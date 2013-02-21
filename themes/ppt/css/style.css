@@ -27,7 +27,7 @@ input[type=text]:focus, textarea:focus { background:#F9F9F9; border: solid 1px #
 span.gray { color:#999}
 
 #btnBox { text-align:right;}
-#btnSave { margin-left:20%;}
+#btnSave { margin-left:20%; margin-top:10px;}
 .ico_quest { margin-bottom:-3px;}
 
 

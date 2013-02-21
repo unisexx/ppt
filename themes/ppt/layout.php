@@ -9,10 +9,12 @@
     <?php include "_script.php";?>
 </head>
 <body>
+	<div class="container-fluid">
 	<?php include "_header.php";?>
 	<?php include "_menu.php";?>
 	<div id="page">
 		<?php echo $template['body'] ?>
+	</div>
 	</div>
 </body>
 </html>

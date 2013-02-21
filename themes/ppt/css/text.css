@@ -1,0 +1,25 @@
+.gray { color:#707070}
+.gray131 { color:#999; font-size:13px;}
+.gray132 { color:#666; font-size:13px;}
+.red121 { color:#F00; font-size:12px;}
+.Txt_red_12 { color:#F00;}
+.brown14 {color:#C60; font-size:14px;}
+.f24 { font-size:24px;}
+
+  .link_login:link{color:#F30;text-decoration:none; font-weight:700;}
+ .link_login:visited{color:#F30;text-decoration:none; font-weight:700;}
+ .link_login:hover{color:#F30;text-decoration:underline; font-weight:700;}
+ 
+   .link_blue:link{color:#FF6600;text-decoration:none}
+ .link_blue:visited{color:#FF6600;text-decoration:none}
+ .link_blue:hover{color:#FF6600;text-decoration:underline}
+ 
+    .link_blue2:link{color:#0066CC;text-decoration:none}
+ .link_blue2:visited{color:#0066CC;text-decoration:none}
+ .link_blue2:hover{color:#0066CC;text-decoration:underline}
+ 
+    .link_white:link{color:#fff;text-decoration:none}
+ .link_white:visited{color:#fff;text-decoration:none}
+ .link_white:hover{color:#ccc;text-decoration:none}
+ 
+

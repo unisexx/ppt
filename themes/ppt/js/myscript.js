@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$('.datepicker').datepick({showOn: 'both', buttonImageOnly: true, buttonImage: 'media/js/jquery.datepick/calendar.png'});
+	
 	$("input[type='button'][value='ย้อนกลับ']").click(function(event) {
 	    event.preventDefault();
 	    history.back(1);

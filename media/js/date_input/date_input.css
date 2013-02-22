@@ -102,9 +102,9 @@
 	clear: both;
 	margin: 0;
 	}
-	
+.date_selector th{border:none !important;}
 .date_selector th, .date_selector td {
-	width: 2.5em;
+	width: 2.5em  !important;
 	height: 2em;
 	padding: 0 !important;
 	text-align: center !important;

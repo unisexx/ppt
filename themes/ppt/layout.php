@@ -4,9 +4,9 @@
 	<base href="<?php echo base_url(); ?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?php echo $template['title'] ?></title>
-	<?php echo $template['metadata'] ?>
 	<?php include "_css.php";?>
     <?php include "_script.php";?>
+    <?php echo $template['metadata'] ?>
 </head>
 <body>
 	<div class="container-fluid">

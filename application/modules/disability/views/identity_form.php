@@ -3,10 +3,8 @@
 <table class="tbadd">
 <tr>
   <th>ข้อมูลตั้งแต่วันที่</th>
-  <td><input name="textarea4" type="text" id="textarea10"  style="width:70px;" value="01-11-37" /> 
-    <img src="themes/ppt/images/ico_cal.png" width="16" height="16" /> -
-<input name="textarea6" type="text" id="textarea11" value=""  style="width:70px;" />
-<img src="themes/ppt/images/ico_cal.png" width="16" height="16" /></td>
+  <td><input name="textarea4" type="text" id="textarea10"  style="width:80px;" value="" class="datepicker" /> -
+<input name="textarea6" type="text" id="textarea11" value=""  style="width:80px;" class="datepicker"/></td>
 </tr>
 <tr>
   <th>กรุงเทพมหานคร <span class="Txt_red_12">*</span></th>

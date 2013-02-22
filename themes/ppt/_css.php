@@ -4,3 +4,4 @@
 <link rel="stylesheet" type="text/css" href="themes/ppt/css/skins/red.css" />
 <link rel="stylesheet" type="text/css" href="themes/ppt/css/vtip.css" />
 <link rel="stylesheet" type="text/css" href="themes/ppt/css/jquery.treeview.css" />
+<link rel="stylesheet" type="text/css" href="media/js/jquery.datepick/redmond.datepick.css" />

@@ -13,13 +13,14 @@
 </tr>
 <tr>
   <th>น้ำหนักเด็ก<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea4" type="text" id="textarea2" value=""  style="width:70px;" />
+  <td><input name="textarea4" type="text" id="textarea2" value=""  style="width:80px;" />
     กรัม</td>
 </tr>
 <tr>
   <th>วันเกิดเด็ก<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea4" type="text" id="textarea21" value=""  style="width:70px;" />
-    <em><img src="themes/ppt/images/ico_cal.png" width="16" height="16" /></em></td>
+  <td>
+  	<input name="textarea4" type="text" id="textarea21" value=""  style="width:80px;" class="datepicker" />
+  </td>
 </tr>
 <tr>
   <th>รหัสโรงพยาบาล<span class="Txt_red_12"> *</span></th>
@@ -31,12 +32,13 @@
 </tr>
 <tr>
   <th>สถานที่เกิด<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea2" type="text" id="textarea10" value=""  style="width:370px;" /></td>
+  <td>
+  	<input name="textarea2" type="text" id="textarea10" value=""  style="width:370px;" />
+  </td>
 </tr>
 <tr>
   <th>วันเกิดมารดา</th>
-  <td><input name="textarea3" type="text" id="textarea3" value=""  style="width:70px;" />
-    <em><img src="themes/ppt/images/ico_cal.png" width="16" height="16" /></em></td>
+  <td><input name="textarea3" type="text" id="textarea3" value=""  style="width:70px;" class="datepicker" /></td>
 </tr>
 <tr>
   <th>รหัสจังหวัด อำเภอ ตำบล หมู่ที่ ของมารดา</th>
@@ -48,8 +50,7 @@
 </tr>
 <tr>
   <th>วันเกิดบิดา</th>
-  <td><input name="textarea6" type="text" id="textarea5" value=""  style="width:70px;" />
-    <em><img src="themes/ppt/images/ico_cal.png" width="16" height="16" /></em></td>
+  <td><input name="textarea6" type="text" id="textarea5" value=""  style="width:70px;" class="datepicker"/></td>
 </tr>
 <tr>
   <th>รหัสจังหวัด อำเภอ ตำบล หมู่ที่ ของบิดา</th>

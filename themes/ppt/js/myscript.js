@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	$("input[type='button'][value='ย้อนกลับ']").click(function(event) {
+	    event.preventDefault();
+	    history.back(1);
+	});
+
 	Cufon.replace('h1, h3, h4, h5');
 	
 	$("#browser").treeview();
@@ -53,5 +58,4 @@ $(document).ready(function(){
 		speed: 'fast',
 		effect: 'fade'
 	});
-
 });

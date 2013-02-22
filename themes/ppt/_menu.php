@@ -5,11 +5,11 @@
 		<ul>
 			<li><a href="#">เด็กและเยาวชน</a>
                 <ul>
-                    <li><a href="people.php?act=child_care_welfare_list">ok_เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=child_offense_list">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามฐานความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=child_cause_offense_list">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุกระทำความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/welfare">ok_เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
+                    <li><a href="child/offense">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามฐานความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/offender">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุกระทำความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
                     <li><a>การสนับสนุนเงินทุนกองทุนคุ้มครองเด็กเพื่อการขับเคลื่อนงานขององค์กรฯ  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริหารกองทุน" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=localgov_list">ok_กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/orphans">ok_กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>ยากจน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>//เร่ร่อน ขอทาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>//เด็กถูกพ่อแม่ทอดทิ้งให้อาศัยอยู่กับผู้อื่น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
@@ -17,12 +17,12 @@
                     <li><a>เด็กที่ไม่มีชื่อในทะเบียนบ้าน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>//เด็กและเยาวชนต่างด้าว <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>เด็กและเยาวชนไม่ได้เรียนตามเกณฑ์ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=edu_drop_list">ok_เด็กและเยาวชนออกจากโรงเรียนกลางคัน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สพฐ." class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=teen_pregnant_list">ok_เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=birth_list">ok_ข้อมูลการเกิด <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/drop">ok_เด็กและเยาวชนออกจากโรงเรียนกลางคัน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สพฐ." class="vtip ico_quest" /></a></li>
+                    <li><a href="child/pregnant">ok_เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/birth">ok_ข้อมูลการเกิด <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
                     <li><a>เยาวชนที่จบการศึกษาระดับปริญญาตรี/การศึกษาสายอาชีพแล้ว ไม่มีงานทำในรอบ 1 ปีที่จบการศึกษา <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>//เด็กไม่ได้รับการเตรียมความพร้อมก่อนวัยเรียน (เด็กที่ไม่ได้รับการเตรียมความพร้อมที่ศูนย์พัฒนาเด็กเล็กหรืออื่น ๆ ก่อนเข้าเรียนชั้นประถมศึกษา) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=localgov2_list">ok_เด็กและเยาวชนที่มีพฤติกรรมไม่เหมาะสมและพบเห็นได้ในที่สาธารณะ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
+                    <li><a href="child/unsuitable">ok_เด็กและเยาวชนที่มีพฤติกรรมไม่เหมาะสมและพบเห็นได้ในที่สาธารณะ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a>//เยาวชนในชุมชนที่เลี้ยงดูบุตรตามลำพัง <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                 </ul>
 			</li>
@@ -48,12 +48,12 @@
 		<ul>
             <li><a href="#">ครอบครัว</a>
                 <ul>
-                    <li><a href="people.php?act=family_warm_list">ok_ครอบครัวมีความอบอุ่น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 21)" class="vtip ico_quest" /></a></li>
+                    <li><a href="family/warm">ok_ครอบครัวมีความอบอุ่น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 21)" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครัวเรือนมีการออม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 31)" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครัวเรือนมีความมั่นคงในที่อยู่อาศัยและบ้านมีสภาพคงทนถาวร <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 14)" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//คนในครัวเรือนมีรายได้เฉลี่ยไม่ต่ำกว่าคนละ 23,000 บาทต่อปี <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 30)" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครอบครัวหย่าร้าง (เลิกกัน/ไม่อยู่ด้วยกันฉันท์สามีภรรยา) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=localgov3_list">ok_ครอบครัวที่กระทำความรุนแรงต่อเด็กและสตรี <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
+                    <li><a href="family/violence">ok_ครอบครัวที่กระทำความรุนแรงต่อเด็กและสตรี <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครอบครัวที่มีบุตรหลานประพฤติตัวไม่เหมาะสมและพบเห็นได้ในที่สาธารณะ (ประพฤติตัวไม่เหมาะสมและพบเห็นได้ที่สาธารณะ) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครอบครัวที่ไม่เลี้ยงดูบุพการีตามสภาพที่เหมาะสม (บุพการี หมายถึง พ่อ แม่ ปู่ ย่า ตา ยาย เป็นต้น) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ครอบครัวที่มีหัวหน้าครอบครัวประพฤติตัวไม่เหมาะสม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
@@ -85,11 +85,11 @@
                 <ul>
                     <li><a href="#">ผู้รับบริการทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
                     <li><a href="#">ชุมชนผู้มีรายได้น้อย <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=disadvantaged_list">ok_ผู้ด้อยโอกาสทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
+                    <li><a href="disadvantaged/social">ok_ผู้ด้อยโอกาสทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
                     <li><a href="#">จำนวนคนว่างงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
                     <li><a href="#">ตำแหน่งงานที่ว่าง <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=poor_province_list">ok_คนยากจน (จังหวัด) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
-                    <li><a href="people.php?act=poor_age_list">ok_คนยากจน (กลุ่มวัย) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
+                    <li><a href="disadvantaged/province">ok_คนยากจน (จังหวัด) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
+                    <li><a href="disadvantaged/allage">ok_คนยากจน (กลุ่มวัย) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                 </ul>
         	</li>
 		</ul>
@@ -99,8 +99,8 @@
 		<ul>
 			<li><a href="#">ข้อมูลทั่วไป</a>
 				<ul>
-					<li><a href="people.php?act=population_list">ok_ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
-                    <li><a>ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
+					<li><a href="information/population">ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
+                    <!-- <li><a>ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li> -->
                     <li><a>ประชากร (บ้าน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
                      <li><a>โครงการพัฒนาที่อยู่อาศัยของ กคช. <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></a></li>
                      <li><a>การให้บริการรับจำนำ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
@@ -119,14 +119,14 @@
 					<li><a>//ประชาชนที่เสียชีวิตในรอบปีจากโรคมะเร็ง โรคเบาหวาน โรคความดัน เป็นต้น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่เจ็บป่วยและไม่สามารถประกอบอาชีพได้ (ไม่รวมคนพิการ) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่มีอาการทางจิต/ประสาท <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-					<li><a href="people.php?act=mental_patients_list">ok_จำนวนและอัตราผู้ป่วยสุภาพจิต <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมสุขภาพจิต" class="vtip ico_quest" /></a></li>
+					<li><a href="datapoint/mental">ok_จำนวนและอัตราผู้ป่วยสุภาพจิต <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมสุขภาพจิต" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนในวัยทำงานที่ไม่มีงานทำหรือไม่ประกอบอาชีพมากกว่า 6 เดือน ในรอบ 1 ปี (ไม่นับรวมผู้ที่จบการศึกษาในรอบ 1 ปีที่ผ่านมา) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่มีรายได้น้อยขาดแคลนทุนประกอบอาชีพเพื่อยังชีพ และสมควรได้รับความช่วยเหลือ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่มีรายได้น้อยที่มีหนี้สินและปัญหาในการส่งใช้เงินกู้ยืม และสมควรได้รับความช่วยเหลือ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่ถูกทำร้ายทางร่างกาย <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-					<li><a href="people.php?act=criminal_offense_list">ok_ความผิดทางคดีอาญา <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สตช. คดีอาญา" class="vtip ico_quest" /></a></li>
+					<li><a href="datapoint/crime">ok_ความผิดทางคดีอาญา <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สตช. คดีอาญา" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-					<li><a href="people.php?act=police_traffic_list">ok_ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สตช." class="vtip ico_quest" /></a></li>
+					<li><a href="datapoint/vehicle">ok_ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สตช." class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่ประสบภัยจากการทำงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
 					<li><a>ประชาชนที่ประสบภัยจากการทำงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สนง.ประกันสังคม" class="vtip ico_quest" /></a></li>
 					<li><a>//ประชาชนที่ได้รับผลกระทบจากสาธารณภัย (ทั้งภัยที่เกิดจากธรรมชาติและมนุษย์) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>

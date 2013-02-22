@@ -4,7 +4,7 @@ img { border:0;}
 .cursor { cursor:pointer;}
 .clear { clear:both;}
 
-#page { padding:0; width:98%; margin:0 auto;}
+#page { padding-bottom:20px; width:98%; margin:0 auto;}
 #page h1 { font-family:supermarket; font-size:36px; text-align:center; font-weight:700; padding-top:140px;}
 #page h2 { font-family:supermarket; font-size:22px; font-weight:700; padding-top:10px; color:#fc7803;}
 #page h3 { font-family:supermarket; font-size:22px; font-weight:700; padding-top:10px; color:#fc7803;}
@@ -131,7 +131,7 @@ span.gray { color:#999}
 .tbadd td label2 { float:left; width:100px;}
 .tbadd td span { float:left; padding-right:15px;}
 .tbadd td span.padd { padding:5px 30px 5px 0; width:220px;}
-.tbadd td span.padd label {  display:inline-block;  width:120px;} 
+.tbadd td span.padd label {  display:inline-block;  width:125px;} 
 .tbadd td span.padd2 { padding:5px 30px 5px 0; width:140px;}
 .tbadd td span.padd2 label { display:inline-block; width:50px;} 
 .tbadd td.line div { border-bottom:1px solid #ccc; padding:5px 0;}

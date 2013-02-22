@@ -35,7 +35,7 @@
         	</li>
             <li><a href="#">คนพิการ</a>
                 <ul>
-                    <li><a href="people.php?act=cripple_card_list">ok_คนพิการที่มีบัตรประจำตัวคนพิการ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พก. (ฐานข้อมูลคำขอมีบัตรประจำตัวคนพิการ)" class="vtip ico_quest" /></a></li>
+                    <li><a href="disability/identity">ok_คนพิการที่มีบัตรประจำตัวคนพิการ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พก. (ฐานข้อมูลคำขอมีบัตรประจำตัวคนพิการ)" class="vtip ico_quest" /></a></li>
             		<li><a href="#">//คนพิการที่ยังไม่ได้รับการจดทะเบียน  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
             		<li><a href="#">//คนพิการที่ยังไม่ได้รับความช่วยเหลือ (ทั้งที่จดทะเบียนแล้วและยังไม่ได้จดทะเบียน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
             		<li><a href="#">คนพิการที่ทางท้องถิ่นสำรวจไว้แล้ว <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>

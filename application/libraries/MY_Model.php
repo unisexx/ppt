@@ -142,7 +142,7 @@ class MY_Model extends Model{
 			$page = new pagination();
 			$page->target($this->target);
 			$page->limit($this->limit);
-			@$page->currentPage($this->current_page);
+			$page->currentPage($this->current_page);
 			$rs = $this->db->PageExecute($sql,$page->limit,$page->page);
 			$page->Items($rs->_maxRecordCount);			
 			$this->pagination = $page->show();						

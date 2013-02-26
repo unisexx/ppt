@@ -20,20 +20,20 @@ Author URI: http://www.mis-algoritmos.com
 	margin: 2px;
 	border: 1px solid #EEE;
 	text-decoration: none; /* no underline */
-	color: #036CB4;
+	color: #333;
 }
 
 .pagination a:hover,
 .pagination a:active {
 	border: 1px solid #999;
-	color: #666;
+	color: #333;
 }
 .pagination .current {
 	padding: 2px 8px 2px 8px;
 	margin: 2px;
-	border: 1px solid #0085DB;
+	border: 1px solid #333;
 	font-weight: bold;
-	background-color: #0085DB;
+	background-color: #666;
 	color: #FFF;
 }
 .pagination .disabled {

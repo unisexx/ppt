@@ -1,26 +1,17 @@
 <h2>ตั้งค่าข้อมูลหลัก > อำเภอ</h2>
+<form method="get" action="setting/set_amphor">
 <div id="search">
   <div id="searchBox">ชื่ออำเภอ
-    <input type="text" name="textfield" id="textfield" style="width:200px;" />
-    <select name="select" id="select">
-      <option>-- จังหวัด --</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+    <input type="text" name="amphor_name" value="<?php echo @$_GET['amphor_name']?>" style="width:200px;" />
+    <?php echo form_dropdown('province_id',get_option('id','province_name','province'),@$_GET['province_id'],'','-- จังหวัด --');?>
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
+</form>
 
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/set_amphor_form'" class="btn_add"/></div>
 
-<div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
-<a href="javascript:;" title="Seite 2">2</a>
-<a href="javascript:;" title="Seite 3">3</a>
-<a href="javascript:;" title="Seite 4">4</a>
+<?php echo $pagination;?>
 
-<span class="break">...</span><a href="javascript:;" title="Seite 19">19</a>
-<a href="javascript:;" title="Seite 2">Next</a>&nbsp;&nbsp;188 record
-</div>	
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
@@ -28,39 +19,19 @@
   <th>จังหวัด</th>
   <th>จัดการ</th>
 </tr>
-<tr>
-  <td>1</td>
-  <td>บางบัวทอง</td>
-  <td>นนทบุรี</td>
-  <td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='set_amphor.php?act=form'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-</tr>
-<tr class="odd">
-  <td>2</td>
-  <td>บางใหญ่</td>
-  <td>นนทบุรี</td>
-  <td><input type="submit" name="button" id="button" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='set_amphor.php?act=form'" />
-    <input type="submit" name="button" id="button5" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td>ปากเกร็ด‎</td>
-  <td>นนทบุรี</td>
-  <td><input type="submit" name="button2" id="button2" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='set_amphor.php?act=form'" />
-    <input type="submit" name="button2" id="button6" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>ธนบุรี</td>
-  <td>กรุงเทพฯ</td>
-  <td><input type="submit" name="button3" id="button3" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='set_amphor.php?act=form'" />
-    <input type="submit" name="button3" id="button7" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td>บางรัก </td>
-  <td>กรุงเทพฯ</td>
-  <td><input type="submit" name="button5" id="button8" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='set_amphor.php?act=form'" />
-    <input type="submit" name="button5" id="button10" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
+<?php $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;?>
+<?php foreach($amphors as $amphor):?>
+	<tr>
+	  <td><?php echo $i;?></td>
+	  <td><?php echo $amphor['amphor_name']?></td>
+	  <td><?php echo $amphor['province_name']?></td>
+	  <td>
+	  	<input type="button" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/set_amphor_form/<?php echo $amphor['id']?>'" />
+	    <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/set_amphor_delete/<?php echo $amphor['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
+	  </td>
+	</tr>
+<?php $i++;?>
+<?php endforeach;?>
 </table>
+
+<?php echo $pagination;?>

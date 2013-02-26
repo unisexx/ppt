@@ -1,5 +1,5 @@
 <div class="red">  
-<ul id="mega-menu-6" class="mega-menu">
+<ul id="mega-menu-6" class="mega-menu unstyled">
 	<li><a href="dashboard.php">ข้อมูลภาพรวม</a></li>
 	<li><a href="#">ข้อมูลกลุ่มเป้าหมาย 1</a>
 		<ul>

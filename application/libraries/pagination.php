@@ -14,7 +14,7 @@ Author URI: http://www.mis-algoritmos.com
 		var $target = ""; 
 		var $page = 1;
 		var $adjacents = 2;
-		var $showCounter = true;
+		var $showCounter = false;
 		var $className = "pagination";
 		var $parameterName = "page";
 		var $urlF = false;//urlFriendly

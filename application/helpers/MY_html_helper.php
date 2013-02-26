@@ -32,8 +32,8 @@ if(!function_exists('notify'))
 		$CI =& get_instance();
 		if($CI->session->flashdata('notify'))
 		{
-			$js = '<link rel="stylesheet" href="js/jquery.notifyBar.css" type="text/css" media="screen" />';
-		    $js .= '<script type="text/javascript" src="js/jquery.notifyBar.js"></script>';
+			$js = '<link rel="stylesheet" href="media/js/notifyBar/jquery.notifyBar.css" type="text/css" media="screen" />';
+		    $js .= '<script type="text/javascript" src="media/js/notifyBar/jquery.notifyBar.js"></script>';
 		    $js .= '<script type="text/javascript">
 		    				$(function () {
 						  		$.notifyBar({

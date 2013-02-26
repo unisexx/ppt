@@ -275,9 +275,13 @@ background: transparent url(../images/btn_delete.png) no-repeat left;
 overflow: hidden;
 line-height: 0px;
 display:inline;
-color: #a63606;
+color: transparent;
 cursor: pointer; /* hand-shaped cursor */
 cursor: hand; /* for IE 5.x */
+}
+
+.btn_delete:hover{
+color: transparent;
 }
 
 .btn_manage{

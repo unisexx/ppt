@@ -6,6 +6,8 @@ $(document).ready(function(){
 	    history.back(1);
 	});
 
+	$('.tblist tr:odd').addClass('odd');
+
 	Cufon.replace('h1, h3, h4, h5');
 	
 	$("#browser").treeview();
@@ -60,4 +62,24 @@ $(document).ready(function(){
 		speed: 'fast',
 		effect: 'fade'
 	});
+	
+	$("form.validate").validate({
+    rules: 
+    {
+    	province_id:{required: true},
+    	province_name:{required: true},
+    	amphor_id:{required: true},
+    	amphor_name:{required: true},
+    	tumbon_name:{required: true}
+    },
+    messages:
+    {
+    	province_id:{required: "กรุณาเลือกจังหวัด"},
+    	province_name:{required: "กรุณากรอกชื่อจังหวัด"},
+    	amphor_id:{required: "กรุณาเลือกอำเภอ"},
+    	amphor_name:{required: "กรุณากรอกชื่ออำเภอ"},
+    	tumbon_name:{required: "กรุณากรอกชื่อตำบล"}
+    }
+    });
+    
 });

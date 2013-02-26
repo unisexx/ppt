@@ -12,9 +12,9 @@ img { border:0;}
 #page h5 { font-family:supermarket; font-size:18px; font-weight:700; padding-top:10px; color:#9d6e2b;}
 #page h6 { font-family:supermarket; font-size:16px; font-weight:700; padding-top:10px; color:#390;}
 
-input[type=text], textarea, select { font-size: 13px; padding:2px; }
+/*input[type=text], textarea, select { font-size: 13px; padding:2px; }
 input[type=text]:hover, textarea:hover { background:#F0F0F0;}
-input[type=text]:focus, textarea:focus { background:#F9F9F9; border: solid 1px #373737;}
+input[type=text]:focus, textarea:focus { background:#F9F9F9; border: solid 1px #373737;}*/
 
 #bgheader { background:url(../images/bg_header.jpg) repeat-x;}
 #header { background:url(../images/header.jpg) no-repeat; width:1000px; height:115px;}
@@ -30,7 +30,7 @@ span.gray { color:#999}
 #btnSave { margin-left:20%; margin-top:10px;}
 .ico_quest { margin-bottom:-3px;}
 
-
+label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 /************************* TABLE STYLE **************************************/
 .odd { background-color:#fffaf1}
 

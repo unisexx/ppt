@@ -16,7 +16,7 @@ ul.sub .row{margin-left:0px;}
 .red ul.mega-menu li.mega-hover a .dc-mega-icon {background-position: 0 100%;}
 .red ul.mega-menu li .sub-container {position: absolute; background: url(images/bg_sub_left.png) no-repeat 0 100%; padding-left: 20px; margin-left: -3px;}
 .red ul.mega-menu li .sub {background: url(images/bg_sub.png) no-repeat 100% 100%; padding: 20px 20px 20px 10px;}
-.red ul.mega-menu li .sub-container.mega .sub {padding: 20px 20px 10px 0;}
+.red ul.mega-menu li .sub-container.mega .sub {padding: 20px 20px 10px 0; background:#fff;}
 .red ul.mega-menu li .sub .row {width: 100%; overflow: hidden; clear: both;}
 .red ul.mega-menu li .sub li {list-style: none; float: none; width: 330px; font-size: 1em; font-weight: normal;}
 .red ul.mega-menu li .sub li.mega-hdr {margin: 0 10px 10px 0; float: left;}

@@ -34,7 +34,7 @@ function db_fetch_array($result,$cursor)
 			for($i=0;$i<count($key);$i++)
 			{
 //				$row[$key[$i]] = $row[$key[$i]];
-				$row[$key[$i]] = cvu($row[$key[$i]]);				
+				$row[$key[$i]] = cvu($row[$key[$i]]);
 			}
 	return $row;
 }
@@ -53,7 +53,6 @@ function cvu($src)
 
 function GenMaxID($tbName)
 {
-	
 	$command = "(SELECT CASE 
 	WHEN (SELECT MAX(ID) FROM ".$tbName." ) > 0 THEN 
 	((SELECT MAX(ID) FROM  ".$tbName." ) +1)

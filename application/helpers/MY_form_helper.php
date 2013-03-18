@@ -121,40 +121,4 @@ if ( ! function_exists('form_checkbox'))
 	}
 
 }
-
-			
-		function get_budget($id,$projectid)
-		{
-
-			$CI =& get_instance();
-			$sql="SELECT sum(budget_m1+budget_m2+budget_m3+budget_m4+budget_m5+budget_m6+budget_m7+budget_m8+budget_m9+budget_m10+budget_m11+budget_m12)as sum_m
-              FROM FN_BUDGET_TYPE_DETAIL
-              WHERE BUDGETID= ".$projectid." AND BUDGETTYPEID IN (SELECT ID FROM FN_BUDGET_TYPE fbt WHERE fbt.BUDGETTYPEID=".$id." AND EXPENSETYPEID>0)";
-			$result=$CI->db->GetArray($sql);			
-			return $result[0]['SUM_M'];
-			
-		}
-		function cal_budget_other($projectid)		
-		{
-			// คำนวณงบจัดสรร หักจาก   จากตาราง fn_cost_related,fn_cost_related_detail ด้วย
-			$CI =& get_instance();
-			$sql="SELECT budgettype_id,sum(budget_commit) as sum_budget 
-			  FROM fn_cost_related a INNER JOIN fn_cost_related_detail b on a.id=b.fn_cost_related_id
-			  GROUP BY budgettype_id,projectid
-			  HAVING projectid=".$projectid;	  		
-			
-			 $cost=$CI->fn_cost_related->get($sql);			
-				if($cost){
-					foreach ($cost as $c)
-					{
-						$budget_cost[$c['budgettype_id']]=$c['sum_budget'];
-					}	  
-				}else{
-					 $budget_cost="";
-				}
-		  	 return $budget_cost;
-		}
-
-
-
 ?>

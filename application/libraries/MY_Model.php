@@ -206,11 +206,11 @@ class MY_Model extends Model{
 		return $this->pagination;
 	}
 	
-	function save($data)
+	function save($data, $fix_import = FALSE)
 	{	
 		$columns = $this->db->MetaColumnNames($this->table);
 		$meta = $this->db->MetaColumns($this->table);
-		array_walk($data,'dbConvert','TIS-620');
+		if($fix_import == FALSE)array_walk($data,'dbConvert','TIS-620');
 		$data = array_change_key_case($data, CASE_UPPER);
 		$data = array_intersect_key($data,$columns);
 		@$mode = ($data[$this->primary_key]) ? 'UPDATE' : 'INSERT';

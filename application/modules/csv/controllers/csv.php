@@ -7,12 +7,13 @@ Class Csv extends Public_Controller{
 	
 	// แบบ อปท.1 (1)
 	function f01(){
+		set_time_limit(0);
 		$csv_path = 'data/opt/2555/opt1_2555.csv';
 		$field = array(
-		    0 => 'number',
+		    0 => 'number_id',
 		    1 => 'province',
 		    2 => 'amphor',
-		    3 => 'name',
+		    3 => 'opt_name',
 		    4 => 'size',
 		    5 => 'c_title',
 		    6 => 'c_name',
@@ -31,8 +32,8 @@ Class Csv extends Public_Controller{
 		    19 => 'b_position',
 		    20 => 'b_other',
 		    21 => 'b_tel',
-		    22 => 'male',
-		    23 => 'female',
+		    22 => 'male_population',
+		    23 => 'female_population',
 		    24 => 'household',
 		    25 => 't311',
 		    26 => 't312',
@@ -185,7 +186,7 @@ Class Csv extends Public_Controller{
 		    {
 		
 		        $row++;
-		        if($row <= 5)
+		        if($row <= 3)
 		        {
 		            $num = count($data);
 		
@@ -211,8 +212,8 @@ Class Csv extends Public_Controller{
 		            // print_r($db);
 					if($db){
 						// $db['c_title'] = 'กกกก';
-						$this->db->debug = true;
-						$this->form_all->save($db, TRUE);
+						// $this->db->debug = true;
+						// $this->form_all->save($db, TRUE);
 					}
 		            if($row > 2) echo '<hr />';
 		        }

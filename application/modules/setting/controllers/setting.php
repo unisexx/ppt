@@ -5,6 +5,8 @@ Class Setting extends Public_Controller{
 		$this->load->model('province_model','province');
 		$this->load->model('amphor_model','amphor');
 		$this->load->model('tumbon_model','tumbon');
+		$this->load->model('set_target_model','set_target');
+		$this->load->model('form_template_model','form_template');
 	}
 	
 	function user(){
@@ -27,8 +29,28 @@ Class Setting extends Public_Controller{
 		$this->template->build('set_target');
 	}
 	
-	function set_target_form(){
-		$this->template->build('set_target_form');
+	function set_target_form($id=false){
+		$data['set_target'] = $this->set_target->get_row($id);
+		$data['basics'] = $this->set_target->where('parent_id = 1')->get();
+		$data['targets'] = $this->set_target->where('parent_id = 2')->get();
+		$data['form_templates'] = $this->form_template->order_by('id','asc')->get();
+		$this->template->build('set_target_form',$data);
+	}
+	
+	function set_target_save(){
+		if($_POST){
+		   $this->set_target->save($_POST);
+		   set_notify('success', lang('save_data_complete'));
+		}
+		redirect('setting/set_target'.GetCurrentUrlGetParameter());
+	}
+
+	function set_target_delete($id=false){
+		if($id){
+			$this->set_target->delete($id);
+			set_notify('error', lang('delete_data_complete'));
+		}
+		redirect('setting/set_target'.GetCurrentUrlGetParameter());
 	}
 	
 	function set_province(){

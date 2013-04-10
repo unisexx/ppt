@@ -1,109 +1,82 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
 <h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1</span> (2)</h4>
 <table class="tbadd">
-<tr>
-  <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><select name="select3" id="select3">
-    <option>-- เลือกปี --</option>
-    <option>2556</option>
-    <option>2555</option>
-    <option>2554</option>
-    <option>2553</option>
-    <option>2552</option>
-</select></td>
-</tr>
-<tr>
-  <th>ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง <br />
-    เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea2" type="text" id="textarea2" value=""  style="width:30px;" />
-คน</td>
-</tr>
-<tr>
-  <th>มั่วสุมและทำความรำคาญให้กับชาวบ้าน<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea" type="text" id="textarea" value=""  style="width:30px;" />
-คน</td>
-</tr>
-<tr>
-  <th>ติดเกมส์ และเล่นการพนันต่าง ๆ<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />
-คน</td>
-</tr>
-<tr>
-  <th>มีพฤติกรรมทางเพศ<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea11" type="text" id="textarea15" value=""  style="width:30px;" />
-คน</td>
-</tr>
-<tr>
-  <th>หมายเลข<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea3" type="text" id="textarea3" value="" /></td>
-</tr>
-<tr>
-  <th>จังหวัด &gt; อำเภอ<span class="Txt_red_12"> *</span></th>
-  <td><select name="select2" id="select2">
-    <option>-- เลือกจังหวัด --</option>
-  </select>
+    <tr>
+        <th>ปี <span class="Txt_red_12">*</span></th>
+        <td><?php echo form_dropdown('year', get_year_option(2555), $rs['year']); ?></td>
+    </tr>
+    <tr>
+        <th>ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง <br />เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4161_m', number_format($rs['t4161_m']), 'class="input-mini"').' คน &nbsp; หญิง '.form_input('t4161_f', number_format($rs['t4161_f']), 'class="input-mini"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>มั่วสุมและทำความรำคาญให้กับชาวบ้าน<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4162_m', number_format($rs['t4162_m']), 'class="input-mini"').' คน &nbsp; หญิง '.form_input('t4162_f', number_format($rs['t4162_f']), 'class="input-mini"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>ติดเกมส์ และเล่นการพนันต่าง ๆ<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4163_m', number_format($rs['t4163_m']), 'class="input-mini"').' คน &nbsp; หญิง '.form_input('t4163_f', number_format($rs['t4163_f']), 'class="input-mini"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>มีพฤติกรรมทางเพศ<span class="Txt_red_12"> *</span></th>
+    <td><?php echo 'ชาย '.form_input('t4164_m', number_format($rs['t4164_m']), 'class="input-mini"').' คน &nbsp; หญิง '.form_input('t4164_f', number_format($rs['t4164_f']), 'class="input-mini"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>หมายเลข<span class="Txt_red_12"> *</span></th>
+        <td><?php echo form_input('number_id', $rs['number_id'], 'class="input-small"'); ?></td>
+    </tr>
+    <tr>
+        <th>จังหวัด &gt; อำเภอ<span class="Txt_red_12"> *</span></th>
+        <td><select name="select2" id="select2">
+        <option>-- เลือกจังหวัด --</option>
+    </select>
     &gt;
     <select name="select4" id="select4">
       <option>-- เลือกอำเภอ --</option>
     </select></td>
-</tr>
-<tr>
-  <th>ชื่ออปท. / ขนาด<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea4" type="text" id="textarea4" value="" style="width:300px;" /> 
-    /
-      <select name="select" id="select">
-      <option>-- เลือกขนาด --</option>
-      <option>เล็ก</option>
-      <option>กลาง</option>
-      <option>ใหญ่</option>
-    </select></td>
-</tr>
-<tr>
-  <th colspan="2" class="title">หัวหน้าสำนักปลัด/นายก(เทศบาล/อบต.)</th>
-  </tr>
-<tr>
-  <th>คำนำ <span class="Txt_red_12">*</span></th>
-  <td><span><input type="radio" name="radio" id="radio4" value="radio" />
-    นาย</span>
-    <span><input type="radio" name="radio" id="radio5" value="radio" />
-      นาง</span>
-  <input type="radio" name="radio" id="radio5" value="radio" />
-    นางสาว
-    </td>
-</tr>
-<tr>
-  <th>ชื่อ-นามสกุล <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea5" type="text" id="textarea5" value="" style="width:400px;" /></td>
-</tr>
-<tr>
-  <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
-  <td><select name="select5" id="select5">
-    <option selected="selected">-- เลือกตำแหน่ง --</option>
-    <option>หัวหน้าสำนักปลัด</option>
-    <option>นายก(เทศบาล/อบต.)</option>
-  </select></td>
-</tr>
-<tr>
-  <th>หมายเลขโทรศัพท์</th>
-  <td><input name="textarea6" type="text" id="textarea6" value="" /></td>
-</tr>
-<tr>
-  <th colspan="2" class="title">เจ้าหน้าที่พัฒนาชุมชน/เจ้าหน้าที่วิเคราะห์ฯ/เจ้าหน้าที่วิชาการศึกษา</th>
-</tr>
-<tr>
-  <th>คำนำ <span class="Txt_red_12">*</span></th>
-  <td><span>
-    <input type="radio" name="radio" id="radio" value="radio" />
-    นาย</span> <span>
-      <input type="radio" name="radio" id="radio2" value="radio" />
-      นาง</span>
-    <input type="radio" name="radio" id="radio2" value="radio" />
-    นางสาว </td>
-</tr>
-<tr>
-  <th>ชื่อ-นามสกุล <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea6" type="text" id="textarea8" value="" style="width:400px;" /></td>
-</tr>
+    </tr>
+    <tr>
+        <th>ชื่ออปท. / ขนาด<span class="Txt_red_12"> *</span></th>
+        <td><?php echo form_input('opt_name', $rs['opt_name']).'/'.form_dropdown('size', array('เล็ก' => 'เล็ก', 'กลาง' => 'กลาง', 'ใหญ่' => 'ใหญ่'), $rs['size'], 'class="span1"'); ?></td>
+    </tr>
+    <tr>
+        <th colspan="2" class="title">หัวหน้าสำนักปลัด/นายก(เทศบาล/อบต.)</th>
+    </tr>
+    <tr>
+        <th>คำนำ <span class="Txt_red_12">*</span></th>
+        <td>
+            <?php echo form_radio('c_title', 'นาย', $rs['c_title']).' นาย'; ?>&nbsp;&nbsp;
+            <?php echo form_radio('c_title', 'นาง', $rs['c_title']).' นาง'; ?>&nbsp;&nbsp;
+            <?php echo form_radio('c_title', 'นางสาว', $rs['c_title']).' นางสาว'; ?>
+        </td>
+    </tr>
+    <tr>
+        <th>ชื่อ-นามสกุล <span class="Txt_red_12">*</span></th>
+        <td><?php echo form_input('c_name', $rs['c_name']); ?></td>
+    </tr>
+    <tr>
+        <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
+        <td><?php echo form_dropdown('c_position', get_option('id', 'c_position_name', 'c_positions'), $rs['c_position'], null, '- เลือกตำแหน่ง -'); ?></td>
+    </tr>
+    <tr>
+        <th>หมายเลขโทรศัพท์</th>
+        <td><?php echo form_input('c_tel', $rs['c_tel']); ?></td>
+    </tr>
+    <tr>
+        <th colspan="2" class="title">เจ้าหน้าที่พัฒนาชุมชน/เจ้าหน้าที่วิเคราะห์ฯ/เจ้าหน้าที่วิชาการศึกษา</th>
+    </tr>
+    <tr>
+        <th>คำนำ <span class="Txt_red_12">*</span></th>
+         <td>
+            <?php echo form_radio('o_title', 'นาย', $rs['o_title']).' นาย'; ?>&nbsp;&nbsp;
+            <?php echo form_radio('o_title', 'นาง', $rs['o_title']).' นาง'; ?>&nbsp;&nbsp;
+            <?php echo form_radio('o_title', 'นางสาว', $rs['o_title']).' นางสาว'; ?>
+        </td>
+    </tr>
+    <tr>
+        <th>ชื่อ-นามสกุล <span class="Txt_red_12">*</span></th>
+        <td><?php echo form_input('o_name', $rs['o_name']); ?></td>
+    </tr>
 <tr>
   <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
   <td><select name="select6" id="select6">

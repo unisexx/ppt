@@ -177,6 +177,16 @@ Class Csv extends Public_Controller{
 		header('Content-type: text/html; charset=tis-620');
 		$row = 0;
 		
+        $opt_province = $this->db->getassoc('select province, id from provinces order by id');
+        $amphur = $this->db->getarray('select id, province_id, amphur_name from amphur order by province_id, id');
+        $opt_amphur = array();
+        foreach($amphur as $val) $opt_amphur[$val['PROVINCE_ID']][$val['AMPHUR_NAME']] = $val['ID'];
+        
+        $opt_c_position = $this->db->getassoc('select c_position_name, id from c_positions order by id');
+        $opt_o_position = $this->db->getassoc('select o_position_name, id from o_positions order by id');
+        $opt_v_position = $this->db->getassoc('select v_position_name, id from v_positions order by id');
+        $opt_b_position = $this->db->getassoc('select b_position_name, id from b_positions order by id');
+        
 		if(($handle = fopen(iconv('UTF-8','TIS-620',$csv_path), 'r')) !== false)
 		{
 		    
@@ -204,18 +214,25 @@ Class Csv extends Public_Controller{
 		                {
 		                    // echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
 		                    if(in_array($c, array_keys($field))) $db[$field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];
+                                                                                   
+                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
+                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
+                            if($c == 7 and in_array($opt_c_position[$data[$c]], array_values($opt_c_position))) $db['c_position_id'] = $opt_c_position[$data[$c]];
+                            if($c == 11 and in_array($opt_o_position[$data[$c]], array_values($opt_o_position))) $db['o_position_id'] = $opt_o_position[$data[$c]];
+                            if($c == 15 and in_array($opt_v_position[$data[$c]], array_values($opt_v_position))) $db['v_position_id'] = $opt_v_position[$data[$c]];
+                            if($c == 19 and in_array($opt_b_position[$data[$c]], array_values($opt_b_position))) $db['b_position_id'] = $opt_b_position[$data[$c]];
 		                }
 		                
 		            }
-		            echo '<hr /><pre>';
+		            //echo '<hr /><pre>';
 		            // var_export($db);
 		            // print_r($db);
 					if($db){
-						// $db['c_title'] = 'กกกก';
-						// $this->db->debug = true;
-						// $this->form_all->save($db, TRUE);
+						 //$db['c_title'] = 'กกกก';
+						 //$this->db->debug = true;
+						 $this->form_all->save($db, TRUE);
 					}
-		            if($row > 2) echo '<hr />';
+		            //if($row > 2) echo '<hr />';
 		        }
 		        unset($data);
 		        

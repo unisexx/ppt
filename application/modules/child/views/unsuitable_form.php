@@ -1,5 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
 <h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1</span> (2)</h4>
+<?php echo form_open('child'); ?>
 <table class="tbadd">
     <tr>
         <th>ปี <span class="Txt_red_12">*</span></th>
@@ -29,7 +30,7 @@
         <th>จังหวัด &gt; อำเภอ<span class="Txt_red_12"> *</span></th>
         <td>
             <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['province_id']); ?> &gt; 
-            <?php echo form_dropdown('amphur_id', get_option('id', 'amphur_name', 'amphur', '1=1 order by amphur_name'), $rs['amphur_id']); ?>
+            <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? null : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['amphur_id']); ?>
         </td>
     </tr>
     <tr>
@@ -76,7 +77,7 @@
     </tr>
     <tr>
         <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
-        <td><?php echo form_dropdown('o_position_id', get_option('id', 'o_position_name', 'o_positions'), $rs['o_position_id'], null, '- เลือกตำแหน่ง -'); ?></td></td>
+        <td><?php echo form_dropdown('o_position_id', get_option('id', 'o_position_name', 'o_positions'), $rs['o_position_id'], null, '- เลือกตำแหน่ง -'); ?></td>
     </tr>
     <tr>
         <th>หมายเลขโทรศัพท์</th>
@@ -99,7 +100,7 @@
     </tr>
     <tr>
         <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
-        <td><?php echo form_dropdown('v_position_id', get_option('id', 'v_position_name', 'v_positions'), $rs['v_position_id'], null, '- เลือกตำแหน่ง -'); ?></td></td>
+        <td><?php echo form_dropdown('v_position_id', get_option('id', 'v_position_name', 'v_positions'), $rs['v_position_id'], null, '- เลือกตำแหน่ง -'); ?></td>
     </tr>
     <tr>
         <th>หมายเลขโทรศัพท์</th>
@@ -119,11 +120,11 @@
     </tr>
     <tr>
         <th>ชื่อ-นามสกุล <span class="Txt_red_12">*</span></th>
-        <<td><?php echo form_input('b_name', $rs['b_name']); ?></td>
+        <td><?php echo form_input('b_name', $rs['b_name']); ?></td>
     </tr>
     <tr>
         <th>ตำแหน่ง <span class="Txt_red_12">*</span></th>
-        <td><?php echo form_dropdown('b_position_id', get_option('id', 'b_position_name', 'b_positions'), $rs['b_position_id'], null, '- เลือกตำแหน่ง -'); ?></td></td>
+        <td><?php echo form_dropdown('b_position_id', get_option('id', 'b_position_name', 'b_positions'), $rs['b_position_id'], null, '- เลือกตำแหน่ง -'); ?></td>
     </tr>
     <tr>
         <th>หมายเลขโทรศัพท์</th>
@@ -135,3 +136,9 @@
 <input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
+</form>
+<script>
+    $(function(){
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
+    });
+</script>

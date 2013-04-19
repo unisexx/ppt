@@ -1,6 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
 <h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1</span> (2)</h4>
-<?php echo form_open('child'); ?>
+<?php echo form_open('child/unsuitable_form'); ?>
 <table class="tbadd">
     <tr>
         <th>ปี <span class="Txt_red_12">*</span></th>
@@ -29,14 +29,15 @@
     <tr>
         <th>จังหวัด &gt; อำเภอ<span class="Txt_red_12"> *</span></th>
         <td>
-            <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['province_id']); ?> &gt; 
-            <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? null : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['amphur_id']); ?>
+            <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['province_id'], null, '- เลือกจังหวัด -'); ?> &gt; 
+            <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['amphur_id'], null, '- เลือกอำเภอ -'); ?>
         </td>
     </tr>
     <tr>
         <th>ชื่ออปท. / ขนาด<span class="Txt_red_12"> *</span></th>
         <td><?php echo form_input('opt_name', $rs['opt_name']).' / '.form_dropdown('size', array('เล็ก' => 'เล็ก', 'กลาง' => 'กลาง', 'ใหญ่' => 'ใหญ่'), $rs['size'], 'class="span1"'); ?></td>
     </tr>
+    
     <tr>
         <th colspan="2" class="title">หัวหน้าสำนักปลัด/นายก(เทศบาล/อบต.)</th>
     </tr>
@@ -133,6 +134,7 @@
 </table>
 
 <div id="btnSave">
+    <?php echo form_hidden('id', $rs['id']); ?>
 <input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>

@@ -196,7 +196,7 @@ Class Csv extends Public_Controller{
 		    {
 		
 		        $row++;
-		        if($row <= 3)
+		        if(!empty($data))
 		        {
 		            $num = count($data);
 		
@@ -228,7 +228,7 @@ Class Csv extends Public_Controller{
 		            // var_export($db);
 		            // print_r($db);
 					if($db){
-						 //$db['c_title'] = 'กกกก';
+						 $db['year'] = '2555';
 						 //$this->db->debug = true;
 						 $this->form_all->save($db, TRUE);
 					}

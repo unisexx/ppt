@@ -103,7 +103,7 @@
                     <!-- <li><a>ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li> -->
                     <li><a>ประชากร (บ้าน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
                      <li><a>โครงการพัฒนาที่อยู่อาศัยของ กคช. <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></a></li>
-                     <li><a>การให้บริการรับจำนำ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
+                     <li><a href='information/pledgee'>การให้บริการรับจำนำ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></li>
                      <li><a>เงินทรัพย์จำนำ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
 				</ul>
 			</li>

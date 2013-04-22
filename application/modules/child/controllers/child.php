@@ -80,6 +80,16 @@ Class Child extends Public_Controller{
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('orphans_form', $data);
 	}
+
+    function orphans_delete($id)
+    {
+        if(!empty($id))
+        {
+            $this->opt->delete($id);
+            set_notify('success', lang('delete_data_complete'));
+        }
+        redirect('child/orphans');
+    }
 	
 	function drop(){
 		$this->template->build('drop_index');

@@ -97,6 +97,41 @@ Class Datapoint extends Public_Controller{
 		$this->template->build('crime/crime_index', $data);
 	}
 	
+	function crime_upload()
+	{
+		/*
+		echo $_FILES['file_upd']['tmp_name'];
+		echo '<BR><BR><BR>';
+		print_r($_FILES['file_upd']);
+		if($_FILES['file_upd'] = 'abc')
+		{
+			$file_path = $_FILES['file_upd']['tmp_name'];
+			require_once 'include/Excel/reader.php';
+			$data = new Spreadsheet_Excel_Reader();
+			$data -> setOutputEncoding('UTF-8');
+	
+			$data -> read($filepath);
+		
+			error_reporting(E_ALL ^ E_NOTICE);
+			$index = 0;
+			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
+				$import[$index]['value'] = trim($data -> sheets[0]['cells'][$i][2]);
+				$import[$index]['value_length'] = strlen($import[$index]['value']);								 
+					
+				$index++;			
+			}		
+			return $import;
+			
+		}
+		
+		 
+		 
+		 
+		 $this->template->build('crime/crime_upload.php');
+		 */
+	}
+	
 		function crime_form($id=FALSE){
 			$data['case_title'] = array("คดีอุกฉกรรณ์และสะเทือนขวัญ", "คดีชีวิต ร่างกาย และเพศ", "คดีประทุษร้ายต่อทรัพย์", "คดีน่าสนใจ", "คดีรัฐเป็นผู้เสียหาย");
 			$data['case_id'] = array(1, 2, 3, 4, 5);

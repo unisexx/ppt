@@ -55,7 +55,7 @@ Class Setting extends Public_Controller{
 	
 	function set_province(){
 		$condition = " 1=1 ";
-		$condition .= (@$_GET['province_name']!='')?" and province_name like '%".$_GET['province_name']."%'" : "";
+		$condition .= (@$_GET['province']!='')?" and province like '%".$_GET['province']."%'" : "";
 		$data['provinces'] = $this->province->where($condition)->get();
 		$data['pagination'] = $this->province->pagination();
 		$this->template->build('set_province',$data);
@@ -85,16 +85,14 @@ Class Setting extends Public_Controller{
 	function set_amphor(){
 		$condition = " 1=1 ";
 		$condition .= (@$_GET['province_id']!='')?" and province_id = ".$_GET['province_id'] : "";
-		$condition .= (@$_GET['amphor_name']!='')?" and amphor_name like '%".$_GET['amphor_name']."%'" : "";
+		$condition .= (@$_GET['amphur_name']!='')?" and amphur_name like '%".$_GET['amphur_name']."%'" : "";
 		
-		$sql = "SELECT
-PPT.AMPHOR.ID,
-PPT.AMPHOR.AMPHOR_NAME,
-PPT.AMPHOR.PROVINCE_ID,
-PPT.PROVINCE.PROVINCE_NAME
-FROM
-PPT.AMPHOR
-LEFT JOIN PPT.PROVINCE ON PPT.AMPHOR.PROVINCE_ID = PPT.PROVINCE.ID WHERE ".$condition;
+		$sql = "SELECT AMPHUR.ID, AMPHUR.AMPHUR_NAME, PROVINCES.PROVINCE
+        FROM AMPHUR
+        JOIN PROVINCES ON PROVINCES.ID = AMPHUR.PROVINCE_ID 
+        WHERE ".$condition." 
+        ORDER BY PROVINCES.PROVINCE, AMPHUR.AMPHUR_NAME";
+        
 		$data['amphors'] = $this->amphor->get($sql);
 		$data['pagination'] = $this->amphor->pagination();
 		$this->template->build('set_amphor',$data);
@@ -123,28 +121,26 @@ LEFT JOIN PPT.PROVINCE ON PPT.AMPHOR.PROVINCE_ID = PPT.PROVINCE.ID WHERE ".$cond
 	
 	function set_tumbon(){
 		$condition = " 1=1 ";
-		$condition .= (@$_GET['province_id']!='')?" and province_id = ".$_GET['province_id'] : "";
-		$condition .= (@$_GET['amphor_id']!='')?" and amphor_id = ".$_GET['amphor_id'] : "";
-		$condition .= (@$_GET['tumbon_name']!='')?" and tumbon_name like '%".$_GET['tumbon_name']."%'" : "";
+		$condition .= (@$_GET['province_id']!='')?" and district.province_id = ".$_GET['province_id'] : "";
+		$condition .= (@$_GET['amphur_id']!='')?" and district.amphur_id = ".$_GET['amphur_id'] : "";
+		$condition .= (@$_GET['district_name']!='')?" and district_name like '%".$_GET['district_name']."%'" : "";
 		
-		$sql = "SELECT
-PPT.AMPHOR.AMPHOR_NAME,
-PPT.PROVINCE.PROVINCE_NAME,
-PPT.TUMBON.ID,
-PPT.TUMBON.PROVINCE_ID,
-PPT.TUMBON.AMPHOR_ID,
-PPT.TUMBON.TUMBON_NAME
-FROM
-PPT.TUMBON
-LEFT JOIN PPT.PROVINCE ON PPT.TUMBON.PROVINCE_ID = PPT.PROVINCE.ID
-LEFT JOIN PPT.AMPHOR ON PPT.TUMBON.AMPHOR_ID = PPT.AMPHOR.ID WHERE ".$condition;
+		$sql = "SELECT DISTRICT.ID, DISTRICT.DISTRICT_NAME, AMPHUR.AMPHUR_NAME, PROVINCES.PROVINCE
+        FROM DISTRICT 
+        JOIN AMPHUR ON AMPHUR.ID = DISTRICT.AMPHUR_ID 
+        JOIN PROVINCES ON PROVINCES.ID = DISTRICT.PROVINCE_ID 
+        WHERE ".$condition." 
+        ORDER BY PROVINCES.PROVINCE, AMPHUR.AMPHUR_NAME, DISTRICT.DISTRICT_NAME";
 		$data['tumbons'] = $this->tumbon->get($sql);
 		$data['pagination'] = $this->tumbon->pagination();
+        
+        $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('set_tumbon',$data);
 	}
 	
 	function set_tumbon_form($id=false){
-		$data['tumbon'] = $this->tumbon->get_row($id);
+		$data['rs'] = $this->tumbon->get_row($id);
+        $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('set_tumbon_form',$data);
 	}
 	

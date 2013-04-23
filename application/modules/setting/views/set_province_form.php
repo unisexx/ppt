@@ -4,7 +4,7 @@
 <table class="tbadd">
 <tr>
   <th>ชื่อจังหวัด<span class="Txt_red_12"> *</span></th>
-  <td><input name="province_name" type="text" id="textarea7" value="<?php echo $province['province_name']?>" size="40" /></td>
+  <td><input name="province" type="text" id="textarea7" value="<?php echo $province['province']?>" size="40" /></td>
 </tr>
 </table>
 

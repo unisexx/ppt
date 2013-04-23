@@ -3,7 +3,7 @@
 <form method="get" action="">
 <div id="search">
   <div id="searchBox">ชื่อจังหวัด
-    <input type="text" name="province_name" value="<?php echo @$_GET['province_name']?>" style="width:200px;" />
+    <input type="text" name="province" value="<?php echo @$_GET['province']?>" style="width:200px;" />
   <input type="submit" name="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 </form>
@@ -16,13 +16,13 @@
 <tr>
   <th>ลำดับ</th>
   <th>ชื่อจังหวัด</th>
-  <th>จัดการ</th>
+  <th width="60">จัดการ</th>
 </tr>
 <?php $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;?>
 <?php foreach($provinces as $province):?>
 	<tr>
 	  <td><?php echo $i?></td>
-	  <td><?php echo $province['province_name']?></td>
+	  <td><?php echo $province['province']?></td>
 	  <td>
 	  	<input type="button" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/set_province_form/<?php echo $province['id']?>'" />
 	    <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/set_province_delete/<?php echo $province['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>

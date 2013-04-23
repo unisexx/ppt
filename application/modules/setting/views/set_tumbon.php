@@ -2,9 +2,9 @@
 <form method="get" action="setting/set_tumbon">
 <div id="search">
   <div id="searchBox">ชื่อตำบล
-    <input type="text" name="tumbon_name" style="width:200px;" />
-    <?php echo form_dropdown('province_id',get_option('id','province_name','province'),@$_GET['province_id'],'','-- จังหวัด --');?>
-    <?php echo form_dropdown('amphor_id',get_option('id','amphor_name','amphor'),@$_GET['amphor_id'],'','-- อำเภอ --');?>
+    <input type="text" name="district_name" style="width:200px;" />
+    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+    <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 </form>
@@ -19,15 +19,15 @@
   <th>ชื่อตำบล</th>
   <th>อำเภอ</th>
   <th>จังหวัด</th>
-<th>จัดการ</th>
+  <th width="60">จัดการ</th>
 </tr>
 <?php $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;?>
 <?php foreach($tumbons as $tumbon):?>
 	<tr>
 	  <td><?php echo $i?></td>
-	  <td><?php echo $tumbon['tumbon_name']?></td>
-	  <td><?php echo $tumbon['amphor_name']?></td>
-	  <td><?php echo $tumbon['province_name']?></td>
+	  <td><?php echo $tumbon['district_name']?></td>
+	  <td><?php echo $tumbon['amphur_name']?></td>
+	  <td><?php echo $tumbon['province']?></td>
 	<td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/set_tumbon_form/<?php echo $tumbon['id']?>'" />
 	  <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/set_tumbon_delete/<?php echo $tumbon['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
 	  </td>
@@ -37,3 +37,9 @@
 </table>
 
 <?php echo $pagination;?>
+
+<script>
+    $(function(){
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+    });
+</script>

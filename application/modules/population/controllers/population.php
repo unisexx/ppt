@@ -238,8 +238,3 @@ Class population extends Public_Controller{
 	//===== END POPULATION ====//
 	
 }
-?>
-
-
-
-

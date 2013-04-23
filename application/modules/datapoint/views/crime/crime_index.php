@@ -3,7 +3,7 @@
 
 <?
 	$pv_list = $this->province->limit(80)->get('SELECT * FROM PROVINCES WHERE ID != 1');
-	$station_title = array('บช.น.', 'บช.น. 1', 'บช.น. 2', 'บช.น. 3', 'บช.น. 4', 'บช.น. 5', 'บช.น. 6', 'บช.น. 7', 'บช.น. 8', 'บช.น. 9', 'บช.ก.');
+	$station_title = array('บก.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
 ?>
 <FORM ACTION='' METHOD='GET'>
 <div id="search">

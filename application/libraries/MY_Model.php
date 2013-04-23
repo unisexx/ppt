@@ -134,6 +134,7 @@ class MY_Model extends Model{
 	
 	function get($sql = FALSE,$noSplitPage = FALSE)
 	{
+		
 		$sql = $sql ? $sql : 'select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where.' '.$this->having.' '.$this->sort.' '.$this->order;
 		$sql = iconv('UTF-8','TIS-620',$sql);
 		if($noSplitPage==FALSE)

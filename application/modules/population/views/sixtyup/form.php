@@ -1,6 +1,6 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
 <h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
-<form method="post" enctype="multipart/form-data" action="population/save">
+<form method="post" enctype="multipart/form-data" action="population/sixtyup_save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
@@ -20,7 +20,7 @@
   <th>ประชากรชายอายุ<span class="Txt_red_12"> *</span></th>
   <td>
   	<?
-  	for($i=1;$i<=102;$i++):
+  	for($i=62;$i<=102;$i++):
 			switch($i){
 			case 1:
 				$label = '&lt;1';
@@ -145,7 +145,7 @@
   <th>ประชากรหญิงอายุ<span class="Txt_red_12"> *</span></th>
   <td>
   	<?
-  	for($i=1;$i<=102;$i++):
+  	for($i=62;$i<=102;$i++):
 			switch($i){
 			case 1:
 				$label = '&lt;1';

@@ -1,6 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1</span></h4>
-<?php echo form_open('child/orphans_form'); ?>
+<h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
+<h4><?php echo $m['title']; ?> <span class="gray">แบบ อปท.1 (2)</span></h4>
+<?php echo form_open('dla/save/'.$m['id']); ?>
 <table class="tbadd">
     <tr>
         <th>ปี <span class="Txt_red_12">*</span></th>
@@ -8,7 +8,7 @@
     </tr>
     <tr>
         <th>ชาย / หญิง<span class="Txt_red_12"> *</span></th>
-        <td><?php echo 'ชาย '.form_input('t414_m', number_format($rs['t414_m']), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input('t414_f', number_format($rs['t414_f']), 'class="input-mini text-center"'); ?> คน</td>
+        <td><?php echo 'ชาย '.form_input($f[0], number_format($rs[$f[0]]), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input($f[1], number_format($rs[$f[1]]), 'class="input-mini text-center"'); ?> คน</td>
     </tr>
     <tr>
         <th>หมายเลข<span class="Txt_red_12"> *</span></th>

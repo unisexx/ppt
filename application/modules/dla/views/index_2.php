@@ -1,7 +1,7 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1 (1)</span></h4>
+<h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?></h2>
+<h4><?php echo $m['title']; ?> <span class="gray">แบบ อปท.1 (2)</span></h4>
 <div id="search">
-    <form method="get" action="child/orphans">
+    <form method="get" action="dla/index/<?php echo $m['id']; ?>">
     <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด
         <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
         <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
@@ -13,7 +13,7 @@
 </div>
 
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('child/orphans_form'); ?>'" class="btn_add">
+    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form/'.$m['id']); ?>'" class="btn_add">
 </div>
 
 <?php echo $pagination; ?>
@@ -42,8 +42,8 @@
         <td><?php echo $item['size']; ?></td>
         <td><?php echo $item['c_title'].$item['c_name']; ?></td>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('child/orphans_form/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('child/orphans_delete/'.$item['id']); ?>';}" />
+            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dla/form/'.$m['id'].'/'.$item['id']); ?>'" />
+            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('dla/delete/'.$m['id'].'/'.$item['id']); ?>';}" />
         </td>
     </tr>
     <?php endforeach; ?>

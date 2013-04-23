@@ -227,7 +227,7 @@ class MY_Model extends Model{
 				$column .= $comma.'"'.$key.'"';
 				//echo $meta[$key]->type;
 				
-				if($meta[$key]->type=='N' || $meta[$key]->type=='I' )
+				if($meta[$key]->type=='N' || $meta[$key]->type=='I' ||$meta[$key]->type=="INT")
 				{					
 						$value .= $item == '' ? $comma."0" : $comma.str_replace(',','',$item);
 				}

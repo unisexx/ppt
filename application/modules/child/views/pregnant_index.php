@@ -16,7 +16,7 @@
 <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/pregnant_form'" class="btn_add"/></div>
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/pregnant_import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/pregnant_form'" class="btn_add"/></div>
 
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
 <a href="javascript:;" title="Seite 2">2</a>

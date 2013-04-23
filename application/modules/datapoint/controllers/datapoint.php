@@ -84,8 +84,7 @@ Class Datapoint extends Public_Controller{
 			if($_GET['YEAR']) { $sql .= 'AND YEAR = '.$_GET['YEAR'].' '; }
 			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."' "; }
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
-
-		echo $sql;		
+	
 		$data['result'] = $this->station->get($sql);
     	$data['pagination'] = $this->station->pagination;
 		
@@ -161,7 +160,7 @@ Class Datapoint extends Public_Controller{
 						{
 							unset($_POST['ID']);
 							$stt_id = $this->statistic->limit(1)->get("SELECT * FROM CRIME_STATISTIC WHERE STATION_ID = ".$_POST['STATION_ID']." AND MONTH = ".$_POST['MONTH']." AND CASE_ID = ".$_POST['CASE_ID']);
-							echo $_POST['ID'] = @$stt_id[0]['id'];
+							$_POST['ID'] = @$stt_id[0]['id'];
 						}
 						
 						$this->statistic->save($_POST);

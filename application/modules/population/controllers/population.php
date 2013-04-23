@@ -8,7 +8,7 @@ Class population extends Public_Controller{
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
 	}
-	//=====POPULATION AUT ====//
+	
 	function index(){
 		$condition = "1=1";
 		$condition.= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
@@ -44,7 +44,13 @@ Class population extends Public_Controller{
 			$value['nunit'] = $_POST['female_'.$i];
 			$this->ppl_detail->save($value);
 		}
-		echo "<script>window.location='population/index';</script>";
+		redirect('population/index');
+	}
+
+	function delete($id=FALSE){
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id);
+		$this->db->execute("DELETE FROM POPULATION WHERE ID=".$id);
+		redirect('population/index');
 	}
 	
 	function import_form(){		
@@ -197,7 +203,7 @@ Class population extends Public_Controller{
 			 * 
 			 */			
 		}
-		echo "<script>window.location='population/index';</script>";
+		redirect('population/index');
 	}
 
 	function ReadData($filepath){
@@ -258,11 +264,57 @@ Class population extends Public_Controller{
 		//print_r($data->formatRecords);
 	}
 
-	//===== END POPULATION ====//
+	
+	function sixtyup_index(){
+		
+		
+		$condition= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
+		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
+		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
+		$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] : "";
+		$sql = " SELECT * FROM (
+		SELECT PPT.*, 		
+		(SELECT SUM(NUNIT) FROM POPULATION_DETAIL WHERE PID=PPT.ID AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102 )NSIXTYUP_MALE,
+		(SELECT SUM(NUNIT) FROM POPULATION_DETAIL WHERE PID=PPT.ID AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204 )NSIXTYUP_FEMALE
+		FROM POPULATION PPT) WHERE (NSIXTYUP_MALE > 0 OR NSIXTYUP_FEMALE > 0) ".$condition." ORDER BY ID "; 
+		$data['ppl'] = $this->ppl->where($condition)->get($sql);
+		$data['pagination'] = $this->ppl->pagination();
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
+		$this->template->build('sixtyup/index',$data);
+	}
+	
+	function sixtyup_form($id=FALSE){		
+		$data['item'] = $this->ppl->get_row($id);
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
+		$this->template->build('sixtyup/form',$data);
+	}
+	
+	function sixtyup_save(){
+		$id = $this->ppl->save($_POST);		
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");			
+		for($i=62;$i<=102;$i++){
+			$value['age_range_code'] = $i;
+			$value['pid'] = $id;
+			$value['nunit'] = $_POST['male_'.$i];
+			$this->ppl_detail->save($value);
+		}
+		
+		for($i=62;$i<=102;$i++){
+			$value['age_range_code'] = $i+102;
+			$value['pid'] = $id;
+			$value['nunit'] = $_POST['female_'.$i];
+			$this->ppl_detail->save($value);
+		}
+		redirect('population/sixtyup_index');
+	}
+	
+	function sixtyup_delete($id=FALSE){
+		
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");				
+		redirect('population/sixtyup_index');		
+	}
 	
 }
 ?>
-
-
-
-

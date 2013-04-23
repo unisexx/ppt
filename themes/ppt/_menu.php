@@ -66,7 +66,7 @@
         	</li>
             <li><a href="#">ผู้สูงอายุ</a>
                 <ul>
-                    <li><a href="#">//จำนวนผู้สูงอายุ (>60 ปี) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
+                    <li><a href="population/sixtyup_index">จำนวนผู้สูงอายุ (>60 ปี) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
                     <li><a href="#">//ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
                     <li><a href="#">การให้บริการกู้ยืมเงินสำหรับผู้สูงอายุจากกองทุนผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
                     <li><a href="#">การให้บริการผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>

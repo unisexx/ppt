@@ -1,6 +1,6 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
 <h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
-<form method="post" action="population/population_import">
+<form method="post" enctype="multipart/form-data" action="population/population_import">
 <div id="search">
   <div id="searchBox">  	
     <?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?>

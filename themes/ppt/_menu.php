@@ -99,7 +99,7 @@
 		<ul>
 			<li><a href="#">ข้อมูลทั่วไป</a>
 				<ul>
-					<li><a href="information/population">ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
+					<li><a href="population/index">ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
                     <!-- <li><a>ประชากร (คน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li> -->
                     <li><a>ประชากร (บ้าน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
                      <li><a>โครงการพัฒนาที่อยู่อาศัยของ กคช. <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></a></li>

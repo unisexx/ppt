@@ -4,16 +4,23 @@ Class Information extends Public_Controller{
 		parent::__construct();
 		$this->load->model('pledgee_model', 'pledgee');
         $this->load->model('opt_model', 'opt');
+		$this->load->model('population_model','ppl');
+		$this->load->model('population_detail_model','ppl_detail');
 	}
-	
+	//=====POPULATION AUT ====//
 	function population(){
-		$this->template->build('population_index');
+		$data['ppl'] = $this->ppl->get();
+		$this->template->build('population/population_index',$data);
 	}
 	
 	function population_form(){
-		$this->template->build('population_form');
+		$this->template->build('population/population_form');
 	}
 	
+	function population_import_form(){
+		$this->template->build('population/population_import_form');
+	}
+	//===== END POPULATION ====//
 	//===== PLEDGEE =====//
 		function pledgee(){
 			$sql = 'SELECT PG.*, PV.PROVINCE, AM.AMPHUR_NAME

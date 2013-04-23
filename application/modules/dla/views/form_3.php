@@ -1,5 +1,5 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
-<h4><?php echo $m['title']; ?> <span class="gray">แบบ อปท.1 (2)</span></h4>
+<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
+<h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1 (3)</span> </h4>
 <?php echo form_open('dla/save/'.$m['id']); ?>
 <table class="tbadd">
     <tr>
@@ -7,8 +7,20 @@
         <td><?php echo form_dropdown('year', get_year_option(2555), $rs['year']); ?></td>
     </tr>
     <tr>
-        <th>ชาย / หญิง<span class="Txt_red_12"> *</span></th>
-        <td><?php echo 'ชาย '.form_input($f[0], number_format($rs[$f[0]]), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input($f[1], number_format($rs[$f[1]]), 'class="input-mini text-center"'); ?> คน</td>
+        <th>ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง <br />เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4161_m', number_format($rs['t4161_m']), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input('t4161_f', number_format($rs['t4161_f']), 'class="input-mini text-center"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>มั่วสุมและทำความรำคาญให้กับชาวบ้าน<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4162_m', number_format($rs['t4162_m']), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input('t4162_f', number_format($rs['t4162_f']), 'class="input-mini text-center"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>ติดเกมส์ และเล่นการพนันต่าง ๆ<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4163_m', number_format($rs['t4163_m']), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input('t4163_f', number_format($rs['t4163_f']), 'class="input-mini text-center"'); ?> คน</td>
+    </tr>
+    <tr>
+        <th>มีพฤติกรรมทางเพศ<span class="Txt_red_12"> *</span></th>
+        <td><?php echo 'ชาย '.form_input('t4164_m', number_format($rs['t4164_m']), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input('t4164_f', number_format($rs['t4164_f']), 'class="input-mini text-center"'); ?> คน</td>
     </tr>
     <tr>
         <th>หมายเลข<span class="Txt_red_12"> *</span></th>
@@ -25,6 +37,7 @@
         <th>ชื่ออปท. / ขนาด<span class="Txt_red_12"> *</span></th>
         <td><?php echo form_input('opt_name', $rs['opt_name']).' / '.form_dropdown('size', array('เล็ก' => 'เล็ก', 'กลาง' => 'กลาง', 'ใหญ่' => 'ใหญ่'), $rs['size'], 'class="span1"'); ?></td>
     </tr>
+    
     <tr>
         <th colspan="2" class="title">หัวหน้าสำนักปลัด/นายก(เทศบาล/อบต.)</th>
     </tr>
@@ -48,7 +61,6 @@
         <th>หมายเลขโทรศัพท์</th>
         <td><?php echo form_input('c_tel', $rs['c_tel']); ?></td>
     </tr>
-    
     <tr>
         <th colspan="2" class="title">เจ้าหน้าที่พัฒนาชุมชน/เจ้าหน้าที่วิเคราะห์ฯ/เจ้าหน้าที่วิชาการศึกษา</th>
     </tr>
@@ -123,8 +135,8 @@
 
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
-    <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+<input type="submit" value="บันทึก" class="btn btn-danger">
+<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>
 <script>

@@ -11,7 +11,7 @@
 
 
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='disadvantaged/vacancy_import'" class="btn_import"/>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disadvantaged/vacancy_form'" class="btn_add"/>
 </div>
 

@@ -13,15 +13,10 @@ Class Datapoint extends Public_Controller{
 	
 	#================ MENTAL ==================#
 	function mental($year=FALSE, $province_id=FALSE){
-		$_POST['year'] = ($year == 'NA')?'':$year;
-		$_POST['province_id'] = ($province_id == 'NA')?'':$province_id;
-		
 		$sql = 'SELECT MT.ID, MT.PROVINCE_ID, MT.YEAR, MT.PSY_NUMBER, MT.FEAR_NUMBER, MT.DEPRESS_NUMBER, MT.RETARDED_NUMBER, MT.APOPLEXY_NUMBER, MT.DRUGADD_NUMBER, MT.AUTISM_NUMBER, MT.OTHER_NUMBER, PV.PROVINCE 
-				FROM MENTAL_NUMBER MT LEFT JOIN PROVINCES PV ON MT.PROVINCE_ID = PV.ID ';
-			$sql .= ($_POST['year'] || $_POST['province_id'])?'WHERE ':'';
-			$sql .= ($_POST['year'])?"MT.YEAR LIKE '".$_POST['year']."'":'';
-			$sql .= ($_POST['year'] && $_POST['province_id'])?'AND ':'';
-			$sql .= ($_POST['province_id'])?"MT.PROVINCE_ID LIKE '".$_POST['province_id']."' ":'';
+				FROM MENTAL_NUMBER MT LEFT JOIN PROVINCES PV ON MT.PROVINCE_ID = PV.ID WHERE 1=1 ';
+			$sql .= (@$_GET['year'])?"AND MT.YEAR LIKE '".$_GET['year']."' ":'';
+			$sql .= (@$_GET['province_id'])?"AND MT.PROVINCE_ID LIKE '".$_GET['province_id']."' ":'';
 		$sql .= 'ORDER BY MT.YEAR DESC, MT.PROVINCE_ID ASC ';
 		
 		$data['province'] = $this->province->limit(80)->get('SELECT ID, PROVINCE FROM PROVINCES');
@@ -87,10 +82,10 @@ Class Datapoint extends Public_Controller{
 		$_GET['STATION'] = @$_GET['STATION'];
 		$sql = 'SELECT * FROM CRIME_STATION WHERE 1=1 ';
 			if($_GET['YEAR']) { $sql .= 'AND YEAR = '.$_GET['YEAR'].' '; }
-			
-			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."'"; }
+			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."' "; }
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
-		
+
+		echo $sql;		
 		$data['result'] = $this->station->get($sql);
     	$data['pagination'] = $this->station->pagination;
 		

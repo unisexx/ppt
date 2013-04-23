@@ -1,38 +1,17 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
 <h4>จำนวนและอัตราผู้ป่วยสุภาพจิต <span class="gray">แบบ กรมสุขภาพจิต</span></h4>
 
+
+<form action='' method='get'>
 <div id="search">
   <div id="searchBox"> 
   		<? if(@$_GET['page']) { ?> <input type='hidden' name='page' value='<?=@$_GET['page'];?>'> <? } ?>
-		<select name='year' id='year'>
-			<option value='NA'>แสดงทุกปี</option>
-			<? for($i=(date('Y')+543); $i>=2554; $i--) { ?> <option><?=$i;?></option> <? } ?>
-		</select>
-		
-		<select name='province_id' id='province_id'>
-			<option value='NA'>แสดงทั้งหมด</option>
-			<? for($i=0; $i<count($province); $i++) { ?> <option value='<?=$province[$i]['id'];?>'><?=$province[$i]['province'];?></option> <? } ?>
-		</select>
-		<script language="javascript">
-			$('#year').val("<?=$_POST['year'];?>");
-			$('#province_id').val("<?=$_POST['province_id'];?>");
-		</script>
-		
-	  	<input type="button" title="ค้นหา" value=" " class="btn_search" onclick='action_search();'/>
-		<script language="javascript">
-			function action_search()
-			{
-				year = $('#year').val();
-				province_id = $('#province_id').val();
-				
-				if(year == 'NA' && province_id == 'NA') { urllink = 'datapoint/mental'; }
-				else { urllink = "datapoint/mental/"+$("#year").val()+"/"+$("#province_id").val(); }
-
-				window.location = urllink; 
-			}
-		</script>
+		<?=form_dropdown('year', get_year_option(2554), @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<?=form_dropdown('province_id', get_option('id', 'province', 'provinces'), @$_GET['province_id'], null, '-- แสดงทั้งหมด --'); ?>
+	  	<input type="submit" title="ค้นหา" value=" " class="btn_search" onclick='action_search();'/>
   </div>
 </div>
+</form>
 
 <div id="btnBox">
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/>

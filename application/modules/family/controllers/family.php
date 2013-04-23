@@ -14,6 +14,11 @@ Class Family extends Public_Controller
 	function warm_form(){
 		$this->template->build('warm_form');
 	}
+    
+    function violence_import()
+    {
+        
+    }
 	
 	function violence()
 	{

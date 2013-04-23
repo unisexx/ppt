@@ -85,9 +85,9 @@
                 <ul>
                     <li><a href="#">ผู้รับบริการทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
                     <li><a href="#">ชุมชนผู้มีรายได้น้อย <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></li>
-                    <li><a href="disadvantaged/social">ok_ผู้ด้อยโอกาสทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">จำนวนคนว่างงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
-                    <li><a href="#">ตำแหน่งงานที่ว่าง <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
+                    <!--<li><a href="disadvantaged/social">ok_ผู้ด้อยโอกาสทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>-->
+                    <li><a href="#">ok_จำนวนคนว่างงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
+                    <li><a href="#">ok_ตำแหน่งงานที่ว่าง <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
                     <li><a href="disadvantaged/province">ok_คนยากจน (จังหวัด) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                     <li><a href="disadvantaged/allage">ok_คนยากจน (กลุ่มวัย) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                 </ul>

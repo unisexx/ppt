@@ -3,28 +3,6 @@
 <form action='information/pledgee_save' method='post'>
 	<input type='hidden' name='ID' value='<?=$id;?>'>
 	<table class="tbadd">
-						<tr style='display:none;'>
-						  <th>ปี <span class="Txt_red_12">*</span></th>
-						  <td><select name="select3" id="select3">
-						    <option>-- เลือกปี --</option>
-						    <option>2556</option>
-						    <option>2555</option>
-						    <option>2554</option>
-						    <option>2553</option>
-						    <option>2552</option>
-						</select></td>
-						</tr>
-						  <tr style='display:none;'>
-						    <th>สถานธนานุเคราะห์</th>
-						    <td>
-						   	<select name="select" id="select">
-						      <option value=''>-- เลือกสถานธนานุเคราะห์ --</option>
-						      <option>st1</option>
-						      <option>st2</option>
-						      <option>st3</option>
-						    </select>
-						    </td>
-						  </tr>
 	<tr>
 		<th>วันที่รับจำนำ<span class="Txt_red_12"> *</span></th>
 		<td>
@@ -97,6 +75,7 @@
         <td>
             <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['province_id']); ?> &gt; 
             <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['amphur_id']); ?> &gt;
+            
             <input name="CTM_TUMBON" type="text" id="textarea4" value="<?=($id)?$pg_dtl['ctm_tumbon']:'';?>" style="width:300px;" />            
         </td>
 	</tr>

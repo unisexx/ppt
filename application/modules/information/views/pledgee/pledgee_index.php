@@ -1,24 +1,15 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป </h2>
 <h4>การให้บริการรับจำนำ <span class="gray">แบบ สถานธนานุเคราะห์</span></h4>
-<div id="search">
-  <div id="searchBox">
-    <select name="select6" id="select6">
-      <option>-- ทุกปี --</option>
-      <option>2556</option>
-      <option>2555</option>
-      <option>2554</option>
-    </select>
-    <select name="select" id="select">
-      <option>-- ทุกจังหวัด --</option>
-    </select>
-    <select name="select2" id="select2">
-      <option>-- ทุกอำเภอ --</option>
-    </select>
-    <select name="select3" id="select3">
-      <option>-- ทุกตำบล --</option>
-    </select>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
-</div>
+<form action="" method='get'>
+	<div id="search">
+	  <div id="searchBox">
+	  	<?=form_dropdown('YEAR', get_year_option(2554), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '--แสดงทั้งหมด--'); ?> 
+	    <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.@$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- แสดงทั้งหมด --'); ?>
+	  	<input type="submit" title="ค้นหา" value=" " class="btn_search" />
+	  </div>
+	</div>
+</form>
 
 <div id="btnBox">
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/>
@@ -104,3 +95,8 @@ function js_action(id, type)
 }
 </script>
 <?php echo $pagination; ?>
+<script>
+    $(function(){
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
+    });
+</script>

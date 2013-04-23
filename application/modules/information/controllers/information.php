@@ -4,6 +4,7 @@ Class Information extends Public_Controller{
 		parent::__construct();
 		$this->load->model('pledgee_model', 'pledgee');
         $this->load->model('opt_model', 'opt');
+		$this->load->model('province_model', 'province');
 	}
 	
 	function population(){
@@ -16,13 +17,10 @@ Class Information extends Public_Controller{
 	
 	//===== PLEDGEE =====//
 		function pledgee(){
-			$sql = 'SELECT PG.*, PV.PROVINCE, AM.AMPHUR_NAME
-					FROM
-						(PLEDGEE PG LEFT JOIN  PROVINCES PV
-							ON PG.CTM_PVM_PV_CODE = PV.ID)
-						LEFT JOIN AMPHUR AM
-							ON PG.CTM_PVM_AMP_CODE = AM.ID
+			$sql = 'SELECT PG.*, PV.PROVINCE, AM.AMPHUR_NAME 
+					FROM (PLEDGEE PG LEFT JOIN PROVINCES PV ON PG.CTM_PVM_PV_CODE = PV.CODE) LEFT JOIN AMPHUR AM ON PG.CTM_PVM_AMP_CODE = AM.ID 
 					ORDER BY PTH_TICKET_DATE DESC';
+
 			$data['result'] = $this->pledgee->get($sql);
         	$data['pagination'] = $this->pledgee->pagination;
 		
@@ -36,7 +34,8 @@ Class Information extends Public_Controller{
 				if($id)
 				{
 					$data['pg_dtl'] = $this->pledgee->get_row($id);
-					$data['rs']['province_id'] = $data['pg_dtl']['ctm_pvm_pv_code'];
+						$pv_dtl = $this->province->limit(1)->get("SELECT * FROM PROVINCES WHERE CODE LIKE '".$data['pg_dtl']['ctm_pvm_pv_code']."'");
+					$data['rs']['province_id'] = $pv_dtl[0]['id'];
 					$data['rs']['amphur_id'] = $data['pg_dtl']['ctm_pvm_amp_code'];
 				}
 								

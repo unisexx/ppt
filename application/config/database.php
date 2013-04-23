@@ -36,10 +36,17 @@
 ini_set("max_execution_time" , 300);
 $active_group = "default";
 $active_record = TRUE;
+/*
 $db['default']['hostname'] = 'S-Notebook';
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';
+*/
+$db['default']['hostname'] = '192.168.1.204';
+$db['default']['username'] = 'ppt';
+$db['default']['password'] = '1234';
+$db['default']['database'] = 'ppt';
+
 $db['default']['dbdriver'] = "oci8po";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;

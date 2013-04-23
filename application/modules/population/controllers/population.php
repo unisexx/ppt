@@ -21,9 +21,30 @@ Class population extends Public_Controller{
 		$this->template->build('population_index',$data);
 	}
 	
-	function form(){
+	function form($id=FALSE){		
+		$data['item'] = $this->ppl->get_row($id);
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('population_form');
+		$this->template->build('population_form',$data);
+	}
+	
+	function save(){
+		$id = $this->ppl->save($_POST);
+		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id);
+		
+		for($i=1;$i<=102;$i++){
+			$value['age_range_code'] = $i;
+			$value['pid'] = $id;
+			$value['nunit'] = $_POST['male_'.$i];
+			$this->ppl_detail->save($value);
+		}
+		
+		for($i=1;$i<=102;$i++){
+			$value['age_range_code'] = $i+102;
+			$value['pid'] = $id;
+			$value['nunit'] = $_POST['female_'.$i];
+			$this->ppl_detail->save($value);
+		}
+		echo "<script>window.location='population/index';</script>";
 	}
 	
 	function import_form(){		
@@ -145,7 +166,7 @@ Class population extends Public_Controller{
 									
 				}				
 			endforeach;
-			redirect('population/index');
+			
 			/*
 			foreach($data as $item):
 				if($item['name_en']!=''){
@@ -176,6 +197,7 @@ Class population extends Public_Controller{
 			 * 
 			 */			
 		}
+		echo "<script>window.location='population/index';</script>";
 	}
 
 	function ReadData($filepath){

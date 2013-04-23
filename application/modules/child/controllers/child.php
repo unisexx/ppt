@@ -5,7 +5,7 @@ Class Child extends Public_Controller{
         $this->load->model('opt_model', 'opt');
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('c_pregnant_model','pregnant');
-		
+
 	}
 	function test(){
 		/*$this->load->library('excel_reader');
@@ -15,6 +15,7 @@ Class Child extends Public_Controller{
 		$worksheetrows =$this->excel_reader->worksheets[0];
 		$worksheetcolumns = 15;
 	
+<<<<<<< HEAD
 		echo "<table>";
 		foreach($worksheetrows as $worksheetrow)
 		{
@@ -131,13 +132,8 @@ Class Child extends Public_Controller{
 	}
 
 	//===== END POPULATION ====//
-	function welfare(){
-		$this->template->build('welfare_index');
-	}
-	
-	function welfare_form(){
-		$this->template->build('welfare_form');
-	}
+
+
 	
 	function offense(){
 		$this->template->build('offense_index');

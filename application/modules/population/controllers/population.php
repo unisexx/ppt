@@ -31,8 +31,7 @@ Class population extends Public_Controller{
 	}
 	
 	function population_import(){
-		//$this->db->debug=true;
-		
+		//$this->db->debug=true;		
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID IN (SELECT ID FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data'].")");
 			$this->db->execute("DELETE FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data']);

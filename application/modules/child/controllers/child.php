@@ -6,7 +6,50 @@ Class Child extends Public_Controller{
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('c_pregnant_model','pregnant');
 
+		$this->load->model('welfare_model','welfare');
+		$this->load->model('welfarelist_model','wflist');
 	}
+	//===== WELFARE =====//
+	function welfare(){
+		$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
+		if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
+		if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
+		
+		$data['result'] = $this->welfare->get($sql);
+    	$data['pagination'] = $this->welfare->pagination;
+		
+		$this->template->build('welfare/welfare_index', $data);
+	}
+	
+	function welfare_form($id=FALSE){
+		$wlist = $this->db->execute('SELECT * FROM WELFARE_LIST');
+		$data['id'] = @$id;
+		if(@$id)
+		{
+			$data['result'] = $this->welfare->get_row($id);
+		}
+		
+		$this->template->build('welfare/welfare_form', $data);
+	}
+		function welfare_save()
+		{
+			$this->welfare->save($_POST);
+			set_notify('success', lang('save_data_complete'));
+			redirect('child/welfare');
+		}
+	function welfare_delete($id=FALSE)
+	{
+		if($id)
+		{
+			$this->welfare->delete($id);
+            set_notify('success', lang('delete_data_complete'));
+			redirect('child/welfare');
+		}
+		
+	}
+	
+	//===== WELFARE =====//	
+	
 	function test(){
 		/*$this->load->library('excel_reader');
 		clearstatcache();

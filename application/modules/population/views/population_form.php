@@ -14,13 +14,15 @@
 </tr>
 <tr>
   <th>จังหวัด &gt; เขต/อำเภอ &gt; แขวง/ตำบล<span class="Txt_red_12">  *</span></th>
-  <td><select name="select2" id="select2">
-    <option>-- เลือกจังหวัด --</option>
-    </select>
+  <td>
+  	<? echo form_dropdown('province_id',get_option('id','province','provinces'),'','','--เลือกจังหวัด--');?>  	
     &gt;
+    <div id="dv_amphur">
     <select name="select4" id="select4">
       <option>-- เลือกเขต/อำเภอ --</option>
       </select>
+    </div>
+    
     &gt;
     <select name="select9" id="select9">
       <option>-- เลือกแขวง/ตำบล --</option>

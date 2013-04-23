@@ -15,10 +15,13 @@ class Location extends Controller
 		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';
 	}
 	
-	function ajax_district()
+	function ajax_district($type=NULL)
 	{
+		$text = ($type == 'report') ? '-- ทุกตำบล --' : '- เลือกตำบล -';
 		$result = $this->db->GetArray('select id,district_name as text from district where amphur_id = ?',$_GET['q']);
-		echo $result ? json_encode($result) : '[{id:"",text:"- เลือกตำบล -"}]';
+		dbConvert($result);
+        if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
+		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';
 	}
 	
 }

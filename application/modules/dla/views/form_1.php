@@ -1,5 +1,5 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
-<h4><?php echo $m['title']; ?> <span class="gray">แบบ อปท.1 (2)</span></h4>
+<h4><?php echo $m['title']; ?>  <span class="gray">แบบ อปท.1 (1)</span></h4>
 <?php echo form_open('dla/save/'.$m['id']); ?>
 <table class="tbadd">
     <tr>
@@ -7,8 +7,8 @@
         <td><?php echo form_dropdown('year', get_year_option(2555), $rs['year']); ?></td>
     </tr>
     <tr>
-        <th>ชาย / หญิง<span class="Txt_red_12"> *</span></th>
-        <td><?php echo 'ชาย '.form_input($f[0], number_format($rs[$f[0]]), 'class="input-mini text-center"').' คน &nbsp;&nbsp; หญิง '.form_input($f[1], number_format($rs[$f[1]]), 'class="input-mini text-center"'); ?> คน</td>
+        <th>จำนวน<span class="Txt_red_12"> *</span></th>
+        <td><?php echo form_input($f, @number_format($rs[$f]), 'class="input-mini text-center"'); ?> คน</td>
     </tr>
     <tr>
         <th>หมายเลข<span class="Txt_red_12"> *</span></th>
@@ -124,7 +124,7 @@
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
     <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
 <script>

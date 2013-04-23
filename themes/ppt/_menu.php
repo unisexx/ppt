@@ -6,8 +6,8 @@
 			<li><a href="#">เด็กและเยาวชน</a>
                 <ul>
                     <li><a href="child/welfare">ok_เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
-                    <li><a href="child/offense">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามฐานความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
-                    <li><a href="child/offender">ok_เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุกระทำความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
+                    <li><a href="offense/offense_data">เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามฐานความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
+                    <li><a href="offender/offender_data">เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุกระทำความผิด  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมพินิจและคุ้มครองเด็กและเยาวชน" class="vtip ico_quest" /></a></li>
                     <li><a>การสนับสนุนเงินทุนกองทุนคุ้มครองเด็กเพื่อการขับเคลื่อนงานขององค์กรฯ  <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริหารกองทุน" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/17">กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/18">ยากจน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
@@ -88,8 +88,8 @@
                     <!--<li><a href="disadvantaged/social">ok_ผู้ด้อยโอกาสทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>-->
                     <li><a href="disadvantaged/unemployee">ok_จำนวนคนว่างงาน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
                     <li><a href="disadvantaged/vacancy">ok_ตำแหน่งงานที่ว่าง <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
-                    <li><a href="disadvantaged/province">ok_คนยากจน (จังหวัด) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
-                    <li><a href="disadvantaged/allage">ok_คนยากจน (กลุ่มวัย) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
+                    <li><a href="poor_province/province_data">ok_คนยากจน (จังหวัด) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
+                    <li><a href="poor_age/allage">ok_คนยากจน (กลุ่มวัย) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                 </ul>
         	</li>
 		</ul>

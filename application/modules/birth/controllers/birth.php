@@ -77,8 +77,7 @@ Class birth extends Public_Controller{
 						$id = $this->birth->save($val);											
 			endforeach;							
 		}
-		echo "<script>window.location='birth';</script>";
-		//redirect('population/index');
+		redirect('birth/index');
 	}
 
 	function ReadData($filepath){

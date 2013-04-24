@@ -59,5 +59,5 @@
   	<input type="button" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='birth/form/<?=$item['id'];?>'" />
     <input type="button" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
 </tr>
-<? } ?>
+<? $i++; } ?>
 </table>

@@ -169,8 +169,8 @@ Class population extends Public_Controller{
 				}				
 			endforeach;							
 		}
-		echo "<script>window.location='population';</script>";
-		//redirect('population/index');
+		/*echo "<script>window.location='population';</script>";*/
+		redirect('population/index');
 	}
 
 	function ReadData($filepath){

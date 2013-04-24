@@ -134,6 +134,7 @@ class MY_Model extends Model{
 	
 	function get($sql = FALSE,$noSplitPage = FALSE)
 	{
+		
 		$sql = $sql ? $sql : 'select '.$this->select.' from '.$this->table.' '.$this->join.' '.$this->where.' '.$this->having.' '.$this->sort.' '.$this->order;
 		$sql = iconv('UTF-8','TIS-620',$sql);
 		if($noSplitPage==FALSE)
@@ -227,7 +228,7 @@ class MY_Model extends Model{
 				$column .= $comma.'"'.$key.'"';
 				//echo $meta[$key]->type;
 				
-				if($meta[$key]->type=='N' || $meta[$key]->type=='I' )
+				if($meta[$key]->type=='N' || $meta[$key]->type=='I' ||$meta[$key]->type=="INT")
 				{					
 						$value .= $item == '' ? $comma."0" : $comma.str_replace(',','',$item);
 				}

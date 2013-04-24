@@ -1,30 +1,20 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
 <h4>เด็กและเยาวชนที่มีพฤติกรรมไม่เหมาะสมและพบเห็นได้ในที่สาธารณะ <span class="gray">แบบ อปท.1 (2)</span> </h4>
 <div id="search">
-  <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด
-    <input type="text" name="textfield" id="textfield" style="width:240px;" />
-    <select name="select6" id="select6">
-      <option>-- ทุกปี --</option>
-      <option>2556</option>
-      <option>2555</option>
-      <option>2554</option>
-    </select>
-    <select name="select" id="select">
-      <option>-- ทุกจังหวัด --</option>
-    </select>
-    <select name="select2" id="select2">
-      <option>-- ทุกอำเภอ --</option>
-    </select>
-    <select name="select3" id="select3">
-      <option>-- ทุก อปท. --</option>
-    </select>
-    <select name="select4" id="select4">
-      <option>-- ทุกขนาด --</option>
-    </select>
-<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+    <form method="get" action="child/unsuitable">
+    <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด
+        <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
+        <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
+        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+        <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
+        <input type="submit" title="ค้นหา" value=" " class="btn_search" />
+    </div>
+    </form>
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/unsuitable_form'" class="btn_add"/></div>
+<div id="btnBox">
+    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('child/unsuitable_form'); ?>'" class="btn_add">
+</div>
 
 <?php echo $pagination; ?>
 <table class="tblist">
@@ -51,17 +41,22 @@
         <td class="text-right"><?php echo number_format($item['total_2']); ?></td>
         <td class="text-right"><?php echo number_format($item['total_3']); ?></td>
         <td class="text-right"><?php echo number_format($item['total_4']); ?></td>
-        <td class="text-right"><?php echo number_format($item['total_5']); ?></td>
+        <td class="text-right"><?php echo @number_format($item['total_5']); ?></td>
         <td class="text-right"><?php echo $item['number_id']; ?></td>
         <td><?php echo $item['opt_name']; ?></td>
-        <td><?php echo $item['amphor'].'/'.$item['province']; ?></td>
+        <td><?php echo $item['amphur_name'].'/'.$item['province']; ?></td>
         <td><?php echo $item['size']; ?></td>
         <td><?php echo $item['c_title'].$item['c_name']; ?></td>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('child/unsuitable_form/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
+            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('child/unsuitable_delete/'.$item['id']); ?>';}" />
         </td>
     </tr>
     <?php endforeach; ?>
 </table>
 <?php echo $pagination; ?>
+ <script>
+    $(function(){
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+    });
+</script>

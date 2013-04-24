@@ -3,20 +3,16 @@
 <div id="search">
   <div id="searchBox">
     เดือน ปี ที่ข้อมูลอัพเดตล่าสุด
-      <select name="select6" id="select6">
-      <option>-- ทุกปี --</option>
-      <option>2556</option>
-      <option>2555</option>
-      <option>2554</option>
-      <option>2553</option>
-    </select>
+	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
     <select name="select" id="select">
       <option>-- ทุกเดือน --</option>
     </select>
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disability/identity_form'" class="btn_add"/></div>
+<div id="btnBox">
+	
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disability/identity_form'" class="btn_add"/></div>
 
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
 <a href="javascript:;" title="Seite 2">2</a>
@@ -38,18 +34,26 @@
   <th>ไม่ระบุ</th>
   <th>จัดการ</th>
 </tr>
+<?php 
+  $rowStyle = '';
+  $page = (isset($_GET['page']))? $_GET['page']:1;
+  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;
+  foreach($result as $item):
+?>
 <tr>
-  <td>1</td>
-  <td>01/11/2537 - 31/01/2556</td>
-  <td>28,517 / 22,124</td>
-  <td>153,196 / 123,195</td>
-  <td>275,027 / 240,487</td>
-  <td>83,709 / 65,351</td>
-  <td>166,350 / 141,199</td>
-  <td>22,852 / 16,501</td>
-  <td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
+  <td><?php echo $i; ?></td>
+  <td><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
+  <td><?php echo number_format($item['bkk_male']) ?> / <?php echo number_format($item['bkk_female']) ?></td>
+  <td><?php echo number_format($item['ce_male']) ?>/ <?php echo number_format($item['ce_female']); ?></td>
+  <td><?php echo number_format($item['ne_male']) ?> / <?php echo number_format($item['ne_female']) ?></td>
+  <td><?php echo number_format($item['s_male']) ?> / <?php echo number_format($item['s_female']) ?></td>
+  <td><?php echo number_format($item['n_male']) ?> / <?php echo number_format($item['n_female']) ?></td>
+  <td><?php echo number_format($item['i_male']) ?> / <?php echo number_format($item['i_female']) ?></td>
+  <td>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'" /> 
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
 </tr>
+<?php $i++;endforeach; ?>
 <tr class="odd">
   <td>2</td>
   <td>01/11/2537 - 31/12/2555</td>

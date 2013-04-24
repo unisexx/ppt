@@ -110,7 +110,7 @@ $autoload['language'] = array('admin');
 
 $autoload['model'] = array();
 
-
+putenv("NLS_LANG=AMERICAN_AMERICA.TH8TISASCII");
 
 /* End of file autoload.php */
 /* Location: ./system/application/config/autoload.php */

@@ -43,6 +43,7 @@ function date_to_mysql($date,$is_date_thai = FALSE)
 	return $y.'-'.$m.'-'.$d;
 }
 
+
 function mysql_to_date($date,$is_date_thai = FALSE)
 {
 	@list($y,$m,$d) = @explode('-', $date);
@@ -147,5 +148,18 @@ if(!function_exists('stamp_to_th_abbrfulldate'))
 		$th_date = db_to_th(date("Y-m-d H:i:s", $timestamp),TRUE,'');
 		return $th_date;
 	}
+}
+function DB2Date($date)
+{
+	
+	list($y,$m,$d) = explode('-', $date);
+	$y = $y + 543;
+	return $d.'/'.$m.'/'.$y;
+}
+function Date2DB($date){
+	//list($date,$time)=explode(' ',$date);	
+	list($y,$m,$d) = explode('-', $date);
+	$y = $y + 543;
+	return $d.'-'.$m.'-'.$y;
 }
 ?>

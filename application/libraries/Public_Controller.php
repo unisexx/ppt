@@ -22,6 +22,7 @@ class Public_Controller extends Controller
 		
 		// Set language
 		$this->lang->load('admin');
+        $this->load->model('menu_model', 'list_menu');
 	}
 }
 ?>

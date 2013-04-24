@@ -1,106 +1,107 @@
 <h2>ผู้ใช้งาน (เพิ่ม/แก้ไข)</h2>
+
+<form class="validate" method="post" action="setting/user_save">
 <table class="tbadd">
 <tr>
   <th>สิทธิ์การใช้งาน  <span class="Txt_red_12">*</span></th>
-  <td><select name="select3" id="select3">
-    <option selected="selected">เลือกสิทธิ์การใช้งาน</option>
-    <option>Super Admin</option>
-    <option>Admin (ศทส.)</option>
-    <option>Admin (คำของบประมาณ)</option>
-    <option>Director (คำของบประมาณ)</option>
-    <option>User (คำของบประมาณ)</option>
+  <td><select name="user_type_id">
+    <option value="">เลือกสิทธิ์การใช้งาน</option>
+    <option value="1">Super Admin</option>
+    <option value="2">Admin (ศทส.)</option>
+    <option value="3">Admin (คำของบประมาณ)</option>
+    <option value="4">Director (คำของบประมาณ)</option>
+    <option value="5">User (คำของบประมาณ)</option>
   </select></td>
 </tr>
 <tr>
   <th>ชื่อ - นามสกุล<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea7" type="text" id="textarea7" value="" size="40" /></td>
+  <td><input name="fullname" type="text" value=""/></td>
 </tr>
 <tr>
   <th>Name <span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea7" type="text" id="textarea9" value="" size="40" /></td>
+  <td><input name="name" type="text" value=""/></td>
 </tr>
 <tr>
   <th>Surname <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea7" type="text" id="textarea8" value="" size="40" /></td>
+  <td><input name="surname" type="text" value=""/></td>
 </tr>
 <tr>
   <th>กรม  <span class="Txt_red_12">*</span></th>
-  <td><select name="select5" id="select6">
-    <option selected="selected">เลือกกรม</option>
-    <option>สำนักงานรัฐมนตรี</option>
-    <option>สำนักงานปลัดกระทรวง</option>
-    <option>สำนักงานกิจการสตรีและสถานบันครอบครัว</option>
-    <option>กรมพัฒนาสังคมและสวัสดิการ</option>
-    </select></td>
+  <td>
+  	<select name="department_id">
+    <option value="">เลือกกรม</option>
+    <option value="1">สำนักงานรัฐมนตรี</option>
+    <option value="2">สำนักงานปลัดกระทรวง</option>
+    <option value="3">สำนักงานกิจการสตรีและสถานบันครอบครัว</option>
+    <option value="4">กรมพัฒนาสังคมและสวัสดิการ</option>
+    </select>
+  </td>
 </tr>
 <tr>
   <th>กอง / สำนักงาน  <span class="Txt_red_12">*</span></th>
-  <td><select name="select4" id="select5">
-    <option>เลือกกอง/สำนักงาน</option>
-    <option>สำนักนโยบายและยุทธศาสตร์</option>
-    <option>สำนักมาตรฐานการพัฒนาสังคมและความมั่นคงของมนุษย์</option>
-    <option>สำนักบริหารงานกลาง</option>
-    <option>สำนักงานเลขานุการคณะกรรมการคุ้มครองเด็กแห่งชาติ</option>
-    <option>กลุ่มพัฒนาระบบบริหาร</option>
-    <option>สำนักงานเลขานุการป้องกันและปราบปรามการค้ามนุษย์</option>
-    <option>ศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร</option>
+  <td><select name="division_id">
+    <option value="">เลือกกอง/สำนักงาน</option>
+    <option value="1">สำนักนโยบายและยุทธศาสตร์</option>
+    <option value="2">สำนักมาตรฐานการพัฒนาสังคมและความมั่นคงของมนุษย์</option>
+    <option value="3">สำนักบริหารงานกลาง</option>
+    <option value="4">สำนักงานเลขานุการคณะกรรมการคุ้มครองเด็กแห่งชาติ</option>
+    <option value="5">กลุ่มพัฒนาระบบบริหาร</option>
+    <option value="6">สำนักงานเลขานุการป้องกันและปราบปรามการค้ามนุษย์</option>
+    <option value="7">ศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร</option>
   </select></td>
 </tr>
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
-  <td><select name="select4" id="select4">
-    <option>เลือกกลุ่ม/ฝ่าย</option>
+  <td><select name="group_id">
+    <option value="">เลือกกลุ่ม/ฝ่าย</option>
+    <option value="1">111</option>
+    <option value="2">222</option>
   </select></td>
 </tr>
 <tr>
   <th>ประเภทบุคลากร  <span class="Txt_red_12">*</span></th>
-  <td><select name="select2" id="select2">
-    <option>เลือกประเภทบุคลากร</option>
-    <option>ข้าราชการ</option>
-    <option>พนักงานราชการ</option>
-    <option>ลูกจ้างประจำ</option>
-    <option>ลูกจ้างชั่วคราว</option>
-    <option>พนักงานของรัฐ</option>
+  <td><select name="person_type_id">
+    <option value="">เลือกประเภทบุคลากร</option>
+    <option value="1">ข้าราชการ</option>
+    <option value="2">พนักงานราชการ</option>
+    <option value="3">ลูกจ้างประจำ</option>
+    <option value="4">ลูกจ้างชั่วคราว</option>
+    <option value="5">พนักงานของรัฐ</option>
     </select></td>
 </tr>
 <tr>
   <th>บัตรประชาชน  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea3" type="text" id="textarea3" maxlength="13" /></td>
+  <td><input name="id_card" type="text"/></td>
 </tr>
 <tr>
   <th>เบอร์ติดต่อ</th>
-  <td><input name="textarea4" type="text" id="textarea4" value="" /></td>
+  <td><input name="contact_number" type="text" value="" /></td>
 </tr>
 <tr>
   <th>กลุ่มเป้าหมายที่รับผิดชอบ</th>
-  <td><span style="margin-right:15px;"><input type="checkbox" name="checkbox" id="checkbox" />
-    เด็กและเยาวชน
-        <input type="checkbox" name="checkbox2" id="checkbox2" />
-        สตรี
-  </span><span style="margin-right:15px;">
-<input type="checkbox" name="checkbox3" id="checkbox3" /> 
-ครอบครัว
-</span><span style="margin-right:15px;">
-<input type="checkbox" name="checkbox4" id="checkbox4" /> 
-ผู้ด้อยโอกาส
-<input type="checkbox" name="checkbox5" id="checkbox5" />
-คนพิการ
-<input type="checkbox" name="checkbox6" id="checkbox6" /> 
-ผู้สูงอายุ
-<input type="checkbox" name="checkbox7" id="checkbox7" />
-อื่นๆ </span></td>
+  <td>
+  	<span style="margin-right:15px;">
+		<input type="checkbox" name="target_response[]" value="เด็กและเยาวชน"/> เด็กและเยาวชน
+		<input type="checkbox" name="target_response[]" value="สตรี"/> สตรี
+		<input type="checkbox" name="target_response[]" value="ครอบครัว"/> ครอบครัว
+		<input type="checkbox" name="target_response[]" value="ผู้ด้อยโอกาส"/> ผู้ด้อยโอกาส
+		<input type="checkbox" name="target_response[]" value="คนพิการ"/> คนพิการ
+		<input type="checkbox" name="target_response[]" value="ผู้สูงอายุ"/> ผู้สูงอายุ
+		<input type="checkbox" name="target_response[]" value="อื่นๆ"/> อื่นๆ 
+	</span>
+  </td>
 </tr>
 <tr>
   <th>อีเมล์  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea" type="text" id="textarea" value="" size="30" /></td>
+  <td><input type="text" name="email" value="" /></td>
 </tr>
 <tr>
   <th>รหัสผ่าน <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea5" type="text" id="textarea5" value="" /></td>
+  <td><input id="password" type="text" name="password" value="" /></td>
 </tr>
 <tr>
   <th>ยืนยันรหัสผ่าน  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea2" type="text" id="textarea2" value="" /></td>
+  <td><input type="password" name="_password" value="" /></td>
 </tr>
 </table>
 
@@ -108,3 +109,4 @@
 <input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
+</form>

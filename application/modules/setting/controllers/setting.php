@@ -7,14 +7,29 @@ Class Setting extends Public_Controller{
 		$this->load->model('tumbon_model','tumbon');
 		$this->load->model('set_target_model','set_target');
 		$this->load->model('form_template_model','form_template');
+		$this->load->model('user_model','user');
 	}
 	
 	function user(){
-		$this->template->build('user_index');
+		$data['users'] = $this->user->order_by('id','desc')->get();
+		$data['pagination'] = $this->user->pagination();
+		$this->template->build('user_index',$data);
 	}
 	
-	function user_form(){
-		$this->template->build('user_form');
+	function user_form($id=false){
+		$data['user'] = $this->user->get_row($id);
+		$this->template->build('user_form',$data);
+	}
+	
+	function user_save(){
+		if($_POST){
+			if($_POST["target_response"]){
+				$_POST["target_response"] = implode(",", $_POST["target_response"]);
+			}
+			$this->user->save($_POST);
+			set_notify('success', lang('save_data_complete'));
+		}
+		redirect('setting/user'.GetCurrentUrlGetParameter());
 	}
 	
 	function usertype(){
@@ -158,6 +173,13 @@ Class Setting extends Public_Controller{
 			set_notify('error', lang('delete_data_complete'));
 		}
 		redirect('setting/set_tumbon'.GetCurrentUrlGetParameter());
+	}
+	
+	function check_email()
+	{
+		$user = new User();
+		$user->get_by_email($_GET['email']);
+		($user->email)?$this->output->set_output("false"):$this->output->set_output("true");
 	}
 }
 ?>

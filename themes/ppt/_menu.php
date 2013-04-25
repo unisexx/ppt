@@ -67,21 +67,12 @@
             <li><a href="#">ผู้สูงอายุ</a>
                 <ul>
                     <li><a href="population/sixtyup_index">จำนวนผู้สูงอายุ (>60 ปี) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
-<<<<<<< HEAD
                     <li><a href="#">***ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
                     <li><a href="#">***การให้บริการกู้ยืมเงินสำหรับผู้สูงอายุจากกองทุนผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
                     <li><a href="#">***การให้บริการผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
                     <li><a href="#">***การให้บริการหลักประกันสุขภาพ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สปสช." class="vtip ico_quest" /></a></li>
                     <li><a href="#">***คนสูงอายุได้รับการดูแลเอาใจใส่จากคนในครัวเรือน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 36)" class="vtip ico_quest" /></a></li>
                     <li><a href="#">***ผู้ต้องขังสูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมราชทัณฑ์" class="vtip ico_quest" /></a></li>
-=======
-                    <li><a href="#">//ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">การให้บริการกู้ยืมเงินสำหรับผู้สูงอายุจากกองทุนผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">การให้บริการผู้สูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">การให้บริการหลักประกันสุขภาพ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="สปสช." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">//คนสูงอายุได้รับการดูแลเอาใจใส่จากคนในครัวเรือน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมการพัฒนาชุมชน (จปฐ. ตัวชี้วัดที่ 36)" class="vtip ico_quest" /></a></li>
-                    <li><a href="#">ผู้ต้องขังสูงอายุ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="กรมราชทัณฑ์" class="vtip ico_quest" /></a></li>
->>>>>>> 3b26aa017a334d2803694ead4cfe090ce8f11b9e
                     <li><a href="dla/index/62">ผู้สูงอายุที่ยังไม่ได้แจ้งจดทะเบียนเพื่อรับเบี้ยยังชีพได้ตามกำหนด (มีเอกสารหลักฐานครบถ้วน) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/63">ผู้สูงอายุที่ช่วยเหลือตัวเองไม่ได้และสมควรได้รับความช่วยเหลือ (ผู้สูงอายุที่อยู่ตามลำพังและไม่มีผู้ดูแล) <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/64">ผู้สูงอายุที่ไม่สามารถเข้าถึงบริการ/กิจกรรมสำหรับผู้สูงอายุในด้านต่าง ๆ เช่น ด้านอาชีพ สุขภาพ นันทนาการ เป็นต้น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>

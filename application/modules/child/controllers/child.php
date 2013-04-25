@@ -9,6 +9,7 @@ Class Child extends Public_Controller{
 		$this->load->model('welfare_model','welfare');
 		$this->load->model('welfarelist_model','wflist');
 	}
+
 	//===== WELFARE =====//
 	function welfare(){
 		$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
@@ -85,6 +86,7 @@ Class Child extends Public_Controller{
 			
 		
 	}
+
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		// ExcelFile($filename, $encoding);
@@ -295,7 +297,7 @@ Class Child extends Public_Controller{
 		$this->template->build('drop_import_form');	
 	}
 	function drop_save_import(){
-		$this->db->debug=TRUE;
+		//$this->db->debug=TRUE;
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
@@ -344,8 +346,7 @@ Class Child extends Public_Controller{
 	function pregnant_import(){
 		$this->template->build('pregnant_import_form');	
 	}
-	function pregnant_save_import(){
-
+	function pregnant_save_import(){	
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);

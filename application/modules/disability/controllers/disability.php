@@ -26,7 +26,7 @@ Class Disability extends Public_Controller{
 		}	
 		redirect('disability/identity');
 	}
-	function identity_delete($id){
+	function delete($id){
 		if(!empty($id)){
 			$this->identity->delete($id);
 			set_notify('success', lang('delete_data_complete'));

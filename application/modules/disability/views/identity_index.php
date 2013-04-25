@@ -1,3 +1,13 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".btn_delete").click(function(){
+			if(confirm('ลบรายการนี้ ? ')){
+				var hdid = $(this).closest('td').find('#hdid').val();
+				window.location='disability/delete/'+hdid;
+			}
+		})
+	})
+</script>
 <h2>ข้อมูลกลุ่มเป้าหมาย - คนพิการ</h2>
 <h4>คนพิการที่มีบัตรประจำตัวคนพิการ <span class="gray">แบบ nep บัตรคนพิการ</span></h4>
 <div id="search">
@@ -50,56 +60,8 @@
   <td><?php echo number_format($item['n_male']) ?> / <?php echo number_format($item['n_female']) ?></td>
   <td><?php echo number_format($item['i_male']) ?> / <?php echo number_format($item['i_female']) ?></td>
   <td>
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'" /> 
+  	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'" />     
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
 </tr>
 <?php $i++;endforeach; ?>
-<tr class="odd">
-  <td>2</td>
-  <td>01/11/2537 - 31/12/2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button" id="button" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button" id="button5" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td>01/11/2537 - 30/11/2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button2" id="button2" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button2" id="button6" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button3" id="button3" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button3" id="button7" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button5" id="button8" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button5" id="button10" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-</table>

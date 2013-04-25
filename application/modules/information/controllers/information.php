@@ -122,7 +122,7 @@ Class Information extends Public_Controller{
 					</div><?
 				}
 				
-			unlink($uploaddir.'/'.$file_name);
+			unlink($uploaddir.$file_name);
 			?><BR><BR>
 				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="information/pledgee";'>
 				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="information/pledgee_import";'>

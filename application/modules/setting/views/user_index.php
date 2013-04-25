@@ -33,9 +33,13 @@
   <th>กอง/สำนัก</th>
   <th>จัดการ</th>
 </tr>
-<?php foreach($users as $user):?>
-	<tr>
-	  <td>1</td>
+<?php
+	$page = (isset($_GET['page']))? $_GET['page']:1;
+	$i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;
+?>
+<?php foreach($users as $key=>$user):?>
+	<tr <?php alternator('','class="odd"')?>>
+	  <td><?php echo $i?></td>
 	  <td><?php echo $user['fullname']?></td>
 	  <td>
 	  	<?php if($user['contact_number']):?>
@@ -45,57 +49,13 @@
 	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="<?php echo $user['email']?>" />
 	  	<?php endif;?>
 	  </td>
-	  <td><?php echo $user['group_id']?></td>
-	  <td><?php echo $user['division_id']?></td>
+	  <td><?php echo $user['group_name']?></td>
+	  <td><?php echo $user['division_name']?></td>
 	  <td>
-	  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-	    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
+	  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/user_form/<?php echo $user['id']?>'" />
+	    <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/user_delete/<?php echo $user['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
 	  </td>
 	</tr>
+<?php $i++?>
 <?php endforeach;?>
-<tr>
-  <td>1</td>
-  <td>นายสมพร  สุขธรรมนิตย์</td>
-  <td><img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="02-225-3210"/><img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="somroam@hotmail.com" /></td>
-  <td>กลุ่มการพัฒนาบุคคลและเสริมสร้างคุณธรรม </td>
-  <td>สำนักบริหารงานกลาง </td>
-  <td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-</tr>
-<tr class="odd">
-  <td>2</td>
-  <td>นางสาวนพมาศ  นิยมพร</td>
-  <td><img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="02-225-3210"/><img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="somroam@hotmail.com" /></td>
-  <td>ฝ่ายบริหารทั่วไป</td>
-  <td>สถาบันพัฒนาสังคม </td>
-  <td><input type="submit" name="button" id="button" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-    <input type="submit" name="button" id="button5" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td>นางสาวชลลดา  วินิจฉัยกุล</td>
-  <td><img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="02-225-3210"/><img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="somroam@hotmail.com" /></td>
-  <td>กลุ่มการพัฒนาบุคคลและเสริมสร้างคุณธรรม</td>
-  <td>สำนักบริหารงานกลาง </td>
-  <td><input type="submit" name="button2" id="button2" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-    <input type="submit" name="button2" id="button6" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>นางสาวรติพร  ราฎร์เจริญ</td>
-  <td><img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="02-225-3210"/><img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="somroam@hotmail.com" /></td>
-  <td>กลุ่มการพัฒนาบุคคลและเสริมสร้างคุณธรรม</td>
-  <td>สำนักบริหารงานกลาง </td>
-  <td><input type="submit" name="button3" id="button3" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-    <input type="submit" name="button3" id="button7" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td>นายพรเทพ  พรทิพย์สกุล</td>
-  <td><img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="02-225-3210"/><img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="somroam@hotmail.com" /></td>
-  <td>กลุ่มการพัฒนาบุคคลและเสริมสร้างคุณธรรม</td>
-  <td>สำนักบริหารงานกลาง </td>
-  <td><input type="submit" name="button5" id="button8" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-    <input type="submit" name="button5" id="button10" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
 </table>

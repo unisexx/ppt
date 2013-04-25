@@ -5,15 +5,15 @@
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td>
-  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- ทุกปี --'); ?>    
+  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- เลือกปี --'); ?>    
 	</td>
 </tr>
 <tr>
   <th>จังหวัด &gt; เขต/อำเภอ &gt; แขวง/ตำบล<span class="Txt_red_12">  *</span></th>
   <td>
-    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$item['province_id'], null, '-- ทุกจังหวัด --'); ?>
-    <?php echo form_dropdown('amphur_id', (empty($item['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$item['province_id'].' order by amphur_name'), @$item['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
-    <?php echo form_dropdown('district_id', (empty($item['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$item['amphur_id'].' order by district_name'), @$item['district_id'], null, '-- ทุกตำบล --'); ?>
+    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$item['province_id'], null, '-- เลือกจังหวัด --'); ?>
+    <?php echo form_dropdown('amphur_id', (empty($item['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$item['province_id'].' order by amphur_name'), @$item['amphur_id'], null, '-- เลือกอำเภอ --'); ?>
+    <?php echo form_dropdown('district_id', (empty($item['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$item['amphur_id'].' order by district_name'), @$item['district_id'], null, '-- เลือกตำบล --'); ?>
     </td>
 </tr>
 <tr>

@@ -28,6 +28,9 @@ Class population extends Public_Controller{
 	}
 	
 	function save(){
+		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
+		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
+		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";
 		$id = $this->ppl->save($_POST);
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id);
 		
@@ -166,8 +169,8 @@ Class population extends Public_Controller{
 				}				
 			endforeach;							
 		}
-		echo "<script>window.location='population';</script>";
-		//redirect('population/index');
+		/*echo "<script>window.location='population';</script>";*/
+		redirect('population/index');
 	}
 
 	function ReadData($filepath){
@@ -209,6 +212,9 @@ Class population extends Public_Controller{
 	}
 	
 	function sixtyup_save(){
+		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
+		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
+		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";		
 		$id = $this->ppl->save($_POST);		
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");			
@@ -235,3 +241,4 @@ Class population extends Public_Controller{
 		redirect('population/sixtyup_index');		
 	}
 }
+?>

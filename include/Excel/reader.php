@@ -258,7 +258,7 @@ class Spreadsheet_Excel_Reader
      */ 
     function Spreadsheet_Excel_Reader()
     {
-       $this->_ole = new OLERead();
+        $this->_ole =& new OLERead();
         $this->setUTFEncoder('iconv');
     }
 
@@ -479,7 +479,7 @@ class Spreadsheet_Excel_Reader
                                                 $spos += 4;
                                                 $limitpos = $spos + $conlength;
                                                 }
-												echo $this->data[$spos];
+												$this->data[$spos];
                                                 $numChars = ord($this->data[$spos]) | (ord($this->data[$spos+1]) << 8);
                                                 //echo "i = $i pos = $pos numChars = $numChars ";
                                                 $spos += 2;

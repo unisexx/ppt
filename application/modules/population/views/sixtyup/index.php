@@ -3,13 +3,13 @@
 		$(".btn_delete").click(function(){
 			if(confirm('ลบรายการนี้ ? ')){
 				var hdid = $(this).closest('td').find('#hdid').val();
-				window.location='population/delete/'+hdid;
+				window.location='population/sixtyup_delete/'+hdid;
 			}
 		})
 	})
 </script>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้สูงอายุ</h2>
+<h4>จำนวนผู้สูงอายุ มากกว่า 60 ปี (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
 <form method="get" enctype="multipart/form-data">
 <div id="search">
   <div id="searchBox">
@@ -20,8 +20,7 @@
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 </form>
-<div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='population/import_form'" class="btn_import"/>
+<div id="btnBox">	
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='population/form'" class="btn_add"/>
 </div>
 <!--
@@ -64,12 +63,13 @@
 	  echo $message;
   	  ?>
   </td>
-  <td><?=number_format($item['sum_male'],0);?></td>
-  <td><?=number_format($item['sum_female'],0);?></td>
+  <td><?=number_format($item['nsixtyup_male'],0);?></td>
+  <td><?=number_format($item['nsixtyup_female'],0);?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/form/<?=$item['id'];?>'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  /></td>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/sixtyup_form/<?=$item['id'];?>'" />
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
+  </td>
 </tr>
 <? $i++; } ?>
 </table>

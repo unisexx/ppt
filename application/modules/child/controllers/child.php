@@ -6,6 +6,85 @@ Class Child extends Public_Controller{
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('c_pregnant_model','pregnant');
 
+		$this->load->model('welfare_model','welfare');
+		$this->load->model('welfarelist_model','wflist');
+	}
+
+	//===== WELFARE =====//
+	function welfare(){
+		$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
+		if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
+		if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
+		
+		$data['result'] = $this->welfare->get($sql);
+    	$data['pagination'] = $this->welfare->pagination;
+		
+		$this->template->build('welfare/welfare_index', $data);
+	}
+	
+	function welfare_form($id=FALSE){
+		$wlist = $this->db->execute('SELECT * FROM WELFARE_LIST');
+		$data['id'] = @$id;
+		if(@$id)
+		{
+			$data['result'] = $this->welfare->get_row($id);
+		}
+		
+		$this->template->build('welfare/welfare_form', $data);
+	}
+		function welfare_save()
+		{
+			$this->welfare->save($_POST);
+			set_notify('success', lang('save_data_complete'));
+			redirect('child/welfare');
+		}
+	function welfare_delete($id=FALSE)
+	{
+		if($id)
+		{
+			$this->welfare->delete($id);
+            set_notify('success', lang('delete_data_complete'));
+			redirect('child/welfare');
+		}
+		
+	}
+	
+	//===== WELFARE =====//	
+	
+	function test(){
+		/*$this->load->library('excel_reader');
+		clearstatcache();
+		$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";		
+		$this->excel_reader->read($uploadpath);
+		$worksheetrows =$this->excel_reader->worksheets[0];
+		$worksheetcolumns = 15;
+	
+<<<<<<< HEAD
+		echo "<table>";
+		foreach($worksheetrows as $worksheetrow)
+		{
+		      echo "<tr>";
+		     for($i=0; $i<$worksheetcolumns; $i++)
+		    {
+		           // if the field is not blank -- otherwise CI will throw warnings
+		           if (isset($worksheetrow[$i]))
+		                 echo "<td>".mb_convert_encoding($worksheetrow[$i],'UTF-8')."</td>";
+		           // empty field
+		           else
+		                 echo "<td>&nbsp; </td>";
+		     }
+		     echo "</tr>";
+		} 
+		echo "</table>";*/
+		
+		//I have used php Spreadsheet_Excel_Reader and used this class as codeigniter library
+		//$pathToFile =$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";
+		//$params = array('file' => $pathToFile, 'store_extended_info' => true,'outputEncoding' =>'');
+		//$this->load->library('Spreadsheet_Excel_Reader', $params);
+		//$this->spreadsheet_excel_reader->read($pathToFile);	
+		
+			
+		
 	}
 
 	function ReadData($filepath,$module=FALSE){

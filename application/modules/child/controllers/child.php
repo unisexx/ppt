@@ -7,41 +7,7 @@ Class Child extends Public_Controller{
 		$this->load->model('c_pregnant_model','pregnant');
 
 	}
-	function test(){
-		/*$this->load->library('excel_reader');
-		clearstatcache();
-		$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";		
-		$this->excel_reader->read($uploadpath);
-		$worksheetrows =$this->excel_reader->worksheets[0];
-		$worksheetcolumns = 15;
-	
-<<<<<<< HEAD
-		echo "<table>";
-		foreach($worksheetrows as $worksheetrow)
-		{
-		      echo "<tr>";
-		     for($i=0; $i<$worksheetcolumns; $i++)
-		    {
-		           // if the field is not blank -- otherwise CI will throw warnings
-		           if (isset($worksheetrow[$i]))
-		                 echo "<td>".mb_convert_encoding($worksheetrow[$i],'UTF-8')."</td>";
-		           // empty field
-		           else
-		                 echo "<td>&nbsp; </td>";
-		     }
-		     echo "</tr>";
-		} 
-		echo "</table>";*/
-		
-		//I have used php Spreadsheet_Excel_Reader and used this class as codeigniter library
-		//$pathToFile =$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";
-		//$params = array('file' => $pathToFile, 'store_extended_info' => true,'outputEncoding' =>'');
-		//$this->load->library('Spreadsheet_Excel_Reader', $params);
-		//$this->spreadsheet_excel_reader->read($pathToFile);	
-		
-			
-		
-	}
+
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		// ExcelFile($filename, $encoding);
@@ -252,7 +218,7 @@ Class Child extends Public_Controller{
 		$this->template->build('drop_import_form');	
 	}
 	function drop_save_import(){
-		$this->db->debug=TRUE;
+		//$this->db->debug=TRUE;
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
@@ -301,8 +267,7 @@ Class Child extends Public_Controller{
 	function pregnant_import(){
 		$this->template->build('pregnant_import_form');	
 	}
-	function pregnant_save_import(){
-
+	function pregnant_save_import(){	
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);

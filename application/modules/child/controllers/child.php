@@ -157,7 +157,7 @@ Class Child extends Public_Controller{
 				$import[$index]['id'] = trim($data -> sheets[0]['cells'][$i][1]);
 				$import[$index]['province_id'] = trim($data -> sheets[0]['cells'][$i][2]);
 				$import[$index]['area_number'] = trim($data -> sheets[0]['cells'][$i][3]);
-				$import[$index]['p_name'] =  trim($data -> sheets[0]['cells'][$i][4]);	
+				$import[$index]['province'] =  trim($data -> sheets[0]['cells'][$i][4]);	
 				$import[$index]['poor'] =  trim($data -> sheets[0]['cells'][$i][5]);			
 				$import[$index]['family'] =  trim($data -> sheets[0]['cells'][$i][6]);
 				$import[$index]['married'] = trim($data -> sheets[0]['cells'][$i][7]);
@@ -259,21 +259,21 @@ Class Child extends Public_Controller{
     }
 	
 	function drop(){
-		//$this->db->debug=TRUE;	
+	
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province_id=(!empty($_GET['province_id'])) ? " and province_id=".$_GET['province_id']:'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->select("C_DROP.*,PROVINCE")->join("LEFT JOIN PROVINCES ON PROVINCES.ID=C_DROP.PROVINCE_ID")
-									/* ->where("C_DROP.ID <>'' ".$area_number.$province_id.$year)*/
-									 ->order_by("C_DROP.ID",'asc')
-									 ->get();
+		$sql="SELECT C_DROP.*,PROVINCE FROM C_DROP 
+					LEFT JOIN PROVINCES ON provinces.id=c_drop.province_id where C_DROP.ID<>'' ".$area_number.$province_id." ORDER BY C_DROP.ID";
+		$data['result']	= $this->drop->get($sql);
+									 
 		$data['pagination'] = $this->drop->pagination();
-		$this->template->build('drop_index',$data);
+		$this->template->build('drop/drop_index',$data);
 	}
 	
 	function drop_form($id=FALSE){
 		$data['rs'] =$this->drop->get_row($id);
-		$this->template->build('drop_form',$data);
+		$this->template->build('drop/drop_form',$data);
 	}
 	function drop_save(){
 			
@@ -294,7 +294,7 @@ Class Child extends Public_Controller{
         redirect('child/drop');
 	}
 	function drop_import(){				
-		$this->template->build('drop_import_form');	
+		$this->template->build('drop/drop_import_form');	
 	}
 	function drop_save_import(){
 		//$this->db->debug=TRUE;
@@ -314,6 +314,7 @@ Class Child extends Public_Controller{
 						$val['YEAR']=$_POST['year_data'];
 						$val['PROVINCE_ID'] = $item['province_id'];
 						$val['AREA_NUMBER'] =$item['area_number'];
+						$val['PROVINCE'] = $item['province'];
 						$val['POOR'] = $item['poor'];
 						$val['FAMILY'] = $item['family'];
 						$val['MARRIED'] = $item['married'];
@@ -324,13 +325,8 @@ Class Child extends Public_Controller{
 						$val['BREADWINNER'] = $item['breadwinner'];
 						$val['OTHER'] = $item['ohter'];
 						$val['TOTAL'] = $item['total'];
-						$val['CREATE'] = date('Y-m-d');
-						$this->drop->save($val);
-																					
-						
-						$this->pregnant->save($val);
-						//$val['CREATE'] = date('Y-m-d H:i:s');																											
-					
+						//$val['CREATE'] = date('Y-m-d');
+						$this->drop->save($val);																													
 			}
 			set_notify('success', lang('save_data_complete'));
 		}

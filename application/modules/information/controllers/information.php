@@ -6,6 +6,7 @@ Class Information extends Public_Controller{
         $this->load->model('opt_model', 'opt');
 
 		$this->load->model('province_model', 'province');
+		$this->load->model('amphur_model', 'amphur');
 	}
 	
 	function population(){
@@ -42,8 +43,8 @@ Class Information extends Public_Controller{
 				if($id)
 				{
 					$data['pg_dtl'] = $this->pledgee->get_row($id);
-						$pv_dtl = $this->province->limit(1)->get("SELECT * FROM PROVINCES WHERE CODE LIKE '".$data['pg_dtl']['ctm_pvm_pv_code']."'");
-					$data['rs']['province_id'] = $pv_dtl[0]['id'];
+					echo $data['pg_dtl']['ctm_pvm_pv_code'];
+						$pv_dtl = $this->province->limit(1)->get("SELECT * FROM PROVINCES WHERE ID LIKE '".$data['pg_dtl']['ctm_pvm_pv_code']."'");
 					$data['rs']['amphur_id'] = $data['pg_dtl']['ctm_pvm_amp_code'];
 				}
 								
@@ -82,6 +83,74 @@ Class Information extends Public_Controller{
 					redirect('information/pledgee');						
 				}
 			}
+		function pledgee_import()
+		{
+			$this->template->build('pledgee/pledgee_import');
+		}
+			function pledgee_upload()
+			{
+				unset($_POST['ID']);
+				$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
+				$file_name = 'pledgee_'.date("Y_m_d_H_i_s").'.'.$ext;
+				$uploaddir = 'import_file/information/pledgee/';
+				move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+				$data = $this->ReadData($uploaddir.$file_name);
+				for($i=3; $i<count($data); $i++)
+				{
+					$pv_dtl = $this->province->get("SELECT ID FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][13]."'");
+					$dt_dtl = $this->amphur->get("SELECT ID FROM AMPHUR WHERE AMPHUR_NAME LIKE '".$data[$i][14]."'");
+					
+					$_POST['PTH_TICKET_DATE'] = ($data[$i][2]-543).'-'.$data[$i][1].'-'.$data[$i][0];
+					$_POST['PTH_TICKET_NO'] = $data[$i][3];
+					$_POST['PTD_SEQ'] = $data[$i][4];
+					$_POST['PTD_DESC'] = $data[$i][5];
+					$_POST['PTH_PAWN_COST'] = $data[$i][6];
+					$_POST['CTM_TITLE'] = $data[$i][7];
+					$_POST['CTM_CARD_NO'] = $data[$i][8];
+					$_POST['CTM_AGE'] = $data[$i][9];
+					$_POST['CTM_NATIONALITY'] = $data[$i][10];
+					$_POST['CTM_HOUSE_NO'] = $data[$i][11];
+					$_POST['CTM_ROAD'] = $data[$i][12];
+					$_POST['CTM_TUMBON'] = $data[$i][15];
+						$_POST['CTM_PVM_AMP_CODE'] = $dt_dtl[0]['id'];
+						$_POST['CTM_PVM_PV_CODE'] = $pv_dtl[0]['id'];
+					$_POST['CTM_OCM_CODE'] = $data[$i][16];
+					
+					$this->pledgee->save($_POST);
+					?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
+						รหัสรับจำนำเลขที่ <?=$_POST['PTH_TICKET_NO'];?>
+					</div><?
+				}
+				
+			unlink($uploaddir.'/'.$file_name);
+			?><BR><BR>
+				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="information/pledgee";'>
+				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="information/pledgee_import";'>
+			<?
+				#print_r($data);
+			}
+		
+
+
+				function ReadData($filepath)
+				{
+					require_once 'include/Excel/reader.php';
+					$data = new Spreadsheet_Excel_Reader();
+					$data -> setOutputEncoding('UTF-8');
+					$data -> read($filepath);
+					
+					error_reporting(E_ALL ^ E_NOTICE);		
+					$index = 0;
+					for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+						$cnt_colum = count($data->sheets[0]['cells'][$i]);
+						for($j=1; $j<=$cnt_colum; $j++)
+						{
+							$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+						}
+						$index++;			
+					}
+					return $import;	
+				}		
 }
 ?>
 

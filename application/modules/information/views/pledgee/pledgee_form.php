@@ -73,8 +73,11 @@
 	<tr>
 	  <th>จังหวัด &gt; อำเภอ<span class="Txt_red_12">&gt; ตำบล *</span></th>
         <td>
-            <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['province_id']); ?> &gt; 
-            <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['amphur_id']); ?> &gt;
+
+            <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['ctm_pvm_pv_code']);
+#				$rs['province_id'] = $rs['ctm_pvm_pv_code'];
+            ?> &gt; 
+            <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['province_id'].' order by amphur_name'), $rs['ctm_pvm_amp_code']); ?> &gt;
             
             <input name="CTM_TUMBON" type="text" id="textarea4" value="<?=($id)?$pg_dtl['ctm_tumbon']:'';?>" style="width:300px;" />            
         </td>

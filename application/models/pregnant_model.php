@@ -1,5 +1,5 @@
 <?php
-class C_pregnant_model extends MY_Model {	
+class pregnant_model extends MY_Model {	
     public $table = 'C_PREGNANT';  
 	function __construct() {
 		parent::__construct();

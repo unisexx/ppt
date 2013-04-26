@@ -12,6 +12,7 @@ Class Crime extends Public_Controller{
 	
 	#================ CRIME ==================#	
 	function index(){
+		menu::source(91);
 		$_GET['YEAR'] = @$_GET['YEAR'];
 		$_GET['STATION'] = @$_GET['STATION'];
 		$sql = 'SELECT * FROM CRIME_STATION WHERE 1=1 ';
@@ -26,6 +27,7 @@ Class Crime extends Public_Controller{
 	}
 	
 	function form($id=FALSE){
+		menu::source(91);
 		$data['monthth_array'] = array('มกราคม', "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
 		$data['station_title'] = array('บช.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
 		$data['case_title'] = array("คดีอุกฉกรรณ์และสะเทือนขวัญ", "คดีชีวิต ร่างกาย และเพศ", "คดีประทุษร้ายต่อทรัพย์", "คดีน่าสนใจ", "คดีรัฐเป็นผู้เสียหาย");
@@ -44,6 +46,7 @@ Class Crime extends Public_Controller{
 		
 	function save()
 	{
+		menu::source(91);
 		$id = @$_POST['ID'];
 		$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
 		if(count($chk_loop) == 1 && !$_POST['ID'])
@@ -81,7 +84,7 @@ Class Crime extends Public_Controller{
 	
 	function delete($id)
 	{
-		
+		menu::source(91);
 		$this->station->delete($id);
 		$this->db->execute("DELETE FROM CRIME_STATISTIC WHERE STATION_ID = ".$id."");
 		
@@ -90,7 +93,7 @@ Class Crime extends Public_Controller{
 	}
 	
 	
-	function import() { $this->template->build('crime/import'); }	
+	function import() { menu::source(91); $this->template->build('crime/import'); }	
 	
 		function upload()
 		{

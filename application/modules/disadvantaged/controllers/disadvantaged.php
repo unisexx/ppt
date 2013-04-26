@@ -9,6 +9,7 @@ Class Disadvantaged extends Public_Controller{
 	}
 	//========== UNEMPLOYEE ==========//
 	function unemployee(){
+			menu::source(71);
 		$sql = 'SELECT * FROM UNEMPLOYEE WHERE 1=1 ';
 			if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 			if(@$_GET['PROVINCE']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE'].' ';
@@ -21,6 +22,7 @@ Class Disadvantaged extends Public_Controller{
 	}
 	
 	function unemployee_form($id=FALSE){
+			menu::source(71);
 		$wlist = $this->db->execute('SELECT * FROM UNEMPLOYEE');
 		$data['id'] = @$id;
 		if(@$id)
@@ -32,12 +34,14 @@ Class Disadvantaged extends Public_Controller{
 	}
 		function unemployee_save()
 		{
+			menu::source(71);
 			$this->unemployee->save($_POST);
 			set_notify('success', lang('save_data_complete'));
 			redirect('disadvantaged/unemployee');
 		}
 	function unemployee_delete($id=FALSE)
 	{
+			menu::source(71);
 		if($id)
 		{
 			$this->unemployee->delete($id);
@@ -48,10 +52,12 @@ Class Disadvantaged extends Public_Controller{
 	}
 	function unemployee_import()
 	{
+			menu::source(71);
 		$this->template->build('unemployee/unemployee_import');	
 	}
 		function unemployee_upload()
 		{
+			menu::source(71);
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'unemployee_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/unemployee/';

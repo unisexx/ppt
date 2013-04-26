@@ -13,6 +13,7 @@ Class Mental extends Public_Controller{
 	
 	#================ MENTAL ==================#
 	function index($year=FALSE, $province_id=FALSE){
+		menu::source(86);
 		$sql = 'SELECT MT.ID, MT.PROVINCE_ID, MT.YEAR, MT.PSY_NUMBER, MT.FEAR_NUMBER, MT.DEPRESS_NUMBER, MT.RETARDED_NUMBER, MT.APOPLEXY_NUMBER, MT.DRUGADD_NUMBER, MT.AUTISM_NUMBER, MT.OTHER_NUMBER, PV.PROVINCE 
 				FROM MENTAL_NUMBER MT LEFT JOIN PROVINCES PV ON MT.PROVINCE_ID = PV.ID WHERE 1=1 ';
 			$sql .= (@$_GET['year'])?"AND MT.YEAR LIKE '".$_GET['year']."' ":'';
@@ -29,6 +30,7 @@ Class Mental extends Public_Controller{
 	}
 	
 	function form($id=FALSE){
+		menu::source(86);
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$data['id'] = $id;
 		if($id)
@@ -41,6 +43,7 @@ Class Mental extends Public_Controller{
 	}
 		function save()
 		{
+			menu::source(86);
 			$sql = "SELECT * FROM MENTAL_NUMBER WHERE PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'";
 			$chk_mental = $this->mental->get($sql);
 			
@@ -53,6 +56,7 @@ Class Mental extends Public_Controller{
 		
 		function delete($id=FALSE)
 		{
+			menu::source(86);
 				if($id)
 				{
 					$this->mental->delete($id);
@@ -64,12 +68,10 @@ Class Mental extends Public_Controller{
 				}
 		}	
 		
-	function import()
-	{
-		$this->template->build('mental/import');
-	}
+	function import() { menu::source(86); $this->template->build('mental/import'); }
 		function upload()
 		{
+			menu::source(86);
 			unset($_POST['ID']);
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'mental_'.date("Y_m_d_H_i_s").'.'.$ext;

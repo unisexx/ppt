@@ -19,6 +19,7 @@ Class Information extends Public_Controller{
 	
 	//===== PLEDGEE =====//
 		function pledgee(){
+			menu::source(77);
 			$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 
 			$sql = 'SELECT PG.*, PV.PROVINCE, AM.AMPHUR_NAME 
@@ -36,6 +37,7 @@ Class Information extends Public_Controller{
 			$this->template->build('pledgee/pledgee_index', $data);
 		}
 		function pledgee_form($id=FALSE) {
+			menu::source(77);
 		    $data['rs'] = $this->pledgee->get_row($id);
 			$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 			
@@ -53,6 +55,7 @@ Class Information extends Public_Controller{
 		
 			function pledgee_save()
 			{
+				menu::source(77);
 				$_POST['CTM_PVM_AMP_CODE'] = $_POST['amphur_id']; 	unset($_POST['amphur_id']);
 				$_POST['CTM_PVM_PV_CODE'] = $_POST['province_id'];	unset($_POST['province_id']);
 					
@@ -73,6 +76,7 @@ Class Information extends Public_Controller{
 			}
 			function pledgee_delete($id=FALSE)
 			{
+				menu::source(77);
 				if($id)
 				{
 					$this->pledgee->delete($id);
@@ -85,10 +89,12 @@ Class Information extends Public_Controller{
 			}
 		function pledgee_import()
 		{
+			menu::source(77);
 			$this->template->build('pledgee/pledgee_import');
 		}
 			function pledgee_upload()
 			{
+				menu::source(77);
 				unset($_POST['ID']);
 				$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 				$file_name = 'pledgee_'.date("Y_m_d_H_i_s").'.'.$ext;

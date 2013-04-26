@@ -24,4 +24,15 @@ class Menu
         }
         return $opt;
     }
+    
+    static public function source($menu_id)
+    {
+        $sql = 'select form_template.source 
+        from form_template 
+        join menus on menus.template_id = form_template.id
+        where menus.id = '.$menu_id;
+        $result = get_instance()->db->getone($sql);
+        dbConvert($result);
+        return '<h5><span class="gray">แหล่งข้อมูล: '.$result.'</span></h5>';
+    }
 }

@@ -18,11 +18,12 @@ class Permission_model extends MY_Model{
 				foreach($perms as $item)
 				{
 					$perm[$item['module']] = array(
-						'read' => $item['read'],
-						'create' => $item['create'],
-						'update' => $item['update'],
+						'view' => $item['view'],
+						'add' => $item['add'],
+						'edit' => $item['edit'],
 						'delete' => $item['delete'],
-						'download' => $item['download']
+						'import' => $item['import'],
+						'export' => $item['export']
 					);
 				}
 				return @$perm;

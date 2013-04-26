@@ -2,19 +2,15 @@
 Class Setting extends Public_Controller{
 	
 	public $module = array(
-		'administrators' => array('label' => 'ผู้ดูแล', 'permission' => array('view','add','edit','delete')),
-		'coverpages' => array('label' => 'หน้าแรก', 'permission' => array('view','add','edit','delete')),
-		'histories' => array('label' => 'ความเป็นมาศูนย์เด็กเล็กปลอดโรค', 'permission' => array('edit')),
-		'hilights' => array('label' => 'ไฮไลท์', 'permission' => array('view','add','edit','delete')),
-		'informations' => array('label' => 'ข่าวประชาสัมพันธ์', 'permission' => array('view','add','edit','delete')),
-		'articles' => array('label' => 'บทความน่าสนใจ', 'permission' => array('view','add','edit','delete')),
-		'vdos' => array('label' => 'vdo แนะนำ', 'permission' => array('view','add','edit','delete')),
-		'downloads' => array('label' => 'เอกสารดาวน์โหลด', 'permission' => array('view','add','edit','delete')),
-		'newsletters' => array('label' => 'จดหมายข่าว', 'permission' => array('view','add','edit','delete')),
-		'galleries' => array('label' => 'ภาพกิจกรรม', 'permission' => array('view','add','edit','delete')),
-		'calendars' => array('label' => 'ปฎิทินกิจกรรม', 'permission' => array('view','add','edit','delete')),
-		'permissions' => array('label' => 'สิทธิ์การใช้งาน', 'permission' => array('view','add','edit','delete')),
-		'dashboards' => array('label' => 'สถิติโดยรวม', 'permission' => array('view')),
+		'user' => array('label' => 'ผู้ใช้งานระบบ', 'permission' => array('view','add','edit','delete')),
+		'usertype' => array('label' => 'สิทธ์การใช้งาน', 'permission' => array('view','add','edit','delete')),
+		'set_target' => array('label' => 'ข้อมูลพื้นฐานและกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
+		'set_province' => array('label' => 'จังหวัด', 'permission' => array('view','add','edit','delete')),
+		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
+		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
+		'report' => array('label' => 'รายงาน', 'permission' => array('view','add','edit','delete')),
+		'basement' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete')),
+		'target' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
 	);
 	
 	public $crud = array(
@@ -113,12 +109,14 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 	function usertype_save(){
 		if($_POST)
 		{
-			$id = $this->user_type->save($_POST);
-			$this->permission->delete('user_type_id', $id);
+			$_POST['id'] = $_POST['user_type_id'];
+			$this->user_type->save($_POST);
+			
+			$this->permission->delete('user_type_id', $_POST['user_type_id']);
 			if(isset($_POST['checkbox'])){
 				foreach($_POST['checkbox'] as $module => $item)
 				{
-					$data['user_type_id'] = $id;
+					$data['user_type_id'] = $_POST['user_type_id'];
 					$data['module'] = $module;
 					foreach($item as $perm => $val) $data[$perm] =  $val;
 					$this->permission->save($data);

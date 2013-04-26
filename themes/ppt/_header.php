@@ -3,5 +3,6 @@
 	<div id="login">
 		<span>เข้าสู่ระบบโดย <a href="profile.php" class="link_login"><?php echo login_data('fullname')?></a> (<?php echo login_data('user_type_name')?>)</span>
 		| <a href="home/logout">ออกจากระบบ</a>
+
 	</div>
 </div>

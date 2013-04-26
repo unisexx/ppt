@@ -1,31 +1,34 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".btn_delete").click(function(){
+			if(confirm('ลบรายการนี้ ? ')){
+				var hdid = $(this).closest('td').find('#hdid').val();
+				window.location='child/pregnant_delete/'+hdid;
+			}
+		})
+	})
+</script>
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
 <h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>
 <div id="search">
   <div id="searchBox">
-    โรงพยาบาล
-      <input type="text" name="textfield" id="textfield" style="width:250px;" />
-    <select name="select6" id="select6">
-      <option>-- ทุกปี --</option>
-      <option>2556</option>
-      <option>2555</option>
-      <option>2554</option>
-    </select>
-    <select name="select" id="select">
-      <option>-- ทุกเพศ --</option>
-    </select>
-<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+  	<form action="child/pregnant" method="get">
+	    โรงพยาบาล
+	      <input type="text" name="location" id="textfield" style="width:250px;"  value="<?php echo @$_GET['location']; ?>"/>
+	    <?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
+	    <select name="sex" id="select">
+	      <option value="">-- ทุกเพศ --</option>
+	      <option value="1" <?php echo  (@$_GET['sex']==1)? "checked='checked' ":''; ?>>ชาย</option>
+	       <option value="2" <?php echo  (@$_GET['sex']==2)? "checked='checked' ":''; ?>>หญิง</option>
+	    </select>
+		<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+	</form>
+	</div>
 </div>
 
 <div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/pregnant_import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/pregnant_form'" class="btn_add"/></div>
 
-<div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
-<a href="javascript:;" title="Seite 2">2</a>
-<a href="javascript:;" title="Seite 3">3</a>
-<a href="javascript:;" title="Seite 4">4</a>
-
-<span class="break">...</span><a href="javascript:;" title="Seite 19">19</a>
-<a href="javascript:;" title="Seite 2">Next</a>&nbsp;&nbsp;188 record
-</div>	
+<?php echo $pagination; ?>
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
@@ -36,54 +39,25 @@
   <th>เลขบัตรประชาชน ของบิดา</th>
   <th>&nbsp;</th>
 </tr>
-<tr>
-  <td>1</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
+<?php 
+ $sex =array(1=>'ชาย',2=>'หญิง');
+  $rowStyle = '';
+  $page = (isset($_GET['page']))? $_GET['page']:1;
+  $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;
+  foreach($result as $item):
+?>
+<tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
+  <td><?php echo $i; ?></td>
+  <td><?php echo $item['year'] ?></td>
+  <td><?php echo $sex[$item['sex']] ?></td>
+  <td><?php echo $item['hospital_code'] ?></td>
+  <td><?php echo $item['location'] ?></td>
+  <td><?php echo $item['f_id']; ?></td>
+  <td>
+  	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'" />
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
 </tr>
-<tr class="odd">
-  <td>2</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button" id="button" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button" id="button5" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button2" id="button2" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button2" id="button6" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr class="odd">
-  <td>4</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button3" id="button3" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button3" id="button7" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td>2555</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><input type="submit" name="button5" id="button8" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='people.php?act=form'" />
-    <input type="submit" name="button5" id="button10" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
-  </tr>
+<?php ++$i;endforeach; ?>
 </table>
+<?php echo $pagination; ?>

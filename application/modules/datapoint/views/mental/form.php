@@ -7,7 +7,7 @@ $mental_dtl['year'] = (@$mental_dtl['year'])?$mental_dtl['year']:'';
 $mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province_id']:'';
 ?>
 <HR>
-<form ACTION="datapoint/mental_save" METHOD="POST">
+<form ACTION="datapoint/mental/save" METHOD="POST">
 	<input type='hidden' name='ID' value='<?=(@$id);?>'>
 	<table class="tbadd">
 	<tr>

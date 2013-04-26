@@ -2,7 +2,7 @@
 <h4>จำนวนและอัตราผู้ป่วยสุภาพจิต <span class="gray">แบบ กรมสุขภาพจิต</span></h4>
 
 
-<form action='datapoint/mental_upload' method='POST' enctype="multipart/form-data">
+<form action='datapoint/mental/upload' method='POST' enctype="multipart/form-data">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
@@ -12,7 +12,7 @@
 	</table>	
 	<div id="btnSave">
 	<input type="submit" value="บันทึก" class="btn btn-danger">
-	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" onclick='window.location="";'/>
 	</div>
 
 </form>

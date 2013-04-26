@@ -9,7 +9,7 @@
     <?php echo $template['metadata'] ?>
 </head>
 <body>
-	<?php // echo login_chk(); // ถ้าไม่ได้ login ให้กลับไปหน้าแรก --- ?>
+	<?php echo login_chk(); // ถ้าไม่ได้ login ให้กลับไปหน้า login --- ?>
 	<div class="container-fluid">
 		<?php include "_header.php";?>
 		<?php include "_menu.php";?>

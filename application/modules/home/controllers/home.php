@@ -5,8 +5,11 @@ Class Home extends  Public_Controller{
 	}
 	
 	function index(){
-		$this->template->set_layout('login_page');
 		$this->template->build('index');
+	}
+	
+	function login_page(){
+		$this->load->view('login_page');
 	}
 	
 	function login($id=FALSE)
@@ -17,7 +20,8 @@ Class Home extends  Public_Controller{
 			if(login(trim($_POST['username']), trim($_POST['password'])))
 			{
 				//time_login_update($this->session->userdata('id'));
-				redirect('setting/user');
+				
+				redirect('home');
 			}
 			else
 			{
@@ -33,13 +37,13 @@ Class Home extends  Public_Controller{
 				//}
 			}	
 		}
-		redirect('home');
+		redirect('home/login_page');
 	}
 	
 	function logout()
 	{
 		logout();
-		redirect('user');
+		redirect('home/login_page');
 	}
 }
 ?>

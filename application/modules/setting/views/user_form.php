@@ -1,110 +1,89 @@
 <h2>ผู้ใช้งาน (เพิ่ม/แก้ไข)</h2>
+
+<form class="validate" method="post" action="setting/user_save">
 <table class="tbadd">
 <tr>
   <th>สิทธิ์การใช้งาน  <span class="Txt_red_12">*</span></th>
-  <td><select name="select3" id="select3">
-    <option selected="selected">เลือกสิทธิ์การใช้งาน</option>
-    <option>Super Admin</option>
-    <option>Admin (ศทส.)</option>
-    <option>Admin (คำของบประมาณ)</option>
-    <option>Director (คำของบประมาณ)</option>
-    <option>User (คำของบประมาณ)</option>
-  </select></td>
+  <td>
+  	<?php echo form_dropdown('user_type_id', get_option('id', 'user_type_name', 'user_type'), $user['user_type_id'], null, '- เลือกสิทธิ์การใช้งาน -'); ?>
+  </td>
 </tr>
 <tr>
   <th>ชื่อ - นามสกุล<span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea7" type="text" id="textarea7" value="" size="40" /></td>
+  <td><input name="fullname" type="text" value="<?php echo $user['fullname']?>"/></td>
 </tr>
 <tr>
   <th>Name <span class="Txt_red_12"> *</span></th>
-  <td><input name="textarea7" type="text" id="textarea9" value="" size="40" /></td>
+  <td><input name="name" type="text" value="<?php echo $user['name']?>"/></td>
 </tr>
 <tr>
   <th>Surname <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea7" type="text" id="textarea8" value="" size="40" /></td>
+  <td><input name="surname" type="text" value="<?php echo $user['surname']?>"/></td>
 </tr>
 <tr>
   <th>กรม  <span class="Txt_red_12">*</span></th>
-  <td><select name="select5" id="select6">
-    <option selected="selected">เลือกกรม</option>
-    <option>สำนักงานรัฐมนตรี</option>
-    <option>สำนักงานปลัดกระทรวง</option>
-    <option>สำนักงานกิจการสตรีและสถานบันครอบครัว</option>
-    <option>กรมพัฒนาสังคมและสวัสดิการ</option>
-    </select></td>
+  <td>
+    <?php echo form_dropdown('department_id', get_option('id', 'department_name', 'department'), $user['department_id'], null, '- เลือกกรม -'); ?>
+  </td>
 </tr>
 <tr>
   <th>กอง / สำนักงาน  <span class="Txt_red_12">*</span></th>
-  <td><select name="select4" id="select5">
-    <option>เลือกกอง/สำนักงาน</option>
-    <option>สำนักนโยบายและยุทธศาสตร์</option>
-    <option>สำนักมาตรฐานการพัฒนาสังคมและความมั่นคงของมนุษย์</option>
-    <option>สำนักบริหารงานกลาง</option>
-    <option>สำนักงานเลขานุการคณะกรรมการคุ้มครองเด็กแห่งชาติ</option>
-    <option>กลุ่มพัฒนาระบบบริหาร</option>
-    <option>สำนักงานเลขานุการป้องกันและปราบปรามการค้ามนุษย์</option>
-    <option>ศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร</option>
-  </select></td>
+  <td>
+  	<?php echo form_dropdown('division_id', get_option('id', 'division_name', 'division'), $user['division_id'], null, '- กอง / สำนักงาน -'); ?>
+  </td>
 </tr>
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
-  <td><select name="select4" id="select4">
-    <option>เลือกกลุ่ม/ฝ่าย</option>
-  </select></td>
+  <td>
+  <?php echo form_dropdown('group_id', get_option('id', 'group_name', 'groups'), $user['group_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
+  </td>
 </tr>
 <tr>
   <th>ประเภทบุคลากร  <span class="Txt_red_12">*</span></th>
-  <td><select name="select2" id="select2">
-    <option>เลือกประเภทบุคลากร</option>
-    <option>ข้าราชการ</option>
-    <option>พนักงานราชการ</option>
-    <option>ลูกจ้างประจำ</option>
-    <option>ลูกจ้างชั่วคราว</option>
-    <option>พนักงานของรัฐ</option>
-    </select></td>
+  <td>
+    <?php echo form_dropdown('person_type_id', get_option('id', 'person_type_name', 'person_type'), $user['person_type_id'], null, '- เลือกประเภทบุคลากร -'); ?>
+  </td>
 </tr>
 <tr>
   <th>บัตรประชาชน  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea3" type="text" id="textarea3" maxlength="13" /></td>
+  <td><input name="id_card" type="text" value="<?php echo $user['id_card']?>"/></td>
 </tr>
 <tr>
   <th>เบอร์ติดต่อ</th>
-  <td><input name="textarea4" type="text" id="textarea4" value="" /></td>
+  <td><input name="contact_number" type="text" value="<?php echo $user['contact_number']?>" /></td>
 </tr>
 <tr>
   <th>กลุ่มเป้าหมายที่รับผิดชอบ</th>
-  <td><span style="margin-right:15px;"><input type="checkbox" name="checkbox" id="checkbox" />
-    เด็กและเยาวชน
-        <input type="checkbox" name="checkbox2" id="checkbox2" />
-        สตรี
-  </span><span style="margin-right:15px;">
-<input type="checkbox" name="checkbox3" id="checkbox3" /> 
-ครอบครัว
-</span><span style="margin-right:15px;">
-<input type="checkbox" name="checkbox4" id="checkbox4" /> 
-ผู้ด้อยโอกาส
-<input type="checkbox" name="checkbox5" id="checkbox5" />
-คนพิการ
-<input type="checkbox" name="checkbox6" id="checkbox6" /> 
-ผู้สูงอายุ
-<input type="checkbox" name="checkbox7" id="checkbox7" />
-อื่นๆ </span></td>
+  <td>
+  	<span style="margin-right:15px;">
+  		<?php $arr_target_response = explode(",", $user['target_response']);?>
+		<input type="checkbox" name="target_response[]" value="เด็กและเยาวชน" <?php if(in_array('เด็กและเยาวชน', $arr_target_response)) echo 'checked="checked"'; ?>/> เด็กและเยาวชน
+		<input type="checkbox" name="target_response[]" value="สตรี" <?php if(in_array('สตรี', $arr_target_response)) echo 'checked="checked"'; ?>/> สตรี
+		<input type="checkbox" name="target_response[]" value="ครอบครัว" <?php if(in_array('ครอบครัว', $arr_target_response)) echo 'checked="checked"'; ?>/> ครอบครัว
+		<input type="checkbox" name="target_response[]" value="ผู้ด้อยโอกาส" <?php if(in_array('ผู้ด้อยโอกาส', $arr_target_response)) echo 'checked="checked"'; ?>/> ผู้ด้อยโอกาส
+		<input type="checkbox" name="target_response[]" value="คนพิการ" <?php if(in_array('คนพิการ', $arr_target_response)) echo 'checked="checked"'; ?>/> คนพิการ
+		<input type="checkbox" name="target_response[]" value="ผู้สูงอายุ" <?php if(in_array('ผู้สูงอายุ', $arr_target_response)) echo 'checked="checked"'; ?>/> ผู้สูงอายุ
+		<input type="checkbox" name="target_response[]" value="อื่นๆ" <?php if(in_array('อื่นๆ', $arr_target_response)) echo 'checked="checked"'; ?>/> อื่นๆ 
+	</span>
+  </td>
 </tr>
 <tr>
   <th>อีเมล์  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea" type="text" id="textarea" value="" size="30" /></td>
+  <td><input type="text" name="email" value="<?php echo $user['email']?>" /></td>
 </tr>
 <tr>
   <th>รหัสผ่าน <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea5" type="text" id="textarea5" value="" /></td>
+  <td><input id="password" type="text" name="password" value="<?php echo $user['password']?>" /></td>
 </tr>
 <tr>
   <th>ยืนยันรหัสผ่าน  <span class="Txt_red_12">*</span></th>
-  <td><input name="textarea2" type="text" id="textarea2" value="" /></td>
+  <td><input type="password" name="_password" value="" /></td>
 </tr>
 </table>
 
 <div id="btnSave">
+<input type="hidden" name="id" value="<?php echo $user['id']?>">
 <input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
+</form>

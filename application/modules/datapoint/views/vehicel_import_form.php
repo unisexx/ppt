@@ -1,6 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>
-<form action="child/pregnant_save_import" method="post" enctype="multipart/form-data">
+<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น</h2>
+<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
+<form action="datapoint/vehicle_save_import" method="post" enctype="multipart/form-data">
 <div id="search">
   <div id="searchBox">  	
     <select name="year_data" id="year_data">

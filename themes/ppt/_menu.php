@@ -1,6 +1,24 @@
 <div class="red">  
 <ul id="mega-menu-6" class="mega-menu unstyled">
 	<li><a href="dashboard.php">ข้อมูลภาพรวม</a></li>
+	
+	<?php foreach(menu::ls(0) as $cat): ?>
+	<li><a><?php echo $cat['title']; ?></a>
+	    <ul>
+	        <?php foreach(menu::ls($cat['id']) as $sub): ?>
+	            <li><a><?php echo $sub['title']; ?></a>
+	                <ul>
+	                    <?php foreach(menu::ls($sub['id']) as $item): ?>
+	                        <li><?php echo anchor($item['url'], $item['title'].' <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" />'); ?></li>
+	                    <?php endforeach; ?>
+	                </ul>
+	            </li>
+	        <?php endforeach; ?>
+	    </ul>
+	</li>
+	<?php endforeach; ?>
+	
+	<?php /*
 	<li><a href="#">ข้อมูลกลุ่มเป้าหมาย 1</a>
 		<ul>
 			<li><a href="#">เด็กและเยาวชน</a>
@@ -150,12 +168,14 @@
 			</li>
 		</ul>
 	</li>
+     * 
+     */?>
 
 <li><a href="#">ตั้งค่าข้อมูลหลัก</a>
 <ul>
 	<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>
 	<li><a href="setting/usertype">สิทธิ์การใช้งาน</a></li>
-	<li><a href="setting/set_target">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
+	<li><a href="setting/menus">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
     <li><a href="setting/set_province">จังหวัด</a></li>
     <li><a href="setting/set_amphor">อำเภอ</a></li>
     <li><a href="setting/set_tumbon">ตำบล</a></li>

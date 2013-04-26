@@ -13,6 +13,7 @@ Class Child extends Public_Controller{
 
 	//===== WELFARE =====//
 	function welfare(){
+		menu::source(13);		
 		$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
 		if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 		if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
@@ -24,6 +25,7 @@ Class Child extends Public_Controller{
 	}
 	
 	function welfare_form($id=FALSE){
+		menu::source(13);
 		$wlist = $this->db->execute('SELECT * FROM WELFARE_LIST');
 		$data['id'] = @$id;
 		if(@$id)
@@ -35,12 +37,14 @@ Class Child extends Public_Controller{
 	}
 		function welfare_save()
 		{
+			menu::source(13);
 			$this->welfare->save($_POST);
 			set_notify('success', lang('save_data_complete'));
 			redirect('child/welfare');
 		}
 	function welfare_delete($id=FALSE)
 	{
+		menu::source(13);
 		if($id)
 		{
 			$this->welfare->delete($id);

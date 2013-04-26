@@ -309,6 +309,7 @@ echo '<HR>';
 		}
 		redirect('datapoint/vehicle');
 	}
+
 	function vehicle_import(){
 		$this->template->build('vehicle/vehicle_import_form');
 	}

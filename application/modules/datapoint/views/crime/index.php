@@ -27,7 +27,8 @@
 </div>
 </FORM>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/crime_form'" class="btn_add"/></div>
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/crime/import'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/crime/form/'" class="btn_add"/></div>
 
 
 <?=$pagination; ?>
@@ -83,12 +84,12 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="datapoint/crime_delete/"+id;
+			window.location="datapoint/crime/delete/"+id;
 		}
 	}
 	else if(type == 'EDIT')
 	{
-		window.location='datapoint/crime_form/'+id;
+		window.location='datapoint/crime/form/'+id;
 	}
 }
 </script>

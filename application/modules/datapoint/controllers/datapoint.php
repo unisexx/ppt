@@ -8,6 +8,7 @@ Class Datapoint extends Public_Controller{
 		$this->load->model('crime_station_model','station');
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
+		$this->load->model('agency_model','agency');
 	}
 	
 	
@@ -258,39 +259,37 @@ echo '<HR>';
 		}
 		
 	#================ CRIME ==================#
-	function ReadData($filepath){
-		require_once 'include/Excel/reader.php';
-		$data = new Spreadsheet_Excel_Reader();
-		$data -> setOutputEncoding('UTF-8');
-		$data -> read($filepath);	
-		error_reporting(E_ALL ^ E_NOTICE);
-		$index = 0;						
-			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-				$import[$index]['id'] = trim($data -> sheets[0]['cells'][$i][1]);
-				$import[$index]['province_id'] = trim($data -> sheets[0]['cells'][$i][2]);
-				$import[$index]['area_number'] = trim($data -> sheets[0]['cells'][$i][3]);
-				$import[$index]['p_name'] =  trim($data -> sheets[0]['cells'][$i][4]);	
-				$import[$index]['poor'] =  trim($data -> sheets[0]['cells'][$i][5]);			
-				$import[$index]['family'] =  trim($data -> sheets[0]['cells'][$i][6]);
-				$import[$index]['married'] = trim($data -> sheets[0]['cells'][$i][7]);
-				$import[$index]['adapt'] =  trim($data -> sheets[0]['cells'][$i][8]);
-				$import[$index]['capture'] =  trim($data -> sheets[0]['cells'][$i][9]);	
-				$import[$index]['accident'] =  trim($data -> sheets[0]['cells'][$i][10]);
-				$import[$index]['migration'] =  trim($data -> sheets[0]['cells'][$i][11]);	
-				$import[$index]['breadwinner'] =  trim($data -> sheets[0]['cells'][$i][12]);	
-				$import[$index]['other'] =  trim($data -> sheets[0]['cells'][$i][13]);	
-				$import[$index]['total'] =  trim($data -> sheets[0]['cells'][$i][15]);				 			
-				$index++;			
-			}				
-		return $import;
-	}	
-	
+
 	function vehicle(){
-		$this->template->build('vehicle_index');
+		//$this->db->debug=TRUE;	
+		$year=(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']:'';
+		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY_ID=".$_GET['agency_id']:'';	
+		$data['result'] =$this->vehicle->select("dp_vehicle.*,agency")
+															->join("LEFT JOIN AGENCY on AGENCY.ID=AGENCY_ID")
+															->where(" 1=1 $year $agency_id")
+															->order_by("dp_vehicle.ID",'asc')->get();	
+		$data['pagination'] = $this->vehicle->pagination();		
+		$this->template->build('vehicle/vehicle_index',$data);
 	}
 	
-	function vehicle_form(){
-		$this->template->build('vehicle_form');
+	function vehicle_form($id=FALSE){
+
+		$data['rs'] =$this->vehicle->get_row($id);		
+		$this->template->build('vehicle/vehicle_form',$data);
+	}
+	function vehicle_save(){
+		if($_POST){
+			$this->vehicle->save($_POST);
+			set_notify('success', lang('save_data_complete'));
+		}
+		redirect('datapoint/vehicle');
+	}
+	function vehicle_delete($id){
+		if(!empty($id)){
+			$this->vehicle->delete($id);
+			set_notify('success', lang('delete_data_complete'));
+		}
+		redirect('datapoint/vehicle');
 	}
 
 
@@ -315,49 +314,63 @@ echo '<HR>';
 				}	
 
 	function vehicle_import(){
-		$this->template->build('vehicle_import_form');
+		$this->template->build('vehicle/vehicle_import_form');
 	}
-	function vehicle_import_save(){		
+	function ImportData($Filepath=FALSE){
+			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
+			require('include/spreadsheet-reader-master/SpreadsheetReader.php');		
+			date_default_timezone_set('UTC');		
+			$Spreadsheet = new SpreadsheetReader($Filepath);
+			$BaseMem = memory_get_usage();		
+			$Time = microtime(true);
+			return $Spreadsheet;
+	}
+	function vehicle_save_import(){		
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM DP_VEHICLE WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_drop_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'vehicle_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/datapoint/vehicle/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data = $this->ReadData($uploaddir.$file_name);							
-			foreach($data as $key=>$item){					
-						$val['YEAR']=$_POST['year_data'];
-						$val['AGENCY_ID'] = $item['province_id'];
-						$val['NOTICE'] =$item['area_number'];
-						$val['WALK'] = $item['poor'];
-						$val['BICYCLE'] = $item['family'];
-						$val['THREEWHEEL'] = $item['married'];
-						$val['MOTORCYCLE'] = $item['adapt'];
-						$val['CAR'] = $item['capture'];
-						$val['MINIBUS'] = $item['accident'];
-						$val['PICKUP'] = $item['migration'];
-						$val['BUS'] = $item['breadwinner'];
-						$val['SIXWHEEL'] = $item['ohter'];
-						$val['TENWHEEL'] = $item['total'];
-						$val['ETAN'] = date('Y-m-d');
-						$val['TAXI'] = $item['total'];
-						$val['OTHER'] = $item['total'];
-						$val['TOTAL'] = $item['total'];
-						$val['DIE_MALE'] = $item['total'];
-						$val['DIE_FEMALE'] = $item['total'];
-						$val['COMA_MALE'] = $item['total'];
-						$val['COMA_FRMALE'] = $item['total'];
-						$val['PAIN_MALE'] = $item['total'];
-						$val['PAIN_FMALE'] = $item['total'];											
-						$val['CATCH_MALE'] = $item['total'];
-						$val['CATCH_FEMALE'] = $item['total'];
-						$val['ESCAPE_MALE'] = $item['total'];
-						$val['ESCAPE_FEMALE'] = $item['total'];
-						$val['INVOLUNTARY'] = $item['total'];
-						$this->vehicle->save($val);																									
-						//$val['CREATE'] = date('Y-m-d H:i:s');																																
-			}
+			$data= $this->ImportData($uploaddir.$file_name);				
+			foreach($data as $key=>$item){						
+					if($key>=4 && $key<=16){
+								$agency=($item[0]) ?$this->agency->where("agency='".trim($item[0])."'")->get():0;			
+								$val['YEAR']=$_POST['year_data'];	
+								$val['agency_id']=$agency[0]['id'];		
+								$val['NOTICE'] =$item[1];
+								$val['WALK'] = $item[2];
+								$val['BICYCLE'] = $item[3];
+								$val['THREEWHEEL'] = $item[4];
+								$val['MOTORCYCLE'] = $item[5];
+								$val['MOTOR_TRICYCLE'] = $item[6];
+								$val['CAR'] =$item[7];
+								$val['MINIBUS'] =$item[8];
+								$val['PICKUP'] = $item[9];
+								$val['BUS'] = $item[10];
+								$val['SIXWHEEL'] =$item[11];
+								$val['TENWHEEL'] = $item[12];
+								$val['ETAN'] = $item[13];
+								$val['TAXI'] = $item[14];
+								$val['OTHER'] = $item[15];
+								$val['TOTAL'] = $item[16];
+								$val['DIE_MALE'] =$item[17];
+								$val['DIE_FEMALE'] = $item[18];
+								$val['COMA_MALE'] =$item[19];
+								$val['COMA_FEMALE'] =$item[20];
+								$val['PAIN_MALE'] = $item[21];
+								$val['PAIN_FEMALE'] = $item[22];										
+								$val['CATCH_MALE'] = $item[23];
+								$val['CATCH_FEMALE'] = $item[24];
+								$val['ESCAPE_MALE'] = $item[25];
+								$val['ESCAPE_FEMALE'] = $item[26];
+								$val['INVOLUNTARY'] = $item[27];
+								//$val['CREATE'] =to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss');
+								$this->vehicle->save($val);																						
+													
+				}	//if																														
+			}		
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('datapoint/vehicle_import');	

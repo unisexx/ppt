@@ -155,7 +155,7 @@
 <ul>
 	<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>
 	<li><a href="setting/usertype">สิทธิ์การใช้งาน</a></li>
-	<li><a href="setting/set_target">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
+	<li><a href="setting/menus">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
     <li><a href="setting/set_province">จังหวัด</a></li>
     <li><a href="setting/set_amphor">อำเภอ</a></li>
     <li><a href="setting/set_tumbon">ตำบล</a></li>

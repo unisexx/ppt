@@ -38,7 +38,6 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = '27.254.33.64';
-$db['default']['hostname'] = 's-notebook';
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';

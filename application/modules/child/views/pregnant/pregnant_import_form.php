@@ -11,6 +11,7 @@
     </select>
     <input type="file" name="fl_import" >
    ส่วนที่ : <input type="text" name="order_no" maxlength="2" >
-  <input type="submit" name="button9" id="button9" title="นำเข้าข้อมูล" value=" " class="btn_import" /></div>
+  <input type="submit" name="button9" id="button9" title="นำเข้าข้อมูล" value=" " class="btn_import" />
+  <small>จำนวนครั้งละไม่เกิน 3,000 เรคอร์ด</small></div>
 </div>
 </form>

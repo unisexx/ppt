@@ -12,7 +12,7 @@
 </div>
 
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form'); ?>'" class="btn_add">
+    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('setting/menus/form'); ?>'" class="btn_add">
 </div>
 
 <div class="clear"></div>

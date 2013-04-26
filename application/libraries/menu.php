@@ -6,7 +6,7 @@ class Menu
 {   
     static public function ls($parent_id)
     {
-        $result = get_instance()->db->getarray('select * from menus where parent_id = ?', array($parent_id));
+        $result = get_instance()->db->getarray('select * from menus where parent_id = ? order by position', array($parent_id));
         dbConvert($result);
         return $result;
     }

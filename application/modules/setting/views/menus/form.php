@@ -1,7 +1,7 @@
 <h2>ตั้งค่าข้อมูลหลัก > ข้อมูลพื้นฐานและกลุ่มเป้าหมาย (เพิ่ม/แก้ไข)</h2>
 <form method="post" action="setting/menus/save">
 <table class="tbadd">
-    <?php if($rs['parent_id'] > 0): ?>
+    <?php if($rs['parent_id'] > 0 or empty($rs['id'])): ?>
     <tr>
         <th>ข้อมูลพื้นฐานหรือกลุ่มเป้าหมาย<span class="TxtRed">*</span></th>
         <td><?php echo form_dropdown('parent_id', menu::option(), $rs['parent_id']); ?></td>

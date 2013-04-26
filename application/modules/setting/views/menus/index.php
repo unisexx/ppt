@@ -15,19 +15,39 @@
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form'); ?>'" class="btn_add">
 </div>
 
-<?php echo $pagination; ?>
-<table class="tblist">
-    <tr>
-        <th>ประเภท</th>
-        <th>หมวด</th>
-        <th>รายการ</th>
-    </tr>
-    <?php foreach($result as $key => $item): ?>
-    <tr>
-        <td><?php echo $item['cat_title']; ?></td>
-        <td><?php echo $item['sub_title']; ?></td>
-        <td><?php echo $item['title']; ?></td>
-    </tr>
+<div class="clear"></div>
+<ul id="browser" class="filetree">
+    <?php foreach(menu::ls(0) as $cat): ?>
+    <li>
+        <img src="themes/ppt/images/treeview/museum.png" /> 
+        <?php echo $cat['title']?> 
+        <span>
+            <a href="setting/menus/form/<?php echo $cat['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+            <a href="setting/menus/delete/<?php echo $cat['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+        </span>
+        <ul>
+            <?php foreach(menu::ls($cat['id']) as $sub): ?>
+            <li>
+                <img src="themes/ppt/images/treeview/folder.gif" /> <?php echo $sub['title']?> 
+                <span>
+                    <a href="setting/menus/form/<?php echo $sub['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+                    <a href="setting/menus/delete/<?php echo $sub['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+                </span>
+                <ul>
+                    <?php foreach(menu::ls($sub['id']) as $item): ?>
+                    <li>
+                        <img src="themes/ppt/images/treeview/file.gif" /> 
+                        <?php echo anchor($item['url'], $item['title']); ?> 
+                        <span>
+                            <a href="setting/menus/form/<?php echo $item['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+                            <a href="setting/menus/delete/<?php echo $item['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+                        </span>
+                    </li>
+                    <?php endforeach;?>
+                </ul>
+            </li>
+            <?php endforeach;?>
+        </ul>
+    </li>
     <?php endforeach; ?>
-</table>
-<?php echo $pagination; ?>
+</ul>

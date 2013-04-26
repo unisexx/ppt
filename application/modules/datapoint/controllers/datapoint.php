@@ -4,10 +4,10 @@ Class Datapoint extends Public_Controller{
 		parent::__construct();
 		
 		$this->load->model('mental_model', 'mental');
-		$this->load->model('province_model', 'province');
-		
+		$this->load->model('province_model', 'province');		
 		$this->load->model('crime_station_model','station');
 		$this->load->model('crime_statistic_model','statistic');
+		$this->load->model('dp_vehicle_model','vehicle');
 	}
 	
 	
@@ -73,6 +73,81 @@ Class Datapoint extends Public_Controller{
 					redirect('datapoint/mental');						
 				}
 		}	
+		
+	function mental_import()
+	{
+		$this->template->build('mental_number/mental_import');
+	}
+		function mental_upload()
+		{
+			unset($_POST['ID']);
+			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'mental_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/datapoint/mental/';
+			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+			$data = $this->ReadData($uploaddir.$file_name);
+echo '<HR>';
+			?><div style='font-size:12px;'><?
+			$_POST['YEAR'] = $data[1][1];
+
+			for($i=6; $i<count($data); $i++)
+			{
+				#print_r($data[$i]);	echo '<BR>';
+				
+				
+				if(strstr($data[$i][0], 'รวม'))
+				{
+					$get_province = explode('รวม', $data[$i][0]);
+					$get_province = trim($get_province[0]);
+					if($get_province != '')
+					{
+						$dtl_province = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$get_province."'");
+						
+						#print_r($data[$i]);
+						
+						$_POST['PROVINCE_ID'] = $dtl_province[0]['id'];
+						
+						$post_title = array('POP_NUMBER', 
+							'PSY_NUMBER', 
+							'PSY_RATE', 
+							'FEAR_NUMBER', 
+							'FEAR_RATE', 
+							'DEPRESS_NUMBER', 
+							'DEPRESS_RATE', 
+							'RETARDED_NUMBER', 
+							'RETARDED_RATE', 
+							'APOPLEXY_NUMBER', 
+							'APOPLEXY_RATE', 
+							'DRUGADD_NUMBER', 
+							'DRUGADD_RATE', 
+							'OTHER_NUMBER', 
+							'OTHER_RATE', 
+							'SUICIDE_SUCC_NUMBER', 
+							'SUICIDE_SUCC_RATE', 
+							'SUICIDE_UNSUC_NUMBER', 
+							'SUICIDE_UNSUC_RATE', 
+							'AUTISM_NUMBER', 
+							'AUTISM_RATE');
+							
+						for($j=0; $j<count($post_title); $j++)
+						{
+							$_POST[$post_title[$j]] = ($data[$i][($j+1)]*1);
+						}
+						$this->mental->save($_POST);
+						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล 
+							จังหวัด "<?=$get_province;?>"
+						</div><?
+					}
+				}
+			}
+			?></div><?
+					unlink($uploaddir.$file_name);
+					?><BR>
+						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="datapoint/mental";'>
+						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="datapoint/mental_import";'>
+					<?
+
+		}
 	#================ MENTAL ==================#	
 	
 	
@@ -84,7 +159,7 @@ Class Datapoint extends Public_Controller{
 			if($_GET['YEAR']) { $sql .= 'AND YEAR = '.$_GET['YEAR'].' '; }
 			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."' "; }
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
-	
+
 		$data['result'] = $this->station->get($sql);
     	$data['pagination'] = $this->station->pagination;
 		
@@ -183,7 +258,32 @@ Class Datapoint extends Public_Controller{
 		}
 		
 	#================ CRIME ==================#
-	
+	function ReadData($filepath){
+		require_once 'include/Excel/reader.php';
+		$data = new Spreadsheet_Excel_Reader();
+		$data -> setOutputEncoding('UTF-8');
+		$data -> read($filepath);	
+		error_reporting(E_ALL ^ E_NOTICE);
+		$index = 0;						
+			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$import[$index]['id'] = trim($data -> sheets[0]['cells'][$i][1]);
+				$import[$index]['province_id'] = trim($data -> sheets[0]['cells'][$i][2]);
+				$import[$index]['area_number'] = trim($data -> sheets[0]['cells'][$i][3]);
+				$import[$index]['p_name'] =  trim($data -> sheets[0]['cells'][$i][4]);	
+				$import[$index]['poor'] =  trim($data -> sheets[0]['cells'][$i][5]);			
+				$import[$index]['family'] =  trim($data -> sheets[0]['cells'][$i][6]);
+				$import[$index]['married'] = trim($data -> sheets[0]['cells'][$i][7]);
+				$import[$index]['adapt'] =  trim($data -> sheets[0]['cells'][$i][8]);
+				$import[$index]['capture'] =  trim($data -> sheets[0]['cells'][$i][9]);	
+				$import[$index]['accident'] =  trim($data -> sheets[0]['cells'][$i][10]);
+				$import[$index]['migration'] =  trim($data -> sheets[0]['cells'][$i][11]);	
+				$import[$index]['breadwinner'] =  trim($data -> sheets[0]['cells'][$i][12]);	
+				$import[$index]['other'] =  trim($data -> sheets[0]['cells'][$i][13]);	
+				$import[$index]['total'] =  trim($data -> sheets[0]['cells'][$i][15]);				 			
+				$index++;			
+			}				
+		return $import;
+	}	
 	
 	function vehicle(){
 		$this->template->build('vehicle_index');
@@ -192,5 +292,75 @@ Class Datapoint extends Public_Controller{
 	function vehicle_form(){
 		$this->template->build('vehicle_form');
 	}
+
+
+				function ReadData($filepath)
+				{
+					require_once 'include/Excel/reader.php';
+					$data = new Spreadsheet_Excel_Reader();
+					$data -> setOutputEncoding('UTF-8');
+					$data -> read($filepath);
+					
+					error_reporting(E_ALL ^ E_NOTICE);		
+					$index = 0;
+					for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+						$cnt_colum = count($data->sheets[0]['cells'][$i]);
+						for($j=1; $j<=$cnt_colum; $j++)
+						{
+							$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+						}
+						$index++;			
+					}
+					return $import;	
+				}	
+
+	function vehicle_import(){
+		$this->template->build('vehicle_import_form');
+	}
+	function vehicle_import_save(){		
+		if($_FILES['fl_import']['name']!=''){
+			$this->db->execute("DELETE FROM DP_VEHICLE WHERE YEAR='".$_POST['year_data']."'");
+			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'child_drop_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$uploaddir = 'import_file/datapoint/vehicle/';
+			$fpicname = $uploaddir.$file_name;
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
+			$data = $this->ReadData($uploaddir.$file_name);							
+			foreach($data as $key=>$item){					
+						$val['YEAR']=$_POST['year_data'];
+						$val['AGENCY_ID'] = $item['province_id'];
+						$val['NOTICE'] =$item['area_number'];
+						$val['WALK'] = $item['poor'];
+						$val['BICYCLE'] = $item['family'];
+						$val['THREEWHEEL'] = $item['married'];
+						$val['MOTORCYCLE'] = $item['adapt'];
+						$val['CAR'] = $item['capture'];
+						$val['MINIBUS'] = $item['accident'];
+						$val['PICKUP'] = $item['migration'];
+						$val['BUS'] = $item['breadwinner'];
+						$val['SIXWHEEL'] = $item['ohter'];
+						$val['TENWHEEL'] = $item['total'];
+						$val['ETAN'] = date('Y-m-d');
+						$val['TAXI'] = $item['total'];
+						$val['OTHER'] = $item['total'];
+						$val['TOTAL'] = $item['total'];
+						$val['DIE_MALE'] = $item['total'];
+						$val['DIE_FEMALE'] = $item['total'];
+						$val['COMA_MALE'] = $item['total'];
+						$val['COMA_FRMALE'] = $item['total'];
+						$val['PAIN_MALE'] = $item['total'];
+						$val['PAIN_FMALE'] = $item['total'];											
+						$val['CATCH_MALE'] = $item['total'];
+						$val['CATCH_FEMALE'] = $item['total'];
+						$val['ESCAPE_MALE'] = $item['total'];
+						$val['ESCAPE_FEMALE'] = $item['total'];
+						$val['INVOLUNTARY'] = $item['total'];
+						$this->vehicle->save($val);																									
+						//$val['CREATE'] = date('Y-m-d H:i:s');																																
+			}
+			set_notify('success', lang('save_data_complete'));
+		}
+		redirect('datapoint/vehicle_import');	
+	}
+
 }
-?>

@@ -41,7 +41,6 @@ $db['default']['hostname'] = '27.254.33.64';
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';
-
 $db['default']['dbdriver'] = "oci8po";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;

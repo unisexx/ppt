@@ -8,7 +8,7 @@ Class population extends Public_Controller{
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
 	}
-	
+	//=====POPULATION AUT ====//
 	function index(){
 		$condition = "1=1";
 		$condition.= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
@@ -21,39 +21,9 @@ Class population extends Public_Controller{
 		$this->template->build('population_index',$data);
 	}
 	
-	function form($id=FALSE){		
-		$data['item'] = $this->ppl->get_row($id);
+	function form(){
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('population_form',$data);
-	}
-	
-	function save(){
-		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
-		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
-		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";
-		$id = $this->ppl->save($_POST);
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id);
-		
-		for($i=1;$i<=102;$i++){
-			$value['age_range_code'] = $i;
-			$value['pid'] = $id;
-			$value['nunit'] = $_POST['male_'.$i];
-			$this->ppl_detail->save($value);
-		}
-		
-		for($i=1;$i<=102;$i++){
-			$value['age_range_code'] = $i+102;
-			$value['pid'] = $id;
-			$value['nunit'] = $_POST['female_'.$i];
-			$this->ppl_detail->save($value);
-		}
-		redirect('population/index');
-	}
-
-	function delete($id=FALSE){
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id);
-		$this->db->execute("DELETE FROM POPULATION WHERE ID=".$id);
-		redirect('population/index');
+		$this->template->build('population_form');
 	}
 	
 	function import_form(){		
@@ -61,8 +31,8 @@ Class population extends Public_Controller{
 	}
 	
 	function population_import(){
+		//$this->db->debug=true;		
 		if($_FILES['fl_import']['name']!=''){
-			
 			$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID IN (SELECT ID FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data'].")");
 			$this->db->execute("DELETE FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data']);
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
@@ -75,7 +45,10 @@ Class population extends Public_Controller{
 			foreach($data as $item):								
 				if($item['value_length']==1712){
 					$chars = str_split($item['value'] , 8);
+					//print_r($chars);	
 					$item['title']."<br>";
+					
+					
 					if (strpos($item['title'], 'จังหวัด')!==false) {
 						$province_name = str_replace('จังหวัด', '', $item['title']);
 						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
@@ -159,6 +132,8 @@ Class population extends Public_Controller{
 						$val['SUM_MALE'] = (int)$chars[212];
 						$val['SUM_FEMALE'] = (int)$chars[213];
 						$id = $this->ppl->save($val);					
+						//echo "ID===>".$id."<BR>";
+						
 						for($i=0;$i<=203;$i++){
 							$val_sub['PID'] = $id;
 							$val_sub['AGE_RANGE_CODE'] = $i+1;
@@ -166,79 +141,105 @@ Class population extends Public_Controller{
 							$this->ppl_detail->save($val_sub);
 						}						
 					}
+									
 				}				
-			endforeach;							
+			endforeach;
+			redirect('population/index');
+			/*
+			foreach($data as $item):
+				if($item['name_en']!=''){
+				$product = $this->db->getrow("select * from product where product_code='".$item['product_code']."' and product.name_en='".$item['name_en']."'");
+				if(@$product['id']>0)
+				{
+					$update['id'] = $product['id'];
+					$update['cat_lv1']=$_POST['cat_lv1'];
+					$update['cat_lv2']=$_POST['cat_lv2'];
+					$update['cat_lv3']=$_POST['cat_lv3'];
+					$update['product_code'] = $item['product_code'];
+					$update['name_th'] = $item['name_th'];
+					$update['name_en'] = $item['name_en'];
+					$update['price'] = $item['price'];
+					$update['show_no'] = $item['show_no'];
+				}
+				else
+				{
+					$update = $item;	
+					$update['cat_lv1']=$_POST['cat_lv1'];
+					$update['cat_lv2']=$_POST['cat_lv2'];
+					$update['cat_lv3']=$_POST['cat_lv3'];
+					$update['show_no'] = $this->db->getone("SELECT (max(show_no))+1 from product ");
+				}
+				$this->product->save($update);
+				}
+			endforeach;
+			 * 
+			 */			
 		}
-		/*echo "<script>window.location='population';</script>";*/
-		redirect('population/index');
 	}
 
 	function ReadData($filepath){
 		require_once 'include/Excel/reader.php';
+		// ExcelFile($filename, $encoding);
 		$data = new Spreadsheet_Excel_Reader();
+		// Set output Encoding.
+		//$data->setOutputEncoding('CP1251');
 		$data -> setOutputEncoding('UTF-8');
+		/***
+		 * if you want you can change 'iconv' to mb_convert_encoding:
+		 * $data->setUTFEncoder('mb');
+		 *
+		 **/
+		/***
+		 * By default rows & cols indeces start with 1
+		 * For change initial index use:
+		 * $data->setRowColOffset(0);
+		 *
+		 **/
+		/***
+		 *  Some function for formatting output.
+		 * $data->setDefaultFormat('%.2f');
+		 * setDefaultFormat - set format for columns with unknown formatting
+		 *
+		 * $data->setColumnFormat(4, '%.3f');
+		 * setColumnFormat - set format for column (apply only to number fields)
+		 *
+		 **/
 		$data -> read($filepath);
-//		error_reporting(E_ALL ^ E_NOTICE);
+		/*
+		 $data->sheets[0]['numRows'] - count rows
+		 $data->sheets[0]['numCols'] - count columns
+		 $data->sheets[0]['cells'][$i][$j] - data from $i-row $j-column
+	
+		 $data->sheets[0]['cellsInfo'][$i][$j] - extended info about cell
+	
+		 $data->sheets[0]['cellsInfo'][$i][$j]['type'] = "date" | "number" | "unknown"
+		 if 'type' == "unknown" - use 'raw' value, because  cell contain value with format '0.00';
+		 $data->sheets[0]['cellsInfo'][$i][$j]['raw'] = value if cell without format
+		 $data->sheets[0]['cellsInfo'][$i][$j]['colspan']
+		 $data->sheets[0]['cellsInfo'][$i][$j]['rowspan']
+		 */
+	
+		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
 		for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
 			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
 			$import[$index]['value'] = trim($data -> sheets[0]['cells'][$i][2]);
 			$import[$index]['value_length'] = strlen($import[$index]['value']);								 
+			//echo $import[$index]['title'].'['.$import[$index]['value_length'].']<br>'.$import[$index]['value'].'<br>';
+			//print_r($chars);
+			//echo '<br>==================================<br>';			
 			$index++;			
 		}		
 		return $import;
+		//print_r($data);
+		//print_r($data->formatRecords);
 	}
+
+	//===== END POPULATION ====//
 	
-	function sixtyup_index(){
-		$condition= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
-		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
-		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
-		$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] : "";
-		$sql = " SELECT * FROM (
-		SELECT PPT.*, 		
-		(SELECT SUM(NUNIT) FROM POPULATION_DETAIL WHERE PID=PPT.ID AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102 )NSIXTYUP_MALE,
-		(SELECT SUM(NUNIT) FROM POPULATION_DETAIL WHERE PID=PPT.ID AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204 )NSIXTYUP_FEMALE
-		FROM POPULATION PPT) WHERE (NSIXTYUP_MALE > 0 OR NSIXTYUP_FEMALE > 0) ".$condition." ORDER BY ID "; 
-		$data['ppl'] = $this->ppl->where($condition)->get($sql);
-		$data['pagination'] = $this->ppl->pagination();
-		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('sixtyup/index',$data);
-	}
-	
-	function sixtyup_form($id=FALSE){		
-		$data['item'] = $this->ppl->get_row($id);
-		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('sixtyup/form',$data);
-	}
-	
-	function sixtyup_save(){
-		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
-		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
-		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";		
-		$id = $this->ppl->save($_POST);		
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");			
-		for($i=62;$i<=102;$i++){
-			$value['age_range_code'] = $i;
-			$value['pid'] = $id;
-			$value['nunit'] = $_POST['male_'.$i];
-			$this->ppl_detail->save($value);
-		}
-		
-		for($i=62;$i<=102;$i++){
-			$value['age_range_code'] = $i+102;
-			$value['pid'] = $id;
-			$value['nunit'] = $_POST['female_'.$i];
-			$this->ppl_detail->save($value);
-		}
-		redirect('population/sixtyup_index');
-	}
-	
-	function sixtyup_delete($id=FALSE){
-		
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
-		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");				
-		redirect('population/sixtyup_index');		
-	}
 }
 ?>
+
+
+
+

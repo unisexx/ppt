@@ -1,42 +1,36 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
 <h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
-<form method="post" enctype="multipart/form-data" action="population/save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td>
-  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- เลือกปี --'); ?>    
-	</td>
+  <td><select name="select3" id="select3">
+    <option>-- เลือกปี --</option>
+    <option>2556</option>
+    <option>2555</option>
+    <option>2554</option>
+    <option>2553</option>
+    <option>2552</option>
+</select></td>
 </tr>
 <tr>
   <th>จังหวัด &gt; เขต/อำเภอ &gt; แขวง/ตำบล<span class="Txt_red_12">  *</span></th>
   <td>
-    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$item['province_id'], null, '-- เลือกจังหวัด --'); ?>
-    <?php echo form_dropdown('amphur_id', (empty($item['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$item['province_id'].' order by amphur_name'), @$item['amphur_id'], null, '-- เลือกอำเภอ --'); ?>
-    <?php echo form_dropdown('district_id', (empty($item['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$item['amphur_id'].' order by district_name'), @$item['district_id'], null, '-- เลือกตำบล --'); ?>
-    </td>
+  	<? echo form_dropdown('province_id',get_option('id','province','provinces'),'','','--เลือกจังหวัด--');?>  	
+    &gt;
+    <div id="dv_amphur">
+    <select name="select4" id="select4">
+      <option>-- เลือกเขต/อำเภอ --</option>
+      </select>
+    </div>
+    
+    &gt;
+    <select name="select9" id="select9">
+      <option>-- เลือกแขวง/ตำบล --</option>
+    </select></td>
 </tr>
 <tr>
   <th>ประชากรชายอายุ<span class="Txt_red_12"> *</span></th>
-  <td>
-  	<?
-  	for($i=1;$i<=102;$i++):
-			switch($i){
-			case 1:
-				$label = '&lt;1';
-				break;
-			case 102:
-				$label = '>100';
-				break;
-			default:
-				$label = $i-1;
-				break;
-			}
-			$nunit = $this->db->getone("SELECT NUNIT FROM POPULATION_DETAIL WHERE AGE_RANGE_CODE=".$i." AND PID=".$item['id']);
-	?>
-  	<span class="padd2"><label><?=$label;?></label><input name="male_<?=$i;?>" type="text" id="textarea14" value="<?=$nunit;?>"  style="width:40px;" />  ราย</span>
-  	<? endfor;?>
-  	<!--
+  <td><span class="padd2"><label>&lt;1ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span> 
     <span class="padd2"><label>1 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span> 
     <span class="padd2"><label>2 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>3 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
@@ -138,31 +132,11 @@
     <span class="padd2"><label>99 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>100 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>>100 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
-   -->
     </td>
 </tr>
 <tr>
   <th>ประชากรหญิงอายุ<span class="Txt_red_12"> *</span></th>
-  <td>
-  	<?
-  	for($i=1;$i<=102;$i++):
-			switch($i){
-			case 1:
-				$label = '&lt;1';
-				break;
-			case 102:
-				$label = '>100';
-				break;
-			default:
-				$label = $i-1;
-				break;
-			}
-			$nunit = $this->db->getone("SELECT NUNIT FROM POPULATION_DETAIL WHERE AGE_RANGE_CODE=".($i+102)." AND PID=".$item['id']);
-	?>
-  	<span class="padd2"><label><?=$label;?></label><input name="female_<?=$i;?>" type="text" id="textarea14" value="<?=$nunit;?>"  style="width:40px;" />  ราย</span>
-  	<? endfor;?>
-  	<!--
-  	<span class="padd2"><label>&lt;1ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span> 
+  <td><span class="padd2"><label>&lt;1ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span> 
     <span class="padd2"><label>1 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span> 
     <span class="padd2"><label>2 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>3 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
@@ -264,70 +238,61 @@
     <span class="padd2"><label>99 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>100 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
     <span class="padd2"><label>>100 ปี </label><input name="textarea10" type="text" id="textarea14" value=""  style="width:30px;" />  ราย</span>
-   -->
     </td>
 </tr>
 <tr>
   <th>ประชากรชายเกิดปีจันทรคติ <span class="Txt_red_12">*</span></th>
-  <td><input name="lunar_cal_male" type="text" id="textarea5" value="<?=$item['lunar_cal_male'];?>" /> 
+  <td><input name="textarea5" type="text" id="textarea5" value="" /> 
     ราย</td>
 </tr>
 <tr>
   <th>ประชากรหญิงเกิดปีจันทรคติ<span class="Txt_red_12"> *</span></th>
-  <td><input name="lunar_cal_female" type="text" id="textarea5" value="<?=$item['lunar_cal_female'];?>" />
+  <td><input name="textarea11" type="text" id="textarea15" value="" /> 
     ราย</td>
 </tr>
 <tr>
   <th>ชายที่มีชื่ออยู่ในทะเบียนบ้านกลาง <span class="Txt_red_12">*</span></th>
-  <td><input name="central_hh_male" type="text" id="textarea6" value="<?=$item['central_hh_male'];?>" />
+  <td><input name="textarea6" type="text" id="textarea6" value="" />
     ราย</td>
 </tr>
 <tr>
   <th>หญิงที่มีชื่ออยู่ในทะเบียนบ้านกลาง <span class="Txt_red_12">*</span></th>
-  <td><input name="central_hh_female" type="text" id="textarea8" value="<?=$item['central_hh_female'];?>" />
+  <td><input name="textarea12" type="text" id="textarea8" value="" />
     ราย</td>
 </tr>
 <tr>
   <th>ชายที่มิใช่สัญชาติไทย <span class="Txt_red_12">*</span></th>
-  <td><input name="no_thai_male" type="text" id="textarea12" value="<?=$item['no_thai_male'];?>" />
+  <td><input name="textarea9" type="text" id="textarea12" value="" />
 ราย</td>
 </tr>
 <tr>
   <th>หญิงที่มิใช่สัญชาติไทย <span class="Txt_red_12">*</span></th>
-  <td><input name="no_thai_female" type="text" id="textarea7" value="<?=$item['no_thai_female'];?>" />
+  <td><input name="textarea13" type="text" id="textarea7" value="" />
 ราย</td>
 </tr>
 <tr>
   <th>ชายที่อยู่ระหว่างการย้าย <span class="Txt_red_12">*</span></th>
-  <td><input name="in_trans_male" type="text" id="textarea10" value="<?=$item['in_trans_male'];?>" />
+  <td><input name="textarea14" type="text" id="textarea10" value="" />
 ราย</td>
 </tr>
 <tr>
   <th>หญิงที่อยู่ระหว่างการย้าย <span class="Txt_red_12">*</span></th>
-  <td><input name="in_trans_female" type="text" id="textarea13" value="<?=$item['in_trans_female'];?>" />
+  <td><input name="textarea15" type="text" id="textarea13" value="" />
 ราย</td>
 </tr>
 <tr>
   <th>ประชากรชายทั้งหมด <span class="Txt_red_12">*</span></th>
-  <td><input name="sum_male" type="text" id="textarea9" value="<?=$item['sum_male'];?>" />
+  <td><input name="textarea7" type="text" id="textarea9" value="" />
 ราย</td>
 </tr>
 <tr>
   <th>ประชากรหญิงทั้งหมด <span class="Txt_red_12">*</span></th>
-  <td><input name="sum_female" type="text" id="textarea11" value="<?=$item['sum_female'];?>" />
+  <td><input name="textarea8" type="text" id="textarea11" value="" />
 ราย</td>
 </tr>
 </table>
 
 <div id="btnSave">
-<input type="hidden" name="id" value="<?=$item['id'];?>">
 <input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
-</form>
-<script>
-    $(function(){
-        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
-        $('[name=district_id]').chainedSelect({parent: '[name=amphur_id]',url: 'location/ajax_district/report',value: 'id',label: 'text'});
-    });
-</script>

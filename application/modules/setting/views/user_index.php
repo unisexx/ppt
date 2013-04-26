@@ -22,8 +22,14 @@
 
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/user_form'" class="btn_add"/></div>
 
-<?php echo $pagination?>
+<div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
+<a href="javascript:;" title="Seite 2">2</a>
+<a href="javascript:;" title="Seite 3">3</a>
+<a href="javascript:;" title="Seite 4">4</a>
 
+<span class="break">...</span><a href="javascript:;" title="Seite 19">19</a>
+<a href="javascript:;" title="Seite 2">Next</a>&nbsp;&nbsp;188 record
+</div>	
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
@@ -33,26 +39,6 @@
   <th>กอง/สำนัก</th>
   <th>จัดการ</th>
 </tr>
-<?php foreach($users as $user):?>
-	<tr>
-	  <td>1</td>
-	  <td><?php echo $user['fullname']?></td>
-	  <td>
-	  	<?php if($user['contact_number']):?>
-	  		<img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="<?php echo $user['contact_number']?>"/>
-	  	<?php endif;?>
-	  	<?php if($user['email']):?>
-	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="<?php echo $user['email']?>" />
-	  	<?php endif;?>
-	  </td>
-	  <td><?php echo $user['group_id']?></td>
-	  <td><?php echo $user['division_id']?></td>
-	  <td>
-	  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='user.php?act=form'" />
-	    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
-	  </td>
-	</tr>
-<?php endforeach;?>
 <tr>
   <td>1</td>
   <td>นายสมพร  สุขธรรมนิตย์</td>

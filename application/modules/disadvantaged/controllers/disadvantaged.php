@@ -46,22 +46,55 @@ Class Disadvantaged extends Public_Controller{
 		}
 		
 	}
-		function unemployee_upload()
-		{
-			//print_r($_FILES);
-			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'unemployee_'.$_POST['YEAR'].date("Y_m_d_H_i_s").'.'.$ext;
-			//$file_name = 'vacancy'.'.'.$ext;			
-			$uploaddir = 'import_file/unemployee/';
-			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
-			$data = $this->ReadData_unemployee($uploaddir.$file_name);
-			unlink($uploaddir.'/'.$file_name);
-		}
-	
 	function unemployee_import()
 	{
 		$this->template->build('unemployee/unemployee_import');	
 	}
+		function unemployee_upload()
+		{
+			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'unemployee_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/unemployee/';
+			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+			$data = $this->ReadData($uploaddir.$file_name);
+			
+			unset($_POST['ID']);
+			$_POST['YEAR'] = $data[1][2];
+			
+			?>
+			<h5>ผลการดำเนินงาน</h5>
+			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
+				for($i=3; $i<count($data); $i++)
+				{
+					$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
+					
+					$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
+					$_POST['AMOUNT'] = $data[$i][2];
+					
+					$chk_repeat = $this->unemployee->get("SELECT ID FROM UNEMPLOYEE WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
+					if(count($chk_repeat) == 1)
+					{
+						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
+							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+							<? echo $data[$i][1]; ?>
+						</div><? 
+					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && $_POST['AMOUNT']) {
+						
+						$this->unemployee->save($_POST);
+						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
+							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+							<? echo $data[$i][1]; ?>
+						</div><? 
+					}
+				}
+			?></div><?
+			unlink($uploaddir.'/'.$file_name);
+			
+			?><BR><BR>
+				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/unemployee";'>
+				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/unemployee_import";'>
+			<?
+		}
 	//========== UNEMPLOYEE ==========//
 
 	
@@ -72,7 +105,7 @@ Class Disadvantaged extends Public_Controller{
 			if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 			if(@$_GET['PROVINCE']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE'].' ';
 		$sql .= 'ORDER BY YEAR DESC, PROVINCE_ID ASC';
-		
+	
 		$data['result'] = $this->vacancy->get($sql);
     	$data['pagination'] = $this->vacancy->pagination;
 		
@@ -103,23 +136,61 @@ Class Disadvantaged extends Public_Controller{
 		}
 		
 	}
-		function vacancy_upload()
-		{
-			//print_r($_FILES);
-			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'vacancy_'.$_POST['YEAR'].date("Y_m_d_H_i_s").'.'.$ext;
-			//$file_name = 'vacancy'.'.'.$ext;			
-			$uploaddir = 'import_file/vacancy/';
-			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
-			$data = $this->ReadData_vacancy($uploaddir.$file_name);
-			unlink($uploaddir.'/'.$file_name);
-		}
-	
-	
 	function vacancy_import()
 	{
 		$this->template->build('vacancy/vacancy_import');	
 	}
+	
+		function vacancy_upload()
+		{
+			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'vacancy_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/vacancy/';
+			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+			$data = $this->ReadData($uploaddir.$file_name);
+			
+			unset($_POST['ID']);
+			$_POST['YEAR'] = $data[1][2];
+			
+			?>
+			<h5>ผลการดำเนินงาน</h5>
+			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
+				for($i=3; $i<count($data); $i++)
+				{
+	
+					$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
+					$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
+					$_POST['VACANCIES'] = $data[$i][2];
+					$_POST['CANDIDATES'] = $data[$i][3];
+					$_POST['ACTIVE'] = $data[$i][4];
+					
+					$chk_repeat = $this->vacancy->get("SELECT ID FROM VACANCY WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
+					if(count($chk_repeat) == 1)
+					{
+						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
+							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+							<? echo $data[$i][1]; ?>
+						</div><? 
+					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && ($_POST['VACANCIES'] || $_POST['CANDIDATES'] || $_POST['ACTIVE'])) {
+						$this->vacancy->save($_POST);
+						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
+							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+							<? echo $data[$i][1]; ?>
+						</div><? 
+					}
+				}
+			?></div><?
+			unlink($uploaddir.'/'.$file_name);
+			
+			?><BR><BR>
+				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/vacancy";'>
+				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/vacancy_import";'>
+			<?
+
+		}
+	
+	
+
 	//========== VACANCY ==========//
 				
 	function social(){
@@ -145,67 +216,25 @@ Class Disadvantaged extends Public_Controller{
 	function allage_form(){
 		$this->template->build('allage_form');
 	}
-
-			function ReadData_vacancy($filepath){
-					require_once 'include/Excel/reader.php';
-					$data = new Spreadsheet_Excel_Reader();
-					$data -> setOutputEncoding('UTF-8');
-					$data -> read($filepath);
-					error_reporting(E_ALL ^ E_NOTICE);		
-					$index = 0;
-					for($i = 3; $i <= $data -> sheets[0]['numRows']; $i++) {
-						$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
-						$import[$index]['province'] = trim($data -> sheets[0]['cells'][$i][2]);
-						$import[$index]['vacancies'] = trim($data -> sheets[0]['cells'][$i][3]);
-						$import[$index]['candidates'] = trim($data -> sheets[0]['cells'][$i][4]);
-						$import[$index]['active'] = trim($data -> sheets[0]['cells'][$i][5]);
-						#$import[$index]['value_length'] = strlen($import[$index]['value']);								 
-						$index++;			
-					}	
-					
-					
-					for($i=0; $i<count($import); $i++)
-					{
-						$pv_dtl = $this->province->limit(1)->get("SELECT * FROM PROVINCES WHERE PROVINCE LIKE '".$import[$i]['province']."'");
-						$_POST['PROVINCE_ID'] = $pv_dtl[0]['id'];
-						$_POST['VACANCIES'] = $import[$i]['vacancies'];
-						$_POST['CANDIDATES'] = $import[$i]['candidates'];
-						$_POST['ACTIVE'] = $import[$i]['active'];
-						$this->vacancy->save($_POST);
-					}
-						set_notify('success', lang('save_data_complete'));
-						redirect('disadvantaged/vacancy');
-			}
-		
-			function ReadData_unemployee($filepath){
+			function ReadData($filepath)
+			{
+				require_once 'include/Excel/reader.php';
+				$data = new Spreadsheet_Excel_Reader();
+				$data -> setOutputEncoding('UTF-8');
+				$data -> read($filepath);
 				
-					require_once 'include/Excel/reader.php';
-					$data = new Spreadsheet_Excel_Reader();
-					$data -> setOutputEncoding('UTF-8');
-					$data -> read($filepath);
-					
-					error_reporting(E_ALL ^ E_NOTICE);		
-					$index = 0;
-					for($i = 3; $i <= $data -> sheets[0]['numRows']; $i++) {
-						$import[$index]['year'] = trim($data -> sheets[0]['cells'][$i][2]);
-						$import[$index]['province'] = trim($data -> sheets[0]['cells'][$i][3]);
-						$import[$index]['amount'] = trim($data -> sheets[0]['cells'][$i][4]);
-						#$import[$index]['value_length'] = strlen($import[$index]['value']);								 
-						$index++;			
-					}	
-					
-					
-					for($i=0; $i<count($import); $i++)
-					{
-						$pv_dtl = $this->province->limit(1)->get("SELECT * FROM PROVINCES WHERE PROVINCE LIKE '".$import[$i]['province']."'");
-						$_POST['PROVINCE_ID'] = $pv_dtl[0]['id'];
-						$_POST['YEAR'] = $_POST['YEAR'];
-						$_POST['AMOUNT'] = $import[$i]['amount'];
-						$this->unemployee->save($_POST);
-					}
-					
-						set_notify('success', lang('save_data_complete'));
-						redirect('disadvantaged/unemployee');
+				error_reporting(E_ALL ^ E_NOTICE);		
+				$index = 0;
+				for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][1]);
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][2]);
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][3]);
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][4]);
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][5]);
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][6]);
+					$index++;			
+				}
+				return $import;	
 			}
 }
 ?>

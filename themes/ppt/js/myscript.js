@@ -66,49 +66,19 @@ $(document).ready(function(){
 	$("form.validate").validate({
     rules: 
     {
-    	// setting
     	province_id:{required: true},
     	province_name:{required: true},
     	amphor_id:{required: true},
     	amphor_name:{required: true},
-    	tumbon_name:{required: true},
-    	
-    	// form user **setting/user_form**
-    	user_type_id:{required: true},
-    	fullname:{required: true},
-    	name:{required: true},
-    	surname:{required: true},
-    	department_id:{required: true},
-    	division_id:{required: true},
-    	group_id:{required: true},
-    	person_type_id:{required: true},
-    	id_card:{required: true},
-    	email:{required: true, email: true, /*remote: "setting/check_email"*/},
-    	password:{required: true, minlength: 4},
-    	_password:{equalTo: "#password"}
+    	tumbon_name:{required: true}
     },
     messages:
     {
-    	// setting
     	province_id:{required: "กรุณาเลือกจังหวัด"},
     	province_name:{required: "กรุณากรอกชื่อจังหวัด"},
     	amphor_id:{required: "กรุณาเลือกอำเภอ"},
     	amphor_name:{required: "กรุณากรอกชื่ออำเภอ"},
-    	tumbon_name:{required: "กรุณากรอกชื่อตำบล"},
-    	
-    	// form user **setting/user_form**
-    	user_type_id:{required: "กรุณาเลือกสิทธิ์การใช้งาน"},
-    	fullname:{required: "กรุณากรอกชื่อ - นามสกุล"},
-    	name:{required: "กรุณากรอก Name"},
-    	surname:{required: "กรุณากรอก Surname"},
-    	department_id:{required: "กรุณาเลือก กรม"},
-    	division_id:{required: "กรุณาเลือกกอง / สำนักงาน"},
-    	group_id:{required: "กรุณาเลือกกลุ่ม / ฝ่าย"},
-    	person_type_id:{required: "กรุณาเลือกประเภทบุคลากร"},
-    	id_card:{required: "กรุณากรอกบัตรประชาชน"},
-    	email:{required: "กรุณากรอกอีเมล์", email: "กรุณากรอกอีเมล์ให้ถูกต้อง", /*remote: "อีเมล์นี้ไม่สามารถใช้งานได้"*/},
-    	password:{required: "กรุณากรอกรหัสผ่าน", minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 4 ตัวอักษร"},
-    	_password:{equalTo: "กรุณากรอกรหัสผ่านให้ตรงกันทั้ง 2 ช่อง"}
+    	tumbon_name:{required: "กรุณากรอกชื่อตำบล"}
     }
     });
     

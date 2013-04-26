@@ -1,5 +1,5 @@
-<!-- <script type="text/javascript" src="media/js/jquery-1.4.2.min.js" ></script> -->
-<script type="text/javascript" src="media/js/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="media/js/jquery-1.4.2.min.js" ></script> 
+<!--<script type="text/javascript" src="media/js/jquery-1.9.1.min.js" ></script>-->
 <script type="text/javascript" src="media/js/jquery-migrate-1.1.1.min.js" ></script>
 <script type="text/javascript" src="media/bootstrap/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="media/js/cufon/cufon-yui.js"></script>

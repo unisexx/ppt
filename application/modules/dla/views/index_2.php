@@ -21,26 +21,24 @@
     <tr>
         <th>ลำดับ</th>
         <th>ปี</th>
-        <th width="25">ชาย</th>
-        <th width="25">หญิง</th>
-        <th width="40">หมายเลข</th>
+        <th>จังหวัด</th>
+        <th>อำเภอ</th>
         <th>อปท.</th>
-        <th>อำเภอ / จังหวัด</th>
         <th>ขนาด</th>
-        <th>หัวหน้าสำนักปลัด</th>
-        <th>จัดการ</th>
+        <th width="25">ชาย</th>
+        <th width="25">หญิง</th>  
+        <th width="60">จัดการ</th>
     </tr>
     <?php foreach($result as $key => $item): $key += 1;?>
     <tr>
         <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?php echo $item['year']; ?></td>
+        <td><?php echo $item['province']; ?></td>
+        <td><?php echo $item['amphur_name']; ?></td>
+        <td><?php echo $item['opt_name']; ?></td>       
+        <td><?php echo $item['size']; ?></td>
         <td class="text-right"><?php echo @number_format($item['total_1']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_2']); ?></td>
-        <td class="text-right"><?php echo $item['number_id']; ?></td>
-        <td><?php echo $item['opt_name']; ?></td>
-        <td><?php echo $item['amphur_name'].'/'.$item['province']; ?></td>
-        <td><?php echo $item['size']; ?></td>
-        <td><?php echo $item['c_title'].$item['c_name']; ?></td>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dla/form/'.$m['id'].'/'.$item['id']); ?>'" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('dla/delete/'.$m['id'].'/'.$item['id']); ?>';}" />

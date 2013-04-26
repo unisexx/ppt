@@ -5,6 +5,7 @@ Class Child extends Public_Controller{
         $this->load->model('opt_model', 'opt');
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('c_pregnant_model','pregnant');
+		$this->load->model('province_model','province');
 
 		$this->load->model('welfare_model','welfare');
 		$this->load->model('welfarelist_model','wflist');
@@ -51,42 +52,43 @@ Class Child extends Public_Controller{
 	
 	//===== WELFARE =====//	
 	
-	function test(){
-		/*$this->load->library('excel_reader');
-		clearstatcache();
-		$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";		
-		$this->excel_reader->read($uploadpath);
-		$worksheetrows =$this->excel_reader->worksheets[0];
-		$worksheetcolumns = 15;
-	
-<<<<<<< HEAD
-		echo "<table>";
-		foreach($worksheetrows as $worksheetrow)
-		{
-		      echo "<tr>";
-		     for($i=0; $i<$worksheetcolumns; $i++)
-		    {
-		           // if the field is not blank -- otherwise CI will throw warnings
-		           if (isset($worksheetrow[$i]))
-		                 echo "<td>".mb_convert_encoding($worksheetrow[$i],'UTF-8')."</td>";
-		           // empty field
-		           else
-		                 echo "<td>&nbsp; </td>";
-		     }
-		     echo "</tr>";
-		} 
-		echo "</table>";*/
+	function test($Filepath=FALSE){
+			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
+			require('include/spreadsheet-reader-master/SpreadsheetReader.php');
 		
-		//I have used php Spreadsheet_Excel_Reader and used this class as codeigniter library
-		//$pathToFile =$uploadpath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."ketsch111sum_new.xls";
-		//$params = array('file' => $pathToFile, 'store_extended_info' => true,'outputEncoding' =>'');
-		//$this->load->library('Spreadsheet_Excel_Reader', $params);
-		//$this->spreadsheet_excel_reader->read($pathToFile);	
+			date_default_timezone_set('UTC');
 		
-			
+			$Spreadsheet = new SpreadsheetReader($Filepath);
+			$BaseMem = memory_get_usage();
 		
+			$Time = microtime(true);
+		
+			foreach ($Spreadsheet as $Key => $Row)
+			{
+				echo $Key.': ';
+				if ($Row)
+				{
+					print_r($Row);
+					echo "<br/>";
+				}
+				else
+				{
+					var_dump($Row);
+				}
+		
+			}			
 	}
-
+	function test_save(){			
+			if($_FILES['fl_import']['name']!=''){
+			//$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
+			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$uploaddir = 'import_file/child/pregnant/';
+			$fpicname = $uploaddir.$file_name;
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
+			$this->test($uploaddir.$file_name);	
+			}
+	}
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		// ExcelFile($filename, $encoding);
@@ -128,46 +130,45 @@ Class Child extends Public_Controller{
 		 $data->sheets[0]['cellsInfo'][$i][$j]['colspan']
 		 $data->sheets[0]['cellsInfo'][$i][$j]['rowspan']
 		 */
-	
+		
 		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
+		$col=array('sex','weight','birthday','hospital_code','address_code','location','m_birthday','m_address_code','m_id','f_birthday','f_address_code','f_id');
 		if($module=="pregnant"){
 			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
 				
-				$import[$index]['sex'] = trim($data -> sheets[0]['cells'][$i][1]);
-				$import[$index]['weight'] = trim($data -> sheets[0]['cells'][$i][2]);
-				$import[$index]['birthday'] =  trim($data -> sheets[0]['cells'][$i][3]);	
-				$import[$index]['hospital_code'] =  trim($data -> sheets[0]['cells'][$i][4]);			
-				$import[$index]['address_code'] =  trim($data -> sheets[0]['cells'][$i][5]);
-				$import[$index]['location'] = trim($data -> sheets[0]['cells'][$i][6]);
-				$import[$index]['m_birthday'] =  trim($data -> sheets[0]['cells'][$i][7]);
-				$import[$index]['m_address_code'] =  trim($data -> sheets[0]['cells'][$i][8]);	
-				$import[$index]['m_id'] =  trim($data -> sheets[0]['cells'][$i][9]);
-				$import[$index]['f_birthday'] =  trim($data -> sheets[0]['cells'][$i][10]);	
-				$import[$index]['f_address_code'] =  trim($data -> sheets[0]['cells'][$i][11]);	
-				$import[$index]['f_id'] =  trim($data -> sheets[0]['cells'][$i][12]);			
+				$import[$index][$col[0]] = trim($data -> sheets[0]['cells'][$i][1]);
+				$import[$index][$col[1]] = trim($data -> sheets[0]['cells'][$i][2]);
+				$import[$index][$col[2]] =  trim($data -> sheets[0]['cells'][$i][3]);	
+				$import[$index][$col[3]] =  trim($data -> sheets[0]['cells'][$i][4]);			
+				$import[$index][$col[4]] =  trim($data -> sheets[0]['cells'][$i][5]);
+				$import[$index][$col[5]] = trim($data -> sheets[0]['cells'][$i][6]);
+				$import[$index][$col[6]] =  trim($data -> sheets[0]['cells'][$i][7]);
+				$import[$index][$col[7]] =  trim($data -> sheets[0]['cells'][$i][8]);	
+				$import[$index][$col[8]] =  trim($data -> sheets[0]['cells'][$i][9]);
+				$import[$index][$col[9]] =  trim($data -> sheets[0]['cells'][$i][10]);	
+				$import[$index][$col[10]]=  trim($data -> sheets[0]['cells'][$i][11]);	
+				$import[$index][$col[11]] =  trim($data -> sheets[0]['cells'][$i][12]);			
 				$index++;			
 			}				
 			
 		}else{
-			$col=array('id','province_id','area_number','p_name','poor'
-					  ,'family','married','adapt','capture','accident','migration','breadwinner','other','total');			
+			$col=array('province_id','area_number','province','poor','family','married','adapt','capture','accident','migration','breadwinner','other','total');			
 		
-			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-				$import[$index]['id'] = trim($data -> sheets[0]['cells'][$i][1]);
-				$import[$index]['province_id'] = trim($data -> sheets[0]['cells'][$i][2]);
-				$import[$index]['area_number'] = trim($data -> sheets[0]['cells'][$i][3]);
-				$import[$index]['province'] =  trim($data -> sheets[0]['cells'][$i][4]);	
-				$import[$index]['poor'] =  trim($data -> sheets[0]['cells'][$i][5]);			
-				$import[$index]['family'] =  trim($data -> sheets[0]['cells'][$i][6]);
-				$import[$index]['married'] = trim($data -> sheets[0]['cells'][$i][7]);
-				$import[$index]['adapt'] =  trim($data -> sheets[0]['cells'][$i][8]);
-				$import[$index]['capture'] =  trim($data -> sheets[0]['cells'][$i][9]);	
-				$import[$index]['accident'] =  trim($data -> sheets[0]['cells'][$i][10]);
-				$import[$index]['migration'] =  trim($data -> sheets[0]['cells'][$i][11]);	
-				$import[$index]['breadwinner'] =  trim($data -> sheets[0]['cells'][$i][12]);	
-				$import[$index]['other'] =  trim($data -> sheets[0]['cells'][$i][13]);	
-				$import[$index]['total'] =  trim($data -> sheets[0]['cells'][$i][15]);				 			
+			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {			
+				$import[$index][$col[0]] = trim($data -> sheets[0]['cells'][$i][2]);
+				$import[$index][$col[1]] = trim($data -> sheets[0]['cells'][$i][3]);
+				$import[$index][$col[2]] =  trim($data -> sheets[0]['cells'][$i][4]);	
+				$import[$index][$col[3]] =  trim($data -> sheets[0]['cells'][$i][5]);			
+				$import[$index][$col[4]] =  trim($data -> sheets[0]['cells'][$i][6]);
+				$import[$index][$col[5]] = trim($data -> sheets[0]['cells'][$i][7]);
+				$import[$index][$col[6]] =  trim($data -> sheets[0]['cells'][$i][8]);
+				$import[$index][$col[7]] =  trim($data -> sheets[0]['cells'][$i][9]);	
+				$import[$index][$col[8]] =  trim($data -> sheets[0]['cells'][$i][10]);
+				$import[$index][$col[9]] =  trim($data -> sheets[0]['cells'][$i][11]);	
+				$import[$index][$col[10]] =  trim($data -> sheets[0]['cells'][$i][12]);	
+				$import[$index][$col[11]] =  trim($data -> sheets[0]['cells'][$i][13]);	
+				$import[$index][$col[12]] =  trim($data -> sheets[0]['cells'][$i][15]);				 			
 				$index++;			
 			}	
 		}	
@@ -259,20 +260,21 @@ Class Child extends Public_Controller{
     }
 	
 	function drop(){
-	
+			
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
-		$province_id=(!empty($_GET['province_id'])) ? " and province_id=".$_GET['province_id']:'';
+		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$sql="SELECT C_DROP.*,PROVINCE FROM C_DROP 
-					LEFT JOIN PROVINCES ON provinces.id=c_drop.province_id where C_DROP.ID<>'' ".$area_number.$province_id." ORDER BY C_DROP.ID";
-		$data['result']	= $this->drop->get($sql);
-									 
+		$data['result']	= $this->drop->get();									 
+		$data['province']= $this->province->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
+		
 		$this->template->build('drop/drop_index',$data);
 	}
 	
 	function drop_form($id=FALSE){
+			
 		$data['rs'] =$this->drop->get_row($id);
+		$data['province']= $this->province->limit(80)->get();
 		$this->template->build('drop/drop_form',$data);
 	}
 	function drop_save(){
@@ -297,7 +299,6 @@ Class Child extends Public_Controller{
 		$this->template->build('drop/drop_import_form');	
 	}
 	function drop_save_import(){
-		//$this->db->debug=TRUE;
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
@@ -323,7 +324,7 @@ Class Child extends Public_Controller{
 						$val['ACCIDENT'] = $item['accident'];
 						$val['MIGRATION'] = $item['migration'];
 						$val['BREADWINNER'] = $item['breadwinner'];
-						$val['OTHER'] = $item['ohter'];
+						$val['OTHER'] = $item['other'];
 						$val['TOTAL'] = $item['total'];
 						//$val['CREATE'] = date('Y-m-d');
 						$this->drop->save($val);																													
@@ -333,25 +334,31 @@ Class Child extends Public_Controller{
 		redirect('child/drop_import');	
 	}
 	function pregnant(){
-		$this->template->build('pregnant_index');
+		
+		$this->template->build('pregnant/pregnant_index');
 	}
 	
 	function pregnant_form(){
-		$this->template->build('pregnant_form');
+		$this->template->build('pregnant/pregnant_form');
 	}
 	function pregnant_import(){
-		$this->template->build('pregnant_import_form');	
+		$this->template->build('pregnant/pregnant_import_form');	
 	}
-	function pregnant_save_import(){	
+	function pregnant_save_import(){
+		// แก้ upload_max_filesize = 40M
+		/* ; Maximum allowed size for uploaded files.
+			upload_max_filesize = 40M   จาก  2M
+			; Must be greater than or equal to upload_max_filesize
+			post_max_size = 40M  จาก 2M*/ 
+		
 		if($_FILES['fl_import']['name']!=''){
-			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");
+			//$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data = $this->ReadData($uploaddir.$file_name,"pregnant");	
-			var_dump($data);exit;						
+			$data = $this->ReadData($uploaddir.$file_name,"pregnant");								
 			foreach($data as $key=>$item){				
 																						
 					$val['year']=$_POST['year'];
@@ -367,8 +374,7 @@ Class Child extends Public_Controller{
 					$val['f_birthday'] =  $item['f_birthday'];	
 					$val['f_address_code'] =  $item['f_address_code'];	
 					$val['f_id'] =  $item['f_id'];		
-					$this->pregnant->save($val);																																
-					
+					$this->pregnant->save($val);																																					
 			}
 			set_notify('success', lang('save_data_complete'));
 		}

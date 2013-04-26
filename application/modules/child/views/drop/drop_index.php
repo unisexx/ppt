@@ -1,3 +1,13 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".btn_delete").click(function(){
+			if(confirm('ลบรายการนี้ ? ')){
+				var hdid = $(this).closest('td').find('#hdid').val();
+				window.location='child/drop_delete/'+hdid;
+			}
+		})
+	})
+</script>
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
 <h4>เด็กและเยาวชนออกจากโรงเรียนกลางคัน <span class="gray">แบบ ศธ. ออกโรงเรียนกลางคัน</span></h4>
 <form action="child/drop" method="get">
@@ -5,7 +15,15 @@
 	<div id="searchBox">หมายเลขเขต
 	<input type="text" name="area_number" id="area_number" style="width:100px;" value="<?php echo @$_GET['area_number'] ?>"/>
 	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- เลือกปีการศึกษา --'); ?>
-	<?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+<select name="province" id="province">
+ <option value="">-- ทุกจังหวัด --</option>
+  <?php 
+  $selected="selected='selected'";
+  foreach($province as $item){
+  	$selected=($item['province']==@$_GET['province'])?"selected='selected'":'';
+  	echo '<option value="'.$item['province'].'" '.$selected.'>'.$item['province'].'</option>';
+  } ?>
+  </select>
 	  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
 </form>
@@ -37,7 +55,7 @@
   <td><?php echo $item['area_number'] ?></td>
   <td><?php echo number_format($item['total'])?></td>
   <td>
-  	
+  	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'" />
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
 </tr>

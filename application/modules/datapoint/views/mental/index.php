@@ -14,8 +14,8 @@
 </form>
 
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/mental_import'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/mental_form'" class="btn_add"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/mental/import'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/mental/form'" class="btn_add"/>
 </div>
 <?=$pagination; ?>
 
@@ -59,7 +59,7 @@
         <td><?=number_format($item['autism_number']); ?></td>
         <td><?=number_format($item['other_number']); ?></td>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('datapoint/mental_form/'.$item['id']); ?>'" />
+            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('datapoint/mental/form/'.$item['id']); ?>'" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$item['id'];?>", "DELETE");'/>
 
         </td>
@@ -75,7 +75,7 @@ function js_action(id, type)
 	{
 		if(confirm('กรุณายืนยันการลบข้อมูล'))
 		{
-			window.location="datapoint/mental_delete/"+id;
+			window.location="datapoint/mental/delete/"+id;
 		}
 	}
 }

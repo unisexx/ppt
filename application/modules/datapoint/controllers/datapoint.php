@@ -293,25 +293,7 @@ echo '<HR>';
 	}
 
 
-				function ReadData($filepath)
-				{
-					require_once 'include/Excel/reader.php';
-					$data = new Spreadsheet_Excel_Reader();
-					$data -> setOutputEncoding('UTF-8');
-					$data -> read($filepath);
-					
-					error_reporting(E_ALL ^ E_NOTICE);		
-					$index = 0;
-					for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-						$cnt_colum = count($data->sheets[0]['cells'][$i]);
-						for($j=1; $j<=$cnt_colum; $j++)
-						{
-							$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
-						}
-						$index++;			
-					}
-					return $import;	
-				}	
+
 
 	function vehicle_import(){
 		$this->template->build('vehicle/vehicle_import_form');

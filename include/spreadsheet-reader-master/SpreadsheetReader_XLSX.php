@@ -675,6 +675,7 @@
 							$Decimals = $Matches[3];
 
 							$Format['MinWidth'] = strlen($Integer) + strlen($DecimalPoint) + strlen($Decimals);
+							if(!empty($Format['MinWidth'])){$Format['MinWidth']=="300";}
 							$Format['Decimals'] = $Decimals;
 							$Format['Precision'] = strlen($Format['Decimals']);
 							$Format['Pattern'] = '%0'.$Format['MinWidth'].'.'.$Format['Precision'].'f';
@@ -803,9 +804,8 @@
 					else
 					{
 						// Scaling
-						$Value = $Value / $Format['Scale'];
-
-						if ($Format['MinWidth'] && $Format['Decimals'])
+						$Value = $Value / $Format['Scale'];						
+						if (@$Format['MinWidth'] && $Format['Decimals'])
 						{
 							if ($Format['Thousands'])
 							{

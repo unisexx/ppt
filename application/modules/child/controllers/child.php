@@ -52,7 +52,7 @@ Class Child extends Public_Controller{
 	
 	//===== WELFARE =====//	
 	
-	function test($Filepath=FALSE){
+	function ImportData($Filepath=FALSE){
 			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
 			require('include/spreadsheet-reader-master/SpreadsheetReader.php');
 		
@@ -62,21 +62,16 @@ Class Child extends Public_Controller{
 			$BaseMem = memory_get_usage();
 		
 			$Time = microtime(true);
-		
-			foreach ($Spreadsheet as $Key => $Row)
+ 			var_dump($Spreadsheet[0]);
+			/*foreach ($Spreadsheet as $Key => $Row)
 			{
 				echo $Key.': ';
 				if ($Row)
 				{
 					print_r($Row);
 					echo "<br/>";
-				}
-				else
-				{
-					var_dump($Row);
-				}
-		
-			}			
+				}						
+			}	*/		
 	}
 	function test_save(){			
 			if($_FILES['fl_import']['name']!=''){

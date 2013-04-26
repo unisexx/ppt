@@ -109,7 +109,7 @@ class Dla extends Public_Controller
         LEFT JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         LEFT JOIN AMPHUR ON AMPHUR.ID = FORM_ALL.AMPHUR_ID
         WHERE 1=1 '.$where.' 
-        ORDER BY FORM_ALL."YEAR" DESC, FORM_ALL.NUMBER_ID DESC';
+        ORDER BY FORM_ALL."YEAR" DESC, PROVINCES.PROVINCE, AMPHUR.AMPHUR_NAME, FORM_ALL.OPT_NAME';
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');

@@ -10,8 +10,8 @@ function login($username,$password)
 		$ip=(@getenv(HTTP_X_FORWARDED_FOR)) ? @getenv(HTTP_X_FORWARDED_FOR):@getenv(REMOTE_ADDR); 
 		$CI->session->set_userdata('ipaddress',$ip);
 		
-		$CI->db->execute("update users set status = 1 where id = $id");		
-		save_logfile("LOGIN","เข้าสู่ระบบ : ".$id." ".login_data("name"),"login");		
+		// $CI->db->execute("update users set status = 1 where id = $id");		
+		//save_logfile("LOGIN","เข้าสู่ระบบ : ".$id." ".login_data("name"),"login");		
 		return TRUE;
 	}
 	else
@@ -51,25 +51,20 @@ function permission($module, $action)
 function login_data($field)
 {
 	$CI =& get_instance();
-	//$CI->db->debug=TRUE;
-		$sql = 'select users.*
-		,user_type_title.title usertype_title
-		,user_type_title.budgetadmin
-		,user_type_title.budgetcanaccessall
-		,lv ,is_inspector ,insp_access_all, mt_access_all, fn_access_all
-		,cnf_workgroup.title workgroup_title, cnf_workgroup.divisionid, cnf_workgroup.wprovinceid workgroup_provinceid, pwg.title workgroup_province_name,cwg_province_area.id workgroup_province_area_id,cwg_province_area.title workgroup_province_area_name
-		,cnf_division.title division_title, cnf_division.departmentid, cnf_division.provinceid division_provinceid, pdv.title division_province_name,cdv_province_area.id division_province_area_id,cdv_province_area.title division_province_area_name		
-		,cnf_department.title department_title
-		from users
-		left join cnf_workgroup  on users.workgroupid = cnf_workgroup.id
-		left join cnf_division on users.divisionid = cnf_division.id
-		left join cnf_department on cnf_division.departmentid = cnf_department.id
-		left join user_type_title on users.id=user_type_title.user_id
-		left join cnf_province pdv on cnf_division.provinceid = pdv.id
-		left join cnf_province pwg on cnf_workgroup.wprovinceid = pwg.id	
-		left join cnf_province_area cdv_province_area on pdv.area = cdv_province_area.id
-		left join cnf_province_area cwg_province_area on pwg.area = cwg_province_area.id
-		where users.id = ?';
+	$sql = 'SELECT
+PPT.USERS.*,
+PPT.DEPARTMENT.DEPARTMENT_NAME,
+PPT.DIVISION.DIVISION_NAME,
+PPT.PERSON_TYPE.PERSON_TYPE_NAME,
+PPT.GROUPS.GROUP_NAME,
+PPT.USER_TYPE.USER_TYPE_NAME
+FROM
+PPT.USERS
+INNER JOIN PPT.USER_TYPE ON PPT.USERS.USER_TYPE_ID = PPT.USER_TYPE.ID
+INNER JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
+INNER JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
+INNER JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
+INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID where users.id = ?';
 	if($CI->session->userdata('id')>0){
 	$row = $CI->db->getrow($sql,$CI->session->userdata('id'));
 	
@@ -78,25 +73,6 @@ function login_data($field)
 		redirect('home');
 	}
 
-	
-	
-	$user_province = $row['WORKGROUP_PROVINCEID'] > 0  ? $row['WORKGROUP_PROVINCEID'] : 0;
-	$user_province = $user_province == 0 && $row['DIVISION_PROVINCEID'] ==2  ? 2 : $user_province;
-	$row['user_area'] = $user_province == 2 ? 'central' : 'domestic';
-	$row['user_province_id'] = $user_province;
-	$row['user_province_title'] = $CI->db->getone("select title from cnf_province where id=".$row['user_province_id']);
-	$row['user_province_area_id'] = $CI->db->getone("select AREA from cnf_province where id=".$row['user_province_id']);	
-	$row['user_province_area_title'] = $CI->db->getone("select TITLE from cnf_province_area where id=".$row['user_province_area_id']);
-	$row['social_province_id']=0;
-	$row['home_province_id']=0;
-	if($row['DIVISIONID']==108){
-		$row['social_province_id']= $row['user_province_id'];
-	}
-	if($row['DIVISIONID']==110){
-		$row['home_province_id']= $row['user_province_id'];
-	}
-	
-	
 	dbConvert($row);
 	return $row[$field];
 }
@@ -122,7 +98,7 @@ function time_check_last_login(){
 function login_chk(){
 	$CI =& get_instance();
 	if($CI->session->userdata('id') == ""){
-		redirect('home');
+		redirect('home/login_page');
 	}
 }
 
@@ -169,6 +145,7 @@ function new_save_logfile($action_type=FALSE,$modules_title=FALSE,$table=FALSE,$
 	)";
 	$CI->db->Execute($sql);
 }
+
 function get_logaction($action_type,$modules_title){
 	switch($action_type){
 		case "VIEW":
@@ -189,4 +166,5 @@ function get_logaction($action_type,$modules_title){
 	}
 	return $cap;
 }
+
 ?>

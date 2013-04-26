@@ -74,6 +74,81 @@ Class Datapoint extends Public_Controller{
 					redirect('datapoint/mental');						
 				}
 		}	
+		
+	function mental_import()
+	{
+		$this->template->build('mental_number/mental_import');
+	}
+		function mental_upload()
+		{
+			unset($_POST['ID']);
+			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
+			$file_name = 'mental_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/datapoint/mental/';
+			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+			$data = $this->ReadData($uploaddir.$file_name);
+echo '<HR>';
+			?><div style='font-size:12px;'><?
+			$_POST['YEAR'] = $data[1][1];
+
+			for($i=6; $i<count($data); $i++)
+			{
+				#print_r($data[$i]);	echo '<BR>';
+				
+				
+				if(strstr($data[$i][0], 'รวม'))
+				{
+					$get_province = explode('รวม', $data[$i][0]);
+					$get_province = trim($get_province[0]);
+					if($get_province != '')
+					{
+						$dtl_province = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$get_province."'");
+						
+						#print_r($data[$i]);
+						
+						$_POST['PROVINCE_ID'] = $dtl_province[0]['id'];
+						
+						$post_title = array('POP_NUMBER', 
+							'PSY_NUMBER', 
+							'PSY_RATE', 
+							'FEAR_NUMBER', 
+							'FEAR_RATE', 
+							'DEPRESS_NUMBER', 
+							'DEPRESS_RATE', 
+							'RETARDED_NUMBER', 
+							'RETARDED_RATE', 
+							'APOPLEXY_NUMBER', 
+							'APOPLEXY_RATE', 
+							'DRUGADD_NUMBER', 
+							'DRUGADD_RATE', 
+							'OTHER_NUMBER', 
+							'OTHER_RATE', 
+							'SUICIDE_SUCC_NUMBER', 
+							'SUICIDE_SUCC_RATE', 
+							'SUICIDE_UNSUC_NUMBER', 
+							'SUICIDE_UNSUC_RATE', 
+							'AUTISM_NUMBER', 
+							'AUTISM_RATE');
+							
+						for($j=0; $j<count($post_title); $j++)
+						{
+							$_POST[$post_title[$j]] = ($data[$i][($j+1)]*1);
+						}
+						$this->mental->save($_POST);
+						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล 
+							จังหวัด "<?=$get_province;?>"
+						</div><?
+					}
+				}
+			}
+			?></div><?
+					unlink($uploaddir.$file_name);
+					?><BR>
+						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="datapoint/mental";'>
+						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="datapoint/mental_import";'>
+					<?
+
+		}
 	#================ MENTAL ==================#	
 	
 	
@@ -85,7 +160,7 @@ Class Datapoint extends Public_Controller{
 			if($_GET['YEAR']) { $sql .= 'AND YEAR = '.$_GET['YEAR'].' '; }
 			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."' "; }
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
-	
+
 		$data['result'] = $this->station->get($sql);
     	$data['pagination'] = $this->station->pagination;
 		
@@ -216,6 +291,28 @@ Class Datapoint extends Public_Controller{
 		}
 		redirect('datapoint/vehicle');
 	}
+
+
+				function ReadData($filepath)
+				{
+					require_once 'include/Excel/reader.php';
+					$data = new Spreadsheet_Excel_Reader();
+					$data -> setOutputEncoding('UTF-8');
+					$data -> read($filepath);
+					
+					error_reporting(E_ALL ^ E_NOTICE);		
+					$index = 0;
+					for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+						$cnt_colum = count($data->sheets[0]['cells'][$i]);
+						for($j=1; $j<=$cnt_colum; $j++)
+						{
+							$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+						}
+						$index++;			
+					}
+					return $import;	
+				}	
+
 	function vehicle_import(){
 		$this->template->build('vehicle/vehicle_import_form');
 	}
@@ -278,5 +375,5 @@ Class Datapoint extends Public_Controller{
 		}
 		redirect('datapoint/vehicle_import');	
 	}
+
 }
-?>

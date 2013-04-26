@@ -1,8 +1,8 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส</h2>
-<h4>ตำแหน่งคนว่างงาน <span class="gray">แบบ ...</span></h4>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
+<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต <span class="gray">แบบ กรมสุขภาพจิต</span></h4>
 
 
-<form action='disadvantaged/vacancy_upload' method='POST' enctype="multipart/form-data">
+<form action='datapoint/mental_upload' method='POST' enctype="multipart/form-data">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>

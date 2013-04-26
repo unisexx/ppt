@@ -1,9 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#province_id').change(function(){
+	/*$('#province_id').change(function(){
 		var province_id=$('#province_id option:selected').val();
 		$('#area_number').val(province_id);
-	})
+	})*/
 });
 </script>
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
@@ -19,9 +19,17 @@ $(document).ready(function(){
 <tr>
   <th>จังหวัด &gt; หมายเลขเขต<span class="Txt_red_12"> *</span></th>
   <td>
-  <?php echo form_dropdown('province_id',get_option('id','PROVINCE','PROVINCES'),$rs['province_id'],'id="province_id"','-- เลือกจังหวัด --'); ?>
+  <select name="province" id="province">
+ <option value="">-- เลือกจังหวัด --</option>
+  <?php 
+  $selected="selected='selected'";
+  foreach($province as $item){
+  	$selected=($item['province']==$rs['province'])?"selected='selected'":'';
+  	echo '<option value="'.$item['province'].'" '.$selected.'>'.$item['province'].'</option>';
+  } ?>
+  </select>
     &gt;
-    <input name="area_number" type="text" id="area_number" value="<?php echo $rs['area_number'] ?>"  style="width:50px;" readonly="readonly"/>
+    <input name="area_number" type="text" id="area_number" value="<?php echo $rs['area_number'] ?>"  style="width:50px;" />
   </td>
 </tr>
 <tr>

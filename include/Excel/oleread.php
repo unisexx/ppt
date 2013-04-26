@@ -53,13 +53,15 @@ class OLERead {
     	
     	$this->data = @file_get_contents($sFileName);
     	if (!$this->data) { 
-    		$this->error = 1; 
+    		//$this->error = 1; 
+			$this->error = 2; 
     		return false; 
    		}
    		//echo IDENTIFIER_OLE;
    		//echo 'start';
    		if (substr($this->data, 0, 8) != IDENTIFIER_OLE) {
-    		$this->error = 1; 
+    		//$this->error = 1; 
+    		$this->error = 3; 
     		return false; 
    		}
         $this->numBigBlockDepotBlocks = GetInt4d($this->data, NUM_BIG_BLOCK_DEPOT_BLOCKS_POS);

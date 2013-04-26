@@ -98,7 +98,7 @@ function time_check_last_login(){
 function login_chk(){
 	$CI =& get_instance();
 	if($CI->session->userdata('id') == ""){
-		redirect('home');
+		redirect('home/login_page');
 	}
 }
 

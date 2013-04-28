@@ -13,6 +13,11 @@
 <tr>
   <th colspan="2" style="font-weight:700; color:#333">ตั้งค่าข้อมูล</th>
 </tr>
+
+<?php // echo '<pre>'?>
+<?php // echo print_r($module)?>
+<?php // echo '</pre>'?>
+
 <?php foreach($module as $key => $item): ?>
 	<tr>
 		<th><?php echo $item['label']; ?></th>

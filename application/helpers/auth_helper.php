@@ -2,7 +2,7 @@
 function login($username,$password)
 {
 	$CI =& get_instance();
-	$sql = "select * from users where username = ? and password = ? and STATUS ='1'";
+	$sql = "select * from users where username = ? and password = ?";
 	$id = $CI->db->GetOne($sql,array($username,$password));	
 	if($id)
 	{
@@ -39,13 +39,13 @@ function is_login($usertype = FALSE)
 
 function permission($module, $action)
 {
-	$sql = 'SELECT '.strtoupper($action).' 
-	FROM USERTYPE 
-	WHERE USERTYPETITLEID = (SELECT ID FROM USER_TYPE_TITLE WHERE USER_ID='.login_data('ID').')  
-	AND MODULENAME = \''.$module.'\'';
+	$sql = 'SELECT "'.strtoupper($action).'" 
+	FROM PERMISSION 
+	WHERE USER_TYPE_ID = '.login_data('USER_TYPE_ID').' 
+	AND MODULE = \''.$module.'\'';
 	$CI =& get_instance();
 	$perm = $CI->db->getone($sql);
-	return $perm == 'on' ? TRUE : FALSE;
+	return $perm ? TRUE : FALSE;
 }
 
 function login_data($field)
@@ -70,7 +70,7 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID where users.id = ?';
 	
 	$field = strtolower($field);	
 	}else{
-		redirect('home');
+		// redirect('home');
 	}
 
 	dbConvert($row);

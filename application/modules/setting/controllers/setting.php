@@ -4,13 +4,14 @@ Class Setting extends Public_Controller{
 	public $module = array(
 		'user' => array('label' => 'ผู้ใช้งานระบบ', 'permission' => array('view','add','edit','delete')),
 		'usertype' => array('label' => 'สิทธ์การใช้งาน', 'permission' => array('view','add','edit','delete')),
-		'set_target' => array('label' => 'ข้อมูลพื้นฐานและกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
+		'menus' => array('label' => 'ข้อมูลพื้นฐานและกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
 		'set_province' => array('label' => 'จังหวัด', 'permission' => array('view','add','edit','delete')),
 		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
 		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
-		'report' => array('label' => 'รายงาน', 'permission' => array('view','add','edit','delete')),
+		'report' => array('label' => 'รายงาน', 'permission' => array('view')),
 		'basement' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete')),
-		'target' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
+		'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete')),
+		'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete')),
 	);
 	
 	public $crud = array(
@@ -32,6 +33,11 @@ Class Setting extends Public_Controller{
 		$this->load->model('user_model','user');
 		$this->load->model('user_type_model','user_type');
 		$this->load->model('permission_model','permission');
+		
+		if (!is_login()){
+			set_notify('error', 'กรุณาเข้าสู่ระบบ');
+			redirect('home');
+		}
 	}
 	
 	function user(){
@@ -103,6 +109,7 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 		$data['rs_perm'] = $this->permission->permission_row($id);
 		$data['module'] = $this->module;
 		$data['crud'] = $this->crud;
+		
 		$this->template->build('usertype_form',$data);
 	}
 	
@@ -269,5 +276,10 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 		$user->get_by_email($_GET['email']);
 		($user->email)?$this->output->set_output("false"):$this->output->set_output("true");
 	}
+
+	function check_username($id=false){
+		$user = $this->user->where("username = '".$_GET['username']."'")->get_row();
+		($user)?$this->output->set_output("false"):$this->output->set_output("true");
+    }
 }
 ?>

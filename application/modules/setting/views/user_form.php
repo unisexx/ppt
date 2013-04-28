@@ -9,6 +9,10 @@
   </td>
 </tr>
 <tr>
+  <th>username<span class="Txt_red_12"> *</span></th>
+  <td><input name="username" type="text" value="<?php echo $user['username']?>"/></td>
+</tr>
+<tr>
   <th>ชื่อ - นามสกุล<span class="Txt_red_12"> *</span></th>
   <td><input name="fullname" type="text" value="<?php echo $user['fullname']?>"/></td>
 </tr>

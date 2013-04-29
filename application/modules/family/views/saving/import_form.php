@@ -1,6 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
-<h4>ครอบครัวมีความอบอุ่น <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="family/warm_import">
+<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
+<form method="post" enctype="multipart/form-data" action="family/saving/import">
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
@@ -39,14 +39,12 @@
 			<th>ข้อมูลระหว่างวันที่</th>
 			<td>
 				<?
-				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-				echo form_dropdown('month_start',$month_th,'','class="span2"','--เลือกเดือน--');
+				echo form_dropdown('month_start',get_month(),'','class="span2"','--เลือกเดือน--');
 				?>
 				<?php echo form_dropdown('year_start', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
 				<?
-				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-				echo form_dropdown('month_end',$month_th,'','class="span2"','--เลือกเดือน--');
+				echo form_dropdown('month_end',get_month(),'','class="span2"','--เลือกเดือน--');
 				?>
 				<?php echo form_dropdown('year_end', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>

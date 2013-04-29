@@ -53,7 +53,7 @@
 	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="<?php echo $user['email']?>" />
 	  	<?php endif;?>
 	  </td>
-	  <td><?php echo $user['group_name']?></td>
+	  <td><?php echo $user['workgroup_name']?></td>
 	  <td><?php echo $user['division_name']?></td>
 	  <td>
 	  	

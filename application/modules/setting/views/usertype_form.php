@@ -14,10 +14,6 @@
   <th colspan="2" style="font-weight:700; color:#333">ตั้งค่าข้อมูล</th>
 </tr>
 
-<?php // echo '<pre>'?>
-<?php // echo print_r($module)?>
-<?php // echo '</pre>'?>
-
 <?php foreach($module as $key => $item): ?>
 	<tr>
 		<th><?php echo $item['label']; ?></th>
@@ -28,6 +24,26 @@
 		</td>
 	</tr>
 <?php endforeach; ?>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr
+	<tr>
+		<th colspan="2" style="font-weight:700; color:#333">ข้อมูลกลุ่มเป้าหมาย</th>
+		<td></td>
+	</tr>
+<?php foreach($menus as $menu):?>
+	<tr>
+		<th><?php echo $menu['title']?></th>
+		<td>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][view]" value="1">ดู</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][add]" value="1">เพิ่ม</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][edit]" value="1">แก้ไข</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][delete]" value="1">ลบ</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][import]" value="1">นำเข้าข้อมูล</label></span>
+		</td>
+	</tr>
+<?php endforeach;?>
 
 </table>
 

@@ -9,9 +9,9 @@ Class Setting extends Public_Controller{
 		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
 		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
 		'report' => array('label' => 'รายงาน', 'permission' => array('view')),
-		'basic' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete','import')),
-		'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete','import')),
-		'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete','import')),
+		// 'basic' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete','import')),
+		// 'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete','import')),
+		// 'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete','import')),
 	);
 	
 	public $crud = array(
@@ -33,6 +33,7 @@ Class Setting extends Public_Controller{
 		$this->load->model('user_model','user');
 		$this->load->model('user_type_model','user_type');
 		$this->load->model('permission_model','permission');
+		$this->load->model('menu_model','menu');
 		
 		if (!is_login()){
 			set_notify('error', 'กรุณาเข้าสู่ระบบ');
@@ -49,7 +50,7 @@ PPT.USERS.NAME,
 PPT.USERS.SURNAME,
 PPT.USERS.DEPARTMENT_ID,
 PPT.USERS.DIVISION_ID,
-PPT.USERS.GROUP_ID,
+PPT.USERS.WORKGROUP_ID,
 PPT.USERS.PERSON_TYPE_ID,
 PPT.USERS.ID_CARD,
 PPT.USERS.CONTACT_NUMBER,
@@ -61,16 +62,16 @@ PPT.USER_TYPE.USER_TYPE_NAME,
 PPT.DEPARTMENT.DEPARTMENT_NAME,
 PPT.DIVISION.DIVISION_NAME,
 PPT.PERSON_TYPE.PERSON_TYPE_NAME,
-PPT.GROUPS.GROUP_NAME,
+PPT.WORKGROUP.WORKGROUP_NAME,
 PPT.USER_TYPE.USER_TYPE_LEVEL
 FROM
 PPT.USERS
-INNER JOIN PPT.USER_TYPE ON PPT.USERS.USER_TYPE_ID = PPT.USER_TYPE.ID
-INNER JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
-INNER JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
-INNER JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
-INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
-WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
+LEFT JOIN PPT.USER_TYPE ON PPT.USERS.USER_TYPE_ID = PPT.USER_TYPE.ID
+LEFT JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
+LEFT JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
+LEFT JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
+LEFT JOIN PPT.WORKGROUP ON PPT.USERS.WORKGROUP_ID = PPT.WORKGROUP.ID
+WHERE USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		$data['users'] = $this->user->order_by('id','desc')->get($sql);
 		$data['pagination'] = $this->user->pagination();
 		$this->template->build('user_index',$data);
@@ -98,7 +99,7 @@ WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
 	}
 	
 	function usertype(){
-		$data['user_types'] = $this->user_type->where('user_type_level < '.login_data('user_type_level'))->order_by('user_type_level','desc')->get();
+		$data['user_types'] = $this->user_type->where('user_type_level <= '.login_data('user_type_level'))->order_by('user_type_level','desc')->get();
 		$data['pagination'] = $this->user_type->pagination();
 		$this->template->build('usertype_index',$data);
 	}
@@ -109,6 +110,7 @@ WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
 		$data['module'] = $this->module;
 		$data['crud'] = $this->crud;
 		
+		$data['menus'] = $this->menu->where('parent_id = 0')->get();
 		$this->template->build('usertype_form',$data);
 	}
 	

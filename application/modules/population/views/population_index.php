@@ -70,7 +70,10 @@
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/form/<?=$item['id'];?>'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  /></td>
+  	<? if(menu::perm($this->menu_id, 'delete')): ?>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
+    <? endif;?>
+    </td>
 </tr>
 <? $i++; } ?>
 </table>

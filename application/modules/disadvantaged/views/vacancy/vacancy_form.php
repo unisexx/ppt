@@ -1,8 +1,14 @@
+<? $m['id'] = 104; ?>
 <h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส</h2>
-<h4>ตำแหน่งคนว่างงาน <span class="gray">แบบ ...</span></h4>
+<h4>ตำแหน่งคนว่างงาน </h4>
+<?=menu::source($m['id']);?>
 
 
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <form action='disadvantaged/vacancy_save' method='POST'>
+<?php endif; ?>
+
+
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 	<tr>
@@ -32,8 +38,8 @@
 	</table>
 	
 	<div id="btnSave">
-	<input type="submit" value="บันทึก" class="btn btn-danger">
+	<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?><input type="submit" value="บันทึก" class="btn btn-danger"><? } ?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>
 
-</form>
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?></form><? } ?>

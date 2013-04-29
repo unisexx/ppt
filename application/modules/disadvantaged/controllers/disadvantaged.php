@@ -9,7 +9,6 @@ Class Disadvantaged extends Public_Controller{
 	}
 	//========== UNEMPLOYEE ==========//
 	function unemployee(){
-			menu::source(71);
 		$sql = 'SELECT * FROM UNEMPLOYEE WHERE 1=1 ';
 			if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 			if(@$_GET['PROVINCE']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE'].' ';
@@ -22,7 +21,6 @@ Class Disadvantaged extends Public_Controller{
 	}
 	
 	function unemployee_form($id=FALSE){
-			menu::source(71);
 		$wlist = $this->db->execute('SELECT * FROM UNEMPLOYEE');
 		$data['id'] = @$id;
 		if(@$id)
@@ -34,14 +32,12 @@ Class Disadvantaged extends Public_Controller{
 	}
 		function unemployee_save()
 		{
-			menu::source(71);
 			$this->unemployee->save($_POST);
 			set_notify('success', lang('save_data_complete'));
 			redirect('disadvantaged/unemployee');
 		}
 	function unemployee_delete($id=FALSE)
 	{
-			menu::source(71);
 		if($id)
 		{
 			$this->unemployee->delete($id);
@@ -50,14 +46,9 @@ Class Disadvantaged extends Public_Controller{
 		}
 		
 	}
-	function unemployee_import()
-	{
-			menu::source(71);
-		$this->template->build('unemployee/unemployee_import');	
-	}
+	function unemployee_import() { $this->template->build('unemployee/unemployee_import'); }
 		function unemployee_upload()
 		{
-			menu::source(71);
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'unemployee_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/unemployee/';
@@ -70,28 +61,40 @@ Class Disadvantaged extends Public_Controller{
 			?>
 			<h5>ผลการดำเนินงาน</h5>
 			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
-				for($i=3; $i<count($data); $i++)
+			if($_POST['YEAR'])
 				{
-					$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
-					
-					$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
-					$_POST['AMOUNT'] = $data[$i][2];
-					
-					$chk_repeat = $this->unemployee->get("SELECT ID FROM UNEMPLOYEE WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
-					if(count($chk_repeat) == 1)
+					for($i=3; $i<count($data); $i++)
 					{
-						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
-							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-							<? echo $data[$i][1]; ?>
-						</div><? 
-					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && $_POST['AMOUNT']) {
+						print_r($_POST);
+						echo '<BR>';
+						$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
 						
-						$this->unemployee->save($_POST);
-						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
-							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-							<? echo $data[$i][1]; ?>
-						</div><? 
+						$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
+						$_POST['AMOUNT'] = $data[$i][2];
+						
+						$chk_repeat = $this->unemployee->get("SELECT ID FROM UNEMPLOYEE WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
+						if(count($chk_repeat) == 1)
+						{
+							?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
+								ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
+								ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+								<? echo $data[$i][1]; ?>
+							</div><? 
+						} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && $_POST['AMOUNT']) {
+							
+							$this->unemployee->save($_POST);
+							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
+								ปี <? echo $_POST['YEAR']; ?>, จังหวัด
+								<? echo $data[$i][1]; ?>
+							</div><? 
+						}
 					}
+				} ELSE {
+					?>
+					<div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
+						ไม่สามารถดำเนินการบันทึกข้อมูลได้เนื่องจากรายงานระบุข้อมูลไม่ครบถ้วน
+					</div>
+					<?
 				}
 			?></div><?
 			unlink($uploaddir.'/'.$file_name);
@@ -161,6 +164,8 @@ Class Disadvantaged extends Public_Controller{
 			?>
 			<h5>ผลการดำเนินงาน</h5>
 			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
+			if($_POST['YEAR'])
+			{
 				for($i=3; $i<count($data); $i++)
 				{
 	
@@ -173,13 +178,15 @@ Class Disadvantaged extends Public_Controller{
 					$chk_repeat = $this->vacancy->get("SELECT ID FROM VACANCY WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
 					if(count($chk_repeat) == 1)
 					{
-						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
+						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
+							ไม่สามารถดำเนินการได้เนื่องจากพบ ข้อมูลของ 
 							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-							<? echo $data[$i][1]; ?>
+							<? echo $data[$i][1]; ?> ในระบบแล้ว
 						</div><? 
 					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && ($_POST['VACANCIES'] || $_POST['CANDIDATES'] || $_POST['ACTIVE'])) {
 						$this->vacancy->save($_POST);
-						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
+						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
+							บันทึก: ข้อมูล 
 							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
 							<? echo $data[$i][1]; ?>
 						</div><? 
@@ -187,12 +194,17 @@ Class Disadvantaged extends Public_Controller{
 				}
 			?></div><?
 			unlink($uploaddir.'/'.$file_name);
+			} ELSE {
+				?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
+					ไม่สามารถบันทึกข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง
+				</div>
+				<?
+			}
 			
 			?><BR><BR>
 				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/vacancy";'>
 				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/vacancy_import";'>
 			<?
-
 		}
 	
 	
@@ -224,7 +236,7 @@ Class Disadvantaged extends Public_Controller{
 	}
 			function ReadData($filepath)
 			{
-				require_once 'include/Excel/reader.php';
+				@require_once 'include/Excel/reader.php';
 				$data = new Spreadsheet_Excel_Reader();
 				$data -> setOutputEncoding('UTF-8');
 				$data -> read($filepath);

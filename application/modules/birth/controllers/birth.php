@@ -111,6 +111,7 @@ Class birth extends Public_Controller{
 	}
 	
 	function custom_import(){
+		$this->db->debug=true;
 		$uploaddir = "import_file/birth/";		
 		$file_list = scandir($uploaddir);
 		$data['file_list'] = $file_list;
@@ -127,20 +128,22 @@ Class birth extends Public_Controller{
 			//rename($uploaddir.$file_name, $uploaddir.$province_id.".xls");
 			
 			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
+			
 			foreach($data as $item):
 						$val['ID']='';								
 						$province_name = str_replace('จังหวัด', '', $item['title']);
 						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
-						$province_id = $province['id'];		
+						$province_id = @$province['id'];		
 						if($province_id > 0 ){
-							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
+							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$finfo[0]." AND PROVINCE_ID=".$province_id)->get_one();
 						}
-						$val['YEAR_DATA'] = $_POST['year_data'];
+						$val['YEAR_DATA'] = $finfo[0];
 						$val['PROVINCE_ID'] = $province_id;
 						$val['PROVINCE_NAME'] = $province_name;
 						$val['BIRTH_MALE'] = (int)$item['birth_male'];
 						$val['BIRTH_FEMALE'] = (int)$item['birth_female'];
-						$id = $this->family->save($val);											
+						//print_r($val);
+						$id = $this->birth->save($val);											
 			endforeach;	
 			
 			 

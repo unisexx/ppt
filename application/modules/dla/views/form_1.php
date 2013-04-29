@@ -25,7 +25,7 @@
         </td>
     </tr>
     <tr>
-        <th>ชื่ออปท. / ขนาด<span class="Txt_red_12"> *</span></th>
+        <th>ชื่ออปท.(ตำบล/เทศบาล) / ขนาด<span class="Txt_red_12"> *</span></th>
         <td><?php echo form_input('opt_name', $rs['opt_name']).' / '.form_dropdown('size', array('เล็ก' => 'เล็ก', 'กลาง' => 'กลาง', 'ใหญ่' => 'ใหญ่'), $rs['size'], 'class="span1"'); ?></td>
     </tr>
     <tr>

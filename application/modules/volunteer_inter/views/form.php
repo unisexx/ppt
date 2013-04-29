@@ -1,5 +1,5 @@
 <h2>ข้อมูลพื้นฐาน - ทุนทางสังคม (เพิ่ม/แก้ไข)</h2>
-<h4>ข้อมูลอาสาสมัคร <span class="gray"></span></h4>
+<h4>ข้อมูลอาสาสมัครต่างประเทศ<span class="gray"></span></h4>
 <form method="post" enctype="multipart/form-data" action="birth/save">
 <table class="tbadd">
 <tr>
@@ -147,7 +147,9 @@
 
 <div id="btnSave">
 <input type="hidden" name="ID" value="<?=@$item['id'];?>">
+<? if(menu::perm($menu_id, 'add')||menu::perm($menu_id,'edit')): ?>
 <input type="submit" value="บันทึก" class="btn btn-danger">
+<? endif;?>
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>

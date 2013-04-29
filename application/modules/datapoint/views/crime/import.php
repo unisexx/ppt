@@ -1,5 +1,5 @@
 <? $m['id'] = 91; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข) <a href="import_file/datapoint/crime/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
 <h4>ความผิดทางคดีอาญา  <span class="gray">แบบ สตช. คดีอาญา</span></h4>
 <?=menu::source($m['id']);?>
 

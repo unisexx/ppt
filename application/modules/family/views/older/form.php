@@ -1,6 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - ผู้สูงอายุ (เพิ่ม/แก้ไข)</h2>
 <h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="family/older/save">
+<form method="post" enctype="multipart/form-data" action="family/warm/save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
@@ -33,7 +33,9 @@
 
 <div id="btnSave">
 <input type="hidden" name="id" value="<?=@$item['id'];?>">	
+<? if(menu::perm($menu_id, 'add')||menu::perm($menu_id, 'edit')){?>
 <input type="submit" value="บันทึก" class="btn btn-danger">
+<? } ?>
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>

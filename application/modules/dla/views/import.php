@@ -1,4 +1,4 @@
-<h2>นำเข้าข้อมูล - อปท.</h2>
+<h2>อปท. (นำเข้าข้อมูล) <?php echo anchor('import_file/dla/sample.csv', img('media/images/btn_ex_data.png')); ?></h2>
 <?php echo menu::source(17); ?>
 <form method="post" enctype="multipart/form-data" action="dla/import">
     <table class="tbadd">

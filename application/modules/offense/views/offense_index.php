@@ -42,7 +42,24 @@
 <tr>
   <td><a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
   <td><a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>"><?php echo $item['offense_year']; ?></a></td>
-  <td><a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>"><?php echo $item['offense_province']; ?></a></td>
+  <td>
+  
+  <a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>">
+  
+  <?php 
+  
+  //echo $item['offense_province'];
+  $sql = 'select * from provinces where id='.$item['offense_province'];
+  $result1 = $this->opt->get($sql);
+  foreach($result1 as $key1 => $item1)
+  {
+	  echo $item1['province'];
+  }
+  ?>
+  
+  </a>
+  
+  </td>
   <td><?php echo @number_format($item['offense_property']); ?></td>
   <td><?php echo @number_format($item['offense_body']); ?></td>
   <td><?php echo @number_format($item['offense_sex']); ?></td>

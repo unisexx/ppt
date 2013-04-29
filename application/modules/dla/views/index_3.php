@@ -3,7 +3,7 @@
 <?php echo menu::source($m['id']); ?>
 <div id="search">
     <form method="get" action="dla/index/<?php echo $m['id']; ?>">
-    <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด/อปท.
+    <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด/อปท.(ตำบล/เทศบาล)
         <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
         <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
@@ -24,7 +24,7 @@
         <th>ปี</th>
         <th>จังหวัด</th>
         <th>อำเภอ</th>
-        <th>อปท.</th>
+        <th>อปท.(ตำบล/เทศบาล)</th>
         <th>ขนาด</th>
         <th width="90"><span class="vtip" title="ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น">ดื่มเครื่องดื่ม..</span></th>
         <th width="78"><span class="vtip" title="มั่วสุมและทำความรำคาญให้กับชาวบ้าน">มั่วสุมและ..</span></th>

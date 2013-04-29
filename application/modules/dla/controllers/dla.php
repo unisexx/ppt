@@ -371,7 +371,7 @@ class Dla extends Public_Controller
     			                
     			            }
     						if($db){
-    							 $db['year'] = '2555';
+    							 $db['year'] = $_POST['year'];
     						     //$this->db->debug = true;
     							 $this->opt->save($db, TRUE);
                                  $total_row++;

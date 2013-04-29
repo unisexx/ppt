@@ -322,7 +322,9 @@
 
 <div id="btnSave">
 <input type="hidden" name="id" value="<?=$item['id'];?>">
+<? if(menu::perm($menu_id, 'add') || menu::perm($menu_id, 'edit')): ?>
 <input type="submit" value="บันทึก" class="btn btn-danger">
+<? endif;?>
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>

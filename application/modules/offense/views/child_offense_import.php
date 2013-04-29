@@ -17,9 +17,10 @@
     ?>
         <table border="1">
         <?php
-            $excel->read('source_import/'.$file_upload);
+            $excel->read('import_file/offense/'.$file_upload);
 
             $x1=12;
+			$i=1;
 			
             while($x1<=($excel->sheets[0]['numRows']+4)) {
 				
@@ -53,7 +54,7 @@
 						$data = array(
 						  
 							   "offense_aumphur" => "1" ,
-							   "offense_province" => "1" ,
+							   "offense_province" => $i ,
 							   "offense_property" => $data1,
 							   "offense_body" => $data2,
 							   "offense_sex" => $data3,
@@ -69,6 +70,7 @@
 
 				}
             $x1++;
+			$i++;
             }
 			
 			echo "<script>alert('Add News successfully!');</script>";		

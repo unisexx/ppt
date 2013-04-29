@@ -280,5 +280,12 @@ function fix_file(&$files)
         }
     }
 }
+
+function get_menu_info($menu_id,$field){
+	$CI=& get_instance();
+	$val = $CI->db->getrow("SELECT ".$field." FROM MENUS WHERE ID=".$menu_id);
+	$val = iconv('tis-620','utf-8',$val['TITLE']);
+	return $val;
+}
  
 ?>

@@ -72,7 +72,7 @@ Class Welfare extends Public_Controller{
 			
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.$file_name);
 				$data = $this->ReadData($uploaddir.$file_name);
-				unlink($uploaddir.$file_name);
+			unlink($uploaddir.$file_name);
 			
 			$_POST['YEAR'] = $data[1][1];
 			$_POST['MONTH'] = array_search(trim($data[1][3]), $month_th)+1;
@@ -102,6 +102,7 @@ Class Welfare extends Public_Controller{
 						{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง </DIV>"; }
 				}
 			}
+
 			$this->template->build('welfare/upload', @$data);
 		}
 

@@ -48,14 +48,14 @@
   foreach($result as $item):
 ?>
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
-  <td><?php echo $i ?></td>
-  <td><?php echo $item['year'] ?></td>
-  <td><?php echo $item['agency'] ?></td>
-  <td><?php echo number_format($item['notice']) ?></td>
-  <td><?php echo number_format($item['die_male']) ?> / <?php echo number_format($item['die_female']) ?></td>
-  <td><?php echo number_format($item['coma_male']) ?> / <?php echo number_format($item['coma_male']) ?></td>
-  <td><?php echo number_format($item['pain_male']) ?> / <?php echo number_format($item['pain_male']) ?></td>
-  <td><?php echo number_format($item['total']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $i ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"> <?php echo $item['year'] ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $item['agency'] ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['notice']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['die_male']) ?> / <?php echo number_format($item['die_female']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['coma_male']) ?> / <?php echo number_format($item['coma_male']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['pain_male']) ?> / <?php echo number_format($item['pain_male']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['total']) ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php if(menu::perm($menu_id, 'edit')): ?>

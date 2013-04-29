@@ -8,12 +8,12 @@ Class Mental extends Public_Controller{
 		$this->load->model('crime_station_model','station');
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
+		$this->load->model('info_model','info');
 	}
 	
 	
 	#================ MENTAL ==================#
 	function index($year=FALSE, $province_id=FALSE){
-		menu::source(86);
 		$sql = 'SELECT MT.ID, MT.PROVINCE_ID, MT.YEAR, MT.PSY_NUMBER, MT.FEAR_NUMBER, MT.DEPRESS_NUMBER, MT.RETARDED_NUMBER, MT.APOPLEXY_NUMBER, MT.DRUGADD_NUMBER, MT.AUTISM_NUMBER, MT.OTHER_NUMBER, PV.PROVINCE 
 				FROM MENTAL_NUMBER MT LEFT JOIN PROVINCES PV ON MT.PROVINCE_ID = PV.ID WHERE 1=1 ';
 			$sql .= (@$_GET['year'])?"AND MT.YEAR LIKE '".$_GET['year']."' ":'';
@@ -30,7 +30,6 @@ Class Mental extends Public_Controller{
 	}
 	
 	function form($id=FALSE){
-		menu::source(86);
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$data['id'] = $id;
 		if($id)
@@ -43,7 +42,6 @@ Class Mental extends Public_Controller{
 	}
 		function save()
 		{
-			menu::source(86);
 			$sql = "SELECT * FROM MENTAL_NUMBER WHERE PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'";
 			$chk_mental = $this->mental->get($sql);
 			
@@ -56,7 +54,6 @@ Class Mental extends Public_Controller{
 		
 		function delete($id=FALSE)
 		{
-			menu::source(86);
 				if($id)
 				{
 					$this->mental->delete($id);
@@ -68,11 +65,12 @@ Class Mental extends Public_Controller{
 				}
 		}	
 		
-	function import() { menu::source(86); $this->template->build('mental/import'); }
+	function import() { $this->template->build('mental/import'); }
 		function upload()
 		{
-			menu::source(86);
-			unset($_POST['ID']);
+			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+            $this->info->save($_POST);
+			unset($_POST);
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'mental_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/datapoint/mental/';
@@ -87,13 +85,14 @@ echo '<HR>';
 				for($i=6; $i<count($data); $i++)
 				{
 					
-					if(strstr($data[$i][0], 'รวม'))
+					if($data[$i][0])
 					{
 						$get_province = explode('รวม', $data[$i][0]);
 						$get_province = trim($get_province[0]);
 						if($get_province != '')
 						{
 							$dtl_province = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$get_province."'");
+							
 							
 							$_POST['PROVINCE_ID'] = $dtl_province[0]['id'];
 							
@@ -119,7 +118,8 @@ echo '<HR>';
 								'AUTISM_NUMBER', 
 								'AUTISM_RATE');
 								
-							for($j=0; $j<count($post_title); $j++) { $_POST[$post_title[$j]] = ($data[$i][($j+1)]*1); }
+							for($j=0; $j<count($post_title); $j++) { $_POST[$post_title[$j]] = number_format(($data[$i][($j+1)]*1), 0); }
+							$this->mental->save($_POST);
 							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล จังหวัด "<?=$get_province;?>" </div><?
 						}
 					}

@@ -40,7 +40,7 @@
   <th>ภาคใต้ (ช/ญ)</th>
   <th>ภาคเหนือ (ช/ญ)</th>
   <th>ไม่ระบุ</th>
-  <th>จัดการ</th>
+   <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
   $rowStyle = '';
@@ -49,14 +49,14 @@
   foreach($result as $item):
 ?>
 <tr>
-  <td><?php echo $i; ?></td>
-  <td><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
-  <td><?php echo number_format($item['bkk_male']) ?> / <?php echo number_format($item['bkk_female']) ?></td>
-  <td><?php echo number_format($item['ce_male']) ?>/ <?php echo number_format($item['ce_female']); ?></td>
-  <td><?php echo number_format($item['ne_male']) ?> / <?php echo number_format($item['ne_female']) ?></td>
-  <td><?php echo number_format($item['s_male']) ?> / <?php echo number_format($item['s_female']) ?></td>
-  <td><?php echo number_format($item['n_male']) ?> / <?php echo number_format($item['n_female']) ?></td>
-  <td><?php echo number_format($item['i_male']) ?> / <?php echo number_format($item['i_female']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['bkk_male']) ?> / <?php echo number_format($item['bkk_female']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['ce_male']) ?>/ <?php echo number_format($item['ce_female']); ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['ne_male']) ?> / <?php echo number_format($item['ne_female']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['s_male']) ?> / <?php echo number_format($item['s_female']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['n_male']) ?> / <?php echo number_format($item['n_female']) ?></td>
+  <td onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['i_male']) ?> / <?php echo number_format($item['i_female']) ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
   	<?php if(menu::perm($menu_id, 'edit')): ?>

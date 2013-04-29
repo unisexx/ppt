@@ -3,7 +3,8 @@ Class birth extends Public_Controller{
 	function __construct(){
 		parent::__construct();
         $this->load->model('birth_model', 'birth');
-		$this->load->model('province_model', 'province');				
+		$this->load->model('province_model', 'province');		
+		$this->load->model('info_model','info');		
 	}
 	public $menu_id = 27;
 	function index(){
@@ -107,6 +108,43 @@ Class birth extends Public_Controller{
 			$index++;			
 		}		
 		return $import;
+	}
+	
+	function custom_import(){
+		$uploaddir = "import_file/birth/";		
+		$file_list = scandir($uploaddir);
+		$data['file_list'] = $file_list;
+		foreach($file_list as $file){
+			$lfile[] = iconv('windows-874','utf-8',$file);
+		}		
+		
+		for($i=2;$i<count($lfile);$i++){
+			$file_name = $lfile[$i];
+			$file = $lfile[$i];
+			$finfo = explode('.',$file);
+			$province_id = $this->province->select('id')->where(" province='".iconv('utf-8','tis-620',$finfo[0])."'")->get_one();
+			echo $finfo[0]."::".$province_id.":::".$lfile[$i]."<br>";						
+			//rename($uploaddir.$file_name, $uploaddir.$province_id.".xls");
+			
+			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
+			foreach($data as $item):
+						$val['ID']='';								
+						$province_name = str_replace('จังหวัด', '', $item['title']);
+						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
+						$province_id = $province['id'];		
+						if($province_id > 0 ){
+							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
+						}
+						$val['YEAR_DATA'] = $_POST['year_data'];
+						$val['PROVINCE_ID'] = $province_id;
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['BIRTH_MALE'] = (int)$item['birth_male'];
+						$val['BIRTH_FEMALE'] = (int)$item['birth_female'];
+						$id = $this->family->save($val);											
+			endforeach;	
+			
+			 
+		}
 	}
 }
 ?>

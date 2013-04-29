@@ -22,8 +22,10 @@
 </div>
 </form>
 <div id="btnBox">
+	<? if(menu::perm($menu_id, 'add')): ?>
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='population/import_form'" class="btn_import"/>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='population/form'" class="btn_add"/>
+	<? endif;?>
 </div>
 <!--
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
@@ -69,8 +71,10 @@
   <td><?=number_format($item['sum_female'],0);?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
+  	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/form/<?=$item['id'];?>'" />
-  	<? if(menu::perm($this->menu_id, 'delete')): ?>
+  	<? endif;?>
+  	<? if(menu::perm($menu_id, 'delete')): ?>
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
     <? endif;?>
     </td>

@@ -5,8 +5,10 @@ Class volunteer_inter extends Public_Controller{
         $this->load->model('volunteer_main_model', 'v_main');
 		$this->load->model('province_model', 'province');				
 	}
+	public $menu_id = 101;
 	function index(){
 		//$this->db->debug=true;
+		$data['menu_id'] = $this->menu_id;
 		$condition = " 1 = 1 AND COUNTRY_ID > 1 ";
 		$condition.= @$_GET['country_id']!='' ? " AND COUNTRY_ID=".$_GET['country_id'] : "";
 		$condition.= @$_GET['amphur_id']!='' ? " AND VOLUNTEER_MAIN.AMPHUR_ID=".$_GET['amphur_id'] : "";
@@ -23,6 +25,7 @@ Class volunteer_inter extends Public_Controller{
 	
 	function form($id=FALSE){
 		//$this->db->debug = true;
+		$data['menu_id'] = $this->menu_id;
 		$data['id'] = @$id;
 		if(@$id)
 		{
@@ -33,12 +36,14 @@ Class volunteer_inter extends Public_Controller{
 	}
 		function save()
 		{
+			$data['menu_id'] = $this->menu_id;
 			$this->v_main->save($_POST);
 			set_notify('success', lang('save_data_complete'));
 			redirect('volunteer/index');
 		}
 	function delete($id=FALSE)
 	{
+		$data['menu_id'] = $this->menu_id;
 		if($id)
 		{
 			$this->v_main->delete($id);
@@ -48,7 +53,8 @@ Class volunteer_inter extends Public_Controller{
 		
 	}
 	function import_form(){
-		$this->template->build('import_form');
+		$data['menu_id'] = $this->menu_id;
+		$this->template->build('import_form',$data);
 	}
 	
 	function birth_import(){

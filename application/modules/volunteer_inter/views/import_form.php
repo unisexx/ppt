@@ -5,6 +5,9 @@
   <div id="searchBox">  	
     <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <input type="file" name="fl_import" >
-  <input type="submit" name="button9" id="button9" title="นำเข้าข้อมูล" value=" " class="btn_import" /></div>
+    <? if(menu::perm($menu_id, 'add')): ?>
+  <input type="submit" name="button9" id="button9" title="นำเข้าข้อมูล" value=" " class="btn_import" />
+  	<? endif;?>
+  </div>
 </div>
 </form>

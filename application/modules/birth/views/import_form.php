@@ -1,4 +1,4 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
+<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <a href="import_file/birth/birth_sample.xls" target="_blank"><img src="media/images/btn_ex_data.png" style=""></a></h2>
 <h4>ข้อมูลการเกิด <?php echo menu::source($menu_id); ?></h4>
 <form method="post" enctype="multipart/form-data" action="birth/birth_import">
 	<table class="tbadd">
@@ -54,7 +54,9 @@
 	</table>	
 	<div id="btnSave">
 	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
+	<? if(menu::perm($menu_id, 'add')): ?>
 	<input type="submit" value="บันทึก" class="btn btn-danger">
+	<? endif;?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>
 </form>

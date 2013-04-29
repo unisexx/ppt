@@ -1,10 +1,10 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (นำเข้าข้อมูล) <a href="import_file/population/population_sample.xls" target="_blank"><img src="media/images/btn_ex_data.png" style="border:0px;"></a></h2>
 <h4>ประชากร (คน) <?php echo menu::source($menu_id); ?></h4>
 <form method="post" enctype="multipart/form-data" action="population/population_import">
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIEST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr>
 			<th>จังหวัด</th>
@@ -39,14 +39,12 @@
 			<th>ข้อมูลระหว่างวันที่</th>
 			<td>
 				<?
-				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-				echo form_dropdown('month_start',$month_th,'','class="span2"','--เลือกเดือน--');
+				echo form_dropdown('month_start',get_month(),'','class="span2"','--เลือกเดือน--');
 				?>
 				<?php echo form_dropdown('year_start', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
 				<?
-				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-				echo form_dropdown('month_end',$month_th,'','class="span2"','--เลือกเดือน--');
+				echo form_dropdown('month_end',get_month(),'','class="span2"','--เลือกเดือน--');
 				?>
 				<?php echo form_dropdown('year_end', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>
@@ -58,7 +56,9 @@
 	</table>	
 	<div id="btnSave">
 	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
+	<? if(menu::perm($menu_id, 'add')): ?>
 	<input type="submit" value="บันทึก" class="btn btn-danger">
+	<? endif;?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>
 </form>

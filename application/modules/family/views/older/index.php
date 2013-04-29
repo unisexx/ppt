@@ -3,7 +3,7 @@
 		$(".btn_delete").click(function(){
 			if(confirm('ลบรายการนี้ ? ')){
 				var hdid = $(this).closest('td').find('#hdid').val();
-				window.location='family/older/delete/'+hdid;
+				window.location='family/warm/delete/'+hdid;
 			}
 		})
 	})
@@ -19,19 +19,11 @@
 </div>
 </form>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='family/older/import_form'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='family/older/form'" class="btn_add"/>
+	<? if(menu::perm($menu_id, 'add')): ?>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='family/warm/import_form'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='family/warm/form'" class="btn_add"/>
+	<? endif;?>
 </div>
-<!--
-<div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
-<a href="javascript:;" title="Seite 2">2</a>
-<a href="javascript:;" title="Seite 3">3</a>
-<a href="javascript:;" title="Seite 4">4</a>
-
-<span class="break">...</span><a href="javascript:;" title="Seite 19">19</a>
-<a href="javascript:;" title="Seite 2">Next</a>&nbsp;&nbsp;188 record
-</div>
--->
 <?=$pagination;?>	
 <table class="tblist">
 <tr>
@@ -61,7 +53,9 @@
   <td><?=number_format($item['edit'],2);?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='family/older/form/<?=$item['id'];?>'" />
+  	<? if(menu::perm($menu_id, 'edit')): ?>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='family/warm/form/<?=$item['id'];?>'" />
+  	<? endif;?>
   	<? if(menu::perm($menu_id, 'delete')): ?>
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
     <? endif;?>

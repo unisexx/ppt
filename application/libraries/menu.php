@@ -3,11 +3,33 @@
  * Menu
  */
 class Menu
-{   
-    static public function ls($parent_id)
+{
+       
+    static public function ls($parent_id, $user_type_id = null)
     {
-        $result = get_instance()->db->getarray('select * from menus where parent_id = ? order by position', array($parent_id));
-        dbConvert($result);
+        if(is_login() and !empty($user_type_id))
+        {
+            $sql = "SELECT * FROM MENUS 
+            WHERE MENUS.PARENT_ID = ?
+            AND MENUS.ID IN ( 
+                SELECT
+                    (CASE PERMISSION.MODULE 
+                        WHEN 'target1' THEN 1 
+                        WHEN 'target2' THEN 2 
+                        WHEN 'basic' THEN 3 
+                        ELSE 0 END)
+                FROM PERMISSION
+                WHERE PERMISSION.MODULE IN ('basic', 'target1', 'target2')
+                AND PERMISSION.USER_TYPE_ID = ?
+                AND PERMISSION.\"VIEW\" = 1
+            ) 
+            ORDER BY MENUS.POSITION";
+            $result = get_instance()->db->getarray($sql, array($parent_id, $user_type_id));
+            dbConvert($result);
+        }else{
+            $result = get_instance()->db->getarray('select * from menus where parent_id = ? order by position', array($parent_id));
+            dbConvert($result);
+        }
         return $result;
     }
     

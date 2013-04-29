@@ -2,7 +2,7 @@
 <h4>เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว  <span class="gray">แบบ พส. สถานสงเคราะห์</span></h4>
 
 
-<form action='child/welfare_save' method='POST'>
+<form action='child/welfare/save' method='POST'>
 	<input type='HIDDEN' name='ID' value='<?=$result['id'];?>'>
 	<table class="tbadd">
 	<tr>

@@ -10,7 +10,9 @@
 </form>
 
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/welfare_form'" class="btn_add"/></div>
+<div id="btnBox">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/welfare/import'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/welfare/form'" class="btn_add"/></div>
 
 
 
@@ -58,12 +60,12 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="child/welfare_delete/"+id;
+			window.location="child/welfare/delete/"+id;
 		}
 	}
 	else if(type == 'EDIT')
 	{
-		window.location='child/welfare_form/'+id;
+		window.location='child/welfare/form/'+id;
 	}
 }
 </script>

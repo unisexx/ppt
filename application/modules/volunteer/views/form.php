@@ -48,7 +48,7 @@
 <tr>
   <th>ศาสนา<span class="Txt_red_12"> *</span></th>
   <td>
-  	
+  	<?=form_dropdown('religion',get_option('id','rname','religion order by rname'),@$item['religion'],'','--เลือกศาสนา--');?>
   </td>
 </tr>
 <tr>

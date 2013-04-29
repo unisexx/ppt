@@ -6,6 +6,7 @@ Class warm extends Public_Controller
 		parent::__construct();
         $this->load->model('family_model','family');
 		$this->load->model('info_model','info');
+		$this->load->model('province_model','province');
 	}
 	public $warm_menu_id = 15;
 	public $key_id = 21;
@@ -103,6 +104,44 @@ Class warm extends Public_Controller
 			}
 		}		
 		return $import;
+	}
+	
+	function custom_import(){
+		$uploaddir = "import_file/family/2547/";
+		$_POST['year_data'] = 2547;
+		$file_list = scandir($uploaddir);
+		$data['file_list'] = $file_list;
+		foreach($file_list as $file){
+			$lfile[] = iconv('windows-874','utf-8',$file);
+		}		
+		
+		for($i=2;$i<count($lfile);$i++){
+			$file_name = $lfile[$i];
+			$file = $lfile[$i];
+			$finfo = explode('.',$file);
+			$province_id = $this->province->select('id')->where(" province='".iconv('utf-8','tis-620',$finfo[0])."'")->get_one();
+			echo $finfo[0]."::".$province_id.":::".$lfile[$i]."<br>";						
+			//rename($uploaddir.$file_name, $uploaddir.$province_id.".xls");
+			
+			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
+			foreach($data as $item):
+						$val['ID']='';								
+						$val['ID'] = $this->family->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id." AND KEY_ID=". (int)$item['key_id'])->get_one();
+						$val['YEAR_DATA'] = $_POST['year_data'];
+						$val['PROVINCE_ID'] = $province_id;
+						$val['KEY_ID'] = (int)$item['key_id'];
+						$val['TITLE'] = $item['title'];
+						$val['PASS'] = (float)$item['pass'];
+						$val['PERCENTAGE'] = (float)$item['percentage'];
+						$val['TARGET'] = (float)$item['target'];
+						$val['LOWER_TARGET'] = (float)$item['lower_target'];
+						$val['EDIT'] = (float)$item['edit'];
+						$id = $this->family->save($val);											
+			endforeach;	
+			
+			 
+		}
+		//$this->template->build('warm/custom_report',$data);
 	}
 }
 ?>

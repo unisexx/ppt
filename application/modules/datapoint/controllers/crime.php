@@ -3,16 +3,16 @@ Class Crime extends Public_Controller{
 	function __construct(){
 		parent::__construct();
 		
-		$this->load->model('mental_model', 'mental');
 		$this->load->model('province_model', 'province');		
 		$this->load->model('crime_station_model','station');
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
+		$this->load->model('info_model','info');
 	}
 	
 	#================ CRIME ==================#	
-	function index(){
-		menu::source(91);
+	function index()
+	{
 		$_GET['YEAR'] = @$_GET['YEAR'];
 		$_GET['STATION'] = @$_GET['STATION'];
 		$sql = 'SELECT * FROM CRIME_STATION WHERE 1=1 ';
@@ -26,8 +26,8 @@ Class Crime extends Public_Controller{
 		$this->template->build('crime/index', $data);
 	}
 	
-	function form($id=FALSE){
-		menu::source(91);
+	function form($id=FALSE)
+	{
 		$data['monthth_array'] = array('มกราคม', "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
 		$data['station_title'] = array('บช.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
 		$data['case_title'] = array("คดีอุกฉกรรณ์และสะเทือนขวัญ", "คดีชีวิต ร่างกาย และเพศ", "คดีประทุษร้ายต่อทรัพย์", "คดีน่าสนใจ", "คดีรัฐเป็นผู้เสียหาย");
@@ -46,7 +46,6 @@ Class Crime extends Public_Controller{
 		
 	function save()
 	{
-		menu::source(91);
 		$id = @$_POST['ID'];
 		$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
 		if(count($chk_loop) == 1 && !$_POST['ID'])
@@ -84,7 +83,6 @@ Class Crime extends Public_Controller{
 	
 	function delete($id)
 	{
-		menu::source(91);
 		$this->station->delete($id);
 		$this->db->execute("DELETE FROM CRIME_STATISTIC WHERE STATION_ID = ".$id."");
 		
@@ -93,11 +91,15 @@ Class Crime extends Public_Controller{
 	}
 	
 	
-	function import() { menu::source(91); $this->template->build('crime/import'); }	
+	function import() { $this->template->build('crime/import'); }	
 	
 		function upload()
 		{
-			unset($_POST['ID']);
+			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+
+            $this->info->save($_POST);
+			unset($_POST);
+			
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'crime_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/datapoint/crime/';
@@ -106,6 +108,84 @@ Class Crime extends Public_Controller{
 			
 			$_POST['YEAR'] = $data[1][1];
 			$_POST['STATION'] = $data[0][1];
+
+			/*			
+			for($i=0 ; $i<count($data); $i++)
+			{
+				if($data[$i][0] != '')
+				{
+					$chk_head = explode('สถิติคดีอาญาที่น่าสนใจรายเดือนของ ',$data[$i][0]);
+					if($chk_head[0] == '')
+					{
+						$station_title = array('บช.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
+						$station_title2 = array('บช.น.', 'บก.น.1', 'บก.น.2', 'บก.น.3', 'บก.น.4', 'บก.น.5', 'บก.น.6', 'บก.น.7', 'บก.น.8', 'บก.น.9', 'บช.ก.');
+						
+						
+						$set_head = explode('ตำรวจภูธรจังหวัด', $chk_head[1]);
+						$set_head = ($set_head[0])?$set_head[0]:$set_head[1];
+						$set_head = trim($set_head);
+						$set_head2 = array_search($set_head, $station_title);
+						if(!$set_head2) { $set_head2 = array_search($set_head, $station_title2); }
+						if(!$set_head2)
+						{
+							$chk_province = $this->province->get("SELECT PROVINCE FROM PROVINCES WHERE PROVINCE LIKE '".$set_head."'");
+							if(count($chk_province) == 1)
+							{ $set_head3 = $chk_province[0]['province']; }
+						} else {
+							$set_head3 = ($set_head2)?$station_title[$set_head2]:$set_head;
+						}
+
+						
+						if($set_head3)
+						{
+							#CRIME_STATION
+								$_POST['YEAR'] = 2554;
+								$_POST['STATION'] = $set_head3;
+								$get_station_id;
+								print_r($_POST); 
+								echo '<BR>';
+								$get_station_id = $this->station->save($_POST);
+								unset($_POST);
+								
+								
+							#CRIME_STATISTIC
+							$pointer_ary = array(4, 10, 17, 28, 40);
+							#$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
+							$pdata_ary = array(1, 3, 5, 7, 9, 11, 16, 18, 20, 22, 24, 26);
+							
+								$_POST['STATION_ID'] = $get_station_id; #$get_station_id;
+								$_POST['MONTH'];
+								$_POST['CASE_ID'];
+								$_POST['NOTIFIED'];
+								$_POST['CATCH'];
+								
+#							print_r($_POST);
+#							unset($_POST);
+							for($j=0; $j<count($pointer_ary); $j++)
+							{
+#								print_r($data[$i+$pointer_ary[$j]]);
+#								echo '<BR>';
+								for($k=0; $k<count($pdata_ary); $k++)
+								{
+									$_POST['MONTH'] = $k;
+									$_POST['CASE_ID'] = $j+1;
+									$_POST['NOTIFIED'] = $data[$i+$pointer_ary[$j]][$pdata_ary[$k]];
+									$_POST['CATCH'] = $data[$i+$pointer_ary[$j]][$pdata_ary[$k]+1];
+									print_r($_POST);
+									echo '<BR>';
+									$this->statistic->save($_POST);
+								}
+							}
+							echo '<HR>';
+						}
+						
+					}
+				}
+			}
+			return false;
+			 * PRIVATE UPLOAD
+			*/
+			
 			
 			
 			if($_POST['YEAR'] && $_POST['STATION'])
@@ -120,6 +200,7 @@ Class Crime extends Public_Controller{
 						<?	} 
 					ELSE 
 						{
+	
 							$pointer_ary = array(4, 10, 17, 28, 40);
 							$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
 							$_POST['STATION_ID'] = $this->station->save($_POST);
@@ -135,15 +216,14 @@ Class Crime extends Public_Controller{
 									$_POST['MONTH'] = $i;
 									$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
 									$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
-									
 									$this->statistic->save($_POST);
 								}
 							}
 						}
-				}
-			unlink($uploaddir.'/'.$file_name);
-			set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
-			redirect('datapoint/crime/');	
+				} 
+				unlink($uploaddir.'/'.$file_name);
+				set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
+				redirect('datapoint/crime/');
 		}
 		
 				function ReadData($filepath)

@@ -40,7 +40,7 @@
   <th>ภาคใต้ (ช/ญ)</th>
   <th>ภาคเหนือ (ช/ญ)</th>
   <th>ไม่ระบุ</th>
-  <th>จัดการ</th>
+   <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
   $rowStyle = '';

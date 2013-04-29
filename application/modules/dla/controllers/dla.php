@@ -230,6 +230,7 @@ class Dla extends Public_Controller
     {
         parent::__construct();
         $this->load->model('opt_model', 'opt');
+        $this->load->model('info_model','info');
     }
     
     public function index($menu_id)
@@ -314,7 +315,9 @@ class Dla extends Public_Controller
 		if(!empty($_FILES['file']['name']))
 		{
 			set_time_limit(0);
-			//header('Content-type: text/html; charset=tis-620');
+            ini_set("max_execution_time","600");
+            ini_set("memory_limit","12M");
+			header('Content-type: text/html; charset=tis-620');
 			$row = 0;
 			
 	        $opt_province = $this->db->getassoc('select province, id from provinces order by id');
@@ -331,10 +334,11 @@ class Dla extends Public_Controller
 			if(($handle = fopen('uploads/'.$temp_name, 'r')) !== false)
 			{	    
 			    $header = fgetcsv($handle);
+                
 			    while(($data = fgetcsv($handle)) !== false)
 			    {
 			        $row++;
-			        if(!empty($data))
+			        if(!empty($data[0]))
 			        {
 			            $num = count($data);		
 			            $db = array();
@@ -349,6 +353,7 @@ class Dla extends Public_Controller
 			                }
 			                else 
 			                {
+			                    //echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
 			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
 	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
 	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
@@ -361,7 +366,7 @@ class Dla extends Public_Controller
 			            }
 						if($db){
 							 $db['year'] = '2555';
-						     $this->db->debug = true;
+						     //$this->db->debug = true;
 							 $this->opt->save($db, TRUE);
 						}
 			        }
@@ -370,6 +375,8 @@ class Dla extends Public_Controller
 			    fclose($handle);
 			}
 			}
+            set_notify('success', 'Import Complete');
+            redirect('dla/import');
 		}
 		$this->template->build('import');
 	}

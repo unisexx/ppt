@@ -4,13 +4,13 @@
 <div id="search">
   <div id="searchBox">  	
     <select name="year_data" id="year_data">
-      <option value="">-- เลือกปีการศึกษา--</option>
+      <option value="">-- เลือกปี--</option>
       <option value="2556">2556</option>
       <option value="2555">2555</option>
       <option value="2554">2554</option>    
     </select>
     <input type="file" name="fl_import" >
-   ส่วนที่ : <input type="text" name="order_no" maxlength="2" >
+   <input type="checkbox" name="continue" value="1"> นำเข้าข้อมูลเพิ่ม
   <input type="submit" name="button9" id="button9" title="นำเข้าข้อมูล" value=" " class="btn_import" />
   <small>จำนวนครั้งละไม่เกิน 3,000 เรคอร์ด</small></div>
 </div>

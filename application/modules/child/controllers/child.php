@@ -315,10 +315,13 @@ Class Child extends Public_Controller{
 			post_max_size = 40M  จาก 2M
 		 memmory_limit=256M
 		 * */ 		
-		if($_FILES['fl_import']['name']!=''){
-			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."' and ORDER_NO='".$_POST['order_no']."'");
+		if($_FILES['fl_import']['name']!=''){			
+			if(empty($_POST['continue'])){
+				$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");				
+			}
+			$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$_POST['order_no'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$order_no.date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
@@ -337,7 +340,7 @@ Class Child extends Public_Controller{
 						$val['f_id'] = $item[8];
 						$val['f_birthday'] =  $item[9];	
 						$val['f_address_code'] =  $item[10];	
-						$val['order_no'] = $_POST['order_no'];	
+						$val['order_no'] = $order_no;
 						$val['create']=date('Ymd');
 						$this->pregnant->save($val);
 					}																																					

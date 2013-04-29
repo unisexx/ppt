@@ -129,20 +129,22 @@ Class birth extends Public_Controller{
 			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
 			foreach($data as $item):
 						$val['ID']='';								
-						$val['ID'] = $this->family->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id." AND KEY_ID=". (int)$item['key_id'])->get_one();
+						$province_name = str_replace('จังหวัด', '', $item['title']);
+						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
+						$province_id = $province['id'];		
+						if($province_id > 0 ){
+							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
+						}
 						$val['YEAR_DATA'] = $_POST['year_data'];
 						$val['PROVINCE_ID'] = $province_id;
-						$val['KEY_ID'] = (int)$item['key_id'];
-						$val['TITLE'] = $item['title'];
-						$val['PASS'] = (float)$item['pass'];
-						$val['PERCENTAGE'] = (float)$item['percentage'];
-						$val['TARGET'] = (float)$item['target'];
-						$val['LOWER_TARGET'] = (float)$item['lower_target'];
-						$val['EDIT'] = (float)$item['edit'];
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['BIRTH_MALE'] = (int)$item['birth_male'];
+						$val['BIRTH_FEMALE'] = (int)$item['birth_female'];
 						$id = $this->family->save($val);											
 			endforeach;	
 			
 			 
 		}
+	}
 }
 ?>

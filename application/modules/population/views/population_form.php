@@ -1,5 +1,6 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<h4>ประชากร (คน) </h4>
+<?php echo menu::source($menu_id); ?>
 <form method="post" enctype="multipart/form-data" action="population/save">
 <table class="tbadd">
 <tr>

@@ -270,24 +270,43 @@ echo '<HR>';
 		$data -> read($filepath);
 		
 		error_reporting(E_ALL ^ E_NOTICE);		
-		$index = 0;
-		for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-			$cnt_colum = count($data->sheets[0]['cells'][$i]);
-			for($j=1; $j<=$cnt_colum; $j++)
-			{
-				$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+		$index = 0;	
+			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$cnt_colum = count($data->sheets[0]['cells'][$i]);
+				for($j=1; $j<=$cnt_colum; $j++)
+				{
+					$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+				}
+				$index++;			
 			}
-			$index++;			
-		}
 		return $import;	
 	}	
+	function ImportData($filepath)
+	{
+		require_once 'include/Excel/reader.php';
+		$data = new Spreadsheet_Excel_Reader();
+		$data -> setOutputEncoding('UTF-8');
+		$data -> read($filepath);
+		
+		error_reporting(E_ALL ^ E_NOTICE);		
+		$index = 0;
+		for($sheet=0;$sheet<=12;$sheet++){				
+			for($i = 1; $i <= $data -> sheets[$sheet]['numRows']; $i++) {
+				$cnt_colum = count($data->sheets[$sheet]['cells'][$i]);
+				for($j=1; $j<=$cnt_colum; $j++)
+				{
+					$import[$index][] = trim($data -> sheets[$sheet]['cells'][$i][$j]);		
+				}
+				$index++;			
+			}
+		}
+		
+		return $import;			
+	}
 	function vehicle(){
 		$year=(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']:'';
-		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY_ID=".$_GET['agency_id']:'';	
-		$data['result'] =$this->vehicle->select("dp_vehicle.*,agency")
-															->join("LEFT JOIN AGENCY on AGENCY.ID=AGENCY_ID")
-															->where(" 1=1 $year $agency_id")
-															->order_by("dp_vehicle.ID",'asc')->get();	
+		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY LIKE '%".$_GET['agency_id']."%'":'';	
+		$data['result'] =$this->vehicle->where(" 1=1 $year $agency_id")->order_by("dp_vehicle.ID",'asc')->get();	
 		$data['pagination'] = $this->vehicle->pagination();	
 		$data['menu_id']=$this->vehicle_menu_id;	
 		$this->template->build('vehicle/vehicle_index',$data);
@@ -295,7 +314,7 @@ echo '<HR>';
 	
 	function vehicle_form($id=FALSE){
 		$data['rs'] =$this->vehicle->get_row($id);		
-		(menu::perm($menu_id, 'import'))? $this->template->build('vehicle/vehicle_form',$data):redirect('datapoint/vehicle');
+		 $this->template->build('vehicle/vehicle_form',$data);
 	}
 	function vehicle_save(){
 		if($_POST){
@@ -314,18 +333,10 @@ echo '<HR>';
 
 	function vehicle_import()
 	{	 
-		(menu::perm($menu_id, 'import')) ? $this->template->build('vehicle/vehicle_import_form'):redirect('datapoint/vehicle');
+		$this->template->build('vehicle/vehicle_import_form');
 	
 	}
-	function ImportData($Filepath=FALSE){
-			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
-			require('include/spreadsheet-reader-master/SpreadsheetReader.php');		
-			date_default_timezone_set('UTC');		
-			$Spreadsheet = new SpreadsheetReader($Filepath);
-			$BaseMem = memory_get_usage();		
-			$Time = microtime(true);
-			return $Spreadsheet;
-	}
+
 	function vehicle_save_import(){		
 		if($_FILES['fl_import']['name']!=''){
 			/*---for insert value to info table ---*/
@@ -341,44 +352,42 @@ echo '<HR>';
 			$uploaddir = 'import_file/datapoint/vehicle/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data= $this->ImportData($uploaddir.$file_name);				
-			foreach($data as $key=>$item){						
-					if($key>=4 && $key<=16){
-								$agency=($item[0]) ?$this->agency->where("agency='".trim($item[0])."'")->get():0;			
-								$val['YEAR']=$_POST['year_data'];	
-								$val['agency_id']=$agency[0]['id'];		
-								$val['NOTICE'] =$item[1];
-								$val['WALK'] = $item[2];
-								$val['BICYCLE'] = $item[3];
-								$val['THREEWHEEL'] = $item[4];
-								$val['MOTORCYCLE'] = $item[5];
-								$val['MOTOR_TRICYCLE'] = $item[6];
-								$val['CAR'] =$item[7];
-								$val['MINIBUS'] =$item[8];
-								$val['PICKUP'] = $item[9];
-								$val['BUS'] = $item[10];
-								$val['SIXWHEEL'] =$item[11];
-								$val['TENWHEEL'] = $item[12];
-								$val['ETAN'] = $item[13];
-								$val['TAXI'] = $item[14];
-								$val['OTHER'] = $item[15];
-								$val['TOTAL'] = $item[16];
-								$val['DIE_MALE'] =$item[17];
-								$val['DIE_FEMALE'] = $item[18];
-								$val['COMA_MALE'] =$item[19];
-								$val['COMA_FEMALE'] =$item[20];
-								$val['PAIN_MALE'] = $item[21];
-								$val['PAIN_FEMALE'] = $item[22];										
-								$val['CATCH_MALE'] = $item[23];
-								$val['CATCH_FEMALE'] = $item[24];
-								$val['ESCAPE_MALE'] = $item[25];
-								$val['ESCAPE_FEMALE'] = $item[26];
-								$val['INVOLUNTARY'] = $item[27];
-								$val['CREATE'] =date('Ymd');
-								$this->vehicle->save($val);																						
-													
-				}	//if																														
+			$data= $this->ImportData($uploaddir.$file_name);	
+			foreach($data as $key=>$item){										
+					if(in_array('หน่วยงาน',$item) || in_array('รวม',$item))continue;																	
+						$val['YEAR']=$_POST['year_data'];	
+						$val['agency']=$item[0];
+						$val['NOTICE'] =$item[1];
+						$val['WALK'] = $item[2];
+						$val['BICYCLE'] = $item[3];
+						$val['THREEWHEEL'] = $item[4];
+						$val['MOTORCYCLE'] = $item[5];
+						$val['MOTOR_TRICYCLE'] = $item[6];
+						$val['CAR'] =$item[7];
+						$val['MINIBUS'] =$item[8];
+						$val['PICKUP'] = $item[9];
+						$val['BUS'] = $item[10];
+						$val['SIXWHEEL'] =$item[11];
+						$val['TENWHEEL'] = $item[12];
+						$val['ETAN'] = $item[13];
+						$val['TAXI'] = $item[14];
+						$val['OTHER'] = $item[15];
+						$val['TOTAL'] = $item[16];
+						$val['DIE_MALE'] =$item[17];
+						$val['DIE_FEMALE'] = $item[18];
+						$val['COMA_MALE'] =$item[19];
+						$val['COMA_FEMALE'] =$item[20];
+						$val['PAIN_MALE'] = $item[21];
+						$val['PAIN_FEMALE'] = $item[22];										
+						$val['CATCH_MALE'] = $item[23];
+						$val['CATCH_FEMALE'] = $item[24];
+						$val['ESCAPE_MALE'] = $item[25];
+						$val['ESCAPE_FEMALE'] = $item[26];
+						$val['INVOLUNTARY'] = $item[27];
+						$val['CREATE'] =date('Ymd');
+						$this->vehicle->save($val);																																																																		
 			}		
+			$this->db->Execute("DELETE FROM DP_VEHICLE WHERE AGENCY IS NULL");	
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('datapoint/vehicle_import');	

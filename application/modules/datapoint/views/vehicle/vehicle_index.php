@@ -14,7 +14,7 @@
   <div id="searchBox">
   	<form action="datapoint/vehicle">
 		    <?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
-		   <?php echo form_dropdown('agency_id',get_option('id','agency','agency order by id'),@$_GET['agency_id'],'','-- ทุกหน่วยงาน --') ;?>
+			หน่วยงาน <input type="text" name="agency_id" value="<?php echo @$_GET['agency_id'] ?>">
 		  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   </form>
   </div>
@@ -60,7 +60,7 @@
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'" /><?php endif; ?>
-    <?php if(menu::perm($menu_id, 'delete')): ?>
+    <?php  if(menu::perm($menu_id, 'delete')): ?>
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?>
    </td>
 </tr>

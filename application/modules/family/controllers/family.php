@@ -69,7 +69,7 @@ Class Family extends Public_Controller
 		$data -> read($filepath);
 //		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
-		for($i = 2; $i <= $data -> sheets[0]['numRows']; $i++) {
+		for($i = 3; $i <= $data -> sheets[0]['numRows']; $i++) {
 			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
 			$import[$index]['pass'] = trim($data -> sheets[0]['cells'][$i][2]);
 			$import[$index]['percentage'] = trim($data -> sheets[0]['cells'][$i][3]);

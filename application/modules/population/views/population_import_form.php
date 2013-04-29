@@ -5,7 +5,7 @@
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
-			<th>ปีพ.ศ.</th>
+			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
 			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr>

@@ -1,5 +1,7 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป </h2>
-<h4>การให้บริการรับจำนำ <span class="gray">แบบ สถานธนานุเคราะห์</span></h4>
+<h4>การให้บริการรับจำนำ </h4>
+<?=menu::source(77);?>
+
 <form action="" method='get'>
 	<div id="search">
 	  <div id="searchBox">

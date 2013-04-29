@@ -17,17 +17,18 @@ class Menu
                         WHEN 'target1' THEN 1 
                         WHEN 'target2' THEN 2 
                         WHEN 'basic' THEN 3 
-                        ELSE 0 END)
+                        ELSE NULL END)
                 FROM PERMISSION
                 WHERE PERMISSION.MODULE IN ('basic', 'target1', 'target2')
                 AND PERMISSION.USER_TYPE_ID = ?
                 AND PERMISSION.\"VIEW\" = 1
             ) 
+            AND MENUS.PUBLISH = 1
             ORDER BY MENUS.POSITION";
             $result = get_instance()->db->getarray($sql, array($parent_id, $user_type_id));
             dbConvert($result);
         }else{
-            $result = get_instance()->db->getarray('select * from menus where parent_id = ? order by position', array($parent_id));
+            $result = get_instance()->db->getarray('select * from menus where parent_id = ? and publish = 1 order by position', array($parent_id));
             dbConvert($result);
         }
         return $result;
@@ -56,5 +57,37 @@ class Menu
         $result = get_instance()->db->getone($sql);
         dbConvert($result);
         return '<h5><span class="gray">แหล่งข้อมูล: '.$result.'</span></h5>';
+    }
+    
+    /**
+     * Check permission for show button
+     *
+     * @access  public
+     * @param   number
+     * @param   string
+     * @param   string
+     * @return  string
+     */
+    static public function perm($menu_id, $action, $url)
+    {
+        if(is_login())
+        {
+            // button
+            $btn = array(
+                'add' => '<input type="button" title="เพิ่มรายการ" value=" " onclick="document.location=\''.site_url($url).'\'" class="btn_add">'
+            );
+            
+            // check group menu form menu_id
+            $group = get_instance()->db->getone("SELECT (CASE PARENT_ID
+            WHEN 1 THEN 'target1'
+            WHEN 2 THEN 'target2'
+            WHEN 3 THEN 'basic'
+            ELSE NULL END) GROUP_NAME
+            FROM MENUS WHERE ID = (SELECT PARENT_ID FROM MENUS WHERE ID = ?)", array($menu_id));
+            
+            // check permission
+            $result = get_instance()->db->getone("SELECT \"$action\" FROM PERMISSION WHERE USER_TYPE_ID = ".login_data('user_type_id')." AND MODULE = '".$group."'");
+            if($result == 1) echo $btn['action'];
+        }
     }
 }

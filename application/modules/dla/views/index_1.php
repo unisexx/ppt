@@ -14,6 +14,7 @@
 </div>
 
 <div id="btnBox">
+    <?php menu::perm($m['id'], 'add', 'dla/form/'.$m['id']); ?>
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form/'.$m['id']); ?>'" class="btn_add">
 </div>
 

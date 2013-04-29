@@ -22,8 +22,10 @@
 </div>
 </form>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='birth/import_form'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='birth/form'" class="btn_add"/>
+	<!--<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='birth/import_form'" class="btn_import"/>-->
+	<? if(menu::perm($menu_id, 'add')): ?>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='volunteer/form'" class="btn_add"/>
+	<? endif;?>
 </div>
 <!--
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
@@ -68,8 +70,14 @@
   <td><?=$item['fax'];?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
+  	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="button" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='volunteer/form/<?=$item['id'];?>'" />
-    <input type="button" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
+  	<? endif;?>
+  	<? if(menu::perm($menu_id, 'add')): ?>
+    <input type="button" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
+    <? endif;?>
+    </td>
+    
 </tr>
 <? $i++; } ?>
 </table>

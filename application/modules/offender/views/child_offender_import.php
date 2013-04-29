@@ -14,7 +14,7 @@
     ?>
         <table border="1">
         <?php
-            $excel->read('source_import/'.$file_upload);
+            $excel->read('import_file/offender/'.$file_upload);
 
             $x1=2;
 			

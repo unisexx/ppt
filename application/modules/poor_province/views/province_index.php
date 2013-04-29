@@ -38,7 +38,20 @@
 <tr>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_year']; ?></a></td>
-  <td><?php echo $item['poor_province_province']; ?></td>
+  <td>
+  
+  <?php 
+  
+  //echo $item['offense_province'];
+  $sql = 'select * from provinces where id='.$item['poor_province_province'];
+  $result1 = $this->opt->get($sql);
+  foreach($result1 as $key1 => $item1)
+  {
+	  echo $item1['province'];
+  }
+  ?>
+  
+  </td>
   <td><?php echo @number_format($item['poor_province_line']); ?></td>
   <td><?php echo @number_format($item['poor_province_percent']); ?></td>
   <td><?php echo @number_format($item['poor_province_qty']); ?></td>

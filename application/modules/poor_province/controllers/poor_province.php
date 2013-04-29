@@ -22,7 +22,7 @@ Class Poor_province extends Public_Controller{
 		FROM
 		POOL_PROVINCE
 		WHERE 1=1 '.$where.' 
-        ORDER BY ID DESC';
+        ORDER BY ID ASC';
         // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
@@ -81,7 +81,7 @@ Class Poor_province extends Public_Controller{
 		
 		   $ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 		   $file_name = 'poor_province_'.date("Y_m_d_H_i_s").'.'.$ext;
-		   $uploaddir = 'source_import/';
+		   $uploaddir = 'import_file/poor_province/';
 		   $fpicname = $uploaddir.$file_name;
 		   move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
 		   

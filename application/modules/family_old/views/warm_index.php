@@ -1,5 +1,5 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว</h2>
-<h4>ครอบครัวมีความอบอุ่น <?php echo menu::source($menu_id); ?></h4>
+<h4>ครอบครัวมีความอบอุ่น <span class="gray">มท. (จปฐ.)</span></h4>
 <div id="search">
   <div id="searchBox">
     <select name="select6" id="select6">

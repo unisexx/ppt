@@ -6,7 +6,7 @@
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td>
-  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- เลือกปี --'); ?>    
+  	<?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$item['year_data'], null, '-- เลือกปี --'); ?>    
 	</td>
 </tr>
 <tr>

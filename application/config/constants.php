@@ -58,9 +58,7 @@ define('LOGIN_FAIL', 'Username หรือ Password ไม่ถูกต้อ
 
 define('CENTRE', 1);
 
-define("BUDGET_DSN","BUDGETQ");
-define("BUDGET_DBUSER","db2inst1");
-define("BUDGET_DBPASSWORD","teerawat");
+define("MIN_YEAR_LIST",2500);
 
 /* End of file constants.php */
 /* Location: ./system/application/config/constants.php */

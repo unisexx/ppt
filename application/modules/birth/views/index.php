@@ -13,7 +13,7 @@
 <form method="get" >
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
 	<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   </div>

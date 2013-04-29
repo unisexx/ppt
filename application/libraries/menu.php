@@ -12,14 +12,10 @@ class Menu
             $sql = "SELECT * FROM MENUS 
             WHERE MENUS.PARENT_ID = ?
             AND MENUS.ID IN ( 
-                SELECT
-                    (CASE PERMISSION.MODULE 
-                        WHEN 'target1' THEN 1 
-                        WHEN 'target2' THEN 2 
-                        WHEN 'basic' THEN 3 
-                        ELSE NULL END)
+                SELECT SUBSTR(PERMISSION.MODULE, 6) AS ID
                 FROM PERMISSION
-                WHERE PERMISSION.MODULE IN ('basic', 'target1', 'target2')
+                WHERE PERMISSION.MODULE LIKE 'menu_%'
+                AND PERMISSION.MODULE <> 'menus'
                 AND PERMISSION.USER_TYPE_ID = ?
                 AND PERMISSION.\"VIEW\" = 1
             ) 
@@ -76,15 +72,12 @@ class Menu
             $btn = array(
                 'add' => '<input type="button" title="เพิ่มรายการ" onclick="document.location=\''.site_url($url).'\'" class="btn_add">',
                 'edit' => '<input type="button" title="แก้ไขรายการนี้" class="btn_edit vtip"  onclick="window.location=\''.site_url($url).'\'" />',
-                'delete' => ' <input type="button" title="ลบรายการนี้" class="btn_delete vtip" onclick="if(confirm(\'ยืนยันการลบ\')){window.location=\''.site_url($url).'\';}" />'
+                'delete' => '<input type="button" title="ลบรายการนี้" class="btn_delete vtip" onclick="if(confirm(\'ยืนยันการลบ\')){window.location=\''.site_url($url).'\';}" />',
+                'import' => ''
             );
             
             // check group menu form menu_id
-            $group = get_instance()->db->getone("SELECT (CASE PARENT_ID
-            WHEN 1 THEN 'target1'
-            WHEN 2 THEN 'target2'
-            WHEN 3 THEN 'basic'
-            ELSE NULL END) GROUP_NAME
+            $group = 'menu_'.get_instance()->db->getone("SELECT PARENT_ID
             FROM MENUS WHERE ID = (SELECT PARENT_ID FROM MENUS WHERE ID = ?)", array($menu_id));
 
             // check permission

@@ -1,0 +1,399 @@
+<html xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:x=\"urn:schemas-microsoft-com:office:excel\" xmlns=\"http://www.w3.org/TR/REC-html40\">
+<head>
+    <meta http-equiv=\"Content-type\" content=\"text/html;charset=utf-8\"/>
+</head>
+<body>
+
+<table class='size_max border_me'>
+<tr>
+    <td rowspan='2' class='align_center txt_bold cell hcol1'>ตัวชี้วัดความจำเป็นพื้นฐาน</td>
+    <td colspan='2' class='align_center txt_bold cell hcol5'>ผ่านเกณฑ์</td>
+    <td rowspan='2' class='align_center txt_bold cell hcol4'>เป้าหมาย<br/>ปี 2554 <br/>(ร้อยละ)</td>
+    <td rowspan='2' class='align_center txt_bold cell hcol6'>ต่ำกว่าเป้าหมาย (ร้อยละ)</td>
+    <td rowspan='2' class='align_center txt_bold cell hcol3'>จำนวนที่ต้อง<br/>แก้ไขทั้งหมด</td>
+</tr>
+<tr>
+    <td class='align_center txt_bold cell hcol4'>จำนวน</td>
+    <td class='align_center txt_bold cell hcol4'>ร้อยละ</td>
+</tr>
+<tr>
+    <td class="rcol1">26. เด็กที่จบการศึกษาภาคบังคับ 9 ปี แต่ไม่ได้เรียนต่อมัธยมศึกษาตอนปลายฯ (คน)</td>
+    <td class="right rcol2"><span class='number'>135</span></td>
+    <td class="right rcol3"><span class='number'>68.88</span></td>
+    <td class="center rcol4"><span class='number'>80.00</span></td>
+    <td class="center rcol2"><span class='number'>11.12</span></td>
+    <td class="right rcol5"><span class='number'>61</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">41. คนในครัวเรือนมีส่วนร่วมทำกิจกรรมสาธารณะของหมู่บ้าน (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,215</span></td>
+    <td class="right rcol3"><span class='number'>98.30</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>1.70</span></td>
+    <td class="right rcol5"><span class='number'>1,835</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">18. ครัวเรือนไม่ถูกรบกวนจากมลพิษ (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,872</span></td>
+    <td class="right rcol3"><span class='number'>98.91</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>1.09</span></td>
+    <td class="right rcol5"><span class='number'>1,178</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">32. คนในครัวเรือนไม่ติดสุรา (คน)</td>
+    <td class="right rcol2"><span class='number'>395,030</span></td>
+    <td class="right rcol3"><span class='number'>98.95</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>1.05</span></td>
+    <td class="right rcol5"><span class='number'>4,196</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">10. คนในครัวเรือนมีความรู้ในการใช้ยาที่ถูกต้องเหมาะสม (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,922</span></td>
+    <td class="right rcol3"><span class='number'>98.96</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>1.04</span></td>
+    <td class="right rcol5"><span class='number'>1,128</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">35. คนอายุ 6 ปีขึ้นไปทุกคนปฏิบัติกิจกรรมทางศาสนา อย่างน้อยสัปดาห์ละ 1 ครั้ง (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,185</span></td>
+    <td class="right rcol3"><span class='number'>99.20</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.80</span></td>
+    <td class="right rcol5"><span class='number'>865</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">27. คนอายุ 15-60 ปีเต็ม อ่านเขียนภาษาไทยได้ และคิดเลขอย่างง่ายได้ (คน)</td>
+    <td class="right rcol2"><span class='number'>276,730</span></td>
+    <td class="right rcol3"><span class='number'>99.68</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.32</span></td>
+    <td class="right rcol5"><span class='number'>897</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">24. เด็กอายุ 6-15 ปี ได้รับการศึกษาภาคบังคับ 9 ปี (คน)</td>
+    <td class="right rcol2"><span class='number'>58,033</span></td>
+    <td class="right rcol3"><span class='number'>99.73</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.27</span></td>
+    <td class="right rcol5"><span class='number'>157</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">20. ครัวเรือนมีความปลอดภัยในชีวิตและทรัพย์สิน (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,759</span></td>
+    <td class="right rcol3"><span class='number'>99.73</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.27</span></td>
+    <td class="right rcol5"><span class='number'>291</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">19. ครัวเรือนมีการป้องกันอุบัติภัยอย่างถูกวิธี (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,811</span></td>
+    <td class="right rcol3"><span class='number'>99.78</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.22</span></td>
+    <td class="right rcol5"><span class='number'>239</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">3. เด็กแรกเกิดมีน้ำหนักไม่ต่ำกว่า 2,500 กรัม (คน)</td>
+    <td class="right rcol2"><span class='number'>3,631</span></td>
+    <td class="right rcol3"><span class='number'>99.81</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.19</span></td>
+    <td class="right rcol5"><span class='number'>7</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">28. คนในครัวเรือนได้รับรู้ข่าวสารที่เป็นประโยชน์ อย่างน้อยสัปดาห์ละ 5 ครั้ง (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,901</span></td>
+    <td class="right rcol3"><span class='number'>99.86</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.14</span></td>
+    <td class="right rcol5"><span class='number'>149</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">37. คนพิการได้รับการดูแลเอาใจใส่จากคนในครัวเรือน (คน)</td>
+    <td class="right rcol2"><span class='number'>4,371</span></td>
+    <td class="right rcol3"><span class='number'>99.86</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.14</span></td>
+    <td class="right rcol5"><span class='number'>6</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">14. ครัวเรือนมีความมั่นคงในที่อยู่อาศัยและบ้านมีสภาพคงทนถาวร (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,952</span></td>
+    <td class="right rcol3"><span class='number'>99.91</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.09</span></td>
+    <td class="right rcol5"><span class='number'>98</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">21. ครอบครัวมีความอบอุ่น (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,982</span></td>
+    <td class="right rcol3"><span class='number'>99.94</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.06</span></td>
+    <td class="right rcol5"><span class='number'>68</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">4. เด็กแรกเกิดถึง 1 ปี ได้รับการฉีดวัคซีนป้องกันโรคครบตามตารางสร้างเสริมภูมิคุ้มกันโรค (คน)</td>
+    <td class="right rcol2"><span class='number'>3,637</span></td>
+    <td class="right rcol3"><span class='number'>99.97</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.03</span></td>
+    <td class="right rcol5"><span class='number'>1</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">36. คนสูงอายุได้รับการดูแลเอาใจใส่จากคนในครัวเรือน (คน)</td>
+    <td class="right rcol2"><span class='number'>46,532</span></td>
+    <td class="right rcol3"><span class='number'>99.97</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.03</span></td>
+    <td class="right rcol5"><span class='number'>12</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">6. เด็กแรกเกิดถึง 5 ปี  เจริญเติบโตตามเกณฑ์มาตรฐาน (คน)</td>
+    <td class="right rcol2"><span class='number'>23,390</span></td>
+    <td class="right rcol3"><span class='number'>99.98</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.02</span></td>
+    <td class="right rcol5"><span class='number'>4</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">7. เด็กอายุ 6-15 ปี  เจริญเติบโตตามเกณฑ์มาตรฐาน (คน)</td>
+    <td class="right rcol2"><span class='number'>58,181</span></td>
+    <td class="right rcol3"><span class='number'>99.98</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.02</span></td>
+    <td class="right rcol5"><span class='number'>9</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">8. เด็กอายุ 6-12 ปี ได้รับการฉีดวัคซีนป้องกันโรคครบตามตารางสร้างเสริมภูมิคุ้มกันโรค (คน)</td>
+    <td class="right rcol2"><span class='number'>38,901</span></td>
+    <td class="right rcol3"><span class='number'>99.99</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='number'>0.01</span></td>
+    <td class="right rcol5"><span class='number'>3</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">1. หญิงตั้งครรภ์ได้รับการดูแลก่อนคลอด และฉีดวัคซีนครบตามเกณฑ์บริการ (คน)</td>
+    <td class="right rcol2"><span class='number'>2,086</span></td>
+    <td class="right rcol3"><span class='number'>100.00</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='gray'><CENTER>-</CENTER></span></td>
+    <td class="right rcol5"><span class='gray'><CENTER>-</CENTER></span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">2. แม่ที่คลอดลูกได้รับการทำคลอด และดูแลหลังคลอด (คน)</td>
+    <td class="right rcol2"><span class='number'>2,199</span></td>
+    <td class="right rcol3"><span class='number'>100.00</span></td>
+    <td class="center rcol4"><span class='number'>100.00</span></td>
+    <td class="center rcol2"><span class='gray'><CENTER>-</CENTER></span></td>
+    <td class="right rcol5"><span class='gray'><CENTER>-</CENTER></span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">38. ครัวเรือนมีคนเป็นสมาชิกกลุ่มที่ตั้งขึ้นในหมู่บ้าน ตำบล (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>104,561</span></td>
+    <td class="right rcol3"><span class='number'>96.77</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-1.77</span></td>
+    <td class="right rcol5"><span class='number'>3,489</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">13. ทุกคนในเครัวเรือนที่มีหลักประกันสุขภาพได้รับสิทธิอย่างทั่วถึง (คน)</td>
+    <td class="right rcol2"><span class='number'>384,483</span></td>
+    <td class="right rcol3"><span class='number'>99.94</span></td>
+    <td class="center rcol4"><span class='number'>98.00</span></td>
+    <td class="center rcol2"><span class='number'>-1.94</span></td>
+    <td class="right rcol5"><span class='number'>227</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">25. เด็กที่จบการศึกษาภาคบังคับ 9 ปี ได้เรียนต่อมัธยมศึกษาตอนปลายหรือเทียบเท่า (คน)</td>
+    <td class="right rcol2"><span class='number'>6,983</span></td>
+    <td class="right rcol3"><span class='number'>97.27</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-2.27</span></td>
+    <td class="right rcol5"><span class='number'>196</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">5. เด็กแรกเกิดได้กินนมแม่อย่างเดียวอย่างน้อย 4 เดือนแรกติดต่อกัน (คน)</td>
+    <td class="right rcol2"><span class='number'>2,865</span></td>
+    <td class="right rcol3"><span class='number'>97.42</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-2.42</span></td>
+    <td class="right rcol5"><span class='number'>76</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">39. ครัวเรือนมีคนมีส่วนร่วมแสดงความคิดเห็น เพื่อประโยชน์ของชุมชนหรือท้องถิ่น (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,218</span></td>
+    <td class="right rcol3"><span class='number'>98.30</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-3.30</span></td>
+    <td class="right rcol5"><span class='number'>1,832</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">29. คนอายุ 15-60 ปีเต็ม มีการประกอบอาชีพและมีรายได้ (คน)</td>
+    <td class="right rcol2"><span class='number'>247,375</span></td>
+    <td class="right rcol3"><span class='number'>98.73</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-3.73</span></td>
+    <td class="right rcol5"><span class='number'>3,173</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">9. ทุกคนในครัวเรือนได้กินอาหารถูกสุขลักษณะ ปลอดภัย  และได้มาตรฐาน (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,734</span></td>
+    <td class="right rcol3"><span class='number'>98.78</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-3.78</span></td>
+    <td class="right rcol5"><span class='number'>1,316</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">34. คนในครัวเรือน ได้ปฏิบัติตนตามขนมธรรมเนียมและมารยาทไทย (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,629</span></td>
+    <td class="right rcol3"><span class='number'>99.61</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-4.61</span></td>
+    <td class="right rcol5"><span class='number'>421</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">17. ครัวเรือนมีการจัดบ้านเรือนเป็นระเบียบถูกสุขลักษณะ (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,670</span></td>
+    <td class="right rcol3"><span class='number'>99.65</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-4.65</span></td>
+    <td class="right rcol5"><span class='number'>380</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">33. คนในครัวเรือนไม่สูบบุหรี่ (คน)</td>
+    <td class="right rcol2"><span class='number'>377,931</span></td>
+    <td class="right rcol3"><span class='number'>94.67</span></td>
+    <td class="center rcol4"><span class='number'>90.00</span></td>
+    <td class="center rcol2"><span class='number'>-4.67</span></td>
+    <td class="right rcol5"><span class='number'>21,295</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">15. ครัวเรือนมีน้ำสะอาดสำหรับดื่มและบริโภคเพียงพอตลอดปี (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,765</span></td>
+    <td class="right rcol3"><span class='number'>99.74</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-4.74</span></td>
+    <td class="right rcol5"><span class='number'>285</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">16. ครัวเรือนมีน้ำใช้เพียงพอตลอดปี (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,770</span></td>
+    <td class="right rcol3"><span class='number'>99.74</span></td>
+    <td class="center rcol4"><span class='number'>95.00</span></td>
+    <td class="center rcol2"><span class='number'>-4.74</span></td>
+    <td class="right rcol5"><span class='number'>280</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">31. ครัวเรือนมีการเก็บออมเงิน (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>94,981</span></td>
+    <td class="right rcol3"><span class='number'>87.90</span></td>
+    <td class="center rcol4"><span class='number'>80.00</span></td>
+    <td class="center rcol2"><span class='number'>-7.90</span></td>
+    <td class="right rcol5"><span class='number'>13,069</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">40. ครัวเรือน มีส่วนร่วมในการทำกิจกรรมเกี่ยวกับการอนุรักษ์ทรัพยากรธรรมชาติฯ (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>106,047</span></td>
+    <td class="right rcol3"><span class='number'>98.15</span></td>
+    <td class="center rcol4"><span class='number'>90.00</span></td>
+    <td class="center rcol2"><span class='number'>-8.15</span></td>
+    <td class="right rcol5"><span class='number'>2,003</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">42. คนอายุ 18 ปีขึ้นไปที่มีสิทธิ์เลือกตั้งไปใช้สิทธิ์เลือกในชุมชนของตน (คน)</td>
+    <td class="right rcol2"><span class='number'>300,393</span></td>
+    <td class="right rcol3"><span class='number'>99.54</span></td>
+    <td class="center rcol4"><span class='number'>90.00</span></td>
+    <td class="center rcol2"><span class='number'>-9.54</span></td>
+    <td class="right rcol5"><span class='number'>1,402</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">23. เด็กอายุ 3-5 ปี ได้รับบริการเลี้ยงดูเตรียมความพร้อมก่อนวัยเรียน (คน)</td>
+    <td class="right rcol2"><span class='number'>15,377</span></td>
+    <td class="right rcol3"><span class='number'>99.90</span></td>
+    <td class="center rcol4"><span class='number'>80.00</span></td>
+    <td class="center rcol2"><span class='number'>-19.90</span></td>
+    <td class="right rcol5"><span class='number'>16</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">22. เด็กอายุต่ำกว่า 3 ปี ได้รับการกระตุ้นการเรียนรู้จากการทำกิจกรรมร่วมกับผู้ใหญ่ในบ้าน (คน)</td>
+    <td class="right rcol2"><span class='number'>9,030</span></td>
+    <td class="right rcol3"><span class='number'>99.90</span></td>
+    <td class="center rcol4"><span class='number'>80.00</span></td>
+    <td class="center rcol2"><span class='number'>-19.90</span></td>
+    <td class="right rcol5"><span class='number'>9</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">30. คนในครัวเรือนมีรายได้เฉลี่ยไม่ต่ำกว่าคนละ 23,000 บาทต่อปี (ครัวเรือน)</td>
+    <td class="right rcol2"><span class='number'>107,871</span></td>
+    <td class="right rcol3"><span class='number'>99.83</span></td>
+    <td class="center rcol4"><span class='number'>70.00</span></td>
+    <td class="center rcol2"><span class='number'>-29.83</span></td>
+    <td class="right rcol5"><span class='number'>179</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">12. คนอายุ 6 ปีขึ้นไป ออกกำลังกายอย่างน้อยสัปดาห์ละ 3 วัน วันละ 30 นาที (คน)</td>
+    <td class="right rcol2"><span class='number'>375,105</span></td>
+    <td class="right rcol3"><span class='number'>99.81</span></td>
+    <td class="center rcol4"><span class='number'>60.00</span></td>
+    <td class="center rcol2"><span class='number'>-39.81</span></td>
+    <td class="right rcol5"><span class='number'>727</span></td>
+
+</tr>
+<tr>
+    <td class="rcol1">11. คนอายุ 35 ปีขึ้นไป ได้รับการตรวจสุขภาพประจำปี (คน)</td>
+    <td class="right rcol2"><span class='number'>198,411</span></td>
+    <td class="right rcol3"><span class='number'>99.19</span></td>
+    <td class="center rcol4"><span class='number'>50.00</span></td>
+    <td class="center rcol2"><span class='number'>-49.19</span></td>
+    <td class="right rcol5"><span class='number'>1,623</span></td>
+
+</tr>
+</table>
+</body>
+</html>

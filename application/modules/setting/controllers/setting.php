@@ -83,9 +83,6 @@ WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
 	
 	function user_save(){
 		if($_POST){
-			if($_POST["target_response"] != ""){
-				$_POST["target_response"] = implode(",", $_POST["target_response"]);
-			}
 			$this->user->save($_POST);
 			set_notify('success', lang('save_data_complete'));
 		}

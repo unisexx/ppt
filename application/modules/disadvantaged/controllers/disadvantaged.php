@@ -6,6 +6,7 @@ Class Disadvantaged extends Public_Controller{
 		
 		$this->load->model('unemployee_model', 'unemployee');
 		$this->load->model('vacancy_model', 'vacancy');
+		$this->load->model('info_model','info');
 	}
 	//========== UNEMPLOYEE ==========//
 	function unemployee(){
@@ -65,8 +66,6 @@ Class Disadvantaged extends Public_Controller{
 				{
 					for($i=3; $i<count($data); $i++)
 					{
-						print_r($_POST);
-						echo '<BR>';
 						$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
 						
 						$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
@@ -152,6 +151,10 @@ Class Disadvantaged extends Public_Controller{
 	
 		function vacancy_upload()
 		{
+			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+            $this->info->save($_POST);
+			unset($_POST);
+			
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'vacancy_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/vacancy/';

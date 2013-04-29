@@ -39,7 +39,7 @@
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
   <td>
-  <?php echo form_dropdown('group_id', get_option('id', 'workgroup_name', 'workgroup'), $user['group_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
+  <?php echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup'), $user['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
   </td>
 </tr>
 <tr>

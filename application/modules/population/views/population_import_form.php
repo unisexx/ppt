@@ -1,8 +1,6 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
-<h4>ประชากร (คน) </h4>
-<?php echo menu::source($menu_id); ?>
+<h4>ประชากร (คน) <?php echo menu::source($menu_id); ?></h4>
 <form method="post" enctype="multipart/form-data" action="population/population_import">
-	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
@@ -59,7 +57,7 @@
 		</tr>
 	</table>	
 	<div id="btnSave">
-	<input type="hidden" name="menu_id" value="">
+	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
 	<input type="submit" value="บันทึก" class="btn btn-danger">
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>

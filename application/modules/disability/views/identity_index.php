@@ -17,6 +17,10 @@
     <select name="select" id="select">
       <option>-- ทุกเดือน --</option>
     </select>
+    <?php
+    $month_th = array( 1 =>'มกราคม',2 => 'กุมภาพันธ์',3=>'มีนาคม',4=>'เมษายน',5=>'พฤษภาคม',6=>'มิถุนายน',7=>'กรกฏาคม',8=>'สิงหาคม',9=>'กันยายน',10=>'ตุลาคม',11=>'พฤศจิกายน',12=>'ธันวาคม');
+     echo form_dropdown('month',$month_th,@$_GET['year'],'','-- ทุกปี --'); ?>
+    
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 

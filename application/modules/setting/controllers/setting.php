@@ -56,11 +56,13 @@ PPT.USERS.CONTACT_NUMBER,
 PPT.USERS.TARGET_RESPONSE,
 PPT.USERS.EMAIL,
 PPT.USERS.PASSWORD,
+PPT.USERS.USERNAME,
 PPT.USER_TYPE.USER_TYPE_NAME,
 PPT.DEPARTMENT.DEPARTMENT_NAME,
 PPT.DIVISION.DIVISION_NAME,
 PPT.PERSON_TYPE.PERSON_TYPE_NAME,
-PPT.GROUPS.GROUP_NAME
+PPT.GROUPS.GROUP_NAME,
+PPT.USER_TYPE.USER_TYPE_LEVEL
 FROM
 PPT.USERS
 INNER JOIN PPT.USER_TYPE ON PPT.USERS.USER_TYPE_ID = PPT.USER_TYPE.ID
@@ -68,7 +70,7 @@ INNER JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
 INNER JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
 INNER JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
 INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
-		";
+WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
 		$data['users'] = $this->user->order_by('id','desc')->get($sql);
 		$data['pagination'] = $this->user->pagination();
 		$this->template->build('user_index',$data);
@@ -99,7 +101,7 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 	}
 	
 	function usertype(){
-		$data['user_types'] = $this->user_type->get();
+		$data['user_types'] = $this->user_type->where('user_type_level < '.login_data('user_type_level'))->order_by('user_type_level','desc')->get();
 		$data['pagination'] = $this->user_type->pagination();
 		$this->template->build('usertype_index',$data);
 	}

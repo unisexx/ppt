@@ -1,3 +1,39 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$('select[name=department_id]').live('change',function(){
+		$.post('setting/get_devision',{
+			department_id : $(this).val()
+		},function(data){
+			$('.division').html(data);
+		});
+	});
+	
+	$('select[name=division_id]').live('change',function(){
+		$.post('setting/get_workgroup',{
+			division_id : $(this).val()
+		},function(data){
+			$('.workgroup').html(data);
+		});
+	});
+	
+	<?php if(@$user['id']):?>
+    	$.post('setting/get_devision',{
+			department_id : "<?php echo $user['department_id']?>",
+			division_id : "<?php echo $user['division_id']?>"
+		},function(data){
+			$('.division').html(data);
+		});
+		
+		$.post('setting/get_workgroup',{
+			division_id : "<?php echo $user['division_id']?>",
+			workgroup_id : "<?php echo $user['workgroup_id']?>"
+		},function(data){
+			$('.workgroup').html(data);
+		});
+    <?php endif;?>
+});
+</script>
+
 <h2>ผู้ใช้งาน (เพิ่ม/แก้ไข)</h2>
 
 <form class="validate" method="post" action="setting/user_save">
@@ -32,13 +68,13 @@
 </tr>
 <tr>
   <th>กอง / สำนักงาน  <span class="Txt_red_12">*</span></th>
-  <td>
+  <td class="division">
   	<?php echo form_dropdown('division_id', get_option('id', 'division_name', 'division'), $user['division_id'], null, '- กอง / สำนักงาน -'); ?>
   </td>
 </tr>
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
-  <td>
+  <td class="workgroup">
   <?php echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup'), $user['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
   </td>
 </tr>

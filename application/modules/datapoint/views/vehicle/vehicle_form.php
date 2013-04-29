@@ -8,7 +8,7 @@
 </tr>
 <tr>
   <th>หน่วยงาน<span class="Txt_red_12"> *</span></th>
-  <td><?php echo form_dropdown('agency_id',get_option('id','agency','agency order by id'),@$rs['agency_id'],'','-- เลือกหน่วยงาน --') ;?></td>
+  <td><input type="text" name="agency" value="<?php echo $rs['agency'] ?>"></td>
 </tr>
 <tr>
   <th>รับแจ้ง <span class="Txt_red_12"> *</span></th>

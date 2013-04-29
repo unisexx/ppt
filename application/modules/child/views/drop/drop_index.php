@@ -40,8 +40,18 @@
   <th>ลำดับ</th>
   <th>ปีการศึกษา</th>
   <th>จังหวัด</th>
-  <th>หมายเลขเขต</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th>8</th>
+  <th>9</th>
+  <th>รวม</th>
   <th>จำนวน นร.ต้นปี</th>
+  <th>%</th>
   <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
@@ -54,8 +64,20 @@
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['year']; ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['province']?></td>
-  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['area_number'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['poor'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['family'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['married'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['adapt'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['capture'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['accident'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['migration'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['breadwinner'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['other'] ?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $sum=$item['poor']+$item['family']+$item['married']+$item['adapt']
+  																																						+$item['capture']+$item['accident']+$item['migration']+$item['breadwinner']+$item['other']; ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['total'])?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo round(($sum*100)/$item['total'],2);?></td>
+  
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php  if(menu::perm($menu_id, 'edit')): ?>

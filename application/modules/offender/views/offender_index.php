@@ -14,7 +14,7 @@
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('offender/offender_form'); ?>'" class="btn_add">
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/></div>
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('offender/import_data'); ?>'" class="btn_import"/></div>
 
 
 <?php echo $pagination; ?>
@@ -37,9 +37,9 @@
 
  <?php foreach($result as $key => $item): $key += 1;?>
 <tr>
-  <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
-  <td><?php echo $item['offender_year']; ?></td>
-  <td><?php echo @number_format($item['offender_mental']); ?></td>
+  <td><a href="<?php echo site_url('offender/offender_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
+  <td><a href="<?php echo site_url('offender/offender_form/'.$item['id']); ?>"><?php echo $item['offender_year']; ?></a></td>
+  <td><a href="<?php echo site_url('offender/offender_form/'.$item['id']); ?>"><?php echo @number_format($item['offender_mental']); ?></a></td>
   <td><?php echo @number_format($item['offender_wrangle']); ?></td>
   <td><?php echo @number_format($item['offender_social']); ?></td>
   <td><?php echo @number_format($item['offender_force']); ?></td>

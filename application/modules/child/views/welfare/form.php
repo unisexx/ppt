@@ -1,8 +1,12 @@
+<? $m['id'] = 13; ?>
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
 <h4>เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว </h4>
-<?=menu::source(13);?>
+<?=menu::source($m['id']);?>
 
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <form action='child/welfare/save' method='POST'>
+<?php endif; ?>
+	
 	<input type='HIDDEN' name='ID' value='<?=$result['id'];?>'>
 	<table class="tbadd">
 	<tr>
@@ -31,9 +35,11 @@
 	?>
 	</table>
 	
+	
 	<div id="btnSave">
-	<input type="submit" value="บันทึก" class="btn btn-danger">
+	<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?> <input type="submit" value="บันทึก" class="btn btn-danger"><?php endif; ?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
-	</div>
-
+	</div>	
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 </form>
+<?php endif; ?>

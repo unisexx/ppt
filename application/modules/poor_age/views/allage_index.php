@@ -15,7 +15,7 @@
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('poor_age/allage_form'); ?>'" class="btn_add">
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/></div>
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('poor_age/import_data'); ?>'" class="btn_import"/></div>
 
 
 <?php echo $pagination; ?>
@@ -31,8 +31,8 @@
 </tr>
     <?php foreach($result as $key => $item): $key += 1;?>
 <tr>
-  <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
-  <td><?php echo $item['year']; ?></td>
+  <td><a href="<?php echo site_url('poor_age/allage_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
+  <td><a href="<?php echo site_url('poor_age/allage_form/'.$item['id']); ?>"><?php echo $item['year']; ?></a></td>
   <td><?php $township = $item['township_child']+$item['township_work']+$item['township_elderly']; echo @number_format($township); ?></td>
   <td><?php $rural = $item['rural_area_child']+$item['rural_area_work']+$item['rural_area_elderly']; echo @number_format($rural); ?></td>
   <td><?php $country = $item['country_child']+$item['country_work']+$item['country_elderly']; echo @number_format($country); ?></td>

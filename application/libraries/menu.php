@@ -73,7 +73,7 @@ class Menu
                 'add' => '<input type="button" title="เพิ่มรายการ" onclick="document.location=\''.site_url($url).'\'" class="btn_add">',
                 'edit' => '<input type="button" title="แก้ไขรายการนี้" class="btn_edit vtip"  onclick="window.location=\''.site_url($url).'\'" />',
                 'delete' => '<input type="button" title="ลบรายการนี้" class="btn_delete vtip" onclick="if(confirm(\'ยืนยันการลบ\')){window.location=\''.site_url($url).'\';}" />',
-                'import' => ''
+                'import' => '<input type="button" title="นำเข้าข้อมูล" onclick="document.location=\''.site_url($url).'\'" class="btn_import">'
             );
             
             // check group menu form menu_id

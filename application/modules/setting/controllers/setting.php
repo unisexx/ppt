@@ -42,6 +42,12 @@ Class Setting extends Public_Controller{
 	}
 	
 	function user(){
+		$condition = " 1=1 ";
+		$condition .= (@$_GET['department_id']!='')?" and PPT.USERS.DEPARTMENT_ID = ".$_GET['department_id'] : "";
+		$condition .= (@$_GET['division_id']!='')?" and PPT.USERS.DIVISION_ID = ".$_GET['division_id'] : "";
+		$condition .= (@$_GET['workgroup_id']!='')?" and PPT.USERS.WORKGROUP_ID = ".$_GET['workgroup_id'] : "";
+		$condition .= (@$_GET['fullname']!='')?" and PPT.USERS.FULLNAME like '%".$_GET['fullname']."%'" : "";
+		
 		$sql = "SELECT
 PPT.USERS.ID,
 PPT.USERS.USER_TYPE_ID,
@@ -71,14 +77,16 @@ LEFT JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
 LEFT JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
 LEFT JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
 LEFT JOIN PPT.WORKGROUP ON PPT.USERS.WORKGROUP_ID = PPT.WORKGROUP.ID
-WHERE USER_TYPE_LEVEL <= ".login_data('user_type_level');
+WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		$data['users'] = $this->user->order_by('id','desc')->get($sql);
 		$data['pagination'] = $this->user->pagination();
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('user_index',$data);
 	}
 	
 	function user_form($id=false){
 		$data['user'] = $this->user->get_row($id);
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('user_form',$data);
 	}
 	
@@ -99,7 +107,10 @@ WHERE USER_TYPE_LEVEL <= ".login_data('user_type_level');
 	}
 	
 	function usertype(){
-		$data['user_types'] = $this->user_type->where('user_type_level <= '.login_data('user_type_level'))->order_by('user_type_level','desc')->get();
+		$condition = " 1=1 ";
+		$condition .= (@$_GET['user_type_name']!='')?" and user_type_name like '%".$_GET['user_type_name']."%'" : "";
+		
+		$data['user_types'] = $this->user_type->where('user_type_level <= '.login_data('user_type_level').' and '.$condition)->order_by('user_type_level','desc')->get();
 		$data['pagination'] = $this->user_type->pagination();
 		$this->template->build('usertype_index',$data);
 	}
@@ -283,16 +294,18 @@ WHERE USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		($user)?$this->output->set_output("false"):$this->output->set_output("true");
     }
 	
-	function get_devision(){
-		if($_POST){
-			echo form_dropdown('division_id', get_option('id', 'division_name', 'division where department_id = '.$_POST['department_id']), @$_POST['division_id'], '', '- กอง / สำนักงาน -');
-		}
+	function ajax_division(){
+		$result = $this->db->GetArray('select id,division_name as text from division where department_id = ?',$_GET['q']);
+		dbConvert($result);
+        if(!empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => '- กอง / สำนักงาน -'));
+		echo $result ? json_encode($result) : '[{"id":"","text":"- กอง / สำนักงาน -"}]';
 	}
 	
-	function get_workgroup(){
-		if($_POST){
-			echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup where division_id = '.$_POST['division_id']), @$_POST['workgroup_id'], '', '- กลุ่ม / ฝ่าย -');
-		}
+	function ajax_workgroup(){
+		$result = $this->db->GetArray('select id,workgroup_name as text from workgroup where division_id = ?',$_GET['q']);
+		dbConvert($result);
+        if(!empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => '- กลุ่ม / ฝ่าย -'));
+		echo $result ? json_encode($result) : '[{"id":"","text":"- กลุ่ม / ฝ่าย -"}]';
 	}
 }
 ?>

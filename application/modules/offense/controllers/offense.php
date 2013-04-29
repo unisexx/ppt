@@ -22,7 +22,7 @@ Class Offense extends Public_Controller{
 		FROM
 		OFFENSES
 		WHERE 1=1 '.$where.' 
-        ORDER BY ID DESC';
+        ORDER BY ID ASC';
         // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
@@ -32,7 +32,7 @@ Class Offense extends Public_Controller{
 	
 	function offense_form($id = null){
 	    if($_POST)
-        {
+        {	
             $this->opt->save($_POST);
             set_notify('success', lang('save_data_complete'));
             redirect('offense/offense_data');
@@ -79,7 +79,7 @@ Class Offense extends Public_Controller{
 		//-----
 				   $ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 		   $file_name = 'offense_'.date("Y_m_d_H_i_s").'.'.$ext;
-		   $uploaddir = 'source_import/';
+		   $uploaddir = 'import_file/offense/';
 		   $fpicname = $uploaddir.$file_name;
 		   move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
 		   

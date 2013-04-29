@@ -85,7 +85,7 @@ Class Poor_age extends Public_Controller{
 		
 				   $ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 		   $file_name = 'poor_age_'.date("Y_m_d_H_i_s").'.'.$ext;
-		   $uploaddir = 'source_import/';
+		   $uploaddir = 'import_file/poor_age/';
 		   $fpicname = $uploaddir.$file_name;
 		   move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
 		   

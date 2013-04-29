@@ -12,7 +12,7 @@
     ?>
         <table border="1">
         <?php
-            $excel->read('source_import/'.$file_upload);
+            $excel->read('import_file/poor_age/'.$file_upload);
 
             $x=6;
             while($x<=($excel->sheets[0]['numRows']+4)) {

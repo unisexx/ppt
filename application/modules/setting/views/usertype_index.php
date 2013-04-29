@@ -5,7 +5,9 @@
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 
+<?php if(permission('usertype','add')):?>
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/usertype_form'" class="btn_add"/></div>
+<?php endif;?>
 
 <?php echo $pagination?>
 
@@ -13,17 +15,19 @@
 <tr>
   <th>ลำดับ</th>
   <th>สิทธิ์การใช้งาน</th>
-  <th>ความสามารถ</th>
-  <th>จัดการ</th>
+  <th></th>
 </tr>
-<?php foreach($user_types as $user_type):?>
+<?php foreach($user_types as $key=>$user_type):?>
 	<tr>
-	  <td>1</td>
+	  <td><?php echo $key+1?></td>
 	  <td><?php echo $user_type['user_type_name']?></td>
-	  <td>ทั้งหมด</td>
 	  <td>
+	  	<?php if(permission('usertype','edit')):?>
 	  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/usertype_form/<?php echo $user_type['id']?>'" />
+	  	<?php endif;?>
+	  	<?php if(permission('usertype','delete')):?>
 	    <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/usertype_delete/<?php echo $user_type['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
+	    <?php endif;?>
 	  </td>
 	</tr>
 <?php endforeach;?>

@@ -12,58 +12,58 @@
 </tr>
 <tr>
   <th>รับแจ้ง <span class="Txt_red_12"> *</span></th>
-  <td><input name="notice" type="text" id="textarea3" value="<?php echo number_format($rs['notice']) ?>" />
+  <td><input name="notice" type="text" id="textarea3" value="<?php echo $rs['notice'] ?>" />
     ราย</td>
 </tr>
 <tr>
   <th>ประเภท<span class="Txt_red_12"> *</span></th>
   <td><span class="padd">
     <label>คนเดินเท้า </label>
-    <input name="walk" type="text" id="textarea14" value="<?php echo  number_format($rs['walk']) ?>"  style="width:50px;" />
+    <input name="walk" type="text" id="textarea14" value="<?php echo  $rs['walk'] ?>"  style="width:50px;" />
     ราย</span> <span class="padd">
       <label>รถจักรยาน</label>
-      <input name="bicycle" type="text" id="textarea14" value="<?php echo number_format($rs['bicycle']) ?>"  style="width:50px;" />
+      <input name="bicycle" type="text" id="textarea14" value="<?php echo $rs['bicycle'] ?>"  style="width:50px;" />
       ราย</span> <span class="padd">
         <label>รถสามล้อ</label>
-        <input name="threewheel" type="text" id="textarea14" value="<?php echo number_format($rs['threewheel']) ?>"  style="width:50px;" />
+        <input name="threewheel" type="text" id="textarea14" value="<?php echo $rs['threewheel'] ?>"  style="width:50px;" />
         ราย</span> <span class="padd">
           <label>รถจักรยานยนต์ </label>
-          <input name="motorcycle" type="text" id="textarea14" value="<?php echo number_format($rs['motorcycle']) ?>"  style="width:50px;" />
+          <input name="motorcycle" type="text" id="textarea14" value="<?php echo $rs['motorcycle'] ?>"  style="width:50px;" />
           ราย</span> <span class="padd">
             <label>รถสามล้อเครื่อง</label>
-            <input name="motor_tricycle" type="text" id="textarea14" value="<?php echo number_format($rs['motor_tricycle']) ?>"  style="width:50px;" />
+            <input name="motor_tricycle" type="text" id="textarea14" value="<?php echo $rs['motor_tricycle'] ?>"  style="width:50px;" />
             ราย</span> <span class="padd">
               <label>รถยนต์นั่ง</label>
-              <input name="car" type="text" id="textarea14" value="<?php echo number_format($rs['car']) ?>"  style="width:50px;" />
+              <input name="car" type="text" id="textarea14" value="<?php echo $rs['car'] ?>"  style="width:50px;" />
               ราย</span> <span class="padd">
-                <label>รถโดยสารเล็ก (ตู้)</label>
-                <input name="minibus" type="text" id="textarea14" value="<?php echo number_format($rs['minibus']) ?>"  style="width:50px;" />
+                <label>รถโดยสารเล็ก (ตู้</label>
+                <input name="minibus" type="text" id="textarea14" value="<?php echo $rs['minibus'] ?>"  style="width:50px;" />
                 ราย</span> <span class="padd">
-                  <label>รถบรรทุกเล็ก (ปิกอัพ)</label>
-                  <input name="pickup" type="text" id="textarea14" value="<?php echo number_format($rs['pickup']) ?>"  style="width:50px;" />
+                  <label>รถบรรทุกเล็ก (ปิกอัพ</label>
+                  <input name="pickup" type="text" id="textarea14" value="<?php echo $rs['pickup'] ?>"  style="width:50px;" />
                   ราย</span> <span class="padd">
                     <label>รถโดยสารขนาดใหญ่</label>
-                    <input name="bus" type="text" id="textarea14" value="<?php echo number_format($rs['bus']) ?>"  style="width:50px;" />
+                    <input name="bus" type="text" id="textarea14" value="<?php echo $rs['bus'] ?>"  style="width:50px;" />
                     ราย</span> <span class="padd">
                       <label>รถบรรทุก 6 ล้อ</label>
-                      <input name="sixwheel" type="text" id="textarea14" value="<?php echo number_format($rs['sixwheel']) ?>"  style="width:50px;" />
+                      <input name="sixwheel" type="text" id="textarea14" value="<?php echo $rs['sixwheel'] ?>"  style="width:50px;" />
                       ราย</span> <span class="padd">
                         <label>รถบรรทุก 10 ล้อ</label>
-                        <input name="tenwheel" type="text" id="textarea14" value="<?php echo number_format($rs['tenwheel']) ?>"  style="width:50px;" />
+                        <input name="tenwheel" type="text" id="textarea14" value="<?php echo $rs['tenwheel'] ?>"  style="width:50px;" />
                         ราย</span> <span class="padd">
                           <label>รถอีแต๋น</label>
-                          <input name="etan" type="text" id="textarea14" value="<?php echo number_format($rs['etan']) ?>"  style="width:50px;" />
+                          <input name="etan" type="text" id="textarea14" value="<?php echo $rs['etan'] ?>"  style="width:50px;" />
                           ราย</span> <span class="padd">
                             <label>รถแท๊กซี่</label>
-                            <input name="taxi" type="text" id="textarea14" value="<?php echo number_format($rs['taxi']) ?>"  style="width:50px;" />
+                            <input name="taxi" type="text" id="textarea14" value="<?php echo $rs['taxi'] ?>"  style="width:50px;" />
                             ราย</span> <span class="padd">
                               <label>รถอื่นๆ</label>
-                              <input name="other" type="text" id="textarea14" value="<?php echo number_format($rs['other']) ?>"  style="width:50px;" />
+                              <input name="other" type="text" id="textarea14" value="<?php echo $rs['other']?>"  style="width:50px;" />
                               ราย</span></td>
 </tr>
 <tr>
   <th>มูลค่าทรัพย์สินเสียหายรวม</th>
-  <td><input name="total" type="text" id="textarea4" value="<?php echo number_format($rs['total']) ?>" />
+  <td><input name="total" type="text" id="textarea4" value="<?php echo $rs['total'] ?>" />
     บาท</td>
 </tr>
 <tr>
@@ -75,25 +75,25 @@
     <input name="die_male" type="text" id="textarea15" value="<?php echo $rs['die_male'] ?>"  style="width:30px;" />
 /
   หญิง
-<input name="die_female" type="text" id="textarea16" value="<?php echo number_format($rs['die_female']) ?>"  style="width:30px;" />
+<input name="die_female" type="text" id="textarea16" value="<?php echo $rs['die_female'] ?>"  style="width:30px;" />
 คน</td>
 </tr>
 <tr>
   <th>บาดเจ็บสาหัส <span class="Txt_red_12">*</span></th>
   <td>ชาย
-    <input name="coma_male" type="text" id="textarea" value="<?php echo number_format($rs['coma_male']) ?>"  style="width:30px;" />
+    <input name="coma_male" type="text" id="textarea" value="<?php echo $rs['coma_male'] ?>"  style="width:30px;" />
 /
   หญิง
-<input name="coma_female" type="text" id="textarea2" value="<?php echo number_format($rs['coma_female']) ?>"  style="width:30px;" />
+<input name="coma_female" type="text" id="textarea2" value="<?php echo $rs['coma_female'] ?>"  style="width:30px;" />
 คน</td>
 </tr>
 <tr>
   <th>บาดเจ็บเล็กน้อย <span class="Txt_red_12">*</span></th>
   <td>ชาย
-    <input name="pain_male" type="text" id="textarea5" value="<?php echo number_format($rs['pain_male']) ?>"  style="width:30px;" />
+    <input name="pain_male" type="text" id="textarea5" value="<?php echo $rs['pain_male'] ?>"  style="width:30px;" />
 /
   หญิง
-<input name="pain_female" type="text" id="textarea17" value="<?php echo number_format($rs['pain_female']) ?>"  style="width:30px;" />
+<input name="pain_female" type="text" id="textarea17" value="<?php echo $rs['pain_female'] ?>"  style="width:30px;" />
 คน</td>
 </tr>
 <tr>
@@ -102,29 +102,29 @@
 <tr>
   <th>จับกุม <span class="Txt_red_12">*</span></th>
   <td>ชาย
-    <input name="catch_male" type="text" id="textarea18" value="<?php echo number_format($rs['catch_male']) ?>"  style="width:30px;" />
+    <input name="catch_male" type="text" id="textarea18" value="<?php echo $rs['catch_male']?>"  style="width:30px;" />
     /
     หญิง
-    <input name="catch_female" type="text" id="textarea19" value="<?php echo number_format($rs['catch_female']) ?>"  style="width:30px;" />
+    <input name="catch_female" type="text" id="textarea19" value="<?php echo $rs['catch_female'] ?>"  style="width:30px;" />
     คน</td>
 </tr>
 <tr>
   <th>หลบหนี <span class="Txt_red_12">*</span></th>
   <td>ชาย
-    <input name="escape_male" type="text" id="textarea6" value="<?php echo number_format($rs['escape_male']) ?>"  style="width:30px;" />
+    <input name="escape_male" type="text" id="textarea6" value="<?php echo $rs['escape_male'] ?>"  style="width:30px;" />
     /
     หญิง
-    <input name="escape_female" type="text" id="textarea8" value="<?php echo number_format($rs['escape_female']) ?>"  style="width:30px;" />
+    <input name="escape_female" type="text" id="textarea8" value="<?php echo $rs['escape_female'] ?>"  style="width:30px;" />
     คน</td>
 </tr>
 <tr>
   <th>ไม่รู้ตัว <span class="Txt_red_12">*</span></th>
   <td>
-    <input name="involuntary" type="text" id="textarea7" value="<?php echo number_format($rs['involuntary']) ?>"  style="width:50px;" />
+    <input name="involuntary" type="text" id="textarea7" value="<?php echo $rs['involuntary'] ?>"  style="width:50px;" />
 ราย</td>
 </tr>
 </table>
-<?php echo (!empty($rs['id'])) ? form_hidden('update',date('Y-m-d')):form_hidden('create',date('Y-m-d'));
+<?php 
  			echo form_hidden('id',$rs['id']);
  ?>
 <div id="btnSave">

@@ -24,14 +24,7 @@
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/vehicle_import'" class="btn_import"/>
 <input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/vehicle_form'" class="btn_add"/></div>
 
-<div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
-<a href="javascript:;" title="Seite 2">2</a>
-<a href="javascript:;" title="Seite 3">3</a>
-<a href="javascript:;" title="Seite 4">4</a>
-
-<span class="break">...</span><a href="javascript:;" title="Seite 19">19</a>
-<a href="javascript:;" title="Seite 2">Next</a>&nbsp;&nbsp;188 record
-</div>	
+<?php echo $pagination;?>
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
@@ -67,3 +60,4 @@
 </tr>
 <?php  ++$i; endforeach; ?>
 </table>
+<?php echo $pagination;?>

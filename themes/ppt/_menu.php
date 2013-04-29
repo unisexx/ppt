@@ -171,37 +171,54 @@
      * 
      */?>
 
-<li><a href="#">ตั้งค่าข้อมูลหลัก</a>
-<ul>
-	<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>
-	<li><a href="setting/usertype">สิทธิ์การใช้งาน</a></li>
-	<li><a href="setting/menus">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
-    <li><a href="setting/set_province">จังหวัด</a></li>
-    <li><a href="setting/set_amphor">อำเภอ</a></li>
-    <li><a href="setting/set_tumbon">ตำบล</a></li>
-</ul>
-</li>
-<li><a href="#">รายงาน</a>
-<ul>
-	<li><a href="#">รายงาน 1</a>
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+	<li><a href="#">ตั้งค่าข้อมูลหลัก</a>
+		<ul>
+			<?php if(permission('user','view')):?>
+				<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>
+			<?php endif;?>
+			<?php if(permission('usertype','view')):?>
+				<li><a href="setting/usertype">สิทธิ์การใช้งาน</a></li>
+			<?php endif;?>
+			<?php if(permission('menus','view')):?>
+				<li><a href="setting/menus">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
+			<?php endif;?>
+			<?php if(permission('set_province','view')):?>
+		    	<li><a href="setting/set_province">จังหวัด</a></li>
+		    <?php endif;?>
+		    <?php if(permission('set_amphor','view')):?>
+		    	<li><a href="setting/set_amphor">อำเภอ</a></li>
+		    <?php endif;?>
+		    <?php if(permission('set_tumbon','view')):?>
+		    	<li><a href="setting/set_tumbon">ตำบล</a></li>
+		    <?php endif;?>
+		</ul>
+	</li>
+	
+	<?php if(permission('report','view')):?>
+	<li><a href="#">รายงาน</a>
 	<ul>
-		<li><a href="#">รายงาน Detail A</a></li>
-		<li><a href="#">รายงาน Detail B</a></li>
+		<li><a href="#">รายงาน 1</a>
+		<ul>
+			<li><a href="#">รายงาน Detail A</a></li>
+			<li><a href="#">รายงาน Detail B</a></li>
+		</ul>
+	</li>
+	<li><a href="#">รายงาน 2</a>
+		<ul>
+			<li><a href="#">รายงาน Detail C</a></li>
+		</ul>
+	</li>
+		<li><a href="#">รายงาน 3</a>
+		<ul>
+			<li><a href="#">รายงาน Detail D</a></li>
+			<li><a href="#">รายงาน Detail E</a></li>
+			<li><a href="#">รายงาน Detail F</a></li>
+		</ul>
+	</li>
+	<?php endif;?>
 	</ul>
-</li>
-<li><a href="#">รายงาน 2</a>
-	<ul>
-		<li><a href="#">รายงาน Detail C</a></li>
-	</ul>
-</li>
-	<li><a href="#">รายงาน 3</a>
-	<ul>
-		<li><a href="#">รายงาน Detail D</a></li>
-		<li><a href="#">รายงาน Detail E</a></li>
-		<li><a href="#">รายงาน Detail F</a></li>
-	</ul>
-</li>
-</ul>
-</li>
+	</li>
+<?php endif;?>
 </ul>
 </div>

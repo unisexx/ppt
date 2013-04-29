@@ -1,4 +1,5 @@
 <h2>นำเข้าข้อมูล - อปท.</h2>
+<?php echo menu::source(17); ?>
 <form method="post" enctype="multipart/form-data" action="dla/import">
     <table class="tbadd">
         <tr>
@@ -45,7 +46,7 @@
         </tr>
         <tr>
           <th>ไฟล์<span class="Txt_red_12"> *</span></th>
-          <td><input type="file" name="fl_import" ></td>
+          <td><input type="file" name="file" ></td>
         </tr>
     </table>    
     <div id="btnSave">

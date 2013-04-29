@@ -8,7 +8,7 @@ Class volunteer_inter extends Public_Controller{
 	function index(){
 		//$this->db->debug=true;
 		$condition = " 1 = 1 AND COUNTRY_ID > 1 ";
-		$condition.= @$_GET['province_id']!='' ? " AND VOLUNTEER_MAIN.PROVINCE_ID=".$_GET['province_id'] : "";
+		$condition.= @$_GET['country_id']!='' ? " AND COUNTRY_ID=".$_GET['country_id'] : "";
 		$condition.= @$_GET['amphur_id']!='' ? " AND VOLUNTEER_MAIN.AMPHUR_ID=".$_GET['amphur_id'] : "";
 		$condition.= @$_GET['district_id']!='' ? " AND VOLUNTEER_MAIN.DISTRICT_ID=".$_GET['district_id'] : "";
 		$select = 'VOLUNTEER_MAIN.*, DISTRICT_NAME V_DISTRICT_NAME, AMPHUR_NAME V_AMPHUR_NAME, PROVINCE V_PROVINCE_NAME ';

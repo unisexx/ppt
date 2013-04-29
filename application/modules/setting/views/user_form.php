@@ -1,36 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	$('select[name=department_id]').live('change',function(){
-		$.post('setting/get_devision',{
-			department_id : $(this).val()
-		},function(data){
-			$('.division').html(data);
-		});
-	});
-	
-	$('select[name=division_id]').live('change',function(){
-		$.post('setting/get_workgroup',{
-			division_id : $(this).val()
-		},function(data){
-			$('.workgroup').html(data);
-		});
-	});
-	
-	<?php if(@$user['id']):?>
-    	$.post('setting/get_devision',{
-			department_id : "<?php echo $user['department_id']?>",
-			division_id : "<?php echo $user['division_id']?>"
-		},function(data){
-			$('.division').html(data);
-		});
-		
-		$.post('setting/get_workgroup',{
-			division_id : "<?php echo $user['division_id']?>",
-			workgroup_id : "<?php echo $user['workgroup_id']?>"
-		},function(data){
-			$('.workgroup').html(data);
-		});
-    <?php endif;?>
+		$('[name=division_id]').chainedSelect({parent: '[name=department_id]',url: 'setting/ajax_division',value: 'id',label: 'text'});
+        
+        $('[name=workgroup_id]').chainedSelect({parent: '[name=division_id]',url: 'setting/ajax_workgroup',value: 'id',label: 'text'});
+        
 });
 </script>
 
@@ -69,13 +42,13 @@ $(document).ready(function(){
 <tr>
   <th>กอง / สำนักงาน  <span class="Txt_red_12">*</span></th>
   <td class="division">
-  	<?php echo form_dropdown('division_id', get_option('id', 'division_name', 'division'), $user['division_id'], null, '- กอง / สำนักงาน -'); ?>
+  	<?php echo form_dropdown('division_id', (empty($user['department_id'])) ? array() : get_option('id', 'division_name', 'division', 'department_id = '.$user['department_id'].' order by division_name'), @$user['division_id'], null, '- กอง / สำนักงาน -'); ?>
   </td>
 </tr>
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
   <td class="workgroup">
-  <?php echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup'), $user['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
+  <?php echo form_dropdown('workgroup_id', (empty($user['division_id'])) ? array() : get_option('id', 'workgroup_name', 'workgroup', 'division_id = '.$user['division_id'].' order by workgroup_name'), $user['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
   </td>
 </tr>
 <tr>

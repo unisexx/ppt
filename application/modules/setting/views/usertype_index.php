@@ -1,9 +1,11 @@
 <h2>สิทธิ์การใช้งาน</h2>
+<form action="" method="get">
 <div id="search">
   <div id="searchBox">ชื่อสิทธิ์การใช้งาน
-    <input type="text" name="textfield" id="textfield" style="width:200px;" />
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+    <input type="text" name="user_type_name" style="width:200px;" value="<?php echo @$_GET['user_type_name']?>" />
+	<input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
+</form>
 
 <?php if(permission('usertype','add')):?>
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/usertype_form'" class="btn_add"/></div>

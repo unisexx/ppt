@@ -63,7 +63,7 @@ class Menu
      * Check permission for show button
      *
      * @access  public
-     * @param   number (menu_id) or string module 
+     * @param   number (menu_id) or string module name 
      * @param   string (Action)
      * @param   string (Url)
      * @return  string

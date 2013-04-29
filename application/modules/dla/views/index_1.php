@@ -27,7 +27,7 @@
         <th>อปท.</th>
         <th>ขนาด</th>
         <th width="25">จำนวน</th>
-        <th width="60">จัดการ</th>
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
     </tr>
     <?php foreach($result as $key => $item): $key += 1;?>
     <tr>
@@ -35,13 +35,15 @@
         <td><?php echo $item['year']; ?></td>
         <td><?php echo $item['province']; ?></td>
         <td><?php echo $item['amphur_name']; ?></td>
-        <td><?php echo $item['opt_name']; ?></td>
+        <td><?php echo anchor('dla/form/'.$m['id'].'/'.$item['id'], $item['opt_name']); ?></td>
         <td><?php echo $item['size']; ?></td>
         <td class="text-right"><?php echo @number_format($item['total_1']); ?></td>
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <?php echo menu::perm($m['id'], 'edit', 'dla/form/'.$m['id'].'/'.$item['id']); ?>
             <?php echo menu::perm($m['id'], 'delete', 'dla/delete/'.$m['id'].'/'.$item['id']); ?>
         </td>
+        <?php endif; ?>
     </tr>
     <?php endforeach; ?>
 </table>

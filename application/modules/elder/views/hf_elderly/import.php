@@ -1,15 +1,15 @@
-<? $m['id'] = 91; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข) <a href="import_file/datapoint/crime/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
-<h4>ความผิดทางคดีอาญา  <span class="gray">แบบ สตช. คดีอาญา</span></h4>
-<?=menu::source($m['id']);?>
+<? $m['id'] = 56; ?>
+<h2>ข้อมูลกลุ่มเป้าหมาย 2- ผู้สูงอายุ  <a href="import_file/elder/hfelderly/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
+<h4>ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม</h4>
+<?=menu::source($m['id']);?>		
 
 
-<form action='datapoint/crime/upload' method='POST' enctype="multipart/form-data">
+<form action='elder/hf_elderly/upload' method='POST' enctype="multipart/form-data">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<input type='hidden' name='MENU_ID' value='<?=$m['id'];?>'>
 	
 	<table class="tbadd">
-		<tr>
+<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
 			<td><?php echo form_dropdown('YEAR_DATA', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
@@ -45,13 +45,14 @@
 		<tr>
 			<th>ข้อมูลระหว่างวันที่</th>
 			<td>
-				<?=form_dropdown('MONTH_START', get_month(),'','class="span2"','--เลือกเดือน--');?>
+				<?=form_dropdown('MONTH_START', get_month(),'','class="span2"','--เลือกเดือน--'); ?>
 				<?=form_dropdown('YEAR_START', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
-				<?=form_dropdown('MONTH_END', get_month(),'','class="span2"','--เลือกเดือน--');	?>
+				<?=form_dropdown('MONTH_END', get_month(),'','class="span2"','--เลือกเดือน--'); ?>
 				<?=form_dropdown('YEAR_END', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>
-		</tr>
+		</tr>		
+		
 		<tr>
 		  <th>ไฟล์<span class="Txt_red_12"> *</span></th>
 		  <td><input type='file' name='file_import'></td>
@@ -63,6 +64,7 @@
 	</div>
 
 </form>
+
 <script>
     $(function(){
     	$('[name=section_type]').live('change',function(){

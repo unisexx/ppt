@@ -1,8 +1,5 @@
-<?
-	$m['id'] = 86; 
-	$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
-?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
+<? $m['id'] = 86; ?>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)  <a href="import_file/datapoint/mental/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
 <h4>จำนวนและอัตราผู้ป่วยสุภาพจิต </h4>
 <?=menu::source($m['id']);?>
 
@@ -47,10 +44,10 @@
 		<tr>
 			<th>ข้อมูลระหว่างวันที่</th>
 			<td>
-				<?=form_dropdown('MONTH_START',$month_th,'','class="span2"','--เลือกเดือน--');?>
+				<?=form_dropdown('MONTH_START',get_month(),'','class="span2"','--เลือกเดือน--');?>
 				<?=form_dropdown('YEAR_START', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
-				<?=form_dropdown('MONTH_END',$month_th,'','class="span2"','--เลือกเดือน--');	?>
+				<?=form_dropdown('MONTH_END', get_month(),'','class="span2"','--เลือกเดือน--');	?>
 				<?=form_dropdown('YEAR_END', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>
 		</tr>

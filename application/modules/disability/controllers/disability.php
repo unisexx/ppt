@@ -9,7 +9,7 @@ Class Disability extends Public_Controller{
 		//$this->db->debug=TRUE;			
 		$month=(!empty($_GET['month']) && empty($_GET['year']))? " AND  EXTRACT(MONTH FROM E_DATE) ='".$_GET['month']."'":'';
 		$year =(!empty($_GET['year']) && empty($_GET['month'])) ? "  and EXTRACT(YEAR FROM E_DATE) ='".$_GET['year']."'":'';	
-		$sql="   AND EXTRACT(MONTH FROM E_DATE) >='".$_GET['month']."' OR EXTRACT(YEAR FROM E_DATE)='".@$_GET['year']."'";
+		$sql="   AND EXTRACT(MONTH FROM E_DATE) ='".@$_GET['month']."' OR EXTRACT(YEAR FROM E_DATE)='".@$_GET['year']."'";
 		$all =(!empty($_GET['year']) && !empty($_GET['month'])) ? $sql :'';
 		$data['result']=$this->identity->where("1=1 $month $year $all")->get();
 		$data['pagination'] =$this->identity->pagination();

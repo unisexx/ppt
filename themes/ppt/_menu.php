@@ -9,7 +9,7 @@
 	            <li><a><?php echo $sub['title']; ?></a>
 	                <ul>
 	                    <?php foreach(menu::ls($sub['id']) as $item): ?>
-	                        <li><?php echo anchor($item['url'], $item['title'].' <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="พส." class="vtip ico_quest" />'); ?></li>
+	                        <li><?php echo anchor($item['url'], $item['title'].' <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="'.$item['name'].'" class="vtip ico_quest" />'); ?></li>
 	                    <?php endforeach; ?>
 	                </ul>
 	            </li>
@@ -192,6 +192,7 @@
 		    <?php if(permission('set_tumbon','view')):?>
 		    	<li><a href="setting/set_tumbon">ตำบล</a></li>
 		    <?php endif;?>
+		    <li><?php echo anchor('dla/import', 'นำเข้าข้อมูล อปท.'); ?></li>
 		</ul>
 	</li>
 	

@@ -16,10 +16,12 @@ Class Recipient extends Public_Controller{
 		$this->template->build('recipient_index',$data);
 	}
 	function form($id=FALSE){
+		$data['menu_id']=$this->menu_id;	
 		$data['rs']=$this->recipient->get_row($id);
 		$this->template->build('recipient_form',$data);
 	}
 	function save(){
+		if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('recipient');	
 		if($_POST){
 			$this->recipient->save($_POST);
 			set_notify('success', lang('save_data_complete'));	

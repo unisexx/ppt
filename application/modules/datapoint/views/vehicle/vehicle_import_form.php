@@ -1,10 +1,10 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น <a href="uploads/traffic_years_2554.xlsx"class="btn_ex_data"></a></h2>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น <a href="uploads/traffic_year_54-1.xls"class="btn_ex_data"></a></h2>
 <h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
 <form action="datapoint/vehicle_save_import" method="post" enctype="multipart/form-data">
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('year_data', get_year_option(2552), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>	
 		<tr>
 			<th colspan="2">แหล่งที่มาของข้อมูล</th>

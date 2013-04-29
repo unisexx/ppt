@@ -282,16 +282,44 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		redirect('setting/set_tumbon'.GetCurrentUrlGetParameter());
 	}
 	
-	function check_email()
+	function check_email($id=false)
 	{
-		$user = new User();
-		$user->get_by_email($_GET['email']);
-		($user->email)?$this->output->set_output("false"):$this->output->set_output("true");
+		$user = $this->user->where("email = '".$_GET['email']."'")->get_row();
+		// ถ้ามี  email ใน db
+		if($user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if($id){
+				$emailfromid = $this->user->get_row($id);
+				// เทียบ email ในช่อง input กับ email จาก id ที่ส่งมา
+				if($emailfromid['email'] == $user['email']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
+			echo 'true';
+		}
 	}
 
 	function check_username($id=false){
 		$user = $this->user->where("username = '".$_GET['username']."'")->get_row();
-		($user)?$this->output->set_output("false"):$this->output->set_output("true");
+		// ถ้ามี  username ใน db
+		if($user){
+			// ถ้าเป็นเคสแก้ไข profile
+			if($id){
+				$userfromid = $this->user->get_row($id);
+				// เทียบ username ในช่อง input กับ username จาก id ที่ส่งมา
+				if($userfromid['username'] == $user['username']){
+					echo 'true';
+				}else{
+					echo 'false';
+				}
+			}
+		}else{
+			echo 'true';
+		}
+		// ($user)?$this->output->set_output("false"):$this->output->set_output("true");
     }
 	
 	function ajax_division(){

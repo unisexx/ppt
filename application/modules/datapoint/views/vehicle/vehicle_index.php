@@ -14,7 +14,7 @@
   <div id="searchBox">
   	<form action="datapoint/vehicle">
 		    <?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
-		   <?php echo form_dropdown('agency_id',get_option('id','agency','agency order by id'),@$_GET['agency_id'],'','-- ทุกหน่วยงาน --') ;?>
+			หน่วยงาน <input type="text" name="agency_id" value="<?php echo @$_GET['agency_id'] ?>">
 		  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   </form>
   </div>
@@ -48,19 +48,19 @@
   foreach($result as $item):
 ?>
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
-  <td><?php echo $i ?></td>
-  <td><?php echo $item['year'] ?></td>
-  <td><?php echo $item['agency'] ?></td>
-  <td><?php echo number_format($item['notice']) ?></td>
-  <td><?php echo number_format($item['die_male']) ?> / <?php echo number_format($item['die_female']) ?></td>
-  <td><?php echo number_format($item['coma_male']) ?> / <?php echo number_format($item['coma_male']) ?></td>
-  <td><?php echo number_format($item['pain_male']) ?> / <?php echo number_format($item['pain_male']) ?></td>
-  <td><?php echo number_format($item['total']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $i ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"> <?php echo $item['year'] ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $item['agency'] ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['notice']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['die_male']) ?> / <?php echo number_format($item['die_female']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['coma_male']) ?> / <?php echo number_format($item['coma_male']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['pain_male']) ?> / <?php echo number_format($item['pain_male']) ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['total']) ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'" /><?php endif; ?>
-    <?php if(menu::perm($menu_id, 'delete')): ?>
+    <?php  if(menu::perm($menu_id, 'delete')): ?>
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?>
    </td>
 </tr>

@@ -83,7 +83,7 @@
         	</li>
             <li><a href="#">ผู้ด้อยโอกาส</a>
                 <ul>
-                    <li><a href="#">ผู้รับบริการทางสังคม <img src="images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
+                    <li><a href="recipient">ผู้รับบริการทางสังคม <img src="images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
                     <li><a href="#">ชุมชนผู้มีรายได้น้อย <img src="images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></li>
                     <li><a href="people.php?act=disadvantaged_list">ok_ผู้ด้อยโอกาสทางสังคม <img src="images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
                     <li><a href="#">จำนวนคนว่างงาน <img src="images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>

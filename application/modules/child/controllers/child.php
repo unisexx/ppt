@@ -9,7 +9,7 @@ Class Child extends Public_Controller{
 
 		$this->load->model('welfare_model','welfare');
 		$this->load->model('welfarelist_model','wflist');
-		$this->load->model('menu_model','menu');
+		$this->load->model('info_model','info');
 	}
 
 

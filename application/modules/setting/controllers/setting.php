@@ -282,5 +282,17 @@ WHERE USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		$user = $this->user->where("username = '".$_GET['username']."'")->get_row();
 		($user)?$this->output->set_output("false"):$this->output->set_output("true");
     }
+	
+	function get_devision(){
+		if($_POST){
+			echo form_dropdown('division_id', get_option('id', 'division_name', 'division where department_id = '.$_POST['department_id']), @$_POST['division_id'], '', '- กอง / สำนักงาน -');
+		}
+	}
+	
+	function get_workgroup(){
+		if($_POST){
+			echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup where division_id = '.$_POST['division_id']), @$_POST['workgroup_id'], '', '- กลุ่ม / ฝ่าย -');
+		}
+	}
 }
 ?>

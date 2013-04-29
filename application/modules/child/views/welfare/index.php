@@ -1,5 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว  <span class="gray">แบบ พส. สถานสงเคราะห์</span></h4>
+<h4>เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว </h4>
+<?=menu::source(13);?>		
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
@@ -37,7 +38,7 @@
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td><?=$item_dtl['name'];?> </td>
+        <td><a href="child/welfare/form/<?=$item['id'];?>" style="cursor:pointer;"><?=$item_dtl['name'];?> </a></td>
         <td><?=number_format($item['target'], 0);?></td>
         <td><?=number_format($item['balance'], 0);?></td>
         <td><?=number_format($item['admission'], 0);?></td>
@@ -45,7 +46,7 @@
         <td><?=number_format($item['remain'], 0);?></td>
         <td><?=number_format($item['build'], 0);?></td>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="js_action('<?=$item['id'];?>', 'EDIT');" />
+            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$item['id'];?>", "DELETE");'/>
 
         </td>
@@ -59,9 +60,8 @@ function js_action(id, type)
 	if(type=='DELETE')
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
-		{
-			window.location="child/welfare/delete/"+id;
-		}
+		{ window.location="child/welfare/delete/"+id;}
+		
 	}
 	else if(type == 'EDIT')
 	{

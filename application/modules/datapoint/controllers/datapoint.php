@@ -9,8 +9,9 @@ Class Datapoint extends Public_Controller{
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
 		$this->load->model('agency_model','agency');
+		$this->load->model('info_model','info');
 	}
-	
+	public $vehicle_menu_id=93;
 	
 	#================ MENTAL ==================#
 	function mental($year=FALSE, $province_id=FALSE){
@@ -287,13 +288,14 @@ echo '<HR>';
 															->join("LEFT JOIN AGENCY on AGENCY.ID=AGENCY_ID")
 															->where(" 1=1 $year $agency_id")
 															->order_by("dp_vehicle.ID",'asc')->get();	
-		$data['pagination'] = $this->vehicle->pagination();		
+		$data['pagination'] = $this->vehicle->pagination();	
+		$data['menu_id']=$this->vehicle_menu_id;	
 		$this->template->build('vehicle/vehicle_index',$data);
 	}
 	
 	function vehicle_form($id=FALSE){
 		$data['rs'] =$this->vehicle->get_row($id);		
-		$this->template->build('vehicle/vehicle_form',$data);
+		(menu::perm($menu_id, 'import'))? $this->template->build('vehicle/vehicle_form',$data):redirect('datapoint/vehicle');
 	}
 	function vehicle_save(){
 		if($_POST){
@@ -310,8 +312,10 @@ echo '<HR>';
 		redirect('datapoint/vehicle');
 	}
 
-	function vehicle_import(){
-		$this->template->build('vehicle/vehicle_import_form');
+	function vehicle_import()
+	{	 
+		(menu::perm($menu_id, 'import')) ? $this->template->build('vehicle/vehicle_import_form'):redirect('datapoint/vehicle');
+	
 	}
 	function ImportData($Filepath=FALSE){
 			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
@@ -327,7 +331,7 @@ echo '<HR>';
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			$_POST['section_id'] = $import_section_id;
-			$_POST['menu_id']=93;
+			$_POST['menu_id']=$this->vehicle_menu_id;
 			$this->info->save($_POST);
 			/*--end--*/	
 				

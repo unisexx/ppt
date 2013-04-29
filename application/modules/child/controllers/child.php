@@ -9,10 +9,11 @@ Class Child extends Public_Controller{
 
 		$this->load->model('welfare_model','welfare');
 		$this->load->model('welfarelist_model','wflist');
-		$this->load->model('menu_model','menu');
+		$this->load->model('info_model','info');
 	}
 
-
+	public $drop_menu_id=32;
+	public $pregnant_menu_id=35;
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		$data = new Spreadsheet_Excel_Reader();
@@ -148,7 +149,7 @@ Class Child extends Public_Controller{
 		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->get();									 
 		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
-		
+		$data['menu_id']=$this->drop_menu_id;
 		$this->template->build('drop/drop_index',$data);
 	}
 	
@@ -184,7 +185,7 @@ Class Child extends Public_Controller{
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			$_POST['section_id'] = $import_section_id;
-			$_POST['menu_id']=32;
+			$_POST['menu_id']=$this->drop_menu_id;
 			$this->info->save($_POST);
 			/*--end--*/						
 				
@@ -239,6 +240,7 @@ Class Child extends Public_Controller{
 		$sex =(!empty($_GET['sex'])) ? " and sex =".$_GET['sex']:'';
 		$data['result'] = $this->pregnant->where("1=1 $location $year $sex")->get();
 		$data['pagination'] = $this->pregnant->pagination();
+		$data['menu_id']=$this->pregnant_menu_id;
 		$this->template->build('pregnant/pregnant_index',$data);
 	}	
 	function pregnant_form($id=FALSE){		
@@ -277,7 +279,7 @@ Class Child extends Public_Controller{
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			$_POST['section_id'] = $import_section_id;
-			$_POST['menu_id']=35;
+			$_POST['menu_id']=$this->pregnant_menu_id;
 			$this->info->save($_POST);
 			/*--end--*/				
 							

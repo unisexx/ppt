@@ -94,12 +94,62 @@ Class Information extends Public_Controller{
 		}
 			function pledgee_upload()
 			{
-				menu::source(77);
+				print_r($_FILES);
+				/*
+				
 				unset($_POST['ID']);
+				print_r($_FILES);
 				$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 				$file_name = 'pledgee_'.date("Y_m_d_H_i_s").'.'.$ext;
 				$uploaddir = 'import_file/information/pledgee/';
-				move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
+				move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.$file_name);
+				#$objTxt = file($uploaddir.$file_name);
+				$objTxt2 = opendir($uploaddir.$file_name);
+				$objRes = readdir($objTxt2);
+				print_r($objRes);
+				
+				/*
+				foreach($objTxt as $value)
+				{
+					$value = iconv('TIS-620', 'UTF-8', $value);
+					
+					if(trim($value) != "PTH_TICKET_DATE,PTH_TICKET_NO,PTD_SEQ,PTD_DESC,PTH_PAWN_COST,CTM_TITLE,CTM_CARD_NO,CTM_AGE,CTM_NATIONALITY,CTM_HOUSE_NO,CTM_ROAD,CTM_TUMBON,CTM_PVM_AMP_CODE,CTM_PVM_PV_CODE,CTM_OCM_CODE")
+					{	$value = trim($value);
+						$value_exp = explode(',', $value);
+						$_POST['PTH_TICKET_DATE'] = date('Y-m-d', strtotime($value_exp[0]));
+						$_POST['PTH_TICKET_NO'] = $value_exp[1];
+						$_POST['PTD_SEQ'] = $value_exp[2];
+						$_POST['PTD_DESC'] = $value_exp[3];
+						$_POST['PTH_PAWN_COST'] = $value_exp[4];
+						$_POST['CTM_TITLE'] = $value_exp[5];
+						$_POST['CTM_CARD_NO'] = $value_exp[6];
+						$_POST['CTM_AGE'] = $value_exp[7];
+						$_POST['CTM_NATIONALITY'] = $value_exp[8];
+						$_POST['CTM_HOUSE_NO'] = $value_exp[9];
+						$_POST['CTM_ROAD'] = $value_exp[10];
+						$_POST['CTM_TUMBON'] = $value_exp[11];
+						$_POST['CTM_PVM_AMP_CODE'] = $value_exp[12];
+						$_POST['CTM_PVM_PV_CODE'] = $value_exp[13];
+						$_POST['CTM_OCM_CODE'] = $value_exp[14];
+						
+						$chk_repeat = $this->pledgee->limit(1)->get("SELECT * FROM PLEDGEE WHERE PTH_TICKET_DATE LIKE '".$_POST['PTH_TICKET_DATE']."' AND PTH_TICKET_NO = ".$_POST['PTH_TICKET_NO']);
+						if(count($chk_repeat) == 1)
+							{ ?><DIV STYLE='color:#F55; line-height:25px;'>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล   ตั๋วจำนำเลขที่ <?=$_POST['PTH_TICKET_NO'];?> ลงวันที่ <?=$_POST['PTH_TICKET_DATE'];?> ในระบบอยู่แล้ว</DIV><? 	}
+						else 
+							{
+								$this->pledgee->save($_POST);
+								?><DIV STYLE='color:#0A0; line-height:25px;'>ดำเนินการบันทึกข้อมูล ตั๋วจำนำเลขที่ <?=$_POST['PTH_TICKET_NO'];?> ลงวันที่ <?=$_POST['PTH_TICKET_DATE'];?>เสร็จสิ้น</DIV><?
+							}
+					}
+				}
+				
+				 * 
+				 */
+					?><BR><BR>
+						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="../../information/pledgee";'>
+						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="	../information/pledgee_import";'>
+					<?
+				/*
 				$data = $this->ReadData($uploaddir.$file_name);
 				for($i=3; $i<count($data); $i++)
 				{
@@ -134,8 +184,10 @@ Class Information extends Public_Controller{
 				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="information/pledgee_import";'>
 			<?
 				#print_r($data);
-			}
-		
+				 /* 
+				 */
+				 
+				 }
 
 
 				function ReadData($filepath)

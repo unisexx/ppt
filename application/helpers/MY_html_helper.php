@@ -120,7 +120,6 @@ function cycle($key,$odd = 'odd',$even = '')
 function get_option($value,$text,$table,$where = FALSE)
 {
 	$CI =& get_instance();
-	
 	$where = ($where) ? 'where '.$where : '';
 	$result = $CI->db->GetAssoc('select '.$value.','.$text.' from '.$table.' '.$where);
 	array_walk($result,'dbConvert');

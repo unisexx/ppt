@@ -153,16 +153,16 @@ Class Child extends Public_Controller{
 		$this->template->build('drop/drop_index',$data);
 	}
 	
-	function drop_form($id=FALSE){
-			
+	function drop_form($id=FALSE){			
 		$data['rs'] =$this->drop->get_row($id);
+		$data['menu_id']=$this->drop_menu_id;
 		$data['province']= $this->province->limit(80)->get();
 		$this->template->build('drop/drop_form',$data);
 	}
-	function drop_save(){
-			
-		if($_POST){
-			$_POST['total']= str_replace(",", "",$_POST['total']);			
+	function drop_save()
+	{
+		if(!menu::perm($this->drop_menu_id, 'add') || !menu::perm($this->drop_menu_id,'edit'))redirect('child/drop');
+		if($_POST){			
 		   $this->drop->save($_POST);
 		   set_notify('success', lang('save_data_complete'));
 		}
@@ -245,9 +245,11 @@ Class Child extends Public_Controller{
 	}	
 	function pregnant_form($id=FALSE){		
 		$data['rs'] = $this->pregnant->get_row($id);	
+		$data['menu_id']=$this->pregnant_menu_id;
 		$this->template->build('pregnant/pregnant_form',$data);
 	}
 	function pregnant_save(){
+		if(!menu::perm($this->pregnant_menu_id, 'add') || !menu::perm($this->pregnant_menu_id,'edit'))redirect('child/pregnant');	
 		if($_POST){
 			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
 			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
@@ -260,7 +262,7 @@ Class Child extends Public_Controller{
 	function pregnant_delete($id){
 		if(!empty($id)){
 			$this->pregnant->delete($id);
-			 set_notify('success', lang('delete_data_complete'));
+			set_notify('success', lang('delete_data_complete'));
 		}
 		redirect('child/pregnant');
 	}

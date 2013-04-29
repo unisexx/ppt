@@ -52,12 +52,12 @@
   foreach($result as $item):
 ?>
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
-  <td><?php echo $i; ?></td>
-  <td><?php echo $item['year'] ?></td>
-  <td><?php echo $item['agency']; ?></td>
-  <td><?php echo number_format($item['service_total'])?></td>
-  <td><?php echo $item['help'] ?></td>
-  <td><?php echo number_format($item['money_total'])?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['year'] ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['agency']; ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['service_total'])?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['help'] ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['money_total'])?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php  if(menu::perm($menu_id, 'edit')): ?>

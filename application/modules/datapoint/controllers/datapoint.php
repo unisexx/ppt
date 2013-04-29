@@ -313,10 +313,12 @@ echo '<HR>';
 	}
 	
 	function vehicle_form($id=FALSE){
-		$data['rs'] =$this->vehicle->get_row($id);		
+		$data['rs'] =$this->vehicle->get_row($id);	
+		$data['menu_id']=$this->vehicle_menu_id;		
 		 $this->template->build('vehicle/vehicle_form',$data);
 	}
 	function vehicle_save(){
+		if(!menu::perm($this->vehicle_menu_id, 'add') || !menu::perm($this->vehicle_menu_id,'edit'))redirect('datapoint/vehicle');		
 		if($_POST){
 			$this->vehicle->save($_POST);
 			set_notify('success', lang('save_data_complete'));

@@ -7,6 +7,7 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
+		
 	}
 	public $menu_id = 74;
 	public $menu_sixtyup_id = 55;

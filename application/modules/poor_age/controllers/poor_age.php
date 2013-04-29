@@ -55,7 +55,45 @@ Class Poor_age extends Public_Controller{
         redirect('poor_age/allage');
     }
 	
-
+	
+	
+	function import_data()
+	{
+		$data['menu_id'] = 72; 	
+		$this->template->build('population_import_form',$data);	
+	}
+	
+	function pool_age_import()
+	{
+		
+				//-- update info
+		$this->load->model('one_info_model', 'opt_info');
+		
+							$data_info = array(
+						  
+							   "year" => $this->input->post("year_data"), 
+							   "agency_id" => $this->input->post("import_section_id"), 
+							   "month_start" => $this->input->post("month_start"),
+							   "year_start" => $this->input->post("year_start"),
+							   "month_end" => $this->input->post("month_end"),
+							   "year_end" => $this->input->post("year_end"),
+							   "menu_id" => $this->input->post("menu_id")
+							);
+							
+		$this->opt_info->save($data_info);
+		//-----
+		
+				   $ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+		   $file_name = 'poor_age_'.date("Y_m_d_H_i_s").'.'.$ext;
+		   $uploaddir = 'source_import/';
+		   $fpicname = $uploaddir.$file_name;
+		   move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
+		   
+				
+				$data['file_upload'] = $file_name;
+		
+		$this->template->build('pool_age_import',$data);	
+	}
 	
 	
 }

@@ -16,7 +16,7 @@
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('poor_province/province_form'); ?>'" class="btn_add">
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='people.php?act=import'" class="btn_import"/></div>
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('poor_province/import_data'); ?>'"  class="btn_import"/></div>
 
 
 <?php echo $pagination; ?>
@@ -36,8 +36,8 @@
  <?php foreach($result as $key => $item): $key += 1;?>
 
 <tr>
-  <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
-  <td><?php echo $item['poor_province_year']; ?></td>
+  <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
+  <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_year']; ?></a></td>
   <td><?php echo $item['poor_province_province']; ?></td>
   <td><?php echo @number_format($item['poor_province_line']); ?></td>
   <td><?php echo @number_format($item['poor_province_percent']); ?></td>

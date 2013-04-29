@@ -318,7 +318,7 @@ Class Child extends Public_Controller{
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."' and ORDER_NO='".$_POST['order_no']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$_POST['order_no'].date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		

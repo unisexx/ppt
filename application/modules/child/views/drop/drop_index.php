@@ -28,8 +28,12 @@
 	</div>
 </form>
 <div id="btnBox">
+	 <?php  if(menu::perm($menu_id, 'import')): ?>
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/drop_import'" class="btn_import"/>
+	<?php endif;?>
+   <?php  if(menu::perm($menu_id, 'add')): ?>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/drop_form'" class="btn_add"/>
+	<?php endif; ?>
 </div>
 
 <?php echo $pagination;?>
@@ -40,7 +44,7 @@
   <th>จังหวัด</th>
   <th>หมายเลขเขต</th>
   <th>จำนวน นร.ต้นปี</th>
-  <th>จัดการ</th>
+  <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
   $rowStyle = '';
@@ -56,8 +60,15 @@
   <td><?php echo number_format($item['total'])?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
+  	<?php  if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
+    <?php endif; ?>
+    <?php  if(menu::perm($menu_id, 'delete')): ?>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
+    <?php endif; ?>
+    </td>
+    
+
 </tr>
 <?php 
 $i++;

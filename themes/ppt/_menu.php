@@ -195,7 +195,7 @@
 		</ul>
 	</li>
 	
-	<?php if(permission('report','view')):?>
+	<?php /*if(permission('report','view')):?>
 	<li><a href="#">รายงาน</a>
 	<ul>
 		<li><a href="#">รายงาน 1</a>
@@ -216,7 +216,7 @@
 			<li><a href="#">รายงาน Detail F</a></li>
 		</ul>
 	</li>
-	<?php endif;?>
+	<?php endif; */?>
 	</ul>
 	</li>
 <?php endif;?>

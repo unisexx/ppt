@@ -40,15 +40,15 @@
   <th>ลำดับ</th>
   <th>ปีการศึกษา</th>
   <th>จังหวัด</th>
-  <th>1</th>
-  <th>2</th>
-  <th>3</th>
-  <th>4</th>
-  <th>5</th>
-  <th>6</th>
-  <th>7</th>
-  <th>8</th>
-  <th>9</th>
+  <th><span class="vtip" title="ฐานะยากจน">1</span></th>
+  <th><span class="vtip" title="มีปัญหาครอบครัว">2</span></th>
+  <th><span class="vtip" title="สมรสแล้ว">3</span></th>
+  <th><span class="vtip" title="มีปัญหาในการปรับตัว">4</span></th>
+  <th><span class="vtip" title="ต้องคดี/ถูกจับ">5</span></th>
+  <th><span class="vtip" title="เจ็บป่วย/อุบัติเหตุ">6</span></th>
+  <th><span class="vtip" title="อพยพตามผู้ปรกครอง">7</span></th>
+  <th><span class="vtip" title="หาเลี้ยงครอบครัว">8</span></th>
+  <th><span class="vtip" title="กรณีอื่นๆ">9</span></th>
   <th>รวม</th>
   <th>จำนวน นร.ต้นปี</th>
   <th>%</th>

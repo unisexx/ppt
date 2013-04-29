@@ -11,7 +11,7 @@ Class Datapoint extends Public_Controller{
 		$this->load->model('agency_model','agency');
 		$this->load->model('info_model','info');
 	}
-	
+	public $vehicle_menu_id=93;
 	
 	#================ MENTAL ==================#
 	function mental($year=FALSE, $province_id=FALSE){
@@ -288,7 +288,8 @@ echo '<HR>';
 															->join("LEFT JOIN AGENCY on AGENCY.ID=AGENCY_ID")
 															->where(" 1=1 $year $agency_id")
 															->order_by("dp_vehicle.ID",'asc')->get();	
-		$data['pagination'] = $this->vehicle->pagination();		
+		$data['pagination'] = $this->vehicle->pagination();	
+		$data['menu_id']=$this->vehicle_menu_id;	
 		$this->template->build('vehicle/vehicle_index',$data);
 	}
 	
@@ -328,7 +329,7 @@ echo '<HR>';
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			$_POST['section_id'] = $import_section_id;
-			$_POST['menu_id']=93;
+			$_POST['menu_id']=$this->vehicle_menu_id;
 			$this->info->save($_POST);
 			/*--end--*/	
 				

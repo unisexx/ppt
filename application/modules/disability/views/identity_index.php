@@ -24,8 +24,10 @@
 </div>
 
 <div id="btnBox">
-	
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disability/identity_form'" class="btn_add"/></div>
+	<?php if(menu::perm($menu_id, 'add')): ?>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disability/identity_form'" class="btn_add"/>
+	<?php endif; ?>
+</div>
 
 <?php echo $pagination; ?>
 <table class="tblist">
@@ -57,8 +59,10 @@
   <td><?php echo number_format($item['i_male']) ?> / <?php echo number_format($item['i_female']) ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'" />     
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
+  	<?php if(menu::perm($menu_id, 'edit')): ?>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='disability/identity_form/<?php echo $item['id'] ?>'" /><?php endif; ?>     
+   <?php if(menu::perm($menu_id, 'delete')): ?>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?> </td>
 </tr>
 <?php $i++;endforeach; ?>
 <?php echo $pagination; ?>

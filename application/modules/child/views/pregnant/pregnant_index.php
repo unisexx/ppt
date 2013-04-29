@@ -26,7 +26,12 @@
 	</div>
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/pregnant_import'" class="btn_import"/><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/pregnant_form'" class="btn_add"/></div>
+<div id="btnBox">
+	<?php  if(menu::perm($menu_id, 'import')): ?>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='child/pregnant_import'" class="btn_import"/><?php endif;?>
+	<?php  if(menu::perm($menu_id, 'add')): ?>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='child/pregnant_form'" class="btn_add"/><?php endif;?>
+</div>
 
 <?php echo $pagination; ?>
 <table class="tblist">
@@ -37,7 +42,7 @@
   <th>รหัสโรงพยาบาล</th>
   <th>สถานที่เกิด</th>
   <th>เลขบัตรประชาชน ของบิดา</th>
-  <th>&nbsp;</th>
+    <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
  $sex =array(1=>'ชาย',2=>'หญิง');
@@ -55,8 +60,10 @@
   <td><?php echo $item['f_id']; ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'" />
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /></td>
+  	 <?php  if(menu::perm($menu_id, 'edit')): ?>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'" /><?php endif; ?>
+     <?php  if(menu::perm($menu_id, 'delete')): ?>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?></td>
 </tr>
 <?php ++$i;endforeach; ?>
 </table>

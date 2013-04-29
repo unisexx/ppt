@@ -59,7 +59,7 @@
 		</tr>
 	</table>	
 	<div id="btnSave">
-	<input type="hidden" name="menu_id" value="">
+	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
 	<input type="submit" value="บันทึก" class="btn btn-danger">
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>

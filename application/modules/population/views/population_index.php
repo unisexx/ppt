@@ -9,7 +9,8 @@
 	})
 </script>
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<h4>ประชากร (คน) </h4>
+<?php echo menu::source($menu_id); ?>
 <form method="get" enctype="multipart/form-data">
 <div id="search">
   <div id="searchBox">

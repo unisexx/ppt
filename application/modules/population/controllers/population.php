@@ -7,9 +7,12 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
+		
 	}
-	
+	public $menu_id = 74;
+	public $menu_sixtyup_id = 55;
 	function index(){
+		$data['menu_id'] = $this->menu_id;
 		$condition = "1=1";
 		$condition.= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
@@ -21,7 +24,8 @@ Class population extends Public_Controller{
 		$this->template->build('population_index',$data);
 	}
 	
-	function form($id=FALSE){		
+	function form($id=FALSE){
+		$data['menu_id'] = $this->menu_id;		
 		$data['item'] = $this->ppl->get_row($id);
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('population_form',$data);
@@ -57,8 +61,9 @@ Class population extends Public_Controller{
 	}
 	
 	function import_form(){
+		$data['menu_id'] = $this->menu_id;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');		
-		$this->template->build('population_import_form');
+		$this->template->build('population_import_form',$data);
 	}
 	
 	function population_import(){
@@ -207,6 +212,7 @@ Class population extends Public_Controller{
 	}
 	
 	function sixtyup_index(){
+		$data['menu_id'] = $this->menu_sixtyup_id;
 		$condition= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
@@ -222,7 +228,8 @@ Class population extends Public_Controller{
 		$this->template->build('sixtyup/index',$data);
 	}
 	
-	function sixtyup_form($id=FALSE){		
+	function sixtyup_form($id=FALSE){
+		$data['menu_id'] = $this->menu_sixtyup_id;		
 		$data['item'] = $this->ppl->get_row($id);
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('sixtyup/form',$data);

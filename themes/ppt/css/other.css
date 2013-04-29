@@ -450,3 +450,17 @@ color: #a63606;
 cursor: pointer; /* hand-shaped cursor */
 cursor: hand; /* for IE 5.x */
 }
+
+.btn_ex_data{
+width:190px !important;
+height:32px;
+border: none;
+background: transparent url(../images/btn_ex_data.png) no-repeat center;
+overflow: hidden;
+text-indent: -999px;
+line-height: 0px;
+display:inline-block;
+color: #a63606;
+cursor: pointer; /* hand-shaped cursor */
+cursor: hand; /* for IE 5.x */
+}

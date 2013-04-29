@@ -1,28 +1,27 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (น้าเข้าข้อมูล)</h2>
-<h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
+<h4>ประชากร (คน) <?php echo menu::source($menu_id); ?></h4>
 <form method="post" enctype="multipart/form-data" action="population/population_import">
-	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
-			<th>ปีพ.ศ.</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
+			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIEST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr>
 			<th>จังหวัด</th>
 			<td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
+		</tr>		
+		<tr>
+			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>
 		<tr>
 			<th>ประเภทหน่วยงาน</th>
 			<td>
 				<select name="section_type" id="section_type">
-			  		<option value="">เลือืกประเภทหน่วยงาน</option>
+			  		<option value="">เลือกประเภทหน่วยงาน</option>
 			  		<option value="1">หน่วยงานหลัก</option>
 			  		<option value="2">หน่วยงานสนับสนุน</option>
 			  	</select>
 			</td>
-		</tr>
-		<tr>
-			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>
 		<tr>
 			<th>หน่วยงาน</th>
@@ -43,13 +42,13 @@
 				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
 				echo form_dropdown('month_start',$month_th,'','class="span2"','--เลือกเดือน--');
 				?>
-				<?php echo form_dropdown('year_start', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+				<?php echo form_dropdown('year_start', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
 				<?
 				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
 				echo form_dropdown('month_end',$month_th,'','class="span2"','--เลือกเดือน--');
 				?>
-				<?php echo form_dropdown('year_end', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+				<?php echo form_dropdown('year_end', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>
 		</tr>
 		<tr>
@@ -58,6 +57,7 @@
 		</tr>
 	</table>	
 	<div id="btnSave">
+	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
 	<input type="submit" value="บันทึก" class="btn btn-danger">
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>

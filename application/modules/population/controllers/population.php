@@ -7,9 +7,12 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
+		$this->load->model('info_model','info');
 	}
-	
+	public $menu_id = 74;
+	public $menu_sixtyup_id = 55;
 	function index(){
+		$data['menu_id'] = $this->menu_id;
 		$condition = "1=1";
 		$condition.= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
@@ -21,13 +24,15 @@ Class population extends Public_Controller{
 		$this->template->build('population_index',$data);
 	}
 	
-	function form($id=FALSE){		
+	function form($id=FALSE){
+		$data['menu_id'] = $this->menu_id;		
 		$data['item'] = $this->ppl->get_row($id);
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('population_form',$data);
 	}
 	
 	function save(){
+		if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('population/index');
 		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
 		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
 		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";
@@ -57,19 +62,20 @@ Class population extends Public_Controller{
 	}
 	
 	function import_form(){
+		$data['menu_id'] = $this->menu_id;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');		
-		$this->template->build('population_import_form');
+		$this->template->build('population_import_form',$data);
 	}
 	
 	function population_import(){
 		if($_FILES['fl_import']['name']!=''){
+			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
-			
-			
-			$this->db->execute("DELETE FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data']);
+			$_POST['section_id'] = $import_section_id;
+			$this->info->save($_POST);
+			/*--end--*/
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'population_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;
-			$file_name = 'population'.'.'.$ext;			
+			$file_name = 'population_'.$_POST['year_data'].'_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;			
 			$uploaddir = 'import_file/population/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
@@ -207,6 +213,7 @@ Class population extends Public_Controller{
 	}
 	
 	function sixtyup_index(){
+		$data['menu_id'] = $this->menu_sixtyup_id;
 		$condition= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
@@ -222,13 +229,15 @@ Class population extends Public_Controller{
 		$this->template->build('sixtyup/index',$data);
 	}
 	
-	function sixtyup_form($id=FALSE){		
+	function sixtyup_form($id=FALSE){
+		$data['menu_id'] = $this->menu_sixtyup_id;		
 		$data['item'] = $this->ppl->get_row($id);
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('sixtyup/form',$data);
 	}
 	
 	function sixtyup_save(){
+		if(!menu::perm($this->menu_sixtyup_id, 'add') || !menu::perm($this->menu_sixtyup_id,'edit'))redirect('population/index');
 		$_POST['PROVINCE_NAME'] = $this->province->select("PROVINCE")->where("ID=".$_POST['province_id'])->get_one();
 		$_POST['AMPHUR_NAME'] = $_POST['amphur_id'] > 0 ? $this->amphur->select("amphur_name")->where("ID=".$_POST['amphur_id'])->get_one() : "";
 		$_POST['DISTRICT_NAME'] = $_POST['district_id'] > 0 ? $this->district->select("district_name")->where("ID=".$_POST['district_id'])->get_one() : "";		

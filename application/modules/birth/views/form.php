@@ -5,7 +5,7 @@
 <tr>
   <th>ปี พ.ค.<span class="Txt_red_12"> *</span></th>
   <td>
-  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- ทุกปี --'); ?>
+  	<?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$item['year_data'], null, '-- ทุกปี --'); ?>
   </td>
 </tr>
 <tr>

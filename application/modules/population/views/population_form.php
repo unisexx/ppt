@@ -1,11 +1,12 @@
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>ประชากร (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<h4>ประชากร (คน) </h4>
+<?php echo menu::source($menu_id); ?>
 <form method="post" enctype="multipart/form-data" action="population/save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td>
-  	<?php echo form_dropdown('year_data', get_year_option(2555), @$item['year_data'], null, '-- เลือกปี --'); ?>    
+  	<?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$item['year_data'], null, '-- เลือกปี --'); ?>    
 	</td>
 </tr>
 <tr>

@@ -1,10 +1,13 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล)</h2>
-<h4>ข้อมูลการเกิด <span class="gray">แบบ กรมการปกครอง การเกิด</span></h4>
+<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
+<h4>ข้อมูลการเกิด <?php echo menu::source($menu_id); ?></h4>
 <form method="post" enctype="multipart/form-data" action="birth/birth_import">
 	<table class="tbadd">
 		<tr>
-			<th>ปีพ.ศ.</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
+			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+		</tr>
+		<tr>
+			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>
 		<tr>
 			<th>ประเภทหน่วยงาน</th>
@@ -29,11 +32,28 @@
 			</td>
 		</tr>
 		<tr>
+			<th>ข้อมูลระหว่างวันที่</th>
+			<td>
+				<?
+				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
+				echo form_dropdown('month_start',$month_th,'','class="span2"','--เลือกเดือน--');
+				?>
+				<?php echo form_dropdown('year_start', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+				ถึง
+				<?
+				$month_th = array( 1 =>'ม.ค.',2 => 'ก.พ.',3=>'มี.ค.',4=>'เม.ย',5=>'พ.ค.',6=>'มิ.ย',7=>'ก.ค.',8=>'ส.ค.',9=>'ก.ย.',10=>'ต.ค.',11=>'พ.ย.',12=>'ธ.ค.');
+				echo form_dropdown('month_end',$month_th,'','class="span2"','--เลือกเดือน--');
+				?>
+				<?php echo form_dropdown('year_end', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+			</td>
+		</tr>
+		<tr>
 		  <th>ไฟล์<span class="Txt_red_12"> *</span></th>
 		  <td><input type="file" name="fl_import" ></td>
 		</tr>
 	</table>	
 	<div id="btnSave">
+	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
 	<input type="submit" value="บันทึก" class="btn btn-danger">
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>

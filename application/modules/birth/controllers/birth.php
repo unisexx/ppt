@@ -5,8 +5,10 @@ Class birth extends Public_Controller{
         $this->load->model('birth_model', 'birth');
 		$this->load->model('province_model', 'province');				
 	}
+	public $menu_id = 27;
 	function index(){
 		//$this->db->debug=true;
+		$data['menu_id'] = $this->menu_id;
 		$condition = " 1 = 1 ";
 		if(@$_GET['year_data']) $condition .= "AND year_data = ".$_GET['year_data'].' ';
 		if(@$_GET['province_id']) $condition .= "AND province_id = ".$_GET['province_id'].' ';
@@ -19,6 +21,7 @@ Class birth extends Public_Controller{
 	
 	function form($id=FALSE){
 		//$this->db->debug = true;
+		$data['menu_id'] = $this->menu_id;
 		$data['id'] = @$id;
 		if(@$id)
 		{
@@ -29,6 +32,7 @@ Class birth extends Public_Controller{
 	}
 		function save()
 		{
+			if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('birth/index');
 			$province_id = $_POST['province_id'];
 			if($province_id > 0 ){
 				$_POST['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
@@ -40,6 +44,7 @@ Class birth extends Public_Controller{
 		}
 	function delete($id=FALSE)
 	{
+		if(!menu::perm($this->menu_id, 'delete'))redirect('birth/index');
 		if($id)
 		{
 			$this->birth->delete($id);
@@ -49,14 +54,21 @@ Class birth extends Public_Controller{
 		
 	}
 	function import_form(){
+		$data['menu_id'] = $this->menu_id;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('import_form');
+		$this->template->build('import_form',$data);
 	}
 	
 	function birth_import(){
 //		$this->db->debug = true;
+		if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('birth/index');
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$this->info->save($_POST);
+			/*--end--*/
 			$file_name = 'birth_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/birth/';
 			$fpicname = $uploaddir.$file_name;

@@ -1,3 +1,39 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$('select[name=department_id]').live('change',function(){
+		$.post('setting/get_devision',{
+			department_id : $(this).val()
+		},function(data){
+			$('.division').html(data);
+		});
+	});
+	
+	$('select[name=division_id]').live('change',function(){
+		$.post('setting/get_workgroup',{
+			division_id : $(this).val()
+		},function(data){
+			$('.workgroup').html(data);
+		});
+	});
+	
+	<?php if(@$user['id']):?>
+    	$.post('setting/get_devision',{
+			department_id : "<?php echo $user['department_id']?>",
+			division_id : "<?php echo $user['division_id']?>"
+		},function(data){
+			$('.division').html(data);
+		});
+		
+		$.post('setting/get_workgroup',{
+			division_id : "<?php echo $user['division_id']?>",
+			workgroup_id : "<?php echo $user['workgroup_id']?>"
+		},function(data){
+			$('.workgroup').html(data);
+		});
+    <?php endif;?>
+});
+</script>
+
 <h2>ผู้ใช้งาน (เพิ่ม/แก้ไข)</h2>
 
 <form class="validate" method="post" action="setting/user_save">
@@ -32,14 +68,14 @@
 </tr>
 <tr>
   <th>กอง / สำนักงาน  <span class="Txt_red_12">*</span></th>
-  <td>
+  <td class="division">
   	<?php echo form_dropdown('division_id', get_option('id', 'division_name', 'division'), $user['division_id'], null, '- กอง / สำนักงาน -'); ?>
   </td>
 </tr>
 <tr>
   <th>กลุ่ม / ฝ่าย   <span class="Txt_red_12">*</span></th>
-  <td>
-  <?php echo form_dropdown('group_id', get_option('id', 'group_name', 'groups'), $user['group_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
+  <td class="workgroup">
+  <?php echo form_dropdown('workgroup_id', get_option('id', 'workgroup_name', 'workgroup'), $user['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
   </td>
 </tr>
 <tr>
@@ -55,21 +91,6 @@
 <tr>
   <th>เบอร์ติดต่อ</th>
   <td><input name="contact_number" type="text" value="<?php echo $user['contact_number']?>" /></td>
-</tr>
-<tr>
-  <th>กลุ่มเป้าหมายที่รับผิดชอบ</th>
-  <td>
-  	<span style="margin-right:15px;">
-  		<?php $arr_target_response = explode(",", $user['target_response']);?>
-		<input type="checkbox" name="target_response[]" value="เด็กและเยาวชน" <?php if(in_array('เด็กและเยาวชน', $arr_target_response)) echo 'checked="checked"'; ?>/> เด็กและเยาวชน
-		<input type="checkbox" name="target_response[]" value="สตรี" <?php if(in_array('สตรี', $arr_target_response)) echo 'checked="checked"'; ?>/> สตรี
-		<input type="checkbox" name="target_response[]" value="ครอบครัว" <?php if(in_array('ครอบครัว', $arr_target_response)) echo 'checked="checked"'; ?>/> ครอบครัว
-		<input type="checkbox" name="target_response[]" value="ผู้ด้อยโอกาส" <?php if(in_array('ผู้ด้อยโอกาส', $arr_target_response)) echo 'checked="checked"'; ?>/> ผู้ด้อยโอกาส
-		<input type="checkbox" name="target_response[]" value="คนพิการ" <?php if(in_array('คนพิการ', $arr_target_response)) echo 'checked="checked"'; ?>/> คนพิการ
-		<input type="checkbox" name="target_response[]" value="ผู้สูงอายุ" <?php if(in_array('ผู้สูงอายุ', $arr_target_response)) echo 'checked="checked"'; ?>/> ผู้สูงอายุ
-		<input type="checkbox" name="target_response[]" value="อื่นๆ" <?php if(in_array('อื่นๆ', $arr_target_response)) echo 'checked="checked"'; ?>/> อื่นๆ 
-	</span>
-  </td>
 </tr>
 <tr>
   <th>อีเมล์  <span class="Txt_red_12">*</span></th>

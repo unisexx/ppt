@@ -9,9 +9,9 @@ Class Child extends Public_Controller{
 
 		$this->load->model('welfare_model','welfare');
 		$this->load->model('welfarelist_model','wflist');
+		$this->load->model('info_model','info');
 	}
 
-	
 
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
@@ -61,10 +61,6 @@ Class Child extends Public_Controller{
 		}	
 		return $import;
 	}
-
-	//===== END POPULATION ====//
-
-
 	
 	function offense(){
 		$this->template->build('offense_index');
@@ -185,6 +181,13 @@ Class Child extends Public_Controller{
 	}
 	function drop_save_import(){
 		if($_FILES['fl_import']['name']!=''){
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$_POST['menu_id']=32;
+			$this->info->save($_POST);
+			/*--end--*/						
+				
 			$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'child_drop_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
@@ -243,7 +246,6 @@ Class Child extends Public_Controller{
 		$this->template->build('pregnant/pregnant_form',$data);
 	}
 	function pregnant_save(){
-		$this->db->debug=TRUE;	
 		if($_POST){
 			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
 			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
@@ -272,9 +274,19 @@ Class Child extends Public_Controller{
 		 memmory_limit=256M
 		 * */ 		
 		if($_FILES['fl_import']['name']!=''){
-			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."' and ORDER_NO='".$_POST['order_no']."'");
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$_POST['menu_id']=35;
+			$this->info->save($_POST);
+			/*--end--*/				
+							
+			if(empty($_POST['continue'])){
+				$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");				
+			}
+			$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$_POST['order_no'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$order_no.date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
@@ -293,7 +305,7 @@ Class Child extends Public_Controller{
 						$val['f_id'] = $item[8];
 						$val['f_birthday'] =  $item[9];	
 						$val['f_address_code'] =  $item[10];	
-						$val['order_no'] = $_POST['order_no'];	
+						$val['order_no'] = $order_no;
 						$val['create']=date('Ymd');
 						$this->pregnant->save($val);
 					}																																					

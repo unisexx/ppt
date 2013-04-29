@@ -1,7 +1,9 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
 <h4><?php echo $m['title']; ?></h4>
 <?php echo menu::source($m['id']); ?>
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <?php echo form_open('dla/save/'.$m['id']); ?>
+<?php endif; ?>
 <table class="tbadd">
     <tr>
         <th>ปี <span class="Txt_red_12">*</span></th>
@@ -121,13 +123,18 @@
         <td><?php echo form_input('b_tel', $rs['b_tel']); ?></td>
     </tr>
 </table>
-
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
     <input type="submit" value="บันทึก" class="btn btn-danger">
     <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>
 <script>
     $(function(){
         $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});

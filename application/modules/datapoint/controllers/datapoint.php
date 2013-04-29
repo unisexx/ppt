@@ -9,6 +9,7 @@ Class Datapoint extends Public_Controller{
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
 		$this->load->model('agency_model','agency');
+		$this->load->model('info_model','info');
 	}
 	
 	
@@ -324,6 +325,13 @@ echo '<HR>';
 	}
 	function vehicle_save_import(){		
 		if($_FILES['fl_import']['name']!=''){
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$_POST['menu_id']=93;
+			$this->info->save($_POST);
+			/*--end--*/	
+				
 			$this->db->execute("DELETE FROM DP_VEHICLE WHERE YEAR='".$_POST['year_data']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'vehicle_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	

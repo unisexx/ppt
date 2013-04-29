@@ -192,6 +192,8 @@
 		    <?php if(permission('set_tumbon','view')):?>
 		    	<li><a href="setting/set_tumbon">ตำบล</a></li>
 		    <?php endif;?>
+		    <li><a href="setting/section/index">หน่วยงานหลัก</a></li>
+		    <li><a href="setting/support_section/index">หน่วยงานสนับสนุน</a></li>
 		    <li><?php echo anchor('dla/import', 'นำเข้าข้อมูล อปท.'); ?></li>
 		</ul>
 	</li>

@@ -1,8 +1,8 @@
 <div class="red">  
 <ul id="mega-menu-6" class="mega-menu unstyled">
-	<li><a href="dashboard.php">ข้อมูลภาพรวม</a></li>
+	<li><a href="dashboard.php">สถานการณ์ที่สำคัญ</a></li>
 	
-	<?php foreach(menu::ls(0) as $cat): ?>
+	<?php foreach(menu::ls(0, @login_data('user_type_id')) as $cat): ?>
 	<li><a><?php echo $cat['title']; ?></a>
 	    <ul>
 	        <?php foreach(menu::ls($cat['id']) as $sub): ?>

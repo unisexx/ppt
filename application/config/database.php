@@ -38,6 +38,7 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = '192.168.1.204';
+
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';

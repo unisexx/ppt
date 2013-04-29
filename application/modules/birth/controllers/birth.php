@@ -64,6 +64,11 @@ Class birth extends Public_Controller{
 		if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('birth/index');
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$this->info->save($_POST);
+			/*--end--*/
 			$file_name = 'birth_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/birth/';
 			$fpicname = $uploaddir.$file_name;

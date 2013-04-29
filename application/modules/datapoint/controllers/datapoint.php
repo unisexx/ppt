@@ -9,6 +9,7 @@ Class Datapoint extends Public_Controller{
 		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
 		$this->load->model('agency_model','agency');
+		$this->load->model('info_model','info');
 	}
 	
 	

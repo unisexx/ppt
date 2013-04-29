@@ -9,7 +9,7 @@ Class Setting extends Public_Controller{
 		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
 		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
 		'report' => array('label' => 'รายงาน', 'permission' => array('view')),
-		'basement' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete')),
+		'basic' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete')),
 		'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete')),
 		'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete')),
 	);

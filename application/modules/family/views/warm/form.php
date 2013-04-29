@@ -1,6 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว (เพิ่ม/แก้ไข)</h2>
-<h4>ครอบครัวมีความอบอุ่น  <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="family/warm_save">
+<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
+<form method="post" enctype="multipart/form-data" action="family/warm/save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>

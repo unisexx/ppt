@@ -46,7 +46,8 @@ $(document).ready(function(){
 echo form_hidden('id',@$rs['id']);
 echo (!empty($rs['id']))? form_hidden('update',date('Y-m-d')):form_hidden('create',date('Y-m-d')); ?>
 <div id="btnSave">
-<input type="submit" value="บันทึก" class="btn btn-danger">
+<?php  if(menu::perm($menu_id, 'add')): ?>		
+<input type="submit" value="บันทึก" class="btn btn-danger"><?php endif; ?>
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>

@@ -52,11 +52,11 @@
   foreach($result as $item):
 ?>
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
-  <td><?php echo $i; ?></td>
-  <td><?php echo $item['year'] ?></td>
-  <td><?php echo $sex[$item['sex']] ?></td>
-  <td><?php echo $item['hospital_code'] ?></td>
-  <td><?php echo $item['location'] ?></td>
+  <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
+  <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $item['year'] ?></td>
+  <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $sex[$item['sex']] ?></td>
+  <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $item['hospital_code'] ?></td>
+  <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $item['location'] ?></td>
   <td><?php echo $item['f_id']; ?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">

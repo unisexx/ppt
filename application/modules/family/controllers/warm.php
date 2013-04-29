@@ -1,5 +1,5 @@
 <?php
-Class Family extends Public_Controller
+Class warm extends Public_Controller
 {
 	function __construct()
 	{
@@ -8,44 +8,46 @@ Class Family extends Public_Controller
 		$this->load->model('info_model','info');
 	}
 	public $warm_menu_id = 15;
-	function warm_index(){
+	public $key_id = 21;
+	function index(){
 		$data['menu_id'] = $this->warm_menu_id;
 		$select = " FAMILY.*, PROVINCE PROVINCE_NAME ";
 		$join = " LEFT JOIN PROVINCES ON FAMILY.PROVINCE_ID = PROVINCES.ID ";
-		$condition = '1=1';
+		$condition = '1=1 AND KEY_ID='.$this->key_id;
 		$condition.= @$_GET['year_data'] > 0 ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id'] > 0 ? " AND PROVINCE_ID=".$_GET['province_id']:"";
 		$data['data'] = $this->family->select($select)->join($join)->where($condition)->order_by('FAMILY.ID','DESC')->get();
 		$data['pagination'] =$this->family->pagination();
-		$this->template->build('warm_index',$data);
+		$this->template->build('warm/index',$data);
 	}
 	
-	function warm_form($id=FALSE){
+	function form($id=FALSE){
 		$data['menu_id'] = $this->warm_menu_id;
 		if($id){
 			$data['item'] = $this->family->get_row($id);
 		}
-		$this->template->build('warm_form',$data);
+		$this->template->build('warm/form',$data);
 	}
     
-    function warm_save(){
+    function save(){
+    	$_POST['key_id'] = $this->key_id;
     	$this->family->save($_POST);
-		redirect('family/warm_index');
+		redirect('family/warm/index');
     }
 	
-	function warm_delete($id=false){
+	function delete($id=false){
 		if($id){
 			$this->family->delete($id);
 		}
-		redirect('family/warm_index');
+		redirect('family/warm/index');
 	}
 	
-	function warm_import_form(){
+	function import_form(){
 		$data['menu_id'] = $this->warm_menu_id;		
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('import_form',$data);
+		$this->template->build('warm/import_form',$data);
 	}
-	function warm_import(){
+	function import(){
 //		$this->db->debug = true;
 		//if(!menu::perm($this->warm_menu_id, 'add') || !menu::perm($this->warm_menu_id,'edit'))redirect('family/warm_index');
 		if($_FILES['fl_import']['name']!=''){						
@@ -78,7 +80,7 @@ Class Family extends Public_Controller
 						$id = $this->family->save($val);											
 			endforeach;							
 		}
-		redirect('family/warm_index');
+		redirect('family/warm/index');
 	}
 
 	function ReadData($filepath){
@@ -89,7 +91,7 @@ Class Family extends Public_Controller
 //		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
 		for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
-			if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30))){
+			if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){
 			$import[$index]['key_id'] = substr(trim($data -> sheets[0]['cells'][$i][1]),0,2); 
 			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
 			$import[$index]['pass'] = trim($data -> sheets[0]['cells'][$i][2]);

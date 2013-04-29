@@ -104,7 +104,7 @@ $mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province
 	
 	<div id="btnSave">
 		<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?><input type="submit" value="บันทึก" class="btn btn-danger"><? } ?>
-		<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+		<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" onclick='../mental/'/>
 	</div>
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?></form><? } ?>
 

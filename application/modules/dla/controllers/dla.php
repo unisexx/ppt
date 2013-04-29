@@ -315,10 +315,15 @@ class Dla extends Public_Controller
 		if(!empty($_FILES['file']['name']))
 		{
 			set_time_limit(0);
-            ini_set("max_execution_time","600");
-            ini_set("memory_limit","12M");
-			header('Content-type: text/html; charset=tis-620');
+            
+            // save info
+            $_POST['section_id'] = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+            $this->info->save($_POST);
+            
+            // import from csv
+			//header('Content-type: text/html; charset=tis-620');
 			$row = 0;
+			$total_row = 0;
 			
 	        $opt_province = $this->db->getassoc('select province, id from provinces order by id');
 	        $amphur = $this->db->getarray('select id, province_id, amphur_name from amphur order by province_id, id');
@@ -330,52 +335,54 @@ class Dla extends Public_Controller
 	        $opt_v_position = $this->db->getassoc('select v_position_name, id from v_positions order by id');
 	        $opt_b_position = $this->db->getassoc('select b_position_name, id from b_positions order by id');
 	        $temp_name = time().'.csv';
-	        if(move_uploaded_file($_FILES["file"]["tmp_name"], 'uploads/'.$temp_name)){
-			if(($handle = fopen('uploads/'.$temp_name, 'r')) !== false)
-			{	    
-			    $header = fgetcsv($handle);
-                
-			    while(($data = fgetcsv($handle)) !== false)
-			    {
-			        $row++;
-			        if(!empty($data[0]))
-			        {
-			            $num = count($data);		
-			            $db = array();
-			            for ($c=0; $c < $num; $c++) {
-			                if($row == 1)
-			                {
-			                    $col_title[$c] = $data[$c];
-			                }
-			                else if($row == 2)
-			                {
-			                    $col_title_sub[$c] = $data[$c];
-			                }
-			                else 
-			                {
-			                    //echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
-			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
-	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
-	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
-	                            if($c == 7 and in_array($opt_c_position[$data[$c]], array_values($opt_c_position))) $db['c_position_id'] = $opt_c_position[$data[$c]];
-	                            if($c == 11 and in_array($opt_o_position[$data[$c]], array_values($opt_o_position))) $db['o_position_id'] = $opt_o_position[$data[$c]];
-	                            if($c == 15 and in_array($opt_v_position[$data[$c]], array_values($opt_v_position))) $db['v_position_id'] = $opt_v_position[$data[$c]];
-	                            if($c == 19 and in_array($opt_b_position[$data[$c]], array_values($opt_b_position))) $db['b_position_id'] = $opt_b_position[$data[$c]];
-			                }
-			                
-			            }
-						if($db){
-							 $db['year'] = '2555';
-						     //$this->db->debug = true;
-							 $this->opt->save($db, TRUE);
-						}
-			        }
-			        unset($data);   
-			    }
-			    fclose($handle);
+	        if(move_uploaded_file($_FILES["file"]["tmp_name"], 'uploads/'.$temp_name))
+	        {
+    			if(($handle = fopen('uploads/'.$temp_name, 'r')) !== false)
+    			{	    
+    			    $header = fgetcsv($handle);
+                    
+    			    while(($data = fgetcsv($handle)) !== false)
+    			    {
+    			        $row++;
+    			        if(!empty($data[0]))
+    			        {
+    			            $num = count($data);		
+    			            $db = array();
+    			            for ($c=0; $c < $num; $c++) {
+    			                if($row == 1)
+    			                {
+    			                    $col_title[$c] = $data[$c];
+    			                }
+    			                else if($row == 2)
+    			                {
+    			                    $col_title_sub[$c] = $data[$c];
+    			                }
+    			                else 
+    			                {
+    			                    //echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
+    			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
+    	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
+    	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
+    	                            if($c == 7 and in_array($opt_c_position[$data[$c]], array_values($opt_c_position))) $db['c_position_id'] = $opt_c_position[$data[$c]];
+    	                            if($c == 11 and in_array($opt_o_position[$data[$c]], array_values($opt_o_position))) $db['o_position_id'] = $opt_o_position[$data[$c]];
+    	                            if($c == 15 and in_array($opt_v_position[$data[$c]], array_values($opt_v_position))) $db['v_position_id'] = $opt_v_position[$data[$c]];
+    	                            if($c == 19 and in_array($opt_b_position[$data[$c]], array_values($opt_b_position))) $db['b_position_id'] = $opt_b_position[$data[$c]];
+    			                }
+    			                
+    			            }
+    						if($db){
+    							 $db['year'] = '2555';
+    						     //$this->db->debug = true;
+    							 $this->opt->save($db, TRUE);
+                                 $total_row++;
+    						}
+    			        }
+    			        unset($data);   
+    			    }
+    			    fclose($handle);
+    			}
 			}
-			}
-            set_notify('success', 'Import Complete');
+            set_notify('success', 'Import '.number_format($total_row).' rows');
             redirect('dla/import');
 		}
 		$this->template->build('import');

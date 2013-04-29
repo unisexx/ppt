@@ -63,6 +63,8 @@ $(document).ready(function(){
 		effect: 'fade'
 	});
 	
+	var user_id = $('input[name=id]').val();
+	
 	$("form.validate").validate({
     rules: 
     {
@@ -75,7 +77,7 @@ $(document).ready(function(){
     	
     	// form user **setting/user_form**
     	user_type_id:{required: true},
-    	username:{required: true, minlength: 4, /*remote: "setting/check_username/"+user_id*/},
+    	username:{required: true, minlength: 4, remote: "setting/check_username/"+user_id},
     	fullname:{required: true},
     	name:{required: true},
     	surname:{required: true},
@@ -84,7 +86,7 @@ $(document).ready(function(){
     	group_id:{required: true},
     	person_type_id:{required: true},
     	id_card:{required: true},
-    	email:{required: true, email: true, /*remote: "setting/check_email"*/},
+    	email:{required: true, email: true, remote: "setting/check_email/"+user_id},
     	password:{required: true, minlength: 4},
     	_password:{equalTo: "#password"}
     },
@@ -108,7 +110,7 @@ $(document).ready(function(){
     	group_id:{required: "กรุณาเลือกกลุ่ม / ฝ่าย"},
     	person_type_id:{required: "กรุณาเลือกประเภทบุคลากร"},
     	id_card:{required: "กรุณากรอกบัตรประชาชน"},
-    	email:{required: "กรุณากรอกอีเมล์", email: "กรุณากรอกอีเมล์ให้ถูกต้อง", /*remote: "อีเมล์นี้ไม่สามารถใช้งานได้"*/},
+    	email:{required: "กรุณากรอกอีเมล์", email: "กรุณากรอกอีเมล์ให้ถูกต้อง", remote: "อีเมล์นี้ไม่สามารถใช้งานได้"},
     	password:{required: "กรุณากรอกรหัสผ่าน", minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 4 ตัวอักษร"},
     	_password:{equalTo: "กรุณากรอกรหัสผ่านให้ตรงกันทั้ง 2 ช่อง"}
     }

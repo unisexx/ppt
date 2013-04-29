@@ -82,61 +82,56 @@ echo '<HR>';
 			?><div style='font-size:12px;'><?
 			$_POST['YEAR'] = $data[1][1];
 
-			for($i=6; $i<count($data); $i++)
+			if($_POST['YEAR'])
 			{
-				#print_r($data[$i]);	echo '<BR>';
-				
-				
-				if(strstr($data[$i][0], 'รวม'))
+				for($i=6; $i<count($data); $i++)
 				{
-					$get_province = explode('รวม', $data[$i][0]);
-					$get_province = trim($get_province[0]);
-					if($get_province != '')
+					
+					if(strstr($data[$i][0], 'รวม'))
 					{
-						$dtl_province = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$get_province."'");
-						
-						#print_r($data[$i]);
-						
-						$_POST['PROVINCE_ID'] = $dtl_province[0]['id'];
-						
-						$post_title = array('POP_NUMBER', 
-							'PSY_NUMBER', 
-							'PSY_RATE', 
-							'FEAR_NUMBER', 
-							'FEAR_RATE', 
-							'DEPRESS_NUMBER', 
-							'DEPRESS_RATE', 
-							'RETARDED_NUMBER', 
-							'RETARDED_RATE', 
-							'APOPLEXY_NUMBER', 
-							'APOPLEXY_RATE', 
-							'DRUGADD_NUMBER', 
-							'DRUGADD_RATE', 
-							'OTHER_NUMBER', 
-							'OTHER_RATE', 
-							'SUICIDE_SUCC_NUMBER', 
-							'SUICIDE_SUCC_RATE', 
-							'SUICIDE_UNSUC_NUMBER', 
-							'SUICIDE_UNSUC_RATE', 
-							'AUTISM_NUMBER', 
-							'AUTISM_RATE');
-							
-						for($j=0; $j<count($post_title); $j++)
+						$get_province = explode('รวม', $data[$i][0]);
+						$get_province = trim($get_province[0]);
+						if($get_province != '')
 						{
-							$_POST[$post_title[$j]] = ($data[$i][($j+1)]*1);
+							$dtl_province = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$get_province."'");
+							
+							$_POST['PROVINCE_ID'] = $dtl_province[0]['id'];
+							
+							$post_title = array('POP_NUMBER', 
+								'PSY_NUMBER', 
+								'PSY_RATE', 
+								'FEAR_NUMBER', 
+								'FEAR_RATE', 
+								'DEPRESS_NUMBER', 
+								'DEPRESS_RATE', 
+								'RETARDED_NUMBER', 
+								'RETARDED_RATE', 
+								'APOPLEXY_NUMBER', 
+								'APOPLEXY_RATE', 
+								'DRUGADD_NUMBER', 
+								'DRUGADD_RATE', 
+								'OTHER_NUMBER', 
+								'OTHER_RATE', 
+								'SUICIDE_SUCC_NUMBER', 
+								'SUICIDE_SUCC_RATE', 
+								'SUICIDE_UNSUC_NUMBER', 
+								'SUICIDE_UNSUC_RATE', 
+								'AUTISM_NUMBER', 
+								'AUTISM_RATE');
+								
+							for($j=0; $j<count($post_title); $j++) { $_POST[$post_title[$j]] = ($data[$i][($j+1)]*1); }
+							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล จังหวัด "<?=$get_province;?>" </div><?
 						}
-						#$this->mental->save($_POST);
-						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล 
-							จังหวัด "<?=$get_province;?>"
-						</div><?
 					}
 				}
+			} ELSE {
+				?><DIV STYLE='color:#A00'>ไม่สามารถดำเนินการบันทึกข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง</DIV><?
 			}
 			?></div><?
 					unlink($uploaddir.$file_name);
 					?><BR>
-						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="";'>
-						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="import";'>
+						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="../../datapoint/mental/";'>
+						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="../../datapoint/mental/import";'>
 					<?
 
 		}
@@ -144,7 +139,7 @@ echo '<HR>';
 	
 			function ReadData($filepath)
 			{
-				require_once 'include/Excel/reader.php';
+				@require_once 'include/Excel/reader.php';
 				$data = new Spreadsheet_Excel_Reader();
 				$data -> setOutputEncoding('UTF-8');
 				$data -> read($filepath);

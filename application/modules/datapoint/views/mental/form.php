@@ -1,13 +1,19 @@
+<? $m['id'] = 86; ?>
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต <span class="gray">แบบ กรมสุขภาพจิต</span></h4>
+<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต </h4>
+<?=menu::source($m['id']);?>
 
-<? #$id;?>
-<? #print_r($mental_dtl);
+
+<?
 $mental_dtl['year'] = (@$mental_dtl['year'])?$mental_dtl['year']:'';
 $mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province_id']:'';
 ?>
 <HR>
+	
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <form ACTION="datapoint/mental/save" METHOD="POST">
+<?php endif; ?>
+
 	<input type='hidden' name='ID' value='<?=(@$id);?>'>
 	<table class="tbadd">
 	<tr>
@@ -97,10 +103,10 @@ $mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province
 	</table>
 	
 	<div id="btnSave">
-		<input type="submit" value="บันทึก" class="btn btn-danger">
-		<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+		<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?><input type="submit" value="บันทึก" class="btn btn-danger"><? } ?>
+		<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" onclick='../mental/'/>
 	</div>
-</FORM>
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?></form><? } ?>
 
 
 

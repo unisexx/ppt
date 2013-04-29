@@ -106,59 +106,40 @@ Class Crime extends Public_Controller{
 			
 			$_POST['YEAR'] = $data[1][1];
 			$_POST['STATION'] = $data[0][1];
-						
-			$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
-			if(count($chk_loop) == 1)
-				{	?>
-					<script language='javascript'>
-						alert('มีข้อมูลอยู่แล้วไม่สามารถดำเนินการได้');
-						history.back();
-					</script>
-				<?	} 
-			ELSE 
-				{
-					$pointer_ary = array(4, 10, 17, 28, 40);
-					$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
-					echo 'INSERT DATA STATION <BR>';
-					print_r($_POST);
-					$_POST['STATION_ID'] = $this->station->save($_POST);
-					unset($_POST['YEAR'], $_POST['STATION']);
-					ECHO '<hr>';
-					
-					
-					ECHO 'INSERT DATA STATISTIC <br>';
-					#$_POST['STATION_ID'];
-					#$_POST['MONTH'];
-					#$_POST['CASE_ID'];
-					#$_POST['NOTIFIED'];
-					#$_POST['CATCH'];
-					for($j=0; $j<count($pointer_ary); $j++)
-					{
-						$_POST['CASE_ID'] = ($j+1);
-						
-						
-						for($i=1; $i<=12; $i++)
+			
+			
+			if($_POST['YEAR'] && $_POST['STATION'])
+			{
+					$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
+					if(count($chk_loop) == 1)
+						{	?>
+							<script language='javascript'>
+								alert('มีข้อมูลอยู่แล้วไม่สามารถดำเนินการได้');
+								history.back();
+							</script>
+						<?	} 
+					ELSE 
 						{
-							$_POST['MONTH'] = $i;
-							$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
-							$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
+							$pointer_ary = array(4, 10, 17, 28, 40);
+							$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
+							$_POST['STATION_ID'] = $this->station->save($_POST);
+							unset($_POST['YEAR'], $_POST['STATION']);
 							
-							$this->statistic->save($_POST);
-							#print_r($_POST);
-							#echo '<BR>';
+							for($j=0; $j<count($pointer_ary); $j++)
+							{
+								$_POST['CASE_ID'] = ($j+1);
+								
+								
+								for($i=1; $i<=12; $i++)
+								{
+									$_POST['MONTH'] = $i;
+									$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
+									$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
+									
+									$this->statistic->save($_POST);
+								}
+							}
 						}
-						#echo ($j+1).'/'.$pointer_ary[$j];
-					}
-					echo '<HR style="border:solid 2px #000;">';
-					
-					
-					
-						for($i=4; $i<count($data); $i++)
-						{	#echo $i.'<BR>';
-							#print_r($data[$i]);
-							#echo '<HR>';
-						}
-						echo '<HR>';
 				}
 			unlink($uploaddir.'/'.$file_name);
 			set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
@@ -167,7 +148,7 @@ Class Crime extends Public_Controller{
 		
 				function ReadData($filepath)
 				{
-					require_once 'include/Excel/reader.php';
+					@require_once 'include/Excel/reader.php';
 					$data = new Spreadsheet_Excel_Reader();
 					$data -> setOutputEncoding('UTF-8');
 					$data -> read($filepath);

@@ -1,7 +1,12 @@
+<? $m['id'] = 86; ?>
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>ความผิดทางคดีอาญา  <span class="gray">แบบ สตช. คดีอาญา</span></h4>
+<h4>ความผิดทางคดีอาญา  </h4>
+<?=menu::source($m['id']);?>
 
+
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <form action="datapoint/crime/save" method="post">
+<?php endif; ?>
 	<input type='hidden' name='ID' value='<?=@$id;?>'>
 	<table class="tbadd">
 		<tr>
@@ -53,11 +58,11 @@
 		?>	
 	</table>
 	<div id="btnSave">
-		<input type="submit" value="บันทึก" class="btn btn-danger">
+		<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?><input type="submit" value="บันทึก" class="btn btn-danger"><? } ?>
 		<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" onclick='window.location="";'/>
 	</div>
 
-</form>
+<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?></form><? } ?>
 
 
 <script language='javascript'>

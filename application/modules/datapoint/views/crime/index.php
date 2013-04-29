@@ -1,5 +1,8 @@
+<? $m['id'] = 91; ?>
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>ความผิดทางคดีอาญา  <span class="gray">แบบ สตช. คดีอาญา</span></h4>
+<h4>ความผิดทางคดีอาญา</h4>
+<?=menu::source($m['id']);?>
+
 
 <?
 	$pv_list = $this->province->limit(80)->get('SELECT * FROM PROVINCES WHERE ID != 1');
@@ -42,7 +45,7 @@
   <th>คดีประทุษร้ายต่อทรัพย์</th>
   <th>คดีน่าสนใจ</th>
   <th>คดีรัฐเป็นผู้เสียหาย</th>
-  <th>จัดการ</th>
+	<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>
 </tr>
 
     <?php foreach($result as $key => $item): $key += 1;
@@ -65,11 +68,14 @@
         <td><?=number_format($item_res[3], 0);?></td>
         <td><?=number_format($item_res[4], 0);?></td>
         <td><?=number_format($item_res[5], 0);?></td>
+        
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="js_action('<?=$item['id'];?>', 'EDIT');" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$item['id'];?>", "DELETE");'/>
 
         </td>
+        <?php endif; ?>
     </tr>
     <?php endforeach; ?>
 

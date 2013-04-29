@@ -1,5 +1,7 @@
+<? $m['id'] = 86; ?>
 <h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต <span class="gray">แบบ กรมสุขภาพจิต</span></h4>
+<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต </h4>
+<?=menu::source($m['id']);?>
 
 
 <form action='' method='get'>
@@ -13,10 +15,13 @@
 </div>
 </form>
 
+<?php if(menu::perm($m['id'], 'add')): ?>
 <div id="btnBox">
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/mental/import'" class="btn_import"/>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/mental/form'" class="btn_add"/>
 </div>
+<?php endif; ?>
+
 <?=$pagination; ?>
 
 <table class="tblist">
@@ -32,7 +37,7 @@
 	  <th>ผู้ติดสารเสพติด</th>
 	  <th>ออติสติก</th>
 	  <th>อื่นๆ</th>
-	  <th>จัดการ</th>
+		<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>
 	</tr>
 	
     <?php foreach($result as $key => $item): $key += 1;?>
@@ -58,11 +63,14 @@
         <td><?=number_format($item['drugadd_number']); ?></td>
         <td><?=number_format($item['autism_number']); ?></td>
         <td><?=number_format($item['other_number']); ?></td>
+        
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('datapoint/mental/form/'.$item['id']); ?>'" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$item['id'];?>", "DELETE");'/>
 
         </td>
+        <?php endif; ?>
     </tr>
     <?php endforeach; ?>
 

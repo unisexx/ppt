@@ -7,7 +7,7 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
-		
+		$this->load->model('info_model','info');
 	}
 	public $menu_id = 74;
 	public $menu_sixtyup_id = 55;
@@ -68,10 +68,11 @@ Class population extends Public_Controller{
 	
 	function population_import(){
 		if($_FILES['fl_import']['name']!=''){
+			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
-			
-			
-			$this->db->execute("DELETE FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data']);
+			$_POST['section_id'] = $import_section_id;
+			$this->info->save($_POST);
+			/*--end--*/
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'population_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;
 			$file_name = 'population'.'.'.$ext;			

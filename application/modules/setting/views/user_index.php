@@ -20,13 +20,16 @@
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 
+<?php if(permission('user','add')):?>
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/user_form'" class="btn_add"/></div>
+<?php endif;?>
 
 <?php echo $pagination?>
 
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
+  <th>ชื่อล็อกอิน</th>
   <th>ชื่อ - สกุล</th>
   <th>ข้อมูลติดต่อ</th>
   <th>กลุ่ม/ฝ่าย</th>
@@ -40,6 +43,7 @@
 <?php foreach($users as $key=>$user):?>
 	<tr <?php alternator('','class="odd"')?>>
 	  <td><?php echo $i?></td>
+	  <td><?php echo $user['username']?></td>
 	  <td><?php echo $user['fullname']?></td>
 	  <td>
 	  	<?php if($user['contact_number']):?>
@@ -52,8 +56,15 @@
 	  <td><?php echo $user['group_name']?></td>
 	  <td><?php echo $user['division_name']?></td>
 	  <td>
+	  	
+	  	<?php if(permission('user','edit')):?>
 	  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/user_form/<?php echo $user['id']?>'" />
+	  	<?php endif;?>
+	  	
+	  	<?php if(permission('user','delete')):?>
 	    <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/user_delete/<?php echo $user['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
+	    <?php endif;?>
+	    
 	  </td>
 	</tr>
 <?php $i++?>

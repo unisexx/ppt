@@ -4,7 +4,7 @@ Class Child extends Public_Controller{
 		parent::__construct();
         $this->load->model('opt_model', 'opt');
 		$this->load->model('c_drop_model','drop');
-		$this->load->model('c_pregnant_model','pregnant');
+		$this->load->model('pregnant_model','pregnant');
 		$this->load->model('province_model','province');
 
 		$this->load->model('welfare_model','welfare');
@@ -12,80 +12,12 @@ Class Child extends Public_Controller{
 	}
 
 	
-	function ImportData($Filepath=FALSE){
-			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
-			require('include/spreadsheet-reader-master/SpreadsheetReader.php');
-		
-			date_default_timezone_set('UTC');
-		
-			$Spreadsheet = new SpreadsheetReader($Filepath);
-			$BaseMem = memory_get_usage();
-		
-			$Time = microtime(true);
- 			var_dump($Spreadsheet[0]);
-			/*foreach ($Spreadsheet as $Key => $Row)
-			{
-				echo $Key.': ';
-				if ($Row)
-				{
-					print_r($Row);
-					echo "<br/>";
-				}						
-			}	*/		
-	}
-	function test_save(){			
-			if($_FILES['fl_import']['name']!=''){
-			//$this->db->execute("DELETE FROM C_DROP WHERE YEAR='".$_POST['year_data']."'");
-			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
-			$uploaddir = 'import_file/child/pregnant/';
-			$fpicname = $uploaddir.$file_name;
-			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$this->test($uploaddir.$file_name);	
-			}
-	}
+
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
-		// ExcelFile($filename, $encoding);
 		$data = new Spreadsheet_Excel_Reader();
-		// Set output Encoding.
-		//$data->setOutputEncoding('CP1251');
 		$data -> setOutputEncoding('UTF-8');
-		/***
-		 * if you want you can change 'iconv' to mb_convert_encoding:
-		 * $data->setUTFEncoder('mb');
-		 *
-		 **/
-		/***
-		 * By default rows & cols indeces start with 1
-		 * For change initial index use:
-		 * $data->setRowColOffset(0);
-		 *
-		 **/
-		/***
-		 *  Some function for formatting output.
-		 * $data->setDefaultFormat('%.2f');
-		 * setDefaultFormat - set format for columns with unknown formatting
-		 *
-		 * $data->setColumnFormat(4, '%.3f');
-		 * setColumnFormat - set format for column (apply only to number fields)
-		 *
-		 **/
-		$data -> read($filepath);
-		/*
-		 $data->sheets[0]['numRows'] - count rows
-		 $data->sheets[0]['numCols'] - count columns
-		 $data->sheets[0]['cells'][$i][$j] - data from $i-row $j-column
-	
-		 $data->sheets[0]['cellsInfo'][$i][$j] - extended info about cell
-	
-		 $data->sheets[0]['cellsInfo'][$i][$j]['type'] = "date" | "number" | "unknown"
-		 if 'type' == "unknown" - use 'raw' value, because  cell contain value with format '0.00';
-		 $data->sheets[0]['cellsInfo'][$i][$j]['raw'] = value if cell without format
-		 $data->sheets[0]['cellsInfo'][$i][$j]['colspan']
-		 $data->sheets[0]['cellsInfo'][$i][$j]['rowspan']
-		 */
-		
+		$data -> read($filepath);		
 		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
 		$col=array('sex','weight','birthday','hospital_code','address_code','location','m_birthday','m_address_code','m_id','f_birthday','f_address_code','f_id');
@@ -128,8 +60,6 @@ Class Child extends Public_Controller{
 			}	
 		}	
 		return $import;
-		//print_r($data);
-		//print_r($data->formatRecords);
 	}
 
 	//===== END POPULATION ====//
@@ -219,8 +149,8 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->get();									 
-		$data['province']= $this->province->limit(80)->get();
+		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->get();									 
+		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		
 		$this->template->build('drop/drop_index',$data);
@@ -281,20 +211,54 @@ Class Child extends Public_Controller{
 						$val['BREADWINNER'] = $item['breadwinner'];
 						$val['OTHER'] = $item['other'];
 						$val['TOTAL'] = $item['total'];
-						//$val['CREATE'] = date('Y-m-d');
+						$val['CREATE'] = date('Ymd');
 						$this->drop->save($val);																													
 			}
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/drop_import');	
 	}
-	function pregnant(){
+
+	function ImportData($Filepath=FALSE){
+			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
+			require('include/spreadsheet-reader-master/SpreadsheetReader.php');
 		
-		$this->template->build('pregnant/pregnant_index');
+			date_default_timezone_set('UTC');
+		
+			$Spreadsheet = new SpreadsheetReader($Filepath);
+			$BaseMem = memory_get_usage();		
+			$Time = microtime(true);			
+		return 	$Spreadsheet;
 	}
-	
-	function pregnant_form(){
-		$this->template->build('pregnant/pregnant_form');
+	function pregnant(){
+		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
+		$year =(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']: '';
+		$sex =(!empty($_GET['sex'])) ? " and sex =".$_GET['sex']:'';
+		$data['result'] = $this->pregnant->where("1=1 $location $year $sex")->get();
+		$data['pagination'] = $this->pregnant->pagination();
+		$this->template->build('pregnant/pregnant_index',$data);
+	}	
+	function pregnant_form($id=FALSE){		
+		$data['rs'] = $this->pregnant->get_row($id);	
+		$this->template->build('pregnant/pregnant_form',$data);
+	}
+	function pregnant_save(){
+		$this->db->debug=TRUE;	
+		if($_POST){
+			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
+			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
+			$_POST['f_birthday'] = (!empty($_POST['f_birthday'])) ?date_to_mysql($_POST['f_birthday']):0;
+			$this->pregnant->save($_POST);
+			set_notify('success',lang('data_save_complete'));
+		}
+		redirect('child/pregnant');
+	}
+	function pregnant_delete($id){
+		if(!empty($id)){
+			$this->pregnant->delete($id);
+			 set_notify('success', lang('delete_data_complete'));
+		}
+		redirect('child/pregnant');
 	}
 	function pregnant_import(){
 		$this->template->build('pregnant/pregnant_import_form');	
@@ -304,36 +268,39 @@ Class Child extends Public_Controller{
 		/* ; Maximum allowed size for uploaded files.
 			upload_max_filesize = 40M   จาก  2M
 			; Must be greater than or equal to upload_max_filesize
-			post_max_size = 40M  จาก 2M*/ 
-		
+			post_max_size = 40M  จาก 2M
+		 memmory_limit=256M
+		 * */ 		
 		if($_FILES['fl_import']['name']!=''){
-			//$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");
+			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."' and ORDER_NO='".$_POST['order_no']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$_POST['order_no'].date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data = $this->ReadData($uploaddir.$file_name,"pregnant");								
-			foreach($data as $key=>$item){				
-																						
-					$val['year']=$_POST['year'];
-					$val['sex'] = $item['sex'];
-					$val['weight'] = $item['weight'];
-					$val['birthday'] = $item['birthday'];	
-					$val['hospital_code'] =  $item['hospital_code'];			
-					$val['address_code'] =  $item['address_code'];
-					$val['location'] = $item['location'];
-					$val['m_birthday'] =  $item['m_birthday'];
-					$val['m_address_code'] =  $item['m_address_code'];	
-					$val['m_id'] = $item['m_id'];
-					$val['f_birthday'] =  $item['f_birthday'];	
-					$val['f_address_code'] =  $item['f_address_code'];	
-					$val['f_id'] =  $item['f_id'];		
-					$this->pregnant->save($val);																																					
+			$data = $this->ImportData($uploaddir.$file_name,"pregnant");										
+			foreach($data as $key=>$item){
+					if($key>=1){																														
+						$val['year']=$_POST['year_data'];
+						$val['sex'] = $item[0];
+						$val['weight'] = $item[1];
+						$val['birthday'] = $item[2];	
+						$val['hospital_code'] =  $item[3];			
+						$val['address_code'] =  $item[4];
+						$val['location'] = $item[5];
+						$val['m_birthday'] =  $item[6];
+						$val['m_address_code'] =  $item[7];	
+						$val['f_id'] = $item[8];
+						$val['f_birthday'] =  $item[9];	
+						$val['f_address_code'] =  $item[10];	
+						$val['order_no'] = $_POST['order_no'];	
+						$val['create']=date('Ymd');
+						$this->pregnant->save($val);
+					}																																					
 			}
 			set_notify('success', lang('save_data_complete'));
 		}
-		//redirect('child/pregnant_import');	
+		redirect('child/pregnant_import');	
 	}
 	function birth(){
 		$this->template->build('birth_index');

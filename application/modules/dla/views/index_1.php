@@ -1,5 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?></h2>
-<h4><?php echo $m['title']; ?> <span class="gray">แบบ อปท.1 (1)</span></h4>
+<h4><?php echo $m['title']; ?></h4>
+<?php echo menu::source($m['id']); ?>
 <div id="search">
     <form method="get" action="dla/index/<?php echo $m['id']; ?>">
     <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด

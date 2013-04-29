@@ -1,19 +1,23 @@
 <?php
-Class birth extends Public_Controller{
+Class volunteer_inter extends Public_Controller{
 	function __construct(){
 		parent::__construct();
-        $this->load->model('birth_model', 'birth');
+        $this->load->model('volunteer_main_model', 'v_main');
 		$this->load->model('province_model', 'province');				
 	}
 	function index(){
 		//$this->db->debug=true;
-		$condition = " 1 = 1 ";
-		if(@$_GET['year_data']) $condition .= "AND year_data = ".$_GET['year_data'].' ';
-		if(@$_GET['province_id']) $condition .= "AND province_id = ".$_GET['province_id'].' ';
-		
-		$data['birth'] = $this->birth->where($condition)->get();
-    	$data['pagination'] = $this->birth->pagination;
-		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
+		$condition = " 1 = 1 AND COUNTRY_ID > 1 ";
+		$condition.= @$_GET['province_id']!='' ? " AND VOLUNTEER_MAIN.PROVINCE_ID=".$_GET['province_id'] : "";
+		$condition.= @$_GET['amphur_id']!='' ? " AND VOLUNTEER_MAIN.AMPHUR_ID=".$_GET['amphur_id'] : "";
+		$condition.= @$_GET['district_id']!='' ? " AND VOLUNTEER_MAIN.DISTRICT_ID=".$_GET['district_id'] : "";
+		$select = 'VOLUNTEER_MAIN.*, DISTRICT_NAME V_DISTRICT_NAME, AMPHUR_NAME V_AMPHUR_NAME, PROVINCE V_PROVINCE_NAME ';
+		$join = 'LEFT JOIN DISTRICT ON VOLUNTEER_MAIN.DISTRICT_ID = DISTRICT.ID ';
+		$join.= 'LEFT JOIN AMPHUR ON VOLUNTEER_MAIN.AMPHUR_ID = AMPHUR.ID ';
+		$join.= 'LEFT JOIN PROVINCES ON VOLUNTEER_MAIN.PROVINCE_ID = PROVINCES.ID ';
+		$data['data'] = $this->v_main->select($select)->join($join)->where($condition)->order_by('VOLUNTEER_MAIN.ID','desc')->get();
+    	$data['pagination'] = $this->v_main->pagination;
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');		
 		$this->template->build('index', $data);
 	}
 	
@@ -22,34 +26,28 @@ Class birth extends Public_Controller{
 		$data['id'] = @$id;
 		if(@$id)
 		{
-			$data['item'] = $this->birth->get_row($id);
+			$data['item'] = $this->v_main->get_row($id);
 		}
 		
 		$this->template->build('form', $data);
 	}
 		function save()
 		{
-			$province_id = $_POST['province_id'];
-			if($province_id > 0 ){
-				$_POST['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
-				$_POST['PROVINCE_NAME'] = $this->province->select('PROVINCE')->where("ID=".$_POST['province_id'])->get_one();
-			}
-			$this->birth->save($_POST);
+			$this->v_main->save($_POST);
 			set_notify('success', lang('save_data_complete'));
-			redirect('birth/index');
+			redirect('volunteer/index');
 		}
 	function delete($id=FALSE)
 	{
 		if($id)
 		{
-			$this->birth->delete($id);
+			$this->v_main->delete($id);
             set_notify('success', lang('delete_data_complete'));
-			redirect('birth/index');
+			redirect('volunteer/index');
 		}
 		
 	}
 	function import_form(){
-		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('import_form');
 	}
 	

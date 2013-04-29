@@ -1,5 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>กำพร้า (เด็กที่บิดาและ/หรือมารดาเสียชีวิต) <span class="gray">แบบ อปท.1 (3)</span> </h4>
+<h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
+<h4><?php echo $m['title']; ?></h4>
+<?php echo menu::source($m['id']); ?>
 <?php echo form_open('dla/save/'.$m['id']); ?>
 <table class="tbadd">
     <tr>

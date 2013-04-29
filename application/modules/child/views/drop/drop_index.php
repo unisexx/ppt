@@ -14,7 +14,7 @@
 	<div id="search">
 	<div id="searchBox">หมายเลขเขต
 	<input type="text" name="area_number" id="area_number" style="width:100px;" value="<?php echo @$_GET['area_number'] ?>"/>
-	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- เลือกปีการศึกษา --'); ?>
+	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปีการศึกษา --'); ?>
 <select name="province" id="province">
  <option value="">-- ทุกจังหวัด --</option>
   <?php 

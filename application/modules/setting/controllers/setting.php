@@ -2,19 +2,16 @@
 Class Setting extends Public_Controller{
 	
 	public $module = array(
-		'administrators' => array('label' => 'ผู้ดูแล', 'permission' => array('view','add','edit','delete')),
-		'coverpages' => array('label' => 'หน้าแรก', 'permission' => array('view','add','edit','delete')),
-		'histories' => array('label' => 'ความเป็นมาศูนย์เด็กเล็กปลอดโรค', 'permission' => array('edit')),
-		'hilights' => array('label' => 'ไฮไลท์', 'permission' => array('view','add','edit','delete')),
-		'informations' => array('label' => 'ข่าวประชาสัมพันธ์', 'permission' => array('view','add','edit','delete')),
-		'articles' => array('label' => 'บทความน่าสนใจ', 'permission' => array('view','add','edit','delete')),
-		'vdos' => array('label' => 'vdo แนะนำ', 'permission' => array('view','add','edit','delete')),
-		'downloads' => array('label' => 'เอกสารดาวน์โหลด', 'permission' => array('view','add','edit','delete')),
-		'newsletters' => array('label' => 'จดหมายข่าว', 'permission' => array('view','add','edit','delete')),
-		'galleries' => array('label' => 'ภาพกิจกรรม', 'permission' => array('view','add','edit','delete')),
-		'calendars' => array('label' => 'ปฎิทินกิจกรรม', 'permission' => array('view','add','edit','delete')),
-		'permissions' => array('label' => 'สิทธิ์การใช้งาน', 'permission' => array('view','add','edit','delete')),
-		'dashboards' => array('label' => 'สถิติโดยรวม', 'permission' => array('view')),
+		'user' => array('label' => 'ผู้ใช้งานระบบ', 'permission' => array('view','add','edit','delete')),
+		'usertype' => array('label' => 'สิทธ์การใช้งาน', 'permission' => array('view','add','edit','delete')),
+		'menus' => array('label' => 'ข้อมูลพื้นฐานและกลุ่มเป้าหมาย', 'permission' => array('view','add','edit','delete')),
+		'set_province' => array('label' => 'จังหวัด', 'permission' => array('view','add','edit','delete')),
+		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
+		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
+		'report' => array('label' => 'รายงาน', 'permission' => array('view')),
+		'basic' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete','import')),
+		'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete','import')),
+		'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete','import')),
 	);
 	
 	public $crud = array(
@@ -36,6 +33,11 @@ Class Setting extends Public_Controller{
 		$this->load->model('user_model','user');
 		$this->load->model('user_type_model','user_type');
 		$this->load->model('permission_model','permission');
+		
+		if (!is_login()){
+			set_notify('error', 'กรุณาเข้าสู่ระบบ');
+			redirect('home');
+		}
 	}
 	
 	function user(){
@@ -54,11 +56,13 @@ PPT.USERS.CONTACT_NUMBER,
 PPT.USERS.TARGET_RESPONSE,
 PPT.USERS.EMAIL,
 PPT.USERS.PASSWORD,
+PPT.USERS.USERNAME,
 PPT.USER_TYPE.USER_TYPE_NAME,
 PPT.DEPARTMENT.DEPARTMENT_NAME,
 PPT.DIVISION.DIVISION_NAME,
 PPT.PERSON_TYPE.PERSON_TYPE_NAME,
-PPT.GROUPS.GROUP_NAME
+PPT.GROUPS.GROUP_NAME,
+PPT.USER_TYPE.USER_TYPE_LEVEL
 FROM
 PPT.USERS
 INNER JOIN PPT.USER_TYPE ON PPT.USERS.USER_TYPE_ID = PPT.USER_TYPE.ID
@@ -66,7 +70,7 @@ INNER JOIN PPT.DEPARTMENT ON PPT.USERS.DEPARTMENT_ID = PPT.DEPARTMENT.ID
 INNER JOIN PPT.DIVISION ON PPT.USERS.DIVISION_ID = PPT.DIVISION.ID
 INNER JOIN PPT.PERSON_TYPE ON PPT.USERS.PERSON_TYPE_ID = PPT.PERSON_TYPE.ID
 INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
-		";
+WHERE USER_TYPE_LEVEL < ".login_data('user_type_level');
 		$data['users'] = $this->user->order_by('id','desc')->get($sql);
 		$data['pagination'] = $this->user->pagination();
 		$this->template->build('user_index',$data);
@@ -97,7 +101,7 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 	}
 	
 	function usertype(){
-		$data['user_types'] = $this->user_type->get();
+		$data['user_types'] = $this->user_type->where('user_type_level < '.login_data('user_type_level'))->order_by('user_type_level','desc')->get();
 		$data['pagination'] = $this->user_type->pagination();
 		$this->template->build('usertype_index',$data);
 	}
@@ -107,18 +111,21 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 		$data['rs_perm'] = $this->permission->permission_row($id);
 		$data['module'] = $this->module;
 		$data['crud'] = $this->crud;
+		
 		$this->template->build('usertype_form',$data);
 	}
 	
 	function usertype_save(){
 		if($_POST)
 		{
-			$id = $this->user_type->save($_POST);
-			$this->permission->delete('user_type_id', $id);
+			$_POST['id'] = $_POST['user_type_id'];
+			$this->user_type->save($_POST);
+			
+			$this->permission->delete('user_type_id', $_POST['user_type_id']);
 			if(isset($_POST['checkbox'])){
 				foreach($_POST['checkbox'] as $module => $item)
 				{
-					$data['user_type_id'] = $id;
+					$data['user_type_id'] = $_POST['user_type_id'];
 					$data['module'] = $module;
 					foreach($item as $perm => $val) $data[$perm] =  $val;
 					$this->permission->save($data);
@@ -271,5 +278,10 @@ INNER JOIN PPT.GROUPS ON PPT.USERS.GROUP_ID = PPT.GROUPS.ID
 		$user->get_by_email($_GET['email']);
 		($user->email)?$this->output->set_output("false"):$this->output->set_output("true");
 	}
+
+	function check_username($id=false){
+		$user = $this->user->where("username = '".$_GET['username']."'")->get_row();
+		($user)?$this->output->set_output("false"):$this->output->set_output("true");
+    }
 }
 ?>

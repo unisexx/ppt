@@ -11,9 +11,11 @@
     </form>
 </div>
 
+<?php if(permission('menus','add')):?>
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form'); ?>'" class="btn_add">
+    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('setting/menus/form'); ?>'" class="btn_add">
 </div>
+<?php endif;?>
 
 <div class="clear"></div>
 <ul id="browser" class="filetree">
@@ -22,16 +24,24 @@
         <img src="themes/ppt/images/treeview/museum.png" /> 
         <?php echo $cat['title']?> 
         <span>
+        	<?php if(permission('menus','edit')):?>
             <a href="setting/menus/form/<?php echo $cat['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+            <?php endif;?>
+            <?php if(permission('menus','delete')):?>
             <a href="setting/menus/delete/<?php echo $cat['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+            <?php endif;?>
         </span>
         <ul>
             <?php foreach(menu::ls($cat['id']) as $sub): ?>
             <li>
                 <img src="themes/ppt/images/treeview/folder.gif" /> <?php echo $sub['title']?> 
                 <span>
+                	<?php if(permission('menus','edit')):?>
                     <a href="setting/menus/form/<?php echo $sub['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+                    <?php endif;?>
+                    <?php if(permission('menus','delete')):?>
                     <a href="setting/menus/delete/<?php echo $sub['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+                    <?php endif;?>
                 </span>
                 <ul>
                     <?php foreach(menu::ls($sub['id']) as $item): ?>
@@ -39,8 +49,12 @@
                         <img src="themes/ppt/images/treeview/file.gif" /> 
                         <?php echo anchor($item['url'], $item['title']); ?> 
                         <span>
+                        	<?php if(permission('menus','edit')):?>
                             <a href="setting/menus/form/<?php echo $item['id']?>"><img src="themes/ppt/images/ico_edit.png" width="16" height="16" /></a> 
+                            <?php endif;?>
+                            <?php if(permission('menus','delete')):?>
                             <a href="setting/menus/delete/<?php echo $item['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')"><img src="themes/ppt/images/ico_delete.png" width="16" height="16" /></a>
+                            <?php endif;?>
                         </span>
                     </li>
                     <?php endforeach;?>

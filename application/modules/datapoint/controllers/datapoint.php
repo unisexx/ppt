@@ -260,8 +260,27 @@ echo '<HR>';
 		
 	#================ CRIME ==================#
 
+
+	function ReadData($filepath)
+	{
+		require_once 'include/Excel/reader.php';
+		$data = new Spreadsheet_Excel_Reader();
+		$data -> setOutputEncoding('UTF-8');
+		$data -> read($filepath);
+		
+		error_reporting(E_ALL ^ E_NOTICE);		
+		$index = 0;
+		for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+			$cnt_colum = count($data->sheets[0]['cells'][$i]);
+			for($j=1; $j<=$cnt_colum; $j++)
+			{
+				$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+			}
+			$index++;			
+		}
+		return $import;	
+	}	
 	function vehicle(){
-		//$this->db->debug=TRUE;	
 		$year=(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']:'';
 		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY_ID=".$_GET['agency_id']:'';	
 		$data['result'] =$this->vehicle->select("dp_vehicle.*,agency")
@@ -273,7 +292,6 @@ echo '<HR>';
 	}
 	
 	function vehicle_form($id=FALSE){
-
 		$data['rs'] =$this->vehicle->get_row($id);		
 		$this->template->build('vehicle/vehicle_form',$data);
 	}
@@ -291,9 +309,6 @@ echo '<HR>';
 		}
 		redirect('datapoint/vehicle');
 	}
-
-
-
 
 	function vehicle_import(){
 		$this->template->build('vehicle/vehicle_import_form');
@@ -348,7 +363,7 @@ echo '<HR>';
 								$val['ESCAPE_MALE'] = $item[25];
 								$val['ESCAPE_FEMALE'] = $item[26];
 								$val['INVOLUNTARY'] = $item[27];
-								//$val['CREATE'] =to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss');
+								$val['CREATE'] =date('Ymd');
 								$this->vehicle->save($val);																						
 													
 				}	//if																														

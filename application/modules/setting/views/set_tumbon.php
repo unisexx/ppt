@@ -9,7 +9,9 @@
 </div>
 </form>
 
+<?php if(permission('set_tumbon','add')):?>
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/set_tumbon_form'" class="btn_add"/></div>
+<?php endif;?>
 
 <?php echo $pagination;?>
 
@@ -28,8 +30,13 @@
 	  <td><?php echo $tumbon['district_name']?></td>
 	  <td><?php echo $tumbon['amphur_name']?></td>
 	  <td><?php echo $tumbon['province']?></td>
-	<td><input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/set_tumbon_form/<?php echo $tumbon['id']?>'" />
-	  <a class="btn_delete vtip" title="ลบรายการนี้" href="setting/set_tumbon_delete/<?php echo $tumbon['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
+	  <td>
+	  	<?php if(permission('set_tumbon','edit')):?>
+		<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/set_tumbon_form/<?php echo $tumbon['id']?>'" />
+		<?php endif;?>
+		<?php if(permission('set_tumbon','delete')):?>
+		<a class="btn_delete vtip" title="ลบรายการนี้" href="setting/set_tumbon_delete/<?php echo $tumbon['id']?>" onclick="return confirm('<?php echo NOTICE_CONFIRM_DELETE?>')">ลบ</a>
+		<?php endif;?>
 	  </td>
 	</tr>
 <?php $i++;?>

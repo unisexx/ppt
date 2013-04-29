@@ -56,14 +56,16 @@ Class population extends Public_Controller{
 		redirect('population/index');
 	}
 	
-	function import_form(){		
+	function import_form(){
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');		
 		$this->template->build('population_import_form');
 	}
 	
 	function population_import(){
 		if($_FILES['fl_import']['name']!=''){
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			
-			$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID IN (SELECT ID FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data'].")");
+			
 			$this->db->execute("DELETE FROM POPULATION WHERE PROVINCE_ID=".$_POST['province_id']." AND YEAR_DATA=".$_POST['year_data']);
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'population_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;
@@ -78,6 +80,10 @@ Class population extends Public_Controller{
 					$item['title']."<br>";
 					if (strpos($item['title'], 'จังหวัด')!==false) {
 						$province_name = str_replace('จังหวัด', '', $item['title']);
+						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=0 AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}						
 						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
 						$province_id = $province['id'];		
 						$val['PROVINCE_ID'] = $province_id;
@@ -97,6 +103,7 @@ Class population extends Public_Controller{
 						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
 						$val['SUM_MALE'] = (int)$chars[212];
 						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
 						$id = $this->ppl->save($val);					
 						
 						for($i=0;$i<=203;$i++){
@@ -110,6 +117,10 @@ Class population extends Public_Controller{
 						$amphur_name = strpos($item['title'], 'อำเภอ')!==false ? str_replace('อำเภอ', '', $item['title']) : strpos($item['title'], 'เทศบาล')!==false;
 						$amphur = $this->amphur->where(" province_id=".$province_id." AND AMPHUR_NAME='".iconv('utf-8','tis-620',$amphur_name)."'")->get_row();
 						$amphur_id = $amphur['id'];
+						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=".$amphur_id." AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}
 						$val['PROVINCE_ID'] = $province_id;
 						$val['PROVINCE_NAME'] = $province_name;
 						$val['AMPHUR_ID'] = $amphur_id;
@@ -127,6 +138,7 @@ Class population extends Public_Controller{
 						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
 						$val['SUM_MALE'] = (int)$chars[212];
 						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
 						$id = $this->ppl->save($val);					
 						
 						for($i=0;$i<=203;$i++){
@@ -141,6 +153,10 @@ Class population extends Public_Controller{
 						$district = $this->district->where(" province_id=".$province_id."  AND DISTRICT_NAME='".iconv('utf-8','tis-620',$district_name)."'")->get_row();
 						$amphur = $this->amphur->get_row($district['amphur_id']);
 						$district_id = $district['id'];
+						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$province_id." AND AMPHUR_ID=".$district['amphur_id']." AND DISTRICT_ID=".$district_id." AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}
 						$val['PROVINCE_ID'] = $province_id;
 						$val['PROVINCE_NAME'] = $province_name;
 						$val['AMPHUR_ID'] = $amphur['id'];
@@ -158,6 +174,7 @@ Class population extends Public_Controller{
 						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
 						$val['SUM_MALE'] = (int)$chars[212];
 						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
 						$id = $this->ppl->save($val);					
 						for($i=0;$i<=203;$i++){
 							$val_sub['PID'] = $id;

@@ -363,7 +363,7 @@ echo '<HR>';
 								$val['ESCAPE_MALE'] = $item[25];
 								$val['ESCAPE_FEMALE'] = $item[26];
 								$val['INVOLUNTARY'] = $item[27];
-								//$val['CREATE'] =to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss');
+								$val['CREATE'] =date('Ymd');
 								$this->vehicle->save($val);																						
 													
 				}	//if																														

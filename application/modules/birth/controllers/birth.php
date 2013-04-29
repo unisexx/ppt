@@ -13,7 +13,7 @@ Class birth extends Public_Controller{
 		
 		$data['birth'] = $this->birth->where($condition)->get();
     	$data['pagination'] = $this->birth->pagination;
-		
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('index', $data);
 	}
 	
@@ -49,6 +49,7 @@ Class birth extends Public_Controller{
 		
 	}
 	function import_form(){
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('import_form');
 	}
 	

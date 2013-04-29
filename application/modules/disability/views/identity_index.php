@@ -12,12 +12,15 @@
 <h4>คนพิการที่มีบัตรประจำตัวคนพิการ <span class="gray">แบบ nep บัตรคนพิการ</span></h4>
 <div id="search">
   <div id="searchBox">
-    เดือน ปี ที่ข้อมูลอัพเดตล่าสุด
-	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
-    <select name="select" id="select">
-      <option>-- ทุกเดือน --</option>
-    </select>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+  	<form action="disability/identity">
+	    เดือน ปี ที่ข้อมูลอัพเดตล่าสุด
+		<?php echo form_dropdown('year',array_combine(range(2009,date('Y')),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
+	    <?php
+	    $month_th = array( 1 =>'มกราคม',2 => 'กุมภาพันธ์',3=>'มีนาคม',4=>'เมษายน',5=>'พฤษภาคม',6=>'มิถุนายน',7=>'กรกฏาคม',8=>'สิงหาคม',9=>'กันยายน',10=>'ตุลาคม',11=>'พฤศจิกายน',12=>'ธันวาคม');
+	     echo form_dropdown('month',$month_th,@$_GET['month'],'','-- ทุกเดือน --'); ?>    
+	  	<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+  </form>
+  </div>
 </div>
 
 <div id="btnBox">

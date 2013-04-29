@@ -11,50 +11,6 @@ Class Child extends Public_Controller{
 		$this->load->model('welfarelist_model','wflist');
 	}
 
-	//===== WELFARE =====//
-	function welfare(){
-		menu::source(13);		
-		$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
-		if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
-		if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
-		
-		$data['result'] = $this->welfare->get($sql);
-    	$data['pagination'] = $this->welfare->pagination;
-		
-		$this->template->build('welfare/welfare_index', $data);
-	}
-	
-	function welfare_form($id=FALSE){
-		menu::source(13);
-		$wlist = $this->db->execute('SELECT * FROM WELFARE_LIST');
-		$data['id'] = @$id;
-		if(@$id)
-		{
-			$data['result'] = $this->welfare->get_row($id);
-		}
-		
-		$this->template->build('welfare/welfare_form', $data);
-	}
-		function welfare_save()
-		{
-			menu::source(13);
-			$this->welfare->save($_POST);
-			set_notify('success', lang('save_data_complete'));
-			redirect('child/welfare');
-		}
-	function welfare_delete($id=FALSE)
-	{
-		menu::source(13);
-		if($id)
-		{
-			$this->welfare->delete($id);
-            set_notify('success', lang('delete_data_complete'));
-			redirect('child/welfare');
-		}
-		
-	}
-	
-	//===== WELFARE =====//	
 	
 
 	function ReadData($filepath,$module=FALSE){
@@ -193,8 +149,8 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->get();									 
-		$data['province']= $this->province->limit(80)->get();
+		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->get();									 
+		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		
 		$this->template->build('drop/drop_index',$data);
@@ -255,7 +211,7 @@ Class Child extends Public_Controller{
 						$val['BREADWINNER'] = $item['breadwinner'];
 						$val['OTHER'] = $item['other'];
 						$val['TOTAL'] = $item['total'];
-						//$val['CREATE'] = date('Y-m-d');
+						$val['CREATE'] = date('Ymd');
 						$this->drop->save($val);																													
 			}
 			set_notify('success', lang('save_data_complete'));
@@ -318,7 +274,7 @@ Class Child extends Public_Controller{
 		if($_FILES['fl_import']['name']!=''){
 			$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."' and ORDER_NO='".$_POST['order_no']."'");
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].date("Y_m_d_H_i_s").'.'.$ext;	
+			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$_POST['order_no'].date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		

@@ -63,18 +63,20 @@ class Menu
      * Check permission for show button
      *
      * @access  public
-     * @param   number
-     * @param   string
-     * @param   string
+     * @param   number (menu_id) or string module 
+     * @param   string (Action)
+     * @param   string (Url)
      * @return  string
      */
-    static public function perm($menu_id, $action, $url)
+    static public function perm($menu_id, $action, $url = null)
     {
         if(is_login())
         {
             // button
             $btn = array(
-                'add' => '<input type="button" title="เพิ่มรายการ" value=" " onclick="document.location=\''.site_url($url).'\'" class="btn_add">'
+                'add' => '<input type="button" title="เพิ่มรายการ" onclick="document.location=\''.site_url($url).'\'" class="btn_add">',
+                'edit' => '<input type="button" title="แก้ไขรายการนี้" class="btn_edit vtip"  onclick="window.location=\''.site_url($url).'\'" />',
+                'delete' => ' <input type="button" title="ลบรายการนี้" class="btn_delete vtip" onclick="if(confirm(\'ยืนยันการลบ\')){window.location=\''.site_url($url).'\';}" />'
             );
             
             // check group menu form menu_id
@@ -84,10 +86,20 @@ class Menu
             WHEN 3 THEN 'basic'
             ELSE NULL END) GROUP_NAME
             FROM MENUS WHERE ID = (SELECT PARENT_ID FROM MENUS WHERE ID = ?)", array($menu_id));
-            
+
             // check permission
-            $result = get_instance()->db->getone("SELECT \"$action\" FROM PERMISSION WHERE USER_TYPE_ID = ".login_data('user_type_id')." AND MODULE = '".$group."'");
-            if($result == 1) echo $btn['action'];
+            $result = get_instance()->db->getone("SELECT \"".strtoupper($action)."\" FROM PERMISSION WHERE USER_TYPE_ID = ".login_data('user_type_id')." AND MODULE = '".$group."'");
+            
+            // check show button or permission
+            if(empty($url))
+            {
+                return ($result == 1) ? TRUE : FALSE;
+            }
+            else 
+            {
+                return ($result == 1) ? $btn[$action] : null;
+            }
+            
         }
     }
 }

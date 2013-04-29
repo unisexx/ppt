@@ -14,8 +14,7 @@
 </div>
 
 <div id="btnBox">
-    <?php menu::perm($m['id'], 'add', 'dla/form/'.$m['id']); ?>
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form/'.$m['id']); ?>'" class="btn_add">
+    <?php echo menu::perm($m['id'], 'add', 'dla/form/'.$m['id']); ?>
 </div>
 
 <?php echo $pagination; ?>
@@ -40,8 +39,8 @@
         <td><?php echo $item['size']; ?></td>
         <td class="text-right"><?php echo @number_format($item['total_1']); ?></td>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dla/form/'.$m['id'].'/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('dla/delete/'.$m['id'].'/'.$item['id']); ?>';}" />
+            <?php echo menu::perm($m['id'], 'edit', 'dla/form/'.$m['id'].'/'.$item['id']); ?>
+            <?php echo menu::perm($m['id'], 'delete', 'dla/delete/'.$m['id'].'/'.$item['id']); ?>
         </td>
     </tr>
     <?php endforeach; ?>

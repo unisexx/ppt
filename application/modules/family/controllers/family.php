@@ -10,20 +10,38 @@ Class Family extends Public_Controller
 	public $warm_menu_id = 15;
 	function warm_index(){
 		$data['menu_id'] = $this->warm_menu_id;
+		$select = " FAMILY.*, PROVINCE PROVINCE_NAME ";
+		$join = " LEFT JOIN PROVINCES ON FAMILY.PROVINCE_ID = PROVINCES.ID ";
+		$condition = '1=1';
+		$condition.= @$_GET['year_data'] > 0 ? " AND YEAR_DATA=".$_GET['year_data'] : "";
+		$condition.= @$_GET['province_id'] > 0 ? " AND PROVINCE_ID=".$_GET['province_id']:"";
+		$data['data'] = $this->family->select($select)->join($join)->where($condition)->order_by('FAMILY.ID','DESC')->get();
+		$data['pagination'] =$this->family->pagination();
 		$this->template->build('warm_index',$data);
 	}
 	
-	function warm_form(){
+	function warm_form($id=FALSE){
 		$data['menu_id'] = $this->warm_menu_id;
-		$this->template->build('warm_form');
+		if($id){
+			$data['item'] = $this->family->get_row($id);
+		}
+		$this->template->build('warm_form',$data);
 	}
     
     function warm_save(){
-    	
+    	$this->family->save($_POST);
+		redirect('family/warm_index');
     }
 	
+	function warm_delete($id=false){
+		if($id){
+			$this->family->delete($id);
+		}
+		redirect('family/warm_index');
+	}
+	
 	function warm_import_form(){
-		$data['menu_id'] = $this->warm_menu_id;
+		$data['menu_id'] = $this->warm_menu_id;		
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('import_form',$data);
 	}
@@ -42,24 +60,25 @@ Class Family extends Public_Controller
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 			$data = $this->ReadData($uploaddir.$file_name);
-			print_r($data);exit;			
 			foreach($data as $item):
 						$val['ID']='';								
-						$province_name = str_replace('จังหวัด', '', $item['title']);
-						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
-						$province_id = $province['id'];		
+						$province_id = $_POST['province_id'];
 						if($province_id > 0 ){
-							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
+							$val['ID'] = $this->family->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id." AND KEY_ID=". (int)$item['key_id'])->get_one();
 						}
 						$val['YEAR_DATA'] = $_POST['year_data'];
-						$val['PROVINCE_ID'] = $province_id;
-						$val['PROVINCE_NAME'] = $province_name;
-						$val['BIRTH_MALE'] = (int)$item['birth_male'];
-						$val['BIRTH_FEMALE'] = (int)$item['birth_female'];
-						$id = $this->birth->save($val);											
+						$val['PROVINCE_ID'] = $_POST['province_id'];
+						$val['KEY_ID'] = (int)$item['key_id'];
+						$val['TITLE'] = $item['title'];
+						$val['PASS'] = (float)$item['pass'];
+						$val['PERCENTAGE'] = (float)$item['percentage'];
+						$val['TARGET'] = (float)$item['target'];
+						$val['LOWER_TARGET'] = (float)$item['lower_target'];
+						$val['EDIT'] = (float)$item['edit'];
+						$id = $this->family->save($val);											
 			endforeach;							
 		}
-		//redirect('family/warm_index');
+		redirect('family/warm_index');
 	}
 
 	function ReadData($filepath){
@@ -69,14 +88,17 @@ Class Family extends Public_Controller
 		$data -> read($filepath);
 //		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
-		for($i = 3; $i <= $data -> sheets[0]['numRows']; $i++) {
+		for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
+			if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30))){
+			$import[$index]['key_id'] = substr(trim($data -> sheets[0]['cells'][$i][1]),0,2); 
 			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
 			$import[$index]['pass'] = trim($data -> sheets[0]['cells'][$i][2]);
 			$import[$index]['percentage'] = trim($data -> sheets[0]['cells'][$i][3]);
 			$import[$index]['target'] = trim($data -> sheets[0]['cells'][$i][4]);
-			$import[$index]['low_target'] = trim($data -> sheets[0]['cells'][$i][5]);
+			$import[$index]['lower_target'] = trim($data -> sheets[0]['cells'][$i][5]);
 			$import[$index]['edit'] = trim($data -> sheets[0]['cells'][$i][6]);								 
 			$index++;			
+			}
 		}		
 		return $import;
 	}

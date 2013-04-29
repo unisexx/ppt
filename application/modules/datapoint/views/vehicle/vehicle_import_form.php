@@ -1,4 +1,4 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น</h2>
+<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น <a href="uploads/traffic_years_2554.xlsx"class="btn_ex_data"></a></h2>
 <h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
 <form action="datapoint/vehicle_save_import" method="post" enctype="multipart/form-data">
 	<table class="tbadd">

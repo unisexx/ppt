@@ -295,7 +295,7 @@ echo '<HR>';
 	
 	function vehicle_form($id=FALSE){
 		$data['rs'] =$this->vehicle->get_row($id);		
-		$this->template->build('vehicle/vehicle_form',$data);
+		(menu::perm($menu_id, 'import'))? $this->template->build('vehicle/vehicle_form',$data):redirect('datapoint/vehicle');
 	}
 	function vehicle_save(){
 		if($_POST){
@@ -312,8 +312,10 @@ echo '<HR>';
 		redirect('datapoint/vehicle');
 	}
 
-	function vehicle_import(){
-		$this->template->build('vehicle/vehicle_import_form');
+	function vehicle_import()
+	{	 
+		(menu::perm($menu_id, 'import')) ? $this->template->build('vehicle/vehicle_import_form'):redirect('datapoint/vehicle');
+	
 	}
 	function ImportData($Filepath=FALSE){
 			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');

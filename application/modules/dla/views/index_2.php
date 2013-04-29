@@ -36,7 +36,7 @@
         <td><?php echo $item['year']; ?></td>
         <td><?php echo $item['province']; ?></td>
         <td><?php echo $item['amphur_name']; ?></td>
-        <td><?php echo $item['opt_name']; ?></td>       
+        <td><?php echo anchor('dla/form/'.$m['id'].'/'.$item['id'], $item['opt_name']); ?></td>       
         <td><?php echo $item['size']; ?></td>
         <td class="text-right"><?php echo @number_format($item['total_1']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_2']); ?></td>

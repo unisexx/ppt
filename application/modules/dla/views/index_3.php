@@ -14,7 +14,7 @@
 </div>
 
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('dla/form/'.$m['id']); ?>'" class="btn_add">
+    <?php echo menu::perm($m['id'], 'add', 'dla/form/'.$m['id']); ?>
 </div>
 
 <?php echo $pagination; ?>
@@ -22,36 +22,36 @@
     <tr>
         <th>ลำดับ</th>
         <th>ปี</th>
+        <th>จังหวัด</th>
+        <th>อำเภอ</th>
+        <th>อปท.</th>
+        <th>ขนาด</th>
         <th width="90"><span class="vtip" title="ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น">ดื่มเครื่องดื่ม..</span></th>
         <th width="78"><span class="vtip" title="มั่วสุมและทำความรำคาญให้กับชาวบ้าน">มั่วสุมและ..</span></th>
         <th width="100"><span class="vtip" title="ติดเกมส์ และเล่นการพนันต่าง ๆ">ติดเกมส์ และ...</span></th>
         <th width="87"><span class="vtip" title="มีพฤติกรรมทางเพศ">มีพฤติกรรม..</span></th>
         <th width="60">อื่นๆ ระบุ</th>
-        <th width="60">หมายเลข</th>
-        <th>อปท.</th>
-        <th>อำเภอ / จังหวัด</th>
-        <th>ขนาด</th>
-        <th>หัวหน้าสำนักปลัด</th>
-        <th>จัดการ</th>
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
     </tr>
     <?php foreach($result as $key => $item): $key += 1;?>
     <tr>
         <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?php echo $item['year']; ?></td>
+        <td><?php echo $item['province']; ?></td>
+        <td><?php echo $item['amphur_name']; ?></td>
+        <td><?php echo anchor('dla/form/'.$m['id'].'/'.$item['id'], $item['opt_name']); ?></td>       
+        <td><?php echo $item['size']; ?></td>
         <td class="text-right"><?php echo @number_format($item['total_1']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_2']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_3']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_4']); ?></td>
         <td class="text-right"><?php echo @number_format($item['total_5']); ?></td>
-        <td class="text-right"><?php echo $item['number_id']; ?></td>
-        <td><?php echo $item['opt_name']; ?></td>
-        <td><?php echo $item['amphur_name'].'/'.$item['province']; ?></td>
-        <td><?php echo $item['size']; ?></td>
-        <td><?php echo $item['c_title'].$item['c_name']; ?></td>
+        <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dla/form/'.$m['id'].'/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('dla/delete/'.$m['id'].'/'.$item['id']); ?>';}" />
+            <?php echo menu::perm($m['id'], 'edit', 'dla/form/'.$m['id'].'/'.$item['id']); ?>
+            <?php echo menu::perm($m['id'], 'delete', 'dla/delete/'.$m['id'].'/'.$item['id']); ?>
         </td>
+        <?php endif; ?>
     </tr>
     <?php endforeach; ?>
 </table>

@@ -78,5 +78,5 @@ Class Recipient extends Public_Controller{
 			set_notify('success', lang('save_data_complete'));		
 		}
 		redirect('recipient/import');
-	}
+	}	
 }	

@@ -249,7 +249,7 @@ Class Child extends Public_Controller{
 		$this->template->build('pregnant/pregnant_form',$data);
 	}
 	function pregnant_save(){
-		if(!menu::perm($this->pregnant_menu_id, 'add') || !menu::perm($this->pregnant_menu_id,'edit'))redirect('child/pregnant');	
+		//if(!menu::perm($this->pregnant_menu_id, 'add') || !menu::perm($this->pregnant_menu_id,'edit'))redirect('child/pregnant');	
 		if($_POST){
 			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
 			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
@@ -277,7 +277,8 @@ Class Child extends Public_Controller{
 			post_max_size = 40M  จาก 2M
 		 memmory_limit=256M
 		 * */ 		
-		if($_FILES['fl_import']['name']!=''){
+
+		 if($_FILES['fl_import']['name']!=''){
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
 			$_POST['section_id'] = $import_section_id;

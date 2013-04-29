@@ -193,8 +193,8 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->get();									 
-		$data['province']= $this->province->limit(80)->get();
+		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->get();									 
+		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		
 		$this->template->build('drop/drop_index',$data);
@@ -255,7 +255,7 @@ Class Child extends Public_Controller{
 						$val['BREADWINNER'] = $item['breadwinner'];
 						$val['OTHER'] = $item['other'];
 						$val['TOTAL'] = $item['total'];
-						//$val['CREATE'] = date('Y-m-d');
+						$val['CREATE'] = date('Ymd');
 						$this->drop->save($val);																													
 			}
 			set_notify('success', lang('save_data_complete'));

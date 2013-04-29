@@ -3,7 +3,7 @@
 <?php echo menu::source($m['id']); ?>
 <div id="search">
     <form method="get" action="dla/index/<?php echo $m['id']; ?>">
-    <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด
+    <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด/อปท.
         <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
         <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>

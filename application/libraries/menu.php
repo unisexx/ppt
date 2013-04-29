@@ -9,7 +9,8 @@ class Menu
     {
         if(is_login() and !empty($user_type_id))
         {
-            $sql = "SELECT * FROM MENUS 
+            $sql = "SELECT MENUS.*, FORM_TEMPLATE.NAME FROM MENUS 
+            LEFT JOIN FORM_TEMPLATE ON FORM_TEMPLATE.ID = MENUS.TEMPLATE_ID 
             WHERE MENUS.PARENT_ID = ?
             AND MENUS.ID IN ( 
                 SELECT SUBSTR(PERMISSION.MODULE, 6) AS ID
@@ -24,7 +25,7 @@ class Menu
             $result = get_instance()->db->getarray($sql, array($parent_id, $user_type_id));
             dbConvert($result);
         }else{
-            $result = get_instance()->db->getarray('select * from menus where parent_id = ? and publish = 1 order by position', array($parent_id));
+            $result = get_instance()->db->getarray('select menus.*, form_template.name from menus LEFT JOIN FORM_TEMPLATE ON FORM_TEMPLATE.ID = MENUS.TEMPLATE_ID where menus.parent_id = ? and menus.publish = 1 order by menus.position', array($parent_id));
             dbConvert($result);
         }
         return $result;
@@ -77,8 +78,15 @@ class Menu
             );
             
             // check group menu form menu_id
-            $group = 'menu_'.get_instance()->db->getone("SELECT PARENT_ID
-            FROM MENUS WHERE ID = (SELECT PARENT_ID FROM MENUS WHERE ID = ?)", array($menu_id));
+            if(is_numeric($menu_id))
+            {
+                $group = 'menu_'.get_instance()->db->getone("SELECT PARENT_ID
+                FROM MENUS WHERE ID = (SELECT PARENT_ID FROM MENUS WHERE ID = ?)", array($menu_id));
+            }
+            else 
+            {
+                $group = $menu_id;
+            }
 
             // check permission
             $result = get_instance()->db->getone("SELECT \"".strtoupper($action)."\" FROM PERMISSION WHERE USER_TYPE_ID = ".login_data('user_type_id')." AND MODULE = '".$group."'");

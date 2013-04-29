@@ -13,13 +13,15 @@
 
 <table class="tblist">
 <tr>
-  <th>ลำดับ</th>
+  <!-- <th>ลำดับ</th> -->
+  <th>ระดับการใช้งาน</th>
   <th>สิทธิ์การใช้งาน</th>
-  <th></th>
+  <th>จัดการ</th>
 </tr>
 <?php foreach($user_types as $key=>$user_type):?>
 	<tr>
-	  <td><?php echo $key+1?></td>
+	  <!-- <td><?php echo $key+1?></td> -->
+	  <td><?php echo $user_type['user_type_level']?></td>
 	  <td><?php echo $user_type['user_type_name']?></td>
 	  <td>
 	  	<?php if(permission('usertype','edit')):?>

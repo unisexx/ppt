@@ -29,11 +29,12 @@
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
+  <th>ชื่อล็อกอิน</th>
   <th>ชื่อ - สกุล</th>
   <th>ข้อมูลติดต่อ</th>
   <th>กลุ่ม/ฝ่าย</th>
   <th>กอง/สำนัก</th>
-  <th></th>
+  <th>จัดการ</th>
 </tr>
 <?php
 	$page = (isset($_GET['page']))? $_GET['page']:1;
@@ -42,6 +43,7 @@
 <?php foreach($users as $key=>$user):?>
 	<tr <?php alternator('','class="odd"')?>>
 	  <td><?php echo $i?></td>
+	  <td><?php echo $user['username']?></td>
 	  <td><?php echo $user['fullname']?></td>
 	  <td>
 	  	<?php if($user['contact_number']):?>

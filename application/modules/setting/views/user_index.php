@@ -1,24 +1,22 @@
+<script type="text/javascript">
+    $(function(){
+        $('[name=division_id]').chainedSelect({parent: '[name=department_id]',url: 'setting/ajax_division',value: 'id',label: 'text'});
+        
+        $('[name=workgroup_id]').chainedSelect({parent: '[name=division_id]',url: 'setting/ajax_workgroup',value: 'id',label: 'text'});
+    });
+</script>
+
 <h2>ผู้ใช้งาน</h2>
+<form action="" method="get">
 <div id="search">
   <div id="searchBox">ชื่อ-สกุล
-    <input type="text" name="textfield" id="textfield" style="width:200px;" />
-    เลขที่บัตรประชาชน
-    <input name="data" type="text" id="data" onkeyup="autoTab(this)" />
-
-    <select name="select6" id="select6">
-      <option>-- กอง / สำนักงาน --</option>
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-  </select>
-    <select name="select" id="select">
-      <option>-- กลุ่ม / ฝ่าย --</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+    <input type="text" name="fullname" style="width:200px;" value="<?php echo @$_GET['fullname']?>" />
+    <?php echo form_dropdown('department_id', get_option('id', 'department_name', 'department'), @$_GET['department_id'], null, '- เลือกกรม -'); ?>
+    <?php echo form_dropdown('division_id', (empty($_GET['department_id'])) ? array() : get_option('id', 'division_name', 'division', 'department_id = '.$_GET['department_id'].' order by division_name'), @$_GET['division_id'], null, '- กอง / สำนักงาน -'); ?>
+    <?php echo form_dropdown('workgroup_id', (empty($_GET['division_id'])) ? array() : get_option('id', 'workgroup_name', 'workgroup', 'division_id = '.$_GET['division_id'].' order by workgroup_name'), @$_GET['workgroup_id'], null, '- กลุ่ม / ฝ่าย -'); ?>
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
+</form>
 
 <?php if(permission('user','add')):?>
 <div id="btnBox"><input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='setting/user_form'" class="btn_add"/></div>
@@ -32,6 +30,7 @@
   <th>ชื่อล็อกอิน</th>
   <th>ชื่อ - สกุล</th>
   <th>ข้อมูลติดต่อ</th>
+  <th>กรม</th>
   <th>กลุ่ม/ฝ่าย</th>
   <th>กอง/สำนัก</th>
   <th>จัดการ</th>
@@ -53,8 +52,9 @@
 	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="<?php echo $user['email']?>" />
 	  	<?php endif;?>
 	  </td>
-	  <td><?php echo $user['workgroup_name']?></td>
+	  <td><?php echo $user['department_name']?></td>
 	  <td><?php echo $user['division_name']?></td>
+	  <td><?php echo $user['workgroup_name']?></td>
 	  <td>
 	  	
 	  	<?php if(permission('user','edit')):?>

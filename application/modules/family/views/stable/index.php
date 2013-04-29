@@ -3,13 +3,13 @@
 		$(".btn_delete").click(function(){
 			if(confirm('ลบรายการนี้ ? ')){
 				var hdid = $(this).closest('td').find('#hdid').val();
-				window.location='family/warm_delete/'+hdid;
+				window.location='family/stable/delete/'+hdid;
 			}
 		})
 	})
 </script>
 <h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว</h2>
-<h4>ครอบครัวมีความอบอุ่น <?php echo menu::source($menu_id); ?></h4>
+<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
 <form method="get">
 <div id="search">
   <div id="searchBox">
@@ -19,8 +19,8 @@
 </div>
 </form>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='family/warm_import_form'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='family/warm_form'" class="btn_add"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='family/stable/import_form'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='family/stable/form'" class="btn_add"/>
 </div>
 <!--
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
@@ -61,7 +61,7 @@
   <td><?=number_format($item['edit'],2);?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='family/warm_form/<?=$item['id'];?>'" />
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='family/stable/form/<?=$item['id'];?>'" />
   	<? if(menu::perm($menu_id, 'delete')): ?>
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
     <? endif;?>

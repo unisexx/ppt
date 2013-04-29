@@ -37,7 +37,6 @@ ini_set("max_execution_time" , 300);
 $active_group = "default";
 $active_record = TRUE;
 
-
 #$db['default']['hostname'] = '27.254.33.64';
 $db['default']['hostname'] = '192.168.1.204	';
 $db['default']['username'] = 'ppt';

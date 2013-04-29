@@ -1,6 +1,6 @@
 <h2>ตั้งค่าข้อมูลหลัก > ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</h2>
 
-<div id="search">
+<!-- <div id="search">
     <form method="get" action="setting/menus">
     <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด
         <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
@@ -9,7 +9,7 @@
         <input type="submit" title="ค้นหา" value=" " class="btn_search" />
     </div>
     </form>
-</div>
+</div> -->
 
 <?php if(permission('menus','add')):?>
 <div id="btnBox">

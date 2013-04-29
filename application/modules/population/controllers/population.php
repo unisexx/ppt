@@ -75,8 +75,7 @@ Class population extends Public_Controller{
 			$this->info->save($_POST);
 			/*--end--*/
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'population_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;
-			$file_name = 'population'.'.'.$ext;			
+			$file_name = 'population_'.$_POST['year_data'].'_'.$_POST['province_id'].date("Y_m_d_H_i_s").'.'.$ext;			
 			$uploaddir = 'import_file/population/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		

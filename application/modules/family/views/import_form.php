@@ -1,10 +1,14 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
-<h4>ข้อมูลการเกิด <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="birth/birth_import">
+<h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว (นำเข้าข้อมูล) <img src="media/images/btn_ex_data.png" style=""></h2>
+<h4>ครอบครัวมีความอบอุ่น <?php echo menu::source($menu_id); ?></h4>
+<form method="post" enctype="multipart/form-data" action="family/warm_import">
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
 			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+		</tr>
+		<tr>
+			<th>จังหวัด</th>
+			<td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
 		</tr>
 		<tr>
 			<th colspan="2">แหล่งที่มาของข้อมูล</th>

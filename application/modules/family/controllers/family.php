@@ -4,83 +4,81 @@ Class Family extends Public_Controller
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model('opt_model', 'opt');
+        $this->load->model('family_model','family');
+		$this->load->model('info_model','info');
 	}
-	
-	function warm(){
-		$this->template->build('warm_index');
+	public $warm_menu_id = 15;
+	function warm_index(){
+		$data['menu_id'] = $this->warm_menu_id;
+		$this->template->build('warm_index',$data);
 	}
 	
 	function warm_form(){
+		$data['menu_id'] = $this->warm_menu_id;
 		$this->template->build('warm_form');
 	}
     
-    function violence_import()
-    {
-        
+    function warm_save(){
+    	
     }
 	
-	function violence()
-	{
-	    $where = '';
-        if(!empty($_GET))
-        {
-            if(!empty($_GET['keyword']))
-            {
-                $where .= " AND ( FORM_ALL.NUMBER_ID LIKE '%".$_GET['keyword']."%'";
-                $where .= " OR FORM_ALL.C_NAME LIKE '%".$_GET['keyword']."%'";
-                $where .= " OR FORM_ALL.OPT_NAME LIKE '%".$_GET['keyword']."%' )";
-            }
-            
-            if(!empty($_GET['year'])) $where .= ' AND FORM_ALL."YEAR" = '.$_GET['year'];
-            if(!empty($_GET['province_id'])) $where .= ' AND FORM_ALL.PROVINCE_ID = '.$_GET['province_id'];
-            if(!empty($_GET['amphur_id'])) $where .= ' AND FORM_ALL.AMPHUR_ID = '.$_GET['amphur_id'];
-        }
-        $sql = 'SELECT 
-          FORM_ALL."ID",
-          FORM_ALL."YEAR",
-          (FORM_ALL.T422) AS TOTAL_1,
-          FORM_ALL.NUMBER_ID,
-          FORM_ALL.OPT_NAME,
-          AMPHUR.AMPHUR_NAME,
-          PROVINCES.PROVINCE,
-          FORM_ALL."SIZE",
-          FORM_ALL.C_TITLE,
-          FORM_ALL.C_NAME
-        FROM FORM_ALL 
-        LEFT JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
-        LEFT JOIN AMPHUR ON AMPHUR.ID = FORM_ALL.AMPHUR_ID
-        WHERE 1=1 '.$where.' 
-        ORDER BY FORM_ALL."YEAR" DESC, FORM_ALL.NUMBER_ID DESC';
-        // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
-        $data['result'] = $this->opt->get($sql);
-        $data['pagination'] = $this->opt->pagination;
-        $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('violence_index', $data);
+	function warm_import_form(){
+		$data['menu_id'] = $this->warm_menu_id;
+		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
+		$this->template->build('import_form',$data);
 	}
-	
-	function violence_form($id = null)
-	{
-	    if($_POST)
-        {
-            //$this->db->debug = true;
-            $this->opt->save($_POST);
-            set_notify('success', lang('save_data_complete'));
-            redirect('family/violence');
-        }
-        $data['rs'] = $this->opt->get_row($id);
-        $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('violence_form', $data);
+	function warm_import(){
+//		$this->db->debug = true;
+		//if(!menu::perm($this->warm_menu_id, 'add') || !menu::perm($this->warm_menu_id,'edit'))redirect('family/warm_index');
+		if($_FILES['fl_import']['name']!=''){						
+			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			/*---for insert value to info table ---*/
+			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			$_POST['section_id'] = $import_section_id;
+			$this->info->save($_POST);
+			/*--end--*/
+			$file_name = 'family_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/family/';
+			$fpicname = $uploaddir.$file_name;
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
+			$data = $this->ReadData($uploaddir.$file_name);
+			print_r($data);exit;			
+			foreach($data as $item):
+						$val['ID']='';								
+						$province_name = str_replace('จังหวัด', '', $item['title']);
+						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
+						$province_id = $province['id'];		
+						if($province_id > 0 ){
+							$val['ID'] = $this->birth->select('id')->where("YEAR_DATA=".$_POST['year_data']." AND PROVINCE_ID=".$province_id)->get_one();
+						}
+						$val['YEAR_DATA'] = $_POST['year_data'];
+						$val['PROVINCE_ID'] = $province_id;
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['BIRTH_MALE'] = (int)$item['birth_male'];
+						$val['BIRTH_FEMALE'] = (int)$item['birth_female'];
+						$id = $this->birth->save($val);											
+			endforeach;							
+		}
+		//redirect('family/warm_index');
 	}
-    
-    function violence_delete($id)
-    {
-        if(!empty($id))
-        {
-            $this->opt->delete($id);
-            set_notify('success', lang('delete_data_complete'));
-        }
-        redirect('family/violence');
-    }
+
+	function ReadData($filepath){
+		require_once 'include/Excel/reader.php';
+		$data = new Spreadsheet_Excel_Reader();
+		$data -> setOutputEncoding('UTF-8');
+		$data -> read($filepath);
+//		error_reporting(E_ALL ^ E_NOTICE);
+		$index = 0;
+		for($i = 2; $i <= $data -> sheets[0]['numRows']; $i++) {
+			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
+			$import[$index]['pass'] = trim($data -> sheets[0]['cells'][$i][2]);
+			$import[$index]['percentage'] = trim($data -> sheets[0]['cells'][$i][3]);
+			$import[$index]['target'] = trim($data -> sheets[0]['cells'][$i][4]);
+			$import[$index]['low_target'] = trim($data -> sheets[0]['cells'][$i][5]);
+			$import[$index]['edit'] = trim($data -> sheets[0]['cells'][$i][6]);								 
+			$index++;			
+		}		
+		return $import;
+	}
 }
 ?>

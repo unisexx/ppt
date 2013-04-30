@@ -21,8 +21,10 @@ Class Recipient extends Public_Controller{
 		$this->template->build('recipient_form',$data);
 	}
 	function save(){
-		if(!menu::perm($this->menu_id, 'add') || !menu::perm($this->menu_id,'edit'))redirect('recipient');	
+		
 		if($_POST){
+			$_POST['s_date']=(!empty($_POST['s_date']))?  date_to_mysql($_POST['s_date'],true):'0000-00-00';
+			$_POST['e_date']=(!empty($_POST['e_date']))?  date_to_mysql($_POST['e_date'],true):'0000-00-00';
 			$this->recipient->save($_POST);
 			set_notify('success', lang('save_data_complete'));	
 		}

@@ -24,8 +24,7 @@ Class Offender extends Public_Controller{
 		FROM
 		OFFENDER
 		WHERE 1=1 '.$where.' 
-        ORDER BY ID DESC';
-        // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
+        ORDER BY OFFENDER_YEAR DESC';
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');

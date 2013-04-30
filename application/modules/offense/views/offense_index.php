@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offense/offense_data">
- <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(null, null, 'OFFENSES', 'offense_year', true), @$_GET['year'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
         <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
         
@@ -37,26 +37,9 @@
 </tr>
  <?php foreach($result as $key => $item): $key += 1;?>
 <tr>
-  <td><a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
-  <td><a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>"><?php echo $item['offense_year']; ?></a></td>
-  <td>
-  
-  <a href="<?php echo site_url('offense/offense_form/'.$item['id']); ?>">
-  
-  <?php 
-  
-  //echo $item['offense_province'];
-  $sql = 'select * from provinces where id='.$item['offense_province'];
-  $result1 = $this->opt->get($sql);
-  foreach($result1 as $key1 => $item1)
-  {
-	  echo $item1['province'];
-  }
-  ?>
-  
-  </a>
-  
-  </td>
+  <td><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
+  <td><?php echo $item['offense_year']; ?></td>
+  <td><?php echo anchor('offense/offense_form/'.$item['id'], $item['province']); ?></td>
   <td><?php echo @number_format($item['offense_property']); ?></td>
   <td><?php echo @number_format($item['offense_body']); ?></td>
   <td><?php echo @number_format($item['offense_sex']); ?></td>

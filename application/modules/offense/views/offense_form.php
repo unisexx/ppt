@@ -6,7 +6,7 @@
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('offense_year', get_year_option(2555), $rs['offense_year']); ?></td>
+  <td><?php echo form_dropdown('offense_year', get_year_option(), $rs['offense_year']); ?></td>
 </tr>
 <tr>
   <th>เขตจังหวัด &gt; จังหวัด</th>

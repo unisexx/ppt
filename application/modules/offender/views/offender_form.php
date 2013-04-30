@@ -6,7 +6,7 @@
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('offender_year', get_year_option(2555), $rs['offender_year']); ?></td>
+  <td><?php echo form_dropdown('offender_year', get_year_option(), $rs['offender_year']); ?></td>
 </tr>
 <tr>
   <th>ป่วยทางจิต<span class="Txt_red_12"> *</span></th>

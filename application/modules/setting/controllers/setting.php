@@ -8,10 +8,9 @@ Class Setting extends Public_Controller{
 		'set_province' => array('label' => 'จังหวัด', 'permission' => array('view','add','edit','delete')),
 		'set_amphor' => array('label' => 'อำเภอ', 'permission' => array('view','add','edit','delete')),
 		'set_tumbon' => array('label' => 'ตำบล', 'permission' => array('view','add','edit','delete')),
-		'report' => array('label' => 'รายงาน', 'permission' => array('view')),
-		// 'basic' => array('label' => 'ข้อมูลพื้นฐาน', 'permission' => array('view','add','edit','delete','import')),
-		// 'target1' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 1', 'permission' => array('view','add','edit','delete','import')),
-		// 'target2' => array('label' => 'ข้อมูลกลุ่มเป้าหมาย 2', 'permission' => array('view','add','edit','delete','import')),
+		'section' => array('label' => 'หน่วยงานหลัก', 'permission' => array('view','add','edit','delete')),
+		'support_section' => array('label' => 'หน่วยงานสนับสนุน', 'permission' => array('view','add','edit','delete')),
+		/*'report' => array('label' => 'รายงาน', 'permission' => array('view')),*/
 	);
 	
 	public $crud = array(
@@ -146,6 +145,14 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 		}
 		redirect('setting/usertype'.GetCurrentUrlGetParameter());
 	}
+    
+    function usertype_delete($id=false){
+        if($id){
+            $this->user_type->delete($id);
+            set_notify('success', lang('delete_data_complete'));
+        }
+        redirect('setting/usertype'.GetCurrentUrlGetParameter());
+    }
 	
 	function set_target(){
 		$this->template->build('set_target');

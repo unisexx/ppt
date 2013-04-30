@@ -48,6 +48,18 @@ function permission($module, $action)
 	return $perm ? TRUE : FALSE;
 }
 
+// เช็ค checkbox ในหน้า usertype form
+function permission_chk($module, $action, $user_type_id)
+{
+    $sql = 'SELECT "'.strtoupper($action).'" 
+    FROM PERMISSION 
+    WHERE USER_TYPE_ID = '.$user_type_id.' 
+    AND MODULE = \''.$module.'\'';
+    $CI =& get_instance();
+    $perm = $CI->db->getone($sql);
+    return $perm ? TRUE : FALSE;
+}
+
 function login_data($field)
 {
 	$CI =& get_instance();

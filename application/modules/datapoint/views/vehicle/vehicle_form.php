@@ -1,4 +1,4 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลประเด็น (เพิ่ม/แก้ไข)</h2>
+<h2>ข้อมูลประเด็น (เพิ่ม/แก้ไข)</h2>
 <h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
 <form action="datapoint/vehicle_save" method="post">
 <table class="tbadd">
@@ -8,7 +8,7 @@
 </tr>
 <tr>
   <th>หน่วยงาน<span class="Txt_red_12"> *</span></th>
-  <td><?php echo form_dropdown('agency_id',get_option('id','agency','agency order by id'),@$rs['agency_id'],'','-- เลือกหน่วยงาน --') ;?></td>
+  <td><input type="text" name="agency" value="<?php echo $rs['agency'] ?>"></td>
 </tr>
 <tr>
   <th>รับแจ้ง <span class="Txt_red_12"> *</span></th>

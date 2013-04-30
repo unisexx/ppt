@@ -91,7 +91,7 @@ Class population extends Public_Controller{
 							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
 						}						
 						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();
-						$province_id = $province['id'];		
+						$province_id = @$province['id'];		
 						$val['PROVINCE_ID'] = $province_id;
 						$val['PROVINCE_NAME'] = $province_name;
 						$val['AMPHUR_ID'] = '';
@@ -122,7 +122,7 @@ Class population extends Public_Controller{
 					else if (strpos($item['title'], 'อำเภอ')!==false) {
 						$amphur_name = strpos($item['title'], 'อำเภอ')!==false ? str_replace('อำเภอ', '', $item['title']) : strpos($item['title'], 'เทศบาล')!==false;
 						$amphur = $this->amphur->where(" province_id=".$province_id." AND AMPHUR_NAME='".iconv('utf-8','tis-620',$amphur_name)."'")->get_row();
-						$amphur_id = $amphur['id'];
+						$amphur_id = @$amphur['id'];
 						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=".$amphur_id." AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
 						if($val['ID']>0){
 							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
@@ -158,7 +158,7 @@ Class population extends Public_Controller{
 						$district_name = str_replace('ตำบล', '', $item['title']);
 						$district = $this->district->where(" province_id=".$province_id."  AND DISTRICT_NAME='".iconv('utf-8','tis-620',$district_name)."'")->get_row();
 						$amphur = $this->amphur->get_row($district['amphur_id']);
-						$district_id = $district['id'];
+						$district_id = @$district['id'];
 						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$province_id." AND AMPHUR_ID=".$district['amphur_id']." AND DISTRICT_ID=".$district_id." AND YEAR_DATA=".$_POST['year_data'])->get_one();
 						if($val['ID']>0){
 							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);

@@ -10,6 +10,7 @@ class Dla extends Public_Controller
         22 => array('s' => '(FORM_ALL.T418_M) AS TOTAL_1, (FORM_ALL.T418_F) AS TOTAL_2', 'f' => array('t418_m', 't418_f')),
         23 => array('s' => '(FORM_ALL.T4110_M) AS TOTAL_1, (FORM_ALL.T4110_F) AS TOTAL_2', 'f' => array('t4110_m', 't4110_f')),
         24 => array('s' => '(FORM_ALL.T331_M) AS TOTAL_1, (FORM_ALL.T331_F) AS TOTAL_2', 'f' => array('t331_m', 't331_f')),
+        25 => array('s' => '(FORM_ALL.T332_M) AS TOTAL_1, (FORM_ALL.T332_F) AS TOTAL_2', 'f' => array('t332_m', 't332_f')),
         28 => array('s' => '(FORM_ALL.T333_M) AS TOTAL_1, (FORM_ALL.T333_F) AS TOTAL_2', 'f' => array('t333_m', 't333_f')),
         29 => array('s' => '(FORM_ALL.T413_M) AS TOTAL_1, (FORM_ALL.T413_F) AS TOTAL_2', 'f' => array('t413_m', 't413_f')),
         31 => array('s' => '(FORM_ALL.T419_M) AS TOTAL_1, (FORM_ALL.T419_F) AS TOTAL_2', 'f' => array('t419_m', 't419_f')),

@@ -1,9 +1,9 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด <span class="gray">แบบ กรมพินิจ สาเหตุกระทำความผิด</span></h4>
-
-
+<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด </h4>
+<?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <?php echo form_open('offender/offender_form'); ?>
-
+<?php endif; ?>
 
 <table class="tbadd">
 <tr>
@@ -57,9 +57,15 @@
 </tr>
 </table>
 
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
     <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>

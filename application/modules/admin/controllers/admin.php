@@ -31,6 +31,9 @@ Class Admin extends  Public_Controller{
 					//set_notify('error', LOGIN_FAIL);
 					//redirect('user');	
 				//}
+				
+				set_notify('error', LOGIN_FAIL);
+				redirect('admin');	
 			}	
 		}
 		redirect('admin');

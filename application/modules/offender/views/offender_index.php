@@ -1,5 +1,6 @@
 <h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด <span class="gray">แบบ กรมพินิจ สาเหตุกระทำความผิด</span></h4>
+<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด </h4>
+<?php echo menu::source($menu_id); ?>
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offender/offender_data">
@@ -11,11 +12,9 @@
 </div>
 
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('offender/offender_form'); ?>'" class="btn_add">
+    <?php echo menu::perm($menu_id, 'import', 'offender/import_data'); ?>
+    <?php echo menu::perm($menu_id, 'add', 'offender/offender_form'); ?>
 </div>
-
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('offender/import_data'); ?>'" class="btn_import"/></div>
-
 
 <?php echo $pagination; ?>
 
@@ -32,7 +31,7 @@
   <th>ความรู้เท่าไม่ถึงการณ์</th>
   <th>คึกคะนอง</th>
   <th>อื่น ๆ</th>
-  <th>&nbsp;</th>
+  <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 
  <?php foreach($result as $key => $item): $key += 1;?>
@@ -48,12 +47,12 @@
   <td><?php echo @number_format($item['offender_unknow']); ?></td>
   <td><?php echo @number_format($item['offender_fight']); ?></td>
   <td><?php echo @number_format($item['offender_etc']); ?></td>
-<td>
-  
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('offender/offender_form/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('offender/offender_delete/'.$item['id']); ?>';}" />
-    
+    <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?>
+    <td>
+        <?php echo menu::perm($menu_id, 'edit', 'offender/offender_form/'.$item['id']); ?>
+        <?php echo menu::perm($menu_id, 'delete', 'offender/offender_delete/'.$item['id']); ?>
     </td>
+    <?php endif; ?>
 </tr>
 
 <?php endforeach; ?>

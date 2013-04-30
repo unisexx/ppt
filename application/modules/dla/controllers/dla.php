@@ -10,6 +10,7 @@ class Dla extends Public_Controller
         22 => array('s' => '(FORM_ALL.T418_M) AS TOTAL_1, (FORM_ALL.T418_F) AS TOTAL_2', 'f' => array('t418_m', 't418_f')),
         23 => array('s' => '(FORM_ALL.T4110_M) AS TOTAL_1, (FORM_ALL.T4110_F) AS TOTAL_2', 'f' => array('t4110_m', 't4110_f')),
         24 => array('s' => '(FORM_ALL.T331_M) AS TOTAL_1, (FORM_ALL.T331_F) AS TOTAL_2', 'f' => array('t331_m', 't331_f')),
+        25 => array('s' => '(FORM_ALL.T332_M) AS TOTAL_1, (FORM_ALL.T332_F) AS TOTAL_2', 'f' => array('t332_m', 't332_f')),
         28 => array('s' => '(FORM_ALL.T333_M) AS TOTAL_1, (FORM_ALL.T333_F) AS TOTAL_2', 'f' => array('t333_m', 't333_f')),
         29 => array('s' => '(FORM_ALL.T413_M) AS TOTAL_1, (FORM_ALL.T413_F) AS TOTAL_2', 'f' => array('t413_m', 't413_f')),
         31 => array('s' => '(FORM_ALL.T419_M) AS TOTAL_1, (FORM_ALL.T419_F) AS TOTAL_2', 'f' => array('t419_m', 't419_f')),
@@ -363,15 +364,15 @@ class Dla extends Public_Controller
     			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
     	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
     	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
-    	                            if($c == 7 and in_array($opt_c_position[$data[$c]], array_values($opt_c_position))) $db['c_position_id'] = $opt_c_position[$data[$c]];
-    	                            if($c == 11 and in_array($opt_o_position[$data[$c]], array_values($opt_o_position))) $db['o_position_id'] = $opt_o_position[$data[$c]];
-    	                            if($c == 15 and in_array($opt_v_position[$data[$c]], array_values($opt_v_position))) $db['v_position_id'] = $opt_v_position[$data[$c]];
-    	                            if($c == 19 and in_array($opt_b_position[$data[$c]], array_values($opt_b_position))) $db['b_position_id'] = $opt_b_position[$data[$c]];
+    	                            if($c == 7 and @in_array($opt_c_position[$data[$c]], @array_values($opt_c_position))) @$db['c_position_id'] = @$opt_c_position[$data[$c]];
+    	                            if($c == 11 and @in_array($opt_o_position[$data[$c]], @array_values($opt_o_position))) @$db['o_position_id'] = @$opt_o_position[$data[$c]];
+    	                            if($c == 15 and @in_array($opt_v_position[$data[$c]], @array_values($opt_v_position))) @$db['v_position_id'] = @$opt_v_position[$data[$c]];
+    	                            if($c == 19 and @in_array($opt_b_position[$data[$c]], @array_values($opt_b_position))) @$db['b_position_id'] = @$opt_b_position[$data[$c]];
     			                }
     			                
     			            }
     						if($db){
-    							 $db['year'] = $_POST['year'];
+    							 $db['year'] = $_POST['year_data'];
     						     //$this->db->debug = true;
     							 $this->opt->save($db, TRUE);
                                  $total_row++;
@@ -387,4 +388,11 @@ class Dla extends Public_Controller
 		}
 		$this->template->build('import');
 	}
+
+    public function download()
+    {
+        $this->load->helper('download');
+        $data = file_get_contents('import_file/dla/sample.csv');
+        force_download('sample.csv', $data); 
+    }
 }

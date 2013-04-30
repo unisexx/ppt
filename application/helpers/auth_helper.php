@@ -2,7 +2,7 @@
 function login($username,$password)
 {
 	$CI =& get_instance();
-	$sql = "select * from users where username = ? and password = ?";
+	$sql = "select * from users where username = ? and password = ? and status = 1";
 	$id = $CI->db->GetOne($sql,array($username,$password));	
 	if($id)
 	{

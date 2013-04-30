@@ -107,8 +107,8 @@ Class warm extends Public_Controller
 	}
 	
 	function custom_import(){
-		$uploaddir = "import_file/family/2547/";
-		$_POST['year_data'] = 2547;
+		$_POST['year_data'] = 2548;
+		$uploaddir = "import_file/family/".$_POST['year_data']."/";		
 		$file_list = scandir($uploaddir);
 		$data['file_list'] = $file_list;
 		foreach($file_list as $file){

@@ -36,11 +36,11 @@
 	<tr>
 		<th><?php echo $menu['title']?></th>
 		<td>
-			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][view]" value="1" <?php echo (permission($menu['module_name'],'view'))?'checked':'';?>>ดู</label></span>
-			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][add]" value="1" <?php echo (permission($menu['module_name'],'add'))?'checked':'';?>>เพิ่ม</label></span>
-			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][edit]" value="1" <?php echo (permission($menu['module_name'],'edit'))?'checked':'';?>>แก้ไข</label></span>
-			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][delete]" value="1" <?php echo (permission($menu['module_name'],'delete'))?'checked':'';?>>ลบ</label></span>
-			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][import]" value="1" <?php echo (permission($menu['module_name'],'import'))?'checked':'';?>>นำเข้าข้อมูล</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][view]" value="1" <?php echo (permission_chk($menu['module_name'],'view',$usertype['id']))?'checked':'';?>>ดู</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][add]" value="1" <?php echo (permission_chk($menu['module_name'],'add',$usertype['id']))?'checked':'';?>>เพิ่ม</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][edit]" value="1" <?php echo (permission_chk($menu['module_name'],'edit',$usertype['id']))?'checked':'';?>>แก้ไข</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][delete]" value="1" <?php echo (permission_chk($menu['module_name'],'delete',$usertype['id']))?'checked':'';?>>ลบ</label></span>
+			<span class="perm form-inline"><label class="checkbox"><input type="checkbox" name="checkbox[<?php echo $menu['module_name']?>][import]" value="1" <?php echo (permission_chk($menu['module_name'],'import',$usertype['id']))?'checked':'';?>>นำเข้าข้อมูล</label></span>
 		</td>
 	</tr>
 <?php endforeach;?>

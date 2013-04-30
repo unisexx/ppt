@@ -77,6 +77,7 @@ $(document).ready(function(){
     	
     	// form user **setting/user_form**
     	user_type_id:{required: true},
+    	status:{required: true},
     	username:{required: true, minlength: 4, remote: "setting/check_username/"+user_id},
     	fullname:{required: true},
     	name:{required: true},
@@ -101,6 +102,7 @@ $(document).ready(function(){
     	
     	// form user **setting/user_form**
     	user_type_id:{required: "กรุณาเลือกสิทธิ์การใช้งาน"},
+    	status:{required: "กรุณาเลือกสถานะ"},
     	username:{required: "กรุณากรอกชื่อล็อกอิน", minlength: "กรุณากรอกรหัสผ่านอย่างน้อย 4 ตัวอักษร", remote: "ยูสเซอร์เนมนี้ไม่สามารถใช้งานได้"},
     	fullname:{required: "กรุณากรอกชื่อ - นามสกุล"},
     	name:{required: "กรุณากรอก Name"},

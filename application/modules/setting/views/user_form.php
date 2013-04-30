@@ -18,6 +18,17 @@ $(document).ready(function(){
   </td>
 </tr>
 <tr>
+	<th>สถานะ <span class="Txt_red_12">*</span></th>
+	<td>
+		<label class="radio inline">
+			<input type="radio" name="status" value="0" <?php if($user['status'] == 0)echo"checked"?>> ปิดการใช้งาน
+		</label>
+		<label class="radio inline">
+			<input type="radio" name="status" value="1" <?php if($user['status'] == 1)echo"checked"?>> เปิดการใช้งาาน
+		</label>
+	</td>
+</tr>
+<tr>
   <th>username<span class="Txt_red_12"> *</span></th>
   <td><input name="username" type="text" value="<?php echo $user['username']?>"/></td>
 </tr>

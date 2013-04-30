@@ -364,15 +364,15 @@ class Dla extends Public_Controller
     			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
     	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
     	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
-    	                            if($c == 7 and in_array($opt_c_position[$data[$c]], array_values($opt_c_position))) $db['c_position_id'] = $opt_c_position[$data[$c]];
-    	                            if($c == 11 and in_array($opt_o_position[$data[$c]], array_values($opt_o_position))) $db['o_position_id'] = $opt_o_position[$data[$c]];
-    	                            if($c == 15 and in_array($opt_v_position[$data[$c]], array_values($opt_v_position))) $db['v_position_id'] = $opt_v_position[$data[$c]];
-    	                            if($c == 19 and in_array($opt_b_position[$data[$c]], array_values($opt_b_position))) $db['b_position_id'] = $opt_b_position[$data[$c]];
+    	                            if($c == 7 and @in_array($opt_c_position[$data[$c]], @array_values($opt_c_position))) @$db['c_position_id'] = @$opt_c_position[$data[$c]];
+    	                            if($c == 11 and @in_array($opt_o_position[$data[$c]], @array_values($opt_o_position))) @$db['o_position_id'] = @$opt_o_position[$data[$c]];
+    	                            if($c == 15 and @in_array($opt_v_position[$data[$c]], @array_values($opt_v_position))) @$db['v_position_id'] = @$opt_v_position[$data[$c]];
+    	                            if($c == 19 and @in_array($opt_b_position[$data[$c]], @array_values($opt_b_position))) @$db['b_position_id'] = @$opt_b_position[$data[$c]];
     			                }
     			                
     			            }
     						if($db){
-    							 $db['year'] = $_POST['year'];
+    							 $db['year'] = $_POST['year_data'];
     						     //$this->db->debug = true;
     							 $this->opt->save($db, TRUE);
                                  $total_row++;
@@ -388,4 +388,11 @@ class Dla extends Public_Controller
 		}
 		$this->template->build('import');
 	}
+
+    public function download()
+    {
+        $this->load->helper('download');
+        $data = file_get_contents('import_file/dla/sample.csv');
+        force_download('sample.csv', $data); 
+    }
 }

@@ -30,7 +30,7 @@
 <div id="btnBox">
 	<?php  if(menu::perm($menu_id, 'import')): ?>
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='recipient/import'" class="btn_import"/>	<?php endif; ?>
-	<?php  if(menu::perm($menu_id, 'add')): ?>
+	<?php if(menu::perm($menu_id, 'add')): ?>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='recipient/form'" class="btn_add"/>	<?php endif; ?>
 </div>
 
@@ -39,6 +39,7 @@
 <tr>
   <th>ลำดับ</th>
   <th>ปี</th>
+  <th>วันที่ใบคำขอ</th>
   <th>ชื่อหน่วยงาน</th>
   <th>จำนวนรายบริการ</th>
   <th>ความช่วยเหลือ</th>
@@ -54,6 +55,7 @@
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['year'] ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['agency']; ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['service_total'])?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['help'] ?></td>

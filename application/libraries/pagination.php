@@ -137,7 +137,7 @@ Author URI: http://www.mis-algoritmos.com
 				if($this->showCounter)
 				{
 					$this->pagination .= "<div class=\"pagination_data\">
-					มีทั้งหมด  $this->total_pages รายการ   / $lastpage หน้า </div>
+					มีทั้งหมด  ".@number_format($this->total_pages)." รายการ   / ".@number_format($lastpage)." หน้า </div>
 					";
 				}
 				

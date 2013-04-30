@@ -286,23 +286,21 @@ echo '<HR>';
 		require_once 'include/Excel/reader.php';
 		$data = new Spreadsheet_Excel_Reader();
 		$data -> setOutputEncoding('UTF-8');
-		$data -> read($filepath);
-		
+		$data -> read($filepath);		
 		error_reporting(E_ALL ^ E_NOTICE);		
 		$index = 0;
-		for($sheet=0;$sheet<=12;$sheet++){				
-			for($i = 1; $i <= $data -> sheets[$sheet]['numRows']; $i++) {
-				$cnt_colum = count($data->sheets[$sheet]['cells'][$i]);
+		foreach($data->sheets as $key =>$item){			
+			for($i = 1; $i <= $item['numRows']; $i++) {
+				$cnt_colum = count($item['cells'][$i]);
 				for($j=1; $j<=$cnt_colum; $j++)
 				{
-					$import[$index][] = trim($data -> sheets[$sheet]['cells'][$i][$j]);		
+					$import[$index][] = trim($item['cells'][$i][$j]);		
 				}
 				$index++;			
 			}
-		}
-		
+		}	
 		return $import;			
-	}
+	}	
 	function vehicle(){
 		$year=(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']:'';
 		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY LIKE '%".$_GET['agency_id']."%'":'';	

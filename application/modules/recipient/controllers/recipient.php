@@ -38,15 +38,26 @@ Class Recipient extends Public_Controller{
 	function import(){
 		$this->template->build('recipient_import_form');
 	}
-	function ImportData($Filepath=FALSE){
-			require('include/spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
-			require('include/spreadsheet-reader-master/SpreadsheetReader.php');		
-			date_default_timezone_set('UTC');		
-			$Spreadsheet = new SpreadsheetReader($Filepath);
-			$BaseMem = memory_get_usage();		
-			$Time = microtime(true);
-			return $Spreadsheet;
-	}
+	function ImportData($filepath)
+	{
+		require_once 'include/Excel/reader.php';
+		$data = new Spreadsheet_Excel_Reader();
+		$data -> setOutputEncoding('UTF-8');
+		$data -> read($filepath);		
+		error_reporting(E_ALL ^ E_NOTICE);		
+		$index = 0;
+		foreach($data->sheets as $key =>$item){			
+			for($i = 1; $i <= $item['numRows']; $i++) {
+				$cnt_colum = count($item['cells'][$i]);
+				for($j=1; $j<=$cnt_colum; $j++)
+				{
+					$import[$index][] = trim($item['cells'][$i][$j]);		
+				}
+				$index++;			
+			}
+		}	
+		return $import;			
+	}	
 	function save_import(){
 			if($_FILES['fl_import']['name']!=''){
 				/*---for insert value to info table ---*/
@@ -62,18 +73,25 @@ Class Recipient extends Public_Controller{
 				$fpicname = $uploaddir.$file_name;
 				move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 				$data= $this->ImportData($uploaddir.$file_name);				
-				foreach($data as $key=>$item){
-					if($key>=0){										
-						$val['agency_id'] =$item[0];
-						$val['agency'] =$item[1];
-						$val['service_total'] = $item[2];
-						$val['help_id'] =$item[3];
-						$val['help'] = $item[4];
-						$val['money_total'] = $item[5];
-						$val['year'] = $_POST['year_data'];
-						$val['create'] =date('Y-m-d');
-						$this->recipient->save($val);	
-					}
+				foreach($data as $key=>$item){	
+						if(strpos($item[0],':')){
+							list($s_date,$e_date)=explode('-',substr($item[0],strpos ($item[0],':')+1));
+							$val['s_date']=Date2Oracle($s_date);
+							$val['e_date']=Date2Oracle($e_date);
+							continue;
+							}
+							if(in_array('รหัสหน่วยงาน',$item)){
+								continue;
+							}	
+							$val['agency_id'] =$item[0];
+							$val['agency'] =$item[1];
+							$val['service_total'] = $item[2];
+							$val['help_id'] =$item[3];
+							$val['help'] = $item[4];
+							$val['money_total'] = $item[5];
+							$val['year'] = $_POST['year_data'];
+							$val['create'] =date('Y-m-d');
+							$this->recipient->save($val);																	
 				}
 			set_notify('success', lang('save_data_complete'));		
 		}

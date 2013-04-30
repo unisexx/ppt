@@ -1,8 +1,7 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้ด้อยโอกาส (เพิ่ม/แก้ไข)</h2>
-<h4>คนยากจน (กลุ่มอายุ) <span class="gray">แบบ สคช. คนยากจน (กลุ่มวัย)</span></h4>
-
+<?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <?php echo form_open('poor_age/allage_form'); ?>
-
+<?php endif; ?>
 
 <table class="tbadd">
 <tr>
@@ -67,10 +66,16 @@
 </tr>
 </table>
 
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
     <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>
 

@@ -1,5 +1,4 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามฐานความผิด <span class="gray">แบบ กรมพินิจ ฐานความผิด</span></h4>
+<?php echo menu::source($menu_id); ?>
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offense/offense_data">
@@ -13,11 +12,9 @@
 </div>
 
 <div id="btnBox">
-    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('offense/offense_form'); ?>'" class="btn_add">
+    <?php echo menu::perm($menu_id, 'import', 'offense/import_data'); ?>
+    <?php echo menu::perm($menu_id, 'add', 'offense/offense_form'); ?>
 </div>
-
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('offense/import_data'); ?>'" class="btn_import"/></div>
-
 
 <?php echo $pagination; ?>
 
@@ -36,7 +33,7 @@
   <th>ยาเสพติดให้โทษ</th>
   <th>อาวุธและวัตถุระเบิด</th>
   <th>อื่น ๆ</th>
-  <th>จัดการ</th>
+  <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
  <?php foreach($result as $key => $item): $key += 1;?>
 <tr>
@@ -67,12 +64,12 @@
   <td><?php echo @number_format($item['offense_drug']); ?></td>
   <td><?php echo @number_format($item['offense_weapon']); ?></td>
   <td><?php echo @number_format($item['offense_etc']); ?></td>
-<td>
-  
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('offense/offense_form/'.$item['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('offense/offense_delete/'.$item['id']); ?>';}" />
-    
+  <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?>
+    <td>
+        <?php echo menu::perm($menu_id, 'edit', 'offense/offense_form/'.$item['id']); ?>
+        <?php echo menu::perm($menu_id, 'delete', 'offense/offense_delete/'.$item['id']); ?>
     </td>
+    <?php endif; ?>
 </tr>
 
 <?php endforeach; ?>

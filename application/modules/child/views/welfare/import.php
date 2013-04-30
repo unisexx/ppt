@@ -1,7 +1,5 @@
 <? $m['id'] = 13; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2- ผู้สูงอายุ  <a href="import_file/child/welfare/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
-<h4>ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม</h4>
-<?=menu::source($m['id']);?>		
+<?=menu::source($m['id'], 'import_file/child/welfare/example.xls');?>		
 
 
 <form action='child/welfare/upload' method='POST' enctype="multipart/form-data">

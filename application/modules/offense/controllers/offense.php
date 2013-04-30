@@ -1,5 +1,8 @@
 <?php
 Class Offense extends Public_Controller{
+    
+    public $menu_id = 14;
+    
 	function __construct(){
 		parent::__construct();
         $this->load->model('offense_model', 'opt');
@@ -9,6 +12,7 @@ Class Offense extends Public_Controller{
 	
 	function offense_data()
 	{
+	    $data['menu_id'] = $this->menu_id;
 	    $where = '';
         if(!empty($_GET))
         {
@@ -37,6 +41,7 @@ Class Offense extends Public_Controller{
             set_notify('success', lang('save_data_complete'));
             redirect('offense/offense_data');
         }
+        $data['menu_id'] = $this->menu_id;
         $data['rs'] = $this->opt->get_row($id);
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('offense_form', $data);
@@ -54,7 +59,7 @@ Class Offense extends Public_Controller{
 	
 	function import_data()
 	{
-		$data['menu_id'] = 14; 	
+		$data['menu_id'] = $this->menu_id;
 		$this->template->build('population_import_form',$data);	
 	}
 	

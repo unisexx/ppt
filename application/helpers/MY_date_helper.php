@@ -53,14 +53,20 @@ function mysql_to_date($date,$is_date_thai = FALSE)
 
 if(!function_exists('get_year_option'))
 {
-	function get_year_option($start,$plus = 0)
+	function get_year_option($start, $plus = 0, $table = null, $field_year = null, $min = FALSE, $max = FALSE)
 	{
-		$year = (date('Y') + 543) + $plus;
-		$data = array();
-		for($year;$year >= $start;$year--)
-		{
-			$data[$year] = $year;
-		}
+	    $data = array();
+        $year = (date('Y') + 543) + $plus;
+	    if(!empty($table) and !empty($field_year))
+        {
+            $rs = get_instance()->db->getrow('SELECT MAX('.$field_year.') AS MAX_YEAR, MIN('.$field_year.') AS MIN_YEAR FROM '.$table.' ');
+            if($max == TRUE) $year = $rs['MAX_YEAR'];
+            if($min == TRUE) $start = $rs['MIN_YEAR'];
+        }
+        for($year; $year >= $start; $year--)
+        {
+            $data[$year] = $year;
+        }
 		return $data;
 	}
 }

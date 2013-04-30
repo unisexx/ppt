@@ -162,4 +162,8 @@ function Date2DB($date){
 	$y = $y + 543;
 	return $d.'-'.$m.'-'.$y;
 }
+function Date2Oracle($date){
+	list($d,$m,$y) = explode('/', $date);
+	return trim($y).'-'.trim($m).'-'.trim($d);
+}
 ?>

@@ -45,15 +45,35 @@ class Menu
         return $opt;
     }
     
-    static public function source($menu_id)
+    static public function source($menu_id, $import_url = null)
     {
-        $sql = 'select form_template.source 
-        from form_template 
-        join menus on menus.template_id = form_template.id
-        where menus.id = '.$menu_id;
-        $result = get_instance()->db->getone($sql);
-        dbConvert($result);
-        return '<h5><span class="gray">แหล่งข้อมูล: '.$result.'</span></h5>';
+        $sql = 'SELECT CAT.CAT_TITLE, SUB.SUB_TITLE, MENUS.TITLE, FORM_TEMPLATE.SOURCE AS SOURCE_NAME
+        FROM MENUS
+        JOIN (SELECT MENUS.ID, MENUS.PARENT_ID, MENUS.TITLE AS SUB_TITLE FROM MENUS) SUB ON SUB.ID = MENUS.PARENT_ID
+        JOIN (SELECT MENUS.ID, MENUS.PARENT_ID, MENUS.TITLE AS CAT_TITLE FROM MENUS) CAT ON CAT.ID = SUB.PARENT_ID
+        LEFT JOIN FORM_TEMPLATE ON FORM_TEMPLATE."ID" = MENUS.TEMPLATE_ID
+        WHERE MENUS.ID = '.$menu_id;
+        $rs = get_instance()->db->getrow($sql);
+        dbConvert($rs);
+        if($menu_id == 17 and !empty($import_url))
+        {
+            $html = '<h2>อปท. (นำเข้าข้อมูล) '.anchor($import_url, img('media/images/btn_ex_data.png')).'</h2>';
+            $html .= '<h5><span class="gray">แหล่งข้อมูล: '.$rs['source_name'].'</span></h5>';
+        }
+        else if(!empty($import_url)) 
+        {
+            $html = '<h2>'.$rs['cat_title'].' - '.$rs['sub_title'].' '.anchor($import_url, img('media/images/btn_ex_data.png')).'</h2>';
+            $html .= '<h4>'.$rs['title'].'</h4>';
+            $html .= '<h5><span class="gray">แหล่งข้อมูล: '.$rs['source_name'].'</span></h5>';
+        }
+        else 
+        {
+            $html = '<h2>'.$rs['cat_title'].' - '.$rs['sub_title'].'</h2>';
+            $html .= '<h4>'.$rs['title'].'</h4>';
+            $html .= '<h5><span class="gray">แหล่งข้อมูล: '.$rs['source_name'].'</span></h5>';
+        }
+        
+        return $html;
     }
     
     /**
@@ -103,4 +123,6 @@ class Menu
             
         }
     }
+
+    
 }

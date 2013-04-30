@@ -1,5 +1,3 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - <?php echo $m_sub; ?> (เพิ่ม/แก้ไข)</h2>
-<h4><?php echo $m['title']; ?></h4>
 <?php echo menu::source($m['id']); ?>
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 <?php echo form_open('dla/save/'.$m['id']); ?>

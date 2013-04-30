@@ -7,7 +7,7 @@
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td>
-		<?php echo form_dropdown('year', get_year_option(2555), $rs['year']); ?>
+		<?php echo form_dropdown('year', get_year_option(), $rs['year']); ?>
   </td>
 </tr>
 <tr>

@@ -3,7 +3,7 @@
 <div id="search">
     <form method="get" action="poor_age/allage">
 
-        <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
+        <?php echo form_dropdown('year', get_year_option(2555, null, 'POOL_AGE_LIST', 'YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
 
         <input type="submit" title="ค้นหา" value=" " class="btn_search" />
   

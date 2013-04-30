@@ -5,7 +5,7 @@
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('poor_province_year', get_year_option(2555), $rs['poor_province_year']); ?></td>
+  <td><?php echo form_dropdown('poor_province_year', get_year_option(), $rs['poor_province_year']); ?></td>
 </tr>
 <tr>
   <th>ภาคจังหวัด &gt; จังหวัด<span class="Txt_red_12"> *</span></th>

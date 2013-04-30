@@ -16,6 +16,12 @@ $(document).ready(function(){
   	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$rs['year'],'','-- เลือกปี --'); ?>
   </td>
 </tr>
+<tr><th>วันที่ใบคำขอ(วันที่เริ่มต้น)</th>
+	<td><input type="text" name="s_date" class="datepicker" value="<?php echo Date2DB($rs['s_date'])?>"></td>
+</tr>
+<tr><th>วันที่ใบคำขอ(วันที่สิ้นสุด)</th>
+	<td><input type="text" name="e_date" class="datepicker" value="<?php echo Date2DB($rs['e_date'])?>"></td>
+</tr>
 <tr>
   <th>รหัสหน่วยงาน<span class="Txt_red_12"> *</span></th>
   <td><input name="agency_id" type="text" id="textarea14" value="<?php echo $rs['agency_id'] ?>"  style="width:50px;" /> </td>
@@ -45,9 +51,8 @@ $(document).ready(function(){
 <?php 
 echo form_hidden('id',@$rs['id']);
 echo (!empty($rs['id']))? form_hidden('update',date('Y-m-d')):form_hidden('create',date('Y-m-d')); ?>
-<div id="btnSave">
-<?php  if(menu::perm($menu_id, 'add')): ?>		
-<input type="submit" value="บันทึก" class="btn btn-danger"><?php endif; ?>
+<div id="btnSave">	
+<input type="submit" value="บันทึก" class="btn btn-danger">
 <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>

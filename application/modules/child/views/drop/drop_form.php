@@ -6,7 +6,7 @@ $(document).ready(function(){
 	})*/
 });
 </script>
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
+<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
 <h4>เด็กและเยาวชนออกจากโรงเรียนกลางคัน <span class="gray">แบบ ศธ. ออกโรงเรียนกลางคัน</span></h4>
 <form action="child/drop_save" method="post">
 <table class="tbadd">

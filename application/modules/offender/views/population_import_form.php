@@ -1,4 +1,4 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <a href="../../../../import_file/offender/offender_import.xls" target="_blank"><img src="media/images/btn_ex_data.png" border="0" style=""></a></h2>
+<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <a href="import_file/offender/offender_import.xls" target="_blank"><img src="media/images/btn_ex_data.png" border="0" style=""></a></h2>
 <h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด</h4>
 <?php echo menu::source($menu_id); ?>
 <form method="post" enctype="multipart/form-data" action="offender/offender_import">

@@ -16,10 +16,10 @@
 	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี--'); ?>	
   	
   	<?php 
-  	$agency_id=$this->db->GetAssoc("select agency_id,agency from recipient group by agency_id,agency order by agency_id");
+  	$agency_id=$this->db->GetAssoc("select agency_id,agency from recipient group by agency_id,agency order by agency");
 	array_walk($agency_id,'dbConvert');
   	echo form_dropdown('agency_id',$agency_id,@$_GET['agency_id'],'style="width:500px;"','--ทุกหน่วยงาน--'); 
-   	$help_id=$this->db->GetAssoc("select help_id,help from recipient group by help_id,help order by help_id");
+   	$help_id=$this->db->GetAssoc("select help_id,help from recipient group by help_id,help order by help");
 	array_walk($help_id,'dbConvert');
   	echo form_dropdown('help_id',$help_id,@$_GET['help_id'],'style="width:500px;"','--ทุกความช่วยเหลือ--')  	
   	?>

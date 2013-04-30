@@ -65,4 +65,5 @@
     <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?> </td>
 </tr>
 <?php $i++;endforeach; ?>
+</table>
 <?php echo $pagination; ?>

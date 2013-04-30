@@ -148,8 +148,13 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
     
     function usertype_delete($id=false){
         if($id){
-            $this->user_type->delete($id);
-            set_notify('success', lang('delete_data_complete'));
+        	$user = $this->user->where("user_type_id = ".$id)->get_row();
+			if($user){
+				set_notify('error', 'ไม่สามารถดำเนินการได้เนื่องจากมีผู้ใช้งานสิทธิ์นี้อยู่');
+			}else{
+				$this->user_type->delete($id);
+            	set_notify('success', lang('delete_data_complete'));	
+			}
         }
         redirect('setting/usertype'.GetCurrentUrlGetParameter());
     }
@@ -205,8 +210,13 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 	
 	function set_province_delete($id=false){
 		if($id){
-			$this->province->delete($id);
-			set_notify('error', lang('delete_data_complete'));
+			$amphor = $this->amphor->where("province_id = ".$id)->get_row();
+			if($amphor){
+				set_notify('error', 'ไม่สามารถดำเนินการได้เนื่องจากยังมีอำเภออยู่ในจังหวัดนี้');
+			}else{
+				$this->province->delete($id);
+				set_notify('error', lang('delete_data_complete'));	
+			}
 		}
 		redirect('setting/set_province'.GetCurrentUrlGetParameter());
 	}
@@ -242,8 +252,13 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 	
 	function set_amphor_delete($id=false){
 		if($id){
-			$this->amphor->delete($id);
-			set_notify('error', lang('delete_data_complete'));
+			$tumbon = $this->tumbon->where("amphur_id = ".$id)->get_row();
+			if($tumbon){
+				set_notify('error', 'ไม่สามารถดำเนินการได้เนื่องจากยังมีตำบลอยู่ในอำเภอนี้');
+			}else{
+				$this->amphor->delete($id);
+				set_notify('error', lang('delete_data_complete'));
+			}
 		}
 		redirect('setting/set_amphor'.GetCurrentUrlGetParameter());
 	}

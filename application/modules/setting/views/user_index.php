@@ -30,9 +30,10 @@
   <th>ชื่อล็อกอิน</th>
   <th>ชื่อ - สกุล</th>
   <th>ข้อมูลติดต่อ</th>
-  <th>กรม</th>
-  <th>กลุ่ม/ฝ่าย</th>
+  <!-- <th>กรม</th>
   <th>กอง/สำนัก</th>
+  <th>กลุ่ม/ฝ่าย</th> -->
+  <th>สิทธ์การใช้งาน</th>
   <th>จัดการ</th>
 </tr>
 <?php
@@ -49,12 +50,14 @@
 	  		<img src="themes/ppt/images/phone.png" alt="" width="16" height="16" class="vtip" style="margin-right:10px;" title="<?php echo $user['contact_number']?>"/>
 	  	<?php endif;?>
 	  	<?php if($user['email']):?>
-	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" class="vtip" title="<?php echo $user['email']?>" />
+	  	<img src="themes/ppt/images/email.png" alt="" width="16" height="16" style="margin-right:10px;" class="vtip" title="<?php echo $user['email']?>" />
 	  	<?php endif;?>
+	  	<img src="themes/ppt/images/card_address.png" alt="" width="16" height="16" class="vtip" title="<?php echo 'กรม : '.$user['department_name'].'<br>กอง : '.$user['division_name'].'<br>กลุ่ม : '.$user['workgroup_name']?>" />
 	  </td>
-	  <td><?php echo $user['department_name']?></td>
+	  <!-- <td><?php echo $user['department_name']?></td>
 	  <td><?php echo $user['division_name']?></td>
-	  <td><?php echo $user['workgroup_name']?></td>
+	  <td><?php echo $user['workgroup_name']?></td> -->
+	  <td><?php echo $user['user_type_name']?></td>
 	  <td>
 	  	
 	  	<?php if(permission('user','edit')):?>

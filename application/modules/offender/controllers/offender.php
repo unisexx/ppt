@@ -1,16 +1,16 @@
 <?php
 Class Offender extends Public_Controller{
+    
+    public $menu_id = 107;
+    
 	function __construct(){
 		parent::__construct();
         $this->load->model('offender_model', 'opt');
-		
-		
 	}
-	
-
 	
 	function offender_data()
 	{
+	    $data['menu_id'] = $this->menu_id;
 	    $where = '';
         if(!empty($_GET))
         {
@@ -33,6 +33,7 @@ Class Offender extends Public_Controller{
 	}
 	
 	function offender_form($id = null){
+	    $data['menu_id'] = $this->menu_id;
 	    if($_POST)
         {
             $this->opt->save($_POST);
@@ -56,7 +57,7 @@ Class Offender extends Public_Controller{
 	
 	function import_data()
 	{
-		$data['menu_id'] = 13; 	
+	    $data['menu_id'] = $this->menu_id;
 		$this->template->build('population_import_form',$data);	
 	}
 	
@@ -95,4 +96,3 @@ Class Offender extends Public_Controller{
 	
 	
 }
-?>

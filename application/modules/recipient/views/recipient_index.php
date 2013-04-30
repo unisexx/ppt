@@ -28,10 +28,10 @@
 	</div>
 </form>
 <div id="btnBox">
-	<?php  //if(menu::perm($menu_id, 'import')): ?>
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='recipient/import'" class="btn_import"/>	<?php //endif; ?>
-	<?php // if(menu::perm($menu_id, 'add')): ?>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='recipient/form'" class="btn_add"/>	<?php //endif; ?>
+	<?php  if(menu::perm($menu_id, 'import')): ?>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='recipient/import'" class="btn_import"/>	<?php endif; ?>
+	<?php if(menu::perm($menu_id, 'add')): ?>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='recipient/form'" class="btn_add"/>	<?php endif; ?>
 </div>
 
 <?php echo $pagination;?>
@@ -62,10 +62,10 @@
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['money_total'])?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
-  	<?php  //if(menu::perm($menu_id, 'edit')): ?>
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='recipient/form/<?php echo $item['id'] ?>'" />	<?php //endif; ?>
-    <?php  //if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />	<?php //endif; ?></td>
+  	<?php  if(menu::perm($menu_id, 'edit')): ?>
+  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='recipient/form/<?php echo $item['id'] ?>'" />	<?php endif; ?>
+    <?php  if(menu::perm($menu_id, 'delete')): ?>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />	<?php endif; ?></td>
 </tr>
 <?php 
 $i++;

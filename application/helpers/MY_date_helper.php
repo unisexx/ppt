@@ -178,6 +178,24 @@ function Date2Oracle($date){
 	return trim($y).'-'.trim($m).'-'.trim($d);
 }
 
+function ThaiDatePicker2Oracle($date){
+	list($d,$m,$y) = explode('-', $date);
+	return $y.'-'.$m.'-'.$d;
+}
+
+function Oracle2ThaiDatePicker($date){
+	list($y,$m,$d) = explode('-', $date);
+	return $d.'-'.$m.'-'.$y;
+}
+
+function getAgefromThaidate($birthdate){
+	list($y,$m,$d) = explode('-', $birthdate);
+	$y = $y - 543; // แปลงให้เป็น ปี คศ.
+	//get age from date or birthdate
+	$age = (date("md", date("U", mktime(0, 0, 0, $d, $m, $y))) > date("md") ? ((date("Y")-$y)-1):(date("Y")-$y));
+	return $age;
+}
+
 function getAgefromTimestamp($birth){
 	$t = time();
 	$age = ($birth < 0) ? ( $t + ($birth * -1) ) : $t - $birth;

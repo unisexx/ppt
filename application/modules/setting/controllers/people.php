@@ -6,25 +6,35 @@ Class People extends Public_Controller{
 	}
 	
 	function index(){
+		//$this->db->debug = true;
 		$condition = " 1=1 ";
 		$condition .= (@$_GET['name']!='')?" and NAME like '%".$_GET['name']."%'" : "";
 		if(@$_GET['age']!=''){
-			$todayStamp = strtotime("12:00:00");
+				
+			$today = date("Y-m-d");
+			list($y,$m,$d) = explode('-', $today);
+			$y = $y+543; // แปลง คศ เป็น พศ
+			
 			switch($_GET['age']){
 				case 1: // 0-18
-						// 1398848489 timestamp 1 ปี
-			        $condition .= "and birth between 0 and (".$todayStamp." - (1398848489*18))";
+					$sdate = ($y-18).'-'.$m.'-'.$d;
+					$edate = ($y-0).'-'.$m.'-'.$d;
 			        break;
 			    case 2: // 18-25
-			        $condition .= "and birth between (".$todayStamp." - (1398848489*18)) and (".$todayStamp." - (1398848489*25))";
+			        $sdate = ($y-25).'-'.$m.'-'.$d;
+					$edate = ($y-18).'-'.$m.'-'.$d;
 			        break;
 			    case 3: // 25-60
-			        $condition .= "and birth between (".$todayStamp." - (1398848489*25)) and (".$todayStamp." - (1398848489*60))";
+			        $sdate = ($y-60).'-'.$m.'-'.$d;
+					$edate = ($y-25).'-'.$m.'-'.$d;
 			        break;
 				case 4: // 60 up
-			        $condition .= "and birth between (".$todayStamp." - (1398848489*60)) and (".$todayStamp." - (1398848489*100))";
+			        $sdate = ($y-500).'-'.$m.'-'.$d;
+					$edate = ($y-60).'-'.$m.'-'.$d;
 			        break;
 			}
+			
+			$condition .= "and birth BETWEEN TO_DATE('".$sdate."','YYYY-MM-DD') and TO_DATE('".$edate."','YYYY-MM-DD')";
 		}
 		
 		$data['peoples'] = $this->people->where($condition)->order_by('id','desc')->get();
@@ -39,7 +49,10 @@ Class People extends Public_Controller{
 	
 	function save()
 	{
-		$_POST['birth']=($_POST['birth']!="")? th_to_stamp($_POST['birth']):'';
+		//$this->db->debug = true;
+		$_POST['birthstamp'] = $_POST['birth'];
+		$_POST['birth']=($_POST['birth']!="")? ThaiDatePicker2Oracle($_POST['birth']):'';
+		$_POST['birthstamp']=($_POST['birthstamp']!="")? th_to_stamp($_POST['birthstamp']):'';
 		$this->people->save($_POST);
 		set_notify('success', lang('save_data_complete'));
 		redirect('setting/people');

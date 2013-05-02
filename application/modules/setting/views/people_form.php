@@ -11,7 +11,7 @@
 </tr>
 <tr>
   <th>วันเกิด</th>
-  <td><input name="birth" type="text"  size="10" class="datepicker" value="<?php echo ($people['birth']!=0)?@stamp_to_th($people['birth']):""  ?>"/></td>
+  <td><input name="birth" type="text"  size="10" class="datepicker" value="<?php echo ($people['birth']!=0)?@Oracle2ThaiDatePicker($people['birth']):""  ?>"/></td>
 </tr>
 </table>
 

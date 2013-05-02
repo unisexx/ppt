@@ -1,18 +1,14 @@
 <h2>ประชากร</h2>
-<?php
-$today = strtotime("12:00:00");
-echo $today;
-?>
 <form method="get" action="setting/people">
 <div id="search">
   <div id="searchBox">
   	ชื่อ - สกุล <input type="text" name="name" value="<?php echo @$_GET['name']?>">
   	<select name="age">
-  		<option>- ช่่วงอายุ -</option>
-  		<option value="1">เด็ก (0 - 18)</option>
-  		<option value="2">เยาวชน (18 - 25)</option>
-  		<option value="3">วัยทำงาน (25 - 60)</option>
-  		<option value="4">ผู้สูงวัย (60 ขึ้นไป)</option>
+  		<option value="">- ช่่วงอายุ -</option>
+  		<option value="1" <?php echo ($_GET['age']==1)?'selected':'';?>>เด็ก (0 - 18)</option>
+  		<option value="2" <?php echo ($_GET['age']==2)?'selected':'';?>>เยาวชน (18 - 25)</option>
+  		<option value="3" <?php echo ($_GET['age']==3)?'selected':'';?>>วัยทำงาน (25 - 60)</option>
+  		<option value="4" <?php echo ($_GET['age']==4)?'selected':'';?>>ผู้สูงวัย (60 ขึ้นไป)</option>
   	</select>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
@@ -36,7 +32,7 @@ echo $today;
 	<tr>
 	  <td><?php echo $i?></td>
 	  <td><?php echo $people['name']?></td>
-	  <td><?php echo getAgefromTimestamp($people['birth'])?></td>
+	  <td><?php echo getAgefromThaidate($people['birth'])?></td>
 	  <td><?php echo $people['id_card']?></td>
 	  <td>
 		<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='setting/people/form/<?php echo $people['id']?>'" />

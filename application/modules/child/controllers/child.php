@@ -146,7 +146,8 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->order_by('year', 'desc')->order_by('province', 'asc')->get();									 
+        $sql = "select * from c_drop where 1=1 $area_number $province $year order by year desc, province";
+		$data['result']	= $this->drop->get($sql);									 
 		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		$data['menu_id']=$this->drop_menu_id;
@@ -178,13 +179,8 @@ Class Child extends Public_Controller{
         redirect('child/drop');
 	}
 	function drop_import(){
-<<<<<<< HEAD
-		$data['menu_id']=$this->drop_menu_id;				
-		$this->template->build('drop/drop_import_form',$data);	
-=======
 	    $data['menu_id']=$this->drop_menu_id;				
 		$this->template->build('drop/drop_import_form', $data);	
->>>>>>> 35ea12176b187c7083e34ac818f6fa733aa566e4
 	}
 	function drop_save_import(){
 		if($_FILES['fl_import']['name']!=''){
@@ -244,7 +240,8 @@ Class Child extends Public_Controller{
 		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
 		$year =(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']: '';
 		$sex =(!empty($_GET['sex'])) ? " and sex =".$_GET['sex']:'';
-		$data['result'] = $this->pregnant->where("1=1 $location $year $sex")->get();
+        $sql = "select * from c_pregnant where 1=1 $location $year $sex order by year desc, hospital_code, location";
+		$data['result'] = $this->pregnant->get($sql);
 		$data['pagination'] = $this->pregnant->pagination();
 		$data['menu_id']=$this->pregnant_menu_id;
 		$this->template->build('pregnant/pregnant_index',$data);
@@ -399,4 +396,3 @@ Class Child extends Public_Controller{
         redirect('child/unsuitable');
     }
 }
-?>

@@ -1,8 +1,5 @@
-<? $m['id'] = 71; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส</h2>
-<h4>จำนวนคนว่างงาน </h4>
+<? $m['id'] = 61; ?>
 <?=menu::source($m['id']);?>
-
 
 <form action='' method='get'>
 <div id="search">
@@ -15,23 +12,26 @@
 
 
 <?php if(menu::perm($m['id'], 'add')): ?>
-	<div id="btnBox">
-		<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='disadvantaged/unemployee_import'" class="btn_import"/>
-		<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='disadvantaged/unemployee_form'" class="btn_add"/>
-	</div>
+<div id="btnBox">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='elder/inmates/import'" class="btn_import"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='elder/inmates/form'" class="btn_add"/>
+</div>
 <?php endif; ?>
+
 
 
 <?=$pagination; ?>
 
 <table class="tblist">
 <tr>
-  <th style='width:90px;'>ลำดับ</th>
-  <th style='width:90px;'>ปี</th>
-  <th> จังหวัด</th>
-  <th>จำนวน</th>
-  
-  <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?><th style='width:120px;'>จัดการ</th><?php endif; ?>
+	<th style='width:90px;'>ลำดับ</th>
+	<th style='width:90px;'>ปี</th>
+	<th>จังหวัด</th>
+	<th>อายุ 60-69</th>
+	<th>อายุ 70-79</th>
+	<th>อายุ 80</th>
+	
+	<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>
 </tr>
   <?php foreach($result as $key => $item): $key += 1;
 		$item_dtl = $this->province->get_row($item['province_id']);
@@ -39,13 +39,15 @@
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td><a href="disadvantaged/unemployee_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a></td>
-        <td><?=number_format($item['amount'], 0);?></td>
+        <td><a href="disadvantaged/vacancy_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a> </td>
+        <td><?=number_format($item['value1'], 0);?></td>
+        <td><?=number_format($item['value2'], 0);?></td>
+        <td><?=number_format($item['value3'], 0);?></td>
+        
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="js_action('<?=$item['id'];?>', 'EDIT');" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$item['id'];?>", "DELETE");'/>
-
         </td>
         <?php endif; ?>
     </tr>
@@ -59,12 +61,12 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="disadvantaged/unemployee_delete/"+id;
+			window.location="elder/inmates/delete/"+id;
 		}
 	}
 	else if(type == 'EDIT')
 	{
-		window.location="disadvantaged/unemployee_form/"+id;
+		window.location='elder/inmates/form/'+id;
 	}
 }
 </script>

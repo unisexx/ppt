@@ -73,4 +73,3 @@ $(document).ready(function(){
     <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 <?php endif; ?>
-</form>

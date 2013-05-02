@@ -1,10 +1,11 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>
+<?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <form action="child/pregnant_save" method="post">
+<?php endif; ?>
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$rs['year'],'','-- เลือกปี --'); ?></td>
+  <td><?php echo form_dropdown('year',get_year_option(),@$rs['year'],'','-- เลือกปี --'); ?></td>
 </tr>
 <tr>
   <th>เพศเด็ก<span class="Txt_red_12"> *</span></th>
@@ -62,10 +63,14 @@
   <td><input name="f_address_code" type="text" id="textarea6" value="<?php echo $rs['f_address_code'] ?>"  style="width:70px;" /></td>
 </tr>
 </table>
-<?php echo form_hidden('id',@$rs['id']) ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
-<?php  if(menu::perm($menu_id, 'add')): ?>	
-<input type="submit" value="บันทึก" class="btn btn-danger"><?php endif; ?>
-<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>

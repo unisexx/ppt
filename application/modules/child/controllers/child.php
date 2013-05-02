@@ -239,7 +239,8 @@ Class Child extends Public_Controller{
 		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
 		$year =(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']: '';
 		$sex =(!empty($_GET['sex'])) ? " and sex =".$_GET['sex']:'';
-		$data['result'] = $this->pregnant->where("1=1 $location $year $sex")->get();
+        $sql = "select * from c_pregnant where 1=1 $location $year $sex order by year desc, hospital_code, location";
+		$data['result'] = $this->pregnant->get($sql);
 		$data['pagination'] = $this->pregnant->pagination();
 		$data['menu_id']=$this->pregnant_menu_id;
 		$this->template->build('pregnant/pregnant_index',$data);
@@ -268,7 +269,8 @@ Class Child extends Public_Controller{
 		redirect('child/pregnant');
 	}
 	function pregnant_import(){
-		$this->template->build('pregnant/pregnant_import_form');	
+	    $data['menu_id'] = $this->pregnant_menu_id;
+		$this->template->build('pregnant/pregnant_import_form', $data);	
 	}
 	function pregnant_save_import(){
 		// แก้ upload_max_filesize = 40M

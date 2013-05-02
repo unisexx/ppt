@@ -1,12 +1,14 @@
 <!--<h2>ข้อมูลกลุ่มเป้าหมาย2 - ผู้ด้อยโอกาส(เพิ่ม/แก้ไข)</h2>
 <h4>ผู้รับบริการทางสังคม <span class="gray">แบบ ผู้รับบริการทางสังคม</span></h4>-->
 <?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <form action="recipient/save" method="post">
+<?php endif; ?>
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td>
-  	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$rs['year'],'','-- เลือกปี --'); ?>
+  	<?php echo form_dropdown('year',get_year_option(),@$rs['year'],'','-- เลือกปี --'); ?>
   </td>
 </tr>
 <tr><th>วันที่ใบคำขอ(วันที่เริ่มต้น)</th>
@@ -44,8 +46,15 @@
 <?php 
 echo form_hidden('id',@$rs['id']);
 echo (!empty($rs['id']))? form_hidden('update',date('Y-m-d')):form_hidden('create',date('Y-m-d')); ?>
-<div id="btnSave">	
-<input type="submit" value="บันทึก" class="btn btn-danger">
-<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
+<div id="btnSave">
+    <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>

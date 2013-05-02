@@ -14,7 +14,7 @@
 <form action="recipient/index" method="get">
 	<div id="search">
 	<div id="searchBox">
-	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี--'); ?>	
+	<?php echo form_dropdown('year',get_year_option(),@$_GET['year'],'','-- ทุกปี--'); ?>	
   	
   	<?php 
   	$agency_id=$this->db->GetAssoc("select agency_id,agency from recipient group by agency_id,agency order by agency");
@@ -57,7 +57,7 @@
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['year'] ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
-  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['agency']; ?></td>
+  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo anchor('recipient/form/'.$item['id'], $item['agency']); ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['service_total'])?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['help'] ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['money_total'])?></td>
@@ -65,8 +65,8 @@
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
   	<?php  if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='recipient/form/<?php echo $item['id'] ?>'" />	<?php endif; ?>
-    <?php  if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />	<?php endif; ?></td>
+    <?php  echo menu::perm($menu_id, 'delete', 'recipient/delete/'.$item['id']); ?>
+    </td>
 </tr>
 <?php 
 $i++;

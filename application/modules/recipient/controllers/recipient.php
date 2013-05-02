@@ -10,7 +10,7 @@ Class Recipient extends Public_Controller{
 		$year=(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']:'';
 		$agency_id=(!empty($_GET['agency_id'])) ? " and AGENCY_ID=".$_GET['agency_id']:'';	
 		$help =(!empty($_GET['help_id'])) ? " and HELP_ID=".$_GET['help_id']:'';
-		$data['result'] = $this->recipient->where("1=1 $year $agency_id $help")->get();
+		$data['result'] = $this->recipient->where("1=1 $year $agency_id $help")->order_by('year desc, agency', 'asc')->get();
 		$data['pagination'] = $this->recipient->pagination();	
 		$data['menu_id']=$this->menu_id;
 		$this->template->build('recipient_index',$data);

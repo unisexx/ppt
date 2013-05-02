@@ -1,5 +1,6 @@
-<h2>ข้อมูลประเด็น (เพิ่ม/แก้ไข)</h2>
-<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
+<!--<h2>ข้อมูลประเด็น (เพิ่ม/แก้ไข)</h2>
+<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>-->
+<?php echo menu::source($menu_id); ?>
 <form action="datapoint/vehicle_save" method="post">
 <table class="tbadd">
 <tr>

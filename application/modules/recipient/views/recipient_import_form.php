@@ -1,5 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย2 - ผู้ด้อยโอกาส <a href="uploads/การให้ความช่วยเหลือ.xls"class="btn_ex_data"></a></h2>
-<h4>ผู้รับบริการทางสังคม <span class="gray">แบบ ผู้รับบริการทางสังคม</span></h4>
+<!--<h2>ข้อมูลกลุ่มเป้าหมาย2 - ผู้ด้อยโอกาส <a href="uploads/การให้ความช่วยเหลือ.xls"class="btn_ex_data"></a></h2>
+<h4>ผู้รับบริการทางสังคม <span class="gray">แบบ ผู้รับบริการทางสังคม</span></h4>-->
+<?php echo menu::source($menu_id,'uploads/การให้ความช่วยเหลือ.xls'); ?>
 <form action="recipient/save_import" method="post" enctype="multipart/form-data">
 	<table class="tbadd">
 		<tr>

@@ -8,14 +8,13 @@
 		})
 	})
 </script>
-<!--<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนออกจากโรงเรียนกลางคัน <span class="gray">แบบ ศธ. ออกโรงเรียนกลางคัน</span></h4>-->
+
 <?php echo menu::source($menu_id); ?>
 <form action="child/drop" method="get">
 	<div id="search">
 	<div id="searchBox">หมายเลขเขต
 	<input type="text" name="area_number" id="area_number" style="width:100px;" value="<?php echo @$_GET['area_number'] ?>"/>
-	<?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปีการศึกษา --'); ?>
+	<?php echo form_dropdown('year',get_year_option(null, null, 'c_drop', 'year', true),@$_GET['year'],'','-- ทุกปีการศึกษา --'); ?>
 <select name="province" id="province">
  <option value="">-- ทุกจังหวัด --</option>
   <?php 
@@ -64,7 +63,7 @@
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['year']; ?></td>
-  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['province']?></td>
+  <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo anchor('child/drop_form/'.$item['id'], $item['province']); ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['poor'] ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['family'] ?></td>
   <td onclick="window.location='child/drop_form/<?php echo $item['id'] ?>'"><?php echo $item['married'] ?></td>

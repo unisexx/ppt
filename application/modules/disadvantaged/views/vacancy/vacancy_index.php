@@ -41,7 +41,7 @@
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td><?=$item_dtl['province'];?> </td>
+        <td><a href="disadvantaged/vacancy_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a> </td>
         <td><?=number_format($item['vacancies'], 0);?></td>
         <td><?=number_format($item['candidates'], 0);?></td>
         <td><?=number_format($item['active'], 0);?></td>

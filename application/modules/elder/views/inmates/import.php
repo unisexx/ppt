@@ -1,11 +1,17 @@
-<?php echo menu::source($menu_id,'import_file/population/population_sample.xls'); ?>
-<form method="post" enctype="multipart/form-data" action="population/population_import">
+<? $m['id'] = 61; ?>
+<?=menu::source($m['id'], "import_file/elder/inmates/example.xls");?>
+
+
+<form action='disadvantaged/vacancy_upload' method='POST' enctype="multipart/form-data">
+	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
+	<input type='hidden' name='MENU_ID' value='<?=$m['id'];?>'>
+	
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('YEAR_DATA', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
-		<tr>
+		<tr style='display:none;'>
 			<th>จังหวัด</th>
 			<td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
 		</tr>		
@@ -25,41 +31,34 @@
 		<tr>
 			<th>หน่วยงาน</th>
 			<td>
-				<?=form_dropdown('import_section_id',get_option('id','title','section','PID = 0 ORDER BY title '),@$_GET['pid'],'','--ทุกหน่่วยงาน--');?>				
+				<?=form_dropdown('SECTION_ID',get_option('id','title','section','PID = 0 ORDER BY title '),@$_GET['pid'],'','--ทุกหน่่วยงาน--');?>				
 			</td>
 		</tr>
 		<tr class="tr_workgroup">
 			<th>กลุ่มงาน</th>
 			<td>
-				<?=form_dropdown('import_workgroup_id',get_option('id','title','section','PID > 0 ORDER BY title '),@$_GET['pid'],'','--ทุกหน่่วยงาน--');?>				
+				<?=form_dropdown('WORKGROUP_ID',get_option('id','title','section','PID > 0 ORDER BY title '),@$_GET['pid'],'','--ทุกหน่่วยงาน--');?>				
 			</td>
 		</tr>
 		<tr>
 			<th>ข้อมูลระหว่างวันที่</th>
 			<td>
-				<?
-				echo form_dropdown('month_start',get_month(),'','class="span2"','--เลือกเดือน--');
-				?>
-				<?php echo form_dropdown('year_start', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+				<?=form_dropdown('MONTH_START', get_month(),'','class="span2"','--เลือกเดือน--'); ?>
+				<?=form_dropdown('YEAR_START', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 				ถึง
-				<?
-				echo form_dropdown('month_end',get_month(),'','class="span2"','--เลือกเดือน--');
-				?>
-				<?php echo form_dropdown('year_end', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+				<?=form_dropdown('MONTH_END', get_month(),'','class="span2"','--เลือกเดือน--'); ?>
+				<?=form_dropdown('YEAR_END', get_year_option(2500), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
 			</td>
-		</tr>
-		<tr>
+		</tr>		<tr>
 		  <th>ไฟล์<span class="Txt_red_12"> *</span></th>
-		  <td><input type="file" name="fl_import" ></td>
+		  <td><input type='file' name='file_import'></td>
 		</tr>
 	</table>	
 	<div id="btnSave">
-	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
-	<? if(menu::perm($menu_id, 'add')): ?>
 	<input type="submit" value="บันทึก" class="btn btn-danger">
-	<? endif;?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>
+
 </form>
 <script>
     $(function(){

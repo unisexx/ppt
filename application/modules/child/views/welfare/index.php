@@ -48,8 +48,8 @@
         <td><?=number_format($item['build'], 0);?></td>
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
-            <?php echo menu::perm($m['id'], 'edit', 'dla/form/'.$m['id'].'/'.$item['id']); ?>
-            <?php echo menu::perm($m['id'], 'delete', 'dla/delete/'.$m['id'].'/'.$item['id']); ?>
+            <?php echo menu::perm($m['id'], 'edit', 'child/welfare/form/'.$item['id']); ?>
+            <?php echo menu::perm($m['id'], 'delete', 'child/welfare/delete/'.$item['id']); ?>
         </td>
         <?php endif; ?>
 

@@ -8,14 +8,13 @@
 		})
 	})
 </script>
-<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>
+<?php echo menu::source($menu_id); ?>
 <div id="search">
   <div id="searchBox">
   	<form action="child/pregnant" method="get">
 	    โรงพยาบาล
 	      <input type="text" name="location" id="textfield" style="width:250px;"  value="<?php echo @$_GET['location']; ?>"/>
-	    <?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
+	    <?php echo form_dropdown('year',get_year_option(null, null, 'c_pregnant', 'year', true),@$_GET['year'],'','-- ทุกปี --'); ?>
 	    <select name="sex" id="select">
 	      <option value="">-- ทุกเพศ --</option>
 	      <option value="1" <?php echo  (@$_GET['sex']==1)? "checked='checked' ":''; ?>>ชาย</option>
@@ -41,7 +40,7 @@
   <th>เพศเด็ก</th>
   <th>รหัสโรงพยาบาล</th>
   <th>สถานที่เกิด</th>
-  <th>เลขบัตรประชาชน ของบิดา</th>
+  <th width="180">เลขบัตรประชาชน ของบิดา</th>
     <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>
 </tr>
 <?php 
@@ -57,13 +56,16 @@
   <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $sex[$item['sex']] ?></td>
   <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $item['hospital_code'] ?></td>
   <td onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'"><?php echo $item['location'] ?></td>
-  <td><?php echo $item['f_id']; ?></td>
+  <td><?php echo anchor('child/pregnant_form/'.$item['id'], $item['f_id']); ?></td>
+  <?php if(menu::perm($menu_id, 'edit') && menu::perm($menu_id, 'delete')): ?>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?php echo $item['id'];?>">
   	 <?php  if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='child/pregnant_form/<?php echo $item['id'] ?>'" /><?php endif; ?>
      <?php  if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?></td>
+    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" /><?php endif; ?>
+  </td>
+  <?php endif; ?>
 </tr>
 <?php ++$i;endforeach; ?>
 </table>

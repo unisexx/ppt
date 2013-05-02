@@ -332,8 +332,8 @@ echo '<HR>';
 	}
 
 	function vehicle_import()
-	{	 
-		$this->template->build('vehicle/vehicle_import_form');
+	{	 $data['menu_id']=$this->vehicle_menu_id;		
+		$this->template->build('vehicle/vehicle_import_form',$data);
 	
 	}
 

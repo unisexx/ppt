@@ -4,7 +4,7 @@
 <tr>
   <th>จังหวัด  <span class="Txt_red_12">*</span></th>
   <td>
-  	<?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+  	<?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$amphor['province_id'], null, '-- ทุกจังหวัด --'); ?>
   </td>
 </tr>
 <tr>

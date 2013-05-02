@@ -141,6 +141,7 @@ if(!function_exists('stamp_to_th_fulldate'))
 		return $th_date;
 	}
 }
+
 if(!function_exists('stamp_to_th_abbrfulldate'))
 {
 	function stamp_to_th_abbrfulldate($timestamp)
@@ -149,6 +150,7 @@ if(!function_exists('stamp_to_th_abbrfulldate'))
 		return $th_date;
 	}
 }
+
 function DB2Date($date)
 {
 	
@@ -156,14 +158,22 @@ function DB2Date($date)
 	$y = $y + 543;
 	return $d.'/'.$m.'/'.$y;
 }
+
 function Date2DB($date){
 	//list($date,$time)=explode(' ',$date);	
 	list($y,$m,$d) = explode('-', $date);
 	$y = $y + 543;
 	return $d.'-'.$m.'-'.$y;
 }
+
 function Date2Oracle($date){
 	list($d,$m,$y) = explode('/', $date);
 	return trim($y).'-'.trim($m).'-'.trim($d);
+}
+
+function getAgefromTimestamp($birth){
+	$t = time();
+	$age = ($birth < 0) ? ( $t + ($birth * -1) ) : $t - $birth;
+	return floor($age/31536000);
 }
 ?>

@@ -32,7 +32,7 @@ Class Hf_elderly extends Public_Controller{
 			$sql = 'SELECT * FROM HF_ELDERLY_DATA WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 				if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
-			
+			$sql .= ' order by year desc, wlist_id';
 			$data['result'] = $this->welfare->get($sql);
 	    	$data['pagination'] = $this->welfare->pagination;
 			

@@ -1,6 +1,4 @@
 <? $m['id'] = 56; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>เด็กและเยาวชนที่อยู่ในความอุปการะของสถานสงเคราะห์/สถานคุ้มครอง/สถานพัฒนาและฟื้นฟู/ศูนย์ฝึกอาชีพ/บ้านพักเด็กและครอบครัว </h4>
 <?=menu::source($m['id']);?>
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
@@ -12,7 +10,7 @@
 	<table class="tbadd">
 	<tr>
 	  <th>ปี <span class="Txt_red_12">*</span></th>
-	  <td><?php echo form_dropdown('YEAR', get_year_option(2552), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
+	  <td><?php echo form_dropdown('YEAR', get_year_option(), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 	</tr>
 	<tr>
 	  <th>เดือน <span class="Txt_red_12">*</span></th>

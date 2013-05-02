@@ -1,11 +1,9 @@
 <? $m['id'] = 56; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2- ผู้สูงอายุ</h2>
-<h4>ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม</h4>
 <?=menu::source($m['id']);?>		
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', get_year_option(2552), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?=form_dropdown('YEAR', get_year_option(), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 	<?=form_dropdown('WLIST', get_option('id', 'name', 'hf_elderly_list'), @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>

@@ -1,7 +1,7 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>ประชากร (คน) </h4>
 <?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <form method="post" enctype="multipart/form-data" action="population/save">
+<?php endif; ?>
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
@@ -320,14 +320,19 @@
 </tr>
 </table>
 
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
-<input type="hidden" name="id" value="<?=$item['id'];?>">
-<? if(menu::perm($menu_id, 'add') || menu::perm($menu_id, 'edit')): ?>
-<input type="submit" value="บันทึก" class="btn btn-danger">
-<? endif;?>
-<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <?php echo form_hidden('id', $item['id']); ?>
+    <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>
+
 <script>
     $(function(){
         $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});

@@ -8,12 +8,11 @@
 		})
 	})
 </script>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้สูงอายุ</h2>
-<h4>จำนวนผู้สูงอายุ มากกว่า 60 ปี (คน) <span class="gray">แบบ กรมการปกครอง ประชากร</span></h4>
+<?php echo menu::source($menu_id); ?>
 <form method="get" enctype="multipart/form-data">
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    <?php echo form_dropdown('year_data', get_year_option(), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
     <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     <?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>
@@ -22,7 +21,7 @@
 </form>
 <div id="btnBox">	
 	<? if(menu::perm($menu_id, 'add')): ?>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='population/form'" class="btn_add"/>
+	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='population/sixty_form'" class="btn_add"/>
 	<? endif;?>
 </div>
 <!--
@@ -40,10 +39,10 @@
 <tr>
   <th>ลำดับ</th>
   <th>ปี</th>
-  <th>ตำบล(แขวง)/ อำเภอ(เขต) / จังหวัด</th>
+  <th>จังหวัด / อำเภอ(เขต) / ตำบล(แขวง)</th>
   <th>จำนวนประชากรชาย</th>
   <th>จำนวนประชากรหญิง</th>
-  <th>จัดการ</th>
+  <th width="60">จัดการ</th>
 </tr>
 <?php 
   $rowStyle = '';
@@ -54,17 +53,7 @@
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
   <td><?=$item['year_data'];?></td>
-  <td>
-  	  
-  	  <?
-  	  $message = $item['district_name'];
-  	  $message.= $message!='' ? ' / ' : '';
-  	  $message.= $item['amphur_name'];
-	  $message.= $message!='' ? ' / ' : '';
-  	  $message.= $item['province_name'];
-	  echo $message;
-  	  ?>
-  </td>
+  <td><?php echo anchor('population/sixtyup_form/'.$item['id'], implode(' / ', array_filter(array($item['province_name'], $item['amphur_name'], $item['district_name'])))); ?></td>
   <td><?=number_format($item['nsixtyup_male'],0);?></td>
   <td><?=number_format($item['nsixtyup_female'],0);?></td>
   <td>
@@ -72,9 +61,7 @@
   	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/sixtyup_form/<?=$item['id'];?>'" />
   	<? endif;?>
-  	<? if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
-    <? endif;?>
+  	<?php echo menu::perm($menu_id, 'delete', 'population/sixtyup_delete/'.$item['id']); ?>
   </td>
 </tr>
 <? $i++; } ?>

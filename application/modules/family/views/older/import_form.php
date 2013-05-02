@@ -1,6 +1,5 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้สูงอายุ (นำเข้าข้อมูล) <a href="import_file/family/family_sample.xls" target="_blank"><img src="media/images/btn_ex_data.png" style=""></a></h2>
-<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="family/warm/import">
+<?php echo menu::source($menu_id, 'import_file/family/family_sample.xls'); ?>
+<form method="post" enctype="multipart/form-data" action="family/older/import">
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>

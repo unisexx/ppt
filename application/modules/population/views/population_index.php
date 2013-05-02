@@ -40,7 +40,7 @@
 <tr>
   <th>ลำดับ</th>
   <th>ปี</th>
-  <th>ตำบล(แขวง)/ อำเภอ(เขต) / จังหวัด</th>
+  <th>จังหวัด / อำเภอ(เขต) / ตำบล(แขวง)</th>
   <th>จำนวนประชากรชาย</th>
   <th>จำนวนประชากรหญิง</th>
   <th>จัดการ</th>
@@ -54,18 +54,7 @@
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
   <td><?=$item['year_data'];?></td>
-  <td>
-  	  <a href="population/form/<?=$item['id'];?>">
-  	  <?
-  	  $message = $item['district_name'];
-  	  $message.= $message!='' ? ' / ' : '';
-  	  $message.= $item['amphur_name'];
-	  $message.= $message!='' ? ' / ' : '';
-  	  $message.= $item['province_name'];
-	  echo $message;
-  	  ?>
-  	  </a>
-  </td>
+  <td><?php echo anchor('population/sixtyup_form/'.$item['id'], implode(' / ', array_filter(array($item['province_name'], $item['amphur_name'], $item['district_name'])))); ?></td>
   <td><?=number_format($item['sum_male'],0);?></td>
   <td><?=number_format($item['sum_female'],0);?></td>
   <td>
@@ -73,9 +62,7 @@
   	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='population/form/<?=$item['id'];?>'" />
   	<? endif;?>
-  	<? if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
-    <? endif;?>
+  	<?php echo menu::perm($menu_id, 'delete', 'population/delete/'.$item['id']); ?>
     </td>
 </tr>
 <? $i++; } ?>

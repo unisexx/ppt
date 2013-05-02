@@ -146,7 +146,8 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->order_by('year', 'desc')->order_by('province', 'asc')->get();									 
+        $sql = "select * from c_drop where 1=1 $area_number $province $year order by year desc, province";
+		$data['result']	= $this->drop->get($sql);									 
 		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		$data['menu_id']=$this->drop_menu_id;

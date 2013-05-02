@@ -20,11 +20,11 @@ Class Recipient extends Public_Controller{
 		$data['rs']=$this->recipient->get_row($id);
 		$this->template->build('recipient_form',$data);
 	}
-	function save(){
-		
+	function save()
+	{		
 		if($_POST){
 			$_POST['s_date']=(!empty($_POST['s_date']))?  date_to_mysql($_POST['s_date'],true):'0000-00-00';
-			$_POST['e_date']=(!empty($_POST['e_date']))?  date_to_mysql($_POST['e_date'],true):'0000-00-00';
+			$_POST['e_date']=(!empty($_POST['e_date']))? date_to_mysql($_POST['e_date'],true):'0000-00-00';
 			$this->recipient->save($_POST);
 			set_notify('success', lang('save_data_complete'));	
 		}

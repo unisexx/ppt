@@ -8,8 +8,9 @@
 		})
 	})
 </script>
-<h2>ข้อมูลประเด็น</h2>
-<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
+<!--<h2>ข้อมูลประเด็น</h2>
+<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>-->
+<?php echo menu::source($menu_id); ?>
 <div id="search">
   <div id="searchBox">
   	<form action="datapoint/vehicle">

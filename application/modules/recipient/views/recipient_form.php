@@ -1,13 +1,6 @@
-<script type="text/javascript">
-$(document).ready(function(){
-	/*$('#province_id').change(function(){
-		var province_id=$('#province_id option:selected').val();
-		$('#area_number').val(province_id);
-	})*/
-});
-</script>
-<h2>ข้อมูลกลุ่มเป้าหมาย2 - ผู้ด้อยโอกาส(เพิ่ม/แก้ไข)</h2>
-<h4>ผู้รับบริการทางสังคม <span class="gray">แบบ ผู้รับบริการทางสังคม</span></h4>
+<!--<h2>ข้อมูลกลุ่มเป้าหมาย2 - ผู้ด้อยโอกาส(เพิ่ม/แก้ไข)</h2>
+<h4>ผู้รับบริการทางสังคม <span class="gray">แบบ ผู้รับบริการทางสังคม</span></h4>-->
+<?php echo menu::source($menu_id); ?>
 <form action="recipient/save" method="post">
 <table class="tbadd">
 <tr>

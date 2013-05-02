@@ -38,7 +38,8 @@ Class Recipient extends Public_Controller{
 		redirect('recipient');
 	}
 	function import(){
-		$this->template->build('recipient_import_form');
+		$data['menu_id']=$this->menu_id;		
+		$this->template->build('recipient_import_form',$data);
 	}
 	function ImportData($filepath)
 	{

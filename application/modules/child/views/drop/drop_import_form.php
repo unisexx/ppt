@@ -1,5 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน <a href="uploads/ketsch111sum_new.xls"class="btn_ex_data"></a></h2>
-<h4>เด็กและเยาวชนออกจากโรงเรียนกลางคัน <span class="gray">แบบ ศธ. ออกโรงเรียนกลางคัน</span></h4>
+<!--<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน <a href="uploads/ketsch111sum_new.xls"class="btn_ex_data"></a></h2>
+<h4>เด็กและเยาวชนออกจากโรงเรียนกลางคัน <span class="gray">แบบ ศธ. ออกโรงเรียนกลางคัน</span></h4>-->
+<?php echo menu::source($menu_id,'uploads/ketsch111sum_new.xls'); ?>
 <form method="post" enctype="multipart/form-data" action="child/drop_save_import">
 	<table class="tbadd">
 		<tr>

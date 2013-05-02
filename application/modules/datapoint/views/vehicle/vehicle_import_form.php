@@ -1,5 +1,6 @@
-<h2>ข้อมูลประเด็น <a href="uploads/traffic_year_54-1.xls"class="btn_ex_data"></a></h2>
-<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>
+<!--<h2>ข้อมูลประเด็น <a href="uploads/traffic_year_54-1.xls"class="btn_ex_data"></a></h2>
+<h4>ประชาชนได้รับอุบัติเหตุจากยานพาหนะ <span class="gray">แบบ สตช. อุบัติเหตุยานพาหนะ</span></h4>-->
+<?php echo menu::source($menu_id,'traffic_year_54-1.xls'); ?>
 <form action="datapoint/vehicle_save_import" method="post" enctype="multipart/form-data">
 	<table class="tbadd">
 		<tr>

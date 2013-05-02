@@ -177,8 +177,9 @@ Class Child extends Public_Controller{
         }
         redirect('child/drop');
 	}
-	function drop_import(){				
-		$this->template->build('drop/drop_import_form');	
+	function drop_import(){
+		$data['menu_id']=$this->drop_menu_id;				
+		$this->template->build('drop/drop_import_form',$data);	
 	}
 	function drop_save_import(){
 		if($_FILES['fl_import']['name']!=''){
@@ -267,7 +268,8 @@ Class Child extends Public_Controller{
 		redirect('child/pregnant');
 	}
 	function pregnant_import(){
-		$this->template->build('pregnant/pregnant_import_form');	
+		$data['menu_id']=$this->pregnant_menu_id;	
+		$this->template->build('pregnant/pregnant_import_form',$data);	
 	}
 	function pregnant_save_import(){
 		// แก้ upload_max_filesize = 40M

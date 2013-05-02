@@ -1,5 +1,6 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน <a href="uploads/ตั้งครรภ์_3.xlsx"class="btn_ex_data"></a></h2>
-<h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>
+<!--<h2>ข้อมูลกลุ่มเป้าหมาย1 - เด็กและเยาวชน <a href="uploads/ตั้งครรภ์_3.xlsx"class="btn_ex_data"></a></h2>
+<h4>เด็กและเยาวชนตั้งครรภ์ก่อนวัยอันควร <span class="gray">แบบ กรมการปกครอง ตั้งครรภ์ก่อนวัย</span></h4>-->
+<?php echo menu::source($menu_id,'uploads/ตั้งครรภ์_3.xlsx'); ?>
 <form action="child/pregnant_save_import" method="post" enctype="multipart/form-data">
 <table class="tbadd">
 		<tr>

@@ -8,8 +8,6 @@
 		})
 	})
 </script>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>ประชากร (คน) </h4>
 <?php echo menu::source($menu_id); ?>
 <form method="get" enctype="multipart/form-data">
 <div id="search">
@@ -57,7 +55,7 @@
   <td><?=$i;?></td>
   <td><?=$item['year_data'];?></td>
   <td>
-  	  
+  	  <a href="population/form/<?=$item['id'];?>">
   	  <?
   	  $message = $item['district_name'];
   	  $message.= $message!='' ? ' / ' : '';
@@ -66,6 +64,7 @@
   	  $message.= $item['province_name'];
 	  echo $message;
   	  ?>
+  	  </a>
   </td>
   <td><?=number_format($item['sum_male'],0);?></td>
   <td><?=number_format($item['sum_female'],0);?></td>

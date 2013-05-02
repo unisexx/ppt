@@ -156,8 +156,8 @@ Class population extends Public_Controller{
 					}
 					else if (strpos($item['title'], 'ตำบล')!==false && strpos($item['title'], 'เทศบาล')===false) {
 						$district_name = str_replace('ตำบล', '', $item['title']);
-						$district = $this->district->where(" province_id=".$province_id."  AND DISTRICT_NAME='".iconv('utf-8','tis-620',$district_name)."'")->get_row();
-						$amphur = $this->amphur->get_row($district['amphur_id']);
+						$district = $this->district->where(" province_id=".$province_id." AND AMPHUR_ID=".$amphur_id."  AND DISTRICT_NAME='".iconv('utf-8','tis-620',$district_name)."'")->get_row();
+						$amphur = $this->amphur->get_row($amphur_id);
 						$district_id = @$district['id'];
 						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$province_id." AND AMPHUR_ID=".$district['amphur_id']." AND DISTRICT_ID=".$district_id." AND YEAR_DATA=".$_POST['year_data'])->get_one();
 						if($val['ID']>0){

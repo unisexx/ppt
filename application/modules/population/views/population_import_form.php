@@ -1,5 +1,4 @@
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (นำเข้าข้อมูล) <a href="import_file/population/population_sample.xls" target="_blank"><img src="media/images/btn_ex_data.png" style="border:0px;"></a></h2>
-<h4>ประชากร (คน) <?php echo menu::source($menu_id); ?></h4>
+<?php echo menu::source($menu_id,'import_file/population/population_sample.xls'); ?>
 <form method="post" enctype="multipart/form-data" action="population/population_import">
 	<table class="tbadd">
 		<tr>

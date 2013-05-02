@@ -1,10 +1,8 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด </h4>
 <?php echo menu::source($menu_id); ?>
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offender/offender_data">
- <?php echo form_dropdown('year', get_year_option(2555), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(null, null, 'offender', 'offender_year', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>

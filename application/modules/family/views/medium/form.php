@@ -1,6 +1,5 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว (เพิ่ม/แก้ไข)</h2>
-<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
-<form method="post" enctype="multipart/form-data" action="family/warm/save">
+<?php echo menu::source($menu_id); ?>
+<form method="post" enctype="multipart/form-data" action="family/medium/save">
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
@@ -31,11 +30,15 @@
 </tr>
 </table>
 
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
-<input type="hidden" name="id" value="<?=@$item['id'];?>">	
-<? if(menu::perm($menu_id, 'add')||menu::perm($menu_id, 'edit')){?>
-<input type="submit" value="บันทึก" class="btn btn-danger">
-<? } ?>
-<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <?php echo form_hidden('id', $item['id']); ?>
+    <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>

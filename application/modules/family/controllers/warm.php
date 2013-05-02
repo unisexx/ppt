@@ -17,7 +17,7 @@ Class warm extends Public_Controller
 		$condition = '1=1 AND KEY_ID='.$this->key_id;
 		$condition.= @$_GET['year_data'] > 0 ? " AND YEAR_DATA=".$_GET['year_data'] : "";
 		$condition.= @$_GET['province_id'] > 0 ? " AND PROVINCE_ID=".$_GET['province_id']:"";
-		$data['data'] = $this->family->select($select)->join($join)->where($condition)->order_by('FAMILY.ID','DESC')->get();
+		$data['data'] = $this->family->select($select)->join($join)->where($condition)->order_by('year_data desc, province','asc')->get();
 		$data['pagination'] =$this->family->pagination();
 		$this->template->build('warm/index',$data);
 	}

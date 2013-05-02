@@ -8,8 +8,7 @@
 		})
 	})
 </script>
-<h2>ข้อมูลกลุ่มเป้าหมาย - ครอบครัว</h2>
-<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
+<?php echo menu::source($menu_id); ?>
 <form method="get">
 <div id="search">
   <div id="searchBox">
@@ -19,10 +18,8 @@
 </div>
 </form>
 <div id="btnBox">
-	<? if(menu::perm($menu_id, 'add')): ?>
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='family/warm/import_form'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='family/warm/form'" class="btn_add"/>
-	<? endif;?>
+	<?php echo menu::perm($menu_id, 'import', 'family/warm/import_form'); ?>
+    <?php echo menu::perm($menu_id, 'add', 'family/warm/form'); ?>
 </div>
 <?=$pagination;?>	
 <table class="tblist">
@@ -46,7 +43,7 @@
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
   <td><?=$item['year_data'];?></td>
-  <td><?=$item['province_name'];?></td>
+  <td><?php echo anchor('family/warm/form/'.$item['id'], $item['province_name']);?></td>
   <td><?=number_format($item['pass'],2);?>/ <?=number_format($item['percentage'],2);?></td>
   <td><?=number_format($item['target'],0);?></td>
   <td><?=number_format($item['lower_target'],2);?></td>
@@ -56,10 +53,9 @@
   	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='family/warm/form/<?=$item['id'];?>'" />
   	<? endif;?>
-  	<? if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
-    <? endif;?>
+  	<?php echo menu::perm($menu_id, 'delete', 'family/warm/delete/'.$item['id']); ?>
     </td>
 </tr>
 <? $i++;} ?>
 </table>
+<?=$pagination;?>   

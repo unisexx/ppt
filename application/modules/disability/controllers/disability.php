@@ -4,7 +4,7 @@ Class Disability extends Public_Controller{
 		parent::__construct();
 		$this->load->model('d_identity_model','identity');
 	}
-	public $menu_id=34;
+	public $menu_id=39;
 	function identity(){
 		//$this->db->debug=TRUE;			
 		$month=(!empty($_GET['month']) && empty($_GET['year']))? " AND  EXTRACT(MONTH FROM E_DATE) ='".$_GET['month']."'":'';

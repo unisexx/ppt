@@ -146,7 +146,7 @@ Class Child extends Public_Controller{
 		$area_number=(!empty($_GET['area_number']))? " and area_number=".$_GET['area_number']:'';
 		$province=(!empty($_GET['province'])) ? " and province='".$_GET['province']."'":'';
 		$year=(!empty($_GET['year'])) ? " and year=".$_GET['year']:'';		
-		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->get();									 
+		$data['result']	= $this->drop->where("1=1 $area_number $province $year")->order_by('year', 'desc')->order_by('province', 'asc')->get();									 
 		$data['province']= $this->province->order_by("province"," asc")->limit(80)->get();
 		$data['pagination'] = $this->drop->pagination();
 		$data['menu_id']=$this->drop_menu_id;
@@ -177,8 +177,9 @@ Class Child extends Public_Controller{
         }
         redirect('child/drop');
 	}
-	function drop_import(){				
-		$this->template->build('drop/drop_import_form');	
+	function drop_import(){
+	    $data['menu_id']=$this->drop_menu_id;				
+		$this->template->build('drop/drop_import_form', $data);	
 	}
 	function drop_save_import(){
 		if($_FILES['fl_import']['name']!=''){

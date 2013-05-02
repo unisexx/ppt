@@ -1,12 +1,10 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (นำเข้าข้อมูล) <a href="import_file/offense/child_offense_list.xls" target="_blank"><img src="media/images/btn_ex_data.png" border="0" style=""></a></h2>
-<h4>ประชากร (คน) </h4>
-<?php echo menu::source($menu_id); ?>
+<?php echo menu::source($menu_id, 'import_file/offense/child_offense_list.xls'); ?>
 <form method="post" enctype="multipart/form-data" action="offense/offense_import">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('year_data', get_year_option(), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr>
 			<th>จังหวัด</th>

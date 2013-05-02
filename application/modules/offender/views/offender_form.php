@@ -1,5 +1,3 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน (เพิ่ม/แก้ไข)</h2>
-<h4>เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็กและเยาวชน ตามสาเหตุการกระทำความผิด </h4>
 <?php echo menu::source($menu_id); ?>
 <?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <?php echo form_open('offender/offender_form'); ?>
@@ -8,7 +6,7 @@
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('offender_year', get_year_option(2555), $rs['offender_year']); ?></td>
+  <td><?php echo form_dropdown('offender_year', get_year_option(), $rs['offender_year']); ?></td>
 </tr>
 <tr>
   <th>ป่วยทางจิต<span class="Txt_red_12"> *</span></th>

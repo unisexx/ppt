@@ -19,7 +19,7 @@ Class Datapoint extends Public_Controller{
 				FROM MENTAL_NUMBER MT LEFT JOIN PROVINCES PV ON MT.PROVINCE_ID = PV.ID WHERE 1=1 ';
 			$sql .= (@$_GET['year'])?"AND MT.YEAR LIKE '".$_GET['year']."' ":'';
 			$sql .= (@$_GET['province_id'])?"AND MT.PROVINCE_ID LIKE '".$_GET['province_id']."' ":'';
-		$sql .= 'ORDER BY MT.YEAR DESC, MT.PROVINCE_ID ASC ';
+		$sql .= ' ORDER BY MT.YEAR DESC, PV.PROVINCE ASC ';
 		
 		$data['province'] = $this->province->limit(80)->get('SELECT ID, PROVINCE FROM PROVINCES');
 

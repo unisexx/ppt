@@ -22,7 +22,7 @@
         <th>ปี</th>
         <th>จังหวัด</th>
         <th>อำเภอ</th>
-        <th>อปท.(ตำบล/เทศบาล)</th>
+        <th>ตำบล/เทศบาล (อปท.)</th>
         <th>ขนาด</th>
         <th width="25">จำนวน</th>
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?><th width="60">จัดการ</th><?php endif; ?>

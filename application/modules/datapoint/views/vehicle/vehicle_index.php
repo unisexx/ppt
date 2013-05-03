@@ -14,7 +14,7 @@
 <div id="search">
   <div id="searchBox">
   	<form action="datapoint/vehicle">
-		    <?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
+		    <?php echo form_dropdown('year',get_year_option(),@$_GET['year'],'','-- ทุกปี --'); ?>
 			หน่วยงาน <input type="text" name="agency_id" value="<?php echo @$_GET['agency_id'] ?>">
 		  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   </form>
@@ -51,7 +51,7 @@
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $i ?></td>
   <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"> <?php echo $item['year'] ?></td>
-  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo $item['agency'] ?></td>
+  <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo anchor('datapoint/vehicle_form/'.$item['id'], $item['agency']); ?></td>
   <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['notice']) ?></td>
   <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['die_male']) ?> / <?php echo number_format($item['die_female']) ?></td>
   <td onclick="window.location='datapoint/vehicle_form/<?php echo $item['id'] ?>'"><?php echo number_format($item['coma_male']) ?> / <?php echo number_format($item['coma_male']) ?></td>

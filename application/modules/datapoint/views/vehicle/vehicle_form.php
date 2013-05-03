@@ -5,7 +5,7 @@
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('year',array_combine(range(2552,date('Y')+543),range(2552,date('Y')+543)),@$rs['year'],'','-- เลือกปี --'); ?></td>
+  <td><?php echo form_dropdown('year',get_year_option(),@$rs['year'],'','-- เลือกปี --'); ?></td>
 </tr>
 <tr>
   <th>หน่วยงาน<span class="Txt_red_12"> *</span></th>

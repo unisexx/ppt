@@ -1,6 +1,4 @@
 <? $m['id'] = 86; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต </h4>
 <?=menu::source($m['id']);?>
 
 
@@ -8,7 +6,7 @@
 <div id="search">
   <div id="searchBox"> 
   		<? if(@$_GET['page']) { ?> <input type='hidden' name='page' value='<?=@$_GET['page'];?>'> <? } ?>
-		<?=form_dropdown('year', get_year_option(2554), @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<?=form_dropdown('year', get_year_option(), @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 		<?=form_dropdown('province_id', get_option('id', 'province', 'provinces'), @$_GET['province_id'], null, '-- แสดงทั้งหมด --'); ?>
 	  	<input type="submit" title="ค้นหา" value=" " class="btn_search" onclick='action_search();'/>
   </div>
@@ -51,7 +49,7 @@
 						if($item['province_id'] == 99) { $item['province'] = 'ต่างชาติ'; }
 					}
         		
-				echo $item['province'];
+				echo anchor('datapoint/mental/form/'.$item['id'], $item['province']);
         	?>
         	
         </td>

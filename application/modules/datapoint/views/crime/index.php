@@ -1,6 +1,5 @@
 <? $m['id'] = 91; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป</h2>
-<h4>ความผิดทางคดีอาญา</h4>
+
 <?=menu::source($m['id']);?>
 
 
@@ -11,7 +10,7 @@
 <FORM ACTION='' METHOD='GET'>
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('YEAR', get_year_option(2553), @$_GET['YEAR'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+    <?php echo form_dropdown('YEAR', get_year_option(), @$_GET['YEAR'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
     <select name='STATION' id='STATION'>
     	<option VALUE=''>-- ทุกจังหวัด --</option>
 		<?
@@ -62,7 +61,7 @@
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td> <?=$item['station'];?> </td>
+        <td> <?=anchor('datapoint/crime/form/'.$item['id'], $item['station']);?> </td>
         <td><?=number_format($item_res[1], 0);?></td>
         <td><?=number_format($item_res[2], 0);?></td>
         <td><?=number_format($item_res[3], 0);?></td>

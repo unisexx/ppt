@@ -1,6 +1,5 @@
 <? $m['id'] = 91; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)</h2>
-<h4>ความผิดทางคดีอาญา  </h4>
+
 <?=menu::source($m['id']);?>
 
 
@@ -11,7 +10,7 @@
 	<table class="tbadd">
 		<tr>
 		  <th>ปี <span class="Txt_red_12">*</span></th>
-		  <td><?php echo form_dropdown('YEAR', get_year_option(2553), @$station[0]['year']); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
+		  <td><?php echo form_dropdown('YEAR', get_year_option(), @$station[0]['year']); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 		</tr>
 		<tr>
 			<th>จังหวัด <span class="Txt_red_12">  *</span></th>

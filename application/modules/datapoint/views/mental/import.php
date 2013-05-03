@@ -1,7 +1,6 @@
 <? $m['id'] = 86; ?>
-<h2>ข้อมูลพื้นฐาน - ข้อมูลทั่วไป (เพิ่ม/แก้ไข)  <a href="import_file/datapoint/mental/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
-<h4>จำนวนและอัตราผู้ป่วยสุภาพจิต </h4>
-<?=menu::source($m['id']);?>
+
+<?=menu::source($m['id'], 'import_file/datapoint/mental/example.xls');?>
 
 
 <form action='datapoint/mental/upload' method='POST' enctype="multipart/form-data">

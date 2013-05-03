@@ -5,7 +5,7 @@
 <table class="tbadd">
     <tr>
         <th>ปี <span class="Txt_red_12">*</span></th>
-        <td><?php echo form_dropdown('year', get_year_option(2555), $rs['year']); ?></td>
+        <td><?php echo form_dropdown('year', get_year_option(), $rs['year']); ?></td>
     </tr>
     <tr>
         <th>ดื่มเครื่องดื่มที่มีแอลกอฮอล์  สูบบุหรี่ และติดสารเสพติดร้ายแรง <br />เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น<span class="Txt_red_12"> *</span></th>

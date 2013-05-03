@@ -6,6 +6,7 @@ Class Inmates extends Public_Controller{
 		#$this->load->model('hf_elderlylist_model','wflist');
 		$this->load->model('province_model', 'province');
 		$this->load->model('elder_inmates_model', 'inmates');
+		$this->load->model('elder_inmateslist_model', 'inmateslist');
 		$this->load->model('info_model', 'info');
 	}
 	
@@ -71,8 +72,10 @@ Class Inmates extends Public_Controller{
 /***************************************************************************************/
 		function upload()
 		{
-			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
-            $this->info->save($_POST);
+			
+			#$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+            #$this->info->save($_POST);
+            $year = $_POST['YEAR_DATA'];
 			unset($_POST);
 			
 
@@ -84,38 +87,42 @@ Class Inmates extends Public_Controller{
 			
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.$file_name);
 				$data = $this->ReadData($uploaddir.$file_name);
-				unlink($uploaddir.$file_name);
+			unlink($uploaddir.$file_name);
 			
-			$_POST['YEAR'] = $data[1][1];
-			$_POST['MONTH'] = array_search(trim($data[1][3]), $month_th)+1;
-
-			for($i=3; $i<count($data); $i++)
+			$_POST['YEAR'] = $year;
+			if($_POST['YEAR'])
 			{
-				$wlist_dtl = $this->wflist->limit(1)->get("SELECT * FROM HF_ELDERLY_LIST WHERE NAME LIKE '".$data[$i][0]."'");
-				$_POST['WLIST_ID'] = $wlist_dtl[0]['id'];
-				$_POST['TARGET'] = $data[$i][1];
-				$_POST['BALANCE'] = $data[$i][2];
-				$_POST['ADMISSION'] = $data[$i][3];
-				$_POST['DISTRIBUTION'] = $data[$i][4];
-				$_POST['REMAIN'] = $data[$i][5];
-				$_POST['BUILD'] = $data[$i][6];
-				
-				$chk_repeat;
-				if($_POST['YEAR'] && $_POST['MONTH'] && $_POST['WLIST_ID'])
-				{
-					$chk_repeat = $this->welfare->get("SELECT ID FROM HF_ELDERLY_DATA WHERE YEAR=".$_POST['YEAR']." AND MONTH = ".$_POST['MONTH']." AND WLIST_ID = ".$_POST['WLIST_ID']);
-				
-					if(count($chk_repeat) >= 1)
-						{  $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." ในระบบอยู่แล้ว</DIV>"; }
-					else
+					for($i=4; $i<count($data); $i++)
+					{
+						$list_id = $this->inmateslist->limit(1)->get("SELECT * FROM ELDER_INMATES_LIST WHERE NAME LIKE '".$data[$i][0]."'");
+						if($list_id[0]['id'])
 						{
-							$this->welfare->save($_POST); 
-							$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." เสร็จสิ้น</DIV>"; }
-					if(!$_POST['WLIST_ID'] || !$_POST['YEAR'] || !$_POST['MONTH'])
-						{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง </DIV>"; }
-				}
+							$_POST['INMATESLIST_ID'] = $list_id[0]['id'];
+							$_POST['VALUE1_M'] = $data[$i][2];
+							$_POST['VALUE1_F'] = $data[$i][3];
+							$_POST['VALUE2_M'] = $data[$i][4];
+							$_POST['VALUE2_F'] = $data[$i][5];
+							$_POST['VALUE3_M'] = $data[$i][6];
+							$_POST['VALUE3_F'] = $data[$i][7];
+							
+							
+							$chk_repeat = $this->inmates->get("SELECT * FROM ELDER_INMATES WHERE INMATESLIST_ID LIKE '".$_POST['INMATESLIST_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'");
+							if(count($chk_repeat) >= 1)
+							{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." ในระบบอยู่แล้ว</DIV>"; }
+							else if(!$_POST['INMATESLIST_ID'] || !$_POST['YEAR'])
+							{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล ในเอกสารไม่ถูกต้อง"; }
+							else
+							{
+								$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เสร็จสิ้น</DIV>"; 
+								$this->inmates->save($_POST);
+							}
+						}
+					}
+			} else {
+				$data['content'] = '<DIV style="background:#EEE; border-radius:5px; line-height:80px; font-weight:bold; color:#F33; text-align:center; width:100%;">กรุณาเลือกปีก่อนการดำเนินการ</DIV>';
 			}
-			$this->template->build('hf_elderly/upload', @$data);
+			
+			$this->template->build('inmates/upload', @$data);
 		}
 
 	//===== INMATES OF ELDERLY =====//	

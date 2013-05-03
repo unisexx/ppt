@@ -34,15 +34,16 @@
 	<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>
 </tr>
   <?php foreach($result as $key => $item): $key += 1;
-		$item_dtl = $this->province->get_row($item['province_id']);
+  		$list_dtl = $this->inmateslist->limit(1)->get("SELECT * FROM ELDER_INMATES_LIST WHERE ID LIKE '".$item['inmateslist_id']."'");
+		$item_dtl = $this->province->get_row($list_dtl[0]['province_id']);
     	?>
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
         <td><a href="disadvantaged/vacancy_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a> </td>
-        <td><?=number_format($item['value1'], 0);?></td>
-        <td><?=number_format($item['value2'], 0);?></td>
-        <td><?=number_format($item['value3'], 0);?></td>
+        <td><?=number_format(($item['value1_m']+$item['value1_f']), 0);?></td>
+        <td><?=number_format(($item['value2_m']+$item['value2_f']), 0);?></td>
+        <td><?=number_format(($item['value3_m']+$item['value3_f']), 0);?></td>
         
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>

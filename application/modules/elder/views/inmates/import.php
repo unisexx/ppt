@@ -2,7 +2,7 @@
 <?=menu::source($m['id'], "import_file/elder/inmates/example.xls");?>
 
 
-<form action='disadvantaged/vacancy_upload' method='POST' enctype="multipart/form-data">
+<form action='elder/inmates/upload' method='POST' enctype="multipart/form-data">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<input type='hidden' name='MENU_ID' value='<?=$m['id'];?>'>
 	

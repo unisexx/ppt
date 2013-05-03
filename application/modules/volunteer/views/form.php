@@ -1,6 +1,7 @@
-<h2>ข้อมูลพื้นฐาน - ทุนทางสังคม (เพิ่ม/แก้ไข)</h2>
-<h4>ข้อมูลอาสาสมัคร <span class="gray"></span></h4>
-<form method="post" enctype="multipart/form-data" action="birth/save">
+<?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
+<form method="post" enctype="multipart/form-data" action="volunteer/save">
+<?php endif; ?>
 <table class="tbadd">
 <tr>
   <th>เลขที่บัตรประชาชน/เลขที่หนังสือเดินทาง<span class="Txt_red_12"> *</span></th>

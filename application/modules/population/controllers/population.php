@@ -18,7 +18,7 @@ Class population extends Public_Controller{
 		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
 		$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] : "";
-		$data['ppl'] = $this->ppl->where($condition)->order_by('year_data desc, province_name, amphur_name, district_name')->get();
+		$data['ppl'] = $this->ppl->where($condition)->order_by('year_data desc, province_name, amphur_name, district_name', 'asc')->get();
 		$data['pagination'] = $this->ppl->pagination();
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('population_index',$data);

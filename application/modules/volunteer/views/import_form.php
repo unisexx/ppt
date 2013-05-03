@@ -1,6 +1,5 @@
-<h2>ข้อมูลกลุ่มเป้าหมาย - เด็กและเยาวชน</h2>
-<h4>ข้อมูลการเกิด <span class="gray">แบบ กรมการปกครอง การเกิด</span></h4>
-<form method="post" enctype="multipart/form-data" action="birth/birth_import">
+<?php echo menu::source($menu_id); ?>
+<form method="post" enctype="multipart/form-data" action="volunteer/birth_import">
 <div id="search">
   <div id="searchBox">  	
     <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>

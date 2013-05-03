@@ -10,10 +10,13 @@ Class Disadvantaged extends Public_Controller{
 	}
 	//========== UNEMPLOYEE ==========//
 	function unemployee(){
-		$sql = 'SELECT * FROM UNEMPLOYEE WHERE 1=1 ';
+		$sql = 'SELECT UNEMPLOYEE.*, PROVINCES.PROVINCE
+        FROM UNEMPLOYEE
+        JOIN PROVINCES ON PROVINCES.ID = UNEMPLOYEE.PROVINCE_ID
+        WHERE 1=1 ';
 			if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 			if(@$_GET['PROVINCE']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE'].' ';
-		$sql .= 'ORDER BY YEAR DESC, PROVINCE_ID ASC';
+		$sql .= ' ORDER BY UNEMPLOYEE."YEAR" DESC, PROVINCES.PROVINCE';
 		
 		$data['result'] = $this->unemployee->get($sql);
     	$data['pagination'] = $this->unemployee->pagination;
@@ -109,10 +112,13 @@ Class Disadvantaged extends Public_Controller{
 	
 	//========== VACANCY ==========//
 	function vacancy(){
-		$sql = 'SELECT * FROM VACANCY WHERE 1=1 ';
+		$sql = 'SELECT VACANCY.*, PROVINCES.PROVINCE
+        FROM VACANCY
+        JOIN PROVINCES ON PROVINCES.ID = VACANCY.PROVINCE_ID
+        WHERE 1=1 ';
 			if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 			if(@$_GET['PROVINCE']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE'].' ';
-		$sql .= 'ORDER BY YEAR DESC, PROVINCE_ID ASC';
+		$sql .= 'ORDER BY VACANCY."YEAR" DESC, PROVINCES.PROVINCE';
 	
 		$data['result'] = $this->vacancy->get($sql);
     	$data['pagination'] = $this->vacancy->pagination;

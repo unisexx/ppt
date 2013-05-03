@@ -8,12 +8,11 @@
 		})
 	})
 </script>
-<h2>ข้อมูลพื้นฐาน - ทุนทางสังคม</h2>
-<h4>ข้อมูลอาสาสมัคร <span class="gray"></span></h4>
+<?php echo menu::source($menu_id); ?>
 <form method="get" >
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    <?php //echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
     <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     <?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>
@@ -54,7 +53,7 @@
 ?>
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
-  <td><?=$item['fname'].' '.$item['lname'];?></td>
+  <td><?=anchor('volunteer/form/'.$item['id'], $item['fname'].' '.$item['lname']);?></td>
   <td>
 	<?if ($item["home_no"]!="") echo $item['home_no'].'&nbsp;'; ?>
     <?if ($item["moo"]!="")echo "หมู่ที่".$item['moo'].'&nbsp;'; ?>
@@ -73,9 +72,7 @@
   	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="button" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='volunteer/form/<?=$item['id'];?>'" />
   	<? endif;?>
-  	<? if(menu::perm($menu_id, 'add')): ?>
-    <input type="button" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip" />
-    <? endif;?>
+  	<?php echo menu::perm($menu_id, 'delete', 'volunteer/delete/'.$item['id']); ?>
     </td>
     
 </tr>

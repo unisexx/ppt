@@ -1,13 +1,11 @@
 <? $m['id'] = 71; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส</h2>
-<h4>จำนวนคนว่างงาน </h4>
 <?=menu::source($m['id']);?>
 
 
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', get_year_option(2551), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?=form_dropdown('YEAR', get_year_option(), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 	<?=form_dropdown('PROVINCE', get_option('id', 'province', 'provinces'), @$_GET['PROVINCE'], null, '-- แสดงทั้งหมด --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
@@ -33,13 +31,11 @@
   
   <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?><th style='width:120px;'>จัดการ</th><?php endif; ?>
 </tr>
-  <?php foreach($result as $key => $item): $key += 1;
-		$item_dtl = $this->province->get_row($item['province_id']);
-    	?>
+  <?php foreach($result as $key => $item): $key += 1; ?>
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td><a href="disadvantaged/unemployee_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a></td>
+        <td><a href="disadvantaged/unemployee_form/<?=$item['id'];?>"><?=$item['province'];?></a></td>
         <td><?=number_format($item['amount'], 0);?></td>
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>

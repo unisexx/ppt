@@ -1,6 +1,5 @@
 <? $m['id'] = 104; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส</h2>
-<h4>ตำแหน่งคนว่างงาน </h4>
+
 <?=menu::source($m['id']);?>
 
 
@@ -13,7 +12,7 @@
 	<table class="tbadd">
 	<tr>
 	  <th>ปี <span class="Txt_red_12">*</span></th>
-	  <td><?php echo form_dropdown('YEAR', get_year_option(2552), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
+	  <td><?php echo form_dropdown('YEAR', get_year_option(), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 	</tr>
 	<tr>
 	  <th>จังหวัด<span class="Txt_red_12">  *</span></th>

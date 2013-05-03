@@ -1,7 +1,5 @@
 <? $m['id'] = 71; ?>
-<h2>ข้อมูลกลุ่มเป้าหมาย 2 - ผู้ด้อยโอกาส  <a href="import_file/disadvantaged/unemployee/example.xls"> <img src="media/images/btn_ex_data.png" style="border:none;"> </a></h2>
-<h4>จำนวนคนว่างงาน </h4>
-<?=menu::source($m['id']);?>
+<?=menu::source($m['id'], 'import_file/disadvantaged/unemployee/example.xls');?>
 
 
 <form action='disadvantaged/unemployee_upload' method='POST' enctype="multipart/form-data">

@@ -1,6 +1,7 @@
-<h2>ข้อมูลพื้นฐาน - ทุนทางสังคม (เพิ่ม/แก้ไข)</h2>
-<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
+<?php echo menu::source($menu_id); ?>
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <form method="post" enctype="multipart/form-data" action="population/save">
+<?php endif; ?>
 <table class="tbadd">
 <tr>
   <th>ประเภทหน่วยงาน<span class="Txt_red_12">  *</span></th>
@@ -103,12 +104,19 @@
 </tr>
 </table>
 
+<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
-<input type="hidden" name="id" value="<?=$item['id'];?>">
-<input type="submit" value="บันทึก" class="btn btn-danger">
-<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
+    <?php echo form_hidden('id', $item['id']); ?>
+    <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
 </div>
 </form>
+<?php else: ?>
+<div id="btnSave">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+</div>
+<?php endif; ?>
+
 <script>
     $(function(){
         $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});

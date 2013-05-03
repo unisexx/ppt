@@ -8,12 +8,11 @@
 		})
 	})
 </script>
-<h2>ข้อมูลพื้นฐาน - ทุนทางสังคม</h2>
-<h4><?=get_menu_info($menu_id,'TITLE');?> <?php echo menu::source($menu_id); ?></h4>
+<?php echo menu::source($menu_id); ?>
 <form method="get" enctype="multipart/form-data">
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    <?php //echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
     <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     <?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>
@@ -21,8 +20,8 @@
 </div>
 </form>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='organization/import_form'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='organization/form'" class="btn_add"/>
+    <?php echo menu::perm($menu_id, 'import', 'organization/import_data'); ?>
+    <?php echo menu::perm($menu_id, 'add', 'organization/form'); ?>
 </div>
 <!--
 <div class="pagebarUTH">&nbsp;<span class="this-page">1</span>
@@ -56,16 +55,14 @@
   <td><?=$i;?></td>
   <td><?=$item['type_title'];?></td>
   <td><?=$item['organ_id'];?></td>
-  <td><?=$item['organ_name'];?></td>
+  <td><?=anchor('organization/form/'.$item['id'], $item['organ_name']);?></td>
   <td></td>
   <td><?=$item['tel'];?></td>
   <td><?=$item['fax'];?></td>
   <td>
   	<input type="hidden" name="hdid[]" id="hdid" class="hdid" value="<?=$item['id'];?>">
-  	<input type="submit" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='organization/form/<?=$item['id'];?>'" />
-  	<? if(menu::perm($menu_id, 'delete')): ?>
-    <input type="submit" name="button4" id="button4" title="ลบรายการนี้" value=" " class="btn_delete vtip"  />
-    <? endif;?>
+  	<?php echo menu::perm($menu_id, 'edit', 'organization/form/'.$item['id']); ?>
+  	<?php echo menu::perm($menu_id, 'delete', 'organization/delete/'.$item['id']); ?>
     </td>
 </tr>
 <? $i++; } ?>

@@ -34,8 +34,8 @@ Class Inmates extends Public_Controller{
 		{
 			$sql = 'SELECT * FROM ELDER_INMATES WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
-				if(@$_GET['PROVINCE_ID']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE_ID'].' ';
-			
+				#if(@$_GET['PROVINCE_ID']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE_ID'].' ';
+			$sql .= ' ORDER BY ID DESC';
 			$data['result'] = $this->inmates->get($sql);
 	    	$data['pagination'] = $this->inmates->pagination;
 			
@@ -53,6 +53,7 @@ Class Inmates extends Public_Controller{
 		
 			function save()
 			{
+				#print_r($_POST);
 				$this->inmates->save($_POST);
 				set_notify('success', lang('save_data_complete'));	redirect('elder/inmates/');
 			}
@@ -69,12 +70,12 @@ Class Inmates extends Public_Controller{
 		
 		
 		function import() { $this->template->build('inmates/import'); }
-/***************************************************************************************/
+
 		function upload()
 		{
 			
-			#$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
-            #$this->info->save($_POST);
+			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+            $this->info->save($_POST);
             $year = $_POST['YEAR_DATA'];
 			unset($_POST);
 			

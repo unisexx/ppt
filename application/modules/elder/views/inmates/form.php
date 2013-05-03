@@ -14,8 +14,8 @@
 	  <td><?php echo form_dropdown('YEAR', get_year_option(2552), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 	</tr>
 	<tr>
-	  <th>จังหวัด<span class="Txt_red_12">  *</span></th>
-	  <td><?=form_dropdown('PROVINCE_ID', get_option('id', 'province', 'provinces'), @$result['province_id'], null, '-- แสดงทั้งหมด --'); ?></td>
+	  <th>สถานสงเคราะห์<span class="Txt_red_12">  *</span></th>
+	  <td><?=form_dropdown('INMATESLIST_ID', get_option('id', 'name', 'elder_inmates_list'), @$result['inmateslist_id'], null, '-- แสดงทั้งหมด --'); ?></td>
 	</tr>
 	<?
 		$title_ary = array('อายุ 60-69', 'อายุ 70-79','อายุ 80');
@@ -26,8 +26,9 @@
 			?>
 			<tr>
 			  <th><?=$title_ary[$i];?><span class="Txt_red_12"> *</span></th>
-			  <td><input name="<?=$name_ary[$i];?>" type="text" value="<?=@$result[strtolower($name_ary[$i])]; ?>"  style="width:70px;" />
-			    ราย 
+			  <td>
+			  	ชาย <input name="<?=$name_ary[$i];?>_M" type="text" value="<?=@$result[strtolower($name_ary[$i].'_M')]; ?>"  style="width:70px;" /> ราย / 
+			  	หญิง<input name="<?=$name_ary[$i];?>_F" type="text" value="<?=@$result[strtolower($name_ary[$i].'_F')]; ?>"  style="width:70px;" /> ราย 
 			    </td>
 			</tr>
 			<?		

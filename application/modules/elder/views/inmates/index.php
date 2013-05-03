@@ -26,7 +26,8 @@
 <tr>
 	<th style='width:90px;'>ลำดับ</th>
 	<th style='width:90px;'>ปี</th>
-	<th>จังหวัด</th>
+	<th style='width:300px;'>เรือนจำ</th>
+	<th style='width:300px;'>จังหวัด</th>
 	<th>อายุ 60-69</th>
 	<th>อายุ 70-79</th>
 	<th>อายุ 80</th>
@@ -40,7 +41,8 @@
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td><a href="disadvantaged/vacancy_form/<?=$item['id'];?>"><?=$item_dtl['province'];?></a> </td>
+        <td><a href="elder/inmates/form/<?=$item['id'];?>"><?=$list_dtl[0]['name'];?></a> </td>
+        <td><?=$item_dtl['province'];?></td>
         <td><?=number_format(($item['value1_m']+$item['value1_f']), 0);?></td>
         <td><?=number_format(($item['value2_m']+$item['value2_f']), 0);?></td>
         <td><?=number_format(($item['value3_m']+$item['value3_f']), 0);?></td>

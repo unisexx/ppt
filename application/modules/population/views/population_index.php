@@ -54,7 +54,7 @@
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
   <td><?=$item['year_data'];?></td>
-  <td><?php echo anchor('population/sixtyup_form/'.$item['id'], implode(' / ', array_filter(array($item['province_name'], $item['amphur_name'], $item['district_name'])))); ?></td>
+  <td><?php echo anchor('population/form/'.$item['id'], implode(' / ', array_filter(array($item['province_name'], $item['amphur_name'], $item['district_name'])))); ?></td>
   <td><?=number_format($item['sum_male'],0);?></td>
   <td><?=number_format($item['sum_female'],0);?></td>
   <td>

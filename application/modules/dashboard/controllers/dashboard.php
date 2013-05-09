@@ -9,6 +9,107 @@ class Dashboard extends Public_Controller
     /*
      * แนวโน้มประชากรสูงอายุ
      */
+    public function chart_1()
+    {   
+        $sql = 'SELECT POPULATION.YEAR_DATA AS YEAR,
+
+        ((SUM(UNIT_M.TOTAL)/SUM(YOUNG_M.TOTAL))*100) AS M,
+        ((SUM(UNIT_F.TOTAL)/SUM(YOUNG_F.TOTAL))*100) AS F
+        
+        FROM POPULATION
+        
+        LEFT JOIN (
+        SELECT PID, SUM(NUNIT) AS TOTAL
+        FROM POPULATION_DETAIL
+        WHERE AGE_RANGE_CODE BETWEEN 1 AND 15
+        OR AGE_RANGE_CODE BETWEEN 61 AND 102
+        GROUP BY PID
+        ) UNIT_M ON UNIT_M.PID = POPULATION."ID"
+        
+        LEFT JOIN (
+        SELECT PID, SUM(NUNIT) AS TOTAL
+        FROM POPULATION_DETAIL
+        WHERE AGE_RANGE_CODE BETWEEN 103 AND 117
+        OR AGE_RANGE_CODE BETWEEN 163 AND 204
+        GROUP BY PID
+        ) UNIT_F ON UNIT_F.PID = POPULATION."ID"
+        
+        LEFT JOIN (
+        SELECT PID, SUM(NUNIT) AS TOTAL
+        FROM POPULATION_DETAIL
+        WHERE AGE_RANGE_CODE BETWEEN 16 AND 60
+        GROUP BY PID
+        ) YOUNG_M ON YOUNG_M.PID = POPULATION."ID"
+        
+        LEFT JOIN (
+        SELECT PID, SUM(NUNIT) AS TOTAL
+        FROM POPULATION_DETAIL
+        WHERE AGE_RANGE_CODE BETWEEN 118 AND 162
+        GROUP BY PID
+        ) YOUNG_F ON YOUNG_F.PID = POPULATION."ID"
+        
+        WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
+        
+        GROUP BY YEAR_DATA';
+        $result = $this->db->getarray($sql);
+        dbConvert($result);
+            
+        if(!empty($_GET['test']))
+        {
+            $result = array();
+            for($year=2550;$year<=2555;$year++)
+            {
+                $result[] = array('year' => $year, 'm' => rand(0.00, 99.99), 'f' => rand(0.00, 99.99));
+            }
+        }    
+            
+        $year = array();
+        $data_m = array();
+        $data_f = array();    
+        foreach($result as $item)
+        {
+            $year[] = $item['year'];
+            $data_m[] = floatval($item['m']);
+            $data_f[] = floatval($item['f']);
+        }
+        
+        header("content-type: application/json"); 
+        $array = array(
+            
+            'chart' => array(
+                'renderTo' => 'chart_1',
+                'type' => 'line'
+            ),
+            'title' => array(
+                'text' => 'อัตราส่วนการเป็นภาระของประชากร ในระยะ 5 ปี'
+            ),
+            'xAxis' => array(
+                'categories' => $year
+            ),
+            'yAxis' => array(
+                'title' => array('text' => 'หน่วยร้อยละ')
+            ),
+            'series' => array(
+                array('name' => 'ชาย', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
+                array('name' => 'หญิง', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f)  
+            ),
+            'plotOptions' => array(
+                'line' => array(
+                    'dataLabels' => array('enabled' => true, 'format' => '{point.y:.2f}'),
+                    'marker' => array('symbol' => 'circle')
+                )
+            ), 
+            'tooltip' => array(
+                //'pointFormat' => '{series.name}: <b>{point.y}</b>',
+                'valueDecimals' => 2
+            )        
+        );      
+        echo json_encode($array);     
+    }
+    
+    /*
+     * แนวโน้มประชากรสูงอายุ
+     */
     public function chart_2()
     {   
         $sql = 'SELECT POPULATION.YEAR_DATA AS YEAR,
@@ -89,8 +190,11 @@ class Dashboard extends Public_Controller
         );      
         echo json_encode($array);     
     }
-
-public function chart_3()
+    
+    /*
+     * แนวโน้มอัตราการคลอดบุตรของมารดาวัยรุ่น
+     */
+    public function chart_3()
     {
         $sql = 'SELECT 
             DISTINCT C_PREGNANT.YEAR, 
@@ -115,7 +219,7 @@ public function chart_3()
         
         JOIN (SELECT YEAR, COUNT(YEAR) AS ALL_TOTAL FROM C_PREGNANT GROUP BY YEAR) AL ON AL.YEAR = C_PREGNANT.YEAR
         
-        
+        WHERE C_PREGNANT.YEAR BETWEEN 2540 AND 2554
         ORDER BY C_PREGNANT.YEAR ';
         $result = $this->db->getarray($sql);
         dbConvert($result);
@@ -123,7 +227,7 @@ public function chart_3()
         if(!empty($_GET['test']))
         {
             $result = array();
-            for($year=2550;$year<=2555;$year++)
+            for($year=2540;$year<=2554;$year++)
             {
                 $result[] = array('year' => $year, 'age20_total' => rand(0.00, 20.00), 'age15_total' => rand(0.00, 20.00));
             }

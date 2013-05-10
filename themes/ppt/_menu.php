@@ -223,9 +223,11 @@
 			<li><a href="#">รายงาน Detail F</a></li>
 		</ul>
 	</li>
-	<?php endif; */?>
+	
 	</ul>
 	</li>
+	<?php endif; */?>
+	<li><?php echo anchor('report', 'ข้อมูลรายงานสรุป'); ?></li>
 <?php endif;?>
 </ul>
 </div>

@@ -54,13 +54,15 @@ class Child extends Public_Controller
 			$val[$item['year']]['more']=$sum3;
 		}	
 	$data['val']=$val;		
-	if($export){
+	if($export=="export"){
 			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";
 				header("Content-Disposition: attachment; filename=".$filename);
 				$this->load->view("child/pregnant_export",$data);
-		}else{
-			$this->template->build('child/pregnant_index',$data);
-		}
+	}else if($export=="print"){
+		$this->load->view('child/pregnant_print',$data);
+	}else{
+		$this->template->build('child/pregnant_index',$data);
+	}
 		
 		
 	}
@@ -161,6 +163,8 @@ class Child extends Public_Controller
 			    $filename= "pregnant_parent_data_".date("Y-m-d_H_i_s").".xls";
 				header("Content-Disposition: attachment; filename=".$filename);
 				$this->load->view("child/pregnant_parent_export",$data);
+		}elseif($export=="print"){
+				$this->load->view("child/pregnant_parent_print",$data);
 		}else{
 				$this->template->build('child/pregnant_parent',$data);
 		}		

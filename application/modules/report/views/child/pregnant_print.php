@@ -1,5 +1,10 @@
+<html>
+	<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	</head>
+	<body>
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย</h3>
-<table class="tbreport" border="1">
+<table class="tbreport">
 <tr>
 <th rowspan="2">ปี</th>
 <th colspan="3">อายุต่ำกว่า 15 ปีบริบูรณ์</th>
@@ -36,3 +41,6 @@ foreach($val as $key=>$item):
 </table>
 
 <div id="ref">ที่มา :</div>
+<script>window.print();</script>
+</body>
+</html>

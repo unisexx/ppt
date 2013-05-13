@@ -7,6 +7,8 @@ class Child extends Public_Controller
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('pregnant_model','pregnant');
 		$this->load->model('province_model','province');
+		$this->load->model('amphur_model','amphur');
+		$this->load->model('district_model','district');
 	}
 	
 	public function drop()
@@ -17,14 +19,18 @@ class Child extends Public_Controller
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		$amphur_id =(!empty($_GET['amphur_id'])) ? " and substr(m_address_code,3,2)='".$_GET['amphur_id']."'":'';
 		$district_id =(!empty($_GET['district_id'])) ? " and substr(m_address_code,6,2)='".$_GET['district_id']."'":'';
+		$data['province'] = (!empty($_GET['province_id'])) ? '':$this->province->get_one("province","id",$_GET['province_id']);
+		$data['amphur'] = (!empty($_GET['amphur_id'])) ? '':$this->amphur>get_one("amphur_name","id",$_GET['amphur_id']);
+		$data['district'] = (!empty($_GET['district_id'])) ? '':$this->district->get_one("distict_name","id",$_GET['district_id']);
+		
 		$sql= "	
 			SELECT  year,ages,sum(ages) as cnt FROM
 				(
 						SELECT  id,year,to_char(m_birthday,'yyyy-mm-dd'),
-												to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
-												to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-												floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-												to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as ages
+										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
+										to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+										floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as ages
 						 FROM C_PREGNANT
 						 WHERE 1=1 $province_id
 					) 
@@ -60,25 +66,23 @@ class Child extends Public_Controller
 	}
 	function pregnant_parent($export=FALSE)
 	{
-
+		
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
+		$year =(!empty($_GET['year'])) ? " and  year='".$_GET['year']."'":'';	
 		if(!empty($_GET['province_id'])){
 			$data['province'] =$this->province->get_one("province","id",$_GET['province_id']);
-		}
+		}		
 		
-		$year =(!empty($_GET['year'])) ? " and  year='".$_GET['year']."'":'';	
 		$sql="
 				SELECT  year,f_ages,m_ages,count(id) as cnt from
 				(
 					SELECT  id,year,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),to_char(m_birthday,'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
-													
-													floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
-													,to_char(f_birthday,'yyyy-mm-dd'),
-													floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages
-												
+								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,													
+								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
+								,to_char(f_birthday,'yyyy-mm-dd'),
+								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+								to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages												
 							 FROM C_PREGNANT
 							 WHERE 1=1 $province_id $year
 				) GROUP BY year,f_ages,m_ages

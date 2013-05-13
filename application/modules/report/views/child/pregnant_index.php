@@ -4,7 +4,12 @@
   <div id="searchBox">
   	<form action="report/child/pregnant">
      <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '- ทุกจังหวัด -'); ?>
-     <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
+     <select name="select2" id="select3">
+      <option>-- ทุกอำเภอ--</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
     <select name="select3" id="select3">
       <option>-- ทุกตำบล --</option>
       <option>1</option>

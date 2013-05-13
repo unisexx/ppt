@@ -4,7 +4,7 @@
 	</head>
 	<body>
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย</h3>
-<table class="tbreport">
+<table class="tbreport" border="1">
 <tr>
 <th rowspan="2">ปี</th>
 <th colspan="3">อายุต่ำกว่า 15 ปีบริบูรณ์</th>

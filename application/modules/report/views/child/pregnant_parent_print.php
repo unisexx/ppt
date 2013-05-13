@@ -4,26 +4,14 @@
 	</head>
 	<body>
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย (ทารกที่เกิดจากมารดาวัยรุ่น)</h3>
-<div id="search">
-  <div id="searchBox">
-  	<form action="report/child/pregnant_parent">
-  <?php echo form_dropdown('year',get_year_option(),@$_GET['year'],'','-- ทุกปี --'); ?>
-  <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '- ทุกจังหวัด -'); ?>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
-  </form>
-  </div>
-</div>
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> ทารกที่เกิดจากมารดาวัยรุ่น ปี 
   <label><?php echo (!empty($_GET['year'])) ? $_GET['year'] : "ทุกปี" ?></label>
 จังหวัด
 <label><?php echo (!empty($_GET['province_id'])) ? $province : "ทุกจังหวัด" ?></label>
 </div>
-<div style="padding:10px; text-align:right;">
-<a href="report/child/pregnant_parent/export" >
-<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
 
-<table class="tbreport">
+
+<table class="tbreport" border="1">
 <tr>
 <th rowspan="2">อายุบิดา (ปี)</th>
 <th colspan="12">อายุมารดา (ปี)</th>

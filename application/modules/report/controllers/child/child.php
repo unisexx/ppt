@@ -19,9 +19,10 @@ class Child extends Public_Controller
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		$amphur_id =(!empty($_GET['amphur_id'])) ? " and substr(m_address_code,3,2)='".$_GET['amphur_id']."'":'';
 		$district_id =(!empty($_GET['district_id'])) ? " and substr(m_address_code,6,2)='".$_GET['district_id']."'":'';
-		$data['province'] = (!empty($_GET['province_id'])) ? '':$this->province->get_one("province","id",$_GET['province_id']);
-		$data['amphur'] = (!empty($_GET['amphur_id'])) ? '':$this->amphur>get_one("amphur_name","id",$_GET['amphur_id']);
-		$data['district'] = (!empty($_GET['district_id'])) ? '':$this->district->get_one("distict_name","id",$_GET['district_id']);
+		
+		$data['province'] = (!empty($_GET['province_id'])) ? '':$this->province->get_one("province","id",@$_GET['province_id']);
+		//$data['amphur'] = (!empty($_GET['amphur_id'])) ? '':$this->amphur>get_one("amphur_name","id",@$_GET['amphur_id']);
+		//$data['district'] = (!empty($_GET['district_id'])) ? '':$this->district->get_one("distict_name","id",@$_GET['district_id']);
 		
 		$sql= "	
 			SELECT  year,ages,sum(ages) as cnt FROM
@@ -159,7 +160,7 @@ class Child extends Public_Controller
 			}
 	
 		$data['val']=$val;	
-		if($export){
+		if($export=="export"){
 			    $filename= "pregnant_parent_data_".date("Y-m-d_H_i_s").".xls";
 				header("Content-Disposition: attachment; filename=".$filename);
 				$this->load->view("child/pregnant_parent_export",$data);

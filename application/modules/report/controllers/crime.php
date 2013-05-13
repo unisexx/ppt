@@ -35,6 +35,7 @@ class Crime extends Public_Controller
 
 	function export($status=FALSE)
 	{
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{

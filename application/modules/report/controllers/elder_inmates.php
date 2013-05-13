@@ -28,6 +28,7 @@ class Elder_inmates extends Public_Controller
 	
 	function export($status=FALSE)
 	{
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		if($status!='print')
 		{
 			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";

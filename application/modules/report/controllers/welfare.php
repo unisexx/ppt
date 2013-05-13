@@ -101,6 +101,7 @@ class Welfare extends Public_Controller
 
 	function export_index($status=FALSE)
 	{
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{
@@ -165,6 +166,7 @@ class Welfare extends Public_Controller
 
 	function export_index2($status=FALSE)
 	{
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		if($status!='print')
 		{
 			$filename= "welfare_report2_data_".date("Y-m-d_H_i_s").".xls";

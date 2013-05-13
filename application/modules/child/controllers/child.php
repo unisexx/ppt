@@ -164,7 +164,8 @@ Class Child extends Public_Controller{
 	{
 		if(!menu::perm($this->drop_menu_id, 'add') || !menu::perm($this->drop_menu_id,'edit'))redirect('child/drop');
 		if($_POST){			
-		   $this->drop->save($_POST);
+		   $id=$this->drop->save($_POST);
+			  if(empty($_POST['id'])) logs('เพิ่มรายการ ', $this->drop_menu_id, $id); else logs('แก้ไขรายการ', $this->drop_menu_id, $id);
 		   set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/drop');
@@ -173,6 +174,7 @@ Class Child extends Public_Controller{
 	function drop_delete($id){
 		 if(!empty($id))
         {
+             logs('ลบรายการ', $this->drop_menu_id, $id);	
             $this->drop->delete($id);
             set_notify('success', lang('delete_data_complete'));
         }
@@ -220,6 +222,7 @@ Class Child extends Public_Controller{
 						$val['CREATE'] = date('Ymd');
 						$this->drop->save($val);																													
 			}
+			logs('นำเข้าข้อมูลเด็กออกกลางคัน. จำนวน '.number_format($total_row).' record');
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/drop_import');	
@@ -281,13 +284,15 @@ Class Child extends Public_Controller{
 			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
 			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
 			$_POST['f_birthday'] = (!empty($_POST['f_birthday'])) ?date_to_mysql($_POST['f_birthday']):0;
-			$this->pregnant->save($_POST);
+			$id=$this->pregnant->save($_POST);
+		 	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $this->pregnant_menu_id, $id); else logs('แก้ไขรายการ', $this->pregnant_menu_id, $id);
 			set_notify('success',lang('data_save_complete'));
 		}
 		redirect('child/pregnant');
 	}
 	function pregnant_delete($id){
 		if(!empty($id)){
+			 logs('ลบรายการ', $this->pregnant_menu_id, $id);
 			$this->pregnant->delete($id);
 			set_notify('success', lang('delete_data_complete'));
 		}
@@ -304,7 +309,7 @@ Class Child extends Public_Controller{
 			post_max_size = 1024M  จาก 2M
 			 memmory_limit=1024M
 		 * */ 		
-
+ 		 set_time_limit(0);    
 		 if($_FILES['fl_import']['name']!=''){
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
@@ -323,9 +328,10 @@ Class Child extends Public_Controller{
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
-			//$data	=$this->ImportDataCsv($uploaddir.$file_name);	
+			//$data	=$this->ImportDataCsv($uploaddir.$file_name);		                    
 	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
-           $data = csv_to_array($fpicname, $col);										
+           $data = csv_to_array($fpicname, $col);
+		   dbConvert($data);										
 			foreach($data as $key=>$item){
 					if($key>=1){																														
 						$val['year']=$_POST['year_data'];
@@ -344,6 +350,7 @@ Class Child extends Public_Controller{
 						$this->pregnant->save($val);
 					}																																					
 			}
+			logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/pregnant_import');	

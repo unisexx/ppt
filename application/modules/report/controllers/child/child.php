@@ -7,24 +7,31 @@ class Child extends Public_Controller
 		$this->load->model('c_drop_model','drop');
 		$this->load->model('pregnant_model','pregnant');
 		$this->load->model('province_model','province');
+		$this->load->model('amphur_model','amphur');
+		$this->load->model('district_model','district');
 	}
 	
 	public function drop()
 	{
 		$this->template->build('child/drop_index');
 	}
-	public function pregnant(){
+	public function pregnant($export=FALSE){
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		$amphur_id =(!empty($_GET['amphur_id'])) ? " and substr(m_address_code,3,2)='".$_GET['amphur_id']."'":'';
 		$district_id =(!empty($_GET['district_id'])) ? " and substr(m_address_code,6,2)='".$_GET['district_id']."'":'';
+		
+		$data['province'] = (!empty($_GET['province_id'])) ? '':$this->province->get_one("province","id",@$_GET['province_id']);
+		//$data['amphur'] = (!empty($_GET['amphur_id'])) ? '':$this->amphur>get_one("amphur_name","id",@$_GET['amphur_id']);
+		//$data['district'] = (!empty($_GET['district_id'])) ? '':$this->district->get_one("distict_name","id",@$_GET['district_id']);
+		
 		$sql= "	
 			SELECT  year,ages,sum(ages) as cnt FROM
 				(
 						SELECT  id,year,to_char(m_birthday,'yyyy-mm-dd'),
-												to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
-												to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-												floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-												to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as ages
+										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
+										to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+										floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as ages
 						 FROM C_PREGNANT
 						 WHERE 1=1 $province_id
 					) 
@@ -46,31 +53,39 @@ class Child extends Public_Controller
 				$sum3=$sum3+$item['cnt'];
 			}
 			$val[$item['year']]['more']=$sum3;
-		}		
-		//var_dump($val);exit;
-		$data['val']=$val;
+		}	
+	$data['val']=$val;		
+	if($export=="export"){
+			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				$this->load->view("child/pregnant_export",$data);
+	}else if($export=="print"){
+		$this->load->view('child/pregnant_print',$data);
+	}else{
 		$this->template->build('child/pregnant_index',$data);
 	}
-	function pregnant_parent()
+		
+		
+	}
+	function pregnant_parent($export=FALSE)
 	{
+		
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
+		$year =(!empty($_GET['year'])) ? " and  year='".$_GET['year']."'":'';	
 		if(!empty($_GET['province_id'])){
 			$data['province'] =$this->province->get_one("province","id",$_GET['province_id']);
-		}
+		}		
 		
-		$year =(!empty($_GET['year'])) ? " and  year='".$_GET['year']."'":'';	
 		$sql="
 				SELECT  year,f_ages,m_ages,count(id) as cnt from
 				(
 					SELECT  id,year,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),to_char(m_birthday,'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
-													
-													floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
-													,to_char(f_birthday,'yyyy-mm-dd'),
-													floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-													to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages
-												
+								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,													
+								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
+								,to_char(f_birthday,'yyyy-mm-dd'),
+								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+								to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages												
 							 FROM C_PREGNANT
 							 WHERE 1=1 $province_id $year
 				) GROUP BY year,f_ages,m_ages
@@ -144,8 +159,18 @@ class Child extends Public_Controller
 				$sum=0;	
 			}
 	
-		$data['val']=$val;		
-		$this->template->build('child/pregnant_parent',$data);
+		$data['val']=$val;	
+		if($export=="export"){
+			    $filename= "pregnant_parent_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				$this->load->view("child/pregnant_parent_export",$data);
+		}elseif($export=="print"){
+				$this->load->view("child/pregnant_parent_print",$data);
+		}else{
+				$this->template->build('child/pregnant_parent',$data);
+		}		
+	
 	}
+
 }
 ?>

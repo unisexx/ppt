@@ -13,7 +13,7 @@ Class Child extends Public_Controller{
 	}
 
 	public $drop_menu_id=32;
-	public $pregnant_menu_id=35;
+	public $pregnant_menu_id=26;
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		$data = new Spreadsheet_Excel_Reader();
@@ -237,28 +237,28 @@ Class Child extends Public_Controller{
 		return 	$Spreadsheet;
 	}
 	function ImportDataCsv($Filepath=FALSE){
+		$row = 0;	
+		$val=array();
 		if(($handle = fopen($Filepath, 'r')) !== false)
 		{	    
 			    $header = fgetcsv($handle);                   
 			    while(($data = fgetcsv($handle)) !== false)
-			    {
-		        	$row++;
-			        if(!empty($data[0]))
-			        {
-			            $num = count($data);	
-						$val=array();
-						for ($c=0; $c < $num; $c++) {
-			                if($row == 1)
-			                {
-			                    $col_title[$c] = $data[0];								
-			                }else{
-			                	  echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
-			                }
-							
-						}//for num
-					}//$data[0]
-				}//while
-		}// if fopen
+			    {					        	
+						$val[$row][0]=$data[0];
+						$val[$row][1]=$data[1];
+						$val[$row][2]=$data[2];
+						$val[$row][3]=$data[3];
+						$val[$row][4] =$data[4];
+						$val[$row][5] =$data[5];
+						$val[$row][6] = $data[6];
+						$val[$row][7] = $data[7];
+						$val[$row][8] = $data[8];
+						$val[$row][9] = $data[9];
+						$val[$row][10] =$data[10];					
+						$row++;						
+				}//while				
+		}// if fopen	
+		return $val;
 	}
 	function pregnant(){
 		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
@@ -317,15 +317,14 @@ Class Child extends Public_Controller{
 			if(empty($_POST['continue'])){
 				$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");				
 			}
-			$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
+			//$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$order_no.date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
-			$data	=$this->ImportDataCsv($uploaddir.$file_name,"pregnant");	
-			var_dump($data);								
+			$data	=$this->ImportDataCsv($uploaddir.$file_name);											
 			foreach($data as $key=>$item){
 					if($key>=1){																														
 						$val['year']=$_POST['year_data'];
@@ -340,7 +339,7 @@ Class Child extends Public_Controller{
 						$val['f_id'] = $item[8];
 						$val['f_birthday'] =  $item[9];	
 						$val['f_address_code'] =  $item[10];	
-						$val['order_no'] = $order_no;
+						//$val['order_no'] = $order_no;
 						$val['create']=date('Ymd');
 						$this->pregnant->save($val);
 					}																																					

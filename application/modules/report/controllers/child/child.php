@@ -51,8 +51,9 @@ class Child extends Public_Controller
 		$data['val']=$val;
 		$this->template->build('child/pregnant_index',$data);
 	}
-	function pregnant_parent()
+	function pregnant_parent($export=FALSE)
 	{
+
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		if(!empty($_GET['province_id'])){
 			$data['province'] =$this->province->get_one("province","id",$_GET['province_id']);
@@ -144,8 +145,16 @@ class Child extends Public_Controller
 				$sum=0;	
 			}
 	
-		$data['val']=$val;		
-		$this->template->build('child/pregnant_parent',$data);
+		$data['val']=$val;	
+		if($export){
+			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				$this->load->view("child/pregnant_parent_export",$data);
+		}else{
+				$this->template->build('child/pregnant_parent',$data);
+		}		
+	
 	}
+
 }
 ?>

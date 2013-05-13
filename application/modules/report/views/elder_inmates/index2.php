@@ -13,13 +13,13 @@
 	<span style='color:#F33;'><?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	<img src="images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-	<img src="images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
+	<a href='report/elder_inmates/export?year=<?=$_GET['year'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
 	หน่วย : ราย
 </div>
 <table class='tbreport'>
 	<tr>
-		<th style='width:400px;'>ปี</th>
+		<th style='width:400px;'>จังหวัด</th>
 		<th style='width:200px;'>ชาย</th>
 		<th style='width:200px;'>หญิง</th>
 		<th style='width:200px;'>รวม</th>

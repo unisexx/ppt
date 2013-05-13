@@ -1,25 +1,15 @@
-
 <h2>รายงานผู้ต้องขังสูงอายุ</h2>
-<form action='' method='get'>
-	<div id="search">
-	  <div id="searchBox">
-		<?=form_dropdown('year', $set_year, @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
-	</div>
-</form>
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>ผู้ต้องขังสูงอายุ  แสดง
 	<span style='color:#F33;'><?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	<img src="images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-	<img src="images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
 	หน่วย : ราย
 </div>
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
-		<th style='width:400px;'>ปี</th>
+		<th style='width:400px;'>จังหวัด</th>
 		<th style='width:200px;'>ชาย</th>
 		<th style='width:200px;'>หญิง</th>
 		<th style='width:200px;'>รวม</th>
@@ -61,7 +51,7 @@
 		<?
 	}
 	?>
-	<tr class="total">
+	<tr class="total" style='font-weight:bold;'>
 		<td>รวม</td>
 		<td> <?=number_format(@$total['m']);?> </td>
 		<td> <?=number_format(@$total['f']);?> </td>

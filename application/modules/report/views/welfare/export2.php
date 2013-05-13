@@ -1,12 +1,5 @@
 <h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
-<form action='' method='get'>
-	<div id="search">
-	  <div id="searchBox">
-		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-		<?=form_dropdown('WLIST', $main_list, @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
-	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
-	</div>
-</form>
+
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
@@ -15,13 +8,11 @@
 </div>
 
 <div style='line-height:40px; text-align:right;'>
-	<a href='report/welfare/export_index2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
 	หน่วย : ราย
 </div>
 
 
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
 		<th style='width:400px;'>ชื่อหน่วยงาน</th>
 		<th style='width:200px;'>เป้าหมาย</th>
@@ -95,7 +86,7 @@
 	
 	<?
 	$ary_count = count($result_tmp);
-	if($_GET['YEAR']) { $result_tmp = array_unique($result_tmp); }
+	if(@$_GET['YEAR']) { $result_tmp = array_unique($result_tmp); }
 	
 	for($i=0; $i<$ary_count; $i++)
 	{
@@ -115,7 +106,7 @@
 		}
 	}
 	?>
-	<tr class="total">
+	<tr class="total" style='font-weight:bold;'>
 		<td>รวม</td>
 		<td> <?=number_format(@$total['target']);?> </td>
 		<td> <?=number_format(@$total['balance']);?> </td>

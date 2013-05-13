@@ -29,6 +29,12 @@ Class Hf_elderly extends Public_Controller{
 	//===== HOSPITAL OF ELDERLY =====//
 		function index()
 		{
+			$set_year = $this->welfare->get("SELECT YEAR FROM HF_ELDERLY_DATA GROUP BY YEAR ORDER BY YEAR DESC");
+			
+			for($i=0; $i<count($set_year); $i++) 
+			{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+			
+			
 			$sql = 'SELECT * FROM HF_ELDERLY_DATA WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 				if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
@@ -48,16 +54,18 @@ Class Hf_elderly extends Public_Controller{
 			$this->template->build('hf_elderly/form', $data);
 		}
 		
-			function save()
+			function save($menu_id)
 			{
-				$this->welfare->save($_POST);
+				$id = $this->welfare->save($_POST);
+				if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 				set_notify('success', lang('save_data_complete'));	redirect('elder/hf_elderly/');
 			}
 			
-		function delete($id=FALSE)
+		function delete($menu_id, $id)
 		{
 			if($id)
 			{
+				logs('ลบรายการ', $menu_id, $id);
 				$this->welfare->delete($id);
 	            set_notify('success', lang('delete_data_complete'));	redirect('elder/hf_elderly/');
 			}
@@ -68,6 +76,7 @@ Class Hf_elderly extends Public_Controller{
 		function import() { $this->template->build('hf_elderly/import'); }
 		function upload()
 		{
+			$total_row = 0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
 			unset($_POST);
@@ -106,12 +115,14 @@ Class Hf_elderly extends Public_Controller{
 						{  $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." ในระบบอยู่แล้ว</DIV>"; }
 					else
 						{
+							$total_row++;
 							$this->welfare->save($_POST); 
 							$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." เสร็จสิ้น</DIV>"; }
 					if(!$_POST['WLIST_ID'] || !$_POST['YEAR'] || !$_POST['MONTH'])
 						{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง </DIV>"; }
 				}
 			}
+			if($total_row>0) logs('นำเข้าข้อมูล ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม จำนวน '.number_format($total_row).' record');
 			$this->template->build('hf_elderly/upload', @$data);
 		}
 

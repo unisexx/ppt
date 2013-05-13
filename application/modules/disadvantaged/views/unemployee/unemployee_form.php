@@ -3,7 +3,7 @@
 
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='disadvantaged/unemployee_save' method='POST'>
+<form action='disadvantaged/unemployee_save/<?=$m['id'];?>/' method='POST'>
 <?php endif; ?>
 
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

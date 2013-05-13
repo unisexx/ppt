@@ -51,7 +51,7 @@ $autoload['libraries'] = array('adodb','template','parser','session','auth');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','html','form','inflector','auth','language','date');
+$autoload['helper'] = array('url','html','form','inflector','auth','language','date', 'array');
 
 
 /*

@@ -68,6 +68,7 @@ Class population extends Public_Controller{
 	}
 	
 	function population_import(){
+		//$this->db->debug = true;
 		if($_FILES['fl_import']['name']!=''){
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];

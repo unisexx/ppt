@@ -304,7 +304,7 @@ function logs($action, $menu_id = null, $id = null)
 
         $id = empty($id) ? null : ' ID:'.$id;
         
-        $data = array('USER_ID' => login_data('id'), 'ACTION' => $action.$menu_title.$id, 'CREATED' => date('Y-m-d H:i:s'));
+        $data = array('USER_ID' => login_data('id'), 'ACTION' => $action.$menu_title.$id, 'CREATED' => date('Y-m-d H:i:s'), 'IP' => get_instance()->input->ip_address());
         get_instance()->db->autoexecute('logs', $data, 'INSERT');
     }
 }

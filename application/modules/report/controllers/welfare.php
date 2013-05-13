@@ -96,13 +96,6 @@ class Welfare extends Public_Controller
 		$wlist = @$data['main_list'][$_GET['WLIST']];
 		//===== welfare list group =====//
 
-		echo $data['main_list'][$_GET['WLIST']];
-		echo '<BR>';
-		echo $_GET['WLIST'];
-		ECHO '<br>';
-		echo $_GET['YEAR'];
-		ECHO '<hr>';
-		
 		$this->template->build('welfare/index2', $data);
 	}
 }

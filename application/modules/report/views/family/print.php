@@ -1,4 +1,8 @@
+<html>
+	<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	</head>
+<body>	
 <h3>รายงาน ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : <?=$family_key['title'];?> </h3>
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : 
@@ -61,5 +65,5 @@ foreach($value as $item):
 </table>
 
 <div id="ref">ที่มา :</div>
-
-
+</body>
+</html>

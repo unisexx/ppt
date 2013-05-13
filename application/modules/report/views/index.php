@@ -42,7 +42,7 @@ $(document).ready(function(){
                 	<li><a href="offense/offense_report">เด็กและเยาวชนในสถานพินิจฯ</a></li>
                     <li><a href="#">เด็กและเยาวชนออกกลางคัน</a></li>
                     <li><a href="#">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
-                    <li><a href="#">สถานการณ์การมีบุตรของวัยรุ่นไทย</a></li>
+                    <li><a href="report/child/pregnant">สถานการณ์การมีบุตรของวัยรุ่นไทย</a></li>
                 </ul>
             </div>
             <div class="data">

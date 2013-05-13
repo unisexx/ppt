@@ -65,7 +65,7 @@
 		$total['build'] += @$res_['build'];
 		?>
 		<tr>
-			<td><a href="report/welfare/report2?YEAR=<?=$_GET['YEAR'];?>&WLIST=<?=$_GET['WLIST'];?>"><?=$wlist[$i];?></a></td>
+			<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$wlist[$i];?></a></td>
 			<td><?=number_format($res_['target']);?></td>
 			<td><?=number_format($res_['balance']);?></td>
 			<td><?=number_format($res_['admission']);?></td>

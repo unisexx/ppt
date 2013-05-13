@@ -331,8 +331,8 @@ Class Child extends Public_Controller{
 			//$data	=$this->ImportDataCsv($uploaddir.$file_name);		                    
 	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
            $data = csv_to_array($fpicname, $col);
-		   dbConvert($data);										
-			foreach($data as $key=>$item){
+		    dbConvert($data);										
+			foreach($data as $item){
 					if($key>=1){																														
 						$val['year']=$_POST['year_data'];
 						$val['sex'] = $item['SEX'];

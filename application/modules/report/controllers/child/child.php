@@ -33,7 +33,9 @@ class Child extends Public_Controller
 		 }
 		$this->template->build('child/pregnant_index');
 	}
-	function pregnant_parent(){
+	function pregnant_parent()
+	{
+		
 		$this->template->build('child/pregnant_parent');
 	}
 }

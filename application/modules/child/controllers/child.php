@@ -236,6 +236,30 @@ Class Child extends Public_Controller{
 			$Time = microtime(true);			
 		return 	$Spreadsheet;
 	}
+	function ImportDataCsv($Filepath=FALSE){
+		if(($handle = fopen($Filepath, 'r')) !== false)
+		{	    
+			    $header = fgetcsv($handle);                   
+			    while(($data = fgetcsv($handle)) !== false)
+			    {
+		        	$row++;
+			        if(!empty($data[0]))
+			        {
+			            $num = count($data);	
+						$val=array();
+						for ($c=0; $c < $num; $c++) {
+			                if($row == 1)
+			                {
+			                    $col_title[$c] = $data[0];								
+			                }else{
+			                	  echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
+			                }
+							
+						}//for num
+					}//$data[0]
+				}//while
+		}// if fopen
+	}
 	function pregnant(){
 		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
 		$year =(!empty($_GET['year'])) ? " and YEAR=".$_GET['year']: '';
@@ -299,7 +323,9 @@ Class Child extends Public_Controller{
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data = $this->ImportData($uploaddir.$file_name,"pregnant");										
+			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
+			$data	=$this->ImportDataCsv($uploaddir.$file_name,"pregnant");	
+			var_dump($data);								
 			foreach($data as $key=>$item){
 					if($key>=1){																														
 						$val['year']=$_POST['year_data'];

@@ -3,7 +3,7 @@
 		$(".btn_delete").click(function(){
 			if(confirm('ลบรายการนี้ ? ')){
 				var hdid = $(this).closest('td').find('#hdid').val();
-				window.location='volunteer/delete/'+hdid;
+				window.location='volunteer_inder/delete/'+hdid;
 			}
 		})
 	})

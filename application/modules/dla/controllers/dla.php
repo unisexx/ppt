@@ -389,6 +389,21 @@ class Dla extends Public_Controller
 		$this->template->build('import');
 	}
 
+    public function pregnant_save_import()
+    {
+        header ('Content-type: text/html; charset=tis-620');
+        $temp_name = time().'.csv';
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], 'uploads/'.$temp_name))
+        {
+            $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'M_ID', 'F_BIRTHDAY', 'F_ADDRESS');
+            $f = csv_to_array('uploads/'.$temp_name, $col);
+            foreach($f as $data)
+            {
+                // save to db
+            }
+        }
+    }
+
     public function download()
     {
         $this->load->helper('download');

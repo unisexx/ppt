@@ -82,13 +82,13 @@ Class Hf_elderly extends Public_Controller{
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.$file_name);
 				$data = $this->ReadData($uploaddir.$file_name);
 				unlink($uploaddir.$file_name);
-			
+
 			$_POST['YEAR'] = $data[1][1];
 			$_POST['MONTH'] = array_search(trim($data[1][3]), $month_th)+1;
 
 			for($i=3; $i<count($data); $i++)
 			{
-				$wlist_dtl = $this->wflist->limit(1)->get("SELECT * FROM HF_ELDERLY_LIST WHERE NAME LIKE '".$data[$i][0]."'");
+				$wlist_dtl = $this->wflist->limit(1)->get("SELECT * FROM HF_ELDERLY_LIST WHERE NAME LIKE '%".trim($data[$i][0])."%'");
 				$_POST['WLIST_ID'] = $wlist_dtl[0]['id'];
 				$_POST['TARGET'] = $data[$i][1];
 				$_POST['BALANCE'] = $data[$i][2];

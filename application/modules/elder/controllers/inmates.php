@@ -32,10 +32,26 @@ Class Inmates extends Public_Controller{
 	//===== INMATES OF ELDERLY =====//
 		function index()
 		{
+			
+			if(@$_GET['PROVINCE'])
+			{
+				$inmateslist = $this->inmateslist->get("SELECT id FROM ELDER_INMATES_LIST WHERE PROVINCE_ID LIKE '".$_GET['PROVINCE']."'");
+			}
+			
 			$sql = 'SELECT * FROM ELDER_INMATES WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
-				#if(@$_GET['PROVINCE_ID']) $sql .= "AND PROVINCE_ID = ".$_GET['PROVINCE_ID'].' ';
+				if(@$_GET['PROVINCE'])
+				{
+					$sql .= ' AND (';
+					for($i=0; $i<count($inmateslist); $i++)
+					{
+						$sql .= 'INMATESLIST_ID = '.$inmateslist[$i]['id'];
+						if(@$inmateslist[$i+1]) { $sql .= ' OR '; }
+					}
+					$sql .= ') ';
+				}
 			$sql .= ' ORDER BY ID DESC';
+			
 			$data['result'] = $this->inmates->get($sql);
 	    	$data['pagination'] = $this->inmates->pagination;
 			

@@ -33,9 +33,10 @@
   <th>สะสม</th>
 	<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th>จัดการ</th><?php endif; ?>
 </tr>
-  <?php foreach($result as $key => $item): $key += 1;
+	<?php 
+	  	foreach($result as $key => $item): $key += 1;
 		$item_dtl = $this->wflist->get_row($item['wlist_id']);
-    	?>
+	?>
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>

@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offender/offender_data">
- <?php echo form_dropdown('year', get_year_option(null, null, 'offender', 'offender_year', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>

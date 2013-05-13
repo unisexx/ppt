@@ -5,8 +5,8 @@ Class Mental extends Public_Controller{
 		
 		$this->load->model('mental_model', 'mental');
 		$this->load->model('province_model', 'province');		
-		$this->load->model('crime_station_model','station');
-		$this->load->model('crime_statistic_model','statistic');
+#		$this->load->model('crime_station_model','station');
+#		$this->load->model('crime_statistic_model','statistic');
 		$this->load->model('dp_vehicle_model','vehicle');
 		$this->load->model('info_model','info');
 	}
@@ -40,22 +40,24 @@ Class Mental extends Public_Controller{
 		
         $this->template->build('mental/form', $data);
 	}
-		function save()
+		function save($menu_id)
 		{
 			$sql = "SELECT * FROM MENTAL_NUMBER WHERE PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'";
 			$chk_mental = $this->mental->get($sql);
 			
 			
-				$this->mental->save($_POST);
-							
+				$id=$this->mental->save($_POST);
+	           	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
+
 				set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
 				redirect('datapoint/mental');
 		}
 		
-		function delete($id=FALSE)
+		function delete($menu_id, $id)
 		{
 				if($id)
 				{
+					logs('ลบรายการ', $menu_id, $id);
 					$this->mental->delete($id);
 					set_notify('success', 'ดำเนินการลบข้อมูลเสร็จสิ้น');
 					redirect('datapoint/mental');	
@@ -68,6 +70,7 @@ Class Mental extends Public_Controller{
 	function import() { $this->template->build('mental/import'); }
 		function upload()
 		{
+			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
 			unset($_POST);
@@ -119,6 +122,8 @@ echo '<HR>';
 								'AUTISM_RATE');
 								
 							for($j=0; $j<count($post_title); $j++) { $_POST[$post_title[$j]] = number_format(($data[$i][($j+1)]*1), 0); }
+							
+							$total_row++;
 							$this->mental->save($_POST);
 							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล จังหวัด "<?=$get_province;?>" </div><?
 						}
@@ -129,6 +134,7 @@ echo '<HR>';
 			}
 			?></div><?
 					unlink($uploaddir.$file_name);
+					if($total_row>0) logs('นำเข้าข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์  จำนวน '.number_format($total_row).' record');
 					?><BR>
 						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="../../datapoint/mental/";'>
 						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="../../datapoint/mental/import";'>

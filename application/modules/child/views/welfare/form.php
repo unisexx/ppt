@@ -2,7 +2,7 @@
 <?=menu::source($m['id']);?>
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='child/welfare/save' method='POST'>
+<form action='child/welfare/save/<?=$m['id'];?>' method='POST'>
 <?php endif; ?>
 	
 	<input type='HIDDEN' name='ID' value='<?=$result['id'];?>'>

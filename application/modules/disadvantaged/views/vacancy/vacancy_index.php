@@ -59,7 +59,7 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="disadvantaged/vacancy_delete/"+id;
+			window.location="disadvantaged/vacancy_delete/<?=$m['id'];?>/"+id;
 		}
 	}
 	else if(type == 'EDIT')

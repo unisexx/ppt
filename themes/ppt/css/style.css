@@ -41,7 +41,8 @@ span.gray { color:#999}
 .data { display:-moz-groupbox; width:31%; margin:10px; }
 .data h4 { background:#502727; color:#FFF; padding:5px 10px;}
 .data ul { margin-left:10px;}
-.data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px;}
+.data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px; list-style:none;}
+.data li a {color:#502727;}
 
 label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 /************************* TABLE STYLE **************************************/
@@ -224,6 +225,7 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 	font: 0.75em arial;
 }
 #tabs li {
+    list-style:none;
 	display: inline;
 }
 #tabs li a {

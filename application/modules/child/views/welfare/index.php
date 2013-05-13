@@ -1,10 +1,10 @@
 <? $m['id'] = 13; ?>
-<?=menu::source($m['id']);?>		
+<?=menu::source($m['id']);?>
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', get_year_option(2552), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-	<?=form_dropdown('WLIST', get_option('id', 'name', 'welfare_list'), @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
+	<?=form_dropdown('YEAR', $set_year, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?=form_dropdown('WLIST', get_option('id', 'name', 'welfare_list'), @$_GET['WLIST'], 'class="span4"', '-- แสดงทั้งหมด --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 </form>
@@ -70,7 +70,7 @@ function js_action(id, type)
 	if(type=='DELETE')
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
-		{ window.location="child/welfare/delete/"+id;}
+		{ window.location="child/welfare/delete/<?=$m['id'];?>"+id;}
 		
 	}
 	else if(type == 'EDIT')

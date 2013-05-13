@@ -64,7 +64,7 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="elder/inmates/delete/"+id;
+			window.location="elder/inmates/delete/<?=$m['id'];?>?>/"+id;
 		}
 	}
 	else if(type == 'EDIT')

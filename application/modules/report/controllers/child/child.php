@@ -13,7 +13,7 @@ class Child extends Public_Controller
 	{
 		$this->template->build('child/drop_index');
 	}
-	public function pregnant(){
+	public function pregnant($export=FALSE){
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		$amphur_id =(!empty($_GET['amphur_id'])) ? " and substr(m_address_code,3,2)='".$_GET['amphur_id']."'":'';
 		$district_id =(!empty($_GET['district_id'])) ? " and substr(m_address_code,6,2)='".$_GET['district_id']."'":'';
@@ -46,10 +46,17 @@ class Child extends Public_Controller
 				$sum3=$sum3+$item['cnt'];
 			}
 			$val[$item['year']]['more']=$sum3;
-		}		
-		//var_dump($val);exit;
-		$data['val']=$val;
-		$this->template->build('child/pregnant_index',$data);
+		}	
+	$data['val']=$val;		
+	if($export){
+			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				$this->load->view("child/pregnant_export",$data);
+		}else{
+			$this->template->build('child/pregnant_index',$data);
+		}
+		
+		
 	}
 	function pregnant_parent($export=FALSE)
 	{
@@ -147,7 +154,7 @@ class Child extends Public_Controller
 	
 		$data['val']=$val;	
 		if($export){
-			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";
+			    $filename= "pregnant_parent_data_".date("Y-m-d_H_i_s").".xls";
 				header("Content-Disposition: attachment; filename=".$filename);
 				$this->load->view("child/pregnant_parent_export",$data);
 		}else{

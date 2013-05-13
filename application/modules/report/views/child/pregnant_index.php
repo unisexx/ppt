@@ -4,12 +4,7 @@
   <div id="searchBox">
   	<form action="report/child/pregnant">
      <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '- ทุกจังหวัด -'); ?>
-    <select name="select" id="select">
-      <option>-- ทุกอำเภอ --</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
+     <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     <select name="select3" id="select3">
       <option>-- ทุกตำบล --</option>
       <option>1</option>
@@ -20,10 +15,15 @@
   </form>
   </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> สถานการณ์การมีบุตรของวัยรุ่นไทย จังหวัด <label>ทุกจังหวัด</label> อำเภอ <label>ทุกอำเภอ</label> ตำบล <label>ทุกตำบล</label></div>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b>
+	 สถานการณ์การมีบุตรของวัยรุ่นไทย จังหวัด <label><?php echo (!empty($_GET['province_id'])) ? $province : "ทุกจังหวัด" ?></label>
+	  อำเภอ <label><?php echo (!empty($_GET['amphur_id'])) ? $province : "ทุกอำเภอ" ?></label> 
+	  ตำบล <label><?php echo (!empty($_GET['district_id'])) ? $province : "ทุกตำบล" ?></label>
+</div>
 <div style="padding:10px; text-align:right;">
-<img src="images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-<img src="images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
+<a href="report/child/pregnant/export" >
+<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
 <table class="tbreport">
 <tr>
 <th rowspan="2">ปี</th>

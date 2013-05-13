@@ -14,7 +14,7 @@
   	<form action="child/pregnant" method="get">
 	    โรงพยาบาล
 	      <input type="text" name="location" id="textfield" style="width:250px;"  value="<?php echo @$_GET['location']; ?>"/>
-	    <?php echo form_dropdown('year',get_year_option(null, null, 'c_pregnant', 'year', true),@$_GET['year'],'','-- ทุกปี --'); ?>
+	    <?php echo form_dropdown('year',get_year_option(),@$_GET['year'],'','-- ทุกปี --'); ?>
 	    <select name="sex" id="select">
 	      <option value="">-- ทุกเพศ --</option>
 	      <option value="1" <?php echo  (@$_GET['sex']==1)? "checked='checked' ":''; ?>>ชาย</option>

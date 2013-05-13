@@ -11,3 +11,4 @@ class Report extends Public_Controller
 		$this->template->build('index');
 	}
 }
+?>

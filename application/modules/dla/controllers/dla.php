@@ -385,6 +385,7 @@ class Dla extends Public_Controller
     			    fclose($handle);
     			}
 			}
+            logs('นำเข้าข้อมูล อปท. จำนวน '.number_format($total_row).' record');
             set_notify('success', 'Import '.number_format($total_row).' rows');
             redirect('dla/import');
 		}

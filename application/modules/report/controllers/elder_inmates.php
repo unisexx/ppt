@@ -26,11 +26,14 @@ class Elder_inmates extends Public_Controller
 		$this->template->build('elder_inmates/index2', $data);
 	}
 	
-	function export()
+	function export($status=FALSE)
 	{
-		$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		
+		if($status!='print')
+		{
+			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
+			header("Content-Disposition: attachment; filename=".$filename);
+		}
+				
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
 		

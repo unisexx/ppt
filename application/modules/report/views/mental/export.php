@@ -1,25 +1,16 @@
 <h2>รายงาน จำนวนและอัตราผู้ป่วยสุขภาพจิต (ต่อประชากร 100,000 คน)</h2>
-<form action='' method='get'>
-	<div id="search">
-	  <div id="searchBox">
-		<?=form_dropdown('province', get_option('id', 'province', 'provinces'), @$_GET['province'], '', "-- เลือกทุกจังหวัด --");?>
-	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
-	</div>
-</form>
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) แสดง จังหวัด  
 	<span style='color:#F33;'>
-		<?=(@$province_)?'สถานีจังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
+		<?=(@$province_)?'สถานีจังหวัด '.@$province_[0]['province']:'ทุกจังหวัด';	?>
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	<a href='report/mental/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/mental/export/print?province=<?=@$_GET['province'];?>'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
 	หน่วย : ราย
 </div>
 
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
 		<td style='border:none;'></td>
 		<? for($i=0; $i<count($tbl_head); $i++) { ?><th style='font-weight:bold;' colspan='2'><?=$tbl_head[$i];?></th><? } ?>
@@ -98,5 +89,5 @@
 
 <div style='line-height:30px; margin-top:20px;'>
 	<div><strong>ที่มา : </strong> </div>
-	<div><strong>หมายเหตุ : </strong> </div>
+	<div><strong>หมายเหตุ : </strong>  </div>
 </div>

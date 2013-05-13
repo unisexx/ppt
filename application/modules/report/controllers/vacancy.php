@@ -23,12 +23,15 @@ class Vacancy extends Public_Controller
 	}
 	
 	
-	function export()
+	function export($status=FALSE)
 	{
 		$data[1] = 1;
-		$filename= "vacancy_report_data_".date("Y-m-d_H_i_s").".xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		
+		if($status!='print')
+		{
+			$filename= "vacancy_report_data_".date("Y-m-d_H_i_s").".xls";
+			header("Content-Disposition: attachment; filename=".$filename);
+		}
+				
 		$set_y = $this->vacancy->get("SELECT YEAR FROM VACANCY GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i < count($set_y); $i++) { $data['year_list'][] = $set_y[$i]['year']; }
 		

@@ -33,11 +33,14 @@ class Crime extends Public_Controller
 		$this->template->build('elder_inmates/index2', $data);
 	}
 
-	function export()
+	function export($status=FALSE)
 	{
 		$data[1] = 1;
-		$filename= "crime_report_data_".date("Y-m-d_H_i_s").".xls";
-		header("Content-Disposition: attachment; filename=".$filename);
+		if($status!='print')
+		{
+			$filename= "crime_report_data_".date("Y-m-d_H_i_s").".xls";
+			header("Content-Disposition: attachment; filename=".$filename);
+		}
 
 		$set_year = $this->crime_station->get("SELECT YEAR FROM CRIME_STATION GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }

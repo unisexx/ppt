@@ -99,11 +99,14 @@ class Welfare extends Public_Controller
 		$this->template->build('welfare/index2', $data);
 	}
 
-	function export_index()
+	function export_index($status=FALSE)
 	{
 		$data[1] = 1;
+		if($status!='print')
+		{
 			$filename= "welfare_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+		}
 			//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)
@@ -153,10 +156,13 @@ class Welfare extends Public_Controller
 		$this->load->view('welfare/export',$data);
 	}
 
-	function export_index2()
+	function export_index2($status=FALSE)
 	{
+		if($status!='print')
+		{
 			$filename= "welfare_report2_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+		}
 			//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)

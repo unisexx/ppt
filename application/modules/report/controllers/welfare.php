@@ -153,6 +153,7 @@ class Welfare extends Public_Controller
 		
 		$data['list'] = $this->welfare_list->get($data['sql']);
 		
+		logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
 		$this->load->view('welfare/export',$data);
 	}
 
@@ -162,6 +163,9 @@ class Welfare extends Public_Controller
 		{
 			$filename= "welfare_report2_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+			logs('ดาวน์โหลดข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
+		} else {
+			logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
 		}
 			//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');

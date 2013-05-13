@@ -40,6 +40,9 @@ class Crime extends Public_Controller
 		{
 			$filename= "crime_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+			logs('ดาวน์โหลดข้อมูล การกระทำความผิดที่ละเมิดกฎหมายทางอาญา');
+		} else {
+			logs('พิมพ์ข้อมูล การกระทำความผิดที่ละเมิดกฎหมายทางอาญา');	
 		}
 
 		$set_year = $this->crime_station->get("SELECT YEAR FROM CRIME_STATION GROUP BY YEAR ORDER BY YEAR DESC");

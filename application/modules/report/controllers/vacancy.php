@@ -30,6 +30,9 @@ class Vacancy extends Public_Controller
 		{
 			$filename= "vacancy_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+			logs('ดาวน์โหลดข้อมูล ตำแหน่งงานว่่าง');
+		} else {
+			logs('พิมพ์ข้อมูล ตำแหน่งงานว่่าง');	
 		}
 				
 		$set_y = $this->vacancy->get("SELECT YEAR FROM VACANCY GROUP BY YEAR ORDER BY YEAR DESC");
@@ -37,6 +40,7 @@ class Vacancy extends Public_Controller
 		
 		$data['tbl_head'] = array("ปี", "คนว่างงาน", "คนสมัครงาน", "คนบรรจุงาน");
 		if(@$_GET['province']) { $data['province_'] = $this->province->get("SELECT * FROM PROVINCES WHERE ID LIKE '".$_GET['province']."'"); }
+		
 		
 		$this->load->view('vacancy/export', $data);
 		

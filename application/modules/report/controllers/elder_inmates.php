@@ -32,6 +32,9 @@ class Elder_inmates extends Public_Controller
 		{
 			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+			logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
+		} else {
+			logs('พิมพ์ข้อมูล ผู้ต้องขังสูงอายุ');	
 		}
 				
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");

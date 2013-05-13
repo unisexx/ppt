@@ -4,7 +4,7 @@
 
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='disadvantaged/vacancy_save' method='POST'>
+<form action='disadvantaged/vacancy_save/<?=$m['id'];?>/' method='POST'>
 <?php endif; ?>
 
 

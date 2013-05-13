@@ -2,8 +2,6 @@
 Class Inmates extends Public_Controller{
 	function __construct(){
 		parent::__construct();
-		#$this->load->model('hf_elderly_model','welfare');
-		#$this->load->model('hf_elderlylist_model','wflist');
 		$this->load->model('province_model', 'province');
 		$this->load->model('elder_inmates_model', 'inmates');
 		$this->load->model('elder_inmateslist_model', 'inmateslist');
@@ -67,17 +65,18 @@ Class Inmates extends Public_Controller{
 			$this->template->build('inmates/form', $data);
 		}
 		
-			function save()
+			function save($menu_id)
 			{
-				#print_r($_POST);
-				$this->inmates->save($_POST);
+				$id = $this->inmates->save($_POST);
+	           	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 				set_notify('success', lang('save_data_complete'));	redirect('elder/inmates/');
 			}
 			
-		function delete($id=FALSE)
+		function delete($menu_id, $id)
 		{
 			if($id)
 			{
+				logs('ลบรายการ', $menu_id, $id);
 				$this->inmates->delete($id);
 	            set_notify('success', lang('delete_data_complete'));	redirect('elder/inmates/');
 			}
@@ -89,7 +88,7 @@ Class Inmates extends Public_Controller{
 
 		function upload()
 		{
-			
+			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
             $year = $_POST['YEAR_DATA'];
@@ -130,7 +129,8 @@ Class Inmates extends Public_Controller{
 							{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล ในเอกสารไม่ถูกต้อง"; }
 							else
 							{
-								$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เสร็จสิ้น</DIV>"; 
+								$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เสร็จสิ้น</DIV>";
+								$total_row++; 
 								$this->inmates->save($_POST);
 							}
 						}
@@ -139,6 +139,7 @@ Class Inmates extends Public_Controller{
 				$data['content'] = '<DIV style="background:#EEE; border-radius:5px; line-height:80px; font-weight:bold; color:#F33; text-align:center; width:100%;">กรุณาเลือกปีก่อนการดำเนินการ</DIV>';
 			}
 			
+			if($total_row>0) logs('นำเข้าข้อมูล ผู้ต้องขังสูงอายุ  จำนวน '.number_format($total_row).' record');
 			$this->template->build('inmates/upload', @$data);
 		}
 

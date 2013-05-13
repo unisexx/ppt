@@ -55,7 +55,7 @@ function js_action(id, type)
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
 		{
-			window.location="disadvantaged/unemployee_delete/"+id;
+			window.location="disadvantaged/unemployee_delete/<?=$m['id'];?>/"+id;
 		}
 	}
 	else if(type == 'EDIT')

@@ -2,7 +2,7 @@
 <?=menu::source($m['id']);?>
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='elder/hf_elderly/save' method='POST'>
+<form action='elder/hf_elderly/save/<?=$m['id'];?>/' method='POST'>
 <?php endif; ?>
 	
 	

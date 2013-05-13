@@ -38,6 +38,9 @@ class Mental extends Public_Controller
 		{
 			$filename= "mental_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
+			logs('ดาวน์โหลดข้อมูล ผู้ป่วยสุขภาพจิต');
+		} else {
+			logs('พิมพ์ข้อมูล ผู้ป่วยสุขภาพจิต');	
 		}
 		$data['tbl_head'] = array("โรคจิต", "โรควิตกกังวล และเพศ", "โรคซึมเศร้า", "ปัญญาอ่อน", "โรคลมชัก", "ผู้ติดสารเสพติด", "ปัญหาสุขภาพจิตอื่น ๆ", "ผู้พยายามฆ่าตัวตายหรือฆ่าตัวตาย", "ออติสติก", "รวมทั้งหมด");
 		$set_y = $this->mental->get("SELECT YEAR FROM MENTAL_NUMBER GROUP BY YEAR ORDER BY YEAR DESC");

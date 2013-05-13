@@ -44,7 +44,7 @@ Class Crime extends Public_Controller{
 		$this->template->build('crime/form', $data);
 	}
 		
-	function save()
+	function save($menu_id)
 	{
 		$id = @$_POST['ID'];
 		$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
@@ -73,7 +73,8 @@ Class Crime extends Public_Controller{
 						$stt_id = $this->statistic->limit(1)->get("SELECT id FROM CRIME_STATISTIC WHERE STATION_ID = ".$_POST['STATION_ID']." AND MONTH = ".$_POST['MONTH']." AND CASE_ID = ".$_POST['CASE_ID']);
 						$_POST['ID'] = @$stt_id[0]['id'];
 					}
-					$this->statistic->save($_POST);
+					$id=$this->statistic->save($_POST);
+		           	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 				}
 		 	}
 		}
@@ -81,8 +82,9 @@ Class Crime extends Public_Controller{
 		redirect('datapoint/crime/');	
 	}
 	
-	function delete($id)
+	function delete($menu_id, $id)
 	{
+		logs('ลบรายการ', $menu_id, $id);
 		$this->station->delete($id);
 		$this->db->execute("DELETE FROM CRIME_STATISTIC WHERE STATION_ID = ".$id."");
 		
@@ -95,6 +97,7 @@ Class Crime extends Public_Controller{
 	
 		function upload()
 		{
+			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
 
             $this->info->save($_POST);
@@ -108,85 +111,6 @@ Class Crime extends Public_Controller{
 			
 			$_POST['YEAR'] = $data[1][1];
 			$_POST['STATION'] = $data[0][1];
-
-			/*			
-			for($i=0 ; $i<count($data); $i++)
-			{
-				if($data[$i][0] != '')
-				{
-					$chk_head = explode('สถิติคดีอาญาที่น่าสนใจรายเดือนของ ',$data[$i][0]);
-					if($chk_head[0] == '')
-					{
-						$station_title = array('บช.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
-						$station_title2 = array('บช.น.', 'บก.น.1', 'บก.น.2', 'บก.น.3', 'บก.น.4', 'บก.น.5', 'บก.น.6', 'บก.น.7', 'บก.น.8', 'บก.น.9', 'บช.ก.');
-						
-						
-						$set_head = explode('ตำรวจภูธรจังหวัด', $chk_head[1]);
-						$set_head = ($set_head[0])?$set_head[0]:$set_head[1];
-						$set_head = trim($set_head);
-						$set_head2 = array_search($set_head, $station_title);
-						if(!$set_head2) { $set_head2 = array_search($set_head, $station_title2); }
-						if(!$set_head2)
-						{
-							$chk_province = $this->province->get("SELECT PROVINCE FROM PROVINCES WHERE PROVINCE LIKE '".$set_head."'");
-							if(count($chk_province) == 1)
-							{ $set_head3 = $chk_province[0]['province']; }
-						} else {
-							$set_head3 = ($set_head2)?$station_title[$set_head2]:$set_head;
-						}
-
-						
-						if($set_head3)
-						{
-							#CRIME_STATION
-								$_POST['YEAR'] = 2554;
-								$_POST['STATION'] = $set_head3;
-								$get_station_id;
-								print_r($_POST); 
-								echo '<BR>';
-								$get_station_id = $this->station->save($_POST);
-								unset($_POST);
-								
-								
-							#CRIME_STATISTIC
-							$pointer_ary = array(4, 10, 17, 28, 40);
-							#$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
-							$pdata_ary = array(1, 3, 5, 7, 9, 11, 16, 18, 20, 22, 24, 26);
-							
-								$_POST['STATION_ID'] = $get_station_id; #$get_station_id;
-								$_POST['MONTH'];
-								$_POST['CASE_ID'];
-								$_POST['NOTIFIED'];
-								$_POST['CATCH'];
-								
-#							print_r($_POST);
-#							unset($_POST);
-							for($j=0; $j<count($pointer_ary); $j++)
-							{
-#								print_r($data[$i+$pointer_ary[$j]]);
-#								echo '<BR>';
-								for($k=0; $k<count($pdata_ary); $k++)
-								{
-									$_POST['MONTH'] = $k;
-									$_POST['CASE_ID'] = $j+1;
-									$_POST['NOTIFIED'] = $data[$i+$pointer_ary[$j]][$pdata_ary[$k]];
-									$_POST['CATCH'] = $data[$i+$pointer_ary[$j]][$pdata_ary[$k]+1];
-									print_r($_POST);
-									echo '<BR>';
-									$this->statistic->save($_POST);
-								}
-							}
-							echo '<HR>';
-						}
-						
-					}
-				}
-			}
-			return false;
-			 * PRIVATE UPLOAD
-			*/
-			
-			
 			
 			if($_POST['YEAR'] && $_POST['STATION'])
 			{
@@ -216,12 +140,17 @@ Class Crime extends Public_Controller{
 									$_POST['MONTH'] = $i;
 									$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
 									$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
+									$total_row++;
 									$this->statistic->save($_POST);
 								}
 							}
 						}
 				} 
 				unlink($uploaddir.'/'.$file_name);
+				
+				if($total_row>0) logs('นำเข้าข้อมูล จำนวนและอัตราผู้ป่วยสุขภาพจิต  จำนวน '.number_format($total_row).' record');
+
+				
 				set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
 				redirect('datapoint/crime/');
 		}

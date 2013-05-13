@@ -3,7 +3,7 @@
 
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='elder/inmates/save' method='POST'>
+<form action='elder/inmates/save/<?=$m['id'];?>/' method='POST'>
 <?php endif; ?>
 
 

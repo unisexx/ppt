@@ -8,9 +8,11 @@ class Population extends Public_Controller
     
     public function index()
     {
+        $province = (empty($_GET['province_id'])) ? '' : ' and province_id = '.$_GET['province_id'];
         $sql = 'SELECT 
+         POPULATION.YEAR_DATA,
          (((SUM(CHILD_TOTAL) + SUM(OLD_TOTAL))/SUM(YOUNG_TOTAL))*100) AS TOTAL,
-         ((SUM(CHILD_TOTAL)/SUM(YOUNG_TOTAL))*100) AS TOTAL_YOUNG,
+         ((SUM(CHILD_TOTAL)/SUM(YOUNG_TOTAL))*100) AS TOTAL_CHILD,
          ((SUM(OLD_TOTAL)/SUM(YOUNG_TOTAL))*100) AS TOTAL_OLD
         FROM POPULATION
         
@@ -42,7 +44,9 @@ class Population extends Public_Controller
         ) UNIT_YOUNG ON UNIT_YOUNG.PID = POPULATION.ID
         
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        GROUP BY YEAR_DATA';
+        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        GROUP BY YEAR_DATA 
+        ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
         dbConvert($data['result']);
         $this->template->build('population/index', $data);

@@ -1,7 +1,7 @@
 <div class="red">  
 <ul id="mega-menu-6" class="mega-menu unstyled">
-	<li><a href="dashboard.php">สถานการณ์ที่สำคัญ</a></li>
-	
+	<li><a href="dashboard">สถานการณ์ที่สำคัญ</a></li>
+	<li><?php echo anchor('report', 'ข้อมูลรายงานสรุป'); ?></li>
 	<?php foreach(menu::ls(0, @login_data('user_type_id')) as $cat): ?>
 	<li><a><?php echo $cat['title']; ?></a>
 	    <ul>
@@ -223,9 +223,10 @@
 			<li><a href="#">รายงาน Detail F</a></li>
 		</ul>
 	</li>
-	<?php endif; */?>
+	
 	</ul>
 	</li>
+	<?php endif; */?>
 <?php endif;?>
 </ul>
 </div>

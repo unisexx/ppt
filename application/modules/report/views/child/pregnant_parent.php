@@ -1,28 +1,61 @@
 <script type="text/javascript">
 $(document).ready(function(){
-var td,sum=0;
-var sum_all =new Array();
-		for(var j=2;j<20;j++){					
-			for(var i=1;i<12;i++){	
-				td_val=$('tr:eq('+j+')').find('td:eq('+i+')').css('background-color','red').html()
-				sum=parseInt(sum)+parseInt(td_val);
-				//sum_all[i]=sum;
-			
 
+var td,sum=0;
+
+var sum_all =new Array();
+					
+			for(var i=1;i<12;i++){	
+				for(var j=2;j<20;j++){		
+				td_val=$('tr:eq('+j+')').find('td:eq('+i+')').css('background-color','').html();
+				sum=sum+parseInt(td_val);
+				sum_all[i]=sum;			
 			}
+			sum = 0;
 		}
-		$('tr:eq(20)').find('td:eq(1)').html(sum_all[0]);
-		$('tr:eq(20)').find('td:eq(2)').html(sum_all[1]);
-		$('tr:eq(20)').find('td:eq(3)').html(sum_all[2]);
-		$('tr:eq(20)').find('td:eq(4)').html(sum_all[3]);	
-		$('tr:eq(20)').find('td:eq(5)').html(sum_all[4]);	
-		$('tr:eq(20)').find('td:eq(6)').html(sum_all[5]);	
-		$('tr:eq(20)').find('td:eq(7)').html(sum_all[6]);	
-		$('tr:eq(20)').find('td:eq(8)').html(sum_all[7]);	
-		$('tr:eq(20)').find('td:eq(9)').html(sum_all[8]);	
-		$('tr:eq(20)').find('td:eq(10)').html(sum_all[9]);	
-		$('tr:eq(20)').find('td:eq(11)').html(sum_all[10]);	
-		$('tr:eq(20)').find('td:eq(12)').html(sum_all[11]);				
+		$('tr:eq(20)').find('td:eq(1)').html(sum_all[1]);
+		$('tr:eq(20)').find('td:eq(2)').html(sum_all[2]);
+		$('tr:eq(20)').find('td:eq(3)').html(sum_all[3]);
+		$('tr:eq(20)').find('td:eq(4)').html(sum_all[4]);	
+		$('tr:eq(20)').find('td:eq(5)').html(sum_all[5]);	
+		$('tr:eq(20)').find('td:eq(6)').html(sum_all[6]);	
+		$('tr:eq(20)').find('td:eq(7)').html(sum_all[7]);	
+		$('tr:eq(20)').find('td:eq(8)').html(sum_all[8]);	
+		$('tr:eq(20)').find('td:eq(9)').html(sum_all[9]);	
+		$('tr:eq(20)').find('td:eq(10)').html(sum_all[10]);	
+		$('tr:eq(20)').find('td:eq(11)').html(sum_all[11]);	
+		
+		
+		
+/*
+		$('.tbreport tr').each(function(i){
+			var tcol = new Array();
+			var t = 0;
+			var tr = $(this);
+			var td = $(this).find('td');
+			//alert(tr.index());
+			td.each(function(){
+				var col = $(this);
+				if(tr.index() > 1 && tr.index() <20 ){
+					if(col.index() > 0){
+						col.css('background-color', 'red');
+						//alert(parseInt(col.text()));
+					    tcol[parseInt(col.index())] += parseInt(col.text());
+				       alert(col.index() + ' ' + tcol[col.index()]);
+					}				
+				}
+				
+				if(tr.index() == 20){
+					if(col.index() > 0){
+						//alert(tcol[col]);
+						col.css('background-color', '#eee');
+						col.text(tcol[col.index()]);
+					     //$('tr:eq(19)').find('td:eq(1)').html(tcol[2]);
+					}				
+				}
+			});
+		});	
+		*/
 })
 </script>
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย (ทารกที่เกิดจากมารดาวัยรุ่น)</h3>

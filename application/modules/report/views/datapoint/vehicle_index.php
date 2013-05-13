@@ -18,58 +18,18 @@
   <td>ชาย</td>
   <td>หญิง</td>
   </tr>
-<tr>
-<td class="topic"><a href="report_sum.php?act=issue10_1" target="_blank">2555</a></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 <?php foreach($result as $key =>$item): ?>
 <tr>
   <td class="topic"><?php echo $item['year'] ?></td>
-  <td><?php echo $item['die_male'] ?></td>
-  <td><?php echo $item['die_female'] ?></td>
-  <td><?php echo $item['coma_male'] ?></td>
-  <td><?php echo $item['coma_female'] ?></td>
-  <td><?php echo $item['pain_male'] ?></td>
-  <td><?php echo $item['pain_female'] ?></td>
-  <td><?php echo $item['total'] ?></td>
+  <td><?php echo number_format($item['die_male']) ?></td>
+  <td><?php echo number_format($item['die_female']) ?></td>
+  <td><?php echo number_format($item['coma_male']) ?></td>
+  <td><?php echo number_format($item['coma_female']) ?></td>
+  <td><?php echo number_format($item['pain_male']) ?></td>
+  <td><?php echo number_format($item['pain_female']) ?></td>
+  <td><?php echo number_format($item['total']) ?></td>
   </tr>
  <?php endforeach; ?>
-<tr>
-  <td class="topic">2553</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-<tr>
-  <td class="topic">2552</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-<tr>
-  <td class="topic">2551</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
 </table>
 
 <div id="ref"><b>ที่มา :</b></div>

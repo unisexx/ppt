@@ -1,11 +1,4 @@
 <h2>รายงาน ตำแหน่งคนว่างงาน</h2>
-<form action='' method='get'>
-	<div id="search">
-	  <div id="searchBox">
-		<?=form_dropdown('province', get_option('id', 'province', 'provinces'), @$_GET['province'], '', "-- เลือกทุกจังหวัด --");?>
-	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
-	</div>
-</form>
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) แสดง จังหวัด  
@@ -16,12 +9,10 @@
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	<a href='report/vacancy/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/vacancy/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
 	หน่วย : ราย
 </div>
 
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
 		<? for($i=0; $i<count($tbl_head); $i++) { ?>
 			<th><?=$tbl_head[$i];?></td>

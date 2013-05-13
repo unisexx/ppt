@@ -1,11 +1,4 @@
 <h2>รายงาน การกระทำความผิดที่ละเมิดกฏหมายทางอาญา</h2>
-<form action='' method='get'>
-	<div id="search">
-	  <div id="searchBox">
-		<?=form_dropdown('province', $set_province, @$_GET['province'], null, '-- แสดงทุกจังหวัด --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
-	</div>
-</form>
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานการกระทำความผิดที่ละเมิดกฏหมายทางอาญา  
@@ -14,12 +7,10 @@
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	<a href='report/crime/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/crime/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></
 	หน่วย : ราย
 </div>
 
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
 		<td style='border:none;'></td>
 		<th colspan='<?=count($tbl_head);?>'>ประเภทคดี</th>

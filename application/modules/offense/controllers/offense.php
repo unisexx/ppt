@@ -1,5 +1,8 @@
 <?php
 Class Offense extends Public_Controller{
+    
+    public $menu_id = 14;
+    
 	function __construct(){
 		parent::__construct();
         $this->load->model('offense_model', 'opt');
@@ -9,7 +12,8 @@ Class Offense extends Public_Controller{
 	
 	function offense_data()
 	{
-	    $where = '';
+	   $data['menu_id'] = $this->menu_id;
+        $where = '';
         if(!empty($_GET))
         {
             
@@ -17,17 +21,15 @@ Class Offense extends Public_Controller{
             if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
             if(!empty($_GET['amphur_id'])) $where .= ' AND OFFENSES.OFFENSE_AUMPHUR = '.$_GET['amphur_id'];
         }
-        $sql = 'SELECT
-		*
-		FROM
-		OFFENSES
-		WHERE 1=1 '.$where.' 
-        ORDER BY ID ASC';
-        // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
+        $sql = 'SELECT OFFENSES.*, PROVINCES.PROVINCE
+        FROM OFFENSES
+        JOIN PROVINCES ON PROVINCES.ID = OFFENSES.OFFENSE_PROVINCE
+        WHERE 1=1 '.$where.'         
+        ORDER BY OFFENSES.OFFENSE_YEAR DESC, PROVINCES.PROVINCE';
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
-		$this->template->build('offense_index', $data);
+        $this->template->build('offense_index', $data);
 	}
 	
 	function offense_form($id = null){
@@ -38,6 +40,7 @@ Class Offense extends Public_Controller{
             redirect('offense/offense_data');
         }
         $data['rs'] = $this->opt->get_row($id);
+        $data['menu_id'] = $this->menu_id;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('offense_form', $data);
 	}

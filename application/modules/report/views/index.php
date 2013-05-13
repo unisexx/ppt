@@ -92,7 +92,7 @@ $(document).ready(function(){
                     <li><a href="report/crime">การกระทำความผิดที่ละเมิดกฎหมายทางอาญา</a></li>
                     <li><a href="report/vacancy">จำนวนคนว่างงาน บรรจุงาน และสมัครงาน</a></li>
                     <li><a href="report/mental">ผู้ป่วยสุขภาพจิต</a></li>
-                    <li><a href="#">ผู้ได้รับอุบัติเหตุจากยานพาหนะ</a></li>
+                    <li><a href="report/datapoint/vehicle">ผู้ได้รับอุบัติเหตุจากยานพาหนะ</a></li>
                     <li><a href="report/family/index?keydata=1">ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : หมวดสุขภาพดี</a></li>
                     <li><a href="report/family/index?keydata=2">ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : หมวดมีบ้านอาศัย</a></li>
                     <li><a href="report/family/index?keydata=3">ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : หมวดฝักใฝ่การศึกษา</a></li>

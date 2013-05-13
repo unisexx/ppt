@@ -1,8 +1,5 @@
 <?php
 Class Poor_province extends Public_Controller{
-    
-    public $menu_id = 72;
-    
 	function __construct(){
 		parent::__construct();
         $this->load->model('poor_province_model', 'opt');
@@ -12,24 +9,21 @@ Class Poor_province extends Public_Controller{
 	
 	function province_data()
 	{
-	    $data['menu_id'] = $this->menu_id;
 	    $where = '';
         if(!empty($_GET))
         {
+            
             if(!empty($_GET['year'])) $where .= ' AND POOL_PROVINCE."POOR_PROVINCE_YEAR" = '.$_GET['year'];
             if(!empty($_GET['province_id'])) $where .= ' AND POOL_PROVINCE.POOR_PROVINCE_PROVINCE = '.$_GET['province_id'];
             if(!empty($_GET['amphur_id'])) $where .= ' AND POOL_PROVINCE.POOR_PROVINCE_AUMPHUR = '.$_GET['amphur_id'];
         }
-        $sql = 'SELECT POOL_PROVINCE."ID", 
-        POOL_PROVINCE.POOR_PROVINCE_YEAR,
-        PROVINCES.PROVINCE,
-        POOL_PROVINCE.POOR_PROVINCE_LINE,
-        POOL_PROVINCE.POOR_PROVINCE_PERCENT,
-        POOL_PROVINCE.POOR_PROVINCE_QTY
-        FROM POOL_PROVINCE
-        JOIN PROVINCES ON PROVINCES.ID = POOL_PROVINCE.POOR_PROVINCE_PROVINCE 
-        WHERE 1=1 '.$where.' 
-        ORDER BY POOL_PROVINCE.POOR_PROVINCE_YEAR DESC, PROVINCES.PROVINCE';
+        $sql = 'SELECT
+		*
+		FROM
+		POOL_PROVINCE
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
+        // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
@@ -37,7 +31,6 @@ Class Poor_province extends Public_Controller{
 	}
 	
 	function province_form($id = null){
-	    $data['menu_id'] = $this->menu_id;
 	    if($_POST)
         {
             $this->opt->save($_POST);
@@ -61,7 +54,7 @@ Class Poor_province extends Public_Controller{
 	
 	function import_data()
 	{
-		$data['menu_id'] = $this->menu_id;
+		$data['menu_id'] = 73; 	
 		$this->template->build('population_import_form',$data);	
 	}
 	
@@ -97,6 +90,41 @@ Class Poor_province extends Public_Controller{
 		
 		
 		$this->template->build('province_import',$data);	
+	}
+	
+	function poor_report()
+	{
+	    $where = '';
+        if(!empty($_GET))
+        {
+            
+            if(!empty($_GET['year'])) $where .= ' AND POOR_PROVINCE_YEAR = '.$_GET['year'];
+            if(!empty($_GET['province_id'])) $where .= ' AND POOR_PROVINCE_PROVINCE = '.$_GET['province_id'];
+        }
+        $sql = 'SELECT
+		*
+		FROM
+		POOL_PROVINCE
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
+        $data['result'] = $this->opt->get($sql);
+        $data['pagination'] = $this->opt->pagination;
+        $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
+		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
+		$this->template->build('disadvantaged1', $data);	
+	}
+	
+	function poor_province_export()
+	{
+		
+		$this->load->view('poor_export');
+	}
+	
+	function poor_province_print()
+	{
+		
+		$this->load->view('poor_print');
+		//$this->template->build('poor_print');	
 	}
 
 }

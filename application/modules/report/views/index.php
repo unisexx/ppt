@@ -39,7 +39,7 @@ $(document).ready(function(){
             	<h4>เด็กและเยาวชน</h4>
                 <ul>
                 	<li><a href="#">เด็กและเยาวชนในสถาบัน</a></li>
-                	<li><a href="#">เด็กและเยาวชนในสถานพินิจฯ</a></li>
+                	<li><a href="offense/offense_report">เด็กและเยาวชนในสถานพินิจฯ</a></li>
                     <li><a href="#">เด็กและเยาวชนออกกลางคัน</a></li>
                     <li><a href="#">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
                     <li><a href="#">สถานการณ์การมีบุตรของวัยรุ่นไทย</a></li>
@@ -74,7 +74,7 @@ $(document).ready(function(){
             <div class="data">
             	<h4>ผู้ด้อยโอกาส</h4>
                 <ul>
-                	<li><a href="#">ผู้มีรายได้ต่ำกว่าเส้นความยากจน</a></li>
+                	<li><a href="poor_province/poor_report">ผู้มีรายได้ต่ำกว่าเส้นความยากจน</a></li>
                 </ul>
             </div>
           

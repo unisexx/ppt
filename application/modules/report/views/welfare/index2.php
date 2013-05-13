@@ -54,6 +54,20 @@
 				$res_['distribution'] += $res_tmp[$k]['distribution'];
 				$res_['remain'] += $res_tmp[$k]['remain'];
 				$res_['build'] += $res_tmp[$k]['build'];
+				
+				$res_list_dtl = $this->welfare_list->get_row($res_tmp[$k]['wlist_id']);
+				
+				?>
+				<tr>
+					<td><?=$res_list_dtl['name'];?></td>
+					<td><?=number_format($res_tmp[$k]['target']);?></td>
+					<td><?=number_format($res_tmp[$k]['balance']);?></td>
+					<td><?=number_format($res_tmp[$k]['admission']);?></td>
+					<td><?=number_format($res_tmp[$k]['distribution']);?></td>
+					<td><?=number_format($res_tmp[$k]['remain']);?></td>
+					<td><?=number_format($res_tmp[$k]['build']);?></td>
+				</tr>
+				<?
 			}
 		}
 
@@ -64,8 +78,8 @@
 		$total['remain'] += @$res_['remain'];
 		$total['build'] += @$res_['build'];
 		?>
-		<tr>
-			<td><a href="report/welfare/report2?YEAR=<?=$_GET['YEAR'];?>&WLIST=<?=$_GET['WLIST'];?>"><?=$wlist[$i];?></a></td>
+		<tr style='display:none;'>
+			<td><?=$wlist[$i];?></td>
 			<td><?=number_format($res_['target']);?></td>
 			<td><?=number_format($res_['balance']);?></td>
 			<td><?=number_format($res_['admission']);?></td>

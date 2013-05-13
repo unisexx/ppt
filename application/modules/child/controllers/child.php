@@ -241,8 +241,8 @@ Class Child extends Public_Controller{
 		$val=array();
 		if(($handle = fopen($Filepath, 'r')) !== false)
 		{	    
-			    $header = fgetcsv($handle);                   
-			    while(($data = fgetcsv($handle)) !== false)
+			    $header = fget($handle);                   
+			    while(($data = fget($handle)) !== false)
 			    {					        	
 						$val[$row][0]=$data[0];
 						$val[$row][1]=$data[1];
@@ -298,12 +298,11 @@ Class Child extends Public_Controller{
 		$this->template->build('pregnant/pregnant_import_form',$data);	
 	}
 	function pregnant_save_import(){
-		// แก้ upload_max_filesize = 40M
 		/* ; Maximum allowed size for uploaded files.
-			upload_max_filesize = 40M   จาก  2M
+			upload_max_filesize = 1024M   
 			; Must be greater than or equal to upload_max_filesize
-			post_max_size = 40M  จาก 2M
-		 memmory_limit=256M
+			post_max_size = 1024M  จาก 2M
+			 memmory_limit=1024M
 		 * */ 		
 
 		 if($_FILES['fl_import']['name']!=''){
@@ -317,29 +316,30 @@ Class Child extends Public_Controller{
 			if(empty($_POST['continue'])){
 				$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");				
 			}
-			//$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
+			$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$order_no.date("Y_m_d_H_i_s").'.'.$ext;	
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
-			$data	=$this->ImportDataCsv($uploaddir.$file_name);											
+			//$data	=$this->ImportDataCsv($uploaddir.$file_name);	
+	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
+           $data = csv_to_array($fpicname, $col);										
 			foreach($data as $key=>$item){
 					if($key>=1){																														
 						$val['year']=$_POST['year_data'];
-						$val['sex'] = $item[0];
-						$val['weight'] = $item[1];
-						$val['birthday'] = $item[2];	
-						$val['hospital_code'] =  $item[3];			
-						$val['address_code'] =  $item[4];
-						$val['location'] = $item[5];
-						$val['m_birthday'] =  $item[6];
-						$val['m_address_code'] =  $item[7];	
-						$val['f_id'] = $item[8];
-						$val['f_birthday'] =  $item[9];	
-						$val['f_address_code'] =  $item[10];	
-						//$val['order_no'] = $order_no;
+						$val['sex'] = $item['SEX'];
+						$val['weight'] = $item['WEIGHT'];
+						$val['birthday'] = $item['BIRTHDAY'];	
+						$val['hospital_code'] =  $item['HOSPITAL_CODE'];			
+						$val['address_code'] =  $item['ADDRESS_CODE'];
+						$val['location'] = $item['LOCATION'];
+						$val['m_birthday'] =  $item['M_BIRTHDAY'];
+						$val['m_address_code'] =  $item['M_ADDRESS_CODE'];	
+						$val['f_id'] = $item['F_ID'];
+						$val['f_birthday'] =  $item['F_BIRTHDAY'];	
+						$val['f_address_code'] =  $item['F_ADDRESS'];	
 						$val['create']=date('Ymd');
 						$this->pregnant->save($val);
 					}																																					

@@ -42,6 +42,7 @@ class Crime extends Public_Controller
 			header("Content-Disposition: attachment; filename=".$filename);
 			logs('ดาวน์โหลดข้อมูล การกระทำความผิดที่ละเมิดกฎหมายทางอาญา');
 		} else {
+			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล การกระทำความผิดที่ละเมิดกฎหมายทางอาญา');	
 		}
 

@@ -40,6 +40,7 @@ class Mental extends Public_Controller
 			header("Content-Disposition: attachment; filename=".$filename);
 			logs('ดาวน์โหลดข้อมูล ผู้ป่วยสุขภาพจิต');
 		} else {
+			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล ผู้ป่วยสุขภาพจิต');	
 		}
 		$data['tbl_head'] = array("โรคจิต", "โรควิตกกังวล และเพศ", "โรคซึมเศร้า", "ปัญญาอ่อน", "โรคลมชัก", "ผู้ติดสารเสพติด", "ปัญหาสุขภาพจิตอื่น ๆ", "ผู้พยายามฆ่าตัวตายหรือฆ่าตัวตาย", "ออติสติก", "รวมทั้งหมด");

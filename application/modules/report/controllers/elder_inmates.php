@@ -34,6 +34,7 @@ class Elder_inmates extends Public_Controller
 			header("Content-Disposition: attachment; filename=".$filename);
 			logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
 		} else {
+			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล ผู้ต้องขังสูงอายุ');	
 		}
 				

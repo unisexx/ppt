@@ -6,6 +6,7 @@ Class medium extends Public_Controller
 		parent::__construct();
         $this->load->model('family_model','family');
 		$this->load->model('info_model','info');
+		$this->load->model('province_model','province');
 	}
 	public $menu_id = 45;
 	public $key_id = 30;
@@ -103,6 +104,49 @@ Class medium extends Public_Controller
 			//}
 		}		
 		return $import;
+	}
+
+    function custom_import($year_data){
+		//$this->db->debug=true;
+		$uploaddir = "import_file/family/".$year_data."/";		
+		$file_list = scandir($uploaddir);
+		$data['file_list'] = $file_list;
+		foreach($file_list as $file){
+			$lfile[] = iconv('windows-874','utf-8',$file);
+		}		
+		
+		for($i=2;$i<count($lfile);$i++){
+			$file_name = $lfile[$i];
+			$file = $lfile[$i];
+			$finfo = explode('.',$file);
+			$province_id = $this->province->select('id')->where(" province='".iconv('utf-8','tis-620',$finfo[0])."'")->get_one();
+			if($province_id<1)echo "<span style=\"color:red\">";
+			echo iconv('utf-8','tis-620',$finfo[0])."::".$province_id.":::".iconv('utf-8','tis-620',$lfile[$i])."<br>";
+			if($province_id<1)echo "</span>";						
+			//rename($uploaddir.$file_name, $uploaddir.$province_id.".xls");
+			
+			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
+			
+			foreach($data as $item):
+						$val['ID']='';														
+						if($province_id > 0 ){
+							$val['ID'] = $this->family->select('id')->where("YEAR_DATA=".$year_data." AND PROVINCE_ID=".$province_id." AND KEY_ID=". (int)$item['key_id'])->get_one();
+						}
+						$val['YEAR_DATA'] = $year_data;
+						$val['PROVINCE_ID'] = $province_id;
+						$val['KEY_ID'] = (int)$item['key_id'];
+						$val['TITLE'] = $item['title'];
+						$val['PASS'] = $item['pass']=='-' ? 0 : (float)$item['pass'];
+						$val['PERCENTAGE'] = $item['percentage']=='-' ? 0 :(float)$item['percentage'];
+						$val['TARGET'] = $item['target']=='-' ? 0 :(float)$item['target'];
+						$val['LOWER_TARGET'] = $item['lower_target']=='-' ? 0 :(float)$item['lower_target'];
+						$val['EDIT'] = $item['edit']=='-' ? 0 :(float)$item['edit'];
+						if($province_id > 0)$id = $this->family->save($val);	
+			endforeach;	
+			
+			 
+		}
+		
 	}
 }
 ?>

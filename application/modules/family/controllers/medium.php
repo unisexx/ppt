@@ -91,7 +91,7 @@ Class medium extends Public_Controller
 //		error_reporting(E_ALL ^ E_NOTICE);
 		$index = 0;
 		for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
-			if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){
+			//if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){
 			$import[$index]['key_id'] = substr(trim($data -> sheets[0]['cells'][$i][1]),0,2); 
 			$import[$index]['title'] = trim($data -> sheets[0]['cells'][$i][1]);
 			$import[$index]['pass'] = trim($data -> sheets[0]['cells'][$i][2]);
@@ -100,7 +100,7 @@ Class medium extends Public_Controller
 			$import[$index]['lower_target'] = trim($data -> sheets[0]['cells'][$i][5]);
 			$import[$index]['edit'] = trim($data -> sheets[0]['cells'][$i][6]);								 
 			$index++;			
-			}
+			//}
 		}		
 		return $import;
 	}

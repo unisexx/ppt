@@ -30,7 +30,7 @@ class Child extends Public_Controller
 						SELECT  id,year,to_char(m_birthday,'yyyy-mm-dd'),
 										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
 										to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-										floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+										floor(months_between(to_date(concat(to_char(year)-543,'0101'),'yyyy-mm-dd'),
 										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as ages
 						 FROM C_PREGNANT
 						 WHERE 1=1 $province_id

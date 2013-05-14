@@ -24,11 +24,16 @@
                     $header = $row;
                 }else{
                     $cols = is_array($col) ? $col : $header;
-                    $data[] = array_combine($cols, $row);
+					if(count($row)>1){
+						$data[] = array_combine($cols, $row);						
+					}else{
+							continue;  
+					}        			
+					
                 }
             }
             fclose($handle);
         }
-        return $data;
+       return $data;
     }
 ?>

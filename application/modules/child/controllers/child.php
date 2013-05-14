@@ -329,13 +329,16 @@ Class Child extends Public_Controller{
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
 			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
 			//$data	=$this->ImportDataCsv($uploaddir.$file_name);		                    
-	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_BIRTHDAY','F_ADDRESS', 'F_ID' ,'CREATE','UPDATE','YEAR','ORDER_NO');
+	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_BIRTHDAY','F_ADDRESS', 'F_ID');
            $data = csv_to_array($fpicname, $col);
 		    dbConvert($data);	
-			$data['YEAR']=$_POST['year_data'];									
-            foreach($data as $i) $this->pregnant->save($i);
+			//var_dump($data);								
+            foreach($data as $i) {
+            	$i['year']=$_POST['year_data'];	
+            	$this->pregnant->save($i);
+			}
 			logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
-			//set_notify('success', lang('save_data_complete'));
+			set_notify('success', lang('save_data_complete'));
 		}
 		//redirect('child/pregnant_import');	
 	}

@@ -11,12 +11,6 @@
   	<?php echo form_dropdown('year',get_year_option(),@$rs['year'],'','-- เลือกปี --'); ?>
   </td>
 </tr>
-<tr><th>วันที่ใบคำขอ(วันที่เริ่มต้น)</th>
-	<td><input type="text" name="s_date" class="datepicker" value="<?php echo Date2DB($rs['s_date'])?>"></td>
-</tr>
-<tr><th>วันที่ใบคำขอ(วันที่สิ้นสุด)</th>
-	<td><input type="text" name="e_date" class="datepicker" value="<?php echo Date2DB($rs['e_date'])?>"></td>
-</tr>
 <tr>
   <th>รหัสหน่วยงาน<span class="Txt_red_12"> *</span></th>
   <td><input name="agency_id" type="text" id="textarea14" value="<?php echo $rs['agency_id'] ?>"  style="width:50px;" /> </td>

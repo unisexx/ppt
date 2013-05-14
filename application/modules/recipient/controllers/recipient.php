@@ -12,7 +12,8 @@ Class Recipient extends Public_Controller{
 		$help =(!empty($_GET['help_id'])) ? " and HELP_ID=".$_GET['help_id']:'';
 		$data['result'] = $this->recipient->where("1=1 $year $agency_id $help")->order_by('year desc, agency', 'asc')->get();
 		$data['pagination'] = $this->recipient->pagination();	
-		$data['menu_id']=$this->menu_id;
+		$data['menu_id'] = $this->menu_id;
+		$data['year_data'] = $this->recipient->limit(50)->get("SELECT year FROM recipient GROUP BY year order by year desc");
 		$this->template->build('recipient_index',$data);
 	}
 	function form($id=FALSE){
@@ -23,8 +24,8 @@ Class Recipient extends Public_Controller{
 	function save()
 	{		
 		if($_POST){
-			$_POST['s_date']=(!empty($_POST['s_date']))?  date_to_mysql($_POST['s_date'],true):'0000-00-00';
-			$_POST['e_date']=(!empty($_POST['e_date']))? date_to_mysql($_POST['e_date'],true):'0000-00-00';
+			//$_POST['s_date']=(!empty($_POST['s_date']))?  date_to_mysql($_POST['s_date'],true):'0000-00-00';
+			//$_POST['e_date']=(!empty($_POST['e_date']))? date_to_mysql($_POST['e_date'],true):'0000-00-00';
 			$this->recipient->save($_POST);
 			set_notify('success', lang('save_data_complete'));	
 		}
@@ -78,9 +79,9 @@ Class Recipient extends Public_Controller{
 				$data= $this->ImportData($uploaddir.$file_name);				
 				foreach($data as $key=>$item){	
 						if(strpos($item[0],':')){
-							list($s_date,$e_date)=explode('-',substr($item[0],strpos ($item[0],':')+1));
-							$val['s_date']=Date2Oracle($s_date);
-							$val['e_date']=Date2Oracle($e_date);
+							//list($s_date,$e_date)=explode('-',substr($item[0],strpos ($item[0],':')+1));
+							//$val['s_date']=Date2Oracle($s_date);
+							//$val['e_date']=Date2Oracle($e_date);
 							continue;
 							}
 							if(in_array('รหัสหน่วยงาน',$item)){

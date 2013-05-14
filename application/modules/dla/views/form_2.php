@@ -136,6 +136,6 @@
 <?php endif; ?>
 <script>
     $(function(){
-        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: '<?php echo site_url(); ?>location/ajax_amphur',value: 'id',label: 'text'});
     });
 </script>

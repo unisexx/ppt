@@ -54,8 +54,8 @@
     <?php endforeach; ?>
 </table>
 <?php echo $pagination; ?>
- <script>
+<script>
     $(function(){
-        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: '<?php echo site_url(); ?>location/ajax_amphur/report',value: 'id',label: 'text'});
     });
 </script>

@@ -44,9 +44,11 @@ for($i=9;$i<27;$i++){ ?>
 <?php	for($j=9;$j<=20;$j++){ ?>
   <td><?php  //echo $i.'-'.$j." ";
   if($j==20){
-  	echo  $sumall ;break;
+  	echo  number_format($sumall);break;
   }   	
-  echo $sum=(!empty($val[$i][$j])) ? $val[$i][$j]:0; 
+  $sum=(!empty($val[$i][$j])) ? $val[$i][$j]:0; 
+  $shw_sum=$sum;
+	echo number_format($shw_sum);
   $all[]=$sum;
    $sumall=$sumall+$sum;
     
@@ -63,18 +65,18 @@ for($i=9;$i<27;$i++){ ?>
 
 <tr class="total">
   <td>รวม</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><?php echo number_format($val[29][9]) ?></td>
+  <td><?php echo number_format($val[29][10]) ?></td>
+  <td><?php echo number_format($val[29][11]) ?></td>
+  <td><?php echo number_format($val[29][12]) ?></td>
+  <td><?php echo number_format($val[29][13]) ?></td>
+  <td><?php echo number_format($val[29][14]) ?></td>
+  <td><?php echo number_format($val[29][15]) ?></td>
+  <td><?php echo number_format($val[29][16]) ?></td>
+  <td><?php echo number_format($val[29][17]) ?></td>
+  <td><?php echo number_format($val[29][18]) ?></td>
+  <td><?php echo number_format($val[29][19]) ?></td>
+  <td><?php echo number_format($val[29][20]) ?></td>
 </tr>
 
 </table>

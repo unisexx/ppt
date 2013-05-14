@@ -332,28 +332,11 @@ Class Child extends Public_Controller{
 	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
            $data = csv_to_array($fpicname, $col);
 		    dbConvert($data);										
-			foreach($data as $item){
-					if($key>=1){																														
-						$val['year']=$_POST['year_data'];
-						$val['sex'] = $item['SEX'];
-						$val['weight'] = $item['WEIGHT'];
-						$val['birthday'] = $item['BIRTHDAY'];	
-						$val['hospital_code'] =  $item['HOSPITAL_CODE'];			
-						$val['address_code'] =  $item['ADDRESS_CODE'];
-						$val['location'] = $item['LOCATION'];
-						$val['m_birthday'] =  $item['M_BIRTHDAY'];
-						$val['m_address_code'] =  $item['M_ADDRESS_CODE'];	
-						$val['f_id'] = $item['F_ID'];
-						$val['f_birthday'] =  $item['F_BIRTHDAY'];	
-						$val['f_address_code'] =  $item['F_ADDRESS'];	
-						$val['create']=date('Ymd');
-						$this->pregnant->save($val);
-					}																																					
-			}
+            foreach($data as $i) $this->pregnant->save($i);
 			logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
-			set_notify('success', lang('save_data_complete'));
+			//set_notify('success', lang('save_data_complete'));
 		}
-		redirect('child/pregnant_import');	
+		//redirect('child/pregnant_import');	
 	}
 	function birth(){
 		$this->template->build('birth_index');

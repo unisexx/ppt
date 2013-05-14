@@ -1,63 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-
-var td,sum=0;
-
-var sum_all =new Array();
-					
-			for(var i=1;i<12;i++){	
-				for(var j=2;j<20;j++){		
-				td_val=$('tr:eq('+j+')').find('td:eq('+i+')').css('background-color','').html();
-				sum=sum+parseInt(td_val);
-				sum_all[i]=sum;			
-			}
-			sum = 0;
-		}
-		$('tr:eq(20)').find('td:eq(1)').html(sum_all[1]);
-		$('tr:eq(20)').find('td:eq(2)').html(sum_all[2]);
-		$('tr:eq(20)').find('td:eq(3)').html(sum_all[3]);
-		$('tr:eq(20)').find('td:eq(4)').html(sum_all[4]);	
-		$('tr:eq(20)').find('td:eq(5)').html(sum_all[5]);	
-		$('tr:eq(20)').find('td:eq(6)').html(sum_all[6]);	
-		$('tr:eq(20)').find('td:eq(7)').html(sum_all[7]);	
-		$('tr:eq(20)').find('td:eq(8)').html(sum_all[8]);	
-		$('tr:eq(20)').find('td:eq(9)').html(sum_all[9]);	
-		$('tr:eq(20)').find('td:eq(10)').html(sum_all[10]);	
-		$('tr:eq(20)').find('td:eq(11)').html(sum_all[11]);	
-		
-		
-		
-/*
-		$('.tbreport tr').each(function(i){
-			var tcol = new Array();
-			var t = 0;
-			var tr = $(this);
-			var td = $(this).find('td');
-			//alert(tr.index());
-			td.each(function(){
-				var col = $(this);
-				if(tr.index() > 1 && tr.index() <20 ){
-					if(col.index() > 0){
-						col.css('background-color', 'red');
-						//alert(parseInt(col.text()));
-					    tcol[parseInt(col.index())] += parseInt(col.text());
-				       alert(col.index() + ' ' + tcol[col.index()]);
-					}				
-				}
-				
-				if(tr.index() == 20){
-					if(col.index() > 0){
-						//alert(tcol[col]);
-						col.css('background-color', '#eee');
-						col.text(tcol[col.index()]);
-					     //$('tr:eq(19)').find('td:eq(1)').html(tcol[2]);
-					}				
-				}
-			});
-		});	
-		*/
-})
-</script>
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย (ทารกที่เกิดจากมารดาวัยรุ่น)</h3>
 <div id="search">
   <div id="searchBox">
@@ -104,46 +44,48 @@ var sum_all =new Array();
 <?php 
 
 $sum=0;$sumall=0;
-$ages=array(9=>"9",10=>"10",11=>"11",12=>"12",13=>"13",14=>"14",15=>"15",16=>"16",17=>"17",18=>"18",19=>"19",20=>"20ถึง&lt;25"
-					  ,21=>"30ถึง&lt;35",22=>"35ถึง&lt;40",23=>"40ถึง&lt;45",24=>"50ถึง&lt;55",25=>"55ถึง&lt;60",26=>"60 ปีขึ้นไป");
+$ages=array(9=>"9",10=>"10",11=>"11",12=>"12",13=>"13",14=>"14",15=>"15",16=>"16",17=>"17",18=>"18",19=>"19"
+					,20=>"20ถึง&lt;25",21=>"25ถึง&lt;30",22=>"30ถึง&lt;35",23=>"35ถึง&lt;40",24=>"40ถึง&lt;45"
+					,25=>"45ถึง&lt;50",26=>"50 ถึง&lt;55",27=>"55ถึง&lt;60",28=>"60 ปีขึ้นไป");
 
-for($i=9;$i<27;$i++){ ?>
+for($i=9;$i<29;$i++){ ?>
 <tr>
 <td class="topic"><?php echo  ($i==9)? "≤". $ages[$i]:$ages[$i] ?></td>	
 <?php	for($j=9;$j<=20;$j++){ ?>
-  <td><?php  //echo $i.'-'.$j." ";
-  if($j==20){
-  	echo  $sumall ;break;
-  }   	
-  echo $sum=(!empty($val[$i][$j])) ? $val[$i][$j]:0; 
-  $all[]=$sum;
-   $sumall=$sumall+$sum;
-    
-  	?></td>
+ <td>
+  	<?php  //echo $i.'-'.$j." ";
+ 	 if($j==20){
+ 	 	 echo  number_format($sumall );break; 
+ 	 } 	  	
+  	$sum=(!empty($val[$i][$j])) ? $val[$i][$j]:0; 
+	$shw_sum=$sum;
+	echo number_format($shw_sum);
+  	$all[]=$sum;
+   $sumall=$sumall+$sum;  
+  	?>
+ </td>
  
 <?php } 
 	$sumall=0;
 ?>
 
 </tr>
-<?php			}
-
-?>
+<?php		} ?>
 
 <tr class="total">
   <td>รวม</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><?php echo number_format($val[29][9]) ?></td>
+  <td><?php echo number_format($val[29][10]) ?></td>
+  <td><?php echo number_format($val[29][11]) ?></td>
+  <td><?php echo number_format($val[29][12]) ?></td>
+  <td><?php echo number_format($val[29][13]) ?></td>
+  <td><?php echo number_format($val[29][14]) ?></td>
+  <td><?php echo number_format($val[29][15]) ?></td>
+  <td><?php echo number_format($val[29][16]) ?></td>
+  <td><?php echo number_format($val[29][17]) ?></td>
+  <td><?php echo number_format($val[29][18]) ?></td>
+  <td><?php echo number_format($val[29][19]) ?></td>
+  <td><?php echo number_format($val[29][20]) ?></td>
 </tr>
 
 </table>

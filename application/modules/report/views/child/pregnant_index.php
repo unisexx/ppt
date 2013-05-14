@@ -1,16 +1,12 @@
+
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย</h3>
 <a href="report/child/pregnant_parent" target="_blank"><div style="padding:10px; background:#EAEAEA; border:1px solid #ccc; font-weight:700; width:180px; float:right">จำแนกตามอายุบิดา/มารดา</div></a>
 <div id="search">
   <div id="searchBox">
   	<form action="report/child/pregnant">
      <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '- ทุกจังหวัด -'); ?>
-     <select name="select2" id="select3">
-      <option>-- ทุกอำเภอ--</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-    <select name="select3" id="select3">
+ 	 <?php echo form_dropdown('amphur_id', (empty($rs['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '- เลือกอำเภอ -'); ?>
+      <select name="select3">
       <option>-- ทุกตำบล --</option>
       <option>1</option>
       <option>2</option>
@@ -67,5 +63,11 @@ foreach($val as $key=>$item):
 </table>
 
 <div id="ref">ที่มา :</div>
-
+<script>
+    $(function(){
+    	alert("dd");
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+       $('[name=district_id]').chainedSelect({parent: '[name=amphur_id]',url: 'location/ajax_district/report',value: 'id',label: 'text'});
+    });
+</script>
 

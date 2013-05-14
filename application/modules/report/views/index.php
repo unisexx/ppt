@@ -40,7 +40,7 @@ $(document).ready(function(){
                 <ul>
                 	<li><a href="report/welfare">เด็กและเยาวชนในสถาบัน</a></li>
                 	<li><a href="offense/offense_report">เด็กและเยาวชนในสถานพินิจฯ</a></li>
-                    <li><a href="#">เด็กและเยาวชนออกกลางคัน</a></li>
+                    <li><a href="report/child/drop">เด็กและเยาวชนออกกลางคัน</a></li>
                     <li><a href="#">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
                     <li><a href="report/child/pregnant">สถานการณ์การมีบุตรของวัยรุ่นไทย</a></li>
                 </ul>

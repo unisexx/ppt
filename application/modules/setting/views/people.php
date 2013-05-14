@@ -5,10 +5,10 @@
   	ชื่อ - สกุล <input type="text" name="name" value="<?php echo @$_GET['name']?>">
   	<select name="age">
   		<option value="">- ช่่วงอายุ -</option>
-  		<option value="1" <?php echo ($_GET['age']==1)?'selected':'';?>>เด็ก (0 - 18)</option>
-  		<option value="2" <?php echo ($_GET['age']==2)?'selected':'';?>>เยาวชน (18 - 25)</option>
-  		<option value="3" <?php echo ($_GET['age']==3)?'selected':'';?>>วัยทำงาน (25 - 60)</option>
-  		<option value="4" <?php echo ($_GET['age']==4)?'selected':'';?>>ผู้สูงวัย (60 ขึ้นไป)</option>
+  		<option value="1" <?php echo (@$_GET['age']==1)?'selected':'';?>>เด็ก (0 - 18)</option>
+  		<option value="2" <?php echo (@$_GET['age']==2)?'selected':'';?>>เยาวชน (18 - 25)</option>
+  		<option value="3" <?php echo (@$_GET['age']==3)?'selected':'';?>>วัยทำงาน (25 - 60)</option>
+  		<option value="4" <?php echo (@$_GET['age']==4)?'selected':'';?>>ผู้สูงวัย (60 ขึ้นไป)</option>
   	</select>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>

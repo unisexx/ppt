@@ -148,18 +148,27 @@ class Child extends Public_Controller
 				for($j=55;$j<60;$j++){							
 						$v=(!empty($val[$j][$i]))? $val[$j][$i]:0;
 						$sum=$sum+$v;
-						$sumage55[$i]=$sum;
+						$val[27][$i]=$sum;
 					}
 				$sum=0;	
 				for($j=60;$j<100;$j++){							
 						$v=(!empty($val[$j][$i]))? $val[$j][$i]:0;
 						$sum=$sum+$v;
-						$sumage60[$i]=$sum;
+						$val[28][$i]=$sum;
 					}
 				$sum=0;	
 			}
-	
-		$data['val']=$val;	
+
+		// sum แถวล่าง		
+			for($j=9;$j<21;$j++){
+					for($i=9;$i<29;$i++){	
+					$v=(!empty($val[$i][$j]))? $val[$i][$j]:0;	
+					$sum+=$v;
+					$val[29][$j]=$sum;			
+			}
+			$sum = 0;
+		}
+		$data['val']=$val;
 		if($export=="export"){
 			    $filename= "pregnant_parent_data_".date("Y-m-d_H_i_s").".xls";
 				header("Content-Disposition: attachment; filename=".$filename);

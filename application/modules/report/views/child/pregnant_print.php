@@ -41,6 +41,7 @@ foreach($val as $key=>$item):
 </table>
 
 <div id="ref">ที่มา :</div>
+<div id="remark">หมายเหตุ :</div>
 <script>window.print();</script>
 </body>
 </html>

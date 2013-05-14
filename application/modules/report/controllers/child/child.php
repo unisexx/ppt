@@ -68,29 +68,45 @@ class Child extends Public_Controller
 		
 	}
 	function pregnant_parent($export=FALSE)
-	{
-		
+	{		
 		$province_id =(!empty($_GET['province_id'])) ? " and substr(m_address_code,0,2)='".$_GET['province_id']."'":'';
 		$year =(!empty($_GET['year'])) ? " and  year='".$_GET['year']."'":'';	
 		if(!empty($_GET['province_id'])){
 			$data['province'] =$this->province->get_one("province","id",$_GET['province_id']);
 		}		
-		
-		$sql="
-				SELECT  year,f_ages,m_ages,count(id) as cnt from
-				(
-					SELECT  id,year,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),to_char(m_birthday,'yyyy-mm-dd'),
-								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,													
-								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-								to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
-								,to_char(f_birthday,'yyyy-mm-dd'),
-								floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
-								to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages												
-							 FROM C_PREGNANT
-							 WHERE 1=1 $province_id $year
-				) GROUP BY year,f_ages,m_ages
-				ORDER BY f_ages,m_ages		
-		";
+		if(!empty($_GET['year'])){				
+			$sql="
+					SELECT  year,f_ages,m_ages,count(id) as cnt from
+					(
+						SELECT  id,year,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),to_char(m_birthday,'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,													
+									floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
+									,to_char(f_birthday,'yyyy-mm-dd'),
+									floor(months_between(to_date(concat(to_char(year)-543,'0101'),'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages												
+								 FROM C_PREGNANT
+								 WHERE 1=1 $province_id $year
+					) GROUP BY year,f_ages,m_ages
+					ORDER BY f_ages,m_ages		
+				";
+		}else{
+			$sql="
+				SELECT  f_ages,m_ages,count(id) as cnt from
+					(
+						SELECT  year,id,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),to_char(m_birthday,'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,													
+									floor(months_between(to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as m_ages
+									,to_char(f_birthday,'yyyy-mm-dd'),
+									floor(months_between(to_date(concat(to_char(year)-543,'0101'),'yyyy-mm-dd'),
+									to_date(concat(substr(to_char(f_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(f_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd'))/12)as f_ages												
+								 FROM C_PREGNANT
+								 WHERE 1=1
+					) GROUP BY f_ages,m_ages
+					ORDER BY f_ages,m_ages					
+			";
+		}
 		$result = $this->pregnant->limit(1000)->get($sql);
 		$sum=0;
 		foreach($result as $item){

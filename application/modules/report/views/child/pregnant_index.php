@@ -32,7 +32,7 @@
 <th rowspan="2">ปี</th>
 <th colspan="3">อายุต่ำกว่า 15 ปีบริบูรณ์</th>
 <th colspan="3">อายุ 15 ปี - ต่ำกว่า 20 ปีบริบูรณ์</th>
-<th colspan="3">อายุต่ำกว่า 20 ปีบริบูรณ์</th>
+<th colspan="3">รวมมารดาวัยรุ่น</th>
 </tr>
 <tr>
   <td>เด็กหญิงทั้งหมด</td>
@@ -64,6 +64,7 @@ foreach($val as $key=>$item):
 </table>
 
 <div id="ref">ที่มา :</div>
+<div id="remark">หมายเหตุ :</div>
 <script>
     $(function(){
         $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});

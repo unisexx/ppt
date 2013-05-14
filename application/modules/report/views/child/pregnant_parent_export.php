@@ -74,3 +74,4 @@ for($i=9;$i<27;$i++){ ?>
 </table>
 
 <div id="ref">ที่มา :</div>
+<div id="remark">หมายเหตุ :</div>

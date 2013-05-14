@@ -28,7 +28,6 @@ class Elder_inmates extends Public_Controller
 	
 	function export($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		if($status!='print')
 		{
 			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
@@ -38,7 +37,9 @@ class Elder_inmates extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล ผู้ต้องขังสูงอายุ');	
 		}
-				
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+
+						
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
 		

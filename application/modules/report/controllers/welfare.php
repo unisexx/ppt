@@ -101,7 +101,6 @@ class Welfare extends Public_Controller
 
 	function export_index($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{
@@ -114,6 +113,9 @@ class Welfare extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
 		}
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+		
+		
 			//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)
@@ -166,7 +168,6 @@ class Welfare extends Public_Controller
 
 	function export_index2($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		if($status!='print')
 		{
 			$filename= "welfare_report2_data_".date("Y-m-d_H_i_s").".xls";
@@ -177,6 +178,9 @@ class Welfare extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
 		}
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+		
+		
 			//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)

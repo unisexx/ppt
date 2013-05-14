@@ -25,7 +25,6 @@ class Vacancy extends Public_Controller
 	
 	function export($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{
@@ -36,7 +35,9 @@ class Vacancy extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล ตำแหน่งงานว่่าง');	
 		}
-				
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+
+						
 		$set_y = $this->vacancy->get("SELECT YEAR FROM VACANCY GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i < count($set_y); $i++) { $data['year_list'][] = $set_y[$i]['year']; }
 		

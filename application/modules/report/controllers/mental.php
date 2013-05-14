@@ -33,7 +33,6 @@ class Mental extends Public_Controller
 	
 	function export($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{
@@ -44,6 +43,9 @@ class Mental extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล ผู้ป่วยสุขภาพจิต');	
 		}
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+		
+		
 		$data['tbl_head'] = array("โรคจิต", "โรควิตกกังวล และเพศ", "โรคซึมเศร้า", "ปัญญาอ่อน", "โรคลมชัก", "ผู้ติดสารเสพติด", "ปัญหาสุขภาพจิตอื่น ๆ", "ผู้พยายามฆ่าตัวตายหรือฆ่าตัวตาย", "ออติสติก", "รวมทั้งหมด");
 		$set_y = $this->mental->get("SELECT YEAR FROM MENTAL_NUMBER GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_y); $i++) { $data['set_y'][$set_y[$i]['year']] = $set_y[$i]['year']; }

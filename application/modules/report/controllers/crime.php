@@ -35,7 +35,6 @@ class Crime extends Public_Controller
 
 	function export($status=FALSE)
 	{
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		$data[1] = 1;
 		if($status!='print')
 		{
@@ -46,7 +45,9 @@ class Crime extends Public_Controller
 			?><script>window.print();</script><?
 			logs('พิมพ์ข้อมูล การกระทำความผิดที่ละเมิดกฎหมายทางอาญา');	
 		}
+		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 
+		
 		$set_year = $this->crime_station->get("SELECT YEAR FROM CRIME_STATION GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
 		

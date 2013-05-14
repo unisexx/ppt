@@ -1,7 +1,9 @@
 <h3>รายงาน ผู้ประสบอุบัติเหตุจากยานพาหนะ</h3>
 <div style="padding:10px; text-align:right;">
-  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
+<a href="report/datapoint/vehicle/export">
+  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+  <a href="report/datapoint/vehicle/print">
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>หน่วย:คน</div>
 <table class="tbreport">
 <tr>
   <th rowspan="2">ปี</th>

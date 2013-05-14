@@ -1,4 +1,8 @@
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย (ทารกที่เกิดจากมารดาวัยรุ่น)</h3>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> ทารกที่เกิดจากมารดาวัยรุ่น ปี 
+  <label><?php echo (!empty($_GET['year'])) ? $_GET['year'] : "ทุกปี" ?></label>
+จังหวัด
+<label><?php echo (!empty($_GET['province_id'])) ? $province : "ทุกจังหวัด" ?></label>
 <table class="tbreport"  border='1'>
 <tr>
 <th rowspan="2">อายุบิดา (ปี)</th>

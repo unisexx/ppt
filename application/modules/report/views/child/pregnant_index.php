@@ -1,15 +1,11 @@
 <h3>รายงาน สถานการณ์การมีบุตรของวัยรุ่นไทย</h3>
-<a href="report_sum.php?act=child5_1" target="_blank"><div style="padding:10px; background:#EAEAEA; border:1px solid #ccc; font-weight:700; width:180px; float:right">จำแนกตามอายุบิดา/มารดา</div></a>
+<a href="report/child/pregnant_parent" target="_blank"><div style="padding:10px; background:#EAEAEA; border:1px solid #ccc; font-weight:700; width:180px; float:right">จำแนกตามอายุบิดา/มารดา</div></a>
 <div id="search">
   <div id="searchBox">
-    <select name="select6" id="select6">
-      <option>-- ทุกจังหวัด --</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-    <select name="select" id="select">
-      <option>-- ทุกอำเภอ --</option>
+  	<form action="report/child/pregnant">
+     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '- ทุกจังหวัด -'); ?>
+     <select name="select2" id="select3">
+      <option>-- ทุกอำเภอ--</option>
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -20,12 +16,20 @@
       <option>2</option>
       <option>3</option>
     </select>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+  </form>
+  </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> สถานการณ์การมีบุตรของวัยรุ่นไทย จังหวัด <label>ทุกจังหวัด</label> อำเภอ <label>ทุกอำเภอ</label> ตำบล <label>ทุกตำบล</label></div>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b>
+	 สถานการณ์การมีบุตรของวัยรุ่นไทย จังหวัด <label><?php echo (!empty($_GET['province_id'])) ? $province : "ทุกจังหวัด" ?></label>
+	  อำเภอ <label><?php echo (!empty($_GET['amphur_id'])) ? $province : "ทุกอำเภอ" ?></label> 
+	  ตำบล <label><?php echo (!empty($_GET['district_id'])) ? $province : "ทุกตำบล" ?></label>
+</div>
 <div style="padding:10px; text-align:right;">
-<img src="images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-<img src="images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
+<a href="report/child/pregnant/export" >
+<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<a href="report/child/pregnant/print" >
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย:คน</div>
 <table class="tbreport">
 <tr>
 <th rowspan="2">ปี</th>
@@ -44,90 +48,22 @@
   <td>หญิงที่มีบุตร</td>
   <td>ร้อยละ</td>
 </tr>
+<?php //var_dump($val);
+foreach($val as $key=>$item): 
+?>
 <tr>
-<td class="topic">2555</td>
+<td class="topic"><?php echo  $key;?></td>
+<td></td>
+<td><?php echo number_format($item['lower15']) ?></td>
 <td></td>
 <td></td>
+<td><?php echo number_format($item['equal']) ?></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><?php echo number_format($item['more']) ?></td>
 <td></td>
 </tr>
-<tr>
-  <td class="topic">2554</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td class="topic">2553</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td class="topic">2552</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td class="topic">2551</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td class="topic">2550</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td class="topic">2549</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
+<?php endforeach; ?>
 </table>
 
 <div id="ref">ที่มา :</div>

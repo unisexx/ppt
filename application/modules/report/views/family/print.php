@@ -65,5 +65,6 @@ foreach($value as $item):
 </table>
 
 <div id="ref">ที่มา :</div>
+<script>window.print();</script>
 </body>
 </html>

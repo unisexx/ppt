@@ -213,6 +213,197 @@ Class population extends Public_Controller{
 		return $import;
 	}
 	
+    function custom_import($year_data){
+		//$this->db->debug=true;
+		set_time_limit(0);
+		$uploaddir = "import_file/population/".$year_data."/";		
+		$file_list = scandir($uploaddir);
+		$data['file_list'] = $file_list;
+		foreach($file_list as $file){
+			$lfile[] = iconv('windows-874','utf-8',$file);
+		}		
+		
+		for($i=2;$i<count($lfile);$i++){
+			$file_name = $lfile[$i];
+			$file = $lfile[$i];
+			$finfo = explode('.',$file);
+			$province_id = $this->province->select('id')->where(" province='".iconv('utf-8','tis-620',$finfo[0])."'")->get_one();
+			if($province_id<1)echo "<span style=\"color:red\">";
+			echo iconv('utf-8','tis-620',$finfo[0])."::".$province_id.":::".iconv('utf-8','tis-620',$lfile[$i])."<a href=\"../do_import/".$year_data."/".iconv('utf-8','tis-620',$lfile[$i])."\" target=\"_blank\">Import</a><br>";
+			if($province_id<1)echo "</span>";		
+			
+			$this->do_import($year_data, $lfile[$i]);				
+			//rename($uploaddir.$file_name, $uploaddir.$province_id.".xls");
+			/*
+			$data = $this->ReadData($uploaddir.iconv('utf-8','windows-874',$file_name));
+			
+			foreach($data as $item):
+						$val['ID']='';														
+						if($province_id > 0 ){
+							$val['ID'] = $this->family->select('id')->where("YEAR_DATA=".$year_data." AND PROVINCE_ID=".$province_id." AND KEY_ID=". (int)$item['key_id'])->get_one();
+						}
+						$val['YEAR_DATA'] = $year_data;
+						$val['PROVINCE_ID'] = $province_id;
+						$val['KEY_ID'] = (int)$item['key_id'];
+						$val['TITLE'] = $item['title'];
+						$val['PASS'] = $item['pass']=='-' ? 0 : (float)$item['pass'];
+						$val['PERCENTAGE'] = $item['percentage']=='-' ? 0 :(float)$item['percentage'];
+						$val['TARGET'] = $item['target']=='-' ? 0 :(float)$item['target'];
+						$val['LOWER_TARGET'] = $item['lower_target']=='-' ? 0 :(float)$item['lower_target'];
+						$val['EDIT'] = $item['edit']=='-' ? 0 :(float)$item['edit'];
+						if($province_id > 0)$id = $this->family->save($val);	
+			endforeach;	
+			*/
+			 
+		}
+		
+	}	
+	
+	function do_import($year_data,$file_name){
+		//$this->db->debug = true;
+		if($file_name!='' && $year_data !=''){
+			/*--end--*/
+			set_time_limit(0);
+			$import_section_id=0;
+			$file_name=iconv('utf-8','tis-620',$file_name);
+			$_POST['year_data'] = $year_data;
+			$uploaddir = 'import_file/population/'.$year_data.'/';
+			$fpicname = $uploaddir.$file_name;
+			$data = $this->ReadData($uploaddir.$file_name);			
+			foreach($data as $item):								
+				if($item['value_length']==1712){
+					$chars = str_split($item['value'] , 8);
+					$item['title']."<br>";
+					if (strpos($item['title'], 'จังหวัด')!==false) {
+						$province_name = str_replace('จังหวัด', '', $item['title']);
+						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();						
+						$province_id = @$province['id'];	
+						if($province_id <1){
+							echo iconv('utf-8','tis-620',"ไม่มีข้อมูลจังหวัด ".$item['title'])."<br>";
+						}else{
+						$_POST['province_id'] =$province_id;	
+                        $val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=0 AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}						
+						$val['PROVINCE_ID'] = $province_id;
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['AMPHUR_ID'] = '';
+						$val['AMPHUR_NAME'] = '';
+						$val['DISTRICT_ID'] = '';
+						$val['DISTRICT_NAME'] = '';			
+						$val['YEAR_DATA'] = $_POST['year_data'];					
+						$val['LUNAR_CAL_MALE'] = (int)$chars[204];
+						$val['LUNAR_CAL_FEMALE'] = (int)$chars[205];
+						$val['CENTRAL_HH_MALE'] = (int)$chars[206];
+						$val['CENTRAL_HH_FEMALE'] = (int)$chars[207];
+						$val['NO_THAI_MALE'] = (int)$chars[208];
+						$val['NO_THAI_FEMALE'] = (int)$chars[209];
+						$val['IN_TRANS_MALE'] = (int)$chars[210];
+						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
+						$val['SUM_MALE'] = (int)$chars[212];
+						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
+						$id = $this->ppl->save($val);					
+						
+						for($i=0;$i<=203;$i++){
+							$val_sub['PID'] = $id;
+							$val_sub['AGE_RANGE_CODE'] = $i+1;
+							$val_sub['NUNIT'] = $chars[$i];
+							$this->ppl_detail->save($val_sub);
+						}	
+						}				
+					}
+					else if (strpos($item['title'], 'อำเภอ')!==false) {
+						$amphur_name = strpos($item['title'], 'อำเภอ')!==false ? str_replace('อำเภอ', '', $item['title']) : strpos($item['title'], 'เทศบาล')!==false;
+						$amphur = $this->amphur->where(" province_id=".$province_id." AND AMPHUR_NAME='".iconv('utf-8','tis-620',$amphur_name)."'")->get_row();
+						$amphur_id = @$amphur['id'];
+						if($amphur_id<1)
+						{
+							echo iconv('utf-8','tis-620',"ไม่มี ไอดี อำเภอ ".$item['title'])."<br>";
+						}else{
+						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=".$amphur_id." AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}
+						$val['PROVINCE_ID'] = $province_id;
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['AMPHUR_ID'] = $amphur_id;
+						$val['AMPHUR_NAME'] = $amphur_name;
+						$val['DISTRICT_ID'] = '';
+						$val['DISTRICT_NAME'] = '';		
+						$val['YEAR_DATA'] = $_POST['year_data'];					
+						$val['LUNAR_CAL_MALE'] = (int)$chars[204];
+						$val['LUNAR_CAL_FEMALE'] = (int)$chars[205];
+						$val['CENTRAL_HH_MALE'] = (int)$chars[206];
+						$val['CENTRAL_HH_FEMALE'] = (int)$chars[207];
+						$val['NO_THAI_MALE'] = (int)$chars[208];
+						$val['NO_THAI_FEMALE'] = (int)$chars[209];
+						$val['IN_TRANS_MALE'] = (int)$chars[210];
+						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
+						$val['SUM_MALE'] = (int)$chars[212];
+						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
+						$id = $this->ppl->save($val);					
+						
+						for($i=0;$i<=203;$i++){
+							$val_sub['PID'] = $id;
+							$val_sub['AGE_RANGE_CODE'] = $i+1;
+							$val_sub['NUNIT'] = $chars[$i];
+							$this->ppl_detail->save($val_sub);
+						}		
+						}		
+					}
+					else if (strpos($item['title'], 'ตำบล')!==false && strpos($item['title'], 'เทศบาล')===false) {
+						$district_name = str_replace('ตำบล', '', $item['title']);
+						if($amphur_id<1){
+							echo iconv('utf-8','tis-620',$item['title'])."ไม่มี id amphur<br>";
+						}else{
+						$district = $this->district->where(" province_id=".$province_id." AND AMPHUR_ID=".$amphur_id."  AND DISTRICT_NAME='".iconv('utf-8','tis-620',$district_name)."'")->get_row();
+						if(@$district['id']<1){
+							echo iconv('utf-8','tis-620',$item['title'])."ไม่มี id ตำบล <br>";
+						}else{
+						$amphur = $this->amphur->get_row($amphur_id);
+						$district_id = @$district['id'];
+						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$province_id." AND AMPHUR_ID=".$district['amphur_id']." AND DISTRICT_ID=".$district_id." AND YEAR_DATA=".$_POST['year_data'])->get_one();
+						if($val['ID']>0){
+							$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$val['ID']);
+						}
+						$val['PROVINCE_ID'] = $province_id;
+						$val['PROVINCE_NAME'] = $province_name;
+						$val['AMPHUR_ID'] = $amphur['id'];
+						$val['AMPHUR_NAME'] = $amphur['amphur_name'];
+						$val['DISTRICT_ID'] = $district_id;
+						$val['DISTRICT_NAME'] = $district_name;		
+						$val['YEAR_DATA'] = $_POST['year_data'];					
+						$val['LUNAR_CAL_MALE'] = (int)$chars[204];
+						$val['LUNAR_CAL_FEMALE'] = (int)$chars[205];
+						$val['CENTRAL_HH_MALE'] = (int)$chars[206];
+						$val['CENTRAL_HH_FEMALE'] = (int)$chars[207];
+						$val['NO_THAI_MALE'] = (int)$chars[208];
+						$val['NO_THAI_FEMALE'] = (int)$chars[209];
+						$val['IN_TRANS_MALE'] = (int)$chars[210];
+						$val['IN_TRANS_FEMALE'] = (int)$chars[211];
+						$val['SUM_MALE'] = (int)$chars[212];
+						$val['SUM_FEMALE'] = (int)$chars[213];
+						$val['IMPORT_SECTION_ID'] = (int)$import_section_id;
+						$id = $this->ppl->save($val);					
+						for($i=0;$i<=203;$i++){
+							$val_sub['PID'] = $id;
+							$val_sub['AGE_RANGE_CODE'] = $i+1;
+							$val_sub['NUNIT'] = $chars[$i];
+							$this->ppl_detail->save($val_sub);
+						}		
+						}
+						}				
+					}
+				}				
+			endforeach;							
+		}
+		/*echo "<script>window.location='population';</script>";*/
+		//redirect('population/index');
+	}
+	
 	function sixtyup_index(){
 		$data['menu_id'] = $this->menu_sixtyup_id;
 		$condition= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";

@@ -28,7 +28,7 @@ class MY_Model extends Model{
 		parent::__construct();
 		$this->sort($this->primary_key);
 		$this->target();
-		$this->current_page = number_format(@$_GET['page']);	
+		$this->current_page = @$_GET['page'];	
 	}
 	
 	function free_result()

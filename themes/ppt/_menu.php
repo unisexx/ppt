@@ -198,6 +198,7 @@
 		    <?php if(permission('support_section','view')):?>
 		    <li><a href="setting/support_section/index">หน่วยงานสนับสนุน</a></li>
 		    <?php endif;?>
+		    <li><?php echo anchor('setting/people', 'ตรวจสอบปีเกิด'); ?></li>
 		    <li><?php echo anchor('dla/import', 'นำเข้าข้อมูล อปท.'); ?></li>
 		    <li><?php echo anchor('logs', 'บันทึกการใช้งาน'); ?></li>
 		</ul>

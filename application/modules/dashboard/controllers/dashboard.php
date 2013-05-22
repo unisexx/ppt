@@ -260,8 +260,8 @@ class Dashboard extends Public_Controller
                 'title' => array('text' => 'หน่วยร้อยละ')
             ),
             'series' => array(
-                array('name' => 'แม่อายุ < 20 ปี', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
-                array('name' => 'แม่อายุ < 15 ปี', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f)  
+                array('name' => 'มารดาวัยรุ่นอายุ < 20 ปี', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
+                array('name' => 'มารดาวัยรุ่นอายุ < 15 ปี', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f)  
             ),
             'plotOptions' => array(
                 'spline' => array(

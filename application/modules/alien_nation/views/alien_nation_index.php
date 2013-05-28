@@ -11,10 +11,11 @@
 </div>
 
 <div id="btnBox">
+    <input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('alien_nation/import_data'); ?>'"  class="btn_import"/>
     <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('alien_nation/alien_nation_form'); ?>'" class="btn_add">
 </div>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('alien_nation/import_data'); ?>'"  class="btn_import"/></div>
+
 
 
 <?php echo $pagination; ?>

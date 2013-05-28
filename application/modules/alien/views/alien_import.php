@@ -14,6 +14,12 @@
     ?>
         <table border="1">
         <?php
+		
+					// Set output Encoding.
+			$excel->setOutputEncoding('utf-8');
+			
+			$excel->setUTFEncoder('iconv');
+			
             $excel->read('import_file/alien/'.$file_upload);
 
             $x1=4;
@@ -35,17 +41,6 @@
 				$data4 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
 				$data5 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
 
-/*				  $p_vince = ereg_replace('[[:space:]]+', '', trim($province)); 
-				  
-				  echo $p_vince."<br>";
-				  
-				  $sql = "SELECT * from provinces where province = '".$p_vince."'";
-				  
-				  $result1 = $this->opt->get($sql);
-				  foreach($result1 as $key1 => $item1)
-				  {
-					  $province_id = $item1['id'];
-				  }*/
   
   					
 				

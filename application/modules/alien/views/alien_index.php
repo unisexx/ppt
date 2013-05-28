@@ -49,7 +49,7 @@
 <tr>
   <td><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
   <td><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"><?php echo $item['alien_year']; ?></a></td>
-  <td><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"><?php echo $item['province']; ?></a><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"></a></td>
+  <td><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"><?php echo $item['alien_province']; ?></a><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"></a></td>
   <td><a href="<?php echo site_url('alien/alien_form/'.$item['id']); ?>"><?php echo @number_format($item['alien_sum']); ?></a></td>
   <td><?php echo @number_format($item['alien_male']); ?></td>
   <td><?php echo @number_format($item['alien_female']); ?></td>

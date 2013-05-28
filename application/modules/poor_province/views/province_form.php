@@ -1,11 +1,14 @@
-<?php echo menu::source($menu_id); ?>
-<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
+<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้ด้อยโอกาส (เพิ่ม/แก้ไข)</h2>
+<h4>คนยากจน (จังหวัด) <span class="gray">แบบ สคช. คนยากจน (จังหวัด)</span></h4>
+
+
 <?php echo form_open('poor_province/province_form'); ?>
-<?php endif; ?>
+
+
 <table class="tbadd">
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('poor_province_year', get_year_option(), $rs['poor_province_year']); ?></td>
+  <td><?php echo form_dropdown('poor_province_year', get_year_option(2555), $rs['poor_province_year']); ?></td>
 </tr>
 <tr>
   <th>ภาคจังหวัด &gt; จังหวัด<span class="Txt_red_12"> *</span></th>
@@ -27,18 +30,12 @@
 </tr>
 </table>
 
-<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
     <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>
-<?php else: ?>
-<div id="btnSave">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
-</div>
-<?php endif; ?>
 <script>
     $(function(){
         $('[name=poor_province_aumphur]').chainedSelect({parent: '[name=poor_province_province]',url: 'location/ajax_amphur',value: 'id',label: 'text'});

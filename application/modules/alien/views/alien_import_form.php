@@ -1,4 +1,7 @@
-<?php echo menu::source($menu_id, 'import_file/poor_province/poor_province2543.xls'); ?>
+
+<h2>ข้อมูลประเด็น - คนต่างด้าวที่ได้รับอนุญาติทำงาน (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
+<h4>คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร</h4>
+<?php echo menu::source($menu_id); ?>
 <form method="post" enctype="multipart/form-data" action="alien/alien_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">

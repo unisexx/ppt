@@ -1,8 +1,8 @@
 
-<h2>ข้อมูลประเด็น - คนต่างด้าวที่ได้รับอนุญาติทำงาน (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
-<h4>คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร จำแนกตามสัญชาติ </h4>
+<h2>ผู้สงอายุ - การให้บริการหลักประกันสุขภาพ (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
+<h4>การให้บริการหลักประกันสุขภาพ </h4>
 <?php echo menu::source($menu_id); ?>
-<form method="post" enctype="multipart/form-data" action="alien_nation/alien_nation_import" id="frm_im" name="frm_im">
+<form method="post" enctype="multipart/form-data" action="health/health_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
@@ -67,7 +67,7 @@
 		var conf=confirm('ยืนยันการนำเข้าข้อมูล');
 		if(conf)
 		{
-					document.frm_im.action="alien_nation/alien_nation_import";
+					document.frm_im.action="health/health_import";
 
 					document.frm_im.submit();	
 		}

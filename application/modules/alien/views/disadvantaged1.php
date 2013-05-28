@@ -1,28 +1,24 @@
-<h3>รายงาน ผู้มีรายได้ต่ำกว่าเส้นความยากจน</h3>
+<h3>รายงาน คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร</h3>
 <div id="search">
   <div id="searchBox">
-    <form method="get" action="poor_province/poor_report">
- <?php echo form_dropdown('year', get_year_option(2543), @$_GET['year'], null, '-- ทุกปี --'); ?>
-        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+    <form method="get" action="alien/alien_report">
+ <?php echo form_dropdown('year', get_year_option(2550), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
   
   </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> จำนวนและสัดส่วนคนจนที่อยู่ต่ำกว่าเส้นความยากจน  จังหวัด
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> จำนวนคนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร
 <label>
 
   <?php 
   
-        if(isset($_GET['province_id'])!="")
+        if(isset($_GET['year'])!="")
         {
-			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
-			  $result0 = $this->opt->get($sql0);
-			  foreach($result0 as $key0 => $item0)
-			  {
-				  echo $item0['province'];
-			  }
+
+				  echo $_GET['year'];
+			  
 		}
 		else
 		{
@@ -34,17 +30,31 @@
 
 </div>
 <div style="padding:10px; text-align:right;">
-  <img src="<?php echo base_url(); ?>media/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_export'); ?>'" >
-<img src="<?php echo base_url(); ?>media/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_print'); ?>'">หน่วย:พันคน</div>
+  <img src="<?php echo base_url(); ?>media/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('alien/alien_export'); ?>'" >
+<img src="<?php echo base_url(); ?>media/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('alien/alien_print'); ?>'">หน่วย:พันคน</div>
 
 
 <table class="tbreport">
 <tr>
-<th>ปี</th>
-<th>เส้นความยากจน(บาท/คน/เดือน)</th>
-<th>สัดส่วนคนจน(ร้อยละ)</th>
-<th>จำนวนคนจน(พันคน)</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+  <th>จังหวัด</th>
+  <th>รวมทั้งสิ้น</th>
+  <th>&nbsp;</th>
+  <th>ต่างด้าวเข้าเมืองถูกกฏหมาย</th>
+  <th>ต่างด้าวเข้าเมืองผิดกฏหมาย</th>
+  
 </tr>
+<tr>
+  <th>ปี </th>
+  <th>&nbsp;</th>
+  <th>รวม</th>
+  <th>ชาย</th>
+  <th>หญิง</th>
+  <th>รวม</th>
+  <th>รวม</th>
+</tr>
+
 
 <?php 
 
@@ -53,56 +63,39 @@
  {
 		if($_GET['year']!="")
 		{
-			$sql1 = "select distinct(poor_province_year) as poor_province_year from pool_province where poor_province_year='".$_GET['year']."'";
+			$sql1 = "select * from alien where alien_year='".$_GET['year']."'";
 		}
 	}
 	else
 	{
-		$sql1 = 'select distinct(poor_province_year) as poor_province_year from pool_province order by poor_province_year desc';
+		$sql1 = 'select * from alien order by id desc';
 	}
 
 $result1 = $this->opt->get($sql1);
 
- foreach($result1 as $key1 => $item1)
+ foreach($result1 as $key1 => $item)
  {
 	 
 	 
 		
-if(!empty($_GET['province_id']))	
-{ 
-		if($_GET['province_id']!="")
-		{
-			$where = " and poor_province_province=".$_GET['province_id'];
-		}
-	}
-	else
-	{
-		$where = "";
-	}
-			
-		
-		$sql2 = "SELECT sum(poor_province_line) as line,sum(poor_province_percent) as percents,sum(poor_province_qty) as qty from pool_province where poor_province_year = '".$item1['poor_province_year']."' ".$where." order by POOR_PROVINCE_YEAR DESC";
-		
-		
-		
-		$result2 = $this->opt->get($sql2);
-		
-		 foreach($result2 as $key2 => $item2)
-		 {
 		 
 	
 ?>
 
 <tr>
-<td class="topic"><?php echo $item1['poor_province_year']; ?></td>
-<td><?php echo @number_format($item2['line']); ?></td>
-<td><?php echo @number_format($item2['percents']); ?></td>
-<td><?php echo @number_format($item2['qty']); ?></td>
+  <td><?php echo $item['alien_year']; ?></td>
+  <td><?php echo $item['alien_province']; ?></td>
+  <td><?php echo @number_format($item['alien_sum']); ?></td>
+  <td><?php echo @number_format($item['alien_male']); ?></td>
+  <td><?php echo @number_format($item['alien_female']); ?></td>
+  <td><?php echo @number_format($item['alien_sum_in']); ?></td>
+  <td><?php echo @number_format($item['alien_sum_out']); ?></td>
+
 </tr>
 
 <?php 
  
- 		}
+ 	
 		
  }
 
@@ -111,7 +104,6 @@ if(!empty($_GET['province_id']))
 
 </table>
 
-<div id="ref"><b>ที่มา :</b> ข้อมูลจากการสำรวจภาวะเศรษฐกิจและสังคมของครัวเรือน สำนักงานสถิติแห่งชาติ ประมวลผลโดย สำนักพัฒนาฐานข้อมูลและตัวชี้วัดภาวะสังคม สศช.</div>
-<div id="remark"><b>หมายเหตุ : </b>สัดส่วนคนจน คำนวณจากจำนวนประชากรที่มีรายจ่ายเพื่อการบริโภคต่ำกว่าเส้นความยากจน หารด้วย จำนวนประชากรทั้งหมด คูณด้วย 100 
-จำนวนคนจน หมายถึงจำนวนประชากรที่มีรายจ่ายเพื่อการบริโภคต่ำกว่าเส้นความยากจน</div>
+<div id="ref"><b>ที่มา :</b></div>
+<div id="remark"><b>หมายเหตุ :</b></div>
 

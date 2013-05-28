@@ -1,33 +1,33 @@
 <html>
 <head>
-<title>รายงาน ผู้มีรายได้ต่ำกว่าเส้นความยากจน</title>
+<title>รายงาน คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร จำแนกตามสัญชาติ</title>
 <link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
 </head>
 <body>
 
-<div align="center"><h3>รายงาน ผู้มีรายได้ต่ำกว่าเส้นความยากจน</h3></div>
+<div align="center"><h3>รายงาน คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร จำแนกตามสัญชาติ</h3></div>
 
 <table class="tbreport">
 <tr>
 <th>ปี</th>
-<th>เส้นความยากจน(บาท/คน/เดือน)</th>
-<th>สัดส่วนคนจน(ร้อยละ)</th>
-<th>จำนวนคนจน(พันคน)</th>
+<th>สัญชาติ</th>
+<th>รวม ต่างด้าวเข้าเมืองถูกกฎหมาย</th>
+<th>รวม ต่างด้าวเข้าเมืองผิดกฎหมาย</th>
 </tr>
 
 <?php 
-		$filename= "poor_province_summary_data_".date("Y-m-d_H_i_s").".xls";
+		$filename= "alien_nation_summary_data_".date("Y-m-d_H_i_s").".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
 		
-$this->load->model('poor_province_model', 'opt');
+$this->load->model('alien_nation_model', 'opt');
  
 if(isset($_GET['year']))
 {
-	$sql1 = "select distinct(poor_province_year) as poor_province_year from pool_province where poor_province_year='".$_GET['year']."'";
+	$sql1 = "select * from alien_nation where alien_year='".$_GET['year']."'";
 }
 else
 {
-	$sql1 = 'select distinct(poor_province_year) as poor_province_year from pool_province order by poor_province_year desc';
+	$sql1 = 'select * from alien_nation order by id desc';
 }
 
 $result1 = $this->opt->get($sql1);
@@ -35,25 +35,21 @@ $result1 = $this->opt->get($sql1);
  foreach($result1 as $key1 => $item1)
  {
 	 
-		$sql2 = "SELECT sum(poor_province_line) as line,sum(poor_province_percent) as percents,sum(poor_province_qty) as qty from pool_province where poor_province_year = '".$item1['poor_province_year']."' order by POOR_PROVINCE_YEAR DESC";
-		$result2 = $this->opt->get($sql2);
-		
-		 foreach($result2 as $key2 => $item2)
-		 {
+
 		 
 	
 ?>
 
 <tr>
-<td class="topic"><?php echo $item1['poor_province_year']; ?></td>
-<td><?php echo @number_format($item2['line']); ?></td>
-<td><?php echo @number_format($item2['percents']); ?></td>
-<td><?php echo @number_format($item2['qty']); ?></td>
+<td class="topic"><?php echo $item1['alien_year']; ?></td>
+<td><?php echo $item1['alien_nation']; ?></td>'
+<td><?php echo @number_format($item1['alien_in']); ?></td>
+<td><?php echo @number_format($item1['alien_out']); ?></td>
 </tr>
 
 <?php 
  
- 		}
+ 		
 		
  }
 

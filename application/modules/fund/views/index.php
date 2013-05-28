@@ -15,6 +15,8 @@
   <div id="searchBox">
     <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+    <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
+    <?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>    
 	<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   </div>
 </div>
@@ -48,14 +50,28 @@
   $page = (isset($_GET['page']))? $_GET['page']:1;
   $i=(isset($_GET['page']))? (($_GET['page'] -1)* 20)+1:1;
   foreach($fund as $item){
+  	 $address = '';
 ?>
 <tr  <? if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td><?=$i;?></td>
   <td><?=$item['org_create_date'];?></td>
-  <td><?=$item['fund_name'];?></td>
+  <td><a href="fund/form/<?=$item['id'];?>"><?=$item['fund_name'];?></a></td>
   <td>
   	<?
-  		$item['contact_add_no'];
+  		$address = $item['contact_add_no']!='' ? "<b>เลขที่</b> ".$item['contact_add_no'] : '';
+  		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_add_moo']!='' ? "<b>หมู่ </b>".$item['contact_add_moo'] : '';
+		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_add_road']!='' ? "<b>ถนน</b> ".$item['contact_add_road']: '';
+		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_tumbon_name']!='' ? "<b>แขวง/ตำบล</b> ".$item['contact_tumbon_name'] : '';
+		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_amphur_name']!='' ? "<b>เขต/อำเภอ</b> ".$item['contact_amphur_name'] : '';
+		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_province_name']!='' ? "<b>จังหวัด</b> ".$item['contact_province_name'] : '';
+		$address.= $address !='' ? ' ': '';
+		$address.= $item['contact_add_postcode']!='' ? ' '.$item['contact_add_postcode']: '';
+		echo $address;
   	?>
   </td>
   <td>
@@ -70,3 +86,9 @@
 </tr>
 <? $i++; } ?>
 </table>
+<script>
+    $(function(){
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+        $('[name=district_id]').chainedSelect({parent: '[name=amphur_id]',url: 'location/ajax_district/report',value: 'id',label: 'text'});
+    });
+</script>

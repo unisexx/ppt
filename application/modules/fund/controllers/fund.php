@@ -13,9 +13,10 @@ Class fund extends Public_Controller{
 		//$this->db->debug=true;
 		$data['menu_id'] = $this->menu_id;
 		$condition = " 1 = 1 ";
-		if(@$_GET['year_data']) $condition .= "AND year_data = ".$_GET['year_data'].' ';
-		if(@$_GET['province_id']) $condition .= "AND province_id = ".$_GET['province_id'].' ';
-		
+		if(@$_GET['year_data']) $condition .= "AND ORG_CREATE_DATE LIKE'%".$_GET['year_data']."%' ";
+		if(@$_GET['province_id']) $condition .= "AND contact_province_id = ".$_GET['province_id'].' ';
+		if(@$_GET['amphur_id']) $condition .= "AND contact_amphur_id = ".$_GET['amphur_id'].' ';
+		if(@$_GET['district_id']) $condition .= "AND contact_tumbon_id = ".$_GET['district_id'].' ';
 		$data['fund'] = $this->fund->where($condition)->get();
     	$data['pagination'] = $this->fund->pagination;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
@@ -86,9 +87,9 @@ Class fund extends Public_Controller{
 			foreach($data as $item):
 						$item['id'] =$item['org_id']!='' ? $this->fund->get_one('id','org_id',$item['org_id']) : "";
 						$item['org_create_date'] = $item['org_create_date']!='' ? substr($item['org_create_date'],0,2)."-".substr($item['org_create_date'],2,2)."-".(substr($item['org_create_date'],4,4)+543) :"";
-						$item['contact_province_id'] = $item['contact_province_name']!='' ? $this->province->get_one('id','province',@iconv('utf-8','tis-620',$item['contact_province_name'])):'';
-						$item['contact_amphur_id'] = $item['contact_amphur_name']!='' ? $this->amphur->get_one('id','amphur_name',@iconv('utf-8','tis-620',$item['contact_amphur_name'])):'';
-						$item['contact_tumbon_id'] = $item['contact_tumbon_name']!='' ? $this->district->get_one('id','district_name',@iconv('utf-8','tis-620',$item['contact_tumbon_name'])):'';
+						$item['contact_province_id'] = trim($item['contact_province_name'])!='' ? $this->province->get_one('id','province',@iconv('utf-8','tis-620',$item['contact_province_name'])):'';
+						$item['contact_amphur_id'] = trim($item['contact_amphur_name'])!='' ? $this->amphur->get_one('id','amphur_name',@iconv('utf-8','tis-620',$item['contact_amphur_name'])):'';
+						$item['contact_tumbon_id'] = trim($item['contact_tumbon_name'])!='' ? $this->district->get_one('id','district_name',@iconv('utf-8','tis-620',$item['contact_tumbon_name'])):'';
 						$id = $this->fund->save($item);											
 			endforeach;							
 		}

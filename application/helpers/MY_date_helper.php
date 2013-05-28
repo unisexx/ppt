@@ -72,13 +72,13 @@ if(!function_exists('get_year_option'))
             }
             else 
             {
-                $rs = get_instance()->db->getarray('SELECT DISTINCT '.$field_year.' AS YEAR FROM '.$table.' ORDER BY '.$field_year);
+                $rs = get_instance()->db->getarray('SELECT DISTINCT '.$field_year.' AS YEAR FROM '.$table.' ORDER BY '.$field_year.' DESC');
                 foreach($rs as $item) $data[$item['YEAR']] = $item['YEAR'];
             }
             
         }
         
-		return $data;
+		return empty($data) ? array() : $data;
 	}
 }
 

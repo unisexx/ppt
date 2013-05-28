@@ -8,8 +8,8 @@ $(document).ready(function(){
 <h3>รายงาน ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : <?=$family_key['title'];?> </h3>
 <form name="fmreport" id="fmreport" enctype="multipart/form-data" method="get">
 <div id="search">
-  <div id="searchBox">
-    <?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+  <div id="searchBox">    
+    <?php echo form_dropdown('year_data', get_year_option(null,null,'family','year_data'), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
     <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>    
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>

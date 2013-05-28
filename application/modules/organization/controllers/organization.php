@@ -5,7 +5,7 @@ Class organization extends Public_Controller{
 		$this->load->model('organization_main_model','org_main');
 		$this->load->model('info_model','info');
 	}
-	public $menu_id = 74;
+	public $menu_id = 102;
 	function index(){
 		$this->db->debug =false;
 		$data['menu_id'] = $this->menu_id;

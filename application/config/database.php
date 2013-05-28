@@ -33,11 +33,12 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
-ini_set("max_execution_time" , 300);
+ini_set("max_execution_time" , 2000);
 $active_group = "default";
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.1.204	';
+$db['default']['hostname'] = '192.168.1.204';
+#$db['default']['hostname'] = '27.254.33.64';
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';

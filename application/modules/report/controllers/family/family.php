@@ -34,6 +34,7 @@ class family extends Public_Controller
 			$value[$i]['title'] = $item['title'];
 			$value[$i]['nopass'] = $this->family->select(" SUM(EDIT)as SEDIT ")->where($value_condition)->get_one();
 			$value[$i]['pass'] = $this->family->select(" SUM(PASS)as SPASS ")->where($value_condition)->get_one();
+			$value[$i]['target'] = $this->family->select(" max(target)as target ")->where($value_condition)->get_one();
 			$value[$i]['total'] = $value[$i]['nopass'] + $value[$i]['pass'];
 			$value[$i]['p_nopass'] = $value[$i]['nopass'] > 0 ? ($value[$i]['nopass']/$value[$i]['total'])*100 : 0;
 			$value[$i]['p_pass'] =  $value[$i]['pass'] > 0 ? ($value[$i]['pass']/$value[$i]['total'])*100 : 0; 
@@ -65,6 +66,7 @@ class family extends Public_Controller
 			$value[$i]['title'] = $item['title'];
 			$value[$i]['nopass'] = $this->family->select(" SUM(EDIT)as SEDIT ")->where($value_condition)->get_one();
 			$value[$i]['pass'] = $this->family->select(" SUM(PASS)as SPASS ")->where($value_condition)->get_one();
+			$value[$i]['target'] = $this->family->select(" max(target)as target ")->where($value_condition)->get_one();
 			$value[$i]['total'] = $value[$i]['nopass'] + $value[$i]['pass'];
 			$value[$i]['p_nopass'] = $value[$i]['nopass'] > 0 ? ($value[$i]['nopass']/$value[$i]['total'])*100 : 0;
 			$value[$i]['p_pass'] =  $value[$i]['pass'] > 0 ? ($value[$i]['pass']/$value[$i]['total'])*100 : 0; 
@@ -93,6 +95,7 @@ class family extends Public_Controller
 			$value[$i]['title'] = $item['title'];
 			$value[$i]['nopass'] = $this->family->select(" SUM(EDIT)as SEDIT ")->where($value_condition)->get_one();
 			$value[$i]['pass'] = $this->family->select(" SUM(PASS)as SPASS ")->where($value_condition)->get_one();
+			$value[$i]['target'] = $this->family->select(" max(target)as target ")->where($value_condition)->get_one();
 			$value[$i]['total'] = $value[$i]['nopass'] + $value[$i]['pass'];
 			$value[$i]['p_nopass'] = $value[$i]['nopass'] > 0 ? ($value[$i]['nopass']/$value[$i]['total'])*100 : 0;
 			$value[$i]['p_pass'] =  $value[$i]['pass'] > 0 ? ($value[$i]['pass']/$value[$i]['total'])*100 : 0; 

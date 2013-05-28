@@ -3,7 +3,7 @@
 		$(".btn_delete").click(function(){
 			if(confirm('ลบรายการนี้ ? ')){
 				var hdid = $(this).closest('td').find('#hdid').val();
-				window.location='volunteer_inder/delete/'+hdid;
+				window.location='volunteer_inter/delete/'+hdid;
 			}
 		})
 	})
@@ -72,7 +72,7 @@
   	<? if(menu::perm($menu_id, 'edit')): ?>
   	<input type="button" name="button9" id="button9" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='volunteer_inter/form/<?=$item['id'];?>'" />
   	<? endif;?>
-  	<?php echo menu::perm($menu_id, 'add', 'volunteer_inter/delete/'.$item['id']); ?>
+  	<?php echo menu::perm($menu_id, 'delete', 'volunteer_inter/delete/'.$item['id']); ?>
     </td>
 </tr>
 <? $i++; } ?>

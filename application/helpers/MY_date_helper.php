@@ -57,7 +57,7 @@ if(!function_exists('get_year_option'))
 	{
 	    $data = array();
         $year = (date('Y') + 543) + $plus;
-        if(empty($start)) $start = 2500;
+        if(empty($start)) $start = 2535;
 	    if(!empty($table) and !empty($field_year))
         {
             if($min == TRUE and $max == TRUE)

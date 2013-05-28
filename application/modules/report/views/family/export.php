@@ -50,10 +50,10 @@ foreach($value as $item):
   	<?=number_format($item['p_pass'],2);?>
   </td>
   <td colspan="-1"  style="text-align:right;">
-  	
+  	<?=number_format($item['target'],2);?>
   </td>
   <td colspan="-1"  style="text-align:right;">
-  	
+  	<? echo $result = $item['p_pass']>$item['target'] ? 'ผ่าน':'ไม่ผ่าน';?>
   </td>
 </tr>
 <? endforeach;?>

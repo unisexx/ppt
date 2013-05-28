@@ -15,8 +15,8 @@
 </div>
 <div style='line-height:40px; text-align:right;'>
 	<a href='report/crime/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/crime/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></
-	หน่วย : ราย
+	<a href='report/crime/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
+	หน่วย : คดี
 </div>
 
 <table class='tbreport'>

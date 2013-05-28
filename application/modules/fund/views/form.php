@@ -11,7 +11,7 @@
 <tr>
   <th>ชื่อกองทุน<span class="Txt_red_12"> *</span></th>
   <td>
-  	<input name="fund_name" type="text" id="fund_name" value="<?=@$item['fund_name'];?>" />
+  	<input name="fund_name" type="text" id="fund_name" value="<?=@$item['fund_name'];?>" style="width:500px;" />
   </td>
 </tr>
 <tr>

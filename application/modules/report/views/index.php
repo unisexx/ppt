@@ -107,7 +107,7 @@ $(document).ready(function(){
             	<h4>เชิงประเด็น</h4>
                 <ul>
                 	<li><a href="report/population/summary_rate">แนวโน้มประชากรไทย</a></li>
-                	<li><a href="report/population/age_rate">ปัญหาด้านสุขภาพอนามัยในท้องถิ่น</a></li>
+                	<li><a href="report/population/age_rate">สถิติประชากรรายอายุ</a></li>
                     <li><a href="report/population/burden_rate">อัตราส่วนการเป็นภาระ</a></li>
                     <li><a href="#">คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</a></li>
                 </ul>

@@ -4,7 +4,6 @@
   <div id="searchBox">
     <form method="get" action="alien/alien_data" id="frm_im" name="frm_im">
 <?php echo form_dropdown('year', get_year_option(2550), @$_GET['year'], null, '-- ทุกปี --'); ?>
-        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?> 
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
    </div>

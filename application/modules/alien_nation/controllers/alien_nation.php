@@ -13,7 +13,7 @@ Class Alien_nation extends Public_Controller{
         if(!empty($_GET))
         {
             
-            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_NATION_YEAR = '.$_GET['year'];
+            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$_GET['year'];
         }
 		
         $sql = 'SELECT *
@@ -96,7 +96,7 @@ Class Alien_nation extends Public_Controller{
         if(!empty($_GET))
         {
             
-            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_NATION_YEAR = '.$_GET['year'];
+            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$_GET['year'];
         }
 		
         $sql = 'SELECT *

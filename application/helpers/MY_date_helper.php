@@ -76,9 +76,16 @@ if(!function_exists('get_year_option'))
                 foreach($rs as $item) $data[$item['YEAR']] = $item['YEAR'];
             }
             
+            $data = is_array($data) ? $data : array();
+            
+        }else{
+            for($year; $year >= $start; $year--)
+            {
+                $data[$year] = $year;
+            }
         }
         
-		return empty($data) ? array() : $data;
+		return $data;
 	}
 }
 

@@ -1,8 +1,7 @@
 <html>
 <head>
 <title>poor_print_report</title>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<link href="<?php echo site_url('themes/ppt/css/style.css'); ?>" rel="stylesheet">
+<link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -59,6 +58,6 @@ $result1 = $this->opt->get($sql1);
 
 
 </table>
-<script>window.print();</script>
+
 </body>
 </html>

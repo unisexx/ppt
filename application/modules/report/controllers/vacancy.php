@@ -48,4 +48,5 @@ class Vacancy extends Public_Controller
 		$this->load->view('vacancy/export', $data);
 		
 	}
+	
 }

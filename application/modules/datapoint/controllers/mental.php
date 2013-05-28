@@ -70,8 +70,8 @@ Class Mental extends Public_Controller{
 	function import() { $this->template->build('mental/import'); }
 		function upload()
 		{
-			print_r($_POST);
-			return false;
+			$year_data = $_POST['YEAR_DATA'];
+
 			$content = '';
 			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
@@ -84,11 +84,11 @@ Class Mental extends Public_Controller{
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
 			$data = $this->ReadData($uploaddir.$file_name);
 			
-			$_POST['YEAR'] = $data[1][1];
-
+			$_POST['YEAR'] = $year_data;
+			
 			if($_POST['YEAR'])
 			{
-				for($i=6; $i<count($data); $i++)
+				for($i=5; $i<count($data); $i++)
 				{
 					
 					if($data[$i][0])
@@ -124,30 +124,34 @@ Class Mental extends Public_Controller{
 								'AUTISM_NUMBER', 
 								'AUTISM_RATE');
 								
-							for($j=0; $j<count($post_title); $j++) { $_POST[$post_title[$j]] = number_format(($data[$i][($j+1)]*1), 0); }
+							$chk_value = 0;
+							for($j=0; $j<count($post_title); $j++) 
+								{
+									if($data[$i][$j+1] != '')
+									{
+										$_POST[$post_title[$j]] = number_format(($data[$i][($j+1)]*1), 0);
+										$chk_value++;
+									} else {
+										$_POST[$post_title[$j]] = '';
+									} 
+								}
 							
 							$total_row++;
 							
-							print_r($_POST);
-							echo '<BR>';
-							//$this->mental->save($_POST);
-							$content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล จังหวัด \"".$get_province."\" </div>";
+							if($chk_value!=0)
+							{
+								$this->mental->save($_POST);
+								$content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก : เพิ่มข้อมูล จังหวัด \"".$get_province."\" </div>";
+							}
 						}
 					}
 				}
 			} ELSE {
-				$content .= "<DIV STYLE='color:#A00'>ไม่สามารถดำเนินการบันทึกข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง</DIV>";
+				$content .= "<DIV STYLE='color:#A00'>ไม่สามารถดำเนินการบันทึกข้อมูลได้เนื่องจากผู้ใช้งานข้อมูลไม่ถูกต้อง</DIV>";
 			}
 			?></div><?
 					unlink($uploaddir.$file_name);
 					$data['content'] = $content;
-/*
-					if($total_row>0) logs('นำเข้าข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์  จำนวน '.number_format($total_row).' record');
-					?><BR>
-						<input type='button' value='กลับไปหน้าแรก' onclick='window.location="../../datapoint/mental/";'>
-						<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="../../datapoint/mental/import";'>
-					<?
-*/
 
 					$this->template->build('mental/upload.php', $data);
 		}

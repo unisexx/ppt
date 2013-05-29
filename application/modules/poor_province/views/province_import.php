@@ -14,6 +14,12 @@
     ?>
         <table border="1">
         <?php
+		
+					// Set output Encoding.
+			$excel->setOutputEncoding('utf-8');
+			
+			$excel->setUTFEncoder('iconv');
+			
             $excel->read('import_file/poor_province/'.$file_upload);
 
             $x1=7;
@@ -27,25 +33,28 @@
 				{
 				
 				
-                $year = isset($excel->sheets[0]['cells'][6][5]) ? $excel->sheets[0]['cells'][6][5] : '';
-				//$province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
-                $data1 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
-				$data2 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
-				$data3 = isset($excel->sheets[0]['cells'][$x1][7]) ? $excel->sheets[0]['cells'][$x1][7] : '';
+                $year = isset($excel->sheets[0]['cells'][5][4]) ? $excel->sheets[0]['cells'][5][4] : '';
+				$sex = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
+				$province = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+                $data1 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
+				$data2 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
+				$data3 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
 
-				
-				
+
 						$data = array(
 						  
 							   "poor_province_year" => $year ,
-							   "poor_province_aumphur" => "1" ,
-							   "poor_province_province" => $i,
+							   "poor_province_sex" => $sex ,
+							   "poor_province_province" => $province,
 							   "poor_province_line" => $data1,
 							   "poor_province_percent" => $data2,
 							   "poor_province_qty" => $data3
 							);
 							
 							$this->opt->save($data);
+							
+
+				
 				
 
 				}

@@ -25,6 +25,7 @@
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
+  <th>เพศ</th>
   <th>ปี</th>
   <th>จังหวัด</th>
   <th>เส้นความยากจน (บาท/คน/เดือน)</th>
@@ -37,30 +38,15 @@
 
 <tr>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
+   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_sex']; ?></a></td>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_year']; ?></a></td>
-  <td>
-  
-  <?php 
-  
-
-/*  $sql = 'select * from provinces where id='.$item['poor_province_province'];
-  $result1 = $this->opt->get($sql);
-  foreach($result1 as $key1 => $item1)
-  {
-	  echo $item1['province'];
-  }*/
-  
-   echo $item['province'];
-   
-  ?>
-  
-  </td>
-  <td><?php echo @number_format($item['poor_province_line']); ?></td>
-  <td><?php echo @number_format($item['poor_province_percent']); ?></td>
-  <td><?php echo @number_format($item['poor_province_qty']); ?></td>
+  <td> <?php  echo $item['poor_province_province']; ?> </td>
+  <td><?php echo @number_format($item['poor_province_line'],2); ?></td>
+  <td><?php echo @number_format($item['poor_province_percent'],2); ?></td>
+  <td><?php echo @number_format($item['poor_province_qty'],2); ?></td>
   <td>
 
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip" />
+             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('poor_province/province_form/'.$item['id']); ?>'" />
             <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick="if(confirm('ยืนยันการลบ')){window.location='<?php echo site_url('poor_province/province_delete/'.$item['id']); ?>';}" />
     
     

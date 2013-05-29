@@ -18,20 +18,12 @@ Class Poor_province extends Public_Controller{
             if(!empty($_GET['amphur_id'])) $where .= ' AND POOL_PROVINCE.POOR_PROVINCE_AUMPHUR = '.$_GET['amphur_id'];
         }
         $sql = 'SELECT
-POOL_PROVINCE.ID,
-POOL_PROVINCE.POOR_PROVINCE_YEAR,
-POOL_PROVINCE.POOR_PROVINCE_AUMPHUR,
-POOL_PROVINCE.POOR_PROVINCE_PROVINCE,
-POOL_PROVINCE.POOR_PROVINCE_LINE,
-POOL_PROVINCE.POOR_PROVINCE_PERCENT,
-POOL_PROVINCE.POOR_PROVINCE_QTY,
-PROVINCES.PROVINCE
+*
 FROM
 POOL_PROVINCE
-INNER JOIN PROVINCES ON POOL_PROVINCE.POOR_PROVINCE_PROVINCE = PROVINCES.ID
 		WHERE 1=1 '.$where.' 
         ORDER BY ID ASC';
-        // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0
+		
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');

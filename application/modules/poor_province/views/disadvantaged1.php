@@ -3,7 +3,6 @@
   <div id="searchBox">
     <form method="get" action="poor_province/poor_report">
  <?php echo form_dropdown('year', get_year_option(2543), @$_GET['year'], null, '-- ทุกปี --'); ?>
-        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
@@ -15,14 +14,11 @@
 
   <?php 
   
-        if(isset($_GET['province_id'])!="")
+        if(isset($_GET['year'])!="")
         {
-			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
-			  $result0 = $this->opt->get($sql0);
-			  foreach($result0 as $key0 => $item0)
-			  {
-				  echo $item0['province'];
-			  }
+
+				  echo $_GET['year'];
+			  
 		}
 		else
 		{
@@ -40,6 +36,7 @@
 
 <table class="tbreport">
 <tr>
+<th>เพศ</th>
 <th>ปี</th>
 <th>เส้นความยากจน(บาท/คน/เดือน)</th>
 <th>สัดส่วนคนจน(ร้อยละ)</th>
@@ -53,12 +50,12 @@
  {
 		if($_GET['year']!="")
 		{
-			$sql1 = "select distinct(poor_province_year) as poor_province_year from pool_province where poor_province_year='".$_GET['year']."'";
+			$sql1 = "select distinct(poor_province_year) as poor_province_year,poor_province_sex from pool_province where poor_province_year='".$_GET['year']."'";
 		}
 	}
 	else
 	{
-		$sql1 = 'select distinct(poor_province_year) as poor_province_year from pool_province order by poor_province_year desc';
+		$sql1 = 'select distinct(poor_province_year) as poor_province_year,poor_province_sex from pool_province order by poor_province_year desc';
 	}
 
 $result1 = $this->opt->get($sql1);
@@ -66,22 +63,9 @@ $result1 = $this->opt->get($sql1);
  foreach($result1 as $key1 => $item1)
  {
 	 
-	 
+	 	
 		
-if(!empty($_GET['province_id']))	
-{ 
-		if($_GET['province_id']!="")
-		{
-			$where = " and poor_province_province=".$_GET['province_id'];
-		}
-	}
-	else
-	{
-		$where = "";
-	}
-			
-		
-		$sql2 = "SELECT sum(poor_province_line) as line,sum(poor_province_percent) as percents,sum(poor_province_qty) as qty from pool_province where poor_province_year = '".$item1['poor_province_year']."' ".$where." order by POOR_PROVINCE_YEAR DESC";
+		$sql2 = "SELECT sum(poor_province_line) as line,sum(poor_province_percent) as percents,sum(poor_province_qty) as qty from pool_province where poor_province_year = '".$item1['poor_province_year']."' and poor_province_sex='".$item1['poor_province_sex']."' order by POOR_PROVINCE_YEAR DESC";
 		
 		
 		
@@ -94,10 +78,11 @@ if(!empty($_GET['province_id']))
 ?>
 
 <tr>
+<td class="topic"><?php echo $item1['poor_province_sex']; ?></td>
 <td class="topic"><?php echo $item1['poor_province_year']; ?></td>
-<td><?php echo @number_format($item2['line']); ?></td>
-<td><?php echo @number_format($item2['percents']); ?></td>
-<td><?php echo @number_format($item2['qty']); ?></td>
+<td><?php echo @number_format($item2['line'],2); ?></td>
+<td><?php echo @number_format($item2['percents'],2); ?></td>
+<td><?php echo @number_format($item2['qty'],2); ?></td>
 </tr>
 
 <?php 

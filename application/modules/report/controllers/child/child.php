@@ -9,6 +9,7 @@ class Child extends Public_Controller
 		$this->load->model('province_model','province');
 		$this->load->model('amphur_model','amphur');
 		$this->load->model('district_model','district');
+		$this->load->model('population_model','population');
 	}
 	
 	public function drop()
@@ -25,7 +26,7 @@ class Child extends Public_Controller
 		//$data['district'] = (!empty($_GET['district_id'])) ? '':$this->district->get_one("distict_name","id",@$_GET['district_id']);
 		
 		$sql= "	
-			SELECT  year,ages,sum(ages) as cnt FROM
+			SELECT  year,ages,count(ages) as cnt FROM
 				(
 						SELECT  id,year,to_char(m_birthday,'yyyy-mm-dd'),
 										to_date(concat(substr(to_char(m_birthday,'yyyy-mm-dd'),0,4)-543,substr(to_char(m_birthday,'yyyy-mm-dd'),5)),'yyyy-mm-dd') ,
@@ -39,8 +40,12 @@ class Child extends Public_Controller
 			ORDER BY year,ages";
 		
 		$result=$this->pregnant->limit(1000)->get($sql);
-		$sum1=0;$sum2=0;$sum3=0;
+		$sum1=0;$sum2=0;$sum3=0;$tmpyear =0;
 		foreach($result as $item){
+			if($tmpyear==0 || $tmpyear < $item['year'])
+			{
+				$sum1=0;$sum2=0;$sum3=0;$tmpyear =$item['year'];
+			}
 			if($item['ages']<15){
 				$sum1=$sum1+$item['cnt'];
 			}
@@ -53,7 +58,24 @@ class Child extends Public_Controller
 				$sum3=$sum3+$item['cnt'];
 			}
 			$val[$item['year']]['more']=$sum3;
-		}	
+			
+			////Girl <15year from pop
+			$condition = '';
+			$condition .= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : '';
+			$condition .= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : '';
+			$condition .= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] : '';
+			$sql = " SELECT SUM(NUNIT) FROM POPULATION PP LEFT JOIN POPULATION_DETAIL PPD ON PP.ID = PPD.PID ";
+			$sql .= " WHERE YEAR_DATA=".$item['year']." AND (AGE_RANGE_CODE >=103 AND AGE_RANGE_CODE<=117 ) ";
+			$sql .= $condition;
+			$val[$item['year']]['all_lower15'] = $this->db->getone($sql);	
+			
+			///Girl 15 - 20 from pop
+			$sql = " SELECT SUM(NUNIT) FROM POPULATION PP LEFT JOIN POPULATION_DETAIL PPD ON PP.ID = PPD.PID ";
+			$sql .= " WHERE YEAR_DATA=".$item['year']." AND (AGE_RANGE_CODE >=118 AND AGE_RANGE_CODE<=123 ) ";
+			$sql .= $condition;
+			$val[$item['year']]['all_equal'] = $this->db->getone($sql);			
+		}		
+	
 	$data['val']=$val;		
 	if($export=="export"){
 			    $filename= "pregnant_data_".date("Y-m-d_H_i_s").".xls";

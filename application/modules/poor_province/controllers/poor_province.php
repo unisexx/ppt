@@ -14,8 +14,6 @@ Class Poor_province extends Public_Controller{
         {
             
             if(!empty($_GET['year'])) $where .= ' AND POOL_PROVINCE."POOR_PROVINCE_YEAR" = '.$_GET['year'];
-            if(!empty($_GET['province_id'])) $where .= ' AND POOL_PROVINCE.POOR_PROVINCE_PROVINCE = '.$_GET['province_id'];
-            if(!empty($_GET['amphur_id'])) $where .= ' AND POOL_PROVINCE.POOR_PROVINCE_AUMPHUR = '.$_GET['amphur_id'];
         }
         $sql = 'SELECT
 *
@@ -99,7 +97,6 @@ POOL_PROVINCE
         {
             
             if(!empty($_GET['year'])) $where .= ' AND POOR_PROVINCE_YEAR = '.$_GET['year'];
-            if(!empty($_GET['province_id'])) $where .= ' AND POOR_PROVINCE_PROVINCE = '.$_GET['province_id'];
         }
         $sql = 'SELECT
 		*

@@ -1,7 +1,4 @@
-<?
-	$m['id'] = 86; 
-?>
-
+<? $m['id'] = 86; ?>
 <?=menu::source($m['id'], 'import_file/datapoint/mental/example.xls');?>
 
 

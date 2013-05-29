@@ -10,8 +10,8 @@
 <BR>
 <span style='font-weight:bold; line-height:30px; margin-top:40px;'>UPLOAD COMPLETE</span>
 <div style=''>
-	<input type='button' value='กลับไปหน้าแรก' onclick='window.location="elder/inmates";'>
-	<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="elder/inmates/import";'>
+	<input type='button' value='กลับไปหน้าแรก' onclick='window.location="datapoint/mental";'>
+	<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="datapoint/mental/import";'>
 </div>
 
 

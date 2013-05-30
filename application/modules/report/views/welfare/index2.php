@@ -10,7 +10,7 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$list[0]['name'])?'สถาบัน '.$list[0]['name']:'ทุกสถาบัน';?></span>, 
+	<span style='color:#F33;'><?=(@$main_list[$_GET['WLIST']])?'สถาบัน '.$main_list[$_GET['WLIST']]:'ทุกสถาบัน';?></span>, 
 	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
 </div>
 
@@ -32,6 +32,33 @@
 		<th style='width:200px;'>สะสม</th>
 	</tr>
 	<?
+	$condition = '';
+	$condition = (@$_GET['YEAR'])?" AND YEAR LIKE '".$_GET['YEAR']."'":'';
+	for($i=0; $i<count($rs); $i++)
+	{
+		$wlist_dtl = $this->welfare_list->get_row($rs[$i]);
+			$wdata_list = $this->welfare->where("WLIST_ID LIKE '".$rs[$i]."'".$condition)->get();
+			
+			for($j=0; $j<count($wdata_list); $j++)
+			{
+				?>
+				<tr>
+					<td>
+						<?=$wlist_dtl['name'];?>
+						<?=(@$_GET['YEAR'])?'':' (ปี พ.ศ. '.$wdata_list[$j]['year'].')';?>
+						
+					</td>
+					<td><?=number_format($wdata_list[$j]['target'], 0);?></td>
+					<td><?=number_format($wdata_list[$j]['balance'], 0);?></td>
+					<td><?=number_format($wdata_list[$j]['admission'], 0);?></td>
+					<td><?=number_format($wdata_list[$j]['distribution'], 0);?></td>
+					<td><?=number_format($wdata_list[$j]['remain'], 0);?></td>
+					<td><?=number_format($wdata_list[$j]['build'], 0);?></td>
+				</tr>
+				<?
+			}
+	}
+	/*
 	if((@$main_list[@$_GET['WLIST']]) == NULL) { $wlist = $main_list; }
 	else { $wlist[] = $main_list[$_GET['WLIST']]; }
 	
@@ -114,6 +141,7 @@
 		<?
 		}
 	}
+	*/
 	?>
 	<tr class="total">
 		<td>รวม</td>

@@ -1,3 +1,13 @@
+<?
+$test_data = $this->welfare->limit(500)->get();
+$test_data_ = 0;
+for($i=0; $i<count($test_data); $i++)
+{
+	$test_data_ += $test_data[$i]['build'];
+}
+echo $test_data_;
+?>
+<HR>
 <h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
@@ -10,7 +20,7 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$_GET['WLIST'])?'สถาบัน '.$list[0]['name']:'ทุกสถาบัน';?></span>, 
+	<span style='color:#F33;'><?=(@$_GET['WLIST'] || @$_GET['WLIST'] == 0)?'สถาบัน '.$main_list[0]:'ทุกสถาบัน';?></span>, 
 	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
 </div>
 
@@ -32,49 +42,64 @@
 		<th style='width:200px;'>สะสม</th>
 	</tr>
 	<?
-	if((@$main_list[@$_GET['WLIST']]) == NULL) { $wlist = $main_list; }
-	else { $wlist[] = $main_list[$_GET['WLIST']]; }
-	
-	$total['target'] = $total['balance'] = $total['admission'] = $total['distribution'] = $total['remain'] = $total['build'] = 0;
-	for($i=0; $i<count($wlist); $i++)
-	{
-		$res_['target'] = $res_['balance'] = $res_['admission'] = $res_['distribution'] = $res_['remain'] = $res_['build'] = 0;
-		$res_list = $this->welfare_list->where("NAME LIKE '%".$wlist[$i]."%'")->limit(1000)->get();
-		for($j=0; $j<count($res_list); $j++)
+		$total = array(
+			"target"=>0,
+			"balance"=>0,
+			"admission"=>0,
+			"distribution"=>0,
+			"remain"=>0,
+			"build"=>0
+		);
+		if(@$_GET['WLIST'] == '')
 		{
-			$res_qry = "SELECT * FROM WELFARE_DATA WHERE WLIST_ID LIKE '".$res_list[$j]['id']."'";
-			$res_qry .= ($ylist)?"AND YEAR LIKE '".$ylist."'":'';
-			$res_tmp = $this->welfare->limit(1000)->get($res_qry);
-			
-			for($k=0; $k<count($res_tmp); $k++)
-			{
-				$res_['target'] += $res_tmp[$k]['target'];
-				$res_['balance'] += $res_tmp[$k]['balance'];
-				$res_['admission'] += $res_tmp[$k]['admission'];
-				$res_['distribution'] += $res_tmp[$k]['distribution'];
-				$res_['remain'] += $res_tmp[$k]['remain'];
-				$res_['build'] += $res_tmp[$k]['build'];
-			}
+			unset($_GET['WLIST']);
+			$chk_wlist = 0;
+		} else {
+			$chk_wlist = 1;
 		}
-
-		$total['target'] += @$res_['target'];
-		$total['balance'] += @$res_['balance'];
-		$total['admission'] += @$res_['admission'];
-		$total['distribution'] += @$res_['distribution'];
-		$total['remain'] += @$res_['remain'];
-		$total['build'] += @$res_['build'];
-		?>
-		<tr>
-			<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$wlist[$i];?></a></td>
-			<td><?=number_format($res_['target']);?></td>
-			<td><?=number_format($res_['balance']);?></td>
-			<td><?=number_format($res_['admission']);?></td>
-			<td><?=number_format($res_['distribution']);?></td>
-			<td><?=number_format($res_['remain']);?></td>
-			<td><?=number_format($res_['build']);?></td>
-		</tr>
-		<?
-	}
+		
+		if($chk_wlist == 1)
+		{
+			$i = $_GET['WLIST'];
+			 	$total['target'] += @$rs[$i]['target'];
+			 	$total['balance'] += @$rs[$i]['balance'];
+			 	$total['admission'] += @$rs[$i]['admission'];
+			 	$total['distribution'] += @$rs[$i]['distribution'];
+			 	$total['remain'] += @$rs[$i]['remain'];
+			 	$total['build'] += @$rs[$i]['build'];
+			 	?>
+			 	<tr>
+					<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$main_list[$i];?></a></td>
+			 		<td><?=number_format($rs[$i]['target'], 0);?></td>
+			 		<td><?=number_format($rs[$i]['balance'], 0);?></td>
+			 		<td><?=number_format($rs[$i]['admission'], 0);?></td>
+			 		<td><?=number_format($rs[$i]['distribution'], 0);?></td>
+			 		<td><?=number_format($rs[$i]['remain'], 0);?></td>
+			 		<td><?=number_format($rs[$i]['build'], 0);?></td>
+			 	</tr>
+			 	<?
+		} ELSE {
+			 for($i=0; $i<count($main_list); $i++)
+			 {
+			 	$total['target'] += @$rs[$i]['target'];
+			 	$total['balance'] += @$rs[$i]['balance'];
+			 	$total['admission'] += @$rs[$i]['admission'];
+			 	$total['distribution'] += @$rs[$i]['distribution'];
+			 	$total['remain'] += @$rs[$i]['remain'];
+			 	$total['build'] += @$rs[$i]['build'];
+			 	?>
+			 	<tr>
+					<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$main_list[$i];?></a></td>
+			 		<td><?=number_format(@$rs[$i]['target'], 0);?></td>
+			 		<td><?=number_format(@$rs[$i]['balance'], 0);?></td>
+			 		<td><?=number_format(@$rs[$i]['admission'], 0);?></td>
+			 		<td><?=number_format(@$rs[$i]['distribution'], 0);?></td>
+			 		<td><?=number_format(@$rs[$i]['remain'], 0);?></td>
+			 		<td><?=number_format(@$rs[$i]['build'], 0);?></td>
+			 	</tr>
+			 	<?
+			 } 
+		}
 	?>
 	
 	<tr class="total">

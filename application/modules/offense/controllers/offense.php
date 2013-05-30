@@ -19,7 +19,6 @@ Class Offense extends Public_Controller{
             
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
             if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
-            if(!empty($_GET['amphur_id'])) $where .= ' AND OFFENSES.OFFENSE_AUMPHUR = '.$_GET['amphur_id'];
         }
         $sql = 'SELECT OFFENSES.*, PROVINCES.PROVINCE
         FROM OFFENSES
@@ -100,7 +99,6 @@ Class Offense extends Public_Controller{
             
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
             if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
-            if(!empty($_GET['amphur_id'])) $where .= ' AND OFFENSES.OFFENSE_AUMPHUR = '.$_GET['amphur_id'];
         }
         $sql = 'SELECT
 		*
@@ -115,17 +113,54 @@ Class Offense extends Public_Controller{
 		$this->template->build('child2', $data);	
 	}
 	
-	function offense_export()
+	function offense_export($year=null,$province=null,$type=null)
 	{
+		
+		$where = '';
+
+            
+        if(!empty($year)) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
+        if(!empty($province)) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$province;
+      
+        $sql = 'SELECT
+		*
+		FROM
+		OFFENSES
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
+		
+		$data['year'] = $year;
+		$data['province'] = $province;
+		$data['type'] = $type;
+		
+		$data['result'] = $this->opt->get($sql);
 	
-		$this->load->view('offense_export');
+		$this->load->view('offense_export',$data);
 	}
 	
 
-	function offense_print()
+	function offense_print($year=null,$province=null,$type=null)
 	{
 		
-		$this->load->view('offense_print');	
+		$where = '';
+
+            
+        if(!empty($year)) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
+        if(!empty($province)) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$province;
+      
+        $sql = 'SELECT
+		*
+		FROM
+		OFFENSES
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
+		
+		$data['year'] = $year;
+		$data['province'] = $province;
+		$data['type'] = $type;
+		
+		$data['result'] = $this->opt->get($sql);
+		$this->load->view('offense_print',$data);	
 	}
 
 

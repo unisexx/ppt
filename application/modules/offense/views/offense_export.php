@@ -8,7 +8,7 @@
 		$filename= "offense_summary_data_".date("Y-m-d_H_i_s").".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
 
-          $this->load->model('poor_province_model', 'opt');
+/*          $this->load->model('poor_province_model', 'opt');
 		  $where = '';
 		  
 			$sql1 = 'SELECT
@@ -18,7 +18,7 @@
 			WHERE 1=1 '.$where.' 
 			ORDER BY ID ASC';
 	
-			  $result = $this->opt->get($sql1);
+			  $result = $this->opt->get($sql1);*/
 
 
 				
@@ -52,45 +52,173 @@
 
 <div align="center"><h3>รายงาน เด็กและเยาวชนในสถานพินิจฯ</h3></div>
 
+
+<div align="center">
+
+<h3>
+
+ปี <label><?php echo @$year; ?>
+
+</label> จังหวัด <label>
+
+  <?php 
+  
+   if(!empty($province))
+   {  
+   
+		if($province!="")
+		{
+		  $sql = 'select * from provinces where id='.$province;
+		  $result1 = $this->opt->get($sql);
+			  foreach($result1 as $key1 => $item1)
+			  {
+				  echo $item1['province'];
+			  }
+		  
+			 }
+  		 }
+		else
+	   {
+			echo "ทุกจังหวัด";   
+	   }
+	   
+	 echo "</label>";  
+	   
+	 if(@$type!="")
+	 {
+		  $this->load->model('offense_type_model', 'otm');
+		  
+		  
+		  $sql = 'select * from offense_type where id='.$type;
+		  $result1 = $this->otm->get($sql);
+			  foreach($result1 as $key1 => $item1)
+			  {
+				  echo "   ประเภท : <label>".$item1['offense_type_name']."</label>";
+			  }
+	 }
+  ?>  
+
+</h3>
+
+</div>
+
+
 <table class="tbreport">
 <tr>
 <th>ประเภทฐานความผิด</th>
 <th>จำนวน</th>
 </tr>
+
+<?php
+
+if(@$type){
+
+?>
+
+<?php if(@$type==1){ ?>
 <tr>
 <td class="topic">ทรัพย์</td>
 <td><?php echo @number_format($all_property); ?></td>
 </tr>
+<?php } ?>
+
+<?php if(@$type==2){ ?>
 <tr>
   <td class="topic">ชีวิตและร่างกาย</td>
   <td><?php echo @number_format($all_body); ?></td>
   </tr>
+
+<?php } ?>
+
+<?php if(@$type==3){ ?>
 <tr>
-  <td>เพศ</td>
+  <td class="topic">เพศ</td>
   <td><?php echo @number_format($all_sex); ?></td>
   </tr>
+<?php } ?>
+
+<?php if(@$type==4){ ?>
 <tr>
-  <td>ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
+  <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
   <td><?php echo @number_format($all_dominance); ?></td>
   </tr>
+<?php } ?>
+
+<?php if(@$type==5){ ?>
 <tr>
-  <td>ยาเสพติดให้โทษ</td>
+  <td class="topic">ยาเสพติดให้โทษ</td>
   <td><?php echo @number_format($all_drug); ?></td>
   </tr>
+<?php } ?>
+
+<?php if(@$type==6){ ?>
 <tr>
-  <td>อาวุธและวัตถุระเบิด</td>
+  <td class="topic">อาวุธและวัตถุระเบิด</td>
   <td><?php echo @number_format($all_weapon); ?></td>
   </tr>
-  
+<?php } ?>
+
+<?php if(@$type==7){ ?>  
  <tr>
-  <td>อื่น ๆ</td>
+  <td class="topic">อื่น ๆ</td>
   <td><?php echo @number_format($all_etc); ?></td>
   </tr>
-   
+ <?php 
+ 
+ 		 
+ 
+ 	} 
+	
+}
+else
+{
+ 
+ 
+  ?>  
+
+<tr>
+<td class="topic">ทรัพย์</td>
+<td><?php echo @number_format($all_property); ?></td>
+</tr>
+
+<tr>
+  <td class="topic">ชีวิตและร่างกาย</td>
+  <td><?php echo @number_format($all_body); ?></td>
+  </tr>
+
+<tr>
+  <td class="topic">เพศ</td>
+  <td><?php echo @number_format($all_sex); ?></td>
+  </tr>
+
+<tr>
+  <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
+  <td><?php echo @number_format($all_dominance); ?></td>
+  </tr>
+
+<tr>
+  <td class="topic">ยาเสพติดให้โทษ</td>
+  <td><?php echo @number_format($all_drug); ?></td>
+  </tr>
+
+<tr>
+  <td class="topic">อาวุธและวัตถุระเบิด</td>
+  <td><?php echo @number_format($all_weapon); ?></td>
+  </tr>
+
+ <tr>
+  <td class="topic">อื่น ๆ</td>
+  <td><?php echo @number_format($all_etc); ?></td>
+  </tr>
+ 
 <tr class="total">
   <td>รวม</td>
   <td><?php echo @number_format($offense_all); ?></td>
   </tr>
+
+
+
+<?php } ?>
 </table>
 </body>
 </html>

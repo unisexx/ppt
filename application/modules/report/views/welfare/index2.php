@@ -32,6 +32,7 @@
 		<th style='width:200px;'>สะสม</th>
 	</tr>
 	<?
+	$total = array('target'=>0,'balance'=>0,'admission'=>0,'distribution'=>0,'remain'=>0, 'build'=>0);
 	$condition = '';
 	$condition = (@$_GET['YEAR'])?" AND YEAR LIKE '".$_GET['YEAR']."'":'';
 	for($i=0; $i<count($rs); $i++)
@@ -41,12 +42,17 @@
 			
 			for($j=0; $j<count($wdata_list); $j++)
 			{
+				$total['target'] += @$wdata_list[$j]['target'];
+				$total['balance'] += @$wdata_list[$j]['balance'];
+				$total['admission'] += @$wdata_list[$j]['admission'];
+				$total['distribution'] += @$wdata_list[$j]['distribution'];
+				$total['remain'] += @$wdata_list[$j]['remain'];
+				$total['build'] += @$wdata_list[$j]['build'];
 				?>
 				<tr>
 					<td>
 						<?=$wlist_dtl['name'];?>
 						<?=(@$_GET['YEAR'])?'':' (ปี พ.ศ. '.$wdata_list[$j]['year'].')';?>
-						
 					</td>
 					<td><?=number_format($wdata_list[$j]['target'], 0);?></td>
 					<td><?=number_format($wdata_list[$j]['balance'], 0);?></td>

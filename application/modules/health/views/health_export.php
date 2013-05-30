@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>รายงาน การให้บริการหลักประกันสุขภาพ</title>
-<link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>themes/ppt/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -74,7 +74,7 @@
 		$filename= "health_summary_data_".date("Y-m-d_H_i_s").".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
 		
-$this->load->model('health_model', 'opt');
+/*$this->load->model('health_model', 'opt');
  
 if(isset($_GET['year']))
 {
@@ -86,9 +86,9 @@ else
 }
 
 
-$result1 = $this->opt->get($sql1);
+$result1 = $this->opt->get($sql1);*/
 
- foreach($result1 as $key1 => $item)
+ foreach($result as $key1 => $item)
  {
 	 
 

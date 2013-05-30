@@ -111,16 +111,49 @@ Class Health extends Public_Controller{
 		$this->template->build('disadvantaged1', $data);	
 	}
 	
-	function health_export()
+	function health_export($year=null)
 	{
 		
-		$this->load->view('health_export');
+		
+		$where = '';
+
+            
+        if(!empty($year)) $where .= ' AND HEALTH."HEALTH_YEAR" = '.$year;
+      
+        $sql = 'SELECT
+		*
+		FROM
+		HEALTH
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
+		
+		$data['year'] = $year;
+		
+		$data['result'] = $this->opt->get($sql);
+		
+		$this->load->view('health_export',$data);
 	}
 	
-	function health_print()
+	function health_print($year=null)
 	{
+		$where = '';
+
+            
+        if(!empty($year)) $where .= ' AND HEALTH."HEALTH_YEAR" = '.$year;
+      
+        $sql = 'SELECT
+		*
+		FROM
+		HEALTH
+		WHERE 1=1 '.$where.' 
+        ORDER BY ID ASC';
 		
-		$this->load->view('health_print');
+		$data['year'] = $year;
+		
+		$data['result_ex'] = $this->opt->get($sql);		
+		
+		
+		$this->load->view('health_print',$data);
 		//$this->template->build('poor_print');	
 	}
 

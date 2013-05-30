@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>health_print_report</title>
-<link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>themes/ppt/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -71,7 +71,7 @@
 </tr>
 
 <?php 
-$this->load->model('health_model', 'opt');
+/*$this->load->model('health_model', 'opt');
  
 if(isset($_GET['year']))
 {
@@ -82,9 +82,9 @@ else
 	$sql1 = 'select * from health order by id desc';
 }
 
-$result1 = $this->opt->get($sql1);
+$result1 = $this->opt->get($sql1);*/
 
- foreach($result1 as $key1 => $item)
+ foreach($result_ex as $key1 => $item)
  {
 	 
 	

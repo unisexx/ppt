@@ -3,7 +3,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="health/health_data" id="frm_im" name="frm_im">
-<?php echo form_dropdown('year', get_year_option(2550), @$_GET['year'], null, '-- ทุกปี --'); ?>
+<?php echo form_dropdown('year', get_year_option(2555, null, 'HEALTH', 'HEALTH_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
  
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>

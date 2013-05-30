@@ -16,10 +16,10 @@ $(document).ready(function() {
     var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_2') : site_url('dashboard/chart_2/?test=true'); ?>";
     $.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
     
-    var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_3') : site_url('dashboard/chart_3/?test=true'); ?>";
-    $.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
+    //var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_3') : site_url('dashboard/chart_3/?test=true'); ?>";
+    //$.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
     
-    var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_4') : site_url('dashboard/chart_4/?test=true'); ?>";
-    $.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
+    //var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_4') : site_url('dashboard/chart_4/?test=true'); ?>";
+    //$.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
 });
 </script>

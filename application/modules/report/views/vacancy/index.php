@@ -1,4 +1,4 @@
-<h2>รายงาน ตำแหน่งคนว่างงาน</h2>
+<h2>รายงาน ตำแหน่งงานว่าง</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
@@ -10,14 +10,13 @@
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนตำแหน่งคนว่างงาน(ต่อ 100,000 คน) แสดง จังหวัด  
 	<span style='color:#F33;'>
-		<?=(@$province_)?'สถานีจังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
+		<?=(@$province_)?'จังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
 	<a href='import_file/vacancy/define.docx' target='_blank'><img src="themes/ppt/images/define.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 	<a href='report/vacancy/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 	<a href='report/vacancy/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
-	หน่วย : ราย
 </div>
 
 <table class='tbreport'>

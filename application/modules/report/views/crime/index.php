@@ -10,7 +10,7 @@
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานการกระทำความผิดที่ละเมิดกฏหมายทางอาญา  
 	<span style='color:#F33;'>
-		<?=(@$set_province[$_GET['province']])?'สถานีจังหวัด '.$set_province[$_GET['province']]:'ทุกสถานี';?>
+		<?=(@$set_province[$_GET['province']])?'สถานีตำรวจจังหวัด '.$set_province[$_GET['province']]:'ทุกสถานีตำรวจ';?>
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>

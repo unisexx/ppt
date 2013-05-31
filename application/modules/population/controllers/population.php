@@ -221,7 +221,7 @@ Class population extends Public_Controller{
 		$file_list = scandir($uploaddir);
 		$data['file_list'] = $file_list;
 		foreach($file_list as $file){
-			$lfile[] = iconv('windows-874','utf-8',$file);
+			$lfile[] = iconv('windows-874','utf-8',$file);			
 		}		
 		
 		for($i=2;$i<count($lfile);$i++){
@@ -230,7 +230,8 @@ Class population extends Public_Controller{
 			$finfo = explode('.',$file);
 			$province_id = $this->province->select('id')->where(" province='".iconv('utf-8','tis-620',$finfo[0])."'")->get_one();
 			if($province_id<1)echo "<span style=\"color:red\">";
-			echo iconv('utf-8','tis-620',$finfo[0])."::".$province_id.":::".iconv('utf-8','tis-620',$lfile[$i])."<a href=\"../do_import/".$year_data."/".iconv('utf-8','tis-620',$lfile[$i])."\" target=\"_blank\">Import</a><br>";
+			
+			echo iconv('utf-8','windows-874',$finfo[0])."::".$province_id.":::".iconv('utf-8','windows-874',$lfile[$i])."<a href=\"../do_import/".$year_data."/".iconv('utf-8','tis-620',$lfile[$i])."\" target=\"_blank\">Import</a><br>";
 			if($province_id<1)echo "</span>";		
 			
 			$this->do_import($year_data, $lfile[$i]);				
@@ -261,7 +262,7 @@ Class population extends Public_Controller{
 	}	
 	
 	function do_import($year_data,$file_name){
-		$this->db->debug = true;
+		//$this->db->debug = true;
 		if($file_name!='' && $year_data !=''){
 			/*--end--*/
 			set_time_limit(0);
@@ -283,7 +284,7 @@ Class population extends Public_Controller{
 				if($item['value_length']==1712){
 					$chars = str_split($item['value'] , 8);
 					$item['title']."<br>";
-					if (strpos($item['title'], 'จังหวัด')!==false||strpos($item['title'], 'กรุงเทพมหานคร')!==false) {
+					if (strpos($item['title'], 'จังหวัด')!==false) {
 						$province_name = str_replace('จังหวัด', '', $item['title']);
 						$province = $this->province->where(" province='".iconv('utf-8','tis-620',$province_name)."'")->get_row();						
 						$province_id = @$province['id'];	
@@ -297,9 +298,9 @@ Class population extends Public_Controller{
 						}						
 						$val['PROVINCE_ID'] = $province_id;
 						$val['PROVINCE_NAME'] = $province_name;
-						$val['AMPHUR_ID'] = '';
+						$val['AMPHUR_ID'] = '0';
 						$val['AMPHUR_NAME'] = '';
-						$val['DISTRICT_ID'] = '';
+						$val['DISTRICT_ID'] = '0';
 						$val['DISTRICT_NAME'] = '';			
 						$val['YEAR_DATA'] = $_POST['year_data'];					
 						$val['LUNAR_CAL_MALE'] = (int)$chars[204];
@@ -323,14 +324,14 @@ Class population extends Public_Controller{
 						}	
 						}				
 					}
-					else if (strpos($item['title'], 'อำเภอ')!==false || strpos($item['title'], 'เขต')!==false) {
-						$amphur_name = strpos($item['title'], 'อำเภอ')!==false ? str_replace('อำเภอ', '', $item['title']) : $item['title'];
-						$amphur_name = strpos($item['title'], 'เขต')!==false ? str_replace('เขต', '', $item['title']) : $item['title'];
+					else if (strpos($item['title'], 'อำเภอ')!==false) {
+						$amphur_name =  str_replace('อำเภอ', '', $item['title']) ;
+						$amphur_name = str_replace('เขต', '', $amphur_name);
 						$amphur = $this->amphur->where(" province_id=".$province_id." AND AMPHUR_NAME='".iconv('utf-8','tis-620',$amphur_name)."'")->get_row();
 						$amphur_id = @$amphur['id'];
 						if($amphur_id<1)
 						{
-							echo iconv('utf-8','tis-620',"ไม่มี ไอดี อำเภอ ".$item['title'])."<br>";
+							echo iconv('utf-8','tis-620',"ไม่มี ไอดี อำเภอ ".$amphur_name)."<br>";
 						}else{
 						$val['ID'] = $this->ppl->select('id')->where(" PROVINCE_ID=".$_POST['province_id']." AND AMPHUR_ID=".$amphur_id." AND DISTRICT_ID=0 AND YEAR_DATA=".$_POST['year_data'])->get_one();
 						if($val['ID']>0){

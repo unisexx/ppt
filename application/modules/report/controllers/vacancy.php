@@ -16,7 +16,7 @@ class Vacancy extends Public_Controller
 		$set_y = $this->vacancy->get("SELECT YEAR FROM VACANCY GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i < count($set_y); $i++) { $data['year_list'][] = $set_y[$i]['year']; }
 		
-		$data['tbl_head'] = array("ปี", "คนว่างงาน", "คนสมัครงาน", "คนบรรจุงาน");
+		$data['tbl_head'] = array("ปี", "ตำแหน่งงานว่าง (ตำแหน่ง)", "ผู้สมัครงาน (คน)", "ผู้บรรจุงาน (คน)");
 		if(@$_GET['province']) { $data['province_'] = $this->province->get("SELECT * FROM PROVINCES WHERE ID LIKE '".$_GET['province']."'"); }
 		
 		$this->template->build('vacancy/index', $data);

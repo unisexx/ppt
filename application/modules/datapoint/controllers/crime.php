@@ -97,7 +97,6 @@ Class Crime extends Public_Controller{
 	
 		function upload()
 		{
-			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
 
             $this->info->save($_POST);
@@ -115,19 +114,18 @@ Class Crime extends Public_Controller{
 			if($_POST['YEAR'] && $_POST['STATION'])
 			{
 					$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
-					if(count($chk_loop) == 1)
-						{	?>
-							<script language='javascript'>
-								alert('มีข้อมูลอยู่แล้วไม่สามารถดำเนินการได้');
-								history.back();
-							</script>
-						<?	} 
-					ELSE 
-						{
+					
 	
 							$pointer_ary = array(4, 10, 17, 28, 40);
 							$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
-							$_POST['STATION_ID'] = $this->station->save($_POST);
+							
+							$result[] = $_POST;
+							#$_POST['STATION_ID'] = $this->station->save($_POST);
+							
+							$chk_repeat_tmp = $this->station->where("YEAR LIKE '".$_POST['YEAR']."' AND STATION LIKE '".$_POST['STATION']."'");
+							
+														
+							
 							unset($_POST['YEAR'], $_POST['STATION']);
 							
 							for($j=0; $j<count($pointer_ary); $j++)
@@ -140,19 +138,56 @@ Class Crime extends Public_Controller{
 									$_POST['MONTH'] = $i;
 									$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
 									$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
-									$total_row++;
-									$this->statistic->save($_POST);
+									
+									$result2[] = $_POST;
+									
+									#$chk_repeat_tmp = $this->statistic->where()->get();
+#									print_r($_POST);
+#									echo '<BR>';
+									#$this->statistic->save($_POST);
 								}
 							}
-						}
 				} 
 				unlink($uploaddir.'/'.$file_name);
 				
-				if($total_row>0) logs('นำเข้าข้อมูล จำนวนและอัตราผู้ป่วยสุขภาพจิต  จำนวน '.number_format($total_row).' record');
+				
+				if(count($chk_repeat_tmp) >= 1)
+				{
+					?><script language='javascript'>
+						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=count($chk_repeat_tmp);?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+						{
+							alert('ปฏิเสธการบันทึกข้อมูล');
+							window.location="../crime/import";
+							return false;
+						}
+						
+					</script><?
+				}
+				
+				for($i=0; $i<count($result); $i++)
+				{
+					$old_data = $this->station->where("YEAR LIKE '".$result[$i]['YEAR']."' AND STATION LIKE '".$result[$i]['STATION']."'")->get();
+					if(count($old_data) >= 1)
+						{
+							for($j=0; $j<count($old_data); $j++) 
+								{ $this->statistic->where("STATISTIC_ID LIKE '".$result[$i]['STATION']."'")->delete(); } 
+						}
+						
+					$this->station->where("YEAR LIKE '".$result[$i]['YEAR']."' AND STATION LIKE '".$result[$i]['STATION']."'")->delete();
+					
+					$id = $this->station->save($result[$i]);
+					for($j=0; $j<count($result2); $j++)
+					{
+						$result2[$j]['STATION_ID'] = $id;
+						$this->statistic->save($result2[$j]);
+					}
+				}
+				
+				$data['content'] = "<div style='line-height:30px; font-weight:bold;'>บันทึกข้อมูล จังหวัด ".$result[0]['STATION']." ปี ".$result[0]['YEAR']." เสร็จสิ้น</div>";
 
 				
-				set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
-				redirect('datapoint/crime/');
+				#set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
+				$this->template->build('mental/upload.php', $data);
 		}
 		
 				function ReadData($filepath)
@@ -174,6 +209,29 @@ Class Crime extends Public_Controller{
 					}
 					return $import;	
 				}
+		function clear_repeat()
+		{
+			$station_list = $this->station->limit(1000)->get();
+			for($i=0; $i<count($station_list); $i++)
+			{
+				$chk_rp = $this->station->where("YEAR LIKE '".$station_list[$i]['year']."' AND STATION LIKE '".$station_list[$i]['station']."'")->order_by('id', 'asc')->get();
+				if(count($chk_rp) > 1)
+				{
+					echo count($chk_rp);
+					echo '<BR>';
+					
+					for($j=0; $j<count($chk_rp); $j++)
+					{
+						if($j < (count($chk_rp)-1))
+						{
+							#$this->statistic->delete($chk_rp[$j]);
+							$this->station->delete($chk_rp[$j]['id']);
+							$this->statistic->where("STATION_ID LIKE '".$chk_rp[$j]['id']."'")->get();
+						}
+					}
+				}
+			}
+		}
 					
 	#================ CRIME ==================#
 }

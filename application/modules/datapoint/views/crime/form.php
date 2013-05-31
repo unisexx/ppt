@@ -36,7 +36,7 @@
 				<?
 				for($j=0; $j<count($case_title);$j++)
 				{ ?>
-				<? if(@$id) { $result = $this->statistic->limit(1)->get("SELECT NOTIFIED, CATCH FROM CRIME_STATISTIC WHERE STATION_ID = ".$id." AND MONTH = ".($i+1)." AND CASE_ID = ".$case_id[$j]); } ?>
+				<? if(@$id) { $result = $this->statistic->where("STATION_ID = ".$id." AND MONTH = ".($i+1)." AND CASE_ID = ".$case_id[$j])->limit(1)->get(); } ?>
 					<tr>
 					  <th><?=$case_title[$j];?><span class="Txt_red_12"> *</span></th>
 					  <td>

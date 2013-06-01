@@ -5,7 +5,8 @@
 
 <div id="chart_1" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
 <div id="chart_2" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
-<div id="chart_3" style="min-width: 400px; height: 400px; margin: 20px auto"></div>
+<!--<div id="chart_3" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
+<div id="chart_4" style="min-width: 400px; height: 400px; margin: 20px auto"></div>-->
 
 <script>
 $(document).ready(function() {
@@ -15,7 +16,10 @@ $(document).ready(function() {
     var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_2') : site_url('dashboard/chart_2/?test=true'); ?>";
     $.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
     
-    var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_3') : site_url('dashboard/chart_3/?test=true'); ?>";
-    $.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
+    //var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_3') : site_url('dashboard/chart_3/?test=true'); ?>";
+    //$.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
+    
+    //var url =  "<?php echo empty($_GET['test']) ? site_url('dashboard/chart_4') : site_url('dashboard/chart_4/?test=true'); ?>";
+    //$.getJSON(url,function(data) {var chart = new Highcharts.Chart(data);});
 });
 </script>

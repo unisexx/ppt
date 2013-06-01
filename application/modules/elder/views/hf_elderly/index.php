@@ -3,11 +3,11 @@
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', get_year_option(), @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?=form_dropdown('YEAR', $set_year, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 	<?=form_dropdown('WLIST', get_option('id', 'name', 'hf_elderly_list'), @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
-</form>
+</form>	
 
 
 	<?php if(menu::perm($m['id'], 'add')): ?>
@@ -69,7 +69,7 @@ function js_action(id, type)
 	if(type=='DELETE')
 	{
 		if(confirm("กรุณายืนยันการลบข้อมูล"))
-		{ window.location="elder/hf_elderly/delete/"+id;}
+		{ window.location="elder/hf_elderly/delete/<?=$m['id'];?>/"+id;}
 		
 	}
 	else if(type == 'EDIT')

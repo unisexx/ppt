@@ -295,7 +295,8 @@ class Dla extends Public_Controller
     {
         if($_POST)
         {
-            $this->opt->save($_POST);
+            $id = $this->opt->save($_POST);
+            if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
             set_notify('success', lang('save_data_complete'));    
         }
         redirect('dla/index/'.$menu_id);
@@ -305,6 +306,7 @@ class Dla extends Public_Controller
     {
         if(!empty($id))
         {
+            logs('ลบรายการ', $menu_id, $id);
             $this->opt->delete($id);
             set_notify('success', lang('delete_data_complete'));
         }
@@ -383,11 +385,27 @@ class Dla extends Public_Controller
     			    fclose($handle);
     			}
 			}
+            logs('นำเข้าข้อมูล อปท. จำนวน '.number_format($total_row).' record');
             set_notify('success', 'Import '.number_format($total_row).' rows');
             redirect('dla/import');
 		}
 		$this->template->build('import');
 	}
+
+    public function pregnant_save_import()
+    {
+        //header ('Content-type: text/html; charset=utf-8');
+        $this->load->model('pregnant_model','pregnant');
+        $temp_name = time().'.csv';
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], 'uploads/'.$temp_name))
+        {
+            set_time_limit(0);
+            $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
+            $f = csv_to_array('uploads/'.$temp_name, $col);
+            dbConvert($f);
+            foreach($f as $i) $this->pregnant->save($i);
+        }
+    }
 
     public function download()
     {

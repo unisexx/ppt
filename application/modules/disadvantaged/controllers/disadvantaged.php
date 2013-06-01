@@ -34,16 +34,18 @@ Class Disadvantaged extends Public_Controller{
 		
 		$this->template->build('unemployee/unemployee_form', $data);
 	}
-		function unemployee_save()
+		function unemployee_save($menu_id)
 		{
-			$this->unemployee->save($_POST);
+			$id=$this->unemployee->save($_POST);
+			if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 			set_notify('success', lang('save_data_complete'));
 			redirect('disadvantaged/unemployee');
 		}
-	function unemployee_delete($id=FALSE)
+	function unemployee_delete($menu_id, $id)
 	{
 		if($id)
 		{
+			logs('ลบรายการ', $menu_id, $id);
 			$this->unemployee->delete($id);
             set_notify('success', lang('delete_data_complete'));
 			redirect('disadvantaged/unemployee');
@@ -53,6 +55,7 @@ Class Disadvantaged extends Public_Controller{
 	function unemployee_import() { $this->template->build('unemployee/unemployee_import'); }
 		function unemployee_upload()
 		{
+			$total_row=0;
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'unemployee_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/unemployee/';
@@ -84,6 +87,7 @@ Class Disadvantaged extends Public_Controller{
 							</div><? 
 						} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && $_POST['AMOUNT']) {
 							
+							$total_row++;
 							$this->unemployee->save($_POST);
 							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
 								ปี <? echo $_POST['YEAR']; ?>, จังหวัด
@@ -100,7 +104,8 @@ Class Disadvantaged extends Public_Controller{
 				}
 			?></div><?
 			unlink($uploaddir.'/'.$file_name);
-			
+			if($total_row>0) logs('นำเข้าข้อมูล จำนวนคนว่างงาน  จำนวน '.number_format($total_row).' record');
+
 			?><BR><BR>
 				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/unemployee";'>
 				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/unemployee_import";'>
@@ -134,16 +139,18 @@ Class Disadvantaged extends Public_Controller{
 		
 		$this->template->build('vacancy/vacancy_form', $data);
 	}
-		function vacancy_save()
+		function vacancy_save($menu_id)
 		{
-			$this->vacancy->save($_POST);
+			$id=$this->vacancy->save($_POST);
+			if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 			set_notify('success', lang('save_data_complete'));
 			redirect('disadvantaged/vacancy');
 		}
-	function vacancy_delete($id=FALSE)
+	function vacancy_delete($menu_id, $id)
 	{
 		if($id)
 		{
+			logs('ลบรายการ', $menu_id, $id);
 			$this->vacancy->delete($id);
             set_notify('success', lang('delete_data_complete'));
 			redirect('disadvantaged/vacancy');
@@ -157,6 +164,7 @@ Class Disadvantaged extends Public_Controller{
 	
 		function vacancy_upload()
 		{
+			$total_row=0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
 			unset($_POST);
@@ -193,6 +201,8 @@ Class Disadvantaged extends Public_Controller{
 							<? echo $data[$i][1]; ?> ในระบบแล้ว
 						</div><? 
 					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && ($_POST['VACANCIES'] || $_POST['CANDIDATES'] || $_POST['ACTIVE'])) {
+						
+						$total_row++;
 						$this->vacancy->save($_POST);
 						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
 							บันทึก: ข้อมูล 
@@ -203,6 +213,7 @@ Class Disadvantaged extends Public_Controller{
 				}
 			?></div><?
 			unlink($uploaddir.'/'.$file_name);
+			if($total_row>0) logs('นำเข้าข้อมูล  ตำแหน่งงานที่ว่าง จำนวน '.number_format($total_row).' record');
 			} ELSE {
 				?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
 					ไม่สามารถบันทึกข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง

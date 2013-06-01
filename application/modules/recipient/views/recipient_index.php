@@ -14,8 +14,12 @@
 <form action="recipient/index" method="get">
 	<div id="search">
 	<div id="searchBox">
-	<?php echo form_dropdown('year',get_year_option(),@$_GET['year'],'','-- ทุกปี--'); ?>	
-  	
+  	<select name="year">
+  		<option value="">-- ทุกปีงบประมาณ--</option>
+  		<?php foreach($year_data as $item): ?>
+  			<option value="<?php echo $item['year'] ?>" <?php echo ($item['year']==@$_GET['year'])? "checked='checked":''; ?>><?php echo $item['year'] ?></option>
+  		<?php endforeach; ?>
+  	</select>
   	<?php 
   	$agency_id=$this->db->GetAssoc("select agency_id,agency from recipient group by agency_id,agency order by agency");
 	array_walk($agency_id,'dbConvert');
@@ -40,7 +44,6 @@
 <tr>
   <th>ลำดับ</th>
   <th>ปี</th>
-  <th>วันที่ใบคำขอ</th>
   <th>ชื่อหน่วยงาน</th>
   <th>จำนวนรายบริการ</th>
   <th>ความช่วยเหลือ</th>
@@ -56,7 +59,6 @@
 <tr <?php if($rowStyle =='')$rowStyle = 'class="odd"';else $rowStyle = "";echo $rowStyle;?>>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $i; ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['year'] ?></td>
-  <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo DB2Date($item['s_date']) ?> - <?php echo DB2Date($item['e_date']) ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo anchor('recipient/form/'.$item['id'], $item['agency']); ?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo number_format($item['service_total'])?></td>
   <td onclick="window.location='recipient/form/<?php echo $item['id'] ?>'"><?php echo $item['help'] ?></td>

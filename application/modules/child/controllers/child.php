@@ -13,7 +13,7 @@ Class Child extends Public_Controller{
 	}
 
 	public $drop_menu_id=32;
-	public $pregnant_menu_id=35;
+	public $pregnant_menu_id=26;
 	function ReadData($filepath,$module=FALSE){
 		require_once 'include/Excel/reader.php';
 		$data = new Spreadsheet_Excel_Reader();
@@ -164,7 +164,8 @@ Class Child extends Public_Controller{
 	{
 		if(!menu::perm($this->drop_menu_id, 'add') || !menu::perm($this->drop_menu_id,'edit'))redirect('child/drop');
 		if($_POST){			
-		   $this->drop->save($_POST);
+		   $id=$this->drop->save($_POST);
+			  if(empty($_POST['id'])) logs('เพิ่มรายการ ', $this->drop_menu_id, $id); else logs('แก้ไขรายการ', $this->drop_menu_id, $id);
 		   set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/drop');
@@ -173,6 +174,7 @@ Class Child extends Public_Controller{
 	function drop_delete($id){
 		 if(!empty($id))
         {
+             logs('ลบรายการ', $this->drop_menu_id, $id);	
             $this->drop->delete($id);
             set_notify('success', lang('delete_data_complete'));
         }
@@ -220,6 +222,7 @@ Class Child extends Public_Controller{
 						$val['CREATE'] = date('Ymd');
 						$this->drop->save($val);																													
 			}
+			logs('นำเข้าข้อมูลเด็กออกกลางคัน. จำนวน '.number_format($total_row).' record');
 			set_notify('success', lang('save_data_complete'));
 		}
 		redirect('child/drop_import');	
@@ -235,6 +238,30 @@ Class Child extends Public_Controller{
 			$BaseMem = memory_get_usage();		
 			$Time = microtime(true);			
 		return 	$Spreadsheet;
+	}
+	function ImportDataCsv($Filepath=FALSE){
+		$row = 0;	
+		$val=array();
+		if(($handle = fopen($Filepath, 'r')) !== false)
+		{	    
+			    $header = fget($handle);                   
+			    while(($data = fget($handle)) !== false)
+			    {					        	
+						$val[$row][0]=$data[0];
+						$val[$row][1]=$data[1];
+						$val[$row][2]=$data[2];
+						$val[$row][3]=$data[3];
+						$val[$row][4] =$data[4];
+						$val[$row][5] =$data[5];
+						$val[$row][6] = $data[6];
+						$val[$row][7] = $data[7];
+						$val[$row][8] = $data[8];
+						$val[$row][9] = $data[9];
+						$val[$row][10] =$data[10];					
+						$row++;						
+				}//while				
+		}// if fopen	
+		return $val;
 	}
 	function pregnant(){
 		$location= (!empty($_GET['location'])) ? " and LOCATION like'%".$_GET['location']."%'":'';
@@ -257,13 +284,15 @@ Class Child extends Public_Controller{
 			$_POST['birthday'] = (!empty($_POST['birthday'])) ?date_to_mysql($_POST['birthday']):0;
 			$_POST['m_birthday'] = (!empty($_POST['m_birthday'])) ?date_to_mysql($_POST['m_birthday']):0;	
 			$_POST['f_birthday'] = (!empty($_POST['f_birthday'])) ?date_to_mysql($_POST['f_birthday']):0;
-			$this->pregnant->save($_POST);
+			$id=$this->pregnant->save($_POST);
+		 	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $this->pregnant_menu_id, $id); else logs('แก้ไขรายการ', $this->pregnant_menu_id, $id);
 			set_notify('success',lang('data_save_complete'));
 		}
 		redirect('child/pregnant');
 	}
 	function pregnant_delete($id){
 		if(!empty($id)){
+			 logs('ลบรายการ', $this->pregnant_menu_id, $id);
 			$this->pregnant->delete($id);
 			set_notify('success', lang('delete_data_complete'));
 		}
@@ -274,14 +303,13 @@ Class Child extends Public_Controller{
 		$this->template->build('pregnant/pregnant_import_form',$data);	
 	}
 	function pregnant_save_import(){
-		// แก้ upload_max_filesize = 40M
 		/* ; Maximum allowed size for uploaded files.
-			upload_max_filesize = 40M   จาก  2M
+			upload_max_filesize = 1024M   
 			; Must be greater than or equal to upload_max_filesize
-			post_max_size = 40M  จาก 2M
-		 memmory_limit=256M
+			post_max_size = 1024M  จาก 2M
+			 memmory_limit=1024M
 		 * */ 		
-
+ 		 set_time_limit(0);    
 		 if($_FILES['fl_import']['name']!=''){
 			/*---for insert value to info table ---*/
 			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
@@ -299,29 +327,20 @@ Class Child extends Public_Controller{
 			$uploaddir = 'import_file/child/pregnant/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			$data = $this->ImportData($uploaddir.$file_name,"pregnant");										
-			foreach($data as $key=>$item){
-					if($key>=1){																														
-						$val['year']=$_POST['year_data'];
-						$val['sex'] = $item[0];
-						$val['weight'] = $item[1];
-						$val['birthday'] = $item[2];	
-						$val['hospital_code'] =  $item[3];			
-						$val['address_code'] =  $item[4];
-						$val['location'] = $item[5];
-						$val['m_birthday'] =  $item[6];
-						$val['m_address_code'] =  $item[7];	
-						$val['f_id'] = $item[8];
-						$val['f_birthday'] =  $item[9];	
-						$val['f_address_code'] =  $item[10];	
-						$val['order_no'] = $order_no;
-						$val['create']=date('Ymd');
-						$this->pregnant->save($val);
-					}																																					
+			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
+			//$data	=$this->ImportDataCsv($uploaddir.$file_name);		                    
+	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_BIRTHDAY','F_ADDRESS', 'F_ID');
+           $data = csv_to_array($fpicname, $col);
+		    dbConvert($data);	
+			//var_dump($data);								
+            foreach($data as $i) {
+            	$i['year']=$_POST['year_data'];	
+            	$this->pregnant->save($i);
 			}
+			logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
 			set_notify('success', lang('save_data_complete'));
 		}
-		redirect('child/pregnant_import');	
+		//redirect('child/pregnant_import');	
 	}
 	function birth(){
 		$this->template->build('birth_index');

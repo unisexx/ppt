@@ -206,14 +206,14 @@ class Dashboard extends Public_Controller
         LEFT JOIN (
             SELECT YEAR, COUNT(YEAR) AS TOTAL
             FROM C_PREGNANT  
-            WHERE (YEAR - TO_NUMBER(EXTRACT(YEAR FROM F_BIRTHDAY))) BETWEEN 0 AND 14
+            WHERE (YEAR - TO_NUMBER(EXTRACT(YEAR FROM M_BIRTHDAY))) BETWEEN 0 AND 14
           GROUP BY YEAR
         ) AGE15 ON AGE15.YEAR = C_PREGNANT.YEAR
         
         LEFT JOIN (
             SELECT YEAR, COUNT(YEAR) AS TOTAL
             FROM C_PREGNANT  
-            WHERE (YEAR - TO_NUMBER(EXTRACT(YEAR FROM F_BIRTHDAY))) BETWEEN 15 AND 19
+            WHERE (YEAR - TO_NUMBER(EXTRACT(YEAR FROM M_BIRTHDAY))) BETWEEN 15 AND 19
           GROUP BY YEAR
         ) AGE20 ON AGE20.YEAR = C_PREGNANT.YEAR
         
@@ -260,8 +260,8 @@ class Dashboard extends Public_Controller
                 'title' => array('text' => 'หน่วยร้อยละ')
             ),
             'series' => array(
-                array('name' => 'แม่อายุ < 20 ปี', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
-                array('name' => 'แม่อายุ < 15 ปี', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f)  
+                array('name' => 'มารดาวัยรุ่นอายุ < 20 ปี', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
+                array('name' => 'มารดาวัยรุ่นอายุ < 15 ปี', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f)  
             ),
             'plotOptions' => array(
                 'spline' => array(
@@ -275,5 +275,101 @@ class Dashboard extends Public_Controller
             )      
         );      
         echo json_encode($array);    
+    }
+
+    /*
+     * แนวโน้มของประชากรที่มีรายได้ต่ำกว่าเส้นความยากจน ปี 2549-2554
+     */
+    public function chart_4()
+    {   
+        $sql = 'SELECT 
+        POOR_PROVINCE_YEAR AS YEAR,
+        SUM(POOR_PROVINCE_LINE) AS M,
+        SUM(POOR_PROVINCE_QTY) AS F
+        FROM POOL_PROVINCE
+        WHERE POOR_PROVINCE_YEAR BETWEEN 2549 AND 2554
+        GROUP BY POOR_PROVINCE_YEAR
+        ORDER BY POOR_PROVINCE_YEAR';
+        
+        $result = $this->db->getarray($sql);
+        dbConvert($result);
+            
+        if(!empty($_GET['test']))
+        {
+            $result = array();
+            for($year=2549;$year<=2554;$year++)
+            {
+                $result[] = array('year' => $year, 'm' => rand(9000, 200000), 'f' => rand(4000, 7000));
+            }
+        }    
+            
+        $year = array();
+        $data_m = array();
+        $data_f = array();    
+        foreach($result as $item)
+        {
+            $year[] = $item['year'];
+            $data_m[] = intval($item['m']);
+            $data_f[] = intval($item['f']);
+        }
+        
+        header("content-type: application/json"); 
+        $array = array(
+            
+            'chart' => array(
+                'renderTo' => 'chart_4',
+                'type' => 'line'
+            ),
+            'title' => array(
+                'text' => 'แนวโน้มของประชากรที่มีรายได้ต่ำกว่าเส้นความยากจน ปี '.min($year).'-'.max($year)
+            ),
+            'xAxis' => array(
+                'categories' => $year
+            ),
+            'yAxis' => array(
+                'title' => array('text' => 'จำนวน')
+            ),
+            'series' => array(
+                /*
+                array(
+                    'name' => 'เส้นความยากจน(บาท/คน/เดือน)',
+                    'type' => 'column',
+                    'color' => '#007FFF',
+                    'data' => $data_m,
+                    'plotOptions' => array(
+                        'line' => array(
+                            'dataLabels' => array('enabled' => true, 'format' => '{point.y:,.0f}'),
+                            'marker' => array('symbol' => 'circle')
+                        )
+                    ),
+                ), 
+                array(
+                    'name' => 'จำนวนคนจน(พันคน)',
+                    'type' => 'column',
+                    'color' => '#AA4643',
+                    'data' => $data_f,
+                    'plotOptions' => array(
+                        'line' => array(
+                            'dataLabels' => array('enabled' => true, 'format' => '{point.y:,.0f}'),
+                            'marker' => array('symbol' => 'circle')
+                        )
+                    ),
+                ),
+                */
+                array('name' => 'เส้นความยากจน(บาท/คน/เดือน)', 'color' => '#007FFF', 'lineWidth' => 4, 'data' => $data_m), 
+                array('name' => 'จำนวนคนจน(พันคน)', 'color' => '#FF2A2A', 'lineWidth' => 4, 'data' => $data_f) 
+            ),
+            'plotOptions' => array(
+                'line' => array(
+                    'dataLabels' => array('enabled' => true, 'format' => '{point.y:,.0f}'),
+                    'marker' => array('symbol' => 'circle')
+                )
+            ), 
+            'tooltip' => array(
+                'pointFormat' => '{series.name}: <b>{point.y}</b>',
+                'valueDecimals' => 2
+            )      
+        );      
+        echo json_encode($array);     
     }
 } 

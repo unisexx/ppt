@@ -57,17 +57,34 @@ if(!function_exists('get_year_option'))
 	{
 	    $data = array();
         $year = (date('Y') + 543) + $plus;
-        if(empty($start)) $start = 2500;
+        if(empty($start)) $start = 2535;
 	    if(!empty($table) and !empty($field_year))
         {
-            $rs = get_instance()->db->getrow('SELECT MAX('.$field_year.') AS MAX_YEAR, MIN('.$field_year.') AS MIN_YEAR FROM '.$table.' ');
-            if($max == TRUE) $year = $rs['MAX_YEAR'];
-            if($min == TRUE) $start = $rs['MIN_YEAR'];
+            if($min == TRUE and $max == TRUE)
+            {
+                $rs = get_instance()->db->getrow('SELECT MAX('.$field_year.') AS MAX_YEAR, MIN('.$field_year.') AS MIN_YEAR FROM '.$table.' ');
+                if($max == TRUE) $year = $rs['MAX_YEAR'];
+                if($min == TRUE) $start = $rs['MIN_YEAR'];
+                for($year; $year >= $start; $year--)
+                {
+                    $data[$year] = $year;
+                }
+            }
+            else 
+            {
+                $rs = get_instance()->db->getarray('SELECT DISTINCT '.$field_year.' AS YEAR FROM '.$table.' ORDER BY '.$field_year.' DESC');
+                foreach($rs as $item) $data[$item['YEAR']] = $item['YEAR'];
+            }
+            
+            $data = is_array($data) ? $data : array();
+            
+        }else{
+            for($year; $year >= $start; $year--)
+            {
+                $data[$year] = $year;
+            }
         }
-        for($year; $year >= $start; $year--)
-        {
-            $data[$year] = $year;
-        }
+        
 		return $data;
 	}
 }

@@ -287,5 +287,32 @@ function get_menu_info($menu_id,$field){
 	$val = iconv('tis-620','utf-8',$val['TITLE']);
 	return $val;
 }
- 
-?>
+
+function logs($action, $menu_id = null, $id = null)
+{
+    if(is_login())
+    {
+        $action = iconv('utf-8', 'tis-620', $action);
+        if(empty($menu_id))
+        {
+            $menu_title = null;
+        }
+        else 
+        {
+            $menu_title = get_instance()->db->getone('select title from menus where id = '.$menu_id);
+        }
+
+        $id = empty($id) ? null : ' ID:'.$id;
+        
+        $data = array('USER_ID' => login_data('id'), 'ACTION' => $action.$menu_title.$id, 'CREATED' => date('Y-m-d H:i:s'), 'IP' => get_instance()->input->ip_address());
+        get_instance()->db->autoexecute('logs', $data, 'INSERT');
+    }
+}
+
+if(!function_exists('nformat'))
+{
+    function nformat($number)
+    {
+        return empty($number) ? 0 : number_format($number);
+    }
+}

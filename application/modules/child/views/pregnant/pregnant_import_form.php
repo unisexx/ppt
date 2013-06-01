@@ -49,7 +49,7 @@
 		<tr>
 		  <th>ไฟล์<span class="Txt_red_12"> *</span> </th>
 		  <td><input type="file" name="fl_import" > <input type="checkbox" name="continue" value="1"> นำเข้าข้อมูลเพิ่ม 
-		  		  <br/><small>จำนวนครั้งละไม่เกิน 3,000 เรคอร์ด</small></td>
+		  		  <br/><small>จำนวนครั้งละไม่เกิน 60,,000 เรคอร์ด</small></td>
 		</tr>
 	</table>	
 	<div id="btnSave">

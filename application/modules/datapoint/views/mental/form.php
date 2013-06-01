@@ -3,12 +3,12 @@
 
 
 <?
-$mental_dtl['year'] = (@$mental_dtl['year'])?$mental_dtl['year']:'';
-$mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province_id']:'';
+	$mental_dtl['year'] = (@$mental_dtl['year'])?$mental_dtl['year']:'';
+	$mental_dtl['province_id'] = (@$mental_dtl['province_id'])?$mental_dtl['province_id']:'';
 ?>
 	
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form ACTION="datapoint/mental/save" METHOD="POST">
+<form ACTION="datapoint/mental/save/<?=$m['id'];?>/" METHOD="POST">
 <?php endif; ?>
 
 	<input type='hidden' name='ID' value='<?=(@$id);?>'>

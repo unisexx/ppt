@@ -30,13 +30,19 @@ span.gray { color:#999}
 #btnSave { margin-left:20%; margin-top:10px;}
 .ico_quest { margin-bottom:-3px;}
 
+#resultsearch { border:1px dashed #ccc; padding:10px; background-color:#FFC}
+#resultsearch label { color:#F30; padding:0 10px; display:inline;}
+#ref { margin-top:20px;}
+#remark { margin:20px 0;}
+
 .report { float:left; display:inline; width:50%; padding:20px 0; text-align:center;}
 .report p { font-size:20px; margin:10px 0; display:block;}
 
 .data { display:-moz-groupbox; width:31%; margin:10px; }
 .data h4 { background:#502727; color:#FFF; padding:5px 10px;}
 .data ul { margin-left:10px;}
-.data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px;}
+.data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px; list-style:none;}
+.data li a {color:#502727;}
 
 label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 /************************* TABLE STYLE **************************************/
@@ -86,7 +92,52 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 .tblist .paddL60 { padding-left:60px;}
 .tblist tr.topic {  background:url(../images/bg_topic.gif);}
 
+.tbreport
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    background: #fff;
+    margin:0;
+    margin-bottom:10px;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.tbreport th
+{
+    font-size: 16px;
+    font-weight: normal;
+    padding: 10px 5px 3px 5px;
+    border-top: 0px solid #ccc;
+    border-bottom: 2px solid #999;
+    border-left: 0px solid #ccc;
+    border-right: 0px solid #ccc;
+    text-align:left;
+    background-color:#fff;
+    color:#65358f;
+}
+.tbreport td
+{
+    color:#333;
+    padding:5px;
+    height:30px;
+    border-top: 0px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
 
+.tbreport td.B { font-weight:700;}
+.tbreport td strong { font-weight:700;}
+.tbreport td.red, span.red { color:#F00;}
+.tbreport tr:hover td,.tblist tr.active td {}
+.tbreport tr.total { border-top:2px dotted #666; border-bottom:2px dotted #666; font-weight:700; background:url(../images/bg_pattern.png);}
+.tbreport td.topic { background:#F5F5F5;}
+.tbreport td.topic p { padding:5px 0 5px 15px;}
+.tbreport td a:link {color:#800000; text-decoration:underline;}
+.tbreport td a:visited {color:#800000; text-decoration:underline;}
+.tbreport td a:hover {color: #F60; text-decoration:underline;}
+.tbreport td a:active {color: #800000; text-decoration:underline;}
 
 .tbadd
 {
@@ -174,6 +225,7 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 	font: 0.75em arial;
 }
 #tabs li {
+    list-style:none;
 	display: inline;
 }
 #tabs li a {

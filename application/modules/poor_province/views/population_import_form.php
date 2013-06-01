@@ -1,10 +1,13 @@
-<?php echo menu::source($menu_id, 'import_file/poor_province/poor_province2543.xls'); ?>
-<form method="post" enctype="multipart/form-data" action="poor_province/poor_province_import">
+
+<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้ด้อยโอกาส (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
+<h4>ประชากร (คน) </h4>
+<?php echo menu::source($menu_id); ?>
+<form method="post" enctype="multipart/form-data" action="poor_province/poor_province_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr>
 			<th>จังหวัด</th>
@@ -57,8 +60,28 @@
 		</tr>
 	</table>	
 	<div id="btnSave">
+    
+      <script language="javascript">
+  	function import_data()
+	{
+		var conf=confirm('ยืนยันการนำเข้าข้อมูล');
+		if(conf)
+		{
+					document.frm_im.action="poor_province/poor_province_import";
+
+					document.frm_im.submit();	
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
+  </script>
+  
 	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
-	<input type="submit" value="บันทึก" class="btn btn-danger">
+	<input type="button" value="บันทึก" class="btn btn-danger" onClick="import_data();" >
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 	</div>
 </form>

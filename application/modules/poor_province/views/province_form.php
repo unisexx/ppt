@@ -1,17 +1,23 @@
-<?php echo menu::source($menu_id); ?>
-<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
+<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้ด้อยโอกาส (เพิ่ม/แก้ไข)</h2>
+<h4>คนยากจน (จังหวัด) <span class="gray">แบบ สคช. คนยากจน (จังหวัด)</span></h4>
+
+
 <?php echo form_open('poor_province/province_form'); ?>
-<?php endif; ?>
+
+
 <table class="tbadd">
 <tr>
-  <th>ปี <span class="Txt_red_12">*</span></th>
-  <td><?php echo form_dropdown('poor_province_year', get_year_option(), $rs['poor_province_year']); ?></td>
+  <th>เพศ *</th>
+  <td><?php echo form_input('poor_province_sex', $rs['poor_province_sex']); ?></td>
 </tr>
 <tr>
-  <th>ภาคจังหวัด &gt; จังหวัด<span class="Txt_red_12"> *</span></th>
-  <td>  <?php echo form_dropdown('poor_province_aumphur', (empty($rs['poor_province_aumphur'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['poor_province_aumphur'].' order by amphur_name'), $rs['poor_province_aumphur'], null, '- เลือกอำเภอ -'); ?> 
-    <?php echo form_dropdown('poor_province_province', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['poor_province_province'], null, '- เลือกจังหวัด -'); ?> &gt; 
-    </td>
+  <th>ปี <span class="Txt_red_12">*</span></th>
+  <td><?php echo form_dropdown('poor_province_year', get_year_option(2549), $rs['poor_province_year']); ?></td>
+</tr>
+<tr>
+  <th>จังหวัด<span class="Txt_red_12"> *</span></th>
+  <td> 
+    <?php echo form_dropdown('poor_province_province', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['poor_province_province'], null, '- เลือกจังหวัด -'); ?></td>
 </tr>
 <tr>
   <th>เส้นความยากจน (บาท/คน/เดือน)<span class="Txt_red_12"> *</span></th>
@@ -27,20 +33,9 @@
 </tr>
 </table>
 
-<?php if(menu::perm($menu_id, 'add') or menu::perm($menu_id, 'edit')): ?>
 <div id="btnSave">
     <?php echo form_hidden('id', $rs['id']); ?>
-    <input type="submit" value="บันทึก" class="btn btn-danger">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
+  <input type="submit" value="บันทึก" class="btn btn-danger">
+    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
 </div>
 </form>
-<?php else: ?>
-<div id="btnSave">
-    <input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn" />
-</div>
-<?php endif; ?>
-<script>
-    $(function(){
-        $('[name=poor_province_aumphur]').chainedSelect({parent: '[name=poor_province_province]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
-    });
-</script>

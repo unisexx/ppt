@@ -81,7 +81,7 @@ function js_action(id, type)
 	{
 		if(confirm('กรุณายืนยันการลบข้อมูล'))
 		{
-			window.location="datapoint/mental/delete/"+id;
+			window.location="datapoint/mental/delete/<?=$m['id'];?>/"+id;
 		}
 	}
 }

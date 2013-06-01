@@ -3,7 +3,7 @@
     <form method="get" action="dla/index/<?php echo $m['id']; ?>">
     <div id="searchBox">หมายเลข/หัวหน้าสำนักปลัด/อปท.(ตำบล/เทศบาล)
         <input type="text" name="keyword" value="<?php echo @$_GET['keyword']; ?>" style="width:240px;" />
-        <?php echo form_dropdown('year', get_year_option(), @$_GET['year'], null, '-- ทุกปี --'); ?>
+        <?php echo form_dropdown('year', get_year_option(null, null, 'form_all', 'year'), @$_GET['year'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
         <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
         <input type="submit" title="ค้นหา" value=" " class="btn_search" />
@@ -54,8 +54,8 @@
     <?php endforeach; ?>
 </table>
 <?php echo $pagination; ?>
- <script>
+<script>
     $(function(){
-        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur/report',value: 'id',label: 'text'});
+        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: '<?php echo site_url(); ?>location/ajax_amphur/report',value: 'id',label: 'text'});
     });
 </script>

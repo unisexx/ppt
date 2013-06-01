@@ -16,6 +16,7 @@ Class Admin extends  Public_Controller{
 			if(login(trim($_POST['username']), trim($_POST['password'])))
 			{
 				//time_login_update($this->session->userdata('id'));
+				logs('เข้าใช้งานระบบ');
 				set_notify('success', "ยินดีต้อนรับเข้าสู่ระบบ");
 				redirect('home');
 			}
@@ -41,6 +42,7 @@ Class Admin extends  Public_Controller{
 	
 	function logout()
 	{
+	    logs('ออกจากระบบ');
 		logout();
 		set_notify('error', "ออกจากระบบเรียบร้อย");
 		redirect('home');

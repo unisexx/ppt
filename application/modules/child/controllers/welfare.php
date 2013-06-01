@@ -27,6 +27,11 @@ Class Welfare extends Public_Controller{
 	//===== WELFARE =====//
 		function index()
 		{
+			$set_year = $this->welfare->get("SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC");
+			
+			for($i=0; $i<count($set_year); $i++) 
+			{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+			
 			$sql = 'SELECT * FROM WELFARE_DATA WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';
 				if(@$_GET['WLIST']) $sql .= "AND WLIST_ID = ".$_GET['WLIST'].' ';
@@ -45,24 +50,27 @@ Class Welfare extends Public_Controller{
 			
 			$this->template->build('welfare/form', $data);
 		}
-			function save()
+			function save($menu_id)
 			{
-				$this->welfare->save($_POST);
+				$id = $this->welfare->save($_POST);
+	           	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
 				set_notify('success', lang('save_data_complete'));	redirect('child/welfare/');
 			}
-		function delete($id=FALSE)
+		function delete($menu_id, $id)
 		{
-			menu::source(13);
 			if($id)
 			{
+				logs('ลบรายการ', $menu_id, $id);
 				$this->welfare->delete($id);
 	            set_notify('success', lang('delete_data_complete'));	redirect('child/welfare');
 			}
 		}
 		
-		function import() { menu::source(91); $this->template->build('welfare/import'); }
+		function import() { $this->template->build('welfare/import'); }
 		function upload()
 		{
+			#$total_row = 0;
+			$amount_rp = 0;
 			unset($_POST['ID']);
 			$month_th = array('มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฏาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม');
 			$data['content'] = '';
@@ -88,22 +96,70 @@ Class Welfare extends Public_Controller{
 				$_POST['REMAIN'] = $data[$i][5];
 				$_POST['BUILD'] = $data[$i][6];
 				
-				$chk_repeat;
+				if($_POST['TARGET'] || $_POST['BALANCE'] || $_POST['ADMISSION'] || $_POST['DISTRIBUTION'] || $_POST['REMAIN'] || $_POST['BUILD'])
+				{
+					$chk_repeat_tmp = $this->welfare->where("YEAR LIKE '".$_POST['YEAR']."' AND WLIST_ID LIKE '".$_POST['WLIST_ID']."'")->get();
+					if(count($chk_repeat_tmp) != 0) { $amount_rp++; }
+					$result[] = $_POST;
+				}
+				
+				/*
 				if($_POST['YEAR'] && $_POST['MONTH'] && $_POST['WLIST_ID'])
 				{
+					print_r($_POST);
+					echo '<BR>';
 					$chk_repeat = $this->welfare->get("SELECT ID FROM WELFARE_DATA WHERE YEAR=".$_POST['YEAR']." AND MONTH = ".$_POST['MONTH']." AND WLIST_ID = ".$_POST['WLIST_ID']);
 				
 					if(count($chk_repeat) >= 1)
 						{  $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." ในระบบอยู่แล้ว</DIV>"; }
 					else
-						{ $this->welfare->save($_POST); 
+						{
+							#$total_row++;
+							
+							//$this->welfare->save($_POST); 
 							$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." เสร็จสิ้น</DIV>"; }
 					if(!$_POST['WLIST_ID'] || !$_POST['YEAR'] || !$_POST['MONTH'])
 						{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง </DIV>"; }
 				}
+				 * 
+				 */
 			}
 
-			$this->template->build('welfare/upload', @$data);
+				if($amount_rp >= 1)
+				{
+					?><script language='javascript'>
+						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=$amount_rp;?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+						{
+							alert('ปฏิเสธการบันทึกข้อมูล');
+							window.location="../mental/import";
+							return false;
+						}
+					</script><?
+				}
+
+			
+			for($i=0; $i<count($result); $i++)
+			{
+				$chk_repeat_tmp = $this->welfare->where("YEAR LIKE '".$result[$i]['YEAR']."' AND WLIST_ID LIKE '".$result[$i]['WLIST_ID']."'")->get();
+				$welfare_dtl = $this->wflist->get_row($result[$i]['WLIST_ID']);
+
+				if(count($chk_repeat_tmp) != 0)
+					{
+						$this->welfare->where("WLIST_ID LIKE '".$result[$i]['WLIST_ID']."' AND YEAR LIKE '".$result[$i]['YEAR']."'")->delete();
+						$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : ทำการเขียนทับข้อมูล \"".$welfare_dtl['name']."\" </div>"; 
+					}
+				else 
+					{ $content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : เพิ่มข้อมูล  \"".$welfare_dtl['name']."\" </div>"; }
+				print_r($result[$i]);
+				echo '<BR>';
+				$this->welfare->save($result[$i]);
+			}
+			
+			$data['content'] = "<div style='line-height:30px; font-weight:bold;'>บันทึกข้อมูลทั้งสิ้น ".count($result).' รายการ เป็นรายการที่ซ้ำทั้งสิ้น '.$amount_rp.' รายการ  </div>'.$content;
+			
+			$this->template->build('welfare/upload.php', $data);
+			#if($total_row>0) logs('นำเข้าข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์  จำนวน '.number_format($total_row).' record');
+			//$this->template->build('welfare/upload', $data);
 		}
 
 	//===== WELFARE =====//	

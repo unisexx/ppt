@@ -1,16 +1,39 @@
+<script language='javascript'>
+$(function(){
+	$('#import_form').live('submit', function(){
+		if($('#file_import').val() == '')
+		{
+			alert('ไม่พบข้อมูลที่ต้องการ Import');
+			$('#file_import').focus();
+			return false;
+		}
+
+		if($('#YEAR_DATA').val() == '')
+		{
+			alert('กรุณาระบุข้อมูลปีก่อนการดำเนินการ');
+			$('#YEAR_DATA').focus();
+			return false;
+		}
+		
+		
+		if(!confirm("คุณต้องการนำเข้าข้อมูล \""+$('#file_import').val()+'\" ปี '+$('#YEAR_DATA').val())) { return false; }
+	});	
+});
+</script>
+
 <? $m['id'] = 91; ?>
 
 <?=menu::source($m['id'], 'import_file/datapoint/crime/example.xls');?>
 
 
-<form action='datapoint/crime/upload' method='POST' enctype="multipart/form-data">
+<form action='datapoint/crime/upload' method='POST' enctype="multipart/form-data" id='import_form'>
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<input type='hidden' name='MENU_ID' value='<?=$m['id'];?>'>
 	
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('YEAR_DATA', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('YEAR_DATA', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], "ID='YEAR_DATA'", '-- ทุกปี --'); ?></td>
 		</tr>
 		<tr style='display:none;'>
 			<th>จังหวัด</th>
@@ -53,7 +76,7 @@
 		</tr>
 		<tr>
 		  <th>ไฟล์<span class="Txt_red_12"> *</span></th>
-		  <td><input type='file' name='file_import'></td>
+		  <td><input type='file' name='file_import' id='file_import'></td>
 		</tr>
 	</table>	
 	<div id="btnSave">

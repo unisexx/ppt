@@ -4,6 +4,7 @@ class Dla extends Public_Controller
     public function __construct()
     {
         parent::__construct();
+		$this->load->model('opt_model', 'opt');
     }
     
     public function child()
@@ -27,9 +28,12 @@ class Dla extends Public_Controller
         if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
-        if(!empty($_GET['district_id'])) $sql .= " AND DISTRICT_ID = ".$_GET['district_id'];
+        if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
         $data['rs'] = $this->db->getrow($sql);
         dbConvert($data['rs']);
+        
+        if(!empty($_GET['province_id']) && !empty($_GET['amphur_id'])) $data['opt_option'] = $this->opt->get_option($_GET['province_id'], $_GET['amphur_id']);
+        
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
         $this->template->build('dla/child', $data);
     }

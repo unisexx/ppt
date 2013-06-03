@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="offender/offender_data">
- <?php echo form_dropdown('year', get_year_option(), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(2555, null, 'OFFENDER', 'OFFENDER_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
@@ -10,9 +10,11 @@
 </div>
 
 <div id="btnBox">
-    <?php echo menu::perm($menu_id, 'import', 'offender/import_data'); ?>
-    <?php echo menu::perm($menu_id, 'add', 'offender/offender_form'); ?>
+    <input type="button" title="เพิ่มรายการ" value=" " onclick="document.location='<?php echo site_url('offender/import_data'); ?>'" class="btn_add">
 </div>
+
+<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='<?php echo site_url('offender/offender_form'); ?>'" class="btn_import"/></div>
+
 
 <?php echo $pagination; ?>
 

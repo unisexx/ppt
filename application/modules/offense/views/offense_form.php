@@ -9,10 +9,8 @@
   <td><?php echo form_dropdown('offense_year', get_year_option(), $rs['offense_year']); ?></td>
 </tr>
 <tr>
-  <th>เขตจังหวัด &gt; จังหวัด</th>
+  <th>เขตจังหวัด </th>
   <td>
-  <?php echo form_dropdown('offense_aumphur', (empty($rs['offense_aumphur'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$rs['offense_aumphur'].' order by amphur_name'), $rs['offense_aumphur'], null, '- เลือกอำเภอ -'); ?>
-    &gt; 
     <?php echo form_dropdown('offense_province', get_option('id', 'province', 'provinces', '1=1 order by province'), $rs['offense_province'], null, '- เลือกจังหวัด -'); ?> &gt; 
     </td>
 </tr>

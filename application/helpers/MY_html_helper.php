@@ -308,3 +308,11 @@ function logs($action, $menu_id = null, $id = null)
         get_instance()->db->autoexecute('logs', $data, 'INSERT');
     }
 }
+
+if(!function_exists('nformat'))
+{
+    function nformat($number)
+    {
+        return empty($number) ? 0 : number_format($number);
+    }
+}

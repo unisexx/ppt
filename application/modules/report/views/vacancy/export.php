@@ -1,15 +1,12 @@
-<h2>รายงาน ตำแหน่งคนว่างงาน</h2>
+<h2>รายงาน ตำแหน่งงานว่าง</h2>
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) แสดง จังหวัด  
 	<span style='color:#F33;'>
-		<?=(@$province_)?'สถานีจังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	
+		<?=(@$province_)?'จังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	
 		
 		?>
 	</span>
-</div>
-<div style='line-height:40px; text-align:right;'>
-	หน่วย : ราย
 </div>
 
 <table class='tbreport' border='1'>

@@ -11,38 +11,21 @@
 หน่วย:คน</div>
 <table  border="1">
 <tr>
-  <th rowspan="3" class="topic">ตัวชี้วัด</th>
-  <th colspan="7">ผลการสำรวจระดับครอบครัว (จปฐ)</th>
-  </tr>
+  <th rowspan="2" class="topic">ตัวชี้วัดความจำเป็นพื้นฐาน</th>
+  <th colspan="2">ผ่านเกณฑ์</th>
+  <th rowspan="2">เป้าหมาย  ปี <? if(@$_GET['year_data']=='')echo 'ทุกปี'; else echo @$_GET['year_data']; ?></th>
+  <th rowspan="2">ต่ำกว่าเป้าหมาย(ร้อยละ)</th>
+  <th rowspan="2">จำนวนที่ต้องแก้ไขทั้งหมด</th>
+</tr>
 <tr>
-  <td>จำนวนสำรวจ</td>
-  <td colspan="2">ไม่ผ่านเกณฑ์</td>
-  <td colspan="2">ผ่านเกณฑ์</td>
-  <td colspan="2">เทียบเป้าหมาย</td>
-  </tr>
-<tr>
-  <td>ทั้งหมด</td>
-  <td colspan="-1">จำนวน</td>
-  <td>ร้อยละ</td>
-  <td colspan="-1">จำนวน</td>
-  <td colspan="-1">ร้อยละ</td>
-  <td colspan="-1">ร้อยละ</td>
-  <td colspan="-1">ผล</td>
-  </tr>
+  <th>จำนวน</th>
+  <th>ร้อยละ</th>
+</tr>
 <? 
 foreach($value as $item):
 ?>  
 <tr>
   <td class="topic"><?=$item['keyid'].'. '.$item['title'];?>&nbsp;</td>
-  <td style="text-align:right;">
-  	<?=number_format($item['total'],0);?>
-  </td>
-  <td colspan="-1"  style="text-align:right;">
-  	<?=number_format($item['nopass'],0);?>
-  </td>
-  <td  style="text-align:right;">
-  	<?=number_format($item['p_nopass'],2);?>
-  </td>
   <td colspan="-1"  style="text-align:right;">
   	<?=number_format($item['pass'],0);?>
   </td>
@@ -52,9 +35,12 @@ foreach($value as $item):
   <td colspan="-1"  style="text-align:right;">
   	<?=number_format($item['target'],2);?>
   </td>
-  <td colspan="-1"  style="text-align:right;">
-  	<? echo $result = $item['p_pass']>$item['target'] ? 'ผ่าน':'ไม่ผ่าน';?>
+  <td  style="text-align:right;">
+  	<?=number_format($item['p_nopass'],2);?>
   </td>
+  <td  style="text-align:right;">
+  	<?=number_format($item['edit'],0);?>
+  </td>  
 </tr>
 <? endforeach;?>
 </table>

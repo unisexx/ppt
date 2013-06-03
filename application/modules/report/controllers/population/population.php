@@ -15,7 +15,7 @@ class Population extends Public_Controller
          (SUM(SUM_FEMALE)) AS TOTAL_FEMALE         
         FROM POPULATION               
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID = 0) '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
@@ -34,7 +34,7 @@ class Population extends Public_Controller
          (SUM(SUM_FEMALE)) AS TOTAL_FEMALE         
         FROM POPULATION               
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID = 0)  '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
@@ -51,7 +51,7 @@ class Population extends Public_Controller
          (SUM(SUM_FEMALE)) AS TOTAL_FEMALE         
         FROM POPULATION               
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID = 0) '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
@@ -97,7 +97,7 @@ class Population extends Public_Controller
         ) UNIT_YOUNG ON UNIT_YOUNG.PID = POPULATION.ID
         
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0)  '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
@@ -146,7 +146,7 @@ class Population extends Public_Controller
         ) UNIT_YOUNG ON UNIT_YOUNG.PID = POPULATION.ID
         
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0)  '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
@@ -193,7 +193,7 @@ class Population extends Public_Controller
         ) UNIT_YOUNG ON UNIT_YOUNG.PID = POPULATION.ID
         
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
-        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) '.$province.' 
+        AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0)  '.$province.' 
         GROUP BY YEAR_DATA 
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);

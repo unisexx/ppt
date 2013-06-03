@@ -1,7 +1,7 @@
 
-<h2>ข้อมูลประเด็น - คนต่างด้าวที่ได้รับอนุญาติทำงาน (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
-<h4>คนต่างด้าวที่ได้รับอนุญาติทำงาน คงเหลือทั้งราชอาณาจักร จำแนกตามสัญชาติ </h4>
-<?php echo menu::source($menu_id); ?>
+<?php echo menu::source($menu_id, 'import_file/alien_nation/alien_nation_2013_06_03_12_58_12.xls'); ?>
+
+
 <form method="post" enctype="multipart/form-data" action="alien_nation/alien_nation_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
@@ -9,10 +9,10 @@
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
 			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
-		<tr>
+<!--		<tr>
 			<th>จังหวัด</th>
 			<td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
-		</tr>		
+		</tr>-->		
 		<tr>
 			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>

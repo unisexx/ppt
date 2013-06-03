@@ -6,10 +6,10 @@
             <th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
             <td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
         </tr>
-        <tr>
+<!--        <tr>
             <th>จังหวัด</th>
             <td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
-        </tr>       
+        </tr>  -->     
         <tr>
             <th colspan="2">แหล่งที่มาของข้อมูล</th>
         </tr>

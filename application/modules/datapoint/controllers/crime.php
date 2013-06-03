@@ -82,7 +82,7 @@ Class Crime extends Public_Controller{
 		redirect('datapoint/crime/');	
 	}
 	
-	function delete($menu_id, $id)
+	function delete($id)
 	{
 		logs('ลบรายการ', $menu_id, $id);
 		$this->station->delete($id);

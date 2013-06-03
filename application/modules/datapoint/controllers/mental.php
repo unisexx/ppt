@@ -47,7 +47,7 @@ Class Mental extends Public_Controller{
 				redirect('datapoint/mental');
 		}
 		
-		function delete($menu_id, $id)
+		function delete($id)
 		{
 				if($id)
 				{
@@ -143,7 +143,6 @@ Class Mental extends Public_Controller{
 							{
 								$chk_repeat_tmp = $this->mental->where("PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'")->get();
 								if(count($chk_repeat_tmp) != 0) { $amount_repeat++; }
-								
 								$result[] = $_POST;
 							}
 						}

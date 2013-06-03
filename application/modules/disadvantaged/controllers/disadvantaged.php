@@ -27,10 +27,7 @@ Class Disadvantaged extends Public_Controller{
 	function unemployee_form($id=FALSE){
 		$wlist = $this->db->execute('SELECT * FROM UNEMPLOYEE');
 		$data['id'] = @$id;
-		if(@$id)
-		{
-			$data['result'] = $this->unemployee->get_row($id);
-		}
+		if(@$id) { $data['result'] = $this->unemployee->get_row($id); }
 		
 		$this->template->build('unemployee/unemployee_form', $data);
 	}
@@ -55,61 +52,61 @@ Class Disadvantaged extends Public_Controller{
 	function unemployee_import() { $this->template->build('unemployee/unemployee_import'); }
 		function unemployee_upload()
 		{
-			$total_row=0;
+			$amount_rp = 0;
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
 			$file_name = 'unemployee_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/unemployee/';
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
 			$data = $this->ReadData($uploaddir.$file_name);
-			
-			unset($_POST['ID']);
-			$_POST['YEAR'] = $data[1][2];
-			
-			?>
-			<h5>ผลการดำเนินงาน</h5>
-			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
-			if($_POST['YEAR'])
-				{
-					for($i=3; $i<count($data); $i++)
-					{
-						$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
-						
-						$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
-						$_POST['AMOUNT'] = $data[$i][2];
-						
-						$chk_repeat = $this->unemployee->get("SELECT ID FROM UNEMPLOYEE WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
-						if(count($chk_repeat) == 1)
-						{
-							?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
-								ไม่สามารถดำเนินการได้ (ข้อมูลซ้ำ): ข้อมูล 
-								ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-								<? echo $data[$i][1]; ?>
-							</div><? 
-						} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && $_POST['AMOUNT']) {
-							
-							$total_row++;
-							$this->unemployee->save($_POST);
-							?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>บันทึก: ข้อมูล 
-								ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-								<? echo $data[$i][1]; ?>
-							</div><? 
-						}
-					}
-				} ELSE {
-					?>
-					<div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
-						ไม่สามารถดำเนินการบันทึกข้อมูลได้เนื่องจากรายงานระบุข้อมูลไม่ครบถ้วน
-					</div>
-					<?
-				}
-			?></div><?
-			unlink($uploaddir.'/'.$file_name);
-			if($total_row>0) logs('นำเข้าข้อมูล จำนวนคนว่างงาน  จำนวน '.number_format($total_row).' record');
+			$year_data = $_POST['YEAR_DATA'];
+			unset($_POST);
 
-			?><BR><BR>
-				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/unemployee";'>
-				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/unemployee_import";'>
-			<?
+			$_POST['YEAR'] = $year_data;
+			for($i=3; $i<count($data); $i++)
+				{
+					$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
+					
+					$_POST['PROVINCE_ID'] = @$pv_dtl[0]['id'];
+					$_POST['AMOUNT'] = $data[$i][2];
+
+					if($_POST['PROVINCE_ID'] && $_POST['AMOUNT'])
+					{
+						$chk_rp_tmp = $this->unemployee->where("YEAR LIKE '".$_POST['YEAR']."' AND PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."'")->get();
+						
+						if(count($chk_rp_tmp) != 0) { $amount_rp++; }
+						$result[] = $_POST;
+					}
+				}
+				
+			if($amount_rp >= 1)
+			{
+				?><script language='javascript'>
+					if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=$amount_rp;?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+					{
+						alert('ปฏิเสธการบันทึกข้อมูล');
+						window.location="../disdvantaged/unemployee_import";
+						return false;
+					}
+				</script><?
+			}
+			
+			for($i=0; $i<count($result); $i++)
+			{
+				$chk_rp_tmp = $this->unemployee->where("YEAR LIKE '".$result[$i]['YEAR']."' AND PROVINCE_ID LIKE '".$result[$i]['PROVINCE_ID']."'")->get();
+				$province_dtl = $this->province->get_row($result[$i]['PROVINCE_ID']);
+				if(count($chk_rp_tmp) != 0 )
+				{
+					$this->unemployee->where("YEAR LIKE '".$result[$i]['YEAR']."' AND PROVINCE_ID LIKE '".$result[$i]['PROVINCE_ID']."'")->delete();
+					$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : ทำการเขียนทับข้อมูล จังหวัด \"".$province_dtl['province']."\" </div>";
+				}
+				else 
+				{ $content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : เพิ่มข้อมูล จังหวัด \"".$province_dtl['province']."\" </div>"; }
+				
+				$this->unemployee->save($result[$i]);
+			}
+			$data['content'] = $content;
+			
+			$this->template->build('unemployee/unemployee_upload.php', $data);
 		}
 	//========== UNEMPLOYEE ==========//
 
@@ -164,9 +161,10 @@ Class Disadvantaged extends Public_Controller{
 	
 		function vacancy_upload()
 		{
-			$total_row=0;
+			$amount_rp = 0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
+			$year_data = $_POST['YEAR_DATA'];
 			unset($_POST);
 			
 			$ext = pathinfo($_FILES['file_import']['name'], PATHINFO_EXTENSION);
@@ -175,15 +173,8 @@ Class Disadvantaged extends Public_Controller{
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
 			$data = $this->ReadData($uploaddir.$file_name);
 			
-			unset($_POST['ID']);
-			$_POST['YEAR'] = $data[1][2];
-			
-			?>
-			<h5>ผลการดำเนินงาน</h5>
-			<div style='font-family:tahoma; font-size:12px; border-top:solid 1px #CCC;'><?
-			if($_POST['YEAR'])
-			{
-				for($i=3; $i<count($data); $i++)
+			$_POST['YEAR'] = $year_data;
+			for($i=3; $i<count($data); $i++)
 				{
 	
 					$pv_dtl = $this->province->limit(1)->get("SELECT id FROM PROVINCES WHERE PROVINCE LIKE '".$data[$i][1]."'");
@@ -192,39 +183,45 @@ Class Disadvantaged extends Public_Controller{
 					$_POST['CANDIDATES'] = $data[$i][3];
 					$_POST['ACTIVE'] = $data[$i][4];
 					
-					$chk_repeat = $this->vacancy->get("SELECT ID FROM VACANCY WHERE PROVINCE_ID = ".$_POST['PROVINCE_ID']." AND YEAR = ".$_POST['YEAR']);
-					if(count($chk_repeat) == 1)
+					if($_POST['PROVINCE_ID'] && ($_POST['VACANCIES'] || $_POST['CANDIDATES'] || $_POST['ACTIVE']))
 					{
-						?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
-							ไม่สามารถดำเนินการได้เนื่องจากพบ ข้อมูลของ 
-							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-							<? echo $data[$i][1]; ?> ในระบบแล้ว
-						</div><? 
-					} else if($_POST['YEAR'] && $_POST['PROVINCE_ID'] && ($_POST['VACANCIES'] || $_POST['CANDIDATES'] || $_POST['ACTIVE'])) {
-						
-						$total_row++;
-						$this->vacancy->save($_POST);
-						?><div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
-							บันทึก: ข้อมูล 
-							ปี <? echo $_POST['YEAR']; ?>, จังหวัด
-							<? echo $data[$i][1]; ?>
-						</div><? 
+						$chk_rp_tmp = $this->vacancy->where("YEAR LIKE '".$_POST['YEAR']."' AND PROVINCE_ID LIKE '".$_POST['PROVINCE_ID']."'")->get();
+						if(count($chk_rp_tmp) != 0){ $amount_rp++; }
+						$result[] = $_POST;
 					}
 				}
-			?></div><?
-			unlink($uploaddir.'/'.$file_name);
-			if($total_row>0) logs('นำเข้าข้อมูล  ตำแหน่งงานที่ว่าง จำนวน '.number_format($total_row).' record');
-			} ELSE {
-				?><div style='color:#F00; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>
-					ไม่สามารถบันทึกข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง
-				</div>
-				<?
-			}
-			
-			?><BR><BR>
-				<input type='button' value='กลับไปหน้าแรก' onclick='window.location="disadvantaged/vacancy";'>
-				<input type='button' value='ย้อนกลับไปหน้านำเข้าข้อมูล' onclick='window.location="disadvantaged/vacancy_import";'>
-			<?
+
+
+				if($amount_rp >= 1)
+				{
+					?><script language='javascript'>
+						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=$amount_rp;?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+						{
+							alert('ปฏิเสธการบันทึกข้อมูล');
+							window.location="../disdvantaged/vacancy_import";
+							return false;
+						}
+					</script><?
+				}
+
+
+				for($i=0; $i<count($result); $i++)
+				{
+					$chk_rp_tmp = $this->vacancy->where("YEAR LIKE '".$result[$i]['YEAR']."' AND PROVINCE_ID LIKE '".$result[$i]['PROVINCE_ID']."'")->get();
+					$province_dtl = $this->province->get_row($_POST['PROVINCE_ID']);
+					if(count($chk_rp_tmp) != 0 )
+					{
+						$this->vacancy->where("YEAR LIKE '".$result[$i]['YEAR']."' AND PROVINCE_ID LIKE '".$result[$i]['PROVINCE_ID']."'")->delete();
+						$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : ทำการเขียนทับข้อมูล จังหวัด \"".$province_dtl['province']."\" </div>";
+					}
+					else 
+					{ $content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : เพิ่มข้อมูล จังหวัด \"".$province_dtl['province']."\" </div>"; }
+
+					print_r($result[$i]);
+					$this->vacancy->save($result[$i]);
+				}
+				$data['content'] = $content;
+				$this->template->build("vacancy/vacancy_upload", $data);
 		}
 	
 	

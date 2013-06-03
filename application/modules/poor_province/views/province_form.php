@@ -6,10 +6,10 @@
 
 
 <table class="tbadd">
-<tr>
+<!--<tr>
   <th>เพศ *</th>
   <td><?php echo form_input('poor_province_sex', $rs['poor_province_sex']); ?></td>
-</tr>
+</tr>-->
 <tr>
   <th>ปี <span class="Txt_red_12">*</span></th>
   <td><?php echo form_dropdown('poor_province_year', get_year_option(2549), $rs['poor_province_year']); ?></td>

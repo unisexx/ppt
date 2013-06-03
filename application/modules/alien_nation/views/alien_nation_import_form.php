@@ -1,9 +1,6 @@
 
-<?php echo menu::source($menu_id); ?>
+<?php echo menu::source($menu_id, 'import_file/alien_nation/alien_nation_2013_06_03_12_58_12.xls'); ?>
 
-<a href="import_file/alien_nation/alien_nation_2013_06_03_12_58_12.xls" target="_blank">
-<img src="themes/ppt/images/excel.png" border="0" style="">
-</a>
 
 <form method="post" enctype="multipart/form-data" action="alien_nation/alien_nation_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

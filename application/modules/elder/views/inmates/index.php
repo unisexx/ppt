@@ -58,19 +58,15 @@
 
 </table>
 <script language="javascript">
+
 function js_action(id, type)
 {
 	if(type=='DELETE')
-	{
-		if(confirm("กรุณายืนยันการลบข้อมูล"))
-		{
-			window.location="elder/inmates/delete/<?=$m['id'];?>?>/"+id;
+		{ if(confirm("กรุณายืนยันการลบข้อมูล")) 
+			{ window.location="elder/inmates/delete/<?=$m['id'];?>/"+id; }
 		}
-	}
 	else if(type == 'EDIT')
-	{
-		window.location='elder/inmates/form/'+id;
-	}
+		{ window.location='elder/inmates/form/'+id; }
 }
 </script>
 

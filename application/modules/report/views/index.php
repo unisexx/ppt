@@ -41,32 +41,32 @@ $(document).ready(function(){
                 	<li><a href="report/welfare">เด็กและเยาวชนในสถาบัน</a></li>
                 	<li><a href="offense/offense_report">เด็กและเยาวชนในสถานพินิจฯ</a></li>
                     <!--<li><a href="report/child/drop">เด็กและเยาวชนออกกลางคัน</a></li>-->
-                    <li><a href="#">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
+                    <li><a href="report/dla/child">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
                     <!--<li><a href="report/child/pregnant">สถานการณ์การมีบุตรของวัยรุ่นไทย</a></li>-->
                 </ul>
             </div>
             <div class="data">
             	<h4>สตรี</h4>
                 <ul>
-                	<li><a href="#">ปัญหาสตรีในท้องถิ่น</a></li>
+                	<li><a href="report/dla/women">ปัญหาสตรีในท้องถิ่น</a></li>
                 </ul>
             </div>
             <div class="data">
             	<h4>คนพิการ</h4>
                 <ul>
-                	<li><a href="#">ปัญหาคนพิการในท้องถิ่น</a></li>
+                	<li><a href="report/dla/disabled">ปัญหาคนพิการในท้องถิ่น</a></li>
                 </ul>
             </div>
             <div class="data">
             	<h4>ครอบครัว</h4>
                 <ul>
-                	<li><a href="#">ปัญหาครอบครัวในท้องถิ่น</a></li>
+                	<li><a href="report/dla/family">ปัญหาครอบครัวในท้องถิ่น</a></li>
                 </ul>
             </div>
             <div class="data">
             	<h4>ผู้สูงอายุ</h4>
                 <ul>
-                	<li><a href="#">ปัญหาผู้สูงอายุในท้องถิ่น</a></li>
+                	<li><a href="report/dla/older">ปัญหาผู้สูงอายุในท้องถิ่น</a></li>
                     <li><a href="report/elder_inmates">ผู้ต้องขังสูงอายุ</a></li>
                     <li><a href="#">ผู้สูงอายุในสถาบัน</a></li>
                 </ul>
@@ -83,12 +83,12 @@ $(document).ready(function(){
 			<div class="data">
             	<h4>เชิงประเด็น</h4>
                 <ul>
-                	<li><a href="#">ปัญหาด้านที่อยู่อาศัยและสิ่งแวดล้อมในท้องถิ่น</a></li>
-                	<li><a href="#">ปัญหาด้านสุขภาพอนามัยในท้องถิ่น</a></li>
-                    <li><a href="#">ปัญหาด้านการศึกษาในท้องถิ่น</a></li>
-                    <li><a href="#">ปัญหาด้านการมีงานทำและรายได้ในท้องถิ่น</a></li>
-                    <li><a href="#">ปัญหาด้านความไม่ปลอดภัยในชีวิตและทรัพย์สินในท้องถิ่น</a></li>
-                    <li><a href="#">ปัญหาด้านวัฒนธรรมและจริยธรรมในท้องถิ่น</a></li>
+                	<li><a href="report/dla/issue1">ปัญหาด้านที่อยู่อาศัยและสิ่งแวดล้อมในท้องถิ่น</a></li>
+                	<li><a href="report/dla/issue2">ปัญหาด้านสุขภาพอนามัยในท้องถิ่น</a></li>
+                    <li><a href="report/dla/issue3">ปัญหาด้านการศึกษาในท้องถิ่น</a></li>
+                    <li><a href="report/dla/issue4">ปัญหาด้านการมีงานทำและรายได้ในท้องถิ่น</a></li>
+                    <li><a href="report/dla/issue5">ปัญหาด้านความไม่ปลอดภัยในชีวิตและทรัพย์สินในท้องถิ่น</a></li>
+                    <li><a href="report/dla/issue6">ปัญหาด้านวัฒนธรรมและจริยธรรมในท้องถิ่น</a></li>
                     <!--<li><a href="report/crime">การกระทำความผิดที่ละเมิดกฎหมายทางอาญา</a></li>-->
                     <li><a href="report/vacancy">จำนวนคนว่างงาน บรรจุงาน และสมัครงาน</a></li>
                     <li><a href="report/mental">ผู้ป่วยสุขภาพจิต</a></li>

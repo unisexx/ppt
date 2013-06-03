@@ -11,7 +11,7 @@ function clean_url($text)
 	return $text;
 } 
 
-function curPageURL() {
+function curPageURL($param = FALSE) {
  $pageURL = 'http';
  if (@$_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
  $pageURL .= "://";
@@ -20,7 +20,15 @@ function curPageURL() {
  } else {
   $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
  }
- return $pageURL; 
+ if($param)
+ {
+ 	$i = (ereg('[?]', $pageURL)) ? '&' : '?';
+ }
+ else
+ {
+ 	$i = null;	
+ }
+ return $pageURL.$i; 
 }
 function GetCurrentUrlGetParameter($is_first_parameter=TRUE){
 	$parameter = '';

@@ -88,10 +88,11 @@ Class Inmates extends Public_Controller{
 
 		function upload()
 		{
-			$total_row=0;
+			$amount_rp = 0;
+			$content;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
-            $year = $_POST['YEAR_DATA'];
+            $year_data = $_POST['YEAR_DATA'];
 			unset($_POST);
 			
 
@@ -105,41 +106,63 @@ Class Inmates extends Public_Controller{
 				$data = $this->ReadData($uploaddir.$file_name);
 			unlink($uploaddir.$file_name);
 			
-			$_POST['YEAR'] = $year;
-			if($_POST['YEAR'])
+			$_POST['YEAR'] = $year_data;
+			for($i=4; $i<count($data); $i++)
 			{
-					for($i=4; $i<count($data); $i++)
+				$list_id = $this->inmateslist->limit(1)->get("SELECT * FROM ELDER_INMATES_LIST WHERE NAME LIKE '".$data[$i][0]."'");
+				if($list_id[0]['id'])
+				{
+					$_POST['INMATESLIST_ID'] = $list_id[0]['id'];
+					$_POST['VALUE1_M'] = $data[$i][2];
+					$_POST['VALUE1_F'] = $data[$i][3];
+					$_POST['VALUE2_M'] = $data[$i][4];
+					$_POST['VALUE2_F'] = $data[$i][5];
+					$_POST['VALUE3_M'] = $data[$i][6];
+					$_POST['VALUE3_F'] = $data[$i][7];
+					
+					if($_POST['VALUE1_M']||$_POST['VALUE1_F']||$_POST['VALUE2_M']||$_POST['VALUE2_F']||$_POST['VALUE3_M']||$_POST['VALUE3_F'])
 					{
-						$list_id = $this->inmateslist->limit(1)->get("SELECT * FROM ELDER_INMATES_LIST WHERE NAME LIKE '".$data[$i][0]."'");
-						if($list_id[0]['id'])
-						{
-							$_POST['INMATESLIST_ID'] = $list_id[0]['id'];
-							$_POST['VALUE1_M'] = $data[$i][2];
-							$_POST['VALUE1_F'] = $data[$i][3];
-							$_POST['VALUE2_M'] = $data[$i][4];
-							$_POST['VALUE2_F'] = $data[$i][5];
-							$_POST['VALUE3_M'] = $data[$i][6];
-							$_POST['VALUE3_F'] = $data[$i][7];
-							
-							
-							$chk_repeat = $this->inmates->get("SELECT * FROM ELDER_INMATES WHERE INMATESLIST_ID LIKE '".$_POST['INMATESLIST_ID']."' AND YEAR LIKE '".$_POST['YEAR']."'");
-							if(count($chk_repeat) >= 1)
-							{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." ในระบบอยู่แล้ว</DIV>"; }
-							else if(!$_POST['INMATESLIST_ID'] || !$_POST['YEAR'])
-							{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล ในเอกสารไม่ถูกต้อง"; }
-							else
-							{
-								$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เสร็จสิ้น</DIV>";
-								$total_row++; 
-								$this->inmates->save($_POST);
-							}
-						}
+						$chk_rp_tmp = $this->inmates->where("YEAR LIKE '".$_POST['YEAR']."' AND 	INMATESLIST_ID LIKE '".$_POST['INMATESLIST_ID']."'")->get();
+						if(count($chk_rp_tmp) != 0){ $amount_rp++; }
+						$result[] = $_POST;
 					}
-			} else {
-				$data['content'] = '<DIV style="background:#EEE; border-radius:5px; line-height:80px; font-weight:bold; color:#F33; text-align:center; width:100%;">กรุณาเลือกปีก่อนการดำเนินการ</DIV>';
+
+				}
 			}
 			
-			if($total_row>0) logs('นำเข้าข้อมูล ผู้ต้องขังสูงอายุ  จำนวน '.number_format($total_row).' record');
+
+
+				if($amount_rp >= 1)
+				{
+					?><script language='javascript'>
+						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=$amount_rp;?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+						{
+							alert('ปฏิเสธการบันทึกข้อมูล');
+							window.location="../elder/inmates";
+							return false;
+						}
+					</script><?
+				}
+			
+			
+				for($i=0; $i<count($result); $i++)
+				{
+					$inmlist_dtl = $this->inmateslist->get_row($result[$i]['INMATESLIST_ID']);
+					$chk_rp_tmp = $this->inmates->where("YEAR LIKE '".$result[$i]['YEAR']."' AND 	INMATESLIST_ID LIKE '".$result[$i]['INMATESLIST_ID']."'")->get();
+					if($chk_rp_tmp != 0)
+					{
+						$this->inmates->where("YEAR LIKE '".$result[$i]['YEAR']."' AND 	INMATESLIST_ID LIKE '".$result[$i]['INMATESLIST_ID']."'")->delete();
+						$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : ทำการเขียนทับข้อมูล \"".$inmlist_dtl['name']."\" ปี ".$_POST['YEAR']." </div>";
+					}
+					else 
+					{ $content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : เพิ่มข้อมูล  \"".$inmlist_dtl['name']."\" ปี ".$_POST['YEAR']." </div>"; } 
+					
+					$this->inmates->save($result[$i]);
+				}
+
+				$data['content'] = $content;
+				
+			if(count($result)>0) logs('นำเข้าข้อมูล ผู้ต้องขังสูงอายุ  จำนวน '.number_format(count($result)).' record');
 			$this->template->build('inmates/upload', @$data);
 		}
 

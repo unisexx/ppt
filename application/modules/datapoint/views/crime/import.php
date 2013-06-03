@@ -1,28 +1,38 @@
-<script language='javascript'>
-$(function(){
-	$('#import_form').live('submit', function(){
-		if($('#file_import').val() == '')
-		{
-			alert('ไม่พบข้อมูลที่ต้องการ Import');
-			$('#file_import').focus();
-			return false;
-		}
+<script>
+    $(function(){
+    	$('[name=section_type]').live('change',function(){
+    		if($(this).val()==1){
+    			$(".tr_workgroup").show();
+    		}else{
+    			$(".tr_workgroup").hide();
+    		}
+    	})
+        $('[name=import_section_id]').chainedSelect({parent: '[name=section_type]',url: 'setting/section/ajax_section/report',value: 'id',label: 'text'});
+        $('[name=import_workgroup_id]').chainedSelect({parent: '[name=import_section_id]',url: 'setting/section/ajax_workgroup/report',value: 'id',label: 'text'});        
 
-		if($('#YEAR_DATA').val() == '')
-		{
-			alert('กรุณาระบุข้อมูลปีก่อนการดำเนินการ');
-			$('#YEAR_DATA').focus();
-			return false;
-		}
-		
-		
-		if(!confirm("คุณต้องการนำเข้าข้อมูล \""+$('#file_import').val()+'\" ปี '+$('#YEAR_DATA').val())) { return false; }
-	});	
-});
+
+		$('#import_form').live('submit', function(){
+			if($('#file_import').val() == '')
+			{
+				alert('ไม่พบข้อมูลที่ต้องการ Import');
+				$('#file_import').focus();
+				return false;
+			}
+	
+			if($('#YEAR_DATA').val() == '')
+			{
+				alert('กรุณาระบุข้อมูลปีก่อนการดำเนินการ');
+				$('#YEAR_DATA').focus();
+				return false;
+			}
+			
+			
+			if(!confirm("คุณต้องการนำเข้าข้อมูล \""+$('#file_import').val()+'\" ปี '+$('#YEAR_DATA').val())) { return false; }
+		});	
+	});
 </script>
 
 <? $m['id'] = 91; ?>
-
 <?=menu::source($m['id'], 'import_file/datapoint/crime/example.xls');?>
 
 
@@ -85,16 +95,3 @@ $(function(){
 	</div>
 
 </form>
-<script>
-    $(function(){
-    	$('[name=section_type]').live('change',function(){
-    		if($(this).val()==1){
-    			$(".tr_workgroup").show();
-    		}else{
-    			$(".tr_workgroup").hide();
-    		}
-    	})
-        $('[name=import_section_id]').chainedSelect({parent: '[name=section_type]',url: 'setting/section/ajax_section/report',value: 'id',label: 'text'});
-        $('[name=import_workgroup_id]').chainedSelect({parent: '[name=import_section_id]',url: 'setting/section/ajax_workgroup/report',value: 'id',label: 'text'});        
-    });
-</script>

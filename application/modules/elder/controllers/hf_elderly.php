@@ -61,7 +61,7 @@ Class Hf_elderly extends Public_Controller{
 				set_notify('success', lang('save_data_complete'));	redirect('elder/hf_elderly/');
 			}
 			
-		function delete($menu_id, $id)
+		function delete($id)
 		{
 			if($id)
 			{
@@ -72,13 +72,13 @@ Class Hf_elderly extends Public_Controller{
 		}
 		
 		
-		
 		function import() { $this->template->build('hf_elderly/import'); }
 		function upload()
 		{
-			$total_row = 0;
+			$amount_rp = 0;
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
             $this->info->save($_POST);
+			$year_data = $_POST['YEAR_DATA'];
 			unset($_POST);
 			
 
@@ -92,9 +92,8 @@ Class Hf_elderly extends Public_Controller{
 				$data = $this->ReadData($uploaddir.$file_name);
 				unlink($uploaddir.$file_name);
 
-			$_POST['YEAR'] = $data[1][1];
+			$_POST['YEAR'] = $year_data; unset($year_data);
 			$_POST['MONTH'] = array_search(trim($data[1][3]), $month_th)+1;
-
 			for($i=3; $i<count($data); $i++)
 			{
 				$wlist_dtl = $this->wflist->limit(1)->get("SELECT * FROM HF_ELDERLY_LIST WHERE NAME LIKE '%".trim($data[$i][0])."%'");
@@ -105,24 +104,46 @@ Class Hf_elderly extends Public_Controller{
 				$_POST['DISTRIBUTION'] = $data[$i][4];
 				$_POST['REMAIN'] = $data[$i][5];
 				$_POST['BUILD'] = $data[$i][6];
-				
-				$chk_repeat;
-				if($_POST['YEAR'] && $_POST['MONTH'] && $_POST['WLIST_ID'])
+
+				if($_POST['YEAR'] && $_POST['MONTH'] && $_POST['WLIST_ID'] && ($_POST['TARGET'] || $_POST['BALANCE'] || $_POST['ADMISSION'] || $_POST['DISTRIBUTION'] || $_POST['REMAIN'] || $_POST['BUILD']))
 				{
-					$chk_repeat = $this->welfare->get("SELECT ID FROM HF_ELDERLY_DATA WHERE YEAR=".$_POST['YEAR']." AND MONTH = ".$_POST['MONTH']." AND WLIST_ID = ".$_POST['WLIST_ID']);
-				
-					if(count($chk_repeat) >= 1)
-						{  $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก พบข้อมูล  ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." ในระบบอยู่แล้ว</DIV>"; }
-					else
-						{
-							$total_row++;
-							$this->welfare->save($_POST); 
-							$data['content'] .= "<DIV class='list' STYLE='color:#0A0; '>ดำเนินการบันทึกข้อมูล ".$data[$i][0]." ปี (พ.ศ.) ".$_POST['YEAR']." เดือน  ".$data[1][3]." เสร็จสิ้น</DIV>"; }
-					if(!$_POST['WLIST_ID'] || !$_POST['YEAR'] || !$_POST['MONTH'])
-						{ $data['content'] .= "<DIV class='list' STYLE='color:#F55; '>ไม่สามารถเพิ่มข้อมูลได้เนื่องจากข้อมูลไม่ถูกต้อง </DIV>"; }
+					$chk_rp_tmp = $this->welfare->where("YEAR LIKE '".$_POST['YEAR']."' AND MONTH LIKE '".$_POST['MONTH']."' AND WLIST_ID LIKE '".$_POST['WLIST_ID']."'")->get();
+					if(count($chk_rp_tmp) != 0) { $amount_rp++; }
+					$result[] = $_POST;
 				}
+
 			}
-			if($total_row>0) logs('นำเข้าข้อมูล ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม จำนวน '.number_format($total_row).' record');
+
+				if($amount_rp >= 1)
+				{
+					?><script language='javascript'>
+						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=$amount_rp;?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
+						{
+							alert('ปฏิเสธการบันทึกข้อมูล');
+							window.location="../mental/import";
+							return false;
+						}
+					</script><?
+				}
+				
+				for($i=0; $i<count($result); $i++)
+				{
+					$chk_rp_tmp = $this->welfare->where("YEAR LIKE '".$result[$i]['YEAR']."' AND MONTH LIKE '".$result[$i]['MONTH']."' AND WLIST_ID LIKE '".$result[$i]['WLIST_ID']."'")->get();
+					$welfare_dtl = $this->wflist->get_row($result[$i]['WLIST_ID']);
+					
+					if(count($chk_rp_tmp) != 0)
+						{
+							$this->welfare->where("YEAR LIKE '".$result[$i]['YEAR']."' AND MONTH LIKE '".$result[$i]['MONTH']."' AND WLIST_ID LIKE '".$result[$i]['WLIST_ID']."'")->delete();
+							$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : ทำการเขียนทับข้อมูล \"".$welfare_dtl['name']."\" ปี ".$_POST['YEAR']." </div>"; 
+						}
+					else 
+						{ $content .= "<div style='color:#0A0; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($i+1).". บันทึก : เพิ่มข้อมูล  \"".$welfare_dtl['name']."\" ปี ".$_POST['YEAR']." </div>"; }
+#						print_r($result[$i]);
+						$this->welfare->save($result[$i]);
+				}
+				$data['content'] = $content;
+				
+			if(count($result)>0) logs('นำเข้าข้อมูล ผู้สูงอายุในสถานสงเคราะห์และศูนย์บริการทางสังคม จำนวน '.number_format($result).' record');
 			$this->template->build('hf_elderly/upload', @$data);
 		}
 

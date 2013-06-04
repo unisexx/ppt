@@ -2,7 +2,7 @@
 <h4>คนยากจน (จังหวัด) <span class="gray">แบบ สคช. คนยากจน (จังหวัด)</span></h4>
 <div id="search">
   <div id="searchBox">
-    <form method="get" action="poor_province/poor_report" id="frm_im" name="frm_im">
+    <form method="get" action="poor_province/province_data" id="frm_im" name="frm_im">
  <?php echo form_dropdown('year', get_year_option(2555, null, 'POOL_PROVINCE', 'POOR_PROVINCE_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
    
        

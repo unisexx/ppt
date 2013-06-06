@@ -109,7 +109,7 @@ $(document).ready(function(){
                 	<li><a href="report/population/summary_rate">แนวโน้มประชากรไทย</a></li>
                 	<li><a href="report/population/age_rate">สถิติประชากรรายอายุ</a></li>
                     <li><a href="report/population/burden_rate">อัตราส่วนการเป็นภาระ</a></li>
-                    <li><a href="#">คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</a></li>
+                    <li><a href="alien_nation/alien_nation_report">คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</a></li>
                 </ul>
             </div>
 		</div>

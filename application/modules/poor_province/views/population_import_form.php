@@ -1,5 +1,5 @@
 
-<?php echo menu::source($menu_id, 'import_file/poor_province/poor_province2543.xls'); ?>
+<?php echo menu::source($menu_id, 'import_file/poor_province/poor_province_49.xls'); ?>
 
 <form method="post" enctype="multipart/form-data" action="poor_province/poor_province_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

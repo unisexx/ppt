@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="alien_nation/alien_nation_report">
- <?php echo form_dropdown('year', get_year_option(2550), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(2555, null, 'ALIEN_NATION', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
@@ -30,8 +30,12 @@
 
 </div>
 <div style="padding:10px; text-align:right;">
-  <img src="<?php echo base_url(); ?>media/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('alien_nation/alien_nation_export'); ?>'" >
-<img src="<?php echo base_url(); ?>media/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('alien_nation/alien_nation_print'); ?>'">หน่วย:พันคน</div>
+  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('alien_nation/alien_nation_export'); ?>'" >
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('alien_nation/alien_nation_print'); ?>'">หน่วย:พันคน
+
+</div>
+
+
 
 
 <table class="tbreport">
@@ -54,7 +58,7 @@
 	}
 	else
 	{
-			$sql1 = 'select * from alien_nation order by id desc';
+			$sql1 = 'select * from alien_nation order by id asc';
 	}
 
 $result1 = $this->opt->get($sql1);

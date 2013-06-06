@@ -22,23 +22,24 @@
 			
             $excel->read('import_file/poor_province/'.$file_upload);
 
-            $x1=7;
+            $x1=4;
 			$i=1;
 			
             while($x1<=($excel->sheets[0]['numRows']+4)) {
 				
-				$check_data = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
+				$check_data = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
 				
 				if($check_data != "")
 				{
 				
 				
-                $year = isset($excel->sheets[0]['cells'][5][4]) ? $excel->sheets[0]['cells'][5][4] : '';
-				$sex = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
-				$province = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
-                $data1 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
-				$data2 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
-				$data3 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
+                $year = isset($excel->sheets[0]['cells'][2][3]) ? $excel->sheets[0]['cells'][2][3] : '';
+				//$sex = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
+				$sex = 'etc';
+				$province = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
+                $data1 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+				$data2 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
+				$data3 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
 
 
 						$data = array(

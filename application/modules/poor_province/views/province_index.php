@@ -2,7 +2,7 @@
 <h4>คนยากจน (จังหวัด) <span class="gray">แบบ สคช. คนยากจน (จังหวัด)</span></h4>
 <div id="search">
   <div id="searchBox">
-    <form method="get" action="poor_province/poor_report" id="frm_im" name="frm_im">
+    <form method="get" action="poor_province/province_data" id="frm_im" name="frm_im">
  <?php echo form_dropdown('year', get_year_option(2555, null, 'POOL_PROVINCE', 'POOR_PROVINCE_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
    
        
@@ -25,7 +25,6 @@
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
-  <th>เพศ</th>
   <th>ปี</th>
   <th>จังหวัด</th>
   <th>เส้นความยากจน (บาท/คน/เดือน)</th>
@@ -38,7 +37,6 @@
 
 <tr>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo (empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></a></td>
-   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_sex']; ?></a></td>
   <td><a href="<?php echo site_url('poor_province/province_form/'.$item['id']); ?>"><?php echo $item['poor_province_year']; ?></a></td>
   <td> <?php  echo $item['poor_province_province']; ?> </td>
   <td><?php echo @number_format($item['poor_province_line'],2); ?></td>

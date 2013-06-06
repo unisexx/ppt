@@ -1,2 +1,6 @@
-@media print { #head {display:none;} }
+@media print { 
+	#head, #tool-info, #search, div.red {
+		display:none;
+	} 
+}
 

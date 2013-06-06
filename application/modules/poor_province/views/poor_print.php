@@ -9,7 +9,7 @@
 
 <table class="tbreport">
 <tr>
-<th>เพศ</th>
+
 <th>ปี</th>
 <th>เส้นความยากจน(บาท/คน/เดือน)</th>
 <th>สัดส่วนคนจน(ร้อยละ)</th>
@@ -52,7 +52,7 @@ $result1 = $this->opt->get($sql1);
 ?>
 
 <tr>
-<td class="topic"><?php echo $item1['poor_province_sex']; ?></td>
+
 <td class="topic"><?php echo $item1['poor_province_year']; ?></td>
 <td><?php echo @number_format($item2['line'],2); ?></td>
 <td><?php echo @number_format($item2['percents'],2); ?></td>

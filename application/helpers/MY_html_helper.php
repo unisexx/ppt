@@ -16,9 +16,14 @@ if(!function_exists('set_notify'))
 
 if(!function_exists('get_one'))
 {
-	function get_one($field,$table,$id='id',$value)
+	function get_one($field,$table,$id='id',$value = null)
 	{
 		$CI =& get_instance();
+		if(empty($value))
+		{
+			$value = $id;
+			$id = 'id';
+		}
 		$result = $CI->db->getone('select '.$field.' from '.$table.' where '.$id.' = ?',$value);
 		dbConvert($result);
 		return $result;

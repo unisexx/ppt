@@ -1,18 +1,17 @@
 
-<h2>ข้อมูลกลุ่มเป้าหมาย - ผู้ด้อยโอกาส (นำเข้าข้อมูล) <a href="../../../../import_file/poor_province/poor_province2543.xls" target="_blank"><img src="import_file/poor_province/poor_province2543.xls" border="0" style=""></a></h2>
-<h4>ประชากร (คน) </h4>
-<?php echo menu::source($menu_id); ?>
+<?php echo menu::source($menu_id, 'import_file/poor_province/poor_province2543.xls'); ?>
+
 <form method="post" enctype="multipart/form-data" action="poor_province/poor_province_import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 		<tr>
 			<th>ปี, ปีงบประมาณ , ปีการศึกษา</th>
-			<td><?php echo form_dropdown('year_data', get_year_option(2555), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
+			<td><?php echo form_dropdown('year_data', get_year_option(2535), @$_GET['year_data'], null, '-- ทุกปี --'); ?></td>
 		</tr>
-		<tr>
+<!--		<tr>
 			<th>จังหวัด</th>
 			<td><?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?></td>
-		</tr>		
+		</tr>	-->	
 		<tr>
 			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>

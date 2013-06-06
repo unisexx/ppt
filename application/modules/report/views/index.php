@@ -68,7 +68,7 @@ $(document).ready(function(){
                 <ul>
                 	<li><a href="report/dla/older">ปัญหาผู้สูงอายุในท้องถิ่น</a></li>
                     <li><a href="report/elder_inmates">ผู้ต้องขังสูงอายุ</a></li>
-                    <li><a href="#">ผู้สูงอายุในสถาบัน</a></li>
+                    <li><a href="report/elderly">ผู้สูงอายุในสถาบัน</a></li>
                 </ul>
             </div>
             <div class="data">

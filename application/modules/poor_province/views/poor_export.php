@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>รายงาน ผู้มีรายได้ต่ำกว่าเส้นความยากจน</title>
-<link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
+<link href="<?php echo site_url('themes/ppt/css/style.css'); ?>" rel="stylesheet">
 </head>
 <body>
 

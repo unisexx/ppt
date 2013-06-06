@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>รายงาน เด็กและเยาวชนในสถานพินิจฯ</title>
-<link href="<?php echo base_url(); ?>media/css/style.css" rel="stylesheet">
+<link href="<?php echo site_url('themes/ppt/css/style.css'); ?>" rel="stylesheet">
 </head>
 <body>
 <?php

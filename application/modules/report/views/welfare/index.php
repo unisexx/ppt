@@ -5,9 +5,7 @@ for($i=0; $i<count($test_data); $i++)
 {
 	$test_data_ += $test_data[$i]['build'];
 }
-echo $test_data_;
 ?>
-<HR>
 <h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">

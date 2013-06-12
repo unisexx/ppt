@@ -17,6 +17,12 @@
     ?>
         <table border="1">
         <?php
+        
+        					// Set output Encoding.
+			$excel->setOutputEncoding('utf-8');
+			
+			$excel->setUTFEncoder('iconv');
+			
             $excel->read('import_file/offense/'.$file_upload);
 
             $x1=12;
@@ -31,7 +37,7 @@
                 
                 
                 $year = isset($excel->sheets[0]['cells'][7][2]) ? $excel->sheets[0]['cells'][7][2] : '';
-                //$province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
+                $province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
                 $data1 = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
                 $data2 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
                 $data3 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
@@ -53,8 +59,8 @@
                 
                         $data = array(
                           
-                               "offense_aumphur" => "1" ,
-                               "offense_province" => $i ,
+                               "offense_aumphur" => "0" ,
+                               "offense_province" => $province ,
                                "offense_property" => $data1,
                                "offense_body" => $data2,
                                "offense_sex" => $data3,

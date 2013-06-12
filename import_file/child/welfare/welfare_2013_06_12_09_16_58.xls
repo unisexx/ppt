@@ -1,0 +1,981 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
+<title>สถิติผู้รับบริการ</title>
+</head>
+<body>
+	<table x:sTR width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#996699">
+              <tr> 
+                <td colspan="7" bgcolor="#FBFBFB"> 
+                  							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td align="right">จำนวนข้อมูลทั้งหมด 105 รายการ</td>
+                    </tr>
+                  </table>
+                  <table  width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
+                    <tr align="center" bgcolor="#FBFBFB"> 
+                      <td width="100%"><font class="font12n">สถิติผู้รับบริการใน 
+                        เด็ก<br>ปี พ.ศ. 2554                        </font></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr> 
+                <td width="150" align="center" valign="top" bgcolor="#E1C4F0"><p>ชื่อหน่วยงาน</p></td>
+                <td align="center" valign="top" bgcolor="#E1C4F0"><p>เป้าหมาย </p></td>
+                <td align="center" valign="top" bgcolor="#E1C4F0"><p>ยอดยกมา</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>รับเข้า</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>จำหน่าย</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>คงเหลือ</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>สะสม</p></td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กอ่อนปากเกร็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">195</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">140</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">122</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">204</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">335</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กอ่อนพญาไท</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">325</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">138</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">119</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">317</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">463</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กอ่อนรังสิต</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">268</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">158</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">152</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">280</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">426</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กชายจังหวัดนราธิวาส</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">68</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">3</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">66</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">71</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กชายบ้านเชียงใหม่</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">202</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">34</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">199</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">236</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กชายบ้านบางละมุง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">144</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">21</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">30</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">144</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">165</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กชายบ้านปากเกร็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">350</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">210</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">29</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">54</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">198</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">239</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กชายบ้านมหาเมฆ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">146</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">15</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">12</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">146</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">161</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กชายบ้านราชสีมา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">122</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">33</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">19</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">119</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">155</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" > สถานสงเคราะห์เด็กชายบ้านศรีธรรมราช</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">250</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">28</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">57</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">250</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">278</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กชายบ้านหนองคาย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">300</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">160</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">13</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">1</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">159</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">173</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กชายจังหวัดยะลา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">74</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">4</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">12</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">70</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">78</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กบ้านแคนทอง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">195</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">81</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">80</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">204</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">276</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กบ้านเวียงพิงค์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">350</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">592</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">121</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">120</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">592</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">713</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กบ้านสงขลา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">250</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">47</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">70</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">244</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">297</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กจังหวัดปัตตานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">141</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">33</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">26</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">141</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">174</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กหญิงบ้านราชวิถี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">560</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">443</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">61</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">92</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">442</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">504</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กหญิงจังหวัดสระบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">250</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">284</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">47</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">64</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">246</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">331</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กหญิงอุดรธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">400</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">315</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">58</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">51</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">320</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">373</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เยาวชนมูลนิธิมหาราช</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">400</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">323</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">32</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">15</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">322</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">355</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานแรกรับเด็กชายปากเกร็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">230</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">140</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">196</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">203</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">109</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">336</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานแรกรับเด็กหญิงบ้านธัญญพร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">90</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">40</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">14</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">96</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">130</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานคุ้มครองสวัสดิภาพเด็กภาคตะวันออกเฉียงเหนือ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">270</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">42</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">270</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">312</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานคุ้มครองสวัสดิภาพเด็กภาคตะวันออก</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">350</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">295</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">73</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">44</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">303</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">368</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชนจังหวัดศรีสะเกษ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">95</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">26</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">10</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">95</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">121</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานพัฒนาและฟื้นฟูเด็กจังหวัดหนองคาย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">23</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">4</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">5</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">23</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">27</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานพัฒนาและฟื้นฟูเด็กจังหวัดลำปาง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">82</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">15</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">58</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">60</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">97</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานพัฒนาและฟื้นฟูเด็กจังหวัดชลบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">24</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">8</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">1</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">24</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">32</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานพัฒนาและฟื้นฟูเด็กจังหวัดสุราษฎร์ธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">36</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">7</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">8</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">37</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">43</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวกรมพัฒนาสังคมและสวัสดิการ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">180</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">89</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">714</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">686</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">92</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">803</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดชลบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">93</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">96</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">91</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">86</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">189</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดเชียงใหม่</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">80</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">81</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">463</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">432</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">62</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">544</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนครสวรรค์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">50</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">36</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">124</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">116</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">38</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">160</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดอุดรธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">29</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">29</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">29</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดอุบลราชธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">61</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">61</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">82</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสงขลา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">67</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">345</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">346</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">67</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">412</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนราธิวาส</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">58</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">147</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">139</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">59</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">205</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดภูเก็ต</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">54</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">174</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">175</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">63</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">228</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดมหาสารคาม</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">148</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">47</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">152</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">195</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสระบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">50</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">43</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">124</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">114</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">44</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">167</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดระยอง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">50</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">39</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">179</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">169</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">47</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">218</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดปทุมธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">129</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">185</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">172</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">125</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">314</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดตาก</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">40</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">39</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">142</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">124</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">181</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดลำปาง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">29</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">151</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">156</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">26</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">180</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดขอนแก่น</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">70</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">77</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">279</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">289</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">76</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">356</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสุรินทร์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">34</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">87</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">59</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">34</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">121</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดกาญจนบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">41</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">185</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">151</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">49</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">226</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดชุมพร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">40</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">39</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">28</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">22</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">40</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">67</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนครศรีธรรมราช</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">46</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">484</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">470</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">42</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">530</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสุราษฎร์ธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">78</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">870</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">792</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">78</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">948</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดตรัง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">80</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">46</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">333</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">322</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">46</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">379</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดยะลา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">32</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">216</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">221</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">32</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">248</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดพะเยา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">51</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">39</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">72</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดพังงา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">40</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">35</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">162</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">158</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">38</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">197</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดกระบี่</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">65</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">65</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">65</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดเชียงราย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">126</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">150</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">124</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">150</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">276</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนครปฐม</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">49</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">119</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">84</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">51</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">168</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดปัตตานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">57</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">8</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">8</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">57</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">65</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดสตูล</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">89</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">143</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">133</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">88</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">232</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสมุทรปราการ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">211</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">201</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">201</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">209</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">412</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดตราด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">45</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">29</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">41</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">85</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสมุทรสาคร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">77</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">54</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">16</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">97</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดพิษณุโลก</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">29</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">3</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">1</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">32</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดบุรีรัมย์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">35</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">132</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">118</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">35</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">167</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนครพนม</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">20</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">28</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">19</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">51</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดเลย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">39</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">23</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">39</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">62</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดประจวบคีรีขันธ์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">78</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">87</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">61</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">78</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">165</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดนนทบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดจันทบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">51</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">166</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">177</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">79</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">217</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดนครราชสีมา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">265</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">81</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">83</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">265</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">346</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดมุกดาหาร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">110</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">86</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">33</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">141</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดแม่ฮ่องสอน</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">150</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">564</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">518</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">149</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">714</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดราชบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">50</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">99</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">75</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">47</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">149</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสกลนคร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">185</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">155</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">133</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">187</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">340</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดสระแก้ว</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">41</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">69</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">63</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">110</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสุพรรณบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">66</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">73</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">59</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">66</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">139</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดพระนครศรีอยุธยา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">49</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">120</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">103</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">55</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">169</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดกาฬสินธุ์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">106</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">32</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">21</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">106</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">138</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดยโสธร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">16</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">24</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">16</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดร้อยเอ็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">65</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">86</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">80</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">65</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">151</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดศรีสะเกษ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">17</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">76</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">74</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">21</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">93</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดหนองคาย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดหนองบัวลำภู</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">9</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">23</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">12</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">9</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">32</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดอำนาจเจริญ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">51</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">2</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">5</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">48</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">53</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดพัทลุง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">13</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">146</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">102</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">13</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">159</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดระนอง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">29</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">21</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">19</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">29</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">50</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดกำแพงเพชร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">5</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">29</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">5</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">34</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดน่าน</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">57</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">118</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">130</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">59</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">175</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดเพชรบูรณ์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">96</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">97</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">127</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดแพร่</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">79</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">15</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">10</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">82</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">94</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดสุโขทัย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">50</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">0</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">50</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">50</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดอุตรดิตถ์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">34</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">85</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">64</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">41</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">119</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดลพบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">28</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">143</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">140</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">28</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">171</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดลำพูน</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">43</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">86</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">86</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">43</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">129</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดฉะเชิงเทรา</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">141</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">24</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">19</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">142</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">165</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดเพชรบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">19</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">41</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">45</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">60</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดนครนายก</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">10</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">4</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">8</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">7</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">14</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดสมุทรสงคราม</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">45</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">36</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">12</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">65</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดสิงห์บุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">8</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">15</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">14</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">6</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">23</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดชัยนาท</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">0</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดปราจีนบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">12</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">45</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">49</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">16</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">57</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดพิจิตร</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">36</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">78</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">66</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">34</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">114</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดอ่างทอง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">54</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">15</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">13</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">55</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">69</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >บ้านพักเด็กและครอบครัวจังหวัดชัยภูมิ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">10</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">65</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">52</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">13</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">75</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >บ้านพักเด็กและครอบครัวจังหวัดอุทัยธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">30</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">42</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">35</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">31</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">44</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">77</td>
+              </tr>
+                            <!-- End -->
+            </table>
+</body>
+</html>

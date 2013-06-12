@@ -25,7 +25,7 @@ Class Datapoint extends Public_Controller{
 
 
 		$data['result'] = $this->mental->get($sql);
-    	$data['pagination'] = $this->mental->pagination;
+    	$data['pagination'] = $this->mental->pagination();
 		
 		$this->template->build('mental_number/mental_index', $data);
 	}
@@ -163,7 +163,7 @@ echo '<HR>';
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
 
 		$data['result'] = $this->station->get($sql);
-    	$data['pagination'] = $this->station->pagination;
+    	$data['pagination'] = $this->station->pagination();
 		
 		$this->template->build('crime/crime_index', $data);
 	}

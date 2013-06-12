@@ -5,7 +5,6 @@ Class Mental extends Public_Controller{
 		
 		$this->load->model('mental_model', 'mental');
 		$this->load->model('province_model', 'province');		
-#		$this->load->model('dp_vehicle_model','vehicle');
 		$this->load->model('info_model','info');
 	}
 	
@@ -22,7 +21,7 @@ Class Mental extends Public_Controller{
 
 
 		$data['result'] = $this->mental->get($sql);
-    	$data['pagination'] = $this->mental->pagination;
+    	$data['pagination'] = $this->mental->pagination();
 		
 		$this->template->build('mental/index', $data);
 	}

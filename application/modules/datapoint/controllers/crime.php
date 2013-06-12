@@ -21,7 +21,7 @@ Class Crime extends Public_Controller{
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
 
 		$data['result'] = $this->station->get($sql);
-    	$data['pagination'] = $this->station->pagination;
+    	$data['pagination'] = $this->station->pagination();
 		
 		$this->template->build('crime/index', $data);
 	}

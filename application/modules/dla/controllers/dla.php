@@ -261,17 +261,16 @@ class Dla extends Public_Controller
           FORM_ALL."YEAR",
           FORM_ALL.NUMBER_ID,
           FORM_ALL.OPT_NAME,
-          AMPHUR.AMPHUR_NAME,
-          PROVINCES.PROVINCE,
+          AMPHOR AS AMPHUR_NAME,
+          PROVINCE,
           FORM_ALL."SIZE",
           FORM_ALL.C_TITLE,
           FORM_ALL.C_NAME,
           '.$this->menu[$menu_id]['s'].'
         FROM FORM_ALL 
-        LEFT JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
-        LEFT JOIN AMPHUR ON AMPHUR.ID = FORM_ALL.AMPHUR_ID
         WHERE 1=1 '.$where.' 
-        ORDER BY FORM_ALL."YEAR" DESC, PROVINCES.PROVINCE, AMPHUR.AMPHUR_NAME, FORM_ALL.OPT_NAME';
+        ORDER BY FORM_ALL."YEAR" DESC, PROVINCE, AMPHOR, FORM_ALL.OPT_NAME';
+        echo $sql;
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
@@ -324,7 +323,7 @@ class Dla extends Public_Controller
             $this->info->save($_POST);
             
             // import from csv
-			//header('Content-type: text/html; charset=tis-620');
+			header('Content-type: text/html; charset=tis-620');
 			$row = 0;
 			$total_row = 0;
 			
@@ -342,7 +341,7 @@ class Dla extends Public_Controller
 	        {
     			if(($handle = fopen('uploads/'.$temp_name, 'r')) !== false)
     			{	    
-    			    $header = fgetcsv($handle);
+    			    //$header = fgetcsv($handle);
                     
     			    while(($data = fgetcsv($handle)) !== false)
     			    {
@@ -352,6 +351,7 @@ class Dla extends Public_Controller
     			            $num = count($data);		
     			            $db = array();
     			            for ($c=0; $c < $num; $c++) {
+    			                /*    
     			                if($row == 1)
     			                {
     			                    $col_title[$c] = $data[$c];
@@ -362,7 +362,7 @@ class Dla extends Public_Controller
     			                }
     			                else 
     			                {
-    			                    //echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
+    			                    echo '<p>'.$c.' | '.$col_title[$c].' | '.$col_title_sub[$c].' | '.$data[$c] . "</p>\n";
     			                    if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
     	                            if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
     	                            if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
@@ -371,9 +371,20 @@ class Dla extends Public_Controller
     	                            if($c == 15 and @in_array($opt_v_position[$data[$c]], @array_values($opt_v_position))) @$db['v_position_id'] = @$opt_v_position[$data[$c]];
     	                            if($c == 19 and @in_array($opt_b_position[$data[$c]], @array_values($opt_b_position))) @$db['b_position_id'] = @$opt_b_position[$data[$c]];
     			                }
-    			                
+    			                */
+    			                //echo '<p>'.$c.' | '.$data[$c] . "|</p>\n";
+    			                if(in_array($c, array_keys($this->field))) $db[$this->field[$c]] = is_string($data[$c]) ? $data[$c] : $data[$c];                                                                              
+                                if($c == 1 and in_array($opt_province[$data[$c]], array_values($opt_province))) $db['province_id'] = $opt_province[$data[$c]];
+                                if($c == 2 and in_array($opt_amphur[$db['province_id']][$data[$c]], array_values($opt_amphur[$db['province_id']]))) $db['amphur_id'] = $opt_amphur[$db['province_id']][$data[$c]];
+                                if($c == 7 and @in_array($opt_c_position[$data[$c]], @array_values($opt_c_position))) @$db['c_position_id'] = @$opt_c_position[$data[$c]];
+                                if($c == 11 and @in_array($opt_o_position[$data[$c]], @array_values($opt_o_position))) @$db['o_position_id'] = @$opt_o_position[$data[$c]];
+                                if($c == 15 and @in_array($opt_v_position[$data[$c]], @array_values($opt_v_position))) @$db['v_position_id'] = @$opt_v_position[$data[$c]];
+                                if($c == 19 and @in_array($opt_b_position[$data[$c]], @array_values($opt_b_position))) @$db['b_position_id'] = @$opt_b_position[$data[$c]];
     			            }
+                            //echo '<br />';
     						if($db){
+    						     //echo '<pre>';
+                                 //var_dump($db);
     							 $db['year'] = $_POST['year_data'];
     						     //$this->db->debug = true;
     							 $this->opt->save($db, TRUE);

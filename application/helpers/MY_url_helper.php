@@ -22,7 +22,7 @@ function curPageURL($param = FALSE) {
  }
  if($param)
  {
- 	$i = (ereg('[?]', $pageURL)) ? '&' : '?';
+ 	$i = (@ereg('[?]', $pageURL)) ? '&' : '?';
  }
  else
  {

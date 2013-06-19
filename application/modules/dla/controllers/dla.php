@@ -316,13 +316,13 @@ class Dla extends Public_Controller
 		if(!empty($_FILES['file']['name']))
 		{
 			set_time_limit(0);
-            
+            if(!empty($_POST['year_data'])) $this->db->execute('delete from form_all where year = '.$_POST['year_data']);
             // save info
             $_POST['section_id'] = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
             $this->info->save($_POST);
             
             // import from csv
-			header('Content-type: text/html; charset=tis-620');
+			//header('Content-type: text/html; charset=tis-620');
 			$row = 0;
 			$total_row = 0;
 			

@@ -270,7 +270,6 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         WHERE 1=1 '.$where.' 
         ORDER BY FORM_ALL."YEAR" DESC, PROVINCE, AMPHOR, FORM_ALL.OPT_NAME';
-        echo $sql;
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');

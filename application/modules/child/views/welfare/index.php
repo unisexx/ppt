@@ -3,7 +3,7 @@
 <form action='' method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', $set_year, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?=form_dropdown('YEAR', $set_year, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 	<?=form_dropdown('WLIST', get_option('id', 'name', 'welfare_list'), @$_GET['WLIST'], 'class="span4"', '-- แสดงทั้งหมด --'); ?>
   <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
@@ -30,7 +30,7 @@
   <th>รับเข้า</th>
   <th>จำหน่าย</th>
   <th>คงเหลือ</th>
-  <th>สะสม</th>
+  <th style='display:none;'>สะสม</th>
 	<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th>จัดการ</th><?php endif; ?>
 </tr>
 	<?php 
@@ -46,7 +46,7 @@
         <td><?=number_format($item['admission'], 0);?></td>
         <td><?=number_format($item['distribution'], 0);?></td>
         <td><?=number_format($item['remain'], 0);?></td>
-        <td><?=number_format($item['build'], 0);?></td>
+        <td style='display:none;'><?=number_format($item['build'], 0);?></td>
         <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <?php echo menu::perm($m['id'], 'edit', 'child/welfare/form/'.$item['id']); ?>

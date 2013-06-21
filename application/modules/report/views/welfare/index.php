@@ -1,16 +1,11 @@
 <?
-$test_data = $this->welfare->limit(500)->get();
-$test_data_ = 0;
-for($i=0; $i<count($test_data); $i++)
-{
-	$test_data_ += $test_data[$i]['build'];
-}
+
 ?>
 <h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
-		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 		<?=form_dropdown('WLIST', $main_list, @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
@@ -40,64 +35,27 @@ for($i=0; $i<count($test_data); $i++)
 		<th style='width:200px;'>สะสม</th>
 	</tr>
 	<?
-		$total = array(
-			"target"=>0,
-			"balance"=>0,
-			"admission"=>0,
-			"distribution"=>0,
-			"remain"=>0,
-			"build"=>0
-		);
-		if(@$_GET['WLIST'] == '')
-		{
-			unset($_GET['WLIST']);
-			$chk_wlist = 0;
-		} else {
-			$chk_wlist = 1;
-		}
-		
-		if($chk_wlist == 1)
-		{
-			$i = $_GET['WLIST'];
-			 	$total['target'] += @$rs[$i]['target'];
-			 	$total['balance'] += @$rs[$i]['balance'];
-			 	$total['admission'] += @$rs[$i]['admission'];
-			 	$total['distribution'] += @$rs[$i]['distribution'];
-			 	$total['remain'] += @$rs[$i]['remain'];
-			 	$total['build'] += @$rs[$i]['build'];
-			 	?>
-			 	<tr>
-					<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$main_list[$i];?></a></td>
-			 		<td><?=number_format($rs[$i]['target'], 0);?></td>
-			 		<td><?=number_format($rs[$i]['balance'], 0);?></td>
-			 		<td><?=number_format($rs[$i]['admission'], 0);?></td>
-			 		<td><?=number_format($rs[$i]['distribution'], 0);?></td>
-			 		<td><?=number_format($rs[$i]['remain'], 0);?></td>
-			 		<td><?=number_format($rs[$i]['build'], 0);?></td>
-			 	</tr>
-			 	<?
-		} ELSE {
-			 for($i=0; $i<count($main_list); $i++)
-			 {
-			 	$total['target'] += @$rs[$i]['target'];
-			 	$total['balance'] += @$rs[$i]['balance'];
-			 	$total['admission'] += @$rs[$i]['admission'];
-			 	$total['distribution'] += @$rs[$i]['distribution'];
-			 	$total['remain'] += @$rs[$i]['remain'];
-			 	$total['build'] += @$rs[$i]['build'];
-			 	?>
-			 	<tr>
-					<td><a href="report/welfare/report2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$i;?>" target='_blank'><?=$main_list[$i];?></a></td>
-			 		<td><?=number_format(@$rs[$i]['target'], 0);?></td>
-			 		<td><?=number_format(@$rs[$i]['balance'], 0);?></td>
-			 		<td><?=number_format(@$rs[$i]['admission'], 0);?></td>
-			 		<td><?=number_format(@$rs[$i]['distribution'], 0);?></td>
-			 		<td><?=number_format(@$rs[$i]['remain'], 0);?></td>
-			 		<td><?=number_format(@$rs[$i]['build'], 0);?></td>
-			 	</tr>
-			 	<?
-			 } 
-		}
+	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
+	foreach($result as $rs)
+	{
+		$total['target'] += $rs['target'];
+		$total['balance'] += $rs['balance'];
+		$total['admission'] += $rs['admission'];
+		$total['distribution'] += $rs['distribution'];
+		$total['remain'] += $rs['remain'];
+		$total['build'] += $rs['build'];
+		?>
+	 	<tr>
+			<td><a href='report/welfare/report2/?WLIST=<?=$rs['id'];?>'><?=$rs['title'];?></a></td>
+	 		<td><?=number_format($rs['target'], 0);?></td>
+	 		<td><?=number_format($rs['balance'], 0);?></td>
+	 		<td><?=number_format($rs['admission'], 0);?></td>
+	 		<td><?=number_format($rs['distribution'], 0);?></td>
+	 		<td><?=number_format($rs['remain'], 0);?></td>
+	 		<td><?=number_format($rs['build'], 0);?></td>
+	 	</tr>
+		<?
+	}
 	?>
 	
 	<tr class="total">
@@ -110,3 +68,5 @@ for($i=0; $i<count($test_data); $i++)
 		<td> <?=number_format(@$total['build']);?> </td>
 	</tr>
 </table>
+
+<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการทุกหน้า ทุกสถาบัน

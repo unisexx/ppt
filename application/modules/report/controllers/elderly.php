@@ -5,152 +5,83 @@ class Elderly extends Public_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->load->model('elderlylist_model', 'elderly_list');
 		$this->load->model('hf_elderly_model', 'elderly');
-			$this->load->model('hf_elderlylist_model', 'elderly_list');
+		$this->load->model('hf_elderlylist_model', 'elderly_list');
 	}
 	
 	public function index()
 	{
-		$all_list = $this->elderly_list->limit(1000)->get();
-		for($i=0; $i<count($all_list);$i++)
-		{
-			$cat_list[] = $all_list[$i]['name'];
-		}
-#		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก");
-	
-		$condition = '';
-		$condition = (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
+		#$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก", "อื่น ๆ");
+		$cat_list_tmp = $this->elderly_list->get(false, true);
+		foreach($cat_list_tmp as $cat_list_) $cat_list[] = $cat_list_['name']; 
 
 
-		for($i=0; $i<count($all_list); $i++)
-		{
-			$sts_chk = 0;
-			for($j=0; $j<count($cat_list) && $sts_chk == 0; $j++)
-			{
-				if(strstr($all_list[$i]['name'], $cat_list[$j]))
-					{
-						$tmp_ = $this->elderly->where("WLIST_ID LIKE '".$all_list[$i]['id']."' ".$condition)->get();
-						for($k=0; $k<count($tmp_); $k++)
-						{
-							@$data['rs'][$j]['target'] += $tmp_[$k]['target'];
-							@$data['rs'][$j]['balance'] += $tmp_[$k]['balance'];
-							@$data['rs'][$j]['admission'] += $tmp_[$k]['admission'];
-							@$data['rs'][$j]['distribution'] += $tmp_[$k]['distribution'];
-							@$data['rs'][$j]['remain'] += $tmp_[$k]['remain'];
-							@$data['rs'][$j]['build'] += $tmp_[$k]['build'];
-						}
-						$sts_chk++;
-					}
-			}
-			if($sts_chk == 0)
-				{
-					$tmp_ = $this->elderly->where("WLIST_ID LIKE '".$all_list[$i]['id']."'".$condition)->get();
-					for($k=0; $k<count($tmp_); $k++)
-					{
-						@$data['rs'][$j]['target'] += $tmp_[$k]['target'];
-						@$data['rs'][$j]['balance'] += $tmp_[$k]['balance'];
-						@$data['rs'][$j]['admission'] += $tmp_[$k]['admission'];
-						@$data['rs'][$j]['distribution'] += $tmp_[$k]['distribution'];
-						@$data['rs'][$j]['remain'] += $tmp_[$k]['remain'];
-						@$data['rs'][$j]['build'] += $tmp_[$k]['build'];
-					}
-				}
-		}
-		
 		$data['main_list'] = $cat_list;
-		$data['main_list'][] = "อื่น ๆ";
 		//===== set year list group =====//
 		$year_list = $this->elderly->get('SELECT YEAR FROM HF_ELDERLY_DATA GROUP BY YEAR ORDER BY YEAR DESC');
-		for($i=0; $i<count($year_list); $i++)
-		{
-			$data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
-		}
+		for($i=0; $i<count($year_list); $i++) $data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
+
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
 		//===== set year list group =====//
+
+
+		if(@$_GET['WLIST'] != '') $cat_list = array($cat_list[$_GET['WLIST']]);
 		
+		foreach($cat_list as $cat_list_)
+		{
+			$qry_catlist = '';
+				if($cat_list_ == 'อื่น ๆ')
+				{
+					for($i=0; $i<count($cat_list); $i++)
+						{
+							if($cat_list[$i] != 'อื่น ๆ')
+								{
+									if(@$cat_list[$i+1] && $i != 0) $qry_catlist .= 'AND ';
+									$qry_catlist .= "NAME NOT LIKE '".$cat_list[$i]."%' ";
+								} 
+						}
+				} else {
+					$qry_catlist .= "NAME LIKE'".$cat_list_."%'";
+						if($cat_list_ == 'สถานสงเคราะห์เด็ก') $qry_catlist .= " AND NAME NOT LIKE 'สถานสงเคราะห์เด็กอ่อน%'";
+				}
+			$rs_catlist = $this->elderly_list->where($qry_catlist)->get(false, true);
+			$HF_ELDERLY_list[] = $rs_catlist;
+		}		
+		
+		foreach($HF_ELDERLY_list as $key=>$rs)
+		{
+			$qry_data = 'SELECT SUM(TARGET) target, SUM(BALANCE) balance, SUM(ADMISSION) admission, SUM(DISTRIBUTION) distribution, SUM(REMAIN) remain, SUM(BUILD) build FROM HF_ELDERLY_DATA WHERE (';
+			foreach($rs as $key2=>$rs2)
+			{
+				if($key2 != 0 && $key2-1 != count($rs)) $qry_data .= 'OR ';
+				$qry_data .= "WLIST_ID LIKE '".$rs2['id']."' ";
+			}
+			$qry_data .= ')';
+			
+			//CONDITION SEARCH
+			$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
+			$qry_data .= (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
+
+			
+			$wdata = $this->elderly->get($qry_data, true);
+				$result[$key] = $wdata[0];
+				$result[$key]['title'] = $cat_list[$key];
+				$result[$key]['id'] = $key;
+			}
+		
+		$data['result'] = $result;	
 		$this->template->build('elderly/index', $data);
 
 	}
 
 
-	function report2()
-	{
-		$all_list = $this->elderly_list->limit(1000)->get();
-		for($i=0; $i<count($all_list);$i++)
-			{ $cat_list[] = $all_list[$i]['name']; }
-		
-		$wdata = array();
-		$condition = '';
-		$condition = (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
-
-
-		for($i=0; $i<count($all_list); $i++)
-		{
-			if(@$_GET['WLIST'] == '')
-			{
-				$sts_chk = 0;
-				for($j=0; $j<count($cat_list) && $sts_chk == 0; $j++)
-				{
-					if(strstr($all_list[$i]['name'], $cat_list[$j]))
-						{
-							$tmp_ = $this->elderly->where("WLIST_ID LIKE '".$all_list[$i]['id']."' ".$condition)->get();
-							for($k=0; $k<count($tmp_); $k++)
-							{
-								$wdata[] = $tmp_[$k]['id'];
-							}
-							$sts_chk++;
-						}
-				}
-			} else {
-				$sts_chk = 0;
-				$j = $_GET['WLIST'];
-					if($cat_list[$j] == 'สถานสงเคราะห์เด็ก') {
-						if((strstr($all_list[$i]['name'], $cat_list[$j])) && !strstr($all_list[$i]['name'], $cat_list[$j-1])) 
-							{
-								$tmp_ = $this->elderly->where("WLIST_ID LIKE '".$all_list[$i]['id']."' ".$condition)->get();
-								for($k=0; $k<count($tmp_); $k++)
-								{
-									$wdata[] = $tmp_[$k]['id'];
-								}
-								$sts_chk++;
-							}
-					} else {
-						if(strstr($all_list[$i]['name'], $cat_list[$j]))
-							{
-								$tmp_ = $this->elderly->where("WLIST_ID LIKE '".$all_list[$i]['id']."' ".$condition)->get();
-								for($k=0; $k<count($tmp_); $k++)
-								{
-									$wdata[] = $tmp_[$k]['id'];
-								}
-								$sts_chk++;
-							}
-					}
-			}
-		}
-		 
-		sort($wdata);
-		$data['rs'] = $wdata;		
-		$data['main_list'] = $cat_list;
-		$data['main_list'][] = "อื่น ๆ";
-		//===== set year list group =====//
-		$year_list = $this->elderly->get('SELECT YEAR FROM HF_ELDERLY_DATA GROUP BY YEAR ORDER BY YEAR DESC');
-		for($i=0; $i<count($year_list); $i++)
-		{
-			$data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
-		}
-		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
-		//===== set year list group =====//
-			
-		$this->template->build('elderly/index2', $data);
-	}
 
 	function export_index($status=FALSE)
 	{
 		$data[1] = 1;
 		if($status!='print')
 		{
-			$filename= "elderly_report_data_".date("Y-m-d_H_i_s").".xls";
+			$filename= "HF_ELDERLY_report_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
 			
 			logs('ดาวน์โหลดข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
@@ -163,7 +94,7 @@ class Elderly extends Public_Controller
 		
 		
 			//===== set year list group =====//
-		$year_list = $this->elderly->get('SELECT YEAR FROM elderly_DATA GROUP BY YEAR ORDER BY YEAR DESC');
+		$year_list = $this->elderly->get('SELECT YEAR FROM HF_ELDERLY_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)
 		{
 			$data['year_list'][] = $year_list[$i]['year'];
@@ -173,7 +104,7 @@ class Elderly extends Public_Controller
 		
 		
 		//===== elderly list group =====//
-		$data['list'] = $this->elderly_list->limit(100)->get('SELECT * FROM elderly_LIST WHERE 1=1 ORDER BY NAME ASC ');
+		$data['list'] = $this->elderly_list->limit(100)->get('SELECT * FROM HF_ELDERLY_LIST WHERE 1=1 ORDER BY NAME ASC ');
 		for($i=0; $i<count($data['list']); $i++)
 		{
 
@@ -201,7 +132,7 @@ class Elderly extends Public_Controller
 		//===== elderly list group =====//
 
 				
-		$data['sql'] = 'SELECT * FROM elderly_LIST WHERE 1=1 ';
+		$data['sql'] = 'SELECT * FROM HF_ELDERLY_LIST WHERE 1=1 ';
 			$data['sql'] .= (@$wlist)?"AND NAME LIKE '%".$wlist."%' ":'';
 		$data['sql'] .= 'ORDER BY NAME ASC';
 		unset($data['list']);
@@ -216,7 +147,7 @@ class Elderly extends Public_Controller
 	{
 		if($status!='print')
 		{
-			$filename= "elderly_report2_data_".date("Y-m-d_H_i_s").".xls";
+			$filename= "HF_ELDERLY_report2_data_".date("Y-m-d_H_i_s").".xls";
 			header("Content-Disposition: attachment; filename=".$filename);
 			
 			logs('ดาวน์โหลดข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
@@ -228,7 +159,7 @@ class Elderly extends Public_Controller
 		
 		
 			//===== set year list group =====//
-		$year_list = $this->elderly->get('SELECT YEAR FROM elderly_DATA GROUP BY YEAR ORDER BY YEAR DESC');
+		$year_list = $this->elderly->get('SELECT YEAR FROM HF_ELDERLY_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++)
 		{
 			$data['year_list'][] = $year_list[$i]['year'];
@@ -237,7 +168,7 @@ class Elderly extends Public_Controller
 		//===== set year list group =====//
 		
 		//===== elderly list group =====//
-		$data['list'] = $this->elderly_list->limit(100)->get('SELECT * FROM elderly_LIST WHERE 1=1 ORDER BY NAME ASC ');
+		$data['list'] = $this->elderly_list->limit(100)->get('SELECT * FROM HF_ELDERLY_LIST WHERE 1=1 ORDER BY NAME ASC ');
 		for($i=0; $i<count($data['list']); $i++)
 		{
 			$exp_list = explode('จังหวัด', $data['list'][$i]['name']);

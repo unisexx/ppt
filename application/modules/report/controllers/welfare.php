@@ -11,59 +11,62 @@ class Welfare extends Public_Controller
 	
 	public function index()
 	{
-		$all_list = $this->welfare_list->limit(1000)->get();
-		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก");
-	
-		$condition = '';
-		$condition = (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
-
-
-		for($i=0; $i<count($all_list); $i++)
-		{
-			$sts_chk = 0;
-			for($j=0; $j<count($cat_list) && $sts_chk == 0; $j++)
-			{
-				if(strstr($all_list[$i]['name'], $cat_list[$j]))
-					{
-						$tmp_ = $this->welfare->where("WLIST_ID LIKE '".$all_list[$i]['id']."' ".$condition)->get();
-						for($k=0; $k<count($tmp_); $k++)
-						{
-							@$data['rs'][$j]['target'] += $tmp_[$k]['target'];
-							@$data['rs'][$j]['balance'] += $tmp_[$k]['balance'];
-							@$data['rs'][$j]['admission'] += $tmp_[$k]['admission'];
-							@$data['rs'][$j]['distribution'] += $tmp_[$k]['distribution'];
-							@$data['rs'][$j]['remain'] += $tmp_[$k]['remain'];
-							@$data['rs'][$j]['build'] += $tmp_[$k]['build'];
-						}
-						$sts_chk++;
-					}
-			}
-			if($sts_chk == 0)
-				{
-					$tmp_ = $this->welfare->where("WLIST_ID LIKE '".$all_list[$i]['id']."'".$condition)->get();
-					for($k=0; $k<count($tmp_); $k++)
-					{
-						@$data['rs'][$j]['target'] += $tmp_[$k]['target'];
-						@$data['rs'][$j]['balance'] += $tmp_[$k]['balance'];
-						@$data['rs'][$j]['admission'] += $tmp_[$k]['admission'];
-						@$data['rs'][$j]['distribution'] += $tmp_[$k]['distribution'];
-						@$data['rs'][$j]['remain'] += $tmp_[$k]['remain'];
-						@$data['rs'][$j]['build'] += $tmp_[$k]['build'];
-					}
-				}
-		}
+		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก", "อื่น ๆ");
 		
 		$data['main_list'] = $cat_list;
-		$data['main_list'][] = "อื่น ๆ";
 		//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
-		for($i=0; $i<count($year_list); $i++)
-		{
-			$data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
-		}
+		for($i=0; $i<count($year_list); $i++) $data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
+
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
 		//===== set year list group =====//
+
+
+		if(@$_GET['WLIST'] != '') $cat_list = array($cat_list[$_GET['WLIST']]);
 		
+		foreach($cat_list as $cat_list_)
+		{
+			$qry_catlist = '';
+				if($cat_list_ == 'อื่น ๆ')
+				{
+					for($i=0; $i<count($cat_list); $i++)
+						{
+							if($cat_list[$i] != 'อื่น ๆ')
+								{
+									if(@$cat_list[$i+1] && $i != 0) $qry_catlist .= 'AND ';
+									$qry_catlist .= "NAME NOT LIKE '".$cat_list[$i]."%' ";
+								} 
+						}
+				} else {
+					$qry_catlist .= "NAME LIKE'".$cat_list_."%'";
+						if($cat_list_ == 'สถานสงเคราะห์เด็ก') $qry_catlist .= " AND NAME NOT LIKE 'สถานสงเคราะห์เด็กอ่อน%'";
+				}
+			$rs_catlist = $this->welfare_list->where($qry_catlist)->get(false, true);
+			$welfare_list[] = $rs_catlist;
+		}		
+		
+		foreach($welfare_list as $key=>$rs)
+		{
+			$qry_data = 'SELECT SUM(TARGET) target, SUM(BALANCE) balance, SUM(ADMISSION) admission, SUM(DISTRIBUTION) distribution, SUM(REMAIN) remain, SUM(BUILD) build FROM WELFARE_DATA WHERE (';
+			foreach($rs as $key2=>$rs2)
+			{
+				if($key2 != 0 && $key2-1 != count($rs)) $qry_data .= 'OR ';
+				$qry_data .= "WLIST_ID LIKE '".$rs2['id']."' ";
+			}
+			$qry_data .= ')';
+			
+			//CONDITION SEARCH
+			$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
+			$qry_data .= (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
+
+			
+			$wdata = $this->welfare->get($qry_data, true);
+				$result[$key] = $wdata[0];
+				$result[$key]['title'] = $cat_list[$key];
+				$result[$key]['id'] = $key;
+			}
+		
+		$data['result'] = $result;	
 		$this->template->build('welfare/index', $data);
 
 	}
@@ -71,33 +74,57 @@ class Welfare extends Public_Controller
 
 	function report2()
 	{
-		$data['main_list'] = $cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก");
-
+		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก", "อื่น ๆ");
+		$data['main_list'] = $cat_list;
 		//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
-		for($i=0; $i<count($year_list); $i++)
-		{
-			$data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
-		}
+		for($i=0; $i<count($year_list); $i++) $data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
+
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
 		//===== set year list group =====//
 		
-		if($_GET['WLIST'] == 5) { $qry_string = "SELECT L.NAME, D.* FROM WELFARE_DATA D JOIN (select * from WELFARE_LIST WHERE NAME LIKE '%สถานสงเคราะห์เด็ก%'  AND NAME NOT LIKE '%สถานสงเคราะห์เด็กอ่อน%' ) L ON L.ID = D.WLIST_ID"; }
-		else if($_GET['WLIST'] == 6) 
-			{
-				$qry_string = "SELECT L.NAME, D.* FROM WELFARE_DATA D JOIN (select * from WELFARE_LIST WHERE ";
-				for($i=0; $i<count($cat_list); $i++)
+		if(@$_GET['WLIST'] != '') $cat_list = array($cat_list[$_GET['WLIST']]);
+		foreach($cat_list as $cat_list_)
+		{
+			$qry_catlist = '';
+				if($cat_list_ == 'อื่น ๆ')
 				{
-					$qry_string .= ($i==0)?'':'AND ';
-					$qry_string .= "NAME NOT LIKE '%".$cat_list[$i]."%' ";
+					for($i=0; $i<count($cat_list); $i++)
+						{
+							if($cat_list[$i] != 'อื่น ๆ')
+								{
+									if(@$cat_list[$i+1] && $i != 0) $qry_catlist .= 'AND ';
+									$qry_catlist .= "NAME NOT LIKE '".$cat_list[$i]."%' ";
+								} 
+						}
+				} else {
+					$qry_catlist .= "NAME LIKE'".$cat_list_."%'";
+						if($cat_list_ == 'สถานสงเคราะห์เด็ก') $qry_catlist .= " AND NAME NOT LIKE 'สถานสงเคราะห์เด็กอ่อน%'";
 				}
-				$qry_string .= ") L ON L.ID = D.WLIST_ID";
-			}
-		else 
-			{ $qry_string = "SELECT L.NAME, D.* FROM WELFARE_DATA D JOIN (select * from WELFARE_LIST WHERE NAME LIKE '%".$cat_list[$_GET['WLIST']]."%' ) L ON L.ID = D.WLIST_ID"; }
+			$rs_catlist = $this->welfare_list->where($qry_catlist)->get(false, true);
+			$welfare_list[] = $rs_catlist;
+		}
 		
-		$data['rs'] = $this->welfare->get($qry_string);
-				
+		//CONDITION
+			$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
+			
+		
+		foreach($welfare_list as $rs)
+		{
+			foreach($rs as $key2=>$rs2)
+			{
+				$qry_rs2 = "SELECT TARGET, BALANCE, ADMISSION, DISTRIBUTION, REMAIN, BUILD FROM WELFARE_DATA WHERE WLIST_ID LIKE '".$rs2['id']."' AND YEAR LIKE '".$_GET['YEAR']."'";
+				$tmp_result = $this->welfare->get($qry_rs2, false); $tmp_result = $tmp_result[0];
+					$data['rs'][] = array(
+						'title' => $rs2['name'],
+						'target' => $tmp_result['target'],
+						'balance' => $tmp_result['balance'],
+						'admission' => $tmp_result['admission'],
+						'distribution' => $tmp_result['distribution'],
+						'remain' => $tmp_result['remain'],
+						'build' => $tmp_result['build']);
+			}
+		}
 		$this->template->build('welfare/index2', $data);
 	}
 

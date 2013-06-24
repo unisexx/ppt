@@ -123,7 +123,7 @@ class Dla extends Public_Controller
         SUM(T421) AS TOTAL421, 
         SUM(T422) AS TOTAL422, 
         SUM(T423) AS TOTAL423, 
-        SUM(T434) AS TOTAL424, 
+        SUM(T424) AS TOTAL424, 
         SUM(T425) AS TOTAL425 
         FROM FORM_ALL 
         WHERE 1=1";

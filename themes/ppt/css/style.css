@@ -32,13 +32,13 @@ span.gray { color:#999}
 
 #resultsearch { border:1px dashed #ccc; padding:10px; background-color:#FFC}
 #resultsearch label { color:#F30; padding:0 10px; display:inline;}
-#ref { margin-top:20px;}
-#remark { margin:20px 0;}
+#ref { margin-top:20px;  }
+#remark { margin:20px 0; }
 
 .report { float:left; display:inline; width:50%; padding:20px 0; text-align:center;}
 .report p { font-size:20px; margin:10px 0; display:block;}
 
-.data { display:-moz-groupbox; width:31%; margin:10px; }
+.data { display: inline-block; vertical-align: top; width:31%; margin:10px; }
 .data h4 { background:#502727; color:#FFF; padding:5px 10px;}
 .data ul { margin-left:10px;}
 .data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px; list-style:none;}

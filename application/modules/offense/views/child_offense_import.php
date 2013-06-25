@@ -38,13 +38,13 @@
                 
                 $year = isset($excel->sheets[0]['cells'][7][2]) ? $excel->sheets[0]['cells'][7][2] : '';
                 $province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
-                $data1 = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
-                $data2 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
-                $data3 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
-                $data4 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
-                $data5 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][6] : '';
-                $data6 = isset($excel->sheets[0]['cells'][$x1][7]) ? $excel->sheets[0]['cells'][$x1][7] : '';
-                $data7 = isset($excel->sheets[0]['cells'][$x1][8]) ? $excel->sheets[0]['cells'][$x1][8] : '';
+                $data1 = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+                $data2 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][4] : '';
+                $data3 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][5] : '';
+                $data4 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+                $data5 = isset($excel->sheets[0]['cells'][$x1][6]) ? $excel->sheets[0]['cells'][$x1][7] : '';
+                $data6 = isset($excel->sheets[0]['cells'][$x1][7]) ? $excel->sheets[0]['cells'][$x1][8] : '';
+                $data7 = isset($excel->sheets[0]['cells'][$x1][8]) ? $excel->sheets[0]['cells'][$x1][9] : '';
                 
 /*              echo "----------------------<br>";
                 echo "ปี:".$year."<br>";
@@ -59,7 +59,7 @@
                 
                         $data = array(
                           
-                               "offense_aumphur" => "0" ,
+                               "offense_aumphur" => "1" ,
                                "offense_province" => $province ,
                                "offense_property" => $data1,
                                "offense_body" => $data2,

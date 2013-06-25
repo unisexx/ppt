@@ -47,13 +47,8 @@
   
   <?php 
   
-  //echo $item['offense_province'];
-  $sql = 'select * from provinces where id='.$item['offense_province'];
-  $result1 = $this->opt->get($sql);
-  foreach($result1 as $key1 => $item1)
-  {
-	  echo $item1['province'];
-  }
+	  echo $item['offense_province'];
+ 
   ?>
   
   </a>

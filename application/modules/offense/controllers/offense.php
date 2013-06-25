@@ -20,11 +20,10 @@ Class Offense extends Public_Controller{
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
             if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
         }
-        $sql = 'SELECT OFFENSES.*, PROVINCES.PROVINCE
+        $sql = 'SELECT *
         FROM OFFENSES
-        JOIN PROVINCES ON PROVINCES.ID = OFFENSES.OFFENSE_PROVINCE
         WHERE 1=1 '.$where.'         
-        ORDER BY OFFENSES.OFFENSE_YEAR DESC, PROVINCES.PROVINCE';
+        ORDER BY OFFENSE_YEAR DESC';
         $data['result'] = $this->opt->get($sql);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');

@@ -30,11 +30,12 @@
             
             while($x1<=($excel->sheets[0]['numRows']+4)) {
                 
-                $check_data = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
+                $check_data = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
                 
                 if($check_data != "")
                 {
-                
+                	
+				                
                 
                 $year = isset($excel->sheets[0]['cells'][7][2]) ? $excel->sheets[0]['cells'][7][2] : '';
                 $province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
@@ -46,17 +47,48 @@
                 $data6 = isset($excel->sheets[0]['cells'][$x1][8]) ? $excel->sheets[0]['cells'][$x1][8] : '';
                 $data7 = isset($excel->sheets[0]['cells'][$x1][9]) ? $excel->sheets[0]['cells'][$x1][9] : '';
                 
-/*              echo "----------------------<br>";
-                echo "ปี:".$year."<br>";
-                echo "1:".$data1."<br>";
-                echo "2:".$data2."<br>";
-                echo "3:".$data3."<br>";
-                echo "4:".$data4."<br>";
-                echo "5:".$data5."<br>";
-                echo "6:".$data6."<br>";
-                echo "7:".$data7."<br>";
-                echo "---------------------<br>";*/
-                
+				
+				if( ($data1 == '') || ($data1 == '-') )
+				{
+					$data1 = 0;				
+				}
+				
+				if( ($data2 == '') || ($data2 == '-') )
+				{
+					$data2 = 0;				
+				}
+				
+				if( ($data3 == '') || ($data3 == '-') )
+				{
+					$data3 = 0;				
+				}
+				
+				if( ($data4 == '') || ($data4 == '-') )
+				{
+					$data4 = 0;				
+				}
+				
+				if( ($data5 == '') || ($data5 == '-') )
+				{
+					$data5 = 0;				
+				}
+				
+				if( ($data6 == '') || ($data6 == '-') )
+				{
+					$data6 = 0;				
+				}
+				
+				if( ($data7 == '') || ($data7 == '-') )
+				{
+					$data7 = 0;				
+				}
+				
+				
+					if($province!='รวม (Total)')
+					{
+					
+					
+				
                         $data = array(
                           
                                "offense_aumphur" => "1" ,
@@ -72,9 +104,11 @@
                             );
                             
                             $this->opt->save($data);
-                
+					}
 
                 }
+
+
             $x1++;
             $i++;
             }

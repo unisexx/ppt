@@ -1,9 +1,9 @@
-<h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
+<h2>รายงานผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน</h2>
 
 <div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$_GET['WLIST'])?'สถาบัน '.$list[0]['name']:'ทุกสถาบัน';?></span>, 
-	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
+	<strong>ผลที่ค้นหา : </strong>ผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน แสดง 
+	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
+	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
 <div style='line-height:40px; text-align:right;'>
@@ -19,50 +19,26 @@
 		<th style='width:200px;'>รับเข้า</th>
 		<th style='width:200px;'>จำหน่าย</th>
 		<th style='width:200px;'>คงเหลือ</th>
-		<th style='width:200px;'>สะสม</th>
 	</tr>
 	<?
-	if((@$main_list[@$_GET['WLIST']]) == NULL) { $wlist = $main_list; }
-	else { $wlist[] = $main_list[$_GET['WLIST']]; }
-	
-	$total['target'] = $total['balance'] = $total['admission'] = $total['distribution'] = $total['remain'] = $total['build'] = 0;
-	for($i=0; $i<count($wlist); $i++)
+	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
+	foreach($result as $rs)
 	{
-		$res_['target'] = $res_['balance'] = $res_['admission'] = $res_['distribution'] = $res_['remain'] = $res_['build'] = 0;
-		$res_list = $this->welfare_list->where("NAME LIKE '%".$wlist[$i]."%'")->limit(1000)->get();
-		for($j=0; $j<count($res_list); $j++)
-		{
-			$res_qry = "SELECT * FROM WELFARE_DATA WHERE WLIST_ID LIKE '".$res_list[$j]['id']."'";
-			$res_qry .= ($ylist)?"AND YEAR LIKE '".$ylist."'":'';
-			$res_tmp = $this->welfare->limit(1000)->get($res_qry);
-			
-			for($k=0; $k<count($res_tmp); $k++)
-			{
-				$res_['target'] += $res_tmp[$k]['target'];
-				$res_['balance'] += $res_tmp[$k]['balance'];
-				$res_['admission'] += $res_tmp[$k]['admission'];
-				$res_['distribution'] += $res_tmp[$k]['distribution'];
-				$res_['remain'] += $res_tmp[$k]['remain'];
-				$res_['build'] += $res_tmp[$k]['build'];
-			}
-		}
-
-		$total['target'] += @$res_['target'];
-		$total['balance'] += @$res_['balance'];
-		$total['admission'] += @$res_['admission'];
-		$total['distribution'] += @$res_['distribution'];
-		$total['remain'] += @$res_['remain'];
-		$total['build'] += @$res_['build'];
+		$total['target'] += $rs['target'];
+		$total['balance'] += $rs['balance'];
+		$total['admission'] += $rs['admission'];
+		$total['distribution'] += $rs['distribution'];
+		$total['remain'] += $rs['remain'];
+		$total['build'] += $rs['build'];
 		?>
-		<tr>
-			<td><?=$wlist[$i];?></td>
-			<td><?=number_format($res_['target']);?></td>
-			<td><?=number_format($res_['balance']);?></td>
-			<td><?=number_format($res_['admission']);?></td>
-			<td><?=number_format($res_['distribution']);?></td>
-			<td><?=number_format($res_['remain']);?></td>
-			<td><?=number_format($res_['build']);?></td>
-		</tr>
+	 	<tr>
+			<td><?=$rs['title'];?></td>
+	 		<td><?=number_format($rs['target'], 0);?></td>
+	 		<td><?=number_format($rs['balance'], 0);?></td>
+	 		<td><?=number_format($rs['admission'], 0);?></td>
+	 		<td><?=number_format($rs['distribution'], 0);?></td>
+	 		<td><?=number_format($rs['remain'], 0);?></td>
+	 	</tr>
 		<?
 	}
 	?>
@@ -74,6 +50,7 @@
 		<td> <?=number_format(@$total['admission']);?> </td>
 		<td> <?=number_format(@$total['distribution']);?> </td>
 		<td> <?=number_format(@$total['remain']);?> </td>
-		<td> <?=number_format(@$total['build']);?> </td>
 	</tr>
 </table>
+
+<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการ

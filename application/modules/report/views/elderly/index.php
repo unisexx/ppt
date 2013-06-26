@@ -1,7 +1,4 @@
-<?
-
-?>
-<h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
+<h2>รายงานผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
@@ -12,14 +9,14 @@
 </form>
 
 <div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$_GET['WLIST'] || @$_GET['WLIST'] == 0)?'สถาบัน '.$main_list[0]:'ทุกสถาบัน';?></span>, 
-	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
+	<strong>ผลที่ค้นหา : </strong>ผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน แสดง 
+	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
+	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
 <div style='line-height:40px; text-align:right;'>
-	<a href='report/welfare/export_index?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/welfare/export_index/print?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+	<a href='report/elderly/export_index?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<a href='report/elderly/export_index/print?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
 	หน่วย : ราย
 </div>
 
@@ -32,7 +29,7 @@
 		<th style='width:200px;'>รับเข้า</th>
 		<th style='width:200px;'>จำหน่าย</th>
 		<th style='width:200px;'>คงเหลือ</th>
-		<th style='width:200px;'>สะสม</th>
+		<th style='width:200px; display:none;'>สะสม</th>
 	</tr>
 	<?
 	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
@@ -52,7 +49,7 @@
 	 		<td><?=number_format($rs['admission'], 0);?></td>
 	 		<td><?=number_format($rs['distribution'], 0);?></td>
 	 		<td><?=number_format($rs['remain'], 0);?></td>
-	 		<td><?=number_format($rs['build'], 0);?></td>
+	 		<td style='display:none;'><?=number_format($rs['build'], 0);?></td>
 	 	</tr>
 		<?
 	}
@@ -65,8 +62,8 @@
 		<td> <?=number_format(@$total['admission']);?> </td>
 		<td> <?=number_format(@$total['distribution']);?> </td>
 		<td> <?=number_format(@$total['remain']);?> </td>
-		<td> <?=number_format(@$total['build']);?> </td>
+		<td style='display:none;'> <?=number_format(@$total['build']);?> </td>
 	</tr>
 </table>
 
-<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการทุกหน้า ทุกสถาบัน
+<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการ

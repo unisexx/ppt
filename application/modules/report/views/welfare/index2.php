@@ -10,8 +10,8 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$main_list[$_GET['WLIST']])?'สถาบัน '.$main_list[$_GET['WLIST']]:'ทุกสถาบัน';?></span>, 
-	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
+	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
+	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
 <div style='line-height:40px; text-align:right;'>
@@ -29,7 +29,7 @@
 		<th style='width:200px;'>รับเข้า</th>
 		<th style='width:200px;'>จำหน่าย</th>
 		<th style='width:200px;'>คงเหลือ</th>
-		<th style='width:200px;'>สะสม</th>
+		<th style='width:200px; display:none;'>สะสม</th>
 	</tr>
 	<? 	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
 		foreach($rs as $rs) { 
@@ -47,7 +47,7 @@
 			<td><?=$rs['admission'];?></td>
 			<td><?=$rs['distribution'];?></td>
 			<td><?=$rs['remain'];?></td>
-			<td><?=$rs['build'];?></td>
+			<td style='display:none;'><?=$rs['build'];?></td>
 		</tr>
 	<? } ?>
 	<tr class="total">
@@ -57,8 +57,8 @@
 		<td> <?=number_format(@$total['admission']);?> </td>
 		<td> <?=number_format(@$total['distribution']);?> </td>
 		<td> <?=number_format(@$total['remain']);?> </td>
-		<td> <?=number_format(@$total['build']);?> </td>
+		<td style='display:none;'> <?=number_format(@$total['build']);?> </td>
 	</tr>
 </table>
 
-<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการทุกหน้า ทุกสถาบัน
+<b>แหล่งที่มา : </b>กรมพัฒนาสังคมและสวัสดิการ

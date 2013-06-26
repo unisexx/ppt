@@ -38,7 +38,7 @@
 	</tr>
 	<?	}	?>
 	
-	<tr class="total">
+	<tr class="total" style='display:none;'>
 		<td>รวม</td>
 		<td> <?=number_format(@$total['m']);?> </td>
 		<td> <?=number_format(@$total['f']);?> </td>

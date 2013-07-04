@@ -407,16 +407,66 @@ class Dla extends Public_Controller
         //header ('Content-type: text/html; charset=utf-8');
         $this->load->model('pregnant_model','pregnant');
         $temp_name = time().'.csv';
-        if(move_uploaded_file($_FILES["file"]["tmp_name"], 'uploads/'.$temp_name))
+        if(move_uploaded_file($_FILES["fl_import"]["tmp_name"], 'uploads/'.$temp_name))
         {
             set_time_limit(0);
-            $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
+            //$col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_ID', 'F_BIRTHDAY', 'F_ADDRESS');
+            $col = array('sex', 'weight', 'birthday', 'hospital_code', 'address_code', 'location', 'm_birthday', 'm_address_code', 'f_id', 'f_birthday', 'f_address_code');
             $f = csv_to_array('uploads/'.$temp_name, $col);
-            dbConvert($f);
-            foreach($f as $i) $this->pregnant->save($i);
+            
+            foreach($f as $data)
+            {
+                $data['year'] = $_POST['year'];
+                $data['line'] = $key;
+                //$data['id'] = $key;
+                $data['birthday'] = substr($data['birthday'], 0, 4).'-'.substr($data['birthday'], 4, 2).'-'.substr($data['birthday'], 6, 2);
+                $data['f_birthday'] = substr($data['f_birthday'], 0, 4).'-'.substr($data['f_birthday'], 4, 2).'-'.substr($data['f_birthday'], 6, 2);
+                $this->pregnant->save($data, TRUE);
+            } 
         }
     }
-
+    
+    public function ajax_csv($row = 0)
+    {
+        $this->load->model('pregnant_model','pregnant');
+        $col = array('sex', 'weight', 'birthday', 'hospital_code', 'address_code', 'location', 'm_birthday', 'm_address_code', 'f_id', 'f_birthday', 'f_address');
+        $csv = csv_to_array('52.csv', $col);
+        $id = $this->pregnant->save($csv[$row], TRUE);
+    }
+    
+    public function read_csv($row = 1)
+    {
+        $line = $row;
+        $row--;
+        $file = file('53.csv');
+        if(!empty($file[$row]))
+        {
+            $col = array('sex', 'weight', 'birthday', 'hospital_code', 'address_code', 'location', 'm_birthday', 'm_address_code', 'f_id', 'f_birthday', 'f_address_code');
+            $values = explode(',', $file[$row]);
+            //$values = array('check_null', $values);
+            $data = array_combine($col, $values);
+            $data = array_map('trim', $data);
+            header ('Content-type: text/html; charset=tis-620');
+            //$this->load->model('pregnant_model','pregnant');
+            $data['year'] = 2552;
+            $data['line'] = $line;
+            $data['id'] = $line;
+            $data['birthday'] = substr($data['birthday'], 0, 4).'-'.substr($data['birthday'], 4, 2).'-'.substr($data['birthday'], 6, 2);
+            $data['f_birthday'] = substr($data['f_birthday'], 0, 4).'-'.substr($data['f_birthday'], 4, 2).'-'.substr($data['f_birthday'], 6, 2);
+            $this->db->debug = true;
+            $this->db->autoexecute('c_pregnant', $data, 'INSERT');
+        }
+        else
+        {
+            echo 'empty';
+        }    
+    }
+    
+    public function csv()
+    {
+        $this->load->view('csv');
+    }
+    
     public function download()
     {
         $this->load->helper('download');

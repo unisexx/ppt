@@ -302,45 +302,54 @@ Class Child extends Public_Controller{
 		$data['menu_id']=$this->pregnant_menu_id;	
 		$this->template->build('pregnant/pregnant_import_form',$data);	
 	}
-	function pregnant_save_import(){
-		/* ; Maximum allowed size for uploaded files.
-			upload_max_filesize = 1024M   
-			; Must be greater than or equal to upload_max_filesize
-			post_max_size = 1024M  จาก 2M
-			 memmory_limit=1024M
-		 * */ 		
- 		 set_time_limit(0);    
-		 if($_FILES['fl_import']['name']!=''){
-			/*---for insert value to info table ---*/
-			$import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
-			$_POST['section_id'] = $import_section_id;
-			$_POST['menu_id']=$this->pregnant_menu_id;
-			$this->info->save($_POST);
-			/*--end--*/				
-							
-			if(empty($_POST['continue'])){
-				$this->db->execute("DELETE FROM C_PREGNANT WHERE YEAR='".$_POST['year_data']."'");				
-			}
-			$order_no=$this->db->GetOne("SELECT max(order_no)+1 FROM C_PREGNANT");	
-			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'child_pregnant_'.$_POST['year_data'].'-'.$order_no.date("Y_m_d_H_i_s").'.'.$ext;	
-			$uploaddir = 'import_file/child/pregnant/';
-			$fpicname = $uploaddir.$file_name;
-			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
-			//$data = $this->ImportData($uploaddir.$file_name,"pregnant");	
-			//$data	=$this->ImportDataCsv($uploaddir.$file_name);		                    
-	       $col = array('SEX', 'WEIGHT', 'BIRTHDAY', 'HOSPITAL_CODE', 'ADDRESS_CODE', 'LOCATION', 'M_BIRTHDAY', 'M_ADDRESS_CODE', 'F_BIRTHDAY','F_ADDRESS', 'F_ID');
-           $data = csv_to_array($fpicname, $col);
-		    dbConvert($data);	
-			//var_dump($data);								
-            foreach($data as $i) {
-            	$i['year']=$_POST['year_data'];	
-            	$this->pregnant->save($i);
-			}
-			logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
-			set_notify('success', lang('save_data_complete'));
+	function pregnant_save_import()
+	{
+	    set_time_limit(0);
+	    if(!empty($_FILES['fl_import']['name']))
+        {
+            $temp_name = time().'.csv';
+            if(move_uploaded_file($_FILES["fl_import"]["tmp_name"], 'uploads/'.$temp_name))
+            {   
+                // get max_id 
+                $max_id = $this->db->getone('select max(id) from c_pregnant');
+                $max_id = empty($max_id) ? 0 : $max_id;
+                
+                // delete year 
+                if(!empty($_POST['year_data'])) $this->db->execute("DELETE FROM C_PREGNANT WHERE \"YEAR\" = '".$_POST['year_data']."'");
+                
+                // save info
+                $_POST['section_id'] = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+                $this->info->save($_POST);
+                
+                $file = file('uploads/'.$temp_name);
+                foreach($file as $key => $f)
+                {
+                    if(empty($f))
+                    {
+                        break;
+                    }
+                    else
+                    {    
+                        $key++;
+                        $col = array('sex', 'weight', 'birthday', 'hospital_code', 'address_code', 'location', 'm_birthday', 'm_address_code', 'f_id', 'f_birthday', 'f_address_code');
+                        $values = explode(',', $f);
+                        $data = array_combine($col, $values);
+                        $data = array_map('trim', $data);
+                        $this->load->model('pregnant_model','pregnant');
+                        $data['year'] = $_POST['year_data'];
+                        $data['line'] = $key;
+                        $data['id'] = $max_id + $key;
+                        if(!empty($data['birthday'])) $data['birthday'] = substr($data['birthday'], 0, 4).'-'.substr($data['birthday'], 4, 2).'-'.substr($data['birthday'], 6, 2);
+                        if(!empty($data['f_birthday'])) $data['f_birthday'] = substr($data['f_birthday'], 0, 4).'-'.substr($data['f_birthday'], 4, 2).'-'.substr($data['f_birthday'], 6, 2);
+                        $this->db->autoexecute('c_pregnant', $data, 'INSERT');
+                    }
+                }
+            
+			    logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
+			    set_notify('success', lang('save_data_complete'));
+            }
 		}
-		//redirect('child/pregnant_import');	
+		redirect('child/pregnant_import');	
 	}
 	function birth(){
 		$this->template->build('birth_index');

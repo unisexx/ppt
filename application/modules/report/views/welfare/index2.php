@@ -10,8 +10,8 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
-	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
+	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
+	<span style='color:#F33;'><?=(empty($_GET['YEAR']))?'แสดงทุกปี':'ปี '.$_GET['YEAR'];?></span>
 </div>
 
 <div style='line-height:40px; text-align:right;'>
@@ -41,7 +41,10 @@
 			$total['build'] += $rs['build'];
 	?>
 		<tr>
-			<td><?=$rs['title'];?></td>
+			<td>
+				<?=$rs['title'];?>
+				<?=(empty($_GET['YEAR']))?' ( ปี พ.ศ.'.$rs['year'].' )':'';?>
+			</td>
 			<td><?=$rs['target'];?></td>
 			<td><?=$rs['balance'];?></td>
 			<td><?=$rs['admission'];?></td>

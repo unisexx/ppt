@@ -8,10 +8,10 @@
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
 </form>
-<?=$_GET['WLIST'];?>
+
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
+	<span style='color:#F33;'><?=(empty($_GET['WLIST']))?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
@@ -44,7 +44,11 @@
 		$total['build'] += $rs['build'];
 		?>
 	 	<tr>
-			<td><a href='report/welfare/report2/?WLIST=<?=$rs['id'];?>'><?=$rs['title'];?></a></td>
+			<td>
+				<? $rs['id'] = ($rs['title'] == 'อื่น ๆ')?6:$rs['id']; ?>
+				<a href='report/welfare/report2/?WLIST=<?=$rs['id'];?>'><?=$rs['title'];?></a>
+				
+			</td>
 	 		<td><?=number_format($rs['target'], 0);?></td>
 	 		<td><?=number_format($rs['balance'], 0);?></td>
 	 		<td><?=number_format($rs['admission'], 0);?></td>

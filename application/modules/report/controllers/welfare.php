@@ -77,6 +77,7 @@ class Welfare extends Public_Controller
 	{
 		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก", "อื่น ๆ");
 		$data['main_list'] = $cat_list;
+
 		//===== set year list group =====//
 		$year_list = $this->welfare->get('SELECT YEAR FROM WELFARE_DATA GROUP BY YEAR ORDER BY YEAR DESC');
 		for($i=0; $i<count($year_list); $i++) $data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
@@ -84,49 +85,29 @@ class Welfare extends Public_Controller
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
 		//===== set year list group =====//
 		
-		if(@$_GET['WLIST'] != '') $cat_list = array($cat_list[$_GET['WLIST']]);
-		foreach($cat_list as $cat_list_)
-		{
-			$qry_catlist = '';
-				if($cat_list_ == 'อื่น ๆ')
+		
+		$wf_qry = "SELECT WL.NAME title, WD.* FROM WELFARE_LIST WL JOIN WELFARE_DATA WD ON WL.ID = WD.WLIST_ID WHERE 1=1 ";
+				
+			if(@$cat_list[$_GET['WLIST']] == 'อื่น ๆ'){
+				$wf_qry .= "AND (";
+				foreach($cat_list as $key=>$rs)
 				{
-					for($i=0; $i<count($cat_list); $i++)
-						{
-							if($cat_list[$i] != 'อื่น ๆ')
-								{
-									if(@$cat_list[$i+1] && $i != 0) $qry_catlist .= 'AND ';
-									$qry_catlist .= "NAME NOT LIKE '".$cat_list[$i]."%' ";
-								} 
-						}
-				} else {
-					$qry_catlist .= "NAME LIKE'".$cat_list_."%'";
-						if($cat_list_ == 'สถานสงเคราะห์เด็ก') $qry_catlist .= " AND NAME NOT LIKE 'สถานสงเคราะห์เด็กอ่อน%'";
+					$wf_qry .= ($key==0)?'':'AND ';
+					$wf_qry .= "WL.NAME NOT LIKE '".$rs."%' ";
 				}
-			$rs_catlist = $this->welfare_list->where($qry_catlist)->get(false, true);
-			$welfare_list[] = $rs_catlist;
-		}
-		
-		//CONDITION
-			$_GET['WLIST'] = ((@!$_GET['WLIST'] && @$_GET['WLIST'] != 0) || @$_GET['WLIST'] == '')?NULL:$_GET['WLIST'];
-			$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
-			
-		
-		foreach($welfare_list as $rs)
-		{
-			foreach($rs as $key2=>$rs2)
-			{
-				$qry_rs2 = "SELECT TARGET, BALANCE, ADMISSION, DISTRIBUTION, REMAIN, BUILD FROM WELFARE_DATA WHERE WLIST_ID LIKE '".$rs2['id']."' AND YEAR LIKE '".$_GET['YEAR']."'";
-				$tmp_result = $this->welfare->get($qry_rs2, false); $tmp_result = $tmp_result[0];
-					$data['rs'][] = array(
-						'title' => $rs2['name'],
-						'target' => $tmp_result['target'],
-						'balance' => $tmp_result['balance'],
-						'admission' => $tmp_result['admission'],
-						'distribution' => $tmp_result['distribution'],
-						'remain' => $tmp_result['remain'],
-						'build' => $tmp_result['build']);
+				$wf_qry .= ") ";
+			} else if(@$cat_list[$_GET['WLIST']]) {
+				if($cat_list[$_GET['WLIST']] == 'สถานสงเคราะห์เด็ก') 
+					$wf_qry .= "AND (WL.NAME LIKE '".$cat_list[$_GET['WLIST']]."%' AND WL.NAME NOT LIKE 'สถานสงเคราะห์เด็กอ่อน%')";
+				else 
+					$wf_qry .= "AND (WL.NAME LIKE '".$cat_list[$_GET['WLIST']]."%')";
 			}
-		}
+		$wf_qry .= (empty($_GET['YEAR']))?'':"AND WD.YEAR LIKE '".$_GET['YEAR']."'";
+		$wf_qry .= " ORDER BY WL.NAME ASC";
+		
+		$wf_list = $this->welfare_list->get($wf_qry, true);
+		$data['rs'] = $wf_list;
+	
 		$this->template->build('welfare/index2', $data);
 	}
 	public function export_index($status=false)

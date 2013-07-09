@@ -302,14 +302,23 @@ Class Child extends Public_Controller{
 		$data['menu_id']=$this->pregnant_menu_id;	
 		$this->template->build('pregnant/pregnant_import_form',$data);	
 	}
+    
+    public function info()
+    {
+        phpinfo();
+    }
+    
 	function pregnant_save_import()
 	{
 	    set_time_limit(0);
+        ini_set("max_execution_time","600");
+        ini_set("memory_limit","20M");
 	    if(!empty($_FILES['fl_import']['name']))
         {
             $temp_name = time().'.csv';
             if(move_uploaded_file($_FILES["fl_import"]["tmp_name"], 'uploads/'.$temp_name))
-            {   
+            {
+                echo 'upload success';  
                 // get max_id 
                 $max_id = $this->db->getone('select max(id) from c_pregnant');
                 $max_id = empty($max_id) ? 0 : $max_id;
@@ -343,11 +352,11 @@ Class Child extends Public_Controller{
                         if(!empty($data['f_birthday'])) $data['f_birthday'] = substr($data['f_birthday'], 0, 4).'-'.substr($data['f_birthday'], 4, 2).'-'.substr($data['f_birthday'], 6, 2);
                         $this->db->autoexecute('c_pregnant', $data, 'INSERT');
                     }
-                }
+                } 
             
 			    logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
 			    set_notify('success', lang('save_data_complete'));
-            }
+            } else { echo 'upload fail'; }
 		}
 		redirect('child/pregnant_import');	
 	}

@@ -311,14 +311,13 @@ Class Child extends Public_Controller{
 	function pregnant_save_import()
 	{
 	    set_time_limit(0);
-        ini_set("max_execution_time","600");
-        ini_set("memory_limit","20M");
+        //ini_set("max_execution_time","600");
+        //ini_set("memory_limit","20M");
 	    if(!empty($_FILES['fl_import']['name']))
         {
             $temp_name = time().'.csv';
             if(move_uploaded_file($_FILES["fl_import"]["tmp_name"], 'uploads/'.$temp_name))
             {
-                echo 'upload success';  
                 // get max_id 
                 $max_id = $this->db->getone('select max(id) from c_pregnant');
                 $max_id = empty($max_id) ? 0 : $max_id;
@@ -356,7 +355,7 @@ Class Child extends Public_Controller{
             
 			    logs('นำเข้าข้อมูลเด็กตั้งครรภ์ก่อนวัยอันควร. ');
 			    set_notify('success', lang('save_data_complete'));
-            } else { echo 'upload fail'; }
+            }
 		}
 		redirect('child/pregnant_import');	
 	}

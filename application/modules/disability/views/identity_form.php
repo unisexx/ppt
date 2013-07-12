@@ -1,6 +1,6 @@
 <!--<h2>ข้อมูลกลุ่มเป้าหมาย1 - คนพิการ (เพิ่ม/แก้ไข)</h2>
 <h4>คนพิการที่มีบัตรประจำตัวคนพิการ <span class="gray">แบบ nep บัตรคนพิการ</span></h4>-->
-<?php echo menu::source($menu_id); ?>
+<?php echo menu::source($menu_id); ?> 
 <form action="disability/identity_save" method="post">
 <table class="tbadd">
 <tr>

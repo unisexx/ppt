@@ -55,6 +55,7 @@ $(document).ready(function(){
             	<h4>คนพิการ</h4>
                 <ul>
                 	<li><a href="report/dla/disabled">ปัญหาคนพิการในท้องถิ่น</a></li>
+                	<li><a href="report/disability/disabled">ปัญหาคนพิการในสถาบัน</a></li>
                 </ul>
             </div>
             <div class="data">

@@ -30,7 +30,7 @@ Class disabled extends Public_Controller{
 		function index()
 		{
 			$set_year = $this->welfare->get("SELECT YEAR FROM DISABLED_DATA GROUP BY YEAR ORDER BY YEAR DESC");
-			foreach($set_year as $set_year_) $data['set_year'][] = $set_year_['year'];
+			foreach($set_year as $set_year_) $data['set_year'][$set_year_['year']] = $set_year_['year'];
 			
 			$sql = 'SELECT * FROM DISABLED_DATA WHERE 1=1 ';
 				if(@$_GET['YEAR']) $sql .= "AND YEAR = ".$_GET['YEAR'].' ';

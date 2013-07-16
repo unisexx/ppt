@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="alien/alien_report">
- <?php echo form_dropdown('year', get_year_option(2555, null, 'ALIEN', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(2550, null, 'ALIEN', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>

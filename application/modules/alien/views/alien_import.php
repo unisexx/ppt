@@ -7,7 +7,7 @@
 	//error_reporting(0);
 	set_time_limit(0);
           $this->load->model('alien_model', 'opt');
-			$this->opt->delete();
+			//$this->opt->delete();
         include("source_import/reader.php"); 
 		
         $excel = new Spreadsheet_Excel_Reader();

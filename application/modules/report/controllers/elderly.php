@@ -23,6 +23,11 @@ class Elderly extends Public_Controller
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
 		//===== set year list group =====//
 
+		//CONDITION SEARCH
+		$_GET['WLIST'] = ((@!$_GET['WLIST'] && @$_GET['WLIST'] != 0) || @$_GET['WLIST'] == '')?NULL:$_GET['WLIST'];
+		$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
+
+
 
 		if(@$_GET['WLIST'] != '') $cat_list = array($cat_list[$_GET['WLIST']]);
 		
@@ -57,16 +62,16 @@ class Elderly extends Public_Controller
 			}
 			$qry_data .= ')';
 			
+			$qry_data .= (empty($_GET['year']))?" AND YEAR LIKE '".$_GET['YEAR']."'":'';
 
-			
 			$wdata = $this->elderly->get($qry_data, true);
 				$result[$key] = $wdata[0];
 				$result[$key]['title'] = $cat_list[$key];
 				$result[$key]['id'] = $key;
 			}
-			//CONDITION SEARCH
-			$_GET['WLIST'] = ((@!$_GET['WLIST'] && @$_GET['WLIST'] != 0) || @$_GET['WLIST'] == '')?NULL:$_GET['WLIST'];
-			$_GET['YEAR'] = (@!$_GET['YEAR'])?$year_list[0]['year']:$_GET['YEAR'];
+						
+			
+			
 			$qry_data .= (@$_GET['YEAR'])?"AND YEAR LIKE '".$_GET['YEAR']."'":'';
 
 		$data['result'] = $result;	

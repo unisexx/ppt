@@ -4,7 +4,7 @@
    <form method="get" action="offense/offense_report">
  <?php echo form_dropdown('year', get_year_option(2554, null, 'OFFENSES', 'OFFENSE_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
-		<?php echo form_dropdown('offense_type_id', get_option('id', 'offense_type_name', 'offense_type', '1=1 order by id'), @$_GET['offense_type_id'], null, '-- ทุกประเภท --'); ?>
+		<?php //echo form_dropdown('offense_type_id', get_option('id', 'offense_type_name', 'offense_type', '1=1 order by id'), @$_GET['offense_type_id'], null, '-- ทุกประเภท --'); ?>
     <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
    
@@ -75,6 +75,17 @@
  $all_etc = 0;
  $offense_all = 0;
  
+ $i=1;
+ 
+ 		// new liat data
+//$result1 = $this->opt->query("SELECT * FROM OFFENSES ORDER BY OFFENSE_YEAR DESC");
+
+/*        $sql = 'SELECT * FROM OFFENSES ORDER BY OFFENSE_YEAR DESC';
+        $result1 = $this->opt->get($sql);*/
+		
+/* $sql0 = 'SELECT * FROM OFFENSES';
+ $result10 = $this->opt->get($sql0,TRUE);*/
+		  
  foreach($result as $key => $item): $key += 1;
  
  $all_property = $all_property + $item['offense_property'];
@@ -84,6 +95,9 @@
  $all_drug = $all_drug + $item['offense_drug'];
  $all_weapon = $all_weapon + $item['offense_weapon'];
  $all_etc = $all_etc + $item['offense_etc'];
+ 
+ $i++;
+ 
  
  endforeach;
  
@@ -205,13 +219,16 @@ else
   <td><?php echo @number_format($offense_all); ?></td>
   </tr>
 
-
+<!--<tr class="total">
+  <td>จำนวน</td>
+  <td><?php echo @number_format($i); ?></td>
+  </tr>-->
 
 <?php } ?>
 
 </table>
 
-<div id="ref">ที่มา :</div>
+<div id="ref">ที่มา : ศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร  กรมพินิจและคุ้มครองเด็กและเยาวชน</div>
 
 <script>
     $(function(){

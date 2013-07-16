@@ -6,6 +6,9 @@ Class Offense extends Public_Controller{
 	function __construct(){
 		parent::__construct();
         $this->load->model('offense_model', 'opt');
+		$this->load->model('province_model', 'pmd');
+		
+		//$this->load->database();
 	}
 	
 
@@ -18,7 +21,20 @@ Class Offense extends Public_Controller{
         {
             
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
-            if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
+			
+			if(!empty($_GET['province_id']))
+			{
+				$tbpro = $this->pmd->get("select * from provinces where id=".$_GET['province_id']);
+			    foreach($tbpro as $key1 => $item1)
+			  	{
+				  $name_pro = $item1['province'];
+				  
+				}
+				
+				
+				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";		
+			}
+			
         }
         $sql = 'SELECT *
         FROM OFFENSES
@@ -97,7 +113,21 @@ Class Offense extends Public_Controller{
         {
             
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
-            if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
+            //if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
+			
+			if(!empty($_GET['province_id']))
+			{
+				$tbpro = $this->pmd->get("select * from provinces where id=".$_GET['province_id']);
+			    foreach($tbpro as $key1 => $item1)
+			  	{
+				  $name_pro = $item1['province'];
+				  
+				}
+				
+				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";	
+			}
+			
+			
         }
         $sql = 'SELECT
 		*
@@ -105,8 +135,8 @@ Class Offense extends Public_Controller{
 		OFFENSES
 		WHERE 1=1 '.$where.' 
         ORDER BY ID ASC';
-        $data['result'] = $this->opt->get($sql);
-        $data['pagination'] = $this->opt->pagination;
+        $data['result'] = $this->opt->get($sql,TRUE);
+        //$data['pagination'] = $this->opt->pagination;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
 		$this->template->build('child2', $data);	

@@ -14,8 +14,8 @@
 <div id="search">
   <div id="searchBox">
   	<form action="disability/identity">
-	    เดือน ปี ที่ข้อมูลอัพเดตล่าสุด
-		<?php echo form_dropdown('year',array_combine(range(2009,date('Y')),range(2552,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
+	    ข้อมูลถึงปี
+		<?php echo form_dropdown('year',array_combine(range(2010,date('Y')),range(2553,date('Y')+543)),@$_GET['year'],'','-- ทุกปี --'); ?>
 	    <?php
 	    $month_th = array( 1 =>'มกราคม',2 => 'กุมภาพันธ์',3=>'มีนาคม',4=>'เมษายน',5=>'พฤษภาคม',6=>'มิถุนายน',7=>'กรกฏาคม',8=>'สิงหาคม',9=>'กันยายน',10=>'ตุลาคม',11=>'พฤศจิกายน',12=>'ธันวาคม');
 	     echo form_dropdown('month',$month_th,@$_GET['month'],'','-- ทุกเดือน --'); ?>    

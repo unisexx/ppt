@@ -2,7 +2,7 @@
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
-		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 		<?=form_dropdown('WLIST', $main_list, @$_GET['WLIST'], null, '-- แสดงทั้งหมด --'); ?>
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>

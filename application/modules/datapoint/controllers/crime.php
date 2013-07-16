@@ -106,11 +106,57 @@ Class Crime extends Public_Controller{
 			$file_name = 'crime_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/datapoint/crime/';
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
-			$data = $this->ReadData($uploaddir.$file_name);
+			$data = $this->ReadData($uploaddir.$file_name, 1);
 			
-			$_POST['YEAR'] = $data[1][1];
-			$_POST['STATION'] = $data[0][1];
+			#$_POST['YEAR'] = $data[1][1];
+			#$_POST['STATION'] = $data[0][1];
 			
+			foreach($data as $sheet)
+			{
+				#=====Check Year=====#
+				unset($year_list);
+				foreach($sheet[1] as $tmp_yl)
+				{
+					if(!empty($tmp_yl) && $tmp_yl != 'จังหวัด')
+					{
+						$exp_yl = explode('พ.ศ.', $tmp_yl); $tmp_yl='';
+						foreach($exp_yl as $tmp_) $tmp_yl .= trim($tmp_);
+						$year_list[] = $tmp_yl;
+					}
+				}
+				#=====End CheckYear =====#
+				
+				foreach($year_list as $key=>$year)
+				{
+					$colum = 1;
+					$result['year'] = $year;
+					
+					for($i=2; $sheet[$i]; $i++)
+					{
+						$noti = $colum; $colum++;
+						$catch = $colum; $colum++;
+					
+					
+						echo $year.'/';
+						echo $noti.'/';
+						echo $catch;
+						#print_r($sheet[$i]); 
+						#echo $sheet[$i][$noti].'/'.$sheet[$i][$catch];
+						echo '<BR>';
+					}
+				}
+				#print_r($year_list);
+				
+				
+	echo '<pre>';
+	#print_r($sheet);
+	echo '</pre>';
+				echo '<HR>';
+			}
+			
+			
+			echo '<HR>';
+			return false;
 			if($_POST['YEAR'] && $_POST['STATION'])
 			{
 					$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
@@ -198,15 +244,21 @@ Class Crime extends Public_Controller{
 					$data -> read($filepath);
 					
 					error_reporting(E_ALL ^ E_NOTICE);		
-					$index = 0;
-					for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-						$cnt_colum = count($data->sheets[0]['cells'][$i]);
-						for($j=1; $j<=$cnt_colum; $j++)
-						{
-							$import[$index][] = trim($data -> sheets[0]['cells'][$i][$j]);		
+					
+					for($k=0; !empty($data->sheets[$k]); $k++)
+					{
+						//$import[$i] = ;
+						$index = 0;
+						for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+							$cnt_colum = count($data->sheets[0]['cells'][$i]);
+							for($j=1; $j<=$cnt_colum; $j++)
+							{
+								$import[$k][$index][] = trim($data -> sheets[$k]['cells'][$i][$j]);		
+							}
+							$index++;			
 						}
-						$index++;			
 					}
+					
 					return $import;	
 				}
 		function clear_repeat()

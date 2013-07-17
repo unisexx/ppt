@@ -1,25 +1,24 @@
-<h2>รายงาน จำนวนและอัตราผู้ป่วยสุขภาพจิต (ต่อประชากร 100,000 คน)</h2>
-
-<div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) แสดง จังหวัด  
+<link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
+<div id="resultsearch" style="text-align: center;">
+	รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) 
 	<span style='color:#F33;'>
-		<?=(@$province_)?'สถานีจังหวัด '.@$province_[0]['province']:'ทุกจังหวัด';	?>
+		<?=(@$province_)?'จังหวัด '.@$province_[0]['province']:'ทุกจังหวัด';	?>
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	หน่วย : ราย
+	หน่วย : คน
 </div>
 
-<table class='tbreport' border='1'>
+<table class='tbreport'>
 	<tr>
 		<td style='border:none;'></td>
-		<? for($i=0; $i<count($tbl_head); $i++) { ?><th style='font-weight:bold;' colspan='2'><?=$tbl_head[$i];?></th><? } ?>
+		<? for($i=0; $i<count($tbl_head); $i++) { ?><th style='font-weight:bold; text-align: center;' colspan='2'><?=$tbl_head[$i];?></th><? } ?>
 	</tr>
 	<tr>
-		<th style='width:200px;'>ปี</th>
+		<th style='width:200px; text-align: center;'>ปี</th>
 		<? for($i=0; $i<count($tbl_head); $i++) { ?>
-			<td style='font-weight:bold;'>จำนวน</td>
-			<td style='font-weight:bold;'>อัตรา</td>
+			<td style='font-weight:bold;' class="txtcen">จำนวน</td>
+			<td style='font-weight:bold;' class="txtcen">อัตรา</td>
 		<? } ?>
 	</tr>
 	
@@ -52,7 +51,7 @@
 		$res_ary = array('psy', 'fear', 'depress', 'retarded', 'apoplexy', 'drugadd', 'other', 'suicide', 'autism');
 	?>
 	<tr>
-		<td><?=$year_list[$i];?></td>
+		<td style="text-align: center;"><?=$year_list[$i];?></td>
 		<? 
 			$total['number'] = $total['rate'] = 0;
 			for($j=0; $j<count($res_ary); $j++) 
@@ -61,8 +60,8 @@
 				{
 					
 				?>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
 				<?	
 					$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
 					$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
@@ -70,8 +69,8 @@
 				else
 				{
 				?> 
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
 				<?
 					$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
 					$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
@@ -88,6 +87,9 @@
 </table>
 
 <div style='line-height:30px; margin-top:20px;'>
-	<div><strong>ที่มา : </strong> </div>
-	<div><strong>หมายเหตุ : </strong>  </div>
+	<div>ที่มา : กรมสุขภาพจิต กระทรวงสาธารณสุข</div>
+	<div>หมายเหตุ : กรุงเทพหมานคร ประกอบไปด้วยผู้ป่วยสุขภาพจิตในรพ. ของหน่วยงาน ดังต่อไปนี้ 
+รพ.ในสังกัดกรมสุภาพจิต, รพ.ในสังกัดกรุงเทพมหานคร, รพ.ในสังกัดกรมการแพทย์, รพ.สังกัดกระทรวงกลาโหม, รพ.สังกัดสำนักงานตำรวจแห่งชาติ  (รพ.ตำรวจ), รพ.สังกัดทบวงมหาวิทยาลัย</div>
+<div>ประมวลผลโดย : ระบบฐานข้อมูลทางสังคม</div>
+ 
 </div>

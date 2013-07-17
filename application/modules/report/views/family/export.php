@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
 <h3>รายงาน ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : <?=$family_key['title'];?> </h3>
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : 

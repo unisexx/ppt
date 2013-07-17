@@ -29,8 +29,13 @@
 </div>
 </FORM>
 
-<div id="btnBox"><input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/crime/import'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/crime/form/'" class="btn_add"/></div>
+
+<?php if(menu::perm($m['id'], 'add')): ?>
+	<div id="btnBox">
+		<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='datapoint/crime/import'" class="btn_import"/>
+		<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='datapoint/crime/form/'" class="btn_add"/>
+	</div>
+<?php endif; ?>
 
 
 <?=$pagination; ?>

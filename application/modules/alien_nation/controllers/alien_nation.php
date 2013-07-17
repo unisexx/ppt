@@ -16,6 +16,10 @@ Class Alien_nation extends Public_Controller{
             if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$_GET['year'];
         }
 		
+		$tmp_yl = $this->opt->get("SELECT ALIEN_YEAR FROM ALIEN_NATION GROUP BY ALIEN_YEAR ORDER BY ALIEN_YEAR DESC");
+		foreach($tmp_yl as $tmp_) $data['year_list'][$tmp_['alien_year']] = $tmp_['alien_year'];
+
+			
         $sql = 'SELECT *
 			FROM
 			ALIEN_NATION 

@@ -12,13 +12,17 @@ Class Alien extends Public_Controller{
 	    $where = '';
         if(!empty($_GET))
         {
-            
             if(!empty($_GET['year'])) $where .= ' AND ALIEN.ALIEN_YEAR = '.$_GET['year'];
         }
+		
+		$tmp_yl = $this->opt->get("SELECT ALIEN_YEAR FROM ALIEN GROUP BY ALIEN_YEAR ORDER BY ALIEN_YEAR DESC");
+		foreach($tmp_yl as $tmp_) $data['year_list'][$tmp_['alien_year']] = $tmp_['alien_year'];
+
+	
         $sql = 'SELECT
-*
-FROM
-ALIEN
+		*
+		FROM
+		ALIEN
 		WHERE 1=1 '.$where.' 
         ORDER BY ALIEN.ID ASC';
         // WHERE (FORM_ALL.T4161_M + FORM_ALL.T4161_F + FORM_ALL.T4162_M + FORM_ALL.T4162_F + FORM_ALL.T4163_M + FORM_ALL.T4163_F + FORM_ALL.T4164_M + FORM_ALL.T4164_F + FORM_ALL.T4165_M + FORM_ALL.T4165_F) > 0

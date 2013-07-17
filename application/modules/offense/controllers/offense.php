@@ -139,7 +139,7 @@ Class Offense extends Public_Controller{
         //$data['pagination'] = $this->opt->pagination;
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
-		$this->template->build('child2', $data);	
+		$this->template->build('xchild2', $data);	
 	}
 	
 	function offense_export($year=null,$province=null,$type=null)

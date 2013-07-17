@@ -45,4 +45,16 @@ class Elder_inmates extends Public_Controller
 		
 		$this->load->view('elder_inmates/export', $data);
 	}
+
+
+	function export_index()
+	{
+		$data['style'] = 'export';
+		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
+		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
+		$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+#		logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
+		$this->load->view('elder_inmates/index', $data);
+	}
 }

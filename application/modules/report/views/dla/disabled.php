@@ -39,19 +39,19 @@
 	</a>
 	<a href="javascript:print();">
 		<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
-	</a>หน่วย:ราย
+	</a>หน่วย : ราย
 </div>
 <?php endif; ?>
 
 <table class="tbreport">
 <tr>
-<th rowspan="2">สภาพ<?php echo $report_title; ?></th>
-<th colspan="3">จำนวน (ราย)</th>
+<th rowspan="2" class="txtcen">สภาพ<?php echo $report_title; ?></th>
+<th colspan="3" class="txtcen">จำนวน (ราย)</th>
 </tr>
 <tr>
-<td class="text-right">ชาย</td>
-<td class="text-right">หญิง</td>
-<td class="text-right">รวม</td>
+<td class="txtcen">ชาย</td>
+<td class="txtcen">หญิง</td>
+<td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">คนพิการที่ยังไม่ได้รับการจดทะเบียน</td>
@@ -73,7 +73,7 @@
   </tr>
 </table>
 
-<div id="ref">ที่มา :</div>
+<div id="ref">ที่มา : สำนักตรวจและประเมินผล สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์</div>
 
 <?php if(!empty($_GET['export'])): ?>
 </body>

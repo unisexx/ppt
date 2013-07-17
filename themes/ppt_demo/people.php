@@ -125,6 +125,24 @@
 			case 'poor_age_list':
 				include "modules/people/poor_age_list.php";
 			break;
+			case 'pledgee_form': //สถานธนานุเคราะห์  การให้บริการรับจำนำ
+				include "modules/people/pledgee_form.php";
+			break;
+			case 'pledgee_list':  
+				include "modules/people/pledgee_list.php";
+			break;
+			case 'unemployed_form': //ปกครองท้องถิ่น  จำนวนผู้ว่างงาน
+				include "modules/people/unemployed_form.php";
+			break;
+			case 'unemployed_list':  
+				include "modules/people/unemployed_list.php";
+			break;
+			case 'vacancy_form': //ปกครองท้องถิ่น  ตำแหน่งงานที่ว่าง
+				include "modules/people/vacancy_form.php";
+			break;
+			case 'vacancy_list':  
+				include "modules/people/vacancy_list.php";
+			break;
 			default :
 				include "modules/people/list.php";
  		    break;

@@ -39,7 +39,7 @@
 	</a>
 	<a href="javascript:print();">
 		<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
-	</a> หน่วย:ราย
+	</a> หน่วย : ราย
 </div>
 <?php endif; ?>
 
@@ -137,7 +137,7 @@
   </tr>
 </table>
 
-<div id="ref">ที่มา :</div>
+<div id="ref">ที่มา : สำนักตรวจและประเมินผล สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์</div>
 
 <?php if(!empty($_GET['export'])): ?>
 </body>

@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/cufon/cufon-yui.js"></script>
 <script type="text/javascript" src="js/cufon/supermarket_400.font.js"></script>
 <script type="text/javascript">
-	Cufon.replace('h1, h3, h4, h5');
+	Cufon.replace('h1, h3, h4, h5, .report p, #tabs li a');
 
 </script>
 
@@ -79,6 +79,32 @@ $(document).ready(function($){
 		$(function() {
 			$("#browser").treeview();
 		});
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+$(document).ready(function(){
+	$("#tabs li").click(function() {
+		//	First remove class "active" from currently active tab
+		$("#tabs li").removeClass('active');
+
+		//	Now add class "active" to the selected/clicked tab
+		$(this).addClass("active");
+
+		//	Hide all tab content
+		$(".tab_content").hide();
+
+		//	Here we get the href value of the selected tab
+		var selected_tab = $(this).find("a").attr("href");
+
+		//	Show the selected tab content
+		$(selected_tab).fadeIn();
+
+		//	At the end, we add return false so that the click on the link is not executed
+		return false;
+	});
+});
+/* ]]> */
 </script>
 
 

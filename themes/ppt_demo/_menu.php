@@ -1,6 +1,7 @@
 <div class="red">  
 <ul id="mega-menu-6" class="mega-menu">
-	<li><a href="dashboard.php">ข้อมูลภาพรวม</a></li>
+	<li><a href="situations.php">สถานการณ์ทางสังคม</a></li>
+    <li><a href="report.php">ข้อมูลรายงานสรุป</a></li>
 	<li><a href="#">ข้อมูลกลุ่มเป้าหมาย 1</a>
 		<ul>
 			<li><a href="#">เด็กและเยาวชน</a>
@@ -83,11 +84,11 @@
         	</li>
             <li><a href="#">ผู้ด้อยโอกาส</a>
                 <ul>
-                    <li><a href="recipient">ผู้รับบริการทางสังคม <img src="images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
+                    <li><a href="#">ผู้รับบริการทางสังคม <img src="images/ico_question.png" width="16" height="16" title="ฐานข้อมูลระบบงานบริการทางสังคม" class="vtip ico_quest" /></a></li>
                     <li><a href="#">ชุมชนผู้มีรายได้น้อย <img src="images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></li>
                     <li><a href="people.php?act=disadvantaged_list">ok_ผู้ด้อยโอกาสทางสังคม <img src="images/ico_question.png" width="16" height="16" title="สท." class="vtip ico_quest" /></a></li>
-                    <li><a href="#">จำนวนคนว่างงาน <img src="images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
-                    <li><a href="#">ตำแหน่งงานที่ว่าง <img src="images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
+                    <li><a href="people.php?act=unemployed_list">ok_จำนวนคนว่างงาน <img src="images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
+                    <li><a href="people.php?act=vacancy_list">ok_ตำแหน่งงานที่ว่าง <img src="images/ico_question.png" width="16" height="16" title="" class="vtip ico_quest" /></a></li>
                     <li><a href="people.php?act=poor_province_list">ok_คนยากจน (จังหวัด) <img src="images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                     <li><a href="people.php?act=poor_age_list">ok_คนยากจน (กลุ่มวัย) <img src="images/ico_question.png" width="16" height="16" title="แบบ สคช." class="vtip ico_quest" /></a></li>
                 </ul>
@@ -100,10 +101,9 @@
 			<li><a href="#">ข้อมูลทั่วไป</a>
 				<ul>
 					<li><a href="people.php?act=population_list">ok_ประชากร (คน) <img src="images/ico_question.png" width="16" height="16" title="สำนักบริหารงานทะเบียน กรมการปกครอง" class="vtip ico_quest" /></a></li>
-                    <li><a>ประชากร (คน) <img src="images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
                     <li><a>ประชากร (บ้าน) <img src="images/ico_question.png" width="16" height="16" title="สสช." class="vtip ico_quest" /></a></li>
                      <li><a>โครงการพัฒนาที่อยู่อาศัยของ กคช. <img src="images/ico_question.png" width="16" height="16" title="กคช." class="vtip ico_quest" /></a></a></li>
-                     <li><a>การให้บริการรับจำนำ <img src="images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
+                     <li><a href="people.php?act=pledgee_list">ok_การให้บริการรับจำนำ <img src="images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
                      <li><a>เงินทรัพย์จำนำ <img src="images/ico_question.png" width="16" height="16" title="สถานธนานุเคราะห์" class="vtip ico_quest" /></a></a></li>
 				</ul>
 			</li>
@@ -156,31 +156,13 @@
 	<li><a href="user.php">ผู้ใช้งานระบบ</a></li>
 	<li><a href="usertype.php">สิทธิ์การใช้งาน</a></li>
 	<li><a href="set_target.php">ข้อมูลพื้นฐานและกลุ่มเป้าหมาย</a></li>
+    <li><a href="set_import.php">นำชุดข้อมูลเข้า</a></li>
     <li><a href="set_province.php">จังหวัด</a></li>
     <li><a href="set_amphor.php">อำเภอ</a></li>
     <li><a href="set_tumbon.php">ตำบล</a></li>
 </ul>
 </li>
-<li><a href="#">รายงาน</a>
-<ul>
-	<li><a href="#">รายงาน 1</a>
-	<ul>
-		<li><a href="#">รายงาน Detail A</a></li>
-		<li><a href="#">รายงาน Detail B</a></li>
-	</ul>
-</li>
-<li><a href="#">รายงาน 2</a>
-	<ul>
-		<li><a href="#">รายงาน Detail C</a></li>
-	</ul>
-</li>
-	<li><a href="#">รายงาน 3</a>
-	<ul>
-		<li><a href="#">รายงาน Detail D</a></li>
-		<li><a href="#">รายงาน Detail E</a></li>
-		<li><a href="#">รายงาน Detail F</a></li>
-	</ul>
-</li>
+
 </ul>
 </li>
 </ul>

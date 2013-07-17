@@ -4,6 +4,11 @@ img { border:0;}
 .cursor { cursor:pointer;}
 .clear { clear:both;}
 
+a:link {color:#800000; text-decoration:none;}
+a:visited {color:#800000; text-decoration:none;}
+a:hover {color: #F60; text-decoration:none;}
+a:active {color: #800000; text-decoration:none;}
+
 #page { padding:0; width:98%; margin:0 auto;}
 #page h1 { font-family:supermarket; font-size:36px; text-align:center; font-weight:700; padding-top:140px;}
 #page h2 { font-family:supermarket; font-size:22px; font-weight:700; padding-top:10px; color:#fc7803;}
@@ -24,11 +29,24 @@ input[type=text]:focus, textarea:focus { background:#F9F9F9; border: solid 1px #
 #search img { margin-right:5px;}
 #searchBox select, #searchBox input, #searchBox textbox { margin-bottom:10px;}
 
+.report { float:left; display:inline; width:50%; padding:20px 0; text-align:center;}
+.report p { font-size:20px; margin:10px 0; display:block;}
+
+.data { display:inline-block; width:31%; margin:10px; vertical-align:top;}
+.data h4 { background:#502727; color:#FFF; padding:5px 10px;}
+.data ul { margin-left:10px;}
+.data li { background:url(../images/bullet.gif) no-repeat; margin:5px 0; padding-left:20px;}
+
 span.gray { color:#999}
 
 #btnBox { text-align:right;}
 #btnSave { margin-left:20%;}
 .ico_quest { margin-bottom:-3px;}
+
+#resultsearch { border:1px dashed #ccc; padding:10px; background-color:#FFC}
+#resultsearch label { color:#F30; padding:0 10px;}
+#ref { margin-top:20px;}
+#remark { margin:20px 0;}
 
 
 /************************* TABLE STYLE **************************************/
@@ -79,6 +97,52 @@ span.gray { color:#999}
 .tblist tr.topic {  background:url(../images/bg_topic.gif);}
 
 
+.tbreport
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	background: #fff;
+	margin:0;
+	margin-bottom:10px;
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+.tbreport th
+{
+	font-size: 16px;
+	font-weight: normal;
+	padding: 10px 5px 3px 5px;
+	border-top: 0px solid #ccc;
+	border-bottom: 2px solid #999;
+	border-left: 0px solid #ccc;
+	border-right: 0px solid #ccc;
+	text-align:left;
+	background-color:#fff;
+	color:#65358f;
+}
+.tbreport td
+{
+	color:#333;
+	padding:5px;
+	height:30px;
+	border-top: 0px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.tbreport td.B { font-weight:700;}
+.tbreport td strong { font-weight:700;}
+.tbreport td.red, span.red { color:#F00;}
+.tbreport tr:hover td,.tblist tr.active td {}
+.tbreport tr.total { border-top:2px dotted #666; border-bottom:2px dotted #666; font-weight:700; background:url(../images/bg_pattern.png);}
+.tbreport td.topic { background:#F5F5F5;}
+.tbreport td.topic p { padding:5px 0 5px 15px;}
+.tbreport td a:link {color:#800000; text-decoration:underline;}
+.tbreport td a:visited {color:#800000; text-decoration:underline;}
+.tbreport td a:hover {color: #F60; text-decoration:underline;}
+.tbreport td a:active {color: #800000; text-decoration:underline;}
 
 .tbadd
 {
@@ -150,3 +214,71 @@ span.gray { color:#999}
 }
 
 /* END PageBar */
+
+
+/************************* TAB STYLE **************************************/
+
+#tabs_wrapper {
+	width: 99%;
+}
+#tabs_container {
+	border-bottom: 1px solid #ccc;
+}
+#tabs {
+	list-style: none;
+	padding: 5px 0 4px 0;
+	margin: 0 0 0 10px;
+	font: 0.75em arial;
+}
+#tabs li {
+	display: inline;
+}
+#tabs li a {
+	border: 1px solid #ccc;
+	padding: 5px 20px;
+	text-decoration: none;
+	background-color: #eeeeee;
+	border-bottom: none;
+	outline: none;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	font-size:18px;
+	color:#369;
+}
+#tabs li a:hover {
+	background-color: #dddddd;
+	padding: 10px 25px;
+}
+#tabs li.active a {
+	border-bottom: 1px solid #fff;
+	background-color: #fff;
+	padding: 10px 25px;
+	border-bottom: none;
+}
+#tabs li.active a:hover {
+	background-color: #eeeeee;
+	padding: 10px 25px;
+	border-bottom: none;
+}
+
+#tabs li a.icon_accept {
+	background-image: url(accept.png);
+	background-position: 5px;
+	background-repeat: no-repeat;
+	padding-left: 24px;
+}
+#tabs li a.icon_accept:hover {
+	padding-left: 24px;
+}
+
+#tabs_content_container {
+	border: 1px solid #ccc;
+	border-top: none;
+	padding: 10px;
+	width: 99%;
+}
+.tab_content {
+	display: none;
+}

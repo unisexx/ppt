@@ -19,10 +19,10 @@
 </div>
 <table class='tbreport'>
 	<tr>
-		<th style='width:400px;'>จังหวัด</th>
-		<th style='width:200px;'>ชาย</th>
-		<th style='width:200px;'>หญิง</th>
-		<th style='width:200px;'>รวม</th>
+		<th style='width:300px;' class="txtcen">จังหวัด</th>
+		<th style='width:200px;' class="txtcen">ชาย</th>
+		<th style='width:200px;' class="txtcen">หญิง</th>
+		<th style='width:200px;' class="txtcen">รวม</th>
 	</tr>
 	<?
 	$pv_list = $this->province->limit(100)->get("SELECT id, province FROM PROVINCES ORDER BY PROVINCE ASC");
@@ -54,17 +54,18 @@
 		?>
 		<tr class='topic'>
 			<td><?=$pv_list[$i]['province'];?></td>
-			<td><?=number_format($result['m']);?></td>
-			<td><?=number_format($result['f']);?></td>
-			<td><?=number_format($result['sum']);?></td>
+			<td class="txtright"><?=number_format($result['m']);?></td>
+			<td class="txtright"><?=number_format($result['f']);?></td>
+			<td class="txtright"><?=number_format($result['sum']);?></td>
 		</tr>
 		<?
 	}
 	?>
 	<tr class="total">
 		<td>รวม</td>
-		<td> <?=number_format(@$total['m']);?> </td>
-		<td> <?=number_format(@$total['f']);?> </td>
-		<td> <?=number_format(@$total['sum']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['m']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['f']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['sum']);?> </td>
 	</tr>
 </table>
+<div>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>

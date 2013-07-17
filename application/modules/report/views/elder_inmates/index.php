@@ -1,12 +1,16 @@
 <h2>รายงานผู้ต้องขังสูงอายุ</h2>
 
-
+<div style='line-height:40px; text-align:right;'>
+	<a href='report/elder_inmates/export?year=<?=@$_GET['year'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<a href='report/elder_inmates/export/print?year=<?=@$_GET['year'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+	หน่วย : ราย
+</div>
 <table class='tbreport'>
 	<tr>
-		<th style='width:400px;'>ปี</th>
-		<th style='width:200px;'>ชาย</th>
-		<th style='width:200px;'>หญิง</th>
-		<th style='width:200px;'>รวม</th>
+		<th style='width:300px;' class="txtcen">ปี</th>
+		<th style='width:200px;' class="txtcen">ชาย</th>
+		<th style='width:200px;' class="txtcen">หญิง</th>
+		<th style='width:200px;' class="txtcen">รวม</th>
 	</tr>
 
 	<?
@@ -32,9 +36,9 @@
 	?>
 	<tr>
 		<td><a href="report/elder_inmates/report2?year=<?=$i;?>" target="_blank"> <?=$set_year[$i];?> </a></td>
-		<td><?=number_format($get_result[0]['m']);?></td>
-		<td><?=number_format($get_result[0]['f']);?></td>
-		<td><?=number_format($get_result[0]['sum']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['m']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['f']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['sum']);?></td>
 	</tr>
 	<?	}	?>
 	
@@ -45,3 +49,5 @@
 		<td> <?=number_format(@$total['sum']);?> </td>
 	</tr>
 </table>
+
+<div>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>

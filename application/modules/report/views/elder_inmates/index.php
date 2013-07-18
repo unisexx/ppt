@@ -1,12 +1,55 @@
+<?
+	if(!empty($style))
+	{
+		if($style == 'export')
+		{
+			?>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<style type='text/css'>
+			table tr td, table tr th
+			{
+				border:solid 1px #000;
+				border-left:none;
+				border-bottom:none;
+			}
+			table
+			{
+				border:solid 1px #000;
+				border-right:none; border-top:none;
+				width:100%;
+			}
+			</style>
+			<?
+		}
+	}
+?>
+
+<style type='text/css'>
+	@media print
+	{
+		.print_hide { display:none; }
+	}
+	
+	@media screen
+	{
+		.screen_hide { display:none; }
+	}
+</style>
 <h2>รายงานผู้ต้องขังสูงอายุ</h2>
 
-
-<table class='tbreport'>
+<div style='line-height:40px; text-align:right;' class='print_hide'>
+	<a href='report/elder_inmates/export_index' target='_blank'>
+		<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
+	</a>
+		<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
+	หน่วย : ราย
+</div>
+<table class='tbreport' cellpadding="0" cellspacing="0">
 	<tr>
-		<th style='width:400px;'>ปี</th>
-		<th style='width:200px;'>ชาย</th>
-		<th style='width:200px;'>หญิง</th>
-		<th style='width:200px;'>รวม</th>
+		<th style='width:300px;' class="txtcen">ปี</th>
+		<th style='width:200px;' class="txtcen">ชาย</th>
+		<th style='width:200px;' class="txtcen">หญิง</th>
+		<th style='width:200px;' class="txtcen">รวม</th>
 	</tr>
 
 	<?
@@ -31,10 +74,13 @@
 		$total['sum'] += $get_result[0]['sum'];
 	?>
 	<tr>
-		<td><a href="report/elder_inmates/report2?year=<?=$i;?>" target="_blank"> <?=$set_year[$i];?> </a></td>
-		<td><?=number_format($get_result[0]['m']);?></td>
-		<td><?=number_format($get_result[0]['f']);?></td>
-		<td><?=number_format($get_result[0]['sum']);?></td>
+		<td>
+			<a href="report/elder_inmates/report2?year=<?=$i;?>" class='print_hide' target="_blank"> <?=$set_year[$i];?> </a>
+			<span class='screen_hide'><?=$set_year[$i];?></span>
+		</td>
+		<td class="txtright"><?=number_format($get_result[0]['m']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['f']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['sum']);?></td>
 	</tr>
 	<?	}	?>
 	
@@ -45,3 +91,5 @@
 		<td> <?=number_format(@$total['sum']);?> </td>
 	</tr>
 </table>
+
+<div style='margin-top:20px;'>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>

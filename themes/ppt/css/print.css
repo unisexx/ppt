@@ -1,6 +1,7 @@
 @media print { 
-	#head, #tool-info, #search, div.red {
-		display:none;
+	#head, #tool-info, #search, div.red, #resultsearch b, h3 {
+		display:none; 
 	} 
 }
+
 

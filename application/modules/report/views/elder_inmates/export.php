@@ -1,18 +1,17 @@
-<h2>รายงานผู้ต้องขังสูงอายุ</h2>
-
+<link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
 <div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>ผู้ต้องขังสูงอายุ  แสดง
+	ผู้ต้องขังสูงอายุ  แสดง
 	<span style='color:#F33;'><?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></span>
 </div>
 <div style='line-height:40px; text-align:right;'>
-	หน่วย : ราย
+	หน่วย  : ราย
 </div>
-<table class='tbreport' border='1'>
+<table class='tbreport'>
 	<tr>
-		<th style='width:400px;'>จังหวัด</th>
-		<th style='width:200px;'>ชาย</th>
-		<th style='width:200px;'>หญิง</th>
-		<th style='width:200px;'>รวม</th>
+		<th style='width:400px;' class="txtcen">จังหวัด</th>
+		<th style='width:200px;' class="txtcen">ชาย</th>
+		<th style='width:200px;' class="txtcen">หญิง</th>
+		<th style='width:200px;' class="txtcen">รวม</th>
 	</tr>
 	<?
 	$pv_list = $this->province->limit(100)->get("SELECT id, province FROM PROVINCES ORDER BY PROVINCE ASC");
@@ -44,17 +43,19 @@
 		?>
 		<tr class='topic'>
 			<td><?=$pv_list[$i]['province'];?></td>
-			<td><?=number_format($result['m']);?></td>
-			<td><?=number_format($result['f']);?></td>
-			<td><?=number_format($result['sum']);?></td>
+			<td class="txtright"><?=number_format($result['m']);?></td>
+			<td class="txtright"><?=number_format($result['f']);?></td>
+			<td class="txtright"><?=number_format($result['sum']);?></td>
 		</tr>
 		<?
 	}
 	?>
 	<tr class="total" style='font-weight:bold;'>
 		<td>รวม</td>
-		<td> <?=number_format(@$total['m']);?> </td>
-		<td> <?=number_format(@$total['f']);?> </td>
-		<td> <?=number_format(@$total['sum']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['m']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['f']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['sum']);?> </td>
 	</tr>
 </table>
+<div>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>
+<div>ประมวลผลโดย : ระบบฐานข้อมูลทางสังคม</div>

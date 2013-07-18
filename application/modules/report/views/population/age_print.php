@@ -1,10 +1,10 @@
 <html>
 	<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="../../themes/ppt/css/style.css"/>
 	</head>
 	<body>
-<h3>รายงาน สถิติประชากรรายอายุ </h3>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> สถิติประชากรรายอายุ   จังหวัด
+<div id="resultsearch">สถิติประชากรรายอายุ   จังหวัด
     
 <label><? echo empty($_GET['year_data'])? "ทุกปี" : @$_GET['year_data'];?></label> 
   จังหวัด
@@ -16,12 +16,12 @@
  หน่วย:ราย
 </div>
 
-<table width="650" border="1">
+<table class="tbreport">
 <tr>
-<th>อายุ (ปี)</th>
-<th>ชาย</th>
-<th>หญิง</th>
-<th>รวม</th>
+<th class="txtcen">อายุ (ปี)</th>
+<th class="txtcen">ชาย</th>
+<th class="txtcen">หญิง</th>
+<th class="txtcen">รวม</th>
 </tr>
 <? 
 $xtotal_male = 0;

@@ -31,6 +31,7 @@ Class Crime extends Public_Controller{
 		$data['monthth_array'] = array('มกราคม', "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
 		$data['station_title'] = array('บช.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
 		$data['case_title'] = array("คดีอุกฉกรรณ์และสะเทือนขวัญ", "คดีชีวิต ร่างกาย และเพศ", "คดีประทุษร้ายต่อทรัพย์", "คดีน่าสนใจ", "คดีรัฐเป็นผู้เสียหาย");
+		
 		$data['case_id'] = array(1, 2, 3, 4, 5);
 		$data['pv_list'] = $this->province->limit(80)->get('SELECT * FROM PROVINCES WHERE ID != 1');
 		
@@ -97,6 +98,7 @@ Class Crime extends Public_Controller{
 	
 		function upload()
 		{
+			$data['content'] = '';
 			$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
 
             $this->info->save($_POST);
@@ -107,15 +109,22 @@ Class Crime extends Public_Controller{
 			$uploaddir = 'import_file/datapoint/crime/';
 			move_uploaded_file($_FILES['file_import']['tmp_name'], $uploaddir.'/'.$file_name);
 			$data = $this->ReadData($uploaddir.$file_name, 1);
-			
-			#$_POST['YEAR'] = $data[1][1];
-			#$_POST['STATION'] = $data[0][1];
-			
-			foreach($data as $sheet)
+			$case_title = array("คดีอุกฉกรรณ์และสะเทือนขวัญ", "คดีชีวิต ร่างกาย และเพศ", "คดีประทุษร้ายต่อทรัพย์", "คดีน่าสนใจ", "คดีรัฐเป็นผู้เสียหาย");
+			unlink($uploaddir.'/'.$file_name);
+			/*
+				 * 0 : อุกฉกรรจ์
+				 * 1 : ชีวิต ร่างกาย
+				 * 2 : ประทุศร้ายต่อทรัพย์
+				 * 3 : คดีที่น่าสนใจ
+				 * 4 : รัฐเป็นผู้เสียหาย
+			*/
+
+$a_count = 0;
+			foreach($data as $case=>$sheet)
 			{
 				#=====Check Year=====#
 				unset($year_list);
-				foreach($sheet[1] as $tmp_yl)
+				foreach($sheet[0] as $tmp_yl)
 				{
 					if(!empty($tmp_yl) && $tmp_yl != 'จังหวัด')
 					{
@@ -125,100 +134,49 @@ Class Crime extends Public_Controller{
 					}
 				}
 				#=====End CheckYear =====#
-				unset($sheet[0], $sheet[1], $sheet[2]);
-				foreach($sheet as $row)
-				{
-					print_r($row);
-					echo '<BR>';
-				}
-				
-				
-	echo '<pre>';
-	#print_r($sheet);
-	echo '</pre>';
-				echo '<HR>';
-			}
-			
-			
-			echo '<HR>';
-			return false;
-			if($_POST['YEAR'] && $_POST['STATION'])
-			{
-					$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
-					
-	
-							$pointer_ary = array(4, 10, 17, 28, 40);
-							$pdata_ary = array(0, 2, 4, 6, 8, 10, 12, 17, 19, 21, 23, 25, 27);
-							
-							$result[] = $_POST;
-							#$_POST['STATION_ID'] = $this->station->save($_POST);
-							
-							$chk_repeat_tmp = $this->station->where("YEAR LIKE '".$_POST['YEAR']."' AND STATION LIKE '".$_POST['STATION']."'");
-							
-														
-							
-							unset($_POST['YEAR'], $_POST['STATION']);
-							
-							for($j=0; $j<count($pointer_ary); $j++)
+
+					foreach($sheet as $key=>$row)
+					{
+						if($key>2)
+						{
+							$colum = 1;
+							foreach($year_list as $year)
 							{
-								$_POST['CASE_ID'] = ($j+1);
+								$noti = $colum; $colum++;
+								$catch = $colum; $colum++;
 								
-								
-								for($i=1; $i<=12; $i++)
-								{
-									$_POST['MONTH'] = $i;
-									$_POST['NOTIFIED'] = $data[$pointer_ary[$j]][($pdata_ary[$i]-1)];
-									$_POST['CATCH'] = $data[$pointer_ary[$j]][$pdata_ary[$i]];
-									
-									$result2[] = $_POST;
-									
-									#$chk_repeat_tmp = $this->statistic->where()->get();
-#									print_r($_POST);
-#									echo '<BR>';
-									#$this->statistic->save($_POST);
+								$rs['station'] = array(
+									'year'=>trim($year), 
+									'station'=>$row[0],
+									'case'=>$case+1,
+									'notified'=>$row[$noti],
+									'catch'=>$row[$catch]
+								);
+								$chk_station = $this->station->where("YEAR LIKE '".$rs['station']['year']."' AND STATION LIKE '".$rs['station']['station']."'")->get();
+								# AFTER UPDATE DATABASE
+									##:"YEAR LIKE '".$rs['station']['year']."' AND STATION LIKE '".$rs['station']['station']."' AND CATCH LIKE '".$rs['station']['catch']."'"
+								if(count($chk_station) == 0) {
+									#$rs['station']['id'] = $this->station->save($rs['station']);
+									$data['content'] .= '<span>';
+									$data['content'] .= 'เพิ่มข้อมูล จังหวัด '.$rs['station']['station'].' ปี พ.ศ. '.$rs['station']['year'].' '.$case_title[$rs['station']['case']];
+									$data['content'] .= '</span><HR>';
+								} else {
+									#$rs['station']['id'] = $chk_station[0]['id'];
+									#$this->station->save($rs['station']['id']);
+									$data['content'] .= '<span>';
+									$data['content'] .= 'แก้ไขข้อมูล จังหวัด '.$rs['station']['station'].' ปี พ.ศ. '.$rs['station']['year'].' '.$case_title[$rs['station']['case']];
+									$data['content'] .= '</span><HR>';
 								}
 							}
-				} 
-				unlink($uploaddir.'/'.$file_name);
-				
-				
-				if(count($chk_repeat_tmp) >= 1)
-				{
-					?><script language='javascript'>
-						if(!confirm('พบการนำเข้าข้อมูลจำนวน <?=count($result);?> รายการ เป็นข้อมูลที่มีอยู่แล้ว <?=count($chk_repeat_tmp);?> รายการ หากยืนยันจะดำเนินการต่อ ข้อมูลเก่าจะถูกแทนที่ด้วยข้อมูลใหม่ในทันที'))
-						{
-							alert('ปฏิเสธการบันทึกข้อมูล');
-							window.location="../crime/import";
-							return false;
 						}
-						
-					</script><?
-				}
+					}				
+			}
+			
+			echo $return_log;
+			
 				
-				for($i=0; $i<count($result); $i++)
-				{
-					$old_data = $this->station->where("YEAR LIKE '".$result[$i]['YEAR']."' AND STATION LIKE '".$result[$i]['STATION']."'")->get();
-					if(count($old_data) >= 1)
-						{
-							for($j=0; $j<count($old_data); $j++) 
-								{ $this->statistic->where("STATISTIC_ID LIKE '".$result[$i]['STATION']."'")->delete(); } 
-						}
-						
-					$this->station->where("YEAR LIKE '".$result[$i]['YEAR']."' AND STATION LIKE '".$result[$i]['STATION']."'")->delete();
-					
-					$id = $this->station->save($result[$i]);
-					for($j=0; $j<count($result2); $j++)
-					{
-						$result2[$j]['STATION_ID'] = $id;
-						$this->statistic->save($result2[$j]);
-					}
-				}
-				
-				$data['content'] = "<div style='line-height:30px; font-weight:bold;'>บันทึกข้อมูล จังหวัด ".$result[0]['STATION']." ปี ".$result[0]['YEAR']." เสร็จสิ้น</div>";
-
-				
-				#set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
-				$this->template->build('mental/upload.php', $data);
+			#set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
+			$this->template->build('mental/upload.php', $data);
 		}
 		
 				function ReadData($filepath)
@@ -234,16 +192,17 @@ Class Crime extends Public_Controller{
 					{
 						//$import[$i] = ;
 						$index = 0;
-						for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
-							$cnt_colum = count($data->sheets[0]['cells'][$i]);
-							for($j=1; $j<=$cnt_colum; $j++)
+						for($i = 2; $i <= $data -> sheets[0]['numRows']; $i++) 
+						{
+							$index2 = 0;
+							for($j=1; !empty($data->sheets[$k]['cells'][$i][$j]) || !empty($data->sheets[$k]['cells'][$i][$j+1]); $j++)
 							{
-								$import[$k][$index][] = trim($data -> sheets[$k]['cells'][$i][$j]);		
+								$import[$k][$index][$index2] = $data->sheets[$k]['cells'][$i][$j];
+								$index2++;
 							}
-							$index++;			
+						$index++;
 						}
 					}
-					
 					return $import;	
 				}
 		function clear_repeat()

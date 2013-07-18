@@ -8,27 +8,27 @@
 </form>
 
 <div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) แสดง จังหวัด  
+	<strong>ผลที่ค้นหา : </strong>รายงานจำนวนและอัตราผู้ป่วยสุขภาพจิต(ต่อ 100,000 คน) 
 	<span style='color:#F33;'>
-		<?=(@$province_)?'สถานีจังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
+		<?=(@$province_)?'จังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
 	</span>
 </div>
 <div style='line-height:40px; text-align:right;'>
 	<a href='report/mental/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/mental/export/print?province=<?=@$_GET['province'];?>'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
-	หน่วย : ราย
+	<a href='report/mental/export/print?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+	หน่วย : คน
 </div>
 
 <table class='tbreport'>
 	<tr>
 		<td style='border:none;'></td>
-		<? for($i=0; $i<count($tbl_head); $i++) { ?><th style='font-weight:bold;' colspan='2'><?=$tbl_head[$i];?></th><? } ?>
+		<? for($i=0; $i<count($tbl_head); $i++) { ?><th style='font-weight:bold; text-align: center;' colspan='2'><?=$tbl_head[$i];?></th><? } ?>
 	</tr>
 	<tr>
-		<th style='width:200px;'>ปี</th>
+		<th style='width:200px; text-align: center;'>ปี</th>
 		<? for($i=0; $i<count($tbl_head); $i++) { ?>
-			<td style='font-weight:bold;'>จำนวน</td>
-			<td style='font-weight:bold;'>อัตรา</td>
+			<td style='font-weight:bold;' class="txtcen">จำนวน</td>
+			<td style='font-weight:bold;' class="txtcen">อัตรา</td>
 		<? } ?>
 	</tr>
 	
@@ -61,7 +61,7 @@
 		$res_ary = array('psy', 'fear', 'depress', 'retarded', 'apoplexy', 'drugadd', 'other', 'suicide', 'autism');
 	?>
 	<tr>
-		<td><?=$year_list[$i];?></td>
+		<td class="txtcen"><?=$year_list[$i];?></td>
 		<? 
 			$total['number'] = $total['rate'] = 0;
 			for($j=0; $j<count($res_ary); $j++) 
@@ -70,8 +70,8 @@
 				{
 					
 				?>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
 				<?	
 					$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
 					$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
@@ -79,8 +79,8 @@
 				else
 				{
 				?> 
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
-					<td><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
+					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
 				<?
 					$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
 					$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
@@ -88,8 +88,8 @@
 				
 			}
 		?>
-		<td><?=number_format($total['number']);?></td>
-		<td><?=number_format($total['rate']);?></td>
+		<td class="txtright"><?=number_format($total['number']);?></td>
+		<td class="txtright"><?=number_format($total['rate']);?></td>
 	</tr>
 	<?	
 	}
@@ -97,6 +97,7 @@
 </table>
 
 <div style='line-height:30px; margin-top:20px;'>
-	<div><strong>ที่มา : </strong> </div>
-	<div><strong>หมายเหตุ : </strong> </div>
+	<div>ที่มา : กรมสุขภาพจิต กระทรวงสาธารณสุข</div>
+	<div>หมายเหตุ : กรุงเทพหมานคร ประกอบไปด้วยผู้ป่วยสุขภาพจิตในรพ. ของหน่วยงาน ดังต่อไปนี้ 
+รพ.ในสังกัดกรมสุภาพจิต, รพ.ในสังกัดกรุงเทพมหานคร, รพ.ในสังกัดกรมการแพทย์, รพ.สังกัดกระทรวงกลาโหม, รพ.สังกัดสำนักงานตำรวจแห่งชาติ  (รพ.ตำรวจ), รพ.สังกัดทบวงมหาวิทยาลัย </div>
 </div>

@@ -1,22 +1,22 @@
 <html>
 	<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="../../themes/ppt/css/style.css"/>
 	</head>
 	<body>
-<h3>รายงาน แนวโน้มประชากร </h3>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> แนวโน้มประชากร   จังหวัด
-    <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label>
+<div id="resultsearch">แนวโน้มประชากร 
+    <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : 'จังหวัด '.iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label>
 </div>
 <div style="padding:10px; text-align:right;">
-  หน่วย:ราย
+  หน่วย : ราย
 </div>
 
-<table width="650" border="1">
+<table class="tbreport">
     <tr>
-        <th>ปี</th>
-        <th>ชาย</th>
-        <th>หญิง</th>
-        <th>รวม</th>
+        <th class="txtcen">ปี</th>
+        <th class="txtcen">ชาย</th>
+        <th class="txtcen">หญิง</th>
+        <th class="txtcen">รวม</th>
     </tr>
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>

@@ -3,6 +3,8 @@ html,body { font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#333;}
 img { border:0;}
 .cursor { cursor:pointer;}
 .clear { clear:both;}
+.txtcen {text-align: center;}
+.txtright {text-align: right;}
 
 #page { padding-bottom:20px; width:98%; margin:0 auto;}
 #page h1 { font-family:supermarket; font-size:36px; text-align:center; font-weight:700; padding-top:140px;}
@@ -138,6 +140,8 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 .tbreport td a:visited {color:#800000; text-decoration:underline;}
 .tbreport td a:hover {color: #F60; text-decoration:underline;}
 .tbreport td a:active {color: #800000; text-decoration:underline;}
+.tbreport .txtcen {text-align: center;}
+.tbreport .txtright {text-align: right;}
 
 .tbadd
 {

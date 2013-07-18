@@ -125,27 +125,12 @@ Class Crime extends Public_Controller{
 					}
 				}
 				#=====End CheckYear =====#
-				
-				foreach($year_list as $key=>$year)
+				unset($sheet[0], $sheet[1], $sheet[2]);
+				foreach($sheet as $row)
 				{
-					$colum = 1;
-					$result['year'] = $year;
-					
-					for($i=2; $sheet[$i]; $i++)
-					{
-						$noti = $colum; $colum++;
-						$catch = $colum; $colum++;
-					
-					
-						echo $year.'/';
-						echo $noti.'/';
-						echo $catch;
-						#print_r($sheet[$i]); 
-						#echo $sheet[$i][$noti].'/'.$sheet[$i][$catch];
-						echo '<BR>';
-					}
+					print_r($row);
+					echo '<BR>';
 				}
-				#print_r($year_list);
 				
 				
 	echo '<pre>';

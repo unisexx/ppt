@@ -45,13 +45,13 @@
 
 <table class="tbreport">
 <tr>
-<th rowspan="2">สภาพ<?php echo $report_title; ?></th>
-<th colspan="3">จำนวน (ราย)</th>
+<th rowspan="2" class="txtcen">สภาพ<?php echo $report_title; ?></th>
+<th colspan="3" class="txtcen">จำนวน (ราย)</th>
 </tr>
 <tr>
-<td class="text-right">ชาย</td>
-<td class="text-right">หญิง</td>
-<td class="text-right">รวม</td>
+<td class="txtcen">ชาย</td>
+<td class="txtcen">หญิง</td>
+<td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">เด็กขาดอุปการะ  (เช็คหัวข้อ 4.1.1 รายการหายไป)</td>

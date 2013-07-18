@@ -18,10 +18,10 @@
 
 <table class="tbreport">
     <tr>
-        <th>ปี</th>
-        <th>ชาย</th>
-        <th>หญิง</th>
-        <th>รวม</th>
+        <th class="txtcen">ปี</th>
+        <th class="txtcen">ชาย</th>
+        <th class="txtcen">หญิง</th>
+        <th class="txtcen">รวม</th>
     </tr>
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>

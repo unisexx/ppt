@@ -26,10 +26,10 @@
 
 <table class="tbreport">
 <tr>
-<th>อายุ (ปี)</th>
-<th>ชาย</th>
-<th>หญิง</th>
-<th>รวม</th>
+<th class="txtcen">อายุ (ปี)</th>
+<th class="txtcen">ชาย</th>
+<th class="txtcen">หญิง</th>
+<th class="txtcen">รวม</th>
 </tr>
 <? 
 $xtotal_male = 0;

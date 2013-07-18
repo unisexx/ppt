@@ -14,20 +14,21 @@
 <div style="padding:10px; text-align:right;">
   <a href="report/population/burden_rate_export<?=GetCurrentUrlGetParameter();?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
   <a href="report/population/burden_rate_print<?=GetCurrentUrlGetParameter();?>" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+</div>
 
 <table class="tbreport">
     <tr>
-        <th>ปี</th>
-        <th>ภาพรวม</th>
-        <th>วัยเด็ก</th>
-        <th>ผู้สูงอายุ</th>
+        <th class="txtcen">ปี</th>
+        <th class="txtcen">ภาพรวม</th>
+        <th class="txtcen">วัยเด็ก</th>
+        <th class="txtcen">ผู้สูงอายุ</th>
     </tr>
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>
-        <td class="topic"><?php echo $item['year_data']; ?></td>
-        <td><?php echo number_format($item['total'], 2); ?></td>
-        <td><?php echo number_format($item['total_child'], 2); ?></td>
-        <td><?php echo number_format($item['total_old'], 2); ?></td>
+        <td class="topic txtcen"><?php echo $item['year_data']; ?></td>
+        <td class="txtright"><?php echo number_format($item['total'], 2); ?></td>
+        <td class="txtright"><?php echo number_format($item['total_child'], 2); ?></td>
+        <td class="txtright"><?php echo number_format($item['total_old'], 2); ?></td>
     </tr>
     <?php endforeach; ?>
 </table>

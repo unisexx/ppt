@@ -58,10 +58,10 @@
 <table class="tbreport">
 <tr>
 <!--<th>เพศ</th>-->
-<th>ปี</th>
-<th>เส้นความยากจน(บาท/คน/เดือน)</th>
-<th>สัดส่วนคนจน(ร้อยละ)</th>
-<th>จำนวนคนจน(พันคน)</th>
+<th class="txtcen">ปี</th>
+<th class="txtcen">เส้นความยากจน(บาท/คน/เดือน)</th>
+<th class="txtcen">สัดส่วนคนจน(ร้อยละ)</th>
+<th class="txtcen">จำนวนคนจน(พันคน)</th>
 </tr>
 
 <?php 
@@ -100,10 +100,10 @@ $result1 = $this->opt->get($sql1);
 
 <tr>
 <!--<td class="topic"><?php echo $item1['poor_province_sex']; ?></td>-->
-<td class="topic"><?php echo $item1['poor_province_year']; ?></td>
-<td><?php echo @number_format($item2['line'],2); ?></td>
-<td><?php echo @number_format($item2['percents'],2); ?></td>
-<td><?php echo @number_format($item2['qty'],2); ?></td>
+<td class="topic txtcen"><?php echo $item1['poor_province_year']; ?></td>
+<td class="txtright"><?php echo @number_format($item2['line'],2); ?></td>
+<td class="txtright"><?php echo @number_format($item2['percents'],2); ?></td>
+<td class="txtright"><?php echo @number_format($item2['qty'],2); ?></td>
 </tr>
 
 <?php 
@@ -117,8 +117,8 @@ $result1 = $this->opt->get($sql1);
 
 </table>
 
-<div id="ref"><b>ที่มา :</b> ข้อมูลจากการสำรวจภาวะเศรษฐกิจและสังคมของครัวเรือน สำนักงานสถิติแห่งชาติ ประมวลผลโดย สำนักพัฒนาฐานข้อมูลและตัวชี้วัดภาวะสังคม สศช.</div>
-<div id="remark"><b>หมายเหตุ : </b><br>
+<div id="ref">ที่มา : ข้อมูลจากการสำรวจภาวะเศรษฐกิจและสังคมของครัวเรือน สำนักงานสถิติแห่งชาติ ประมวลผลโดย สำนักพัฒนาฐานข้อมูลและตัวชี้วัดภาวะสังคม สศช.</div>
+<div id="remark">หมายเหตุ : <br>
 1.        เส้นความยากจน (Poverty line) เป็นเครื่องมือสำหรับใช้วัดภาวะความยากจน โดยคำนวณจากต้นทุนหรือค่าใช้จ่ายของปัจเจกบุคคลในการได้มาซึ่งอาหารและสินค้าบริการจำเป็นพื้นฐานในการดำรงชีวิต <br>
 2.        สัดส่วนคนจน คำนวณจากจำนวนประชากรที่มีรายจ่ายเพื่อการบริโภคต่ำกว่าเส้นความยากจน หารด้วย จำนวนประชากรทั้งหมด คูณด้วย 100 <br>
 3.        จำนวนคนจน หมายถึงจำนวนประชากรที่มีรายจ่ายเพื่อการบริโภคต่ำกว่าเส้นความยากจน

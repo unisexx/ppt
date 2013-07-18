@@ -2,7 +2,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link rel="stylesheet" type="text/css" href="../../themes/ppt/css/style.css"/>
-<title>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</title>
+<title>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน (จำแนกตามสัญชาติ)</title>
 
 <link href="<?php echo site_url('themes/ppt/css/style.css'); ?>" rel="stylesheet">
 
@@ -10,7 +10,7 @@
 <body>
 
 
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร <label><?php if(isset($_GET['year'])){echo 'ปี '.$_GET['year'];}else{echo "ทุกปี";} ?></label></div>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร  (จำแนกตามสัญชาติ)<label><?php if(isset($_GET['year'])){echo 'ปี '.$_GET['year'];}else{echo "ทุกปี";} ?></label></div>
 
 <table class="tbreport">
 <tr>

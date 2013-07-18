@@ -1,4 +1,4 @@
-<h3>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</h3>
+<h3>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน (จำแนกตามสัญชาติ)</h3>
 <div id="search">
   <div id="searchBox">
 
@@ -12,7 +12,7 @@
   
   </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร <label><?php if(isset($_GET['year'])){echo 'ปี '.$_GET['year'];}else{echo "ทุกปี";} ?></label></div>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร (จำแนกตามสัญชาติ)<label><?php if(isset($_GET['year'])){echo 'ปี '.$_GET['year'];}else{echo "ทุกปี";} ?></label></div>
 <div style="padding:10px; text-align:right;">
 
 

@@ -27,19 +27,19 @@
 			
             while($x1<=($excel->sheets[0]['numRows']+4)) {
 				
-				$check_data = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+				$check_data = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
 				
 				if($check_data != "")
 				{
 				
 				
-                $year = isset($excel->sheets[0]['cells'][2][3]) ? $excel->sheets[0]['cells'][2][3] : '';
+                $year = isset($excel->sheets[0]['cells'][1][4]) ? $excel->sheets[0]['cells'][1][4] : '';
 				//$sex = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
 				$sex = 'etc';
-				$province = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
-                $data1 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
-				$data2 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
-				$data3 = isset($excel->sheets[0]['cells'][$x1][5]) ? $excel->sheets[0]['cells'][$x1][5] : '';
+				$province = isset($excel->sheets[0]['cells'][$x1][1]) ? $excel->sheets[0]['cells'][$x1][1] : '';
+                $data1 = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
+				$data2 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
+				$data3 = isset($excel->sheets[0]['cells'][$x1][4]) ? $excel->sheets[0]['cells'][$x1][4] : '';
 
 
 						$data = array(

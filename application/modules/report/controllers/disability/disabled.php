@@ -38,6 +38,7 @@ class Disabled extends Public_Controller
 		{
 			$qry_data = 'SELECT SUM(TARGET) target, SUM(BALANCE) balance, SUM(ADMISSION) admission, SUM(DISTRIBUTION) distribution, SUM(REMAIN) remain, SUM(BUILD) build FROM DISABLED_DATA WHERE ';
 			$qry_data .= "WLIST_ID LIKE '".$rs['id']."'";
+				$qry_data .= (empty($_GET['YEAR']))?"":" AND YEAR LIKE '".$_GET['YEAR']."'";
 			
 			$ddata = $this->disabled->get($qry_data, true);
 			$ddata = $ddata[0];

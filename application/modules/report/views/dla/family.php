@@ -49,38 +49,26 @@
 <th colspan="3" class="txtcen">จำนวน (ราย)</th>
 </tr>
 <tr>
-<td class="txtcen">ชาย</td>
-<td class="txtcen">หญิง</td>
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">ครอบครัวหย่าร้าง (เลิกกัน/ไม่อยู่ด้วยกันฉันท์สามีภรรยา)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total421']); ?></td>
   </tr>
 <tr>
   <td class="topic">ครอบครัวที่กระทำความรุนแรงต่อเด็กและสตรี</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total422']); ?></td>
   </tr>
 <tr>
   <td class="topic">ครอบครัวที่มีบุตรหลานประพฤติตัวไม่เหมาะสมและพบเห็นได้ในที่สาธารณะ</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total423']); ?></td>
   </tr>
   <tr>
   <td class="topic">ครอบครัวที่ไม่เลี้ยงดูบุพการีตามสภาพที่เหมาะสม (บุพการี หมายถึง พ่อ แม่ ปู่ ย่า ตา ยาย เป็นต้น)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total424']); ?></td>
   </tr>
   <tr>
   <td class="topic">ครอบครัวที่มีหัวหน้าครอบครัวประพฤติตัวไม่เหมาะสม</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total425']); ?></td>
   </tr>
 </table>

@@ -49,26 +49,18 @@
 <th colspan="3" class="txtcen">จำนวน (ราย)</th>
 </tr>
 <tr>
-<td class="txtcen">ชาย</td>
-<td class="txtcen">หญิง</td>
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">สตรีที่ถูกละเมิดทางเพศ</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total431']); ?></td>
   </tr>
 <tr>
   <td class="topic">สตรีที่ถูกทำร้ายร่างกายและจิตใจ</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total432']); ?></td>
   </tr>
 <tr>
   <td class="topic">สตรีหม้ายที่ต้องเลี้ยงดูบุตรเพียงลำพัง</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total433']); ?></td>
   </tr>
 </table>

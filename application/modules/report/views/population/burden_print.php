@@ -11,7 +11,7 @@
   หน่วย : ราย
 </div>
 
-<table class="tbreport">
+<table width="650" border="1" cellpadding="5" cellspacing="1">
     <tr>
         <th class="txtcen">ปี</th>
         <th class="txtcen">ภาพรวม</th>

@@ -4,6 +4,7 @@ class Population extends Public_Controller
     public function __construct()
     {
         parent::__construct();
+		$this->load->model('province_model','province');
     }
 	
 	public function summary_rate()
@@ -59,7 +60,7 @@ class Population extends Public_Controller
         $this->load->view('population/summary_print', $data);
     }
     
-    public function burden_rate()
+    public function burden_rate($mode=FALSE)
     {
         $province = (empty($_GET['province_id'])) ? '' : ' and province_id = '.$_GET['province_id'];
         $sql = 'SELECT 
@@ -102,7 +103,20 @@ class Population extends Public_Controller
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
         dbConvert($data['result']);
-        $this->template->build('population/burden', $data);
+		$data['province_name'] = @$_GET['province_id']!='' ? $this->province->select("province")->where("id=".$_GET['province_id'])->get_one() : "ทุกจังหวัด";
+		switch($mode){
+			case 'print':
+				$this->load->view('population/burden_print', $data);
+			break;
+			case 'export':
+				$filename= "burden_pop_summary_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				$this->load->view('population/burden_export', $data);
+			break;
+			default:
+				$this->template->build('population/burden', $data);
+			break;
+		}        
     }
 
 	public function burden_rate_export()

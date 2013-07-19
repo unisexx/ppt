@@ -14,9 +14,22 @@
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็ก จำแนกตามฐานความผิด 
 
-ปี <label><?php echo @$_GET['year']; ?>
+<label>
+<?php 
 
-</label> จังหวัด <label>
+if(!isset($_GET['year']) || $_GET['year']=="")
+{
+ echo 'ทุกปี';
+}
+else
+{
+ echo 'ปี '.@$_GET['year']; 
+}
+
+
+?>
+</label> 
+<label>
 
   <?php 
   
@@ -29,7 +42,7 @@
 		  $result1 = $this->opt->get($sql);
 			  foreach($result1 as $key1 => $item1)
 			  {
-				  echo $item1['province'];
+				  echo 'จังหวัด '.$item1['province'];
 			  }
 		  
 			 }

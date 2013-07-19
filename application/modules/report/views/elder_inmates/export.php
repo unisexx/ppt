@@ -1,61 +1,50 @@
-<link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
-<div id="resultsearch">
-	ผู้ต้องขังสูงอายุ  แสดง
-	<span style='color:#F33;'><?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></span>
-</div>
-<div style='line-height:40px; text-align:right;'>
-	หน่วย  : ราย
-</div>
-<table class='tbreport'>
+<h2 class='head_sideup'>รายงานผู้ต้องขังสูงอายุ</h2>
+
+<table class='tbreport' style='width:100%;' cellpadding="0" cellspacing="0" border='1'>
 	<tr>
-		<th style='width:400px;' class="txtcen">จังหวัด</th>
+		<th style='width:300px;' class="txtcen">ปี</th>
 		<th style='width:200px;' class="txtcen">ชาย</th>
 		<th style='width:200px;' class="txtcen">หญิง</th>
 		<th style='width:200px;' class="txtcen">รวม</th>
 	</tr>
+
 	<?
-	$pv_list = $this->province->limit(100)->get("SELECT id, province FROM PROVINCES ORDER BY PROVINCE ASC");
-	$total['f'] = $total['m'] = $total['sum'] = 0;
-	for($i=0; $i<count($pv_list); $i++)
-	{
-		$inmates_list = $this->inmateslist->get("SELECT id FROM ELDER_INMATES_LIST WHERE PROVINCE_ID LIKE '".$pv_list[$i]['id']."'");
+	$total['m'] = $total['f'] = $total['sum'] = 0;
+	for($i=0; $i<count($set_year); $i++) {
 		
-		$inmates_qry = "SELECT SUM(VALUE1_M) VALUE1_M, SUM(VALUE1_F) VALUE1_F, SUM(VALUE2_M) VALUE2_M, SUM(VALUE2_F) VALUE2_F, SUM(VALUE3_M) VALUE3_M, SUM(VALUE3_F) VALUE3_F FROM ELDER_INMATES WHERE 1=1 ";
-		for($j=0; $j<count($inmates_list); $j++)
-		{
-			if($j==0) { $inmates_qry .= 'AND ('; }
-				$inmates_qry .= "INMATESLIST_ID LIKE '".$inmates_list[$j]['id']."' ";
-			if(@$inmates_list[$j+1]) { $inmates_qry .= 'OR '; }
-			else { $inmates_qry .= ') '; }
-		}
-		$inmates_qry .= (@$set_year[$_GET['year']])?"AND YEAR LIKE '".$set_year[$_GET['year']]."'":"";
+		$get_result = $this->inmates->get("SELECT 
+			SUM(VALUE1_M) VALUE1_M, 
+			SUM(VALUE1_F) VALUE1_F, 
+			SUM(VALUE2_M) VALUE2_M, 
+			SUM(VALUE2_F) VALUE2_F, 
+			SUM(VALUE3_M) VALUE3_M, 
+			SUM(VALUE3_F) VALUE3_F
+		FROM ELDER_INMATES WHERE YEAR LIKE '".$set_year[$i]."'");
 		
-		$inmates_res = $this->inmates->get($inmates_qry);
+		$get_result[0]['m'] = $get_result[0]['value1_m']+$get_result[0]['value2_m']+$get_result[0]['value3_m'];
+		$get_result[0]['f'] = $get_result[0]['value1_f']+$get_result[0]['value2_f']+$get_result[0]['value3_f'];
+		$get_result[0]['sum'] = $get_result[0]['m']+$get_result[0]['f'];
 		
-		
-		$result['m'] = $inmates_res[0]['value1_m']+$inmates_res[0]['value2_m']+$inmates_res[0]['value3_m'];
-		$result['f'] = $inmates_res[0]['value1_f']+$inmates_res[0]['value2_f']+$inmates_res[0]['value3_f'];
-		$result['sum'] = $result['m'] + $result['f'];
-		
-		$total['m'] += $result['m'];
-		$total['f'] += $result['f'];
-		$total['sum'] += $result['sum'];
-		?>
-		<tr class='topic'>
-			<td><?=$pv_list[$i]['province'];?></td>
-			<td class="txtright"><?=number_format($result['m']);?></td>
-			<td class="txtright"><?=number_format($result['f']);?></td>
-			<td class="txtright"><?=number_format($result['sum']);?></td>
-		</tr>
-		<?
-	}
+		$total['m'] += $get_result[0]['m'];
+		$total['f'] += $get_result[0]['f'];
+		$total['sum'] += $get_result[0]['sum'];
 	?>
-	<tr class="total" style='font-weight:bold;'>
+	<tr>
+		<td>
+			<span><?=$set_year[$i];?></span>
+		</td>
+		<td class="txtright"><?=number_format($get_result[0]['m']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['f']);?></td>
+		<td class="txtright"><?=number_format($get_result[0]['sum']);?></td>
+	</tr>
+	<?	}	?>
+	
+	<tr class="total" style='display:none;'>
 		<td>รวม</td>
-		<td class="txtright"> <?=number_format(@$total['m']);?> </td>
-		<td class="txtright"> <?=number_format(@$total['f']);?> </td>
-		<td class="txtright"> <?=number_format(@$total['sum']);?> </td>
+		<td> <?=number_format(@$total['m']);?> </td>
+		<td> <?=number_format(@$total['f']);?> </td>
+		<td> <?=number_format(@$total['sum']);?> </td>
 	</tr>
 </table>
-<div>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>
-<div>ประมวลผลโดย : ระบบฐานข้อมูลทางสังคม</div>
+
+<div style='margin-top:20px;'>ที่มา : กรมราชทัณฑ์ กระทรวงยุติธรรม</div>

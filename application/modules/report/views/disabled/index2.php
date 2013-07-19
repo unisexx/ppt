@@ -1,4 +1,23 @@
-<h2>รายงานคนพิการอยู่ในความอุปการะของสถาบัน</h2>
+<style type='text/css'>
+@media print
+{
+	.hide_print
+	{ display:none; }
+	
+	.head_sideup
+	{
+		margin-top:-100px;
+	}
+}
+@media screen
+{
+	.hide_screen
+	{ display:none; }
+}
+</style>
+
+
+<h2 class='head_sideup'>รายงานคนพิการอยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
@@ -8,15 +27,19 @@
 	</div>
 </form>
 
-<div id="resultsearch">
+<div id="resultsearch" class='hide_print'>
 	<strong>ผลที่ค้นหา : </strong>รายงานคนพิการอยู่ในความอุปการะของสถาบัน แสดง 
 	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
 	<span style='color:#F33;'><?=(empty($_GET['YEAR']))?'แสดงทุกปี':'ปี '.$_GET['YEAR'];?></span>
 </div>
 
-<div style='line-height:40px; text-align:right;'>
+<div style='line-height:40px; text-align:right;' class='hide_print'>
+<!--
 	<a href='report/welfare/export_index2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 	<a href='report/welfare/export_index2/print?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+-->
+	<a href='report/disability/disabled/export2?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>' target='blank_'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>
 

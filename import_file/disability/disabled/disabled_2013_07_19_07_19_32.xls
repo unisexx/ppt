@@ -1,0 +1,234 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
+<title>สถิติผู้รับบริการ</title>
+</head>
+<body>
+	<table x:sTR width="98%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#996699">
+              <tr> 
+                <td colspan="7" bgcolor="#FBFBFB"> 
+                  							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td align="right">จำนวนข้อมูลทั้งหมด 22 รายการ</td>
+                    </tr>
+                  </table>
+                  <table  width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
+                    <tr align="center" bgcolor="#FBFBFB"> 
+                      <td width="100%"><font class="font12n">สถิติผู้รับบริการใน 
+                        คนพิการ<br>ปี พ.ศ. 2555                        </font></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr> 
+                <td width="150" align="center" valign="top" bgcolor="#E1C4F0"><p>ชื่อหน่วยงาน</p></td>
+                <td align="center" valign="top" bgcolor="#E1C4F0"><p>เป้าหมาย </p></td>
+                <td align="center" valign="top" bgcolor="#E1C4F0"><p>ยอดยกมา</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>รับเข้า</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>จำหน่าย</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>คงเหลือ</p></td>
+				<td align="center" valign="top" bgcolor="#E1C4F0"><p>สะสม</p></td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กอ่อนพิการทางสมองและปัญญาปากเกร็ด (บ้านเพื่องฟ้า)</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">500</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">435</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">65</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">62</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">436</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">500</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กพิการทางสมองและปัญญา ( หญิง )  ปากเกร็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">550</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">547</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">40</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">31</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">555</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">587</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์เด็กพิการทางสมองและปัญญา ( ชาย )</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">650</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">584</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">29</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">46</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">581</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">613</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กพิการและทุพพลภาพปากเกร็ด</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">443</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">406</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">31</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">407</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">437</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์คนพิการการุณยเวศม์</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">320</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">417</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">28</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">44</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">416</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">445</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์คนพิการและทุพพลภาพบางปะกง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">280</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">312</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">24</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">20</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">312</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">336</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์คนพิการและทุพพลภาพพระประแดง</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">500</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">480</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">105</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">108</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">511</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">585</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์คนไข้โรคจิตทุเลาบ้านกึ่งวิถี  ( ชาย )</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">500</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">485</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">58</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">76</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">459</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">543</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์คนไข้โรคจิตทุเลาหญิงบ้านกึ่งวิถี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">470</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">572</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">56</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">574</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">628</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานสงเคราะห์เด็กพิการทางสมองและปัญญาจังหวัดราชบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">200</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">115</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">21</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">28</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">111</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">136</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >สถานสงเคราะห์คนพิการจังหวัดอุบลราชธานี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">120</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">102</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">5</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">3</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">102</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">107</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >ศูนย์พัฒนาอาชีพคนพิการ ( โรงงานปีคนพิการสากล )</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">65</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">21</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">3</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">6</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">22</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">24</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์ฟื้นฟูอาชีพคนพิการจังหวัดหนองคาย</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">18</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">53</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">53</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">49</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">71</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >ศูนย์ฟื้นฟูอาชีพคนพิการขอนแก่น</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">22</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">77</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">14</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">93</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">99</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์ฟื้นฟูอาชีพคนพิการนครศรีธรรมราช</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">23</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">40</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">18</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">41</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">63</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >ศูนย์ฟื้นฟูอาชีพคนพิการบ้านทองพูนเผ่าพนัส</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">35</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">62</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">67</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">25</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">97</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์ฟื้นฟูอาชีพคนพิการพระประแดง   </td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">23</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">69</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">92</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">56</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">92</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >ศูนย์ฟื้นฟูอาชีพคนพิการหยาดฝน</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">69</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">47</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">51</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">80</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">116</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์บริการสวัสดิการสังคมเฉลิมพระชนมพรรษา 5 รอบ (ราชินี)</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">56</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">47</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">64</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">48</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">103</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >สถานฟื้นฟูสมรรถภาพคนพิการภาคตะวันออกเฉียงเหนือ</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">100</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">30</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">48</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">48</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">34</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">78</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#E9F5E6" >ศูนย์บริการบุคคลออทิสติก จ.ขอนแก่น</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">43</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">69</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">1</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">43</td>
+				<td align="center" valign="top" bgcolor="#E9F5E6">112</td>
+              </tr>
+                            <tr> 
+                <td align="left" valign="top" bgcolor="#F0E6F5" >ศูนย์บริการบุคคลออทิสติก จ.นนทบุรี</td>
+                <td align="center" valign="top"  bgcolor="#F0C8C4">60</td>
+                <td align="center" valign="top" bgcolor="#D4F6DA">62</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">19</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">11</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">62</td>
+				<td align="center" valign="top" bgcolor="#F0E6F5">81</td>
+              </tr>
+                            <!-- End -->
+            </table>
+</body>
+</html>

@@ -11,7 +11,7 @@ class Adodb {
        	require_once(dirname(__FILE__).'/adodb/adodb.inc.php');
 		$this->obj =& get_instance();
 		$this->obj->db =& NewADOConnection($this->dbConf['dbdriver']);
-		if ($this->dbConf['db_debug']) { $this->conn->debug = true; }
+		if ($this->dbConf['db_debug']) { @$this->conn->debug = true; }
 		$this->obj->db->Connect(
 			$this->dbConf['hostname'],
 			$this->dbConf['username'],

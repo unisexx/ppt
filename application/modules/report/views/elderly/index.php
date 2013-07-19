@@ -1,5 +1,24 @@
-<h2>รายงานผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน</h2>
-<form action='' method='get'>
+<style type='text/css'>
+@media print
+{
+	.hide_print
+	{ display:none; }
+	
+	.head_sideup
+	{
+		margin-top:-100px;
+	}
+}
+@media screen
+{
+	.hide_screen
+	{ display:none; }
+}
+</style>
+
+
+<h2 class='head_sideup'>รายงานผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน</h2>
+<form action='' method='get' class='hide_print'>
 	<div id="search">
 	  <div id="searchBox">
 		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
@@ -14,9 +33,9 @@
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
-<div style='line-height:40px; text-align:right;'>
-	<a href='report/elderly/export_index?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-	<a href='report/elderly/export_index/print?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>' target='_blank'><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>
+<div style='line-height:40px; text-align:right;' class='hide_print'>
+	<a href='report/elderly/export?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>
 
@@ -44,11 +63,11 @@
 		?>
 	 	<tr>
 			<td><?=$rs['title'];?></td>
-	 		<td><?=number_format($rs['target'], 0);?></td>
-	 		<td><?=number_format($rs['balance'], 0);?></td>
-	 		<td><?=number_format($rs['admission'], 0);?></td>
-	 		<td><?=number_format($rs['distribution'], 0);?></td>
-	 		<td><?=number_format($rs['remain'], 0);?></td>
+	 		<td style='text-align:right;'><?=number_format($rs['target'], 0);?></td>
+	 		<td style='text-align:right;'><?=number_format($rs['balance'], 0);?></td>
+	 		<td style='text-align:right;'><?=number_format($rs['admission'], 0);?></td>
+	 		<td style='text-align:right;'><?=number_format($rs['distribution'], 0);?></td>
+	 		<td style='text-align:right;'><?=number_format($rs['remain'], 0);?></td>
 	 		<td style='display:none;'><?=number_format($rs['build'], 0);?></td>
 	 	</tr>
 		<?

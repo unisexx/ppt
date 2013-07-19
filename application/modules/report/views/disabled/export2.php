@@ -3,7 +3,7 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
+	<span style='color:#F33;'><?=(@$_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 

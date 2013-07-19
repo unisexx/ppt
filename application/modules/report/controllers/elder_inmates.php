@@ -22,39 +22,32 @@ class Elder_inmates extends Public_Controller
 	function report2()
 	{
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
-		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
+		for($i=0; $i<count($set_year); $i++) { $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
 		$this->template->build('elder_inmates/index2', $data);
 	}
-	
-	function export($status=FALSE)
-	{
-		if($status!='print')
-		{
-			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
-			header("Content-Disposition: attachment; filename=".$filename);
-			logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
-		} else {
-			?><script>window.print();</script><?
-			logs('พิมพ์ข้อมูล ผู้ต้องขังสูงอายุ');	
-		}
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 
-						
+
+	function export()
+	{
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
 		
+		$filename= "elderinmates_report_data_".date("Y-m-d_H_i_s").".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		$data['style'] = 'export';
 		$this->load->view('elder_inmates/export', $data);
 	}
 
-
-	function export_index()
+	function export2()
 	{
-		$data['style'] = 'export';
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
-		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
-		$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
+		for($i=0; $i<count($set_year); $i++) { $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+
+		$filename= "elderinmates_report_data_".date("Y-m-d_H_i_s").".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
-#		logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
-		$this->load->view('elder_inmates/index', $data);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		$data['style'] = 'export';
+		$this->load->view('elder_inmates/export2', $data);
 	}
 }

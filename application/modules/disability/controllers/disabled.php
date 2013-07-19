@@ -109,7 +109,7 @@ Class disabled extends Public_Controller{
 				$wf_list['TARGET'] = $data[$i][1];
 				$wf_list['BALANCE'] = $data[$i][2];
 				$wf_list['ADMISSION'] = $data[$i][3];
-				$wf_list['DITRICUTION'] = $data[$i][4];
+				$wf_list['DISTRIBUTION'] = $data[$i][4];
 				$wf_list['REMAIN'] = $data[$i][5];
 				$wf_list['BUILD'] = $data[$i][6];
 				
@@ -123,7 +123,8 @@ Class disabled extends Public_Controller{
 				} else {
 					$this->welfare->where("WLIST_ID LIKE '".$wf_list['WLIST_ID']."' AND YEAR LIKE '".$wf_list['YEAR']."'")->limit(1)->delete();
 					
-					$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($result+1).". บันทึก : ทำการเขียนทับข้อมูล \"".$data[$i][0]."\" ปี ".$wf_list['YEAR']." </div>"; 
+					$content .= "<div style='color:#d97f31; border-bottom:solid 1px #CCC; line-height:15px; padding:5px;'>".($result+1).". บันทึก : ทำการเขียนทับข้อมูล \"".$data[$i][0]."\" ปี ".$wf_list['YEAR']." </div>";
+					
 					$this->welfare->save($wf_list);
 				}
 				$result++;	

@@ -53,8 +53,10 @@
 			SUM(SUICIDE_SUCC_NUMBER) SUICIDE_SUCC_NUMBER,
 			SUM(SUICIDE_SUCC_RATE) SUICIDE_SUCC_RATE,
 			SUM(SUICIDE_UNSUC_NUMBER) SUICIDE_UNSUC_NUMBER,
-			SUM(SUICIDE_UNSUC_RATE) SUICIDE_UNSUC_RATE 
-		FROM MENTAL_NUMBER WHERE YEAR LIKE '".$year_list[$i]."' ";
+			SUM(SUICIDE_UNSUC_RATE) SUICIDE_UNSUC_RATE,
+			SUM(AUTISM_NUMBER) AUTISM_NUMBER,
+			SUM(AUTISM_RATE) AUTISM_RATE 
+					FROM MENTAL_NUMBER WHERE YEAR LIKE '".$year_list[$i]."' ";
 		$mental_sql .= (@$_GET['province'])?"AND PROVINCE_ID LIKE '".$_GET['province']."'":'';
 		$mental_res = $this->mental->get($mental_sql);
 		
@@ -67,24 +69,24 @@
 			for($j=0; $j<count($res_ary); $j++) 
 			{
 				if($res_ary[$j] == 'suicide')
-				{
-					
-				?>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
-				<?	
-					$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
-					$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
-				}
+					{
+						
+					?>
+						<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
+						<td class="txtright"><?=(@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'], 2)); ?></td>
+					<?	
+						$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
+						$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
+					}
 				else
-				{
-				?> 
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
-				<?
-					$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
-					$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
-				}
+					{
+					?> 
+						<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
+						<td class="txtright"><?=(@number_format(@$mental_res[0][$res_ary[$j].'_rate'],2)); ?></td>
+					<?
+						$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
+						$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
+					}
 				
 			}
 		?>

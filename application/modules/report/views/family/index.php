@@ -12,7 +12,7 @@ $(document).ready(function(){
     <?
     $_GET['year_data'] = (empty($_GET['year_data']))?2554:$_GET['year_data'];
     echo form_dropdown('year_data', get_year_option(null,null,'family','year_data'), @$_GET['year_data'], null); ?>
-    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>    
+    <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 AND id <> 1  order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>    
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ) : 

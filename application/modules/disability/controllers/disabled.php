@@ -129,7 +129,7 @@ Class disabled extends Public_Controller{
 				}
 				$result++;	
 			}
-			return false;
+
 			$data['content'] = $content;
 			if(count($result)>0) logs('นำเข้าข้อมูล ผู้พิการในสถานสงเคราะห์และศูนย์บริการทางสังคม จำนวน '.number_format($result).' record');
 			$this->template->build('disabled/upload', @$data);

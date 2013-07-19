@@ -69,24 +69,24 @@
 			for($j=0; $j<count($res_ary); $j++) 
 			{
 				if($res_ary[$j] == 'suicide')
-				{
-					
-				?>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate']); ?></td>
-				<?	
-					$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
-					$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
-				}
+					{
+						
+					?>
+						<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number']); ?></td>
+						<td class="txtright"><?=(@number_format(@$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'], 2)); ?></td>
+					<?	
+						$total['number'] += @$mental_res[0][$res_ary[$j].'_succ_number']+@$mental_res[0][$res_ary[$j].'_unsuc_number'];
+						$total['rate'] += @$mental_res[0][$res_ary[$j].'_succ_rate']+@$mental_res[0][$res_ary[$j].'_unsuc_rate'];
+					}
 				else
-				{
-				?> 
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
-					<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_rate']); ?></td>
-				<?
-					$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
-					$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
-				}
+					{
+					?> 
+						<td class="txtright"><?=@number_format(@$mental_res[0][$res_ary[$j].'_number']); ?></td>
+						<td class="txtright"><?=(@number_format(@$mental_res[0][$res_ary[$j].'_rate'],2)); ?></td>
+					<?
+						$total['number'] += @$mental_res[0][$res_ary[$j].'_number'];
+						$total['rate'] += @$mental_res[0][$res_ary[$j].'_rate'];
+					}
 				
 			}
 		?>

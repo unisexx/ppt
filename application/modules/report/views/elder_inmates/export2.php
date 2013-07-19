@@ -15,6 +15,7 @@
 		$inmates_list = $this->inmateslist->get("SELECT id FROM ELDER_INMATES_LIST WHERE PROVINCE_ID LIKE '".$pv_list[$i]['id']."'");
 		
 		$inmates_qry = "SELECT SUM(VALUE1_M) VALUE1_M, SUM(VALUE1_F) VALUE1_F, SUM(VALUE2_M) VALUE2_M, SUM(VALUE2_F) VALUE2_F, SUM(VALUE3_M) VALUE3_M, SUM(VALUE3_F) VALUE3_F FROM ELDER_INMATES WHERE 1=1 ";
+		
 		for($j=0; $j<count($inmates_list); $j++)
 		{
 			if($j==0) { $inmates_qry .= 'AND ('; }

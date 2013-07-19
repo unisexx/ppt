@@ -31,7 +31,7 @@
 	<span style='color:#F33;'><?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></span>
 </div>
 <div style='line-height:40px; text-align:right;' class='hide_print'>
-	<a href='report/elder_inmates/export2'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"> </a>
+	<a href='report/elder_inmates/export2?year=<?=$_GET['year'];?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"> </a>
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>

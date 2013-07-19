@@ -45,45 +45,9 @@ class Elder_inmates extends Public_Controller
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
 
 		$filename= "elderinmates_report_data_".date("Y-m-d_H_i_s").".xls";
-		#header("Content-Disposition: attachment; filename=".$filename);
+		header("Content-Disposition: attachment; filename=".$filename);
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
 		$data['style'] = 'export';
 		$this->load->view('elder_inmates/export2', $data);
 	}
-		
-	
-	/*
-	function export($status=FALSE)
-	{
-		if($status!='print')
-		{
-			$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
-			header("Content-Disposition: attachment; filename=".$filename);
-			logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
-		} else {
-			?><script>window.print();</script><?
-			logs('พิมพ์ข้อมูล ผู้ต้องขังสูงอายุ');	
-		}
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
-
-						
-		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
-		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
-		
-		$this->load->view('elder_inmates/export', $data);
-	}
-
-
-	function export_index()
-	{
-		$data['style'] = 'export';
-		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
-		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
-		$filename= "elder_inmates_report_data_".date("Y-m-d_H_i_s").".xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-#		logs('ดาวน์โหลดข้อมูล ผู้ต้องขังสูงอายุ');
-		$this->load->view('elder_inmates/index', $data);
-	}
-	 * 
-	 */
 }

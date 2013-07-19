@@ -24,12 +24,12 @@
 
 <table class='tbreport'>
 	<tr>
-		<th style='width:400px;' class="txtcen">ชื่อหน่วยงาน</th>
-		<th style='width:200px;' class="txtcen">เป้าหมาย</th>
-		<th style='width:200px;' class="txtcen">ยอดยกมา</th>
-		<th style='width:200px;' class="txtcen">รับเข้า</th>
-		<th style='width:200px;' class="txtcen">จำหน่าย</th>
-		<th style='width:200px;' class="txtcen">คงเหลือ</th>
+		<th class="txtcen">ชื่อหน่วยงาน</th>
+		<th class="txtcen">เป้าหมาย</th>
+		<th class="txtcen">ยอดยกมา</th>
+		<th class="txtcen">รับเข้า</th>
+		<th class="txtcen">จำหน่าย</th>
+		<th class="txtcen">คงเหลือ</th>
 		<th style='width:200px; display:none;'>สะสม</th>
 	</tr>
 	<?

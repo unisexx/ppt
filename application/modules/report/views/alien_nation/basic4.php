@@ -12,7 +12,7 @@
   
   </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน จังหวัด 
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน 
 <label><?php if(isset($_GET['year'])){echo $_GET['year'];}else{echo "ทุกปี";} ?></label></div>
 <div style="padding:10px; text-align:right;">
 
@@ -29,16 +29,14 @@
 <table class="tbreport">
 <tr>
   <th rowspan="2" class="txtcen">ปี</th>
-  <th colspan="3" class="txtcen">รวมทั้งสิ้น</th>
-  <th class="txtcen">ต่างด้าวเข้าเมืองถูกกฎหมาย</th>
-  <th class="txtcen">ต่างด้าวเข้าเมืองผิดกฎหมาย</th>
+  <th colspan="5" class="txtcen">คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</th>
 </tr>
 <tr>
-  <td class="txtcen">รวม</td>
+  <td class="txtcen">ทั้งหมด</td>
   <td class="txtcen">ชาย</td>
   <td class="txtcen">หญิง</td>
-  <td class="txtcen">รวม</td>
-  <td class="txtcen">รวม</td>
+  <td class="txtcen">ต่างด้าวเข้าเมืองถูกกฎหมาย</td>
+  <td class="txtcen">ต่างด้าวเข้าเมืองผิดกฎหมาย</td>
 
 
 </tr>

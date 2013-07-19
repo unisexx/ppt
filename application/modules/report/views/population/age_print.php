@@ -1,7 +1,7 @@
 <html>
 	<head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<link rel="stylesheet" type="text/css" href="../../themes/ppt/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
 	</head>
 	<body>
 <div id="resultsearch">สถิติประชากรรายอายุ   จังหวัด

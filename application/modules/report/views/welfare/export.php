@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../../../themes/ppt/css/style.css"/>
 <div id="resultsearch">
 	เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$_GET['WLIST'])?'สถาบัน '.$list[0]['name']:'ทุกสถาบัน';?></span>, 
+	<span style='color:#F33;'><?=(@$_GET['WLIST'])?'สถาบัน '.$main_list[$_GET['WLIST']]:'ทุกสถาบัน';?></span>, 
 	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
 </div>
 
@@ -10,7 +10,7 @@
 </div>
 
 
-<table class='tbreport'>
+<table class='tbreport' border='1'>
 	<tr>
 		<th style='width:400px;' class="txtcen">ชื่อหน่วยงาน</th>
 		<th style='width:200px;' class="txtcen">เป้าหมาย</th>

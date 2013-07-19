@@ -91,8 +91,6 @@ class Disabled extends Public_Controller
 	{
 		$cat_list = $this->disabled_list->get();
 		foreach($cat_list as $cat_list_) $data['main_list'][$cat_list_['id']] = $cat_list_['name'];
-		
-		
 
 		//===== set year list group =====//
 		$year_list = $this->disabled->get('SELECT YEAR FROM DISABLED_DATA GROUP BY YEAR ORDER BY YEAR DESC');

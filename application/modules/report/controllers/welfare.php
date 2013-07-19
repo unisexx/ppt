@@ -126,18 +126,18 @@ class Welfare extends Public_Controller
 	public function export_index($status=false)
 		{
 			$data[1] = 1;
-		if($status!='print')
-		{
-			$filename= "welfare_report_data_".date("Y-m-d_H_i_s").".xls";
-			header("Content-Disposition: attachment; filename=".$filename);
-			
-			logs('ดาวน์โหลดข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
-		} else {
-			
-			?><script>window.print();</script><?
-			logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
-		}
-		?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
+			if($status!='print')
+			{
+				$filename= "welfare_report_data_".date("Y-m-d_H_i_s").".xls";
+				header("Content-Disposition: attachment; filename=".$filename);
+				
+				logs('ดาวน์โหลดข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
+			} else {
+				
+				?><script>window.print();</script><?
+				logs('พิมพ์ข้อมูล เด็กและเยาวชนที่อยู่ในสถานอุปการะของสถานสงเคราะห์');
+			}
+			?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?
 		
 		
 #		$cat_list = array("บ้านพักเด็กและครอบครัว", "ศูนย์สงเคราะห์และฝึกอาชีพเด็กและเยาวชน", "สถานคุ้มครองสวัสดิภาพเด็ก", "สถานพัฒนาและฟื้นฟูเด็ก", "สถานสงเคราะห์เด็กอ่อน", "สถานสงเคราะห์เด็ก", "อื่น ๆ");

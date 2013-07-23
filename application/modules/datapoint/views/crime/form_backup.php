@@ -29,22 +29,11 @@
 				
 			</td>
 		</tr>
-		<?
-		foreach($case_title as $key_=>$title)
-		{
-			$key = $key_+1;
-			?>
-			<tr>
-				<th><?=$title;?><span class="Txt_red_12"> *</span></th>
-				<td>
-					รับแจ้ง <input type='text' name='<?=$key.'_NOTI';?>' style='width:60px;' value='<?=$station[0][$key.'_noti'];?>'> ราย 
-					/ จับ   <input type='text' name='<?=$key.'_CATCH';?>' style='width:60px;' value='<?=$station[0][$key.'_catch'];?>'> ราย
-				</td>
-			</tr>
-			<?
-		}
-		?>
-				<?/*
+		<? 
+			for($i=0; $i<count($monthth_array); $i++)
+			{ ?>
+				<tr> <th colspan="2" class="title"><?=$monthth_array[$i];?></th> </tr>
+				<?
 				for($j=0; $j<count($case_title);$j++)
 				{ ?>
 				<? if(@$id) { $result = $this->statistic->where("STATION_ID = ".$id." AND MONTH = ".($i+1)." AND CASE_ID = ".$case_id[$j])->limit(1)->get(); } ?>
@@ -63,7 +52,9 @@
 					  </td>
 
 					</tr>
-				<? } */?>	
+				<? }
+			} 
+		?>	
 	</table>
 	<div id="btnSave">
 		<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')) { ?><input type="submit" value="บันทึก" class="btn btn-danger"><? } ?>

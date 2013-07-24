@@ -4,7 +4,10 @@
 
 
 <?
-	$pv_list = $this->province->limit(80)->get('SELECT * FROM PROVINCES WHERE ID != 1');
+	$pv_list_ = $this->station->get("SELECT STATION FROM CRIME_STATION GROUP BY STATION ORDER BY STATION ASC", true);
+	foreach($pv_list_ as $tmp) $pv_list[$tmp['station']] = $tmp['station'];
+	
+	#echo count($pv_list);
 	$station_title = array('บก.น.', 'บก.น. 1', 'บก.น. 2', 'บก.น. 3', 'บก.น. 4', 'บก.น. 5', 'บก.น. 6', 'บก.น. 7', 'บก.น. 8', 'บก.น. 9', 'บช.ก.');
 ?>
 <FORM ACTION='' METHOD='GET'>
@@ -16,8 +19,10 @@
 		<?
 		for($i=0; $i<count($station_title); $i++)
 			{ ?><option><?=$station_title[$i];?></option><? }
-		for($i=0; $i<count($pv_list); $i++)
-			{ ?><option><?=$pv_list[$i]['province'];?></option><? }
+		foreach($pv_list as $tmp)
+			echo "<option>".$tmp."</option>";
+	#	for($i=0; $i<count($pv_list); $i++)
+	/*		{ ?><option><?=$pv_list[$i]['province'];?></option><? }*/
 		?> 
 	</select>
 	<script language='javascript'>
@@ -53,7 +58,7 @@
 </tr>
 
     <?php foreach($result as $key => $item): $key += 1;
-			$stt_list = $this->statistic->limit(60)->get("SELECT * FROM CRIME_STATISTIC WHERE STATION_ID LIKE '".$item['id']."'");
+		/*	$stt_list = $this->statistic->limit(60)->get("SELECT * FROM CRIME_STATISTIC WHERE STATION_ID LIKE '".$item['id']."'");
 			
 			for($i=0; $i<count($stt_list); $i++)
 			{
@@ -61,12 +66,19 @@
 					$item_res[$stt_list[$i]['case_id']] += $stt_list[$i]['notified'];
 				else
 					$item_res[$stt_list[$i]['case_id']] = $stt_list[$i]['notified'];
-			}	
+			}
+		 * 
+		 */
+		 $item_res[1] = (empty($item['1_noti']))?0:$item['1_noti'];
+		 $item_res[2] = (empty($item['2_noti']))?0:$item['2_noti'];
+		 $item_res[3] = (empty($item['3_noti']))?0:$item['3_noti'];
+		 $item_res[4] = (empty($item['4_noti']))?0:$item['4_noti'];
+		 $item_res[5] = (empty($item['5_noti']))?0:$item['5_noti'];
     	?>
     <tr>
         <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
         <td><?=$item['year']; ?></td>
-        <td> <?=anchor('datapoint/crime/form/'.$item['id'], $item['station']);?> </td>
+        <td> <?=$item['station'];?> </td>
         <td><?=number_format($item_res[1], 0);?></td>
         <td><?=number_format($item_res[2], 0);?></td>
         <td><?=number_format($item_res[3], 0);?></td>

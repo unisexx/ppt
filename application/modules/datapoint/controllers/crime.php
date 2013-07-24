@@ -13,6 +13,7 @@ Class Crime extends Public_Controller{
 	#================ CRIME ==================#	
 	function index()
 	{
+
 		$_GET['YEAR'] = @$_GET['YEAR'];
 		$_GET['STATION'] = @$_GET['STATION'];
 		$sql = 'SELECT * FROM CRIME_STATION WHERE 1=1 ';
@@ -20,7 +21,9 @@ Class Crime extends Public_Controller{
 			if($_GET['STATION']) { $sql .= "AND STATION LIKE '".$_GET['STATION']."' "; }
 		$sql .= 'ORDER BY YEAR DESC, STATION ASC';
 
+
 		$data['result'] = $this->station->get($sql);
+		
     	$data['pagination'] = $this->station->pagination();
 		
 		$this->template->build('crime/index', $data);
@@ -45,8 +48,9 @@ Class Crime extends Public_Controller{
 		$this->template->build('crime/form', $data);
 	}
 		
-	function save($menu_id)
+	function save()
 	{
+		/*
 		$id = @$_POST['ID'];
 		$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
 		if(count($chk_loop) == 1 && !$_POST['ID'])
@@ -79,7 +83,28 @@ Class Crime extends Public_Controller{
 				}
 		 	}
 		}
-		set_notify('success', 'ดำเนินการลบข้อมูลเสร็จสิ้น');
+		 */
+		 //======Check repeat =====//
+		 $chk_year = $this->station->where("ID LIKE '".$_POST['ID']."'")->get();
+		 
+		 if(count($chk_year) == 1)
+		 {
+			 if($chk_year[0]['year'] != $_POST['YEAR'])
+			 {
+			 	$chk_rp = $this->station->where("STATION LIKE '".$chk_year[0]['station']."' AND YEAR LIKE '".$_POST['YEAR']."'")->get();
+				print_r($chk_rp);
+				if(count($chk_rp)==1)
+				{
+					?><script>alert("ไม่สามารถบันทึกข้อมูลได้เนื่องจากมีข้อมูลอยู่แล้วในปีดังกล่าว"); history.back();</script><?
+					return false;
+				}
+			 }
+		 }
+		 //======Check repeat =====//
+		
+		$this->station->save($_POST); 
+
+		set_notify('success', 'ดำเนินการบันทึกข้อมูลเสร็จสิ้น');
 		redirect('datapoint/crime/');	
 	}
 	
@@ -134,49 +159,43 @@ $a_count = 0;
 					}
 				}
 				#=====End CheckYear =====#
-
 					foreach($sheet as $key=>$row)
 					{
-						if($key>2)
+						if($key>1)
 						{
+	
+							
 							$colum = 1;
 							foreach($year_list as $year)
 							{
 								$noti = $colum; $colum++;
 								$catch = $colum; $colum++;
-								
+								unset($rs['station']);
 								$rs['station'] = array(
 									'year'=>trim($year), 
 									'station'=>$row[0],
-									'case'=>$case+1,
-									'notified'=>$row[$noti],
-									'catch'=>$row[$catch]
+									($case+1).'_noti'=>$row[$noti],
+									($case+1).'_catch'=>$row[$catch]
+									#'case'=>$case+1,
+									#'notified'=>$row[$noti],
+									#'catch'=>$row[$catch]
 								);
-								$chk_station = $this->station->where("YEAR LIKE '".$rs['station']['year']."' AND STATION LIKE '".$rs['station']['station']."'")->get();
-								# AFTER UPDATE DATABASE
-									##:"YEAR LIKE '".$rs['station']['year']."' AND STATION LIKE '".$rs['station']['station']."' AND CATCH LIKE '".$rs['station']['catch']."'"
+								
+								$chk_station = $this->station->where("STATION LIKE '".$rs['station']['station']."' AND YEAR LIKE '".$rs['station']['year']."'")->get();
+								
+								$data['content'] .= "<span style='color:#070;'>นำเข้าข้อมูล จังหวัด".$rs['station']['station'].' ปี พ.ศ.'.$rs['station']['year'].'</span><HR>'; 								
 								if(count($chk_station) == 0) {
-									#$rs['station']['id'] = $this->station->save($rs['station']);
-									$data['content'] .= '<span>';
-									$data['content'] .= 'เพิ่มข้อมูล จังหวัด '.$rs['station']['station'].' ปี พ.ศ. '.$rs['station']['year'].' '.$case_title[$rs['station']['case']];
-									$data['content'] .= '</span><HR>';
+									$this->station->save($rs['station']);
 								} else {
-									#$rs['station']['id'] = $chk_station[0]['id'];
-									#$this->station->save($rs['station']['id']);
-									$data['content'] .= '<span>';
-									$data['content'] .= 'แก้ไขข้อมูล จังหวัด '.$rs['station']['station'].' ปี พ.ศ. '.$rs['station']['year'].' '.$case_title[$rs['station']['case']];
-									$data['content'] .= '</span><HR>';
+									$rs['station']['ID'] = $chk_station[0]['id'];
+									$this->station->save($rs['station']);
 								}
 							}
 						}
 					}				
 			}
-			
-			echo $return_log;
-			
-				
-			#set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
-			$this->template->build('mental/upload.php', $data);
+			set_notify('success', 'บันทึกข้อมูลเสร็จสิ้น');
+			$this->template->build('crime/upload.php', $data);
 		}
 		
 				function ReadData($filepath)

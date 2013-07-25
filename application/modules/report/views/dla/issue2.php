@@ -16,7 +16,7 @@
 <div id="search">
   <div id="searchBox">
      <form method="get">
-     <?php echo form_dropdown('year', get_year_option(null, null, 'form_all', 'year'), @$_GET['year'], null, '-- ทุกปี --'); ?>
+     <?php echo form_dropdown('area_id', get_option('id', 'area_name', 'area'), @$_GET['area_id'], null, '-- ทุกเขตตรวจราชการ --'); ?>
      <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
      <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
      <?php echo form_dropdown('opt', array(), @$_GET['opt'], null, '-- ทุกตำบล --'); ?>
@@ -105,6 +105,7 @@
 <?php else: ?>
 	<script>
     $(function(){
+    	$('[name=province_id]').chainedSelect({parent: '[name=area_id]',url: '<?php echo site_url(); ?>location/ajax_province/report',value: 'id',label: 'text'});
         $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: '<?php echo site_url(); ?>location/ajax_amphur/report',value: 'id',label: 'text'})
         .change(function(){
         	$('[name=opt]').attr('readonly', true);

@@ -6,6 +6,15 @@ class Location extends Controller
 		parent::__construct();
 	}
 	
+	function ajax_province($type = NULL)
+	{
+		$text = ($type == 'report') ? '-- ทุกจังหวัด --' : '- เลือกจังหวัด -';
+		$result = $this->db->GetArray('select id,province as text from provinces where area_id = ? order by province',$_GET['q']);
+        dbConvert($result);
+        if($type == 'report' and !empty($_GET['q'])) array_unshift($result, array('id' => '', 'text' => $text));
+		echo $result ? json_encode($result) : '[{"id":"","text":"'.$text.'"}]';
+	}
+	
 	function ajax_amphur($type = NULL)
 	{
 		$text = ($type == 'report') ? '-- ทุกอำเภอ --' : '- เลือกอำเภอ -';

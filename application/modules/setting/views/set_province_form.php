@@ -2,6 +2,10 @@
 
 <form class="validate" method="post" action="setting/set_province_save">
 <table class="tbadd">
+	<tr>
+		<th>เขตตรวจราชกาาร</th>
+		<td><?php echo form_dropdown('area_id', get_option('id', 'area_name', 'area'), $province['area_id'], 'class="span3"', '- กรุณาเลือกเขตเตรวจราชการ -'); ?></td>
+	</tr>
 <tr>
   <th>ชื่อจังหวัด<span class="Txt_red_12"> *</span></th>
   <td><input name="province" type="text" id="textarea7" value="<?php echo $province['province']?>" size="40" /></td>

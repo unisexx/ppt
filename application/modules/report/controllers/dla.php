@@ -28,8 +28,9 @@ class Dla extends Public_Controller
         SUM(T419_M) AS TOTAL419_M, SUM(T419_F) AS TOTAL419_F, (SUM(T419_M) + SUM(T419_F)) AS TOTAL419_S, 
         SUM(T4110_M) AS TOTAL4110_M, SUM(T4110_F) AS TOTAL4110_F, (SUM(T4110_M) + SUM(T4110_F)) AS TOTAL4110_S 
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -60,8 +61,9 @@ class Dla extends Public_Controller
         SUM(T432) AS TOTAL432, 
         SUM(T433) AS TOTAL433 
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -92,8 +94,9 @@ class Dla extends Public_Controller
         SUM(T453_M) AS TOTAL453_M, SUM(T453_F) AS TOTAL453_F, (SUM(T453_M) + SUM(T453_F)) AS TOTAL453_S, 
         SUM(T454_M) AS TOTAL454_M, SUM(T454_F) AS TOTAL454_F, (SUM(T454_M) + SUM(T454_F)) AS TOTAL454_S 
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -126,8 +129,9 @@ class Dla extends Public_Controller
         SUM(T424) AS TOTAL424, 
         SUM(T425) AS TOTAL425 
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -161,8 +165,9 @@ class Dla extends Public_Controller
         SUM(T445_M) AS TOTAL445_M, SUM(T445_F) AS TOTAL445_F, (SUM(T445_M) + SUM(T445_F)) AS TOTAL445_S, 
         SUM(T446_M) AS TOTAL446_M, SUM(T446_F) AS TOTAL446_F, (SUM(T446_M) + SUM(T446_F)) AS TOTAL446_S 
         FROM FORM_ALL 
+       JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -194,8 +199,9 @@ class Dla extends Public_Controller
         SUM(T313) AS TOTAL313, 
         SUM(T314) AS TOTAL314  
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -230,8 +236,9 @@ class Dla extends Public_Controller
         SUM(T326_M) AS TOTAL326_M, SUM(T326_F) AS TOTAL326_F, (SUM(T326_M) + SUM(T326_F)) AS TOTAL326_S,
         SUM(T327_M) AS TOTAL327_M, SUM(T327_F) AS TOTAL327_F, (SUM(T327_M) + SUM(T327_F)) AS TOTAL327_S
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -263,8 +270,9 @@ class Dla extends Public_Controller
         SUM(T333_M) AS TOTAL333_M, SUM(T333_F) AS TOTAL333_F, (SUM(T333_M) + SUM(T333_F)) AS TOTAL333_S,
         SUM(T334_M) AS TOTAL334_M, SUM(T334_F) AS TOTAL334_F, (SUM(T334_M) + SUM(T334_F)) AS TOTAL334_S
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -295,8 +303,9 @@ class Dla extends Public_Controller
         SUM(T342_M) AS TOTAL342_M, SUM(T342_F) AS TOTAL342_F, (SUM(T342_M) + SUM(T342_F)) AS TOTAL342_S,
         SUM(T343_M) AS TOTAL343_M, SUM(T343_F) AS TOTAL343_F, (SUM(T343_M) + SUM(T343_F)) AS TOTAL343_S
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -330,8 +339,9 @@ class Dla extends Public_Controller
         SUM(T356_M) AS TOTAL356_M, SUM(T356_F) AS TOTAL356_F, (SUM(T356_M) + SUM(T356_F)) AS TOTAL356_S,
         SUM(T357_M) AS TOTAL357_M, SUM(T357_F) AS TOTAL357_F, (SUM(T357_M) + SUM(T357_F)) AS TOTAL357_S
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";
@@ -362,8 +372,9 @@ class Dla extends Public_Controller
         SUM(T362) AS TOTAL362, 
         SUM(T363) AS TOTAL363
         FROM FORM_ALL 
+        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
-        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
+        if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
         if(!empty($_GET['opt'])) $sql .= " AND OPT_NAME = '".iconv('utf-8', 'tis-620', $_GET['opt'])."'";

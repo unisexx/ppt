@@ -87,7 +87,7 @@ for($i=1;$i<=102;$i++):
 	FROM POPULATION  WHERE 1=1 ".$condition;	
 	$value = $this->db->getrow($sql);
 	$xtotal_male+=$value['SUM_LUNAR_MALE']+$value['SUM_NO_THAI_MALE']+$value['SUM_HH_MALE']+$value['SUM_INTRANS_MALE'];
-	$xtotal_female+=$value['SUM_LUNAR_FEMALE']+$value['SUM_NO_THAI_FEMALE']+$value['SUM_HH_FMALE']+$value['SUM_INTRANS_FEMALE'];
+	$xtotal_female+=$value['SUM_LUNAR_FEMALE']+$value['SUM_NO_THAI_FEMALE']+$value['SUM_HH_FEMALE']+$value['SUM_INTRANS_FEMALE'];
 ?>
 <tr>
   <td class="topic">ประชากรที่เกิดปีจันทรคติ</td>

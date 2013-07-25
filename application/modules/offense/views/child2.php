@@ -70,11 +70,16 @@ else
 
 
 
-
 </div>
 <div style="padding:10px; text-align:right;">
-<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">หน่วย:ราย</div>
+<!--<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">
+
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">-->
+
+<a href="<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>" target="_blank"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" </a>
+
+<a href="<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" ></a>
+หน่วย:ราย</div>
 
 
  <?php 

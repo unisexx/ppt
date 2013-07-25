@@ -10,7 +10,7 @@
 </div>
 
 
-<table class='tbreport' border='1'>
+<table class='tbreport'>
 	<tr>
 		<th style='width:400px;' class="txtcen">ชื่อหน่วยงาน</th>
 		<th style='width:200px;' class="txtcen">เป้าหมาย</th>
@@ -18,7 +18,7 @@
 		<th style='width:200px;' class="txtcen">รับเข้า</th>
 		<th style='width:200px;' class="txtcen">จำหน่าย</th>
 		<th style='width:200px;' class="txtcen">คงเหลือ</th>
-		<th style='width:200px; display:none;'>สะสม</th>
+		<!--<th style='width:200px; display:none;'>สะสม</th>-->
 	</tr>
 	<?
 	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
@@ -29,7 +29,7 @@
 		$total['admission'] += $rs['admission'];
 		$total['distribution'] += $rs['distribution'];
 		$total['remain'] += $rs['remain'];
-		$total['build'] += $rs['build'];
+		#$total['build'] += $rs['build'];
 		?>
 	 	<tr>
 			<td><?=$rs['title'];?></td>
@@ -38,7 +38,7 @@
 	 		<td class="txtright"><?=number_format($rs['admission'], 0);?></td>
 	 		<td class="txtright"><?=number_format($rs['distribution'], 0);?></td>
 	 		<td class="txtright"><?=number_format($rs['remain'], 0);?></td>
-	 		<td style='display:none;'><?=number_format($rs['build'], 0);?></td>
+	 		<!--<td style='display:none;'><?=number_format($rs['build'], 0);?></td>-->
 	 	</tr>
 		<?
 	}
@@ -51,8 +51,7 @@
 		<td class="txtright"> <?=number_format(@$total['admission']);?> </td>
 		<td class="txtright"> <?=number_format(@$total['distribution']);?> </td>
 		<td class="txtright"> <?=number_format(@$total['remain']);?> </td>
-		<td style='display:none;'> <?=number_format(@$total['build']);?> </td>
-	</tr>
+		<!--<td style='display:none;'> <?=number_format(@$total['build']);?> </td>-->
 </table>
 
 </div>แหล่งที่มา : กรมพัฒนาสังคมและสวัสดิการ</div>

@@ -28,7 +28,7 @@
 			$total['admission'] += $rs['admission'];
 			$total['distribution'] += $rs['distribution'];
 			$total['remain'] += $rs['remain'];
-			$total['build'] += $rs['build'];
+			#$total['build'] += $rs['build'];
 	?>
 		<tr>
 			<td><?=$rs['title'];?></td>

@@ -190,7 +190,12 @@ WHERE ".$condition." and USER_TYPE_LEVEL <= ".login_data('user_type_level');
 	function set_province(){
 		$condition = " 1=1 ";
 		$condition .= (@$_GET['province']!='')?" and province like '%".$_GET['province']."%'" : "";
-		$data['provinces'] = $this->province->where($condition)->get();
+		$sql = "SELECT AREA.AREA_NAME, PROVINCES.ID, PROVINCES.PROVINCE
+		FROM PROVINCES
+		LEFT JOIN AREA ON AREA.ID = PROVINCES.AREA_ID
+		WHERE $condition 
+		ORDER BY AREA.ID, PROVINCES.PROVINCE";
+		$data['provinces'] = $this->province->get($sql);
 		$data['pagination'] = $this->province->pagination();
 		$this->template->build('set_province',$data);
 	}

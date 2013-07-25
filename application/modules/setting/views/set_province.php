@@ -17,6 +17,7 @@
 <table class="tblist">
 <tr>
   <th>ลำดับ</th>
+  <th>เขตตรวจราชการ</th>
   <th>ชื่อจังหวัด</th>
   <th width="60">จัดการ</th>
 </tr>
@@ -24,6 +25,7 @@
 <?php foreach($provinces as $province):?>
 	<tr>
 	  <td><?php echo $i?></td>
+	  <td><?php echo $province['area_name']?></td>
 	  <td><?php echo $province['province']?></td>
 	  <td>
 	  	<?php if(permission('set_province','edit')):?>

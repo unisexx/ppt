@@ -12,9 +12,11 @@
 </div>
 
 
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็ก จำแนกตามฐานความผิด 
+<div id="resultsearch">
 
-<label>
+<b>ผลที่ค้นหา :</b> เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็ก จำแนกตามฐานความผิด 
+
+ปี <label>
 <?php 
 
 if(!isset($_GET['year']) || $_GET['year']=="")
@@ -23,13 +25,13 @@ if(!isset($_GET['year']) || $_GET['year']=="")
 }
 else
 {
- echo 'ปี '.@$_GET['year']; 
+ echo @$_GET['year']; 
 }
 
 
 ?>
-</label> 
-<label>
+
+</label> จังหวัด <label>
 
   <?php 
   
@@ -42,7 +44,7 @@ else
 		  $result1 = $this->opt->get($sql);
 			  foreach($result1 as $key1 => $item1)
 			  {
-				  echo 'จังหวัด '.$item1['province'];
+				  echo $item1['province'];
 			  }
 		  
 			 }
@@ -70,16 +72,12 @@ else
 
 
 
+
 </div>
+
 <div style="padding:10px; text-align:right;">
-<!--<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">
-
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">-->
-
-<a href="<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>" target="_blank"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" </a>
-
-<a href="<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" ></a>
-หน่วย:ราย</div>
+<img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_export/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('offense/offense_print/'.@$_GET['year'].'/'.@$_GET['province_id'].'/'.@$_GET['offense_type_id'].''); ?>'">หน่วย:ราย</div>
 
 
  <?php 
@@ -126,8 +124,8 @@ else
  
 <table class="tbreport">
 <tr>
-<th class="txtcen">ประเภทฐานความผิด</th>
-<th class="txtcen">จำนวน</th>
+<th>ประเภทฐานความผิด</th>
+<th>จำนวน</th>
 </tr>
 
 <?php
@@ -139,14 +137,14 @@ if(@$_GET['offense_type_id']){
 <?php if(@$_GET['offense_type_id']==1){ ?>
 <tr>
 <td class="topic">ทรัพย์</td>
-<td class="txtright"><?php echo @number_format($all_property); ?></td>
+<td><?php echo @number_format($all_property); ?></td>
 </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==2){ ?>
 <tr>
   <td class="topic">ชีวิตและร่างกาย</td>
-  <td class="txtright"><?php echo @number_format($all_body); ?></td>
+  <td><?php echo @number_format($all_body); ?></td>
   </tr>
 
 <?php } ?>
@@ -154,35 +152,35 @@ if(@$_GET['offense_type_id']){
 <?php if(@$_GET['offense_type_id']==3){ ?>
 <tr>
   <td class="topic">เพศ</td>
-  <td class="txtright"><?php echo @number_format($all_sex); ?></td>
+  <td><?php echo @number_format($all_sex); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==4){ ?>
 <tr>
   <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
-  <td class="txtright"><?php echo @number_format($all_dominance); ?></td>
+  <td><?php echo @number_format($all_dominance); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==5){ ?>
 <tr>
   <td class="topic">ยาเสพติดให้โทษ</td>
-  <td class="txtright"><?php echo @number_format($all_drug); ?></td>
+  <td><?php echo @number_format($all_drug); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==6){ ?>
 <tr>
   <td class="topic">อาวุธและวัตถุระเบิด</td>
-  <td class="txtright"><?php echo @number_format($all_weapon); ?></td>
+  <td><?php echo @number_format($all_weapon); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==7){ ?>  
  <tr>
   <td class="topic">อื่น ๆ</td>
-  <td class="txtright"><?php echo @number_format($all_etc); ?></td>
+  <td><?php echo @number_format($all_etc); ?></td>
   </tr>
  <?php 
  
@@ -199,42 +197,42 @@ else
 
 <tr>
 <td class="topic">ทรัพย์</td>
-<td class="txtright"><?php echo @number_format($all_property); ?></td>
+<td><?php echo @number_format($all_property); ?></td>
 </tr>
 
 <tr>
   <td class="topic">ชีวิตและร่างกาย</td>
-  <td class="txtright"><?php echo @number_format($all_body); ?></td>
+  <td><?php echo @number_format($all_body); ?></td>
   </tr>
 
 <tr>
   <td class="topic">เพศ</td>
-  <td class="txtright"><?php echo @number_format($all_sex); ?></td>
+  <td><?php echo @number_format($all_sex); ?></td>
   </tr>
 
 <tr>
   <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
-  <td class="txtright"><?php echo @number_format($all_dominance); ?></td>
+  <td><?php echo @number_format($all_dominance); ?></td>
   </tr>
 
 <tr>
   <td class="topic">ยาเสพติดให้โทษ</td>
-  <td class="txtright"><?php echo @number_format($all_drug); ?></td>
+  <td><?php echo @number_format($all_drug); ?></td>
   </tr>
 
 <tr>
   <td class="topic">อาวุธและวัตถุระเบิด</td>
-  <td class="txtright"><?php echo @number_format($all_weapon); ?></td>
+  <td><?php echo @number_format($all_weapon); ?></td>
   </tr>
 
  <tr>
   <td class="topic">อื่น ๆ</td>
-  <td class="txtright"><?php echo @number_format($all_etc); ?></td>
+  <td><?php echo @number_format($all_etc); ?></td>
   </tr>
  
 <tr class="total">
   <td>รวม</td>
-  <td class="txtright"><?php echo @number_format($offense_all); ?></td>
+  <td><?php echo @number_format($offense_all); ?></td>
   </tr>
 
 <!--<tr class="total">
@@ -246,7 +244,7 @@ else
 
 </table>
 
-<div id="ref">ที่มา : ศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร  กรมพินิจและคุ้มครองเด็กและเยาวชน</div>
+<div id="ref">ที่มา :</div>
 
 <script>
     $(function(){

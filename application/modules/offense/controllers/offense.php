@@ -162,7 +162,7 @@ Class Offense extends Public_Controller{
 		$data['province'] = $province;
 		$data['type'] = $type;
 		
-		$data['result'] = $this->opt->get($sql);
+		$data['result'] = $this->opt->get($sql,TRUE);
 	
 		$this->load->view('offense_export',$data);
 	}
@@ -188,7 +188,7 @@ Class Offense extends Public_Controller{
 		$data['province'] = $province;
 		$data['type'] = $type;
 		
-		$data['result'] = $this->opt->get($sql);
+		$data['result'] = $this->opt->get($sql,TRUE);
 		$this->load->view('offense_print',$data);	
 	}
 

@@ -104,7 +104,7 @@ POOL_PROVINCE
 		POOL_PROVINCE
 		WHERE 1=1 '.$where.' 
         ORDER BY ID ASC';
-        $data['result'] = $this->opt->get($sql);
+        $data['result'] = $this->opt->get($sql,TRUE);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');

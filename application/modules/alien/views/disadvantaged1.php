@@ -2,7 +2,9 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="alien/alien_report">
- <?php echo form_dropdown('year', get_year_option(2550, null, 'ALIEN', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ 
+  <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+  
         
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
@@ -14,7 +16,7 @@
 
   <?php 
   
-        if(isset($_GET['year'])!="")
+/*        if(isset($_GET['year'])!="")
         {
 
 				  echo $_GET['year'];
@@ -23,6 +25,22 @@
 		else
 		{
 				  echo " ทุกปี ";	
+		}*/
+		
+        if(!empty($_GET))
+        {
+			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
+			  $result0 = $this->opt->get($sql0);
+			  foreach($result0 as $key0 => $item0)
+			  {
+				  echo "จังหวัด :".$item0['province'];
+				  $p_name = $item0['province'];
+			  }
+		}
+		else
+		{
+				  echo " ทุกจังหวัด ";	
+				  $p_name = 'ประเทศ';
 		}
   ?>  
 
@@ -59,11 +77,11 @@
 <?php 
 
  $where = "";
- if(!empty($_GET['year']))
+ if(!empty($_GET['province_id']))
  {
-		if($_GET['year']!="")
+		if($_GET['province_id']!="")
 		{
-			$sql1 = "select * from alien where alien_year='".$_GET['year']."'";
+			$sql1 = "select * from alien where alien_province like '%".$p_name."%'";
 		}
 	}
 	else

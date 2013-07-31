@@ -69,6 +69,6 @@ $result1 = $this->opt->get($sql1);
 
 
 </table>
-
+<script>window.print();</script>
 </body>
 </html>

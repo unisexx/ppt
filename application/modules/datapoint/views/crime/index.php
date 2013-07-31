@@ -13,7 +13,7 @@
 <FORM ACTION='' METHOD='GET'>
 <div id="search">
   <div id="searchBox">
-    <?php echo form_dropdown('YEAR', get_year_option(), @$_GET['YEAR'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+    <?php echo form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
     <select name='STATION' id='STATION'>
     	<option VALUE=''>-- ทุกจังหวัด --</option>
 		<?
@@ -21,8 +21,6 @@
 			{ ?><option><?=$station_title[$i];?></option><? }
 		foreach($pv_list as $tmp)
 			echo "<option>".$tmp."</option>";
-	#	for($i=0; $i<count($pv_list); $i++)
-	/*		{ ?><option><?=$pv_list[$i]['province'];?></option><? }*/
 		?> 
 	</select>
 	<script language='javascript'>

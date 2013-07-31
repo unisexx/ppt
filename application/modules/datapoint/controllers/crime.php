@@ -13,7 +13,10 @@ Class Crime extends Public_Controller{
 	#================ CRIME ==================#	
 	function index()
 	{
-
+		$tmp = $this->station->get("SELECT YEAR FROM CRIME_STATION GROUP BY YEAR ORDER BY YEAR DESC");
+		foreach($tmp as $tmp2)
+			$data['year_list'][$tmp2['year']] = $tmp2['year'];
+		
 		$_GET['YEAR'] = @$_GET['YEAR'];
 		$_GET['STATION'] = @$_GET['STATION'];
 		$sql = 'SELECT * FROM CRIME_STATION WHERE 1=1 ';
@@ -23,8 +26,9 @@ Class Crime extends Public_Controller{
 
 
 		$data['result'] = $this->station->get($sql);
-		
     	$data['pagination'] = $this->station->pagination();
+		
+		
 		
 		$this->template->build('crime/index', $data);
 	}
@@ -50,40 +54,6 @@ Class Crime extends Public_Controller{
 		
 	function save()
 	{
-		/*
-		$id = @$_POST['ID'];
-		$chk_loop = $this->station->limit(1)->get("SELECT id FROM CRIME_STATION WHERE YEAR = ".$_POST['YEAR']."  AND STATION = '".$_POST['STATION']."'");
-		if(count($chk_loop) == 1 && !$_POST['ID'])
-		{	?>
-			<script language='javascript'>
-				alert('มีข้อมูลอยู่แล้วไม่สามารถดำเนินการได้');
-				history.back();
-			</script>
-		<?	}
-		else 
-		{
-			$_POST['STATION_ID'] = $this->station->save($_POST);
-		 	for($i=1; $i<=12; $i++)
-		 	{
-		 		for($j=1; $j<=5; $j++)
-				{
-					#MONTH, CASE ID, NOTIFIED, CATCH sort respectively
-						$_POST['MONTH'] = $i;
-						$_POST['CASE_ID'] = $j; 
-						$_POST['NOTIFIED'] = $_POST[$i.'_NOTIFIED'][$j]; 	unset($_POST[$i.'_NOTIFIED'][$j]); 
-						$_POST['CATCH'] = $_POST[$i.'_CATCH'][$j]; 			unset($_POST[$i.'_CATCH'][$j]);
-					if($id)
-					{
-						unset($_POST['ID']);
-						$stt_id = $this->statistic->limit(1)->get("SELECT id FROM CRIME_STATISTIC WHERE STATION_ID = ".$_POST['STATION_ID']." AND MONTH = ".$_POST['MONTH']." AND CASE_ID = ".$_POST['CASE_ID']);
-						$_POST['ID'] = @$stt_id[0]['id'];
-					}
-					$id=$this->statistic->save($_POST);
-		           	if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
-				}
-		 	}
-		}
-		 */
 		 //======Check repeat =====//
 		 $chk_year = $this->station->where("ID LIKE '".$_POST['ID']."'")->get();
 		 

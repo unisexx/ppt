@@ -30,6 +30,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -63,6 +64,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -96,6 +98,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -131,6 +134,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -167,6 +171,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
        JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+        if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -201,6 +206,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -238,6 +244,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -272,6 +279,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -305,6 +313,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -341,6 +350,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];
@@ -374,6 +384,7 @@ class Dla extends Public_Controller
         FROM FORM_ALL 
         JOIN PROVINCES ON PROVINCES.ID = FORM_ALL.PROVINCE_ID
         WHERE 1=1";
+		if(!empty($_GET['year'])) $sql .= " AND YEAR = ".$_GET['year'];
         if(isset($_GET['area_id']) && is_numeric($_GET['area_id'])) $sql .= " AND PROVINCES.AREA_ID = ".$_GET['area_id'];
         if(!empty($_GET['province_id'])) $sql .= " AND PROVINCE_ID = ".$_GET['province_id'];
         if(!empty($_GET['amphur_id'])) $sql .= " AND AMPHUR_ID = ".$_GET['amphur_id'];

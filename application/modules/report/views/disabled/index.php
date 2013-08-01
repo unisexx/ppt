@@ -41,7 +41,7 @@
 
 <table class='tbreport'>
 	<tr>
-		<th class="txtcen">ชื่อหน่วยงาน</th>
+		<th class="txtcen" style="width: 400px">ชื่อหน่วยงาน</th>
 		<th class="txtcen">เป้าหมาย</th>
 		<th class="txtcen">ยอดยกมา</th>
 		<th class="txtcen">รับเข้า</th>

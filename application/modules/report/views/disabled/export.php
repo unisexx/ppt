@@ -11,14 +11,14 @@
 </div>
 
 
-<table class='tbreport' border='1'>
+<table class='tbreport'>
 	<tr>
-		<th style='width:400px;'>ชื่อหน่วยงาน</th>
-		<th style='width:200px;'>เป้าหมาย</th>
-		<th style='width:200px;'>ยอดยกมา</th>
-		<th style='width:200px;'>รับเข้า</th>
-		<th style='width:200px;'>จำหน่าย</th>
-		<th style='width:200px;'>คงเหลือ</th>
+		<th style="width: 400px">ชื่อหน่วยงาน</th>
+		<th>เป้าหมาย</th>
+		<th>ยอดยกมา</th>
+		<th>รับเข้า</th>
+		<th>จำหน่าย</th>
+		<th>คงเหลือ</th>
 		<th style='width:200px; display:none;'>สะสม</th>
 	</tr>
 	<?

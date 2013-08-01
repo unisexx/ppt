@@ -27,6 +27,7 @@
 </div>
 <?php endif; ?>
 
+
 <div id="resultsearch"><b>ผลที่ค้นหา :</b>  สภาพ<?php echo $report_title; ?> ปี 
 <label><?php echo empty($_GET['year']) ? '2555' : $_GET['year'] ?></label> 
 เขตตรวจราชการ <label><?php echo empty($_GET['area_id']) ? 'ทุกเขตตรวจราชการ' : get_one('area_name', 'area', $_GET['area_id']); ?></label> 
@@ -90,7 +91,7 @@
   <td colspan="3"></td>
 </tr>
 <tr>
-    <td class="topic">&nbsp;&nbsp;- ดื่มเครื่องดื่มที่มีแอลกอฮอล์ สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญญชา เป็นต้น</td>
+    <td class="topic">&nbsp;&nbsp;- ดื่มเครื่องดื่มที่มีแอลกอฮอล์ สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น</td>
     <td class="text-right"><?php echo @nformat($rs['total4161_m']); ?></td>
     <td class="text-right"><?php echo @nformat($rs['total4161_f']); ?></td>
     <td class="text-right"><?php echo @nformat($rs['total4161_s']); ?></td>

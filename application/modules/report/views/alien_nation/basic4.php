@@ -4,7 +4,7 @@
   <div id="searchBox">
 <form method="get" action="report/alien_nation_r/index" id="frm_im" name="frm_im">
  
- <?php echo form_dropdown('year', get_year_option(2554, null, 'ALIEN', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+  <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
 
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   
@@ -13,7 +13,42 @@
   </div>
 </div>
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน 
-<label><?php if(isset($_GET['year'])){echo $_GET['year'];}else{echo "ทุกปี";} ?></label></div>
+
+<label>
+
+<?php //if(isset($_GET['year'])){echo $_GET['year'];}else{echo "ทุกปี";} ?>
+
+<?php
+
+        if(!empty($_GET))
+        {
+			if($_GET['province_id']!="")
+			{
+			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
+			  $result0 = $this->opt->get($sql0);
+			  foreach($result0 as $key0 => $item0)
+			  {
+				  echo "จังหวัด :".$item0['province'];
+				  $p_name = $item0['province'];
+			  }
+			}
+			else
+			{
+				  echo " ทุกจังหวัด ";	
+				  $p_name = 'รวม';	
+			}
+		}
+		else
+		{
+				  echo " ทุกจังหวัด ";	
+				  $p_name = 'รวม';
+		}
+		
+?>
+
+</label>
+
+</div>
 <div style="padding:10px; text-align:right;">
 
 
@@ -44,22 +79,41 @@
 
  <?php 
  
- foreach($result as $key => $item): $key += 1;
+$where = "";
+
+$sql1 = 'select distinct(alien_year) from alien order by alien_year desc';
+
+
+$result1 = $this->opt->get($sql1);
+
+ foreach($result1 as $key1 => $item1)
+ {
+	 
+
+		$sql2 = "SELECT * from alien where alien_year = '".$item1['alien_year']."' and alien_province LIKE '%".$p_name."%' ";
+	
+		
+		$result2 = $this->opt->get($sql2);
+		
+		 foreach($result2 as $key2 => $item2)
+		 {
+		 
   
  ?>  
  
 <tr>
-  <td class="topic txtcen"><?php echo $item['s_year']; ?></td>
-  <td class="txtright"><?php echo @number_format($item['a_sum']); ?></td>
-  <td class="txtright"><?php echo @number_format($item['s_male']); ?></td>
-  <td class="txtright"><?php echo @number_format($item['s_female']); ?></td>
-  <td class="txtright"><?php echo @number_format($item['s_in']); ?></td>
-  <td class="txtright"><?php echo @number_format($item['s_out']); ?></td>
+  <td class="topic txtcen"><?php echo $item2['alien_year']; ?></td>
+  <td class="txtright"><?php echo @number_format($item2['alien_sum']); ?></td>
+  <td class="txtright"><?php echo @number_format($item2['alien_male']); ?></td>
+  <td class="txtright"><?php echo @number_format($item2['alien_female']); ?></td>
+  <td class="txtright"><?php echo @number_format($item2['alien_sum_in']); ?></td>
+  <td class="txtright"><?php echo @number_format($item2['alien_sum_out']); ?></td>
 </tr>
 
 <?php 
  
-endforeach;
+		} 
+	}
 
  ?>
  

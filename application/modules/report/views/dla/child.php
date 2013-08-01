@@ -54,7 +54,7 @@
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
-  <td class="topic">เด็กขาดอุปการะ  (เช็คหัวข้อ 4.1.1 รายการหายไป)</td>
+  <td class="topic">เด็กขาดอุปการะ </td>
   <td class="text-right"><?php echo @nformat($rs['total411_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total411_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total411_s']); ?></td>
@@ -78,7 +78,7 @@
   <td class="text-right"><?php echo @nformat($rs['total414_s']); ?></td>
   </tr>
 <tr>
-  <td class="topic">เยาวชนในครอบครัวยากจนที่ไม่มีทุนการศึกษาต่อ (เช็คหัวข้อ 4.1.5 รายการหายไป)</td>
+  <td class="topic">เยาวชนในครอบครัวยากจนที่ไม่มีทุนการศึกษาต่อ</td>
   <td class="text-right"><?php echo @nformat($rs['total415_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total415_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total415_s']); ?></td>
@@ -118,7 +118,7 @@
   <td class="text-right"><?php echo @nformat($rs['total417_s']); ?></td>
 </tr>
 <tr>
-  <td class="topic">เด็กและเยาวชนที่ไม่มีชื่อในทะเบียนบ้าน (เช็คหัวข้อ 4.1.8 รายการหายไป)</td>
+  <td class="topic">เด็กและเยาวชนที่ไม่มีชื่อในทะเบียนบ้าน</td>
   <td class="text-right"><?php echo @nformat($rs['total418_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total418_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total418_s']); ?></td>

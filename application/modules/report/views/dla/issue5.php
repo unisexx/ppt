@@ -16,6 +16,7 @@
 <div id="search">
   <div id="searchBox">
      <form method="get">
+     <?php echo form_dropdown('year', get_year_option(null, null, 'form_all', 'year'), @$_GET['year'], null); ?>
      <?php echo form_dropdown('area_id', get_option('id', 'area_name', 'area'), @$_GET['area_id'], null, '-- ทุกเขตตรวจราชการ --'); ?>
      <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
      <?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
@@ -27,7 +28,8 @@
 <?php endif; ?>
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b>  สภาพ<?php echo $report_title; ?> ปี 
-<label><?php echo empty($_GET['year']) ? 'ทุกปี' : $_GET['year'] ?></label> 
+<label><?php echo empty($_GET['year']) ? '2555' : $_GET['year'] ?></label> 
+เขตตรวจราชการ <label><?php echo empty($_GET['area_id']) ? 'ทุกเขตตรวจราชการ' : get_one('area_name', 'area', $_GET['area_id']); ?></label> 
 จังหวัด <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : get_one('province', 'provinces', $_GET['province_id']); ?></label> 
 อำเภอ <label><?php echo empty($_GET['amphur_id']) ? 'ทุกอำเภอ' : get_one('amphur_name', 'amphur', $_GET['amphur_id']); ?></label> 
 ตำบล <label><?php echo empty($_GET['opt']) ? 'ทุกตำบล' : $_GET['opt']; ?></label></div>

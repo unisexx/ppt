@@ -20,33 +20,31 @@
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
-	  	
 		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-		<?=form_dropdown('WLIST', $main_list, @$_GET['WLIST'], 'class="span5"', '-- แสดงทั้งหมด --'); ?>
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
 </form>
-<div id="resultsearch" class='hide_print'>
-	<strong>ผลที่ค้นหา : </strong>คนพิการที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(empty($_GET['WLIST']))?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
+<div id="resultsearch" class='print'>
+	<strong>ผลที่ค้นหา : </strong>คนพิการที่อยู่ในความอุปการะของ 
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
 <div style='line-height:40px; text-align:right;' class='hide_print'>
-	<a href='report/disability/disabled/export?YEAR=<?=@$_GET['YEAR'];?>&WLIST=<?=@$_GET['WLIST'];?>' target='blank_'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+	<a href='report/disability/disabled/export?YEAR=<?=@$_GET['YEAR'];?>' target='blank_'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip hide_print" title="ส่งออกข้อมูล"></a>
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>
+<span style='line-height:50px; float:right;' class='hide_screen'>หน่วย : ราย</span>
 
 
 <table class='tbreport'>
 	<tr>
-		<th class="txtcen" style="width: 400px">ชื่อหน่วยงาน</th>
-		<th class="txtcen">เป้าหมาย</th>
-		<th class="txtcen">ยอดยกมา</th>
-		<th class="txtcen">รับเข้า</th>
-		<th class="txtcen">จำหน่าย</th>
-		<th class="txtcen">คงเหลือ</th>
+		<th class="txtcen">ชื่อหน่วยงาน</th>
+		<th class="txtcen" style="width:150px;">เป้าหมาย</th>
+		<th class="txtcen" style="width:150px;">ยอดยกมา</th>
+		<th class="txtcen" style="width:150px;">รับเข้า</th>
+		<th class="txtcen" style="width:150px;">จำหน่าย</th>
+		<th class="txtcen" style="width:150px;">คงเหลือ</th>
 		<th style='display:none;'>สะสม</th>
 	</tr>
 	<?
@@ -63,7 +61,8 @@
 	 	<tr>
 			<td>
 				<? $rs['id'] = ($rs['title'] == 'อื่น ๆ')?6:$rs['id']; ?>
-				<a href='report/disability/disabled/index2?WLIST=<?=$rs['id'];?>&YEAR=<?=$_GET['YEAR'];?>' class='hide_print'><?=$rs['title'];?></a>
+				<!--<a href='report/disability/disabled/index2?WLIST=<?=$rs['id'];?>&YEAR=<?=$_GET['YEAR'];?>' class='hide_print'></a>-->
+				<?=$rs['title'];?>
 				<span class='hide_screen'><?=$rs['title'];?></span>
 			</td>
 	 		<td class="txtright"><?=number_format($rs['target'], 0);?></td>

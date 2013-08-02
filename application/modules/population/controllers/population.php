@@ -89,6 +89,7 @@ Class population extends Public_Controller{
 	
 	function population_import(){
 		//$this->db->debug = true;
+		$year_data = $_POST['year_data'];
 		if($_FILES['fl_import']['name']!=''){
 			set_time_limit(0);
 			/*---for insert value to info table ---*/

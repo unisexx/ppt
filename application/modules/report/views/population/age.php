@@ -49,7 +49,7 @@ for($i=1;$i<=102;$i++):
 	$condition= @$_GET['year_data']!=''? " AND YEAR_DATA=".$_GET['year_data'] : "";
 	$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 	$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : " AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) ";
-	$condition.= @$_GET['district_id']!='' ? " AND AMPHUR_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
+	$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
 	$sql = "SELECT SUM(NUNIT) FROM POPULATION_DETAIL LEFT JOIN POPULATION ON POPULATION_DETAIL.PID = POPULATION.ID WHERE AGE_RANGE_CODE=".$i.$condition;	
 	$sum_male = $this->db->getone($sql);
 	$sum_female = $this->db->getone("SELECT SUM(NUNIT) FROM POPULATION_DETAIL LEFT JOIN POPULATION ON POPULATION_DETAIL.PID = POPULATION.ID WHERE AGE_RANGE_CODE=".($i+102).$condition);
@@ -79,7 +79,7 @@ for($i=1;$i<=102;$i++):
 	$condition= @$_GET['year_data']!=''? " AND YEAR_DATA=".$_GET['year_data'] : "";
 	$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 	$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : " AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) ";
-	$condition.= @$_GET['district_id']!='' ? " AND AMPHUR_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
+	$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
 	$sql = "SELECT SUM(LUNAR_CAL_MALE)SUM_LUNAR_MALE, SUM(LUNAR_CAL_FEMALE)SUM_LUNAR_FEMALE,
 	SUM(CENTRAL_HH_MALE)SUM_HH_MALE,SUM(CENTRAL_HH_FEMALE)SUM_HH_FEMALE,
 	SUM(NO_THAI_MALE)SUM_NO_THAI_MALE,SUM(NO_THAI_FEMALE)SUM_NO_THAI_FEMALE,

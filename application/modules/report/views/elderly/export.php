@@ -2,7 +2,6 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>ผู้สูงอายุที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[0];?></span>, 
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 

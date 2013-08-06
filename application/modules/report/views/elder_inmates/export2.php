@@ -1,4 +1,4 @@
-<h2 class='head_sideup'>รายงานผู้ต้องขังสูงอายุ</h2>
+<h2 class='head_sideup'>รายงานผู้ต้องขังสูงอายุ <?=(@$set_year[$_GET['year']])?'ปี '.$set_year[$_GET['year']]:'ทุกปีงบประมาณ';?></h2>
 
 <table class='tbreport' border='1'>
 	<tr>

@@ -41,42 +41,32 @@
 	</a>
 	<a href="javascript:print();">
 		<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
-	</a>หน่วย:ราย
+	</a>หน่วย:ครอบครัว
 </div>
 <?php endif; ?>
 
 <table class="tbreport">
 <tr>
 <th rowspan="2" class="txtcen">สภาพ<?php echo $report_title; ?></th>
-<th colspan="3" class="txtcen">จำนวน (ราย)</th>
+<th class="txtcen">จำนวน (ครอบครัว)</th>
 </tr>
 <tr>
-<td class="txtcen">ชาย</td>
-<td class="txtcen">หญิง</td>
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">ครอบครัวที่อาศัยอยู่ในสภาพแวดล้อมไม่เหมาะสมและสมควรได้รับความช่วยเหลือ (ครอบครัว)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total311']); ?></td>
   </tr>
   <tr>
   <td class="topic">ครัวเรือนที่มีสภาพที่อยู่อาศยไม่มั่นคงถาวร และสมควรได้รับความช่วยเหลือ (ครอบครัว)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total312']); ?></td>
   </tr>
   <tr>
   <td class="topic">ครอบครัวที่อาศัยอยู่ในพื้นที่เสี่ยงภัยทางธรรมชาติในระดับที่เป็นอันตรายต่อชีวิตและทรัพย์สิน (ครอบครัว)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total313']); ?></td>
   </tr>
   <tr>
   <td class="topic">ครัวเรือนที่ไม่มีกรรมสิทธิ์ในที่อยู่อาศัย เช่น อาศัยอยู่ในพื้นที่สาธารณะ ที่ราชพัสดุ ภายในบริเวณวัด ที่เช่า เป็นต้น</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total314']); ?></td>
   </tr>
 </table>

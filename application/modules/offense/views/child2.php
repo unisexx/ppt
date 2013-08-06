@@ -244,7 +244,7 @@ else
 
 </table>
 
-<div id="ref">ที่มา :</div>
+<div id="ref">ที่มา : กรมพินิจและคุ้มครองเด็กและเยาวชน</div>
 
 <script>
     $(function(){

@@ -17,7 +17,7 @@
 </style>
 
 
-<h2 class='head_sideup'>รายงานคนพิการอยู่ในความอุปการะของสถาบัน</h2>
+<h2 class='head_sideup'>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">

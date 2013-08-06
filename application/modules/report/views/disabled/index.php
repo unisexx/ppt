@@ -40,11 +40,11 @@
 <table class='tbreport'>
 	<tr>
 		<th class="txtcen">ชื่อหน่วยงาน</th>
-		<th class="txtcen" style="width:150px;">เป้าหมาย</th>
-		<th class="txtcen" style="width:150px;">ยอดยกมา</th>
-		<th class="txtcen" style="width:150px;">รับเข้า</th>
-		<th class="txtcen" style="width:150px;">จำหน่าย</th>
-		<th class="txtcen" style="width:150px;">คงเหลือ</th>
+		<th class="txtcen" style="width:100px;">เป้าหมาย</th>
+		<th class="txtcen" style="width:100px;">ยอดยกมา</th>
+		<th class="txtcen" style="width:100px;">รับเข้า</th>
+		<th class="txtcen" style="width:100px;">จำหน่าย</th>
+		<th class="txtcen" style="width:100px;">คงเหลือ</th>
 		<th style='display:none;'>สะสม</th>
 	</tr>
 	<?
@@ -61,9 +61,7 @@
 	 	<tr>
 			<td>
 				<? $rs['id'] = ($rs['title'] == 'อื่น ๆ')?6:$rs['id']; ?>
-				<!--<a href='report/disability/disabled/index2?WLIST=<?=$rs['id'];?>&YEAR=<?=$_GET['YEAR'];?>' class='hide_print'></a>-->
 				<?=$rs['title'];?>
-				<span class='hide_screen'><?=$rs['title'];?></span>
 			</td>
 	 		<td class="txtright"><?=number_format($rs['target'], 0);?></td>
 	 		<td class="txtright"><?=number_format($rs['balance'], 0);?></td>

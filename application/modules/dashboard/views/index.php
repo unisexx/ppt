@@ -3,10 +3,10 @@
 <script src="media/js/highcharts/modules/data.js"></script>
 <script src="media/js/highcharts/modules/exporting.js"></script>
 
-<div id="chart_1" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
-<div id="chart_2" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
-<!--<div id="chart_3" style="min-width: 400px; height: 400px; margin: 20px auto"></div><br /><br />
-<div id="chart_4" style="min-width: 400px; height: 400px; margin: 20px auto"></div>-->
+<div id="chart_1" class="chart_area"></div><br /><br />
+<div id="chart_2" class="chart_area"></div><br /><br />
+<!--<div id="chart_3" class="chart_area" ></div><br /><br />
+<div id="chart_4" class="chart_area"></div>-->
 
 <script>
 $(document).ready(function() {

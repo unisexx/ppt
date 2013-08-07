@@ -284,11 +284,8 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
 
 .chart_area {
 	position: relative;
-	z-index: -1000;
+	z-index: -1;
 	min-width: 400px; 
 	height: 400px; 
 	margin: 20px auto;
-}
-.highcharts-container {
-	z-index: -500;
 }

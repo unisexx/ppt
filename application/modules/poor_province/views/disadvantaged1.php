@@ -2,7 +2,7 @@
 <div id="search">
   <div id="searchBox">
     <form method="get" action="poor_province/poor_report">
- <?php echo form_dropdown('year', get_year_option(2555, null, 'POOL_PROVINCE', 'POOR_PROVINCE_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+
  <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
    </form>
@@ -10,29 +10,16 @@
   </div>
 </div>
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> เส้นความยากจน สัดส่วนและจำนวนคนจนเมื่อวัดด้านรายจ่ายเพื่อการอุปโภคบริโภค
-<label>
 
-  <?php 
-  
-        if(isset($_GET['year'])!="")
-        {
-
-				  echo $_GET['year'];
-			  
-		}
-		else
-		{
-				  echo " ทุกปี ";	
-		}
-  ?>  
-
-</label>
 <label>
 
 <?php 
   
         if(!empty($_GET))
         {
+			if($_GET['province_id']!="")
+			{
+			
 			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
 			  $result0 = $this->opt->get($sql0);
 			  foreach($result0 as $key0 => $item0)
@@ -40,6 +27,12 @@
 				  echo $item0['province'];
 				  $p_name = $item0['province'];
 			  }
+			}else{
+			
+				  echo " ทุกจังหวัด ";	
+				  $p_name = 'ประเทศ';	
+				
+			}
 		}
 		else
 		{
@@ -55,8 +48,8 @@
 
 </div>
 <div style="padding:10px; text-align:right;">
-  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_export'); ?>'" >
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_print'); ?>'"></div>
+  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_export/'.@$_GET['province_id'].''); ?>'">
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_print/'.@$_GET['province_id'].''); ?>'"></div>
 
 
 <table class="tbreport">

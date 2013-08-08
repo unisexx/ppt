@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน</title>
+<title>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน (จำแนกตามสัญชาติ)</title>
 
 <link href="<?php echo site_url('themes/ppt/css/style.css'); ?>" rel="stylesheet">
 
@@ -14,17 +14,17 @@
 <body>
 
 
-<h3>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน <label><?php if($year){echo 'ปี '.$year;}else{echo "ทุกปี";} ?></label></h3>
+<h3>รายงาน คนต่างด้าวที่ได้รับอนุญาตให้ทำงาน  (จำแนกตามสัญชาติ)<label><?php if($year){echo 'ปี '.$year;}else{echo "ทุกปี";} ?></label></h3>
 
 <table class="tbreport">
 <tr>
-<th rowspan="2">สัญชาติ</th>
-<th colspan="3">คนต่างด้าวได้รับอนุญาตทำงาน </th>
+<th rowspan="2" class="txtcen">สัญชาติ</th>
+<th colspan="3" class="txtcen">คนต่างด้าวได้รับอนุญาตทำงาน </th>
 </tr>
 <tr>
-  <td>เข้าเมืองถูกกฎหมาย</td>
-  <td>เข้าเมืองผิดกฎหมาย</td>
-  <td>รวม</td>
+  <td class="txtcen">เข้าเมืองถูกกฎหมาย</td>
+  <td class="txtcen">เข้าเมืองผิดกฎหมาย</td>
+  <td class="txtcen">รวม</td>
   </tr>
   
   
@@ -39,12 +39,12 @@
 
 <tr>
   <td class="topic"><?php echo $item['alien_nation']; ?></td>
-  <td><?php echo @number_format($item['alien_in']); ?></td>
-  <td><?php echo @number_format($item['alien_out']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['alien_in']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['alien_out']); ?></td>
   
   <?php $sum = $item['alien_in'] + $item['alien_out']; ?>
   
-  <td><?php echo @number_format($sum); ?></td>
+  <td class="txtright"><?php echo @number_format($sum); ?></td>
   </tr>
   
 <?php 
@@ -63,11 +63,12 @@ endforeach;
 
 <tr class="total">
   <td>รวม</td>
-  <td><?php echo number_format($sum_in,0); ?></td>
-  <td><?php echo number_format($sum_out,0); ?></td>
-  <td><?php echo number_format($sum_all,0); ?></td>
+  <td class="txtright"><?php echo number_format($sum_in,0); ?></td>
+  <td class="txtright"><?php echo number_format($sum_out,0); ?></td>
+  <td class="txtright"><?php echo number_format($sum_all,0); ?></td>
   </tr>
 </table>
+<div id="ref">ที่มา : สำนักบริการแรงงานต่างด้าว</div>
 
 <script>window.print();</script>
 

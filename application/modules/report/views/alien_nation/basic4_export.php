@@ -17,17 +17,18 @@
 
 <table class="tbreport">
 <tr>
-  <th rowspan="2">ปี</th>
-  <td colspan="3">รวมทั้งสิ้น</td>
-  <td>ต่างด้าวเข้าเมืองถูกกฎหมาย</td>
-  <td>ต่างด้าวเข้าเมืองผิดกฎหมาย</td>
+  <th rowspan="2" class="txtcen">ปี</th>
+  <td colspan="3" class="txtcen">รวมทั้งสิ้น</td>
+  <td class="txtcen">ต่างด้าวเข้าเมืองถูกกฎหมาย</td>
+  <td class="txtcen">ต่างด้าวเข้าเมืองผิดกฎหมาย</td>
 </tr>
 <tr>
-  <td>รวม</td>
-  <td>ชาย</td>
-  <td>หญิง</td>
-  <td>รวม</td>
-  <td>รวม</td>
+<td class="txtcen">รวม</td>
+  <td class="txtcen">ชาย</td>
+  <td class="txtcen">หญิง</td>
+  <td class="txtcen">รวม</td>
+  <td class="txtcen">รวม</td>
+
 
 
 </tr>
@@ -40,12 +41,12 @@
  ?>  
  
 <tr>
-  <td class="topic"><?php echo $item['s_year']; ?></td>
-  <td><?php echo @number_format($item['a_sum']); ?></td>
-  <td><?php echo @number_format($item['s_male']); ?></td>
-  <td><?php echo @number_format($item['s_female']); ?></td>
-  <td><?php echo @number_format($item['s_in']); ?></td>
-  <td><?php echo @number_format($item['s_out']); ?></td>
+  <td class="topic txtcen"><?php echo $item['s_year']; ?></td>
+  <td class="txtright"><?php echo @number_format($item['a_sum']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['s_male']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['s_female']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['s_in']); ?></td>
+  <td class="txtright"><?php echo @number_format($item['s_out']); ?></td>
 </tr>
 
 <?php 
@@ -56,6 +57,7 @@ endforeach;
  
  
 </table>
+<div id="ref">ที่มา : สำนักบริการแรงงานต่างด้าว</div>
 
 <script>window.print();</script>
 

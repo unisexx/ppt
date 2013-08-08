@@ -1,4 +1,6 @@
 <h2>สถานการณ์ทางสังคม</h2>
+
+<div style="color:#F00; font-size: 16px; padding: 20px 0;">* ขออภัยข้อมูลอยู่ระหว่างการตรวจสอบ</div>
 <script src="media/js/highcharts/highcharts.js"></script>
 <script src="media/js/highcharts/modules/data.js"></script>
 <script src="media/js/highcharts/modules/exporting.js"></script>

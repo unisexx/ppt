@@ -1,8 +1,9 @@
 <h3>รายงาน สถิติประชากรรายอายุ </h3>
+<div style="color:#F00; font-size: 16px; padding: 20px 0;">* ขออภัยข้อมูลอยู่ระหว่างการตรวจสอบ</div>
 <div id="search">
     <form>
     <div id="searchBox">
-    	<?php echo form_dropdown('year_data', get_year_option(MIN_YEAR_LIST), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    	<?php echo form_dropdown('year_data', get_year_option(null,null,'population','year_data'), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
     	<?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     	<?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>
@@ -49,7 +50,7 @@ for($i=1;$i<=102;$i++):
 	$condition= @$_GET['year_data']!=''? " AND YEAR_DATA=".$_GET['year_data'] : "";
 	$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 	$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : " AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) ";
-	$condition.= @$_GET['district_id']!='' ? " AND AMPHUR_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
+	$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
 	$sql = "SELECT SUM(NUNIT) FROM POPULATION_DETAIL LEFT JOIN POPULATION ON POPULATION_DETAIL.PID = POPULATION.ID WHERE AGE_RANGE_CODE=".$i.$condition;	
 	$sum_male = $this->db->getone($sql);
 	$sum_female = $this->db->getone("SELECT SUM(NUNIT) FROM POPULATION_DETAIL LEFT JOIN POPULATION ON POPULATION_DETAIL.PID = POPULATION.ID WHERE AGE_RANGE_CODE=".($i+102).$condition);
@@ -79,7 +80,7 @@ for($i=1;$i<=102;$i++):
 	$condition= @$_GET['year_data']!=''? " AND YEAR_DATA=".$_GET['year_data'] : "";
 	$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
 	$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : " AND (POPULATION.AMPHUR_ID IS NULL OR POPULATION.AMPHUR_ID = 0) ";
-	$condition.= @$_GET['district_id']!='' ? " AND AMPHUR_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
+	$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] :  " AND (POPULATION.DISTRICT_ID IS NULL OR POPULATION.DISTRICT_ID = 0) ";
 	$sql = "SELECT SUM(LUNAR_CAL_MALE)SUM_LUNAR_MALE, SUM(LUNAR_CAL_FEMALE)SUM_LUNAR_FEMALE,
 	SUM(CENTRAL_HH_MALE)SUM_HH_MALE,SUM(CENTRAL_HH_FEMALE)SUM_HH_FEMALE,
 	SUM(NO_THAI_MALE)SUM_NO_THAI_MALE,SUM(NO_THAI_FEMALE)SUM_NO_THAI_FEMALE,

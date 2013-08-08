@@ -28,7 +28,7 @@
 </form>
 
 <div id="resultsearch" class='hide_print'>
-	<strong>ผลที่ค้นหา : </strong>รายงานคนพิการอยู่ในความอุปการะของสถาบัน แสดง 
+	<strong>ผลที่ค้นหา : </strong>รายงานคนพิการอยู่ในความอุปการะของ 
 	<span style='color:#F33;'><?=($_GET['WLIST'] == NULL)?'ทุกสถาบัน':'สถาบัน '.$main_list[$_GET['WLIST']];?></span>, 
 	<span style='color:#F33;'><?=(empty($_GET['YEAR']))?'แสดงทุกปี':'ปี '.$_GET['YEAR'];?></span>
 </div>

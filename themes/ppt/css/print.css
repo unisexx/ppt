@@ -1,5 +1,5 @@
 @media print { 
-	#head, #tool-info, #search, div.red, #resultsearch b, h3 {
+	#head, #tool-info, #search, div.red, #resultsearch b, h3, #login {
 		display:none; 
 	} 
 }

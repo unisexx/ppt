@@ -27,6 +27,7 @@
 </div>
 <?php endif; ?>
 
+
 <div id="resultsearch"><b>ผลที่ค้นหา :</b>  สภาพ<?php echo $report_title; ?> ปี 
 <label><?php echo empty($_GET['year']) ? '2555' : $_GET['year'] ?></label> 
 เขตตรวจราชการ <label><?php echo empty($_GET['area_id']) ? 'ทุกเขตตรวจราชการ' : get_one('area_name', 'area', $_GET['area_id']); ?></label> 
@@ -56,7 +57,7 @@
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
-  <td class="topic">เด็กขาดอุปการะ  (เช็คหัวข้อ 4.1.1 รายการหายไป)</td>
+  <td class="topic">เด็กขาดอุปการะ </td>
   <td class="text-right"><?php echo @nformat($rs['total411_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total411_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total411_s']); ?></td>
@@ -80,7 +81,7 @@
   <td class="text-right"><?php echo @nformat($rs['total414_s']); ?></td>
   </tr>
 <tr>
-  <td class="topic">เยาวชนในครอบครัวยากจนที่ไม่มีทุนการศึกษาต่อ (เช็คหัวข้อ 4.1.5 รายการหายไป)</td>
+  <td class="topic">เยาวชนในครอบครัวยากจนที่ไม่มีทุนการศึกษาต่อ</td>
   <td class="text-right"><?php echo @nformat($rs['total415_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total415_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total415_s']); ?></td>
@@ -90,7 +91,7 @@
   <td colspan="3"></td>
 </tr>
 <tr>
-    <td class="topic">&nbsp;&nbsp;- ดื่มเครื่องดื่มที่มีแอลกอฮอล์ สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญญชา เป็นต้น</td>
+    <td class="topic">&nbsp;&nbsp;- ดื่มเครื่องดื่มที่มีแอลกอฮอล์ สูบบุหรี่ และติดสารเสพติดร้ายแรง เช่น ยาบ้า ยาอี สารระเหย กัญชา เป็นต้น</td>
     <td class="text-right"><?php echo @nformat($rs['total4161_m']); ?></td>
     <td class="text-right"><?php echo @nformat($rs['total4161_f']); ?></td>
     <td class="text-right"><?php echo @nformat($rs['total4161_s']); ?></td>
@@ -120,7 +121,7 @@
   <td class="text-right"><?php echo @nformat($rs['total417_s']); ?></td>
 </tr>
 <tr>
-  <td class="topic">เด็กและเยาวชนที่ไม่มีชื่อในทะเบียนบ้าน (เช็คหัวข้อ 4.1.8 รายการหายไป)</td>
+  <td class="topic">เด็กและเยาวชนที่ไม่มีชื่อในทะเบียนบ้าน</td>
   <td class="text-right"><?php echo @nformat($rs['total418_m']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total418_f']); ?></td>
   <td class="text-right"><?php echo @nformat($rs['total418_s']); ?></td>

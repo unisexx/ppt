@@ -1,25 +1,21 @@
-<h2>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
-
-<div id="resultsearch">
-	<strong>ผลที่ค้นหา : </strong>เด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน แสดง 
-	<span style='color:#F33;'><?=(@$_GET['WLIST'])?'สถาบัน '.$list[0]['name']:'ทุกสถาบัน';?></span>, 
-	<span style='color:#F33;'><?=(@$ylist)?'ปี '.$ylist:'ทุกปีงบประมาณ';?></span>
+<h2 class='head_sideup'>รายงานคนพิการอยู่ในความอุปการะของสถาบัน</h2>
+<div id="resultsearch" class='print'>
+	<strong>ผลที่ค้นหา : </strong>คนพิการที่อยู่ในความอุปการะของ 
+	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
+<span style='line-height:50px; float:right;' class='hide_screen'>หน่วย : ราย</span>
 
-<div style='line-height:40px; text-align:right;'>
-	หน่วย : ราย
-</div>
 
 
 <table class='tbreport' border='1'>
 	<tr>
-		<th style='width:400px;'>ชื่อหน่วยงาน</th>
-		<th style='width:200px;'>เป้าหมาย</th>
-		<th style='width:200px;'>ยอดยกมา</th>
-		<th style='width:200px;'>รับเข้า</th>
-		<th style='width:200px;'>จำหน่าย</th>
-		<th style='width:200px;'>คงเหลือ</th>
-		<th style='width:200px; display:none;'>สะสม</th>
+		<th class="txtcen">ชื่อหน่วยงาน</th>
+		<th class="txtcen" style="width:100px;">เป้าหมาย</th>
+		<th class="txtcen" style="width:100px;">ยอดยกมา</th>
+		<th class="txtcen" style="width:100px;">รับเข้า</th>
+		<th class="txtcen" style="width:100px;">จำหน่าย</th>
+		<th class="txtcen" style="width:100px;">คงเหลือ</th>
+		<!--<th style='display:none;'>สะสม</th>-->
 	</tr>
 	<?
 	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
@@ -33,13 +29,16 @@
 		$total['build'] += $rs['build'];
 		?>
 	 	<tr>
-			<td><?=$rs['title'];?></td>
-	 		<td><?=number_format($rs['target'], 0);?></td>
-	 		<td><?=number_format($rs['balance'], 0);?></td>
-	 		<td><?=number_format($rs['admission'], 0);?></td>
-	 		<td><?=number_format($rs['distribution'], 0);?></td>
-	 		<td><?=number_format($rs['remain'], 0);?></td>
-	 		<td style='display:none;'><?=number_format($rs['build'], 0);?></td>
+			<td>
+				<? $rs['id'] = ($rs['title'] == 'อื่น ๆ')?6:$rs['id']; ?>
+				<?=$rs['title'];?>
+			</td>
+	 		<td class="txtright"><?=number_format($rs['target'], 0);?></td>
+	 		<td class="txtright"><?=number_format($rs['balance'], 0);?></td>
+	 		<td class="txtright"><?=number_format($rs['admission'], 0);?></td>
+	 		<td class="txtright"><?=number_format($rs['distribution'], 0);?></td>
+	 		<td class="txtright"><?=number_format($rs['remain'], 0);?></td>
+	 		<!--<td style='display:none;'><?=number_format($rs['build'], 0);?></td>-->
 	 	</tr>
 		<?
 	}
@@ -47,12 +46,12 @@
 	
 	<tr class="total">
 		<td>รวม</td>
-		<td> <?=number_format(@$total['target']);?> </td>
-		<td> <?=number_format(@$total['balance']);?> </td>
-		<td> <?=number_format(@$total['admission']);?> </td>
-		<td> <?=number_format(@$total['distribution']);?> </td>
-		<td> <?=number_format(@$total['remain']);?> </td>
-		<td style='display:none;'> <?=number_format(@$total['build']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['target']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['balance']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['admission']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['distribution']);?> </td>
+		<td class="txtright"> <?=number_format(@$total['remain']);?> </td>
+		<!--<td style='display:none;'> <?=number_format(@$total['build']);?> </td>-->
 	</tr>
 </table>
 

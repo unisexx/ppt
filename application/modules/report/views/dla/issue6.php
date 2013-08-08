@@ -41,36 +41,28 @@
 	</a>
 	<a href="javascript:print();">
 		<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">
-	</a>หน่วย:ราย
+	</a>
 </div>
 <?php endif; ?>
 
 <table class="tbreport">
 <tr>
 <th rowspan="2" class="txtcen">สภาพ<?php echo $report_title; ?></th>
-<th colspan="3" class="txtcen">จำนวน (ราย)</th>
+<th class="txtcen">จำนวน</th>
 </tr>
 <tr>
-<td class="txtcen">ชาย</td>
-<td class="txtcen">หญิง</td>
 <td class="txtcen">รวม</td>
 </tr>
 <tr>
   <td class="topic">ร้านค้าที่ขายเหล้า/บุหรี่ อยู่ในบริเวณใกล้เคียงสถานศึกษาและศาสนสถาน (แห่ง)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total361']); ?></td>
   </tr>
   <tr>
   <td class="topic">ร้านสื่อลามก/ร้านเกมส์/ร้านอินเทอร์เน็ตภายในท้องถิ่น (แห่ง)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total362']); ?></td>
   </tr>
   <tr>
   <td class="topic">กลุ่มเครือข่ายที่ยังมีปัญหาเรื่องความปรองดอง และจำเป็นต้องมีการจัดการให้เกิดความสมานฉันท์ (กลุ่ม)</td>
-  <td class="text-right">-</td>
-  <td class="text-right">-</td>
   <td class="text-right"><?php echo @nformat($rs['total363']); ?></td>
   </tr>
 </table>

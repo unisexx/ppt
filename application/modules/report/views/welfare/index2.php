@@ -22,6 +22,7 @@
 	<div id="search">
 	  <div id="searchBox">
 		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<input type='hidden' name='WLIST' value='<?=$_GET['WLIST'];?>'>
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
 </form>

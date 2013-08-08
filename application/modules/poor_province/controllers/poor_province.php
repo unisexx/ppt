@@ -93,11 +93,11 @@ POOL_PROVINCE
 	function poor_report()
 	{
 	    $where = '';
-        if(!empty($_GET))
+/*        if(!empty($_GET))
         {
             
             if(!empty($_GET['year'])) $where .= ' AND POOR_PROVINCE_YEAR = '.$_GET['year'];
-        }
+        }*/
         $sql = 'SELECT
 		*
 		FROM
@@ -111,16 +111,16 @@ POOL_PROVINCE
 		$this->template->build('disadvantaged1', $data);	
 	}
 	
-	function poor_province_export()
+	function poor_province_export($pid = null)
 	{
-		
-		$this->load->view('poor_export');
+		$data['pid']=$pid;
+		$this->load->view('poor_export',$data);
 	}
 	
-	function poor_province_print()
+	function poor_province_print($pid = null)
 	{
-		
-		$this->load->view('poor_print');
+		$data['pid']=$pid;
+		$this->load->view('poor_print',$data);
 		//$this->template->build('poor_print');	
 	}
 

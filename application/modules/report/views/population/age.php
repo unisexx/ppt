@@ -1,4 +1,5 @@
 <h3>รายงาน สถิติประชากรรายอายุ </h3>
+<div style="color:#F00; font-size: 16px; padding: 20px 0;">* ขออภัยข้อมูลอยู่ระหว่างการตรวจสอบ</div>
 <div id="search">
     <form>
     <div id="searchBox">

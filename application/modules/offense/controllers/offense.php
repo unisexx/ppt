@@ -108,12 +108,12 @@ Class Offense extends Public_Controller{
 	
 	function offense_report()
 	{
-		$where = '';
+	   $data['menu_id'] = $this->menu_id;
+        $where = '';
         if(!empty($_GET))
         {
             
             if(!empty($_GET['year'])) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$_GET['year'];
-            //if(!empty($_GET['province_id'])) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$_GET['province_id'];
 			
 			if(!empty($_GET['province_id']))
 			{
@@ -124,19 +124,18 @@ Class Offense extends Public_Controller{
 				  
 				}
 				
-				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";	
+				
+				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";		
 			}
 			
-			
         }
-        $sql = 'SELECT
-		*
-		FROM
-		OFFENSES
-		WHERE 1=1 '.$where.' 
-        ORDER BY ID ASC';
+        $sql = 'SELECT *
+        FROM OFFENSES
+        WHERE 1=1 '.$where.'         
+        ORDER BY OFFENSE_YEAR DESC';
         $data['result'] = $this->opt->get($sql,TRUE);
-        //$data['pagination'] = $this->opt->pagination;
+        $data['pagination'] = $this->opt->pagination;
+		
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
 		$this->template->build('child2', $data);	
@@ -145,24 +144,34 @@ Class Offense extends Public_Controller{
 	function offense_export($year=null,$province=null,$type=null)
 	{
 		
-		$where = '';
+	   $data['menu_id'] = $this->menu_id;
+        $where = '';
 
             
-        if(!empty($year)) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
-        if(!empty($province)) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$province;
-      
-        $sql = 'SELECT
-		*
-		FROM
-		OFFENSES
-		WHERE 1=1 '.$where.' 
-        ORDER BY ID ASC';
+            if($year!='') $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
+			
+			if($province!='')
+			{
+				$tbpro = $this->pmd->get("select * from provinces where id=".$province);
+			    foreach($tbpro as $key1 => $item1)
+			  	{
+				  $name_pro = $item1['province'];
+				  
+				}
+				
+				
+				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";		
+			}
+			
+       	$data['year'] = $year;
+		$data['province'] = $name_pro;	
 		
-		$data['year'] = $year;
-		$data['province'] = $province;
-		$data['type'] = $type;
-		
-		$data['result'] = $this->opt->get($sql,TRUE);
+        $sql = 'SELECT *
+        FROM OFFENSES
+        WHERE 1=1 '.$where.'         
+        ORDER BY OFFENSE_YEAR DESC';
+        $data['result'] = $this->opt->get($sql,TRUE);
+        $data['pagination'] = $this->opt->pagination;
 	
 		$this->load->view('offense_export',$data);
 	}
@@ -171,24 +180,35 @@ Class Offense extends Public_Controller{
 	function offense_print($year=null,$province=null,$type=null)
 	{
 		
-		$where = '';
+	   $data['menu_id'] = $this->menu_id;
+        $where = '';
 
             
-        if(!empty($year)) $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
-        if(!empty($province)) $where .= ' AND OFFENSES.OFFENSE_PROVINCE = '.$province;
-      
-        $sql = 'SELECT
-		*
-		FROM
-		OFFENSES
-		WHERE 1=1 '.$where.' 
-        ORDER BY ID ASC';
-		
+            if($year!='') $where .= ' AND OFFENSES."OFFENSE_YEAR" = '.$year;
+			
+			if($province!='')
+			{
+				$tbpro = $this->pmd->get("select * from provinces where id=".$province);
+			    foreach($tbpro as $key1 => $item1)
+			  	{
+				  $name_pro = $item1['province'];
+				  
+				}
+				
+				
+				$where .= " AND OFFENSES.OFFENSE_PROVINCE = '".$name_pro."' ";		
+			}
+			
 		$data['year'] = $year;
-		$data['province'] = $province;
-		$data['type'] = $type;
-		
-		$data['result'] = $this->opt->get($sql,TRUE);
+		$data['province'] = $name_pro;	
+			
+ 
+        $sql = 'SELECT *
+        FROM OFFENSES
+        WHERE 1=1 '.$where.'         
+        ORDER BY OFFENSE_YEAR DESC';
+        $data['result'] = $this->opt->get($sql,TRUE);
+        $data['pagination'] = $this->opt->pagination;
 		$this->load->view('offense_print',$data);	
 	}
 

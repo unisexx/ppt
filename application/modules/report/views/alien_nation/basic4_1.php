@@ -3,8 +3,10 @@
   <div id="searchBox">
 
 <form method="get" action="report/alien_nation_r/alien_nation_report" id="frm_im" name="frm_im">
+
+ <?php if(empty($_GET['year'])){ $_GET['year']='2554'; } ?>
  
- <?php echo form_dropdown('year', get_year_option(2554, null, 'ALIEN_NATION', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, '-- ทุกปี --'); ?>
+ <?php echo form_dropdown('year', get_year_option(2554, null, 'ALIEN_NATION', 'ALIEN_YEAR', TRUE), @$_GET['year'], null, ''); ?>
 
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
   
@@ -39,35 +41,40 @@
   
   
  <?php 
- $sum_in = '';
- $sum_out = '';
- $sum_all = '';
+
  
- foreach($result as $key => $item): $key += 1;
-  
+ $sum_in = 0;
+ $sum_out = 0;
+ $sum_all = 0;
+ 
+ foreach($result as $key => $item)
+ {
+	 	 
+  			
+			
  ?>  
 
-<tr>
-  <td class="topic"><?php echo $item['alien_nation']; ?></td>
-  <td class="txtright"><?php echo @number_format($item['alien_in']); ?></td>
-  <td class="txtright"><?php echo @number_format($item['alien_out']); ?></td>
-  
-  <?php $sum = $item['alien_in'] + $item['alien_out']; ?>
-  
-  <td class="txtright"><?php echo @number_format($sum); ?></td>
-  </tr>
-  
-<?php 
-
+                <tr>
+                  <td class="topic"><?php echo $item['alien_nation']; ?></td>
+                  <td class="txtright"><?php echo @number_format($item['alien_in']); ?></td>
+                  <td class="txtright"><?php echo @number_format($item['alien_out']); ?></td>
+                  
+                  <?php $sum = $item['alien_in']+ $item['alien_out']; ?>
+                  
+                  <td class="txtright"><?php echo @number_format($sum); ?></td>
+                  </tr>
+                  
+                <?php 
+                
+                
+                 
+                 $sum_in = $sum_in + $item['alien_in'];
+                 $sum_out = $sum_out + $item['alien_out'];
+                 $sum_all = $sum_all + $sum;
+				 
 
  
- $sum_in = $sum_in + $item['alien_in'];
- $sum_out = $sum_out + $item['alien_out'];
- $sum_all = $sum_all + $sum;
- 
- 
-endforeach;
-
+ }
 
  ?>
 

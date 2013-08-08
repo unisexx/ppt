@@ -68,14 +68,17 @@
    
 		if($province!="")
 		{
-		  $sql = 'select * from provinces where id='.$province;
+/*		  $sql = 'select * from provinces where id='.$province;
 		  $result1 = $this->opt->get($sql);
 			  foreach($result1 as $key1 => $item1)
 			  {
 				  echo $item1['province'];
 			  }
 		  
-			 }
+			 }*/
+			 
+			 echo $province;
+			 
   		 }
 		else
 	   {
@@ -84,7 +87,7 @@
 	   
 	 echo "</label>";  
 	   
-	 if(@$type!="")
+/*	 if(@$type!="")
 	 {
 		  $this->load->model('offense_type_model', 'otm');
 		  
@@ -95,8 +98,10 @@
 			  {
 				  echo "   ประเภท : <label>".$item1['offense_type_name']."</label>";
 			  }
+	 }*/
+	 
 	 }
-  ?>  
+  ?> 
 
 </h3>
 

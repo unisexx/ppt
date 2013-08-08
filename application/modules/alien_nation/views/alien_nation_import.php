@@ -7,7 +7,7 @@
 	error_reporting(0);
 	set_time_limit(0);
           $this->load->model('alien_nation_model', 'opt');
-			$this->opt->delete();
+			//$this->opt->delete();
         include("source_import/reader.php"); 
 		
         $excel = new Spreadsheet_Excel_Reader();
@@ -43,6 +43,9 @@
                 $data1 = isset($excel->sheets[0]['cells'][$x1][2]) ? $excel->sheets[0]['cells'][$x1][2] : '';
 				$data2 = isset($excel->sheets[0]['cells'][$x1][3]) ? $excel->sheets[0]['cells'][$x1][3] : '';
 
+				
+				if($data1 == ''){ $data1 = '-'; }
+				if($data2 == ''){ $data2 = '-'; }
 				
 						$data = array(
 						  

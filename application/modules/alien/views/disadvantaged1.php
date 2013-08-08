@@ -29,13 +29,21 @@
 		
         if(!empty($_GET))
         {
-			  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
-			  $result0 = $this->opt->get($sql0);
-			  foreach($result0 as $key0 => $item0)
-			  {
-				  echo "จังหวัด :".$item0['province'];
-				  $p_name = $item0['province'];
-			  }
+			
+					if($_GET['province_id']!="")
+					{
+						  $sql0 = 'select * from provinces where id='.$_GET['province_id'];
+						  $result0 = $this->opt->get($sql0);
+						  foreach($result0 as $key0 => $item0)
+						  {
+							  echo "จังหวัด :".$item0['province'];
+							  $p_name = $item0['province'];
+						  }
+						  
+					}else{
+							  echo " ทุกจังหวัด ";	
+				 			 $p_name = 'ประเทศ';
+					}
 		}
 		else
 		{

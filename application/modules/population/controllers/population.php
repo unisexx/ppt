@@ -7,6 +7,7 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
+		$this->load->model('population_data_model','population_data');
 		$this->load->model('info_model','info');
 		$this->load->model('orginfo_model','org');
 	}
@@ -739,6 +740,55 @@ Class population extends Public_Controller{
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");				
 		redirect('population/sixtyup_index');		
+	}
+	
+	
+	function dear_import_index(){
+		
+		$this->template->build('dear_import_index');
+	}
+	
+	function dear_import(){
+		$this->db->debug=true;
+		$columns = $this->db->MetaColumnNames("POPULATION_DATA");
+		foreach($columns as $item){
+			$column[] = $item;
+		}
+		if($_FILES['fl_import']['name']!=''){						
+			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			/*---for insert value to info table ---*/
+			// $import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			// $_POST['section_id'] = $import_section_id;
+			// $this->info->save($_POST);
+			/*--end--*/
+			$file_name = 'population_dear'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/population/';
+			$fpicname = $uploaddir.$file_name;
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
+			
+			
+			
+			require_once 'include/Excel/reader.php';
+			$data = new Spreadsheet_Excel_Reader();
+			$data -> setOutputEncoding('UTF-8');
+			$data -> read($uploaddir.$file_name);						
+			//error_reporting(E_ALL ^ E_NOTICE);
+			$index = 0;
+			//echo $data -> sheets[0]['numCols'];
+			
+			
+			for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$value = null;
+				//if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){				
+				for($ncolumn = 1; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
+					$column_name = strtoupper(trim($column[$ncolumn]));
+					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+				}
+				//var_dump($value);
+				$this->population_data->save($value);
+			}					
+		}
+		//redirect('population/dear_import');
 	}
 }
 ?>

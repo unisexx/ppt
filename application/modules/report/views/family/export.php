@@ -46,6 +46,6 @@ foreach($value as $item):
 <? endforeach;?>
 </table>
 
-<div id="ref">ที่มา :</div>
+<div id="ref">ที่มา : กรมพัฒนาชุมชน กระทรวงมหาดไทย</div>
 
 

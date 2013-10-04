@@ -20,7 +20,7 @@
             <li><a href="#">คนพิการ</a>
                 <ul>
                     <li><a href="report/dla/disabled">ปัญหาคนพิการในท้องถิ่น</a></li>
-                    <li><a href="report/disability/disabled">ปัญหาคนพิการในสถาบัน</a></li>
+                    <li><a href="report/disability/disabled">คนพิการในสถาบัน</a></li>
                 </ul>
             </li>
             <li><a href="#">ครอบครัว</a>

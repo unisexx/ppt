@@ -17,11 +17,12 @@
 </style>
 
 
-<h2 class='head_sideup'>รายงานคนพิการอยู่ในความอุปการะของสถาบัน</h2>
+<h2 class='head_sideup'>รายงานเด็กและเยาวชนที่อยู่ในความอุปการะของสถาบัน</h2>
 <form action='' method='get'>
 	<div id="search">
 	  <div id="searchBox">
 		<?=form_dropdown('YEAR', $year_list, @$_GET['YEAR'], null); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+		<input type='hidden' name='WLIST' value='<?=$_GET['WLIST'];?>'>
 	  <input type="submit" title="ค้นหา" value=" " class="btn_search" /></div>
 	</div>
 </form>

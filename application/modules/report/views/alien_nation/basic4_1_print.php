@@ -10,7 +10,7 @@
 <body>
 
 
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร  (จำแนกตามสัญชาติ)<label><?php if(isset($_GET['year'])){echo 'ปี '.$_GET['year'];}else{echo "ทุกปี";} ?></label></div>
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> คนต่างด้าวได้รับอนุญาตทำงานคงเหลือทั่วราชอาณาจักร  (จำแนกตามสัญชาติ)<label><?php if($year){echo 'ปี '.$year;}else{echo "ทุกปี";} ?></label></div>
 
 <table class="tbreport">
 <tr>

@@ -50,7 +50,8 @@ class Dashboard extends Public_Controller
         
         WHERE POPULATION.YEAR_DATA BETWEEN TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+538 AND TO_NUMBER((EXTRACT(YEAR FROM SYSDATE)))+543 
         
-        GROUP BY YEAR_DATA';
+        GROUP BY YEAR_DATA
+        ORDER BY YEAR_DATA';
         $result = $this->db->getarray($sql);
         dbConvert($result);
             

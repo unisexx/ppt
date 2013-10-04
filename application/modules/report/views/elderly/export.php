@@ -14,7 +14,7 @@
 		<th style='width:200px;'>รับเข้า</th>
 		<th style='width:200px;'>จำหน่าย</th>
 		<th style='width:200px;'>คงเหลือ</th>
-		<th style='width:200px; display:none;'>สะสม</th>
+	<!--<th style='width:200px; display:none;'>สะสม</th>-->
 	</tr>
 	<?
 	$total = array('target'=>0, 'balance'=>0, 'admission'=>0, 'distribution'=>0, 'remain'=>0, 'build'=>0);
@@ -34,7 +34,7 @@
 	 		<td style='text-align:right;'><?=number_format($rs['admission'], 0);?></td>
 	 		<td style='text-align:right;'><?=number_format($rs['distribution'], 0);?></td>
 	 		<td style='text-align:right;'><?=number_format($rs['remain'], 0);?></td>
-	 		<td style='display:none;'><?=number_format($rs['build'], 0);?></td>
+	 		<!--<td style='display:none;'><?=number_format($rs['build'], 0);?></td>-->
 	 	</tr>
 		<?
 	}
@@ -47,7 +47,7 @@
 		<td> <?=number_format(@$total['admission']);?> </td>
 		<td> <?=number_format(@$total['distribution']);?> </td>
 		<td> <?=number_format(@$total['remain']);?> </td>
-		<td style='display:none;'> <?=number_format(@$total['build']);?> </td>
+		<!--<td style='display:none;'> <?=number_format(@$total['build']);?> </td>-->
 	</tr>
 </table>
 

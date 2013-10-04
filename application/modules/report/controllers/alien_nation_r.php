@@ -10,7 +10,7 @@ Class Alien_nation_r extends Public_Controller{
 	
 	function index()
 	{
-	    $where = '';
+/*	    $where = '';
         if(!empty($_GET))
         {
             
@@ -30,9 +30,14 @@ GROUP BY
 ALIEN_YEAR '.$where.'
 ORDER BY
 S_YEAR DESC';
+
+
 		
         $data['result'] = $this->opt->get($sql);
-        $data['pagination'] = $this->opt->pagination;
+        $data['pagination'] = $this->opt->pagination;*/
+		
+		$data['kenku']='-_-';
+		
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('alien_nation/basic4', $data);
 	}
@@ -52,6 +57,9 @@ S_YEAR DESC';
 			ALIEN_NATION 
 		WHERE 1=1 '.$where.' 
         ORDER BY ALIEN_NATION.ID ASC';
+		
+		//$sql = 'SELECT DISTINCT(ALIEN_NATION) from ALIEN_NATION WHERE 1=1 '.$where.' ORDER BY ALIEN_NATION ASC '; 
+		
         $data['result'] = $this->opt->get($sql,TRUE);
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
@@ -117,15 +125,13 @@ S_YEAR DESC';
 	}
 
 	
-	function alien_nation_export()
+	function alien_nation_export($year = null)
 	{
 		
 		$where = '';
-        if(!empty($_GET))
-        {
-            
-            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$_GET['year'];
-        }
+         
+            if($year!="") $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$year;
+        
 		
         $sql = 'SELECT *
 			FROM
@@ -133,25 +139,29 @@ S_YEAR DESC';
 		WHERE 1=1 '.$where.' 
         ORDER BY ALIEN_NATION.ID ASC';
         $data['result'] = $this->opt->get($sql,TRUE);
+		
+		$data['year'] = $year;
 
-		$this->template->build('alien_nation/basic4_1_export', $data);	
+		//$this->template->build('alien_nation/basic4_1_export', $data);
+		
+		$this->load->view('alien_nation/basic4_1_export',$data);	
 	}
 	
-	function alien_nation_print()
+	function alien_nation_print($year = null)
 	{
 		
 		$where = '';
-        if(!empty($_GET))
-        {
-            
-            if(!empty($_GET['year'])) $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$_GET['year'];
-        }
+         
+            if($year!="") $where .= ' AND ALIEN_NATION.ALIEN_YEAR = '.$year;
+        
 		
         $sql = 'SELECT *
 			FROM
 			ALIEN_NATION 
 		WHERE 1=1 '.$where.' 
         ORDER BY ALIEN_NATION.ID ASC';
+		
+		$data['year'] = $year;
         $data['result'] = $this->opt->get($sql,TRUE);
 
 		$this->template->build('alien_nation/basic4_1_print', $data);	

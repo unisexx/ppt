@@ -89,11 +89,11 @@ class Disabled extends Public_Controller
 	
 	public function export()
 	{
-		$cat_list = $this->disabled_list->get();
+		$cat_list = $this->disabled_list->get(false, true);
 		foreach($cat_list as $cat_list_) $data['main_list'][$cat_list_['id']] = $cat_list_['name'];
-
+		
 		//===== set year list group =====//
-		$year_list = $this->disabled->get('SELECT YEAR FROM DISABLED_DATA GROUP BY YEAR ORDER BY YEAR DESC');
+		$year_list = $this->disabled->get('SELECT YEAR FROM DISABLED_DATA GROUP BY YEAR ORDER BY YEAR DESC', true);
 		for($i=0; $i<count($year_list); $i++) $data['year_list'][$year_list[$i]['year']] = $year_list[$i]['year'];
 
 		$data['ylist'] = @$data['year_list'][$_GET['YEAR']];
@@ -109,15 +109,16 @@ class Disabled extends Public_Controller
 		} else {
 			$dlist = "SELECT * FROM DISABLED_LIST WHERE ID LIKE '".$_GET['WLIST']."'";
 		}
-		$dlist .= " ORDER BY NAME ASC";
-		$dlist = $this->disabled_list->get($dlist);
+		$dlist .= " ORDER BY ID ASC";
+		$dlist = $this->disabled_list->get($dlist, true);
 		
 		foreach($dlist as $rs)
 		{
 			$qry_data = 'SELECT SUM(TARGET) target, SUM(BALANCE) balance, SUM(ADMISSION) admission, SUM(DISTRIBUTION) distribution, SUM(REMAIN) remain, SUM(BUILD) build FROM DISABLED_DATA WHERE ';
 			$qry_data .= "WLIST_ID LIKE '".$rs['id']."'";
+				$qry_data .= (empty($_GET['YEAR']))?"":" AND YEAR LIKE '".$_GET['YEAR']."'";
 			
-			$ddata = $this->disabled->get($qry_data);
+			$ddata = $this->disabled->get($qry_data, true);
 			$ddata = $ddata[0];
 			$result[] = array(
 				'id'=>$rs['id'],

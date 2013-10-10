@@ -804,7 +804,7 @@ Class population extends Public_Controller{
 				$this->population_data->save($value);
 			}					
 		}
-		//redirect('population/dear_import');
+		redirect('population/index');
 	}
 }
 ?>

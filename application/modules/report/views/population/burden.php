@@ -3,14 +3,14 @@
 <div id="search">
     <form>
     <div id="searchBox">
-        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+        <?php echo form_dropdown('province_id', get_option('code', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
         <input type="submit" title="ค้นหา" class="btn_search" />
     </div>
     </form>
 </div>
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> อัตราส่วนการพึ่งพิงของประชากร  จังหวัด
-    <label><?php echo empty($_GET['province_id']) ? 'ทั้งประเทศ' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label>
+    <label><?php echo $province_name; ?></label>
 </div>
 <div style="padding:10px; text-align:right;">
   <a href="report/population/burden_rate/export<?=GetCurrentUrlGetParameter();?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>

@@ -3,7 +3,7 @@
 <div id="search">
     <form>
     <div id="searchBox">
-    	<?php echo form_dropdown('year_data', get_year_option(null,null,'population','year_data'), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
+    	<?php echo form_dropdown('year_data', get_year_option(null,null,'population_data','year_data'), @$_GET['year_data'], null, '-- ทุกปี --'); ?>
         <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
     	<?php echo form_dropdown('amphur_id', (empty($_GET['province_id'])) ? array() : get_option('id', 'amphur_name', 'amphur', 'province_id = '.$_GET['province_id'].' order by amphur_name'), @$_GET['amphur_id'], null, '-- ทุกอำเภอ --'); ?>
     	<?php echo form_dropdown('district_id', (empty($_GET['amphur_id'])) ? array() : get_option('id', 'district_name', 'district', 'amphur_id = '.$_GET['amphur_id'].' order by district_name'), @$_GET['district_id'], null, '-- ทุกตำบล --'); ?>
@@ -49,8 +49,8 @@ for($i=0;$i<=101;$i++):
 	}	
 	
 	$condition = '';
-	$condition.= $_GET['year_data'] !='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
-	if($_GET['province_id']=='' && $_GET['amphur_id']=='' && $_GET['tumbon_id']==''){
+	$condition.= @$_GET['year_data'] !='' ? " AND YEAR_DATA=".@$_GET['year_data'] : "";
+	if(@$_GET['province_id']=='' && @$_GET['amphur_id']=='' && @$_GET['tumbon_id']==''){
 			$condition.=" AND LEVEL_CODE = 1 ";
 	}else if($_GET['province_id']!='' && $_GET['amphur_id']=='' && $_GET['district_id']==''){
 			$province_code = $this->db->getone('SELECT code FROM PROVINCES WHERE id='.$_GET['province_id']);

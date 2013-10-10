@@ -10,7 +10,7 @@
 </div>
 
 <div id="resultsearch"><b>ผลที่ค้นหา :</b> แนวโน้มประชากร   จังหวัด
-    <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label>
+    <label><?php echo empty($_GET['province_code']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where code = '.$_GET['province_code'])); ?></label>
 </div>
 <div style="padding:10px; text-align:right;">
   <a href="report/population/summary_rate<?=GetCurrentUrlGetParameter();?>&mode=export"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>

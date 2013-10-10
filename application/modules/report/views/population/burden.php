@@ -27,7 +27,7 @@
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>
         <td class="topic txtcen"><?php echo $item['year_data']; ?></td>
-        <td class="txtright"><?php echo number_format($item['total'], 2); ?></td>
+        <td class="txtright"><?php echo number_format($item['total_child']+$item['total_old'], 2); ?></td>
         <td class="txtright"><?php echo number_format($item['total_child'], 2); ?></td>
         <td class="txtright"><?php echo number_format($item['total_old'], 2); ?></td>
     </tr>

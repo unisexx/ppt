@@ -3,7 +3,7 @@
 <div id="search">
     <form>
     <div id="searchBox">
-        <?php echo form_dropdown('province_id', get_option('id', 'province', 'provinces', '1=1 order by province'), @$_GET['province_id'], null, '-- ทุกจังหวัด --'); ?>
+        <?php echo form_dropdown('province_code', get_option('code', 'province', 'provinces', '1=1 order by province'), @$_GET['province_code'], null, '-- ทุกจังหวัด --'); ?>
         <input type="submit" title="ค้นหา" class="btn_search" />
     </div>
     </form>
@@ -13,8 +13,8 @@
     <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label>
 </div>
 <div style="padding:10px; text-align:right;">
-  <a href="report/population/summary_rate_export<?=GetCurrentUrlGetParameter();?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-  <a href="report/population/summary_rate_print<?=GetCurrentUrlGetParameter();?>" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>หน่วย:ราย
+  <a href="report/population/summary_rate<?=GetCurrentUrlGetParameter();?>&mode=export"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+  <a href="report/population/summary_rate<?=GetCurrentUrlGetParameter();?>&mode=print" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>หน่วย:ราย
 </div>
 
 <table class="tbreport">
@@ -27,9 +27,9 @@
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>
         <td class="topic"><?php echo $item['year_data']; ?></td>
-        <td style="text-align: right;"><?php echo number_format($item['total_male'], 0); ?></td>
-        <td style="text-align: right;"><?php echo number_format($item['total_female'], 0); ?></td>
-        <td style="text-align: right;"><?php echo number_format($item['total_male']+$item['total_female'], 2); ?></td>
+        <td style="text-align: right;"><?php echo number_format($item['male_population'], 0); ?></td>
+        <td style="text-align: right;"><?php echo number_format($item['female_population'], 0); ?></td>
+        <td style="text-align: right;"><?php echo number_format($item['summary_population'], 2); ?></td>
     </tr>
     <?php endforeach; ?>
 </table>

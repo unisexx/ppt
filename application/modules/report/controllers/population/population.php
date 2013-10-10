@@ -30,6 +30,7 @@ class Population extends Public_Controller
         $condition = (empty($_GET['province_id'])) ? ' AND LEVEL_CODE=1 ' : ' AND LEVEL_CODE=3 and province_code = '.$_GET['province_id'];
 		$sql_child ='';
 		$sql_old = '';
+		$sql_work = '';
 		for($i=0;$i<15;$i++){
 			$sql_child.= $sql_child=='' ? '' : '+';
 			$sql_child.='MALE'.$i.' + FEMALE'.$i;
@@ -38,10 +39,15 @@ class Population extends Public_Controller
 			$sql_old.= $sql_old=='' ? '' : '+';
 			$sql_old.='MALE'.$i.' + FEMALE'.$i;
 		}
+		for($i=15;$i<60;$i++){
+			$sql_work.= $sql_work=='' ? '' : '+';
+			$sql_work.='MALE'.$i.' + FEMALE'.$i;
+		}
         $sql = ' SELECT 
         YEAR_DATA,
         (SELECT ('.$sql_child.') FROM POPULATION_DATA PD WHERE YEAR_DATA=POPULATION_DATA.YEAR_DATA '.$condition.'  )TOTAL_CHILD,
-        (SELECT ('.$sql_old.') FROM POPULATION_DATA PD WHERE YEAR_DATA=POPULATION_DATA.YEAR_DATA '.$condition.' )TOTAL_OLD
+        (SELECT ('.$sql_old.') FROM POPULATION_DATA PD WHERE YEAR_DATA=POPULATION_DATA.YEAR_DATA '.$condition.' )TOTAL_OLD,
+        (SELECT ('.$sql_work.') FROM POPULATION_DATA PD WHERE YEAR_DATA=POPULATION_DATA.YEAR_DATA '.$condition.' )TOTAL_WORK
         FROM POPULATION_DATA
         WHERE 1=1 
         GROUP BY YEAR_DATA 

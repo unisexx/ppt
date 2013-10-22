@@ -12,13 +12,13 @@
     </form>
 </div>
 
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> สถิติประชากรรายอายุ   จังหวัด
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> สถิติประชากรรายอายุ   ปี
     
 <label><? echo empty($_GET['year_data'])? "ทุกปี" : @$_GET['year_data'];?></label> 
   จังหวัด
 <label><?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></label> 
-เขต/อำเภอ <label><?php echo empty($_GET['amphur_id']) ? 'ทุกเขต/อำเภอ' : iconv('TIS-620', 'UTF-8', $this->db->getone('select amphur_name from amphur where id = '.$_GET['amphur_id'])); ?></label> 
-แขวง/ตำบล <label><?php echo empty($_GET['district_id']) ? 'ทุกแขวง/ตำบล' : iconv('TIS-620', 'UTF-8', $this->db->getone('select district_name from district where id = '.$_GET['district_id'])); ?></label>    
+อำเภอ <label><?php echo empty($_GET['amphur_id']) ? 'ทุกอำเภอ' : iconv('TIS-620', 'UTF-8', $this->db->getone('select amphur_name from amphur where id = '.$_GET['amphur_id'])); ?></label> 
+ตำบล <label><?php echo empty($_GET['district_id']) ? 'ทุกตำบล' : iconv('TIS-620', 'UTF-8', $this->db->getone('select district_name from district where id = '.$_GET['district_id'])); ?></label>    
 </div>
 <div style="padding:10px; text-align:right;">
   <a href="report/population/age_rate_export<?=GetCurrentUrlGetParameter();?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
@@ -129,7 +129,7 @@ for($i=0;$i<=101;$i++):
   <td style="text-align:right;"><?=number_format($value['SUM_MALE_MOVE']+$value['SUM_FEMALE_MOVE'],0);?></td>
 </tr>
 <tr>
-  <td class="topic">รวมประชากรทั้งหมด พ.ศ. <? echo empty($_GET['year_data'])? "ทุกปี" : @$_GET['year_data'];?>.จังหวัด<?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?></td>
+  <td class="topic">รวมประชากรทั้งหมด <!--พ.ศ. <? echo empty($_GET['year_data'])? "ทุกปี" : @$_GET['year_data'];?>.จังหวัด<?php echo empty($_GET['province_id']) ? 'ทุกจังหวัด' : iconv('TIS-620', 'UTF-8', $this->db->getone('select province from provinces where id = '.$_GET['province_id'])); ?>--></td>
   <td style="text-align:right;"><?=number_format($xtotal_male,0);?></td>
   <td style="text-align:right;"><?=number_format($xtotal_female,0);?></td>
   <td style="text-align:right;"><?=number_format($xtotal_male+$xtotal_female,0);?></td>

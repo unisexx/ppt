@@ -1,5 +1,5 @@
 <h3>รายงาน อัตราส่วนการเป็นภาระของประชากร</h3>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> อัตราส่วนการเป็นภาระของประชากร  จังหวัด
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> อัตราส่วนการเป็นภาระของประชากร
     <label><?=$province_name;?></label>
 </div>
 <div style="padding:10px; text-align:right;">
@@ -16,8 +16,8 @@
     <?php foreach($result as $key => $item): ?>
     <tr <?php echo cycle($key); ?>>
     	<?
-    		$rate_child = ($item['total_child']/$item['total_work'])*100;
-			$rate_old = ($item['total_old']/$item['total_work'])*100;
+    		@$rate_child = ($item['total_child']/$item['total_work'])*100;
+			@$rate_old = ($item['total_old']/$item['total_work'])*100;
 			$rate_sum = $rate_child+$rate_old;
     	?>
         <td class="topic txtcen"><?php echo $item['year_data']; ?></td>

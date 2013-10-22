@@ -54,7 +54,7 @@ class Population extends Public_Controller
         ORDER BY YEAR_DATA DESC';
         $data['result'] = $this->db->getarray($sql);
         dbConvert($data['result']);
-		$data['province_name'] = @$_GET['province_id']!='' ? $this->province->select("province")->where("code=".$_GET['province_id'])->get_one() : "ทุกจังหวัด";
+		$data['province_name'] = @$_GET['province_id']!='' ? "จังหวัด<label>".$this->province->select("province")->where("code=".$_GET['province_id'])->get_one()."</label>" : "<label>ทั้งประเทศ</label>";
 		switch($mode){
 			case 'print':
 				$this->load->view('population/burden_print', $data);
@@ -75,7 +75,7 @@ class Population extends Public_Controller
     	$filename= "burden_pop_summary_data_".date("Y-m-d_H_i_s").".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
         $province = (empty($_GET['province_id'])) ? '' : ' and province_code = '.$_GET['province_id'];
-		$data['province_name'] = @$_GET['province_id']!='' ? $this->province->select("province")->where("id=".$_GET['province_id'])->get_one() : "ทุกจังหวัด";
+		$data['province_name'] = @$_GET['province_id']!='' ? "จังหวัด ".$this->province->select("province")->where("id=".$_GET['province_id'])->get_one() : "ทั้งประเทศ";
         $sql = 'SELECT 
          POPULATION.YEAR_DATA,
          (((SUM(CHILD_TOTAL) + SUM(OLD_TOTAL))/SUM(YOUNG_TOTAL))*100) AS TOTAL,

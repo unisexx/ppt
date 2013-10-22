@@ -82,7 +82,7 @@ class Dashboard extends Public_Controller
                 'type' => 'line'
             ),
             'title' => array(
-                'text' => 'อัตราส่วนการเป็นภาระของประชากร ในระยะ 5 ปี'
+                'text' => 'อัตราส่วนการเป็นภาระของประชากร ปี '.min($year).'-'.max($year)
             ),
             'xAxis' => array(
                 'categories' => $year
@@ -170,7 +170,7 @@ class Dashboard extends Public_Controller
                 'type' => 'line'
             ),
             'title' => array(
-                'text' => 'แนวโน้มประชากรสูงอายุ ปี '.min($year).'-'.max($year).' (จำแนกชาย - หญิง)'
+                'text' => 'แนวโน้มประชากรสูงอายุ ปี '.min($year).'-'.max($year)
             ),
             'xAxis' => array(
                 'categories' => $year

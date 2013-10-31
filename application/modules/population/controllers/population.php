@@ -7,6 +7,7 @@ Class population extends Public_Controller{
 		$this->load->model('district_model','district');
 		$this->load->model('population_model','ppl');
 		$this->load->model('population_detail_model','ppl_detail');
+		$this->load->model('population_data_model','population_data');		
 		$this->load->model('info_model','info');
 		$this->load->model('orginfo_model','org');
 	}
@@ -15,12 +16,25 @@ Class population extends Public_Controller{
 	function index(){
 		$data['menu_id'] = $this->menu_id;
 		$condition = "1=1";
-		$condition.= @$_GET['year_data']!='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
-		$condition.= @$_GET['province_id']!='' ? " AND PROVINCE_ID=".$_GET['province_id'] : "";
-		$condition.= @$_GET['amphur_id']!='' ? " AND AMPHUR_ID=".$_GET['amphur_id'] : "";
-		$condition.= @$_GET['district_id']!='' ? " AND DISTRICT_ID=".$_GET['district_id'] : "";
-		$data['ppl'] = $this->ppl->where($condition)->order_by('year_data desc, province_name, amphur_name, district_name', 'asc')->get();
-		$data['pagination'] = $this->ppl->pagination();
+		$condition.= @$_GET['year_data'] !='' ? " AND YEAR_DATA=".$_GET['year_data'] : "";
+		if(@$_GET['province_id']=='' && @$_GET['amphur_id']=='' && @$_GET['tumbon_id']==''){
+				//$condition.=" AND LEVEL_CODE = 1 ";
+		}else if(@$_GET['province_id']!='' && @$_GET['amphur_id']=='' && @$_GET['district_id']==''){
+				$province_code = $this->db->getone('SELECT code FROM PROVINCES WHERE id='.$_GET['province_id']);
+				$condition.=" AND LEVEL_CODE = 3 AND PROVINCE_CODE=".$province_code;
+		}else if(@$_GET['province_id']!='' && @$_GET['amphur_id']!='' && @$_GET['district_id']==''){
+				$province_code = $this->db->getone('SELECT code FROM PROVINCES WHERE id='.$_GET['province_id']);
+				$amphur_code = $this->db->getone(" SELECT amphur_code FROM AMPHUR WHERE province_id = ".$_GET['province_id']." AND id=".$_GET['amphur_id']);
+				$condition.=" AND LEVEL_CODE = 4 AND PROVINCE_CODE=".$province_code." AND DISTRICT_CODE=".$amphur_code;
+		}else if(@$_GET['province_id']!='' && @$_GET['amphur_id']!='' && @$_GET['district_id']!=''){
+				$province_code = $this->db->getone('SELECT code FROM PROVINCES WHERE id='.$_GET['province_id']);
+				$amphur_code = $this->db->getone(" SELECT amphur_code FROM AMPHUR WHERE province_id = ".$_GET['province_id']." AND id=".$_GET['amphur_id']);
+				$tumbon_code = $this->db->getone(" SELECT district_name FROM district WHERE province_id = ".$_GET['province_id']." AND amphur_id=".$_GET['amphur_id']." AND id=".$_GET['district_id']);
+				$condition.=" AND LEVEL_CODE = 5 AND PROVINCE_CODE=".$province_code." AND DISTRICT_CODE=".$amphur_code." AND TUMBOL_name='".trim($tumbon_code)."'";
+		}
+		
+		$data['ppl'] = $this->population_data->where($condition)->order_by('id', 'asc')->get();
+		$data['pagination'] = $this->population_data->pagination();
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->build('population_index',$data);
 	}
@@ -739,6 +753,58 @@ Class population extends Public_Controller{
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 61 AND AGE_RANGE_CODE <=102");
 		$this->db->execute("DELETE FROM POPULATION_DETAIL WHERE PID =".$id." AND AGE_RANGE_CODE > 163 AND AGE_RANGE_CODE <=204");				
 		redirect('population/sixtyup_index');		
+	}
+	
+	
+	function dear_import_index(){
+		
+		$this->template->build('dear_import_index');
+	}
+	
+	function dear_import(){
+		set_time_limit(0);
+		//$this->db->debug=true;
+		$columns = $this->db->MetaColumnNames("POPULATION_DATA");
+		foreach($columns as $item){
+			$column[] = $item;
+		}
+		if($_FILES['fl_import']['name']!=''){						
+			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
+			/*---for insert value to info table ---*/
+			// $import_section_id = $_POST['import_workgroup_id']> 0 ? $_POST['import_workgroup_id'] : $_POST['import_section_id'];
+			// $_POST['section_id'] = $import_section_id;
+			// $this->info->save($_POST);
+			/*--end--*/
+			$file_name = 'population_dear'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/population/';
+			$fpicname = $uploaddir.$file_name;
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
+			
+			
+			
+			require_once 'include/Excel/reader.php';
+			$data = new Spreadsheet_Excel_Reader();
+			$data -> setOutputEncoding('UTF-8');
+			$data -> read($uploaddir.$file_name);						
+			//error_reporting(E_ALL ^ E_NOTICE);
+			$index = 0;
+			//echo $data -> sheets[0]['numCols'];
+			
+			
+			for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$value = null;
+				//if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){				
+				for($ncolumn = 1; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
+					$column_name = strtoupper(trim($column[$ncolumn]));
+					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+				}
+				//var_dump($value);
+				$value['year_data'] = '25'.substr($value['date_year'],0,2);
+				$value['month_data']= substr($value['date_year'],2,2);
+				$this->population_data->save($value);
+			}					
+		}
+		redirect('population/index');
 	}
 }
 ?>

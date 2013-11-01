@@ -56,6 +56,7 @@
                     <li><a href="report/vacancy">จำนวนคนว่างงาน บรรจุงาน และสมัครงาน</a></li>
                     <li><a href="report/mental">ผู้ป่วยสุขภาพจิต</a></li>
                     <li><a href="report/family/index?keydata=1">ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ)</a></li>
+                    <li><a href="#">ตัวชี้วัดความจำเป็นขั้นพื้นฐาน(จปฐ)</a></li>
                 </ul>
             </li>
 		</ul>

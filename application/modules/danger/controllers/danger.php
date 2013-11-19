@@ -6,6 +6,32 @@ Class Danger extends Public_Controller{
 		$this->load->model('danger_model', 'danger');
 	}
 	
+	function index(){
+		$data['years'] = $this->danger->get("SELECT DISTINCT YEAR_DATA FROM DANGER ORDER BY YEAR_DATA DESC");
+		$data['provinces'] = $this->danger->limit(80)->get("SELECT DISTINCT CODE, PROVINCE FROM DANGER ORDER BY CODE ASC");
+		
+		$sql = 'SELECT * FROM DANGER WHERE 1=1 ';
+			if(@$_GET['year_data']) $sql .= "AND YEAR_DATA = ".$_GET['year_data'].' ';
+			if(@$_GET['code']) $sql .= "AND CODE = ".$_GET['code'].' ';
+		$sql .= ' ORDER BY ID DESC';
+			
+		$data['dangers'] = $this->danger->get($sql);
+		$data['pagination'] = $this->danger->pagination();
+		$this->template->build('index',$data);
+	}
+	
+	function form(){
+		$this->template->build('form');
+	}
+	
+	function save($id=false){
+		if($_POST){
+			$this->danger->save($_POST); 
+			set_notify('success', 'ดำเนินการบันทึกข้อมูลเสร็จสิ้น');
+		}
+		redirect('danger/index');
+	}
+	
 	function form_import(){
 		$this->template->build('form_import');
 	}

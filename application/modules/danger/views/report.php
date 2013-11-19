@@ -18,11 +18,11 @@
   <?php foreach($dangers as $row):?>
   <tr>
     <td class="topic"><a href="danger/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
-    <td><?php echo number_format($row['total'] )?></td>
-    <td><?php echo number_format($row['all_case'] )?></td>
-    <td><?php echo number_format($row['severe_case'] )?></td>
-    <td><?php echo number_format(($row['all_case'] * 1000)/$row['total'] , 2 )?></td>
-    <td><?php echo number_format(($row['severe_case'] * 1000)/$row['total'] , 2)?></td>
+    <td class="txtright"><?php echo number_format($row['total'] )?></td>
+    <td class="txtright"><?php echo number_format($row['all_case'] )?></td>
+    <td class="txtright"><?php echo number_format($row['severe_case'] )?></td>
+    <td class="txtright"><?php echo number_format(($row['all_case'] * 1000)/$row['total'] , 2 )?></td>
+    <td class="txtright"><?php echo number_format(($row['severe_case'] * 1000)/$row['total'] , 2)?></td>
   </tr>
   <?php endforeach;?>
 </table>

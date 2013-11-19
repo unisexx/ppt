@@ -1,4 +1,4 @@
-<?php echo menu::source($menu_id,'import_file/population/population_sample.xls'); ?>
+<?php // echo menu::source($menu_id,'import_file/population/population_sample.xls'); ?>
 <!-- <form method="post" enctype="multipart/form-data" action="population/population_import"> -->
 	<form method="post" enctype="multipart/form-data" action="danger/import">
 	<table class="tbadd">
@@ -12,7 +12,7 @@
 		</tr>
 	</table>	
 	<div id="btnSave">
-	<input type="hidden" name="menu_id" value="<?=$menu_id;?>">
+	<!-- <input type="hidden" name="menu_id" value="<?=$menu_id;?>"> -->
 	<? // if(menu::perm($menu_id, 'add')): ?>
 	<input type="submit" value="บันทึก" class="btn btn-danger">
 	<? // endif;?>

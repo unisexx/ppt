@@ -40,16 +40,16 @@
 	<tr>
 	  <td><?php echo $key+1?></td>
 	  <td><?php echo $row['province']?></td>
-	  <td><?php echo number_format($row['total'])?></td>
-	  <td><?php echo number_format($row['dead'])?></td>
-	  <td><?php echo number_format($row['disability'])?></td>
-	  <td><?php echo number_format($row['lose'])?></td>
-	  <td><?php echo number_format($row['stopmore3'])?></td>
-	  <td><?php echo number_format($row['stopless3'])?></td>
-	  <td><?php echo number_format($row['all_case'])?></td>
-	  <td><?php echo number_format($row['severe_case'])?></td>
-	  <td><?php echo number_format($row['rate_all_case'], 2)?></td>
-	  <td><?php echo number_format($row['rate_severe_case'], 2)?></td>
+	  <td class="txtright"><?php echo number_format($row['total'])?></td>
+	  <td class="txtright"><?php echo number_format($row['dead'])?></td>
+	  <td class="txtright"><?php echo number_format($row['disability'])?></td>
+	  <td class="txtright"><?php echo number_format($row['lose'])?></td>
+	  <td class="txtright"><?php echo number_format($row['stopmore3'])?></td>
+	  <td class="txtright"><?php echo number_format($row['stopless3'])?></td>
+	  <td class="txtright"><?php echo number_format($row['all_case'])?></td>
+	  <td class="txtright"><?php echo number_format($row['severe_case'])?></td>
+	  <td class="txtright"><?php echo number_format($row['rate_all_case'], 2)?></td>
+	  <td class="txtright"><?php echo number_format($row['rate_severe_case'], 2)?></td>
 	</tr>
 <?php endforeach;?>
 </table>

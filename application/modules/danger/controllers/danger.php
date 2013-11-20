@@ -20,14 +20,22 @@ Class Danger extends Public_Controller{
 		$this->template->build('index',$data);
 	}
 	
-	function form(){
-		$this->template->build('form');
+	function form($id=false){
+		$data['provinces'] = $this->danger->limit(80)->get("SELECT DISTINCT CODE, PROVINCE FROM DANGER ORDER BY CODE ASC");
+		$this->template->build('form',$data);
 	}
 	
 	function save($id=false){
 		if($_POST){
 			$this->danger->save($_POST); 
 			set_notify('success', 'ดำเนินการบันทึกข้อมูลเสร็จสิ้น');
+		}
+		redirect('danger/index');
+	}
+	
+	function delete($id){
+		if($id){
+			$this->danger->delete($id);
 		}
 		redirect('danger/index');
 	}

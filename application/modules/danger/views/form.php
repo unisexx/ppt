@@ -8,7 +8,7 @@
 ?>
 	
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form ACTION="danger/save/<?=$m['id'];?>/" METHOD="POST">
+<form ACTION="danger/save" METHOD="POST">
 <?php endif; ?>
 
 	<input type='hidden' name='ID' value='<?=(@$id);?>'>
@@ -19,7 +19,15 @@
 	</tr>
 	<tr>
 	  <th>จังหวัด <span class="Txt_red_12">  *</span></th>
-	  <td> <?php echo form_dropdown('CODE', get_option('id', 'province', 'provinces', '1=1 order by province'), $mental_dtl['province_id']); ?> </td>
+	  <td>
+	  	<select name="CODE">
+	  	<?php foreach($provinces as $row):?>
+	  		<option value="<?php echo $row['code']?>"><?php echo $row['province']?></option>
+	  	<?php endforeach;?>
+	  	</select>
+	  	
+	  	<input type="hidden" name="PROVINCE" value="">
+	  </td>
 	</tr>
 	<tr>
 	  <th>จำนวนลูกจ้างในข่าย<span class="Txt_red_12"> *</span></th>
@@ -82,7 +90,11 @@
 
 
 <script>
-    $(function(){
-        $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
+$(function(){
+    // $('[name=amphur_id]').chainedSelect({parent: '[name=province_id]',url: 'location/ajax_amphur',value: 'id',label: 'text'});
+    $('select[name=CODE]').change(function(){
+    	var province_name = $(this).find("option:selected").text();
+    	$('input[name=PROVINCE]').val(province_name);
     });
+});
 </script>

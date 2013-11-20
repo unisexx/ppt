@@ -27,7 +27,7 @@
 
 <?php if(menu::perm($m['id'], 'add')): ?>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='danger/import_form'" class="btn_import"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='danger/form_import'" class="btn_import"/>
 	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='danger/form'" class="btn_add"/>
 </div>
 <?php endif; ?>
@@ -75,7 +75,7 @@
 	  <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dangers/form/'.$row['id']); ?>'" />
-            <input type="submit" title="ลบรายการนี้" value=" " class="btn_delete vtip" onclick='js_action("<?=$row['id'];?>", "DELETE");'/>
+            <a href="danger/delete/<?php echo $row['id']?>"><input type="button" title="ลบรายการนี้" value=" " class="btn_delete vtip"/></a>
         </td>
         <?php endif; ?>
 	</tr>

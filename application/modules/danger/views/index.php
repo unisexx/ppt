@@ -74,7 +74,7 @@
 	  <td class="txtright"><?php echo number_format($row['rate_severe_case'], 2)?></td>
 	  <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
-            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dangers/form/'.$row['id']); ?>'" />
+            <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('danger/form/'.$row['id']); ?>'" />
             <a href="danger/delete/<?php echo $row['id']?>"><input type="button" title="ลบรายการนี้" value=" " class="btn_delete vtip"/></a>
         </td>
         <?php endif; ?>

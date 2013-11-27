@@ -6,6 +6,9 @@ Class Health extends Public_Controller{
 	}
 	
 
+	function index(){
+		echo "hello world";
+	}
 	
 	function health_data()
 	{

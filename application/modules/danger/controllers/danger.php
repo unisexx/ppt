@@ -4,7 +4,9 @@ Class Danger extends Public_Controller{
 		parent::__construct();
 		
 		$this->load->model('danger_model', 'danger');
+		$this->load->model('info_model','info');
 	}
+	public $menu_id=111;
 	
 	function index(){
 		$data['years'] = $this->danger->get("SELECT DISTINCT YEAR_DATA FROM DANGER ORDER BY YEAR_DATA DESC");
@@ -45,15 +47,19 @@ Class Danger extends Public_Controller{
 	}
 	
 	function import(){
+		$year_data = $_POST['year_data'];
+		$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+        $this->info->save($_POST);
+		unset($_POST);
+		
 		set_time_limit(0);
-		//$this->db->debug=true;
 		$columns = $this->db->MetaColumnNames("DANGER");
 		foreach($columns as $item){
 			$column[] = $item;
 		}
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'danger_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$file_name = 'danger_'.$year_data.'_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/danger/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
@@ -64,27 +70,21 @@ Class Danger extends Public_Controller{
 			$data -> setOutputEncoding('UTF-8');
 			$data -> read($uploaddir.$file_name);
 			
-			//error_reporting(E_ALL ^ E_NOTICE);
-			//$index = 0;
-			//echo $data -> sheets[0]['numCols'];
-			
+			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
+			$this->danger->delete('YEAR_DATA',$year_data);
 			
 			for($i = 6; $i <= $data -> sheets[0]['numRows']-11; $i++) {
-				$value = null;
-				//if(in_array(substr(trim($data -> sheets[0]['cells'][$i][1]),0,2), array(14,21,31,30,36))){				
+				$value = null;			
 				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
 					$column_name = strtoupper(trim($column[$ncolumn+1]));
 					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
 				}
 				
-				$value['YEAR_DATA'] = $_POST['year_data'];
-				
-				// echo "<pre>";
-				// var_dump($value);
-				// echo "</pre>";
-				
+				$value['YEAR_DATA'] = $year_data;
 				$this->danger->save($value);
 			}
+			
+			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
 		redirect('danger/form_import');
 	}

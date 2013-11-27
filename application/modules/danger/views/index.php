@@ -28,7 +28,7 @@
 <?php if(menu::perm($m['id'], 'add')): ?>
 <div id="btnBox">
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='danger/form_import'" class="btn_import"/>
-	<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='danger/form'" class="btn_add"/>
+	<!-- <input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='danger/form'" class="btn_add"/> -->
 </div>
 <?php endif; ?>
 
@@ -43,7 +43,7 @@
 <th colspan="5" class="txtcen">ความรุนแรงจากอันตรายที่ประสบ</th>
 <th colspan="2" class="txtcen">จำนวนประสบอันตราย</th>
 <th colspan="2" class="txtcen">อัตราการประสบอันตรายต่อลูกจ้าง 1,000 ราย</th>
-<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>
+<!--<?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?> <th style='width:120px;'>จัดการ</th> <?php endif; ?>-->
 </tr>
 <tr>
   <td class="txtcen">ตาย</td>
@@ -55,7 +55,7 @@
 <td class="txtcen">นับกรณีร้ายแรง</td>
 <td class="txtcen">นับทุกกรณี</td>
 <td class="txtcen">นับกรณีร้ายแรง</td>
-<td></td>
+<!-- <td></td> -->
 </tr>
 <?php foreach($dangers as $key=>$row): $key += 1;?>
 	<tr>
@@ -72,12 +72,12 @@
 	  <td class="txtright"><?php echo number_format($row['severe_case'])?></td>
 	  <td class="txtright"><?php echo number_format($row['rate_all_case'], 2)?></td>
 	  <td class="txtright"><?php echo number_format($row['rate_severe_case'], 2)?></td>
-	  <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
+	  <!-- <?php if(menu::perm($m['id'], 'edit') && menu::perm($m['id'], 'delete')): ?>
         <td>
             <input type="submit" title="แก้ไขรายการนี้" value=" " class="btn_edit vtip"  onclick="window.location='<?php echo site_url('dangers/form/'.$row['id']); ?>'" />
             <a href="danger/delete/<?php echo $row['id']?>"><input type="button" title="ลบรายการนี้" value=" " class="btn_delete vtip"/></a>
         </td>
-        <?php endif; ?>
+        <?php endif; ?> -->
 	</tr>
 <?php endforeach;?>
 </table>

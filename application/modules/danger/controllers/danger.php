@@ -24,6 +24,7 @@ Class Danger extends Public_Controller{
 	
 	function form($id=false){
 		$data['provinces'] = $this->danger->limit(80)->get("SELECT DISTINCT CODE, PROVINCE FROM DANGER ORDER BY CODE ASC");
+		$data['danger'] = $this->danger->get_row($id);
 		$this->template->build('form',$data);
 	}
 	

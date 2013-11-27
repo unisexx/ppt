@@ -8,75 +8,75 @@
 ?>
 	
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form ACTION="danger/save" METHOD="POST">
+<form ACTION="danger/save/<?php echo $danger['id']?>" METHOD="POST">
 <?php endif; ?>
 
 	<input type='hidden' name='ID' value='<?=(@$id);?>'>
 	<table class="tbadd">
 	<tr>
 	  <th>ปี <span class="Txt_red_12">*</span></th>
-	  <td><?php echo form_dropdown('YEAR_DATA', get_year_option(), $mental_dtl['year']); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
+	  <td><?php echo form_dropdown('YEAR_DATA', get_year_option(), $danger['year_data']); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 	</tr>
 	<tr>
 	  <th>จังหวัด <span class="Txt_red_12">  *</span></th>
 	  <td>
 	  	<select name="CODE">
 	  	<?php foreach($provinces as $row):?>
-	  		<option value="<?php echo $row['code']?>"><?php echo $row['province']?></option>
+	  		<option value="<?php echo $row['code']?>" <?php echo ($row['code'] == $danger['code'])?"selected":"";?>><?php echo $row['province']?></option>
 	  	<?php endforeach;?>
 	  	</select>
 	  	
-	  	<input type="hidden" name="PROVINCE" value="">
+	  	<input type="hidden" name="PROVINCE" value="<?php echo $danger['province']?>">
 	  </td>
 	</tr>
 	<tr>
 	  <th>จำนวนลูกจ้างในข่าย<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="TOTAL" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="TOTAL" type="text" value="<?php echo $danger['total']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th colspan="2" class="title">ความรุนแรง</th>
 	</tr>
 	<tr>
 	  <th>ตาย<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="DEAD" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="DEAD" type="text" value="<?php echo $danger['dead']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>ทุพพลภาพ<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="DISABILITY" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="DISABILITY" type="text" value="<?php echo $danger['disability']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>สูญเสียอวัยวะบางส่วน<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="LOSE" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="LOSE" type="text" value="<?php echo $danger['lose']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>หยุดงานเกิน 3 วัน<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="STOPMORE3" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="STOPMORE3" type="text" value="<?php echo $danger['stopmore3']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>หยุดงานไม่เกิน 3 วัน<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="STOPLESS3" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="STOPLESS3" type="text" value="<?php echo $danger['stopless3']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th colspan="2" class="title">รวมจำนวนการประสบอันตราย</th>
 	</tr>
 	<tr>
 	  <th>นับทุกกรณี<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="ALL_CASE" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="ALL_CASE" type="text" value="<?php echo $danger['all_case']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>นับกรณีร้ายแรง<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="SEVERE_CASE" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="SEVERE_CASE" type="text" value="<?php echo $danger['severe_case']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th colspan="2" class="title">อัตราการประสบอันตรายต่อลูกจ้าง 1,000 ราย</th>
 	</tr>
 	<tr>
 	  <th>นับทุกกรณี<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="RATE_ALL_CASE" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="RATE_ALL_CASE" type="text" value="<?php echo $danger['rate_all_case']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	<tr>
 	  <th>นับกรณีร้ายแรง<span class="Txt_red_12"> *</span></th>
-	  <td>จำนวน  <input name="RATE_SEVERE_CASE" type="text" value=""  style="width:70px;" /> คน  </td>
+	  <td>จำนวน  <input name="RATE_SEVERE_CASE" type="text" value="<?php echo $danger['rate_severe_case']?>"  style="width:70px;" /> คน  </td>
 	</tr>
 	</table>
 	

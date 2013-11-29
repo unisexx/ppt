@@ -8,6 +8,20 @@ Class Healthcare extends Public_Controller{
 	}
 	// public $menu_id=111;
 	
+	function index(){
+		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
+		$data['provinces'] = $this->healthcare->limit(80)->get("SELECT DISTINCT CODE, PROVINCE FROM HEALTHCARE ORDER BY CODE ASC");
+		
+		$sql = 'SELECT * FROM HEALTHCARE WHERE 1=1 ';
+			if(@$_GET['year_data']) $sql .= "AND YEAR_DATA = ".$_GET['year_data'].' ';
+			if(@$_GET['code']) $sql .= "AND CODE = ".$_GET['code'].' ';
+		$sql .= ' ORDER BY ID ASC';
+			
+		$data['healthcares'] = $this->healthcare->get($sql);
+		$data['pagination'] = $this->healthcare->pagination();
+		$this->template->build('index',$data);
+	}
+	
 	function report1(){
 		$sql = "SELECT 
 				BUDGETYEAR, 

@@ -12,9 +12,10 @@ Class Olderfund extends Public_Controller{
 		for($i=0; $i<$num; $i++)
 		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
 
-		$data['result'] = $this->older->select("YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
-											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_moeny_project")
-								      ->groupby("YEAR")->orderby("YEAR desc")->get();
+		$data['result'] = $this->older->get("SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
+											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_moeny_project
+											   FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
+
 
 		$this->template->build('olderfund/index',$data);
 
@@ -61,5 +62,10 @@ Class Olderfund extends Public_Controller{
 			$this->older->save($_POST);
 		}
 		$this->template->build('olderfund/upload');
+	}
+	function detail($year){
+		$this->db->debug=true;
+		$data['result'] = $this->older->where("year = $year")->get();
+		$this->template->build('olderfund/detail',$data);
 	}
 }

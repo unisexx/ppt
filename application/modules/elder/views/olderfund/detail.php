@@ -34,46 +34,16 @@
   <td></td>
   <td></td>
   </tr>
+<?php foreach($data as $key=>$item): ?>
 <tr>
-  <td>1</td>
-  <td>กระบี่</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><?php echo ++$key ?></td>
+  <td><?php echo $item['province'] ?></td>
+  <td><?php echo $item['total_person'] ?></td>
+  <td><?php echo number_format($item['total_money_person']); ?></td>
+  <td><?php echo $item['total_project'] ?></td>
+  <td><?php echo number_format($item['total_money_project']); ?></td>
   </tr>
-<tr>
-  <td>2</td>
-  <td>กรุงเทพฯ</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>3</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>4</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>5</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
+<?php endforeach; ?>
 </table>
 
 <div id="ref">ที่มา : สท. : เว็บไซต์กองทุนผู้สูงอายุ  http://olderfund.opp.go.th</div>

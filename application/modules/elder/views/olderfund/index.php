@@ -29,11 +29,11 @@
 </tr>
 <?php foreach($result as $key=>$item): ?>
 <tr>
-  <td class="topic"><a href="olderfund/detail/<?php echo $item['id'] ?>"><?php echo $item['YEAR'] ?></a></td>
+  <td class="topic"><a href="olderfund/detail/<?php echo $item['year'] ?>"><?php echo $item['year'] ?></a></td>
   <td><?php echo $item['total_person']; ?></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><?php echo $item['total_money_person']; ?></td>
+  <td><?php echo $item['total_project']; ?></td>
+  <td><?php echo $item['total_money_project']; ?></td>
 </tr>
 <?php endforeach; ?>
 </table>

@@ -6,7 +6,7 @@ Class Healthcare extends Public_Controller{
 		$this->load->model('healthcare_model', 'healthcare');
 		$this->load->model('info_model','info');
 	}
-	// public $menu_id=111;
+	public $menu_id=112;
 	
 	function index(){
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
@@ -125,15 +125,15 @@ Class Healthcare extends Public_Controller{
 	}
 	
 	function form_import(){
-		$data['menu_id'] = 108; 
+		$data['menu_id'] = 112; 
 		$this->template->build('form_import',$data);
 	}
 	
 	function import(){
 		$year_data = $_POST['year_data'];
-		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
-        // $this->info->save($_POST);
-		// unset($_POST);
+		$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+        $this->info->save($_POST);
+		unset($_POST);
 		
 		set_time_limit(0);
 		$columns = $this->db->MetaColumnNames("HEALTHCARE");

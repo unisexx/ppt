@@ -1,0 +1,8 @@
+<?php
+class Olderfund_model extends MY_Model {
+    public $table = 'OLDERFUND';
+	function __construct() {
+		parent::__construct();
+	}
+}
+?>

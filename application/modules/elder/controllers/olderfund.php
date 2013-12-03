@@ -12,10 +12,7 @@ Class Olderfund extends Public_Controller{
 		for($i=0; $i<$num; $i++)
 		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
 
-		$data['result'] = $this->older->get("SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
-											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
-											   FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
-
+		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND  ORDER BY YEAR DESC,PROVINCE ASC ");
 		$data['pagination'] = $this->older->pagination;
 		$this->template->build('olderfund/index',$data);
 
@@ -36,8 +33,9 @@ Class Olderfund extends Public_Controller{
 		}
 		return $import;
 	}
-	function form(){
-		$this->template->build('olderfund/form');
+	function form($id=FALSE){
+		$data['rs'] = $this->older->get_row($id);
+		$this->template->build('olderfund/form',$data);
 	}
 	function import(){
 		$this->template->build('olderfund/import');
@@ -63,22 +61,19 @@ Class Olderfund extends Public_Controller{
 		}
 		$this->template->build('olderfund/upload');
 	}
-	function detail($export=FALSE)
-	{//$this->db->debug=true;
-		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
-        $num = count($set_year);
-		for($i=0; $i<$num; $i++)
-		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
-
-		$grp = (!empty($_GET['year'])) ? "WHERE YEAR =".$_GET['year']." GROUP BY YEAR ":'';
-		$data['cnt'] = $this->older->get("SELECT sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
-										        ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
-										FROM OLDERFUND $grp");
-		$where =(!empty($_GET['year'])) ?" AND YEAR = ".$_GET['year']: "";
-		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE 1=1 $where");
-
-
-		$data['pagination'] = $this->older->pagination;
-		$this->template->build('olderfund/detail',$data);
+	function save($menu)
+	{
+			$id = $this->older->save($_POST);
+			if(empty($_POST['id'])) logs('เพิ่มรายการ ', $menu_id, $id); else logs('แก้ไขรายการ', $menu_id, $id);
+			set_notify('success', lang('save_data_complete'));	redirect('elder/olderfund/');
+	}
+	function delete($menu_id,$id)
+	{
+		if($id)
+		{
+			logs('ลบรายการ', $menu_id, $id);
+			$this->older->delete($id);
+            set_notify('success', lang('delete_data_complete'));	redirect('elder/olderfund/');
+		}
 	}
 }

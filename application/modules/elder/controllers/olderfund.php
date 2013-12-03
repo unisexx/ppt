@@ -64,13 +64,13 @@ Class Olderfund extends Public_Controller{
 		$this->template->build('olderfund/upload');
 	}
 	function detail($year)
-	{
-		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
+	{$this->db->debug=true;
+		/*$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
         $num = count($set_year);
 		for($i=0; $i<$num; $i++)
-		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }*/
 		$_GET['year'] = (empty($_GET['year'])) ? $year:$_GET['year'];
-		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE YEAR=2556");
+		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE YEAR='2556'");
 		$this->template->build('olderfund/detail',$data);
 	}
 }

@@ -1,7 +1,7 @@
 <form  method='get'>
 <div id="search">
   <div id="searchBox">
-	<?=form_dropdown('YEAR', @$set_year, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	<?php //echo form_dropdown('YEAR', @$set_year, @$_GET['YEAR'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
  </div>
 </div>
 </form>

@@ -5,21 +5,31 @@ Class Olderfund extends Public_Controller{
         $this->load->model('olderfund_model', 'older');
 		$this->load->model('province_model','province');
 	}
-	function index()
+	function index($export=FALSE)
 	{
 		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
         $num = count($set_year);
 		for($i=0; $i<$num; $i++)
 		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+		$sql ="SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
+					  ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
+					  FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC";
 
-		$data['result'] = $this->older->get("SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
-											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
-											   FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
+		if($export){
+			$data['result'] = $this->older->get($sql,true);
+			$filename= "olderfund_overall_data_".date("Y-m-d_H_i_s").".xls";
+			header("Content-Disposition: attachment; filename=".$filename);
+			echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+			$this->load->view('olderfund/export', $data);
+		}else{
+			$data['result'] = $this->older->get($sql);
+			$data['pagination'] = $this->older->pagination;
+			$this->template->build('olderfund/index',$data);
+		}
 
-		$data['pagination'] = $this->older->pagination;
-		$this->template->build('olderfund/index',$data);
 
 	}
+
 	function ReadData($filepath)
 	{
 		@require_once 'include/Excel/reader.php';
@@ -64,7 +74,7 @@ Class Olderfund extends Public_Controller{
 		$this->template->build('olderfund/upload');
 	}
 	function detail($export=FALSE)
-	{//$this->db->debug=true;
+	{
 		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
         $num = count($set_year);
 		for($i=0; $i<$num; $i++)
@@ -75,10 +85,21 @@ Class Olderfund extends Public_Controller{
 										        ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
 										FROM OLDERFUND $grp");
 		$where =(!empty($_GET['year'])) ?" AND YEAR = ".$_GET['year']: "";
-		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE 1=1 $where");
+		$sql ="SELECT * FROM OLDERFUND WHERE 1=1 $where";
+
+		if($export){
+			$data['result'] = $this->older->get($sql,true);
+			$filename= "olderfund_province_data_".date("Y-m-d_H_i_s").".xls";
+			header("Content-Disposition: attachment; filename=".$filename);
+			echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+			$this->load->view('olderfund/export_detail', $data);
+		}else{
+			$data['result'] = $this->older->get($sql);
+			$data['pagination'] = $this->older->pagination;
+			$this->template->build('olderfund/detail',$data);
+		}
 
 
-		$data['pagination'] = $this->older->pagination;
-		$this->template->build('olderfund/detail',$data);
 	}
+
 }

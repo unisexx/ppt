@@ -2,10 +2,10 @@
 <?=menu::source($m['id']);?>
 
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
-<form action='elder/hf_elderly/save/<?=$m['id'];?>/' method='POST'>
+<form action='elder/olderfund/save/<?=$m['id'];?>/' method='POST'>
 <?php endif; ?>
-	
-	
+
+
 	<input type='HIDDEN' name='ID' value='<?=@$result['id'];?>'>
 	<table class="tbadd">
 	<tr>
@@ -13,36 +13,28 @@
 	  <td><?php echo form_dropdown('YEAR', get_year_option(), @$result['year'], null, '-- กรุณาเลือกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
 	</tr>
 	<tr>
-	  <th>เดือน <span class="Txt_red_12">*</span></th>
-	  <td><?php echo form_dropdown('MONTH', get_month(), @$result['month'], null, '-- กรุณาเลือกเดือน --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?></td>
+	  <th>จำนวนคน <span class="Txt_red_12">*</span></th>
+	  <td><input type="text" name="total_person" value="<?php echo $rs['total_person'] ?>"></td>
 	</tr>
 	<tr>
-	  <th>หน่วยงาน<span class="Txt_red_12">  *</span></th>
-	  <td><? echo form_dropdown('WLIST_ID', get_option('id', 'name', 'hf_elderly_list'), @$result['wlist_id'], null, '-- กรุณาเลือกสถานสงเคราะห์ --'); ?>	</td>
+	  <th>จำนวนเงิน (บาท)<span class="Txt_red_12">*</span></th>
+	  <td><input type="text" name="total_money_person" value="<?php echo $rs['total_money_person'] ?>"></td>
 	</tr>
-	<?
-		$title_ary = array('เป้าหมาย', 'ยอดยกมา', 'รับเข้า', 'จำหน่าย', 'คงเหลือ', 'สะสม');
-		$name_ary = array('TARGET', 'BALANCE', 'ADMISSION', 'DISTRIBUTION', 'REMAIN', 'BUILD');
-		
-		for($i=0; $i<count($title_ary); $i++)
-		{
-			?>
-			<tr>
-			  <th><?=$title_ary[$i];?><span class="Txt_red_12"> *</span></th>
-			  <td><input name="<?=$name_ary[$i];?>" type="text" value="<?=@$result[strtolower($name_ary[$i])]; ?>"  style="width:70px;" />
-			    ราย 
-			    </td>
-			</tr>
-			<?		
-		}
-	?>
+	<tr>
+	  <th>จำนวนโครงการ<span class="Txt_red_12">*</span></th>
+	  <td><input type="text" name="total_project" value="<?php echo $rs['total_project'] ?>"></td>
+	</tr>
+	<tr>
+	  <th>จำนวนเงิน(บาท) <span class="Txt_red_12">*</span></th>
+	  <td><input type="text" name="total_money_project" value="<?php echo $rs['total_money_project'] ?>"></td>
+	</tr>
 	</table>
-	
-	
+
+
 	<div id="btnSave">
 	<?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?> <input type="submit" value="บันทึก" class="btn btn-danger"><?php endif; ?>
 	<input type="button" title="ย้อนกลับ"  value="ย้อนกลับ" class="btn"/>
-	</div>	
+	</div>
 <?php if(menu::perm($m['id'], 'add') or menu::perm($m['id'], 'edit')): ?>
 </form>
 <?php endif; ?>

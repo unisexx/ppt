@@ -1,4 +1,4 @@
-<h3>รายงาน การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ รายจังหวัด ปีงบประมาณ 2556</h3>
+<h3>รายงาน การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ รายจังหวัด <?php echo (!empty($_GET['year'])) ?"ปีงบประมาณ ".$_GET['year']:"ทุกปีงบประมาณ"; ?></h3>
 <form>
 <div id="search">
   <div id="searchBox">
@@ -11,6 +11,7 @@
 		<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='elder/olderfund/import'" class="btn_import"/>
 		<input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='elder/olderfund/form'" class="btn_add"/>
 	</div>
+<?php echo $pagination; ?>
 <table class="tbreport">
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
@@ -27,21 +28,22 @@
 <tr>
   <td></td>
   <td>รวมทั้งประเทศ</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-<?php //foreach($data as $key=>$item): ?>
-<tr>
-  <td><?php //echo ++$key ?></td>
-  <td><?php //echo $item['province'] ?></td>
-  <td><?php //echo $item['total_person'] ?></td>
-  <td><?php //echo number_format($item['total_money_person']); ?></td>
-  <td><?php //echo $item['total_project'] ?></td>
-  <td><?php //echo number_format($item['total_money_project']); ?></td>
-  </tr>
-<?php //endforeach; ?>
-</table>
+  <td><?php echo number_format($cnt[0]['total_person']) ?></td>
+  <td><?php echo number_format($cnt[0]['total_money_person']) ?></td>
+  <td><?php echo number_format($cnt[0]['total_project']) ?></td>
+  <td><?php echo number_format($cnt[0]['total_money_project']) ?></td>
 
+  </tr>
+<?php foreach($result as $key=>$item):$key += 1; ?>
+<tr>
+  <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
+  <td><?php echo $item['province'] ?></td>
+  <td><?php echo number_format($item['total_person']) ?></td>
+  <td><?php echo number_format($item['total_money_person']); ?></td>
+  <td><?php echo number_format($item['total_project']) ?></td>
+  <td><?php echo number_format($item['total_money_project']); ?></td>
+  </tr>
+<?php endforeach; ?>
+</table>
+<?php echo $pagination; ?>
 <div id="ref">ที่มา : สท. : เว็บไซต์กองทุนผู้สูงอายุ  http://olderfund.opp.go.th</div>

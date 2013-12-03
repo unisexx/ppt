@@ -13,10 +13,10 @@ Class Olderfund extends Public_Controller{
 		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
 
 		$data['result'] = $this->older->get("SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
-											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_moeny_project
+											   ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
 											   FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
 
-
+		$data['pagination'] = $this->older->pagination;
 		$this->template->build('olderfund/index',$data);
 
 	}
@@ -64,13 +64,26 @@ Class Olderfund extends Public_Controller{
 		$this->template->build('olderfund/upload');
 	}
 	function detail($year)
-	{$this->db->debug=true;
-		/*$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
+	{//$this->db->debug=true;
+		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
         $num = count($set_year);
 		for($i=0; $i<$num; $i++)
-		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }*/
-		$_GET['year'] = (empty($_GET['year'])) ? $year:$_GET['year'];
-		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE YEAR='2556'");
+		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+
+		$grp = (!empty($_GET['year'])) ? "WHERE YEAR =".$_GET['year']." GROUP BY YEAR ":'';
+		$data['cnt'] = $this->older->get("SELECT sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
+										        ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
+										FROM OLDERFUND $grp");
+		$where ="";
+		if(!empty($_GET['year'])){
+			$where = " AND YEAR = ".$_GET['year'];
+			$year="";
+		}
+		if(!empty($year)){$where = "AND YEAR =$year";}
+		$data['result'] = $this->older->get("SELECT * FROM OLDERFUND WHERE 1=1 $where");
+
+
+		$data['pagination'] = $this->older->pagination;
 		$this->template->build('olderfund/detail',$data);
 	}
 }

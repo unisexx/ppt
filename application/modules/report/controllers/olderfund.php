@@ -85,7 +85,7 @@ Class Olderfund extends Public_Controller{
 										        ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
 										FROM OLDERFUND $grp");
 		$where =(!empty($_GET['year'])) ?" AND YEAR = ".$_GET['year']: "";
-		$sql ="SELECT * FROM OLDERFUND WHERE 1=1 $where";
+		$sql ="SELECT * FROM OLDERFUND WHERE 1=1  $where";
 
 		if($export){
 			$data['result'] = $this->older->get($sql,true);
@@ -94,8 +94,8 @@ Class Olderfund extends Public_Controller{
 			echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
 			$this->load->view('olderfund/export_detail', $data);
 		}else{
-			$data['result'] = $this->older->get($sql);
-			$data['pagination'] = $this->older->pagination;
+			$data['result'] = $this->older->get($sql,true);
+			//$data['pagination'] = $this->older->pagination;
 			$this->template->build('olderfund/detail',$data);
 		}
 

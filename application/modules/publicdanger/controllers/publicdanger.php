@@ -79,8 +79,12 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_all');
 	}
 	
-	function report_traffic($year='false'){
-		$data['traffics'] = $this->traffic->where('YEAR_DATA',$year)->get();
+	function report_traffic($year=false){
+		// Report all PHP errors (see changelog)
+		// error_reporting(E_ALL);
+		// $this->db->debug = true;
+
+		$data['traffics'] = $this->traffic->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		$this->template->build('report_traffic',$data);
 	}
 }

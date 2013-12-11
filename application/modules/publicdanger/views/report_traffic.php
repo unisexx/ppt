@@ -28,46 +28,16 @@
   <td class="txtcen">สาหัส</td>
   <td class="txtcen">เล็กน้อย</td>
 </tr>
+<?php foreach($traffics as $key=>$row):?>
 <tr>
-  <td>1</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>2</td>
-  <td>&nbsp;</td>
+  <td><?php echo $key+1?></td>
+  <td><?php echo $row['province']?></td>
   <td>&nbsp;</td>
   <td></td>
   <td></td>
   <td></td>
-  </tr>
-<tr>
-  <td>3</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-<tr>
-  <td>4</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-<tr>
-  <td>5</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
+</tr>	
+<?php endforeach;?>
 </table>
 
 <div id="ref">ที่มา : กรมป้องกันและบรรเทาสาธารณะภัย  http://www.disaster.go.th</div>

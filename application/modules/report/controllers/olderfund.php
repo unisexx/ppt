@@ -23,6 +23,7 @@ Class Olderfund extends Public_Controller{
 			$this->load->view('olderfund/export', $data);
 		}else{
 			$data['result'] = $this->older->get($sql);
+			$data['pagination'] = $this->older->pagination;
 			$this->template->build('olderfund/index',$data);
 		}
 

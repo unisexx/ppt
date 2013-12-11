@@ -4,6 +4,8 @@ Class Publicdanger extends Public_Controller{
 		parent::__construct();
 		
 		$this->load->model('publicdanger_traffic_model', 'traffic');
+		$this->load->model('publicdanger_drought_model', 'drought');
+		$this->load->model('publicdanger_storm_model', 'storm');
 		$this->load->model('info_model','info');
 	}
 	// public $menu_id=112;
@@ -15,6 +17,10 @@ Class Publicdanger extends Public_Controller{
 	}
 	
 	function import(){
+		// Report all PHP errors (see changelog)
+		// error_reporting(E_ALL);
+		// $this->db->debug = true;
+		
 		$year_data = $_POST['year_data'];
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
         // $this->info->save($_POST);
@@ -26,11 +32,13 @@ Class Publicdanger extends Public_Controller{
 				$publicdanger_type = "traffic";
 		        $table = 'PUBLICDANGER_TRAFFIC';
 		        break;
-		    case 1:
-		        echo "i equals 1";
+		    case 'drought':
+		        $publicdanger_type = "drought";
+		        $table = 'PUBLICDANGER_DROUGHT';
 		        break;
-		    case 2:
-		        echo "i equals 2";
+		    case 'storm':
+		        $publicdanger_type = "storm";
+		        $table = 'PUBLICDANGER_STORM';
 		        break;
 		}
 
@@ -52,10 +60,10 @@ Class Publicdanger extends Public_Controller{
 			$data -> read($uploaddir.$file_name);
 			
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			$this->traffic->delete('YEAR_DATA',$year_data);
+			$this->$publicdanger_type->delete('YEAR_DATA',$year_data);
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 11; $i <= $data -> sheets[0]['numRows']; $i++) {
+			for($i = 10; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
 				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
 					$column_name = strtoupper(trim($column[$ncolumn+1]));
@@ -67,9 +75,9 @@ Class Publicdanger extends Public_Controller{
 				// echo"<pre>";
 				// echo print_r($value);
 				// echo"</pre>";
+				
 				$this->$publicdanger_type->save($value);
 			}
-
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
 		redirect('publicdanger/form_import');
@@ -79,12 +87,27 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_all');
 	}
 	
-	function report_traffic($year=false){
+	function report_traffic($year=false){ //การจราจร
 		// Report all PHP errors (see changelog)
 		// error_reporting(E_ALL);
 		// $this->db->debug = true;
+		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
 
 		$data['traffics'] = $this->traffic->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		$this->template->build('report_traffic',$data);
+	}
+	
+	function report_drought($year=false){ //ภัยแล้ง
+		$data['years'] = $this->drought->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_DROUGHT ORDER BY YEAR_DATA DESC");
+		
+		$data['droughts'] = $this->drought->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		$this->template->build('report_drought',$data);
+	}
+	
+	function report_storm($year=false){ //ภัยแล้ง
+		$data['years'] = $this->storm->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_STORM ORDER BY YEAR_DATA DESC");
+		
+		$data['storms'] = $this->storm->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		$this->template->build('report_storm',$data);
 	}
 }

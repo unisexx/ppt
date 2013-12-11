@@ -1,13 +1,14 @@
-<h3>รายงาน ผู้ได้รับผลกระทบจากภัยจราจร  จำแนกรายจังหวัด ปีงบประมาณ 2556</h3>
+<h3>รายงาน ผู้ได้รับผลกระทบจากภัยจราจร  จำแนกรายจังหวัด ปีงบประมาณ <?php echo $this->uri->segment(3,0)?></h3>
 <div id="search">
   <div id="searchBox">ปีงบประมาณ
-    <select name="select2" id="select2">
-      <option>2556</option>
-      <option>2555</option>
+    <select name="select" onchange="window.open(this.options[this.selectedIndex].value,'_self')">
+      <?php foreach($years as $row):?>
+      	<option value="publicdanger/report_traffic/<?php echo $row['year_data']?>" <?php echo ($row['year_data'] == $this->uri->segment(3,0))?"selected":"";?>><?php echo $row['year_data']?></option>
+      <?php endforeach;?>
     </select>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+  </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> ปี 2556
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> ปี <?php echo $this->uri->segment(3,0)?>
   <label></label>
 </div>
 <div style="padding:10px; text-align:right;">
@@ -29,13 +30,13 @@
   <td class="txtcen">เล็กน้อย</td>
 </tr>
 <?php foreach($traffics as $key=>$row):?>
-<tr>
+<tr class="txtright">
   <td><?php echo $key+1?></td>
   <td><?php echo $row['province']?></td>
-  <td>&nbsp;</td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><?php echo number_format($row['counter'])?></td>
+  <td><?php echo number_format($row['death'])?></td>
+  <td><?php echo number_format($row['serious_injury'])?></td>
+  <td><?php echo number_format($row['minor_injury'])?></td>
 </tr>	
 <?php endforeach;?>
 </table>

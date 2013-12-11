@@ -33,13 +33,14 @@
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>
-<?php echo $pagination; ?>
+<div class="hide_print">
+<?php echo $pagination; ?></div>
 <table class="tbreport">
 <tr>
   <th rowspan="2" class="txtcen">ปีงบประมาณ</th>
   <th colspan="2" class="txtcen">รายบุคคล (การกู้ยืม)</th>
   <th colspan="2" class="txtcen">รายโครงการ</th>
-  </tr>
+</tr>
 <tr>
 <td class="txtcen">จำนวนคน</td>
 <td class="txtcen">จำนวนเงิน (บาท)</td>
@@ -56,7 +57,8 @@
 </tr>
 <?php endforeach; ?>
 </table>
-<?php echo $pagination; ?>
+<div class="hide_print">
+<?php echo $pagination; ?></div>
 <div id="ref">ที่มา : สท. : เว็บไซต์กองทุนผู้สูงอายุ  http://olderfund.opp.go.th</div>
 
 

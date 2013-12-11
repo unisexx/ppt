@@ -1,8 +1,8 @@
-<div class="red">  
+<div class="red">
 <ul id="mega-menu-6" class="mega-menu unstyled">
 	<li><a href="dashboard">สถานการณ์ที่สำคัญ</a></li>
 	<!--<li><?php echo anchor('report', 'ข้อมูลรายงานสรุป'); ?></li>-->
-	
+
 <li><a href="#">กลุ่มเป้าหมาย</a>
 		<ul>
 			<li><a href="#">เด็กและเยาวชน</a>
@@ -37,7 +37,7 @@
                     <li><a href="report/dla/older">ปัญหาผู้สูงอายุในท้องถิ่น</a></li>
                     <li><a href="report/elder_inmates">ผู้ต้องขังสูงอายุ</a></li>
                     <li><a href="report/elderly">ผู้สูงอายุในสถาบัน</a></li>
-                    <li><a href="#">การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ</a></li>
+                    <li><a href="report/olderfund">การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ</a></li>
                 </ul>
             </li>
             <li><a href="#">ผู้ด้อยโอกาส</a>
@@ -98,7 +98,7 @@
 	    </ul>
 	</li>
 	<?php endforeach; ?>
-	
+
 	<?php /*
 	<li><a href="#">ข้อมูลกลุ่มเป้าหมาย 1</a>
 		<ul>
@@ -160,7 +160,7 @@
                     <li><a href="dla/index/52">ครัวเรือนทีมีสภาพที่อยู่อาศัยไม่มั่นคงและสมควรได้รับความช่วยเหลือ <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/53">ครัวเรือนที่อาศัยอยู่ในพื้นที่เสี่ยงภัยทางธรรมชาติ ในระดับที่เป็นอันตรายต่อชีวิตและทรัพย์สิน <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
                     <li><a href="dla/index/54">ครัวเรือนที่ไม่มีกรรมสิทธิ์ในที่อยู่อาศัย เช่น อาศัยอยู่ในพื้นที่สาธารณะที่ราษฎร์พัสดุ ภายในบริเวณวัด ที่เช่า เป็นต้น <img src="themes/ppt/images/ico_question.png" width="16" height="16" title="แบบ อปท.1" class="vtip ico_quest" /></a></li>
-                    
+
                 </ul>
         	</li>
             <li><a href="#">ผู้สูงอายุ</a>
@@ -249,7 +249,7 @@
 			</li>
 		</ul>
 	</li>
-     * 
+     *
      */?>
 
 
@@ -284,7 +284,7 @@
 		    <li><?php echo anchor('logs', 'บันทึกการใช้งาน'); ?></li>
 		</ul>
 	</li>
-	
+
 	<?php /*if(permission('report','view')):?>
 	<li><a href="#">รายงาน</a>
 	<ul>
@@ -306,7 +306,7 @@
 			<li><a href="#">รายงาน Detail F</a></li>
 		</ul>
 	</li>
-	
+
 	</ul>
 	</li>
 	<?php endif; */?>

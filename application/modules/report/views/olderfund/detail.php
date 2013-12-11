@@ -31,7 +31,7 @@
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>
 	หน่วย : ราย
 </div>
-<span class="hide_print"><?php echo $pagination; ?></span>
+
 <table class="tbreport">
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
@@ -65,5 +65,5 @@
   </tr>
 <?php endforeach; ?>
 </table>
-<span class="hide_print"><?php echo $pagination; ?></span>
+
 <div id="ref">ที่มา : สท. : เว็บไซต์กองทุนผู้สูงอายุ  http://olderfund.opp.go.th</div>

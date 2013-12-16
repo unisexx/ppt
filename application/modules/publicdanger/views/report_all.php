@@ -1,7 +1,7 @@
 <h3>รายงาน ผู้ได้รับผลกระทบจากสาธารณภัยทั้งประเทศ  </h3>
 <div style="padding:10px; text-align:right;">
-  <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล">
-<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล">หน่วย : ราย</div>
+<a href='publicdanger/export_all'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>หน่วย : ราย</div>
 <table class="tbreport">
   <tr>
     <th rowspan="2" class="txtcen">ปี พ.ศ.</th>
@@ -14,46 +14,36 @@
     <td class="txtcen">วาตภัย</td>
     <td class="txtcen">อุทกภัย</td>
   </tr>
-  <tr>
-    <td class="topic">2556</td>
-    <td class="txtcen"><a href="report_sum.php?act=publicdanger2">50</a></td>
-    <td class="txtcen"><a href="report_sum.php?act=publicdanger4">5</a></td>
-    <td class="txtcen"><a href="report_sum.php?act=publicdanger5">25</a></td>
-    <td class="txtcen"><a href="report_sum.php?act=publicdanger6">29</a></td>
-    <td class="txtcen"><a href="report_sum.php?act=publicdanger7">10</a></td>
-  </tr>
-  <tr>
-    <td class="topic">2555</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="topic">2554</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="topic">2553</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="topic">2552</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+  <?php foreach($years as $row):?>
+	<tr>
+	    <td class="topic"><?php echo $row['year_data']?></td>
+	    <td class="txtcen">
+	    	<a href="publicdanger/report_traffic/<?php echo $row['year_data']?>">
+	    		<?php echo number_format($this->db->getone("SELECT sum(COUNTER) FROM PUBLICDANGER_TRAFFIC WHERE YEAR_DATA = ".$row['year_data']));?>
+	    	</a>
+	    </td>
+	    <td class="txtcen">
+	    	<a href="publicdanger/report_drought/<?php echo $row['year_data']?>">
+	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_DROUGHT WHERE YEAR_DATA = ".$row['year_data']));?>
+	    	</a>
+	    </td>
+	    <td class="txtcen">
+	    	<a href="publicdanger/report_cold/<?php echo $row['year_data']?>">
+	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_COLD WHERE YEAR_DATA = ".$row['year_data']));?>
+	    	</a>
+	    </td>
+	    <td class="txtcen">
+	    	<a href="publicdanger/report_storm/<?php echo $row['year_data']?>">
+	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_STORM WHERE YEAR_DATA = ".$row['year_data']));?>
+	    	</a>
+	    </td>
+	    <td class="txtcen">
+	    	<a href="publicdanger/report_flood/<?php echo $row['year_data']?>">
+	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_FLOOD WHERE YEAR_DATA = ".$row['year_data']));?>
+	    	</a>
+	    </td>
+	</tr>
+  <?php endforeach;?>
 </table>
 <div id="ref">ที่มา : กรมป้องกันและบรรเทาสาธารณะภัย  http://www.disaster.go.th</div>
 

@@ -17,7 +17,7 @@
 				<select name="publicdanger_type">
 					<option value="traffic">ภัยจราจร</option>
 					<option value="drought">ภัยแล้ง</option>
-					<option value="3">ภัยหนาว</option>
+					<option value="cold">ภัยหนาว</option>
 					<option value="storm">วาตภัย</option>
 					<option value="5">อุทกภัย</option>
 				</select>

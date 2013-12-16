@@ -6,6 +6,7 @@ Class Publicdanger extends Public_Controller{
 		$this->load->model('publicdanger_traffic_model', 'traffic');
 		$this->load->model('publicdanger_drought_model', 'drought');
 		$this->load->model('publicdanger_storm_model', 'storm');
+		$this->load->model('publicdanger_cold_model', 'cold');
 		$this->load->model('info_model','info');
 	}
 	// public $menu_id=112;
@@ -39,6 +40,10 @@ Class Publicdanger extends Public_Controller{
 		    case 'storm':
 		        $publicdanger_type = "storm";
 		        $table = 'PUBLICDANGER_STORM';
+		        break;
+			case 'cold':
+		        $publicdanger_type = "cold";
+		        $table = 'PUBLICDANGER_COLD';
 		        break;
 		}
 
@@ -84,7 +89,18 @@ Class Publicdanger extends Public_Controller{
 	}
 
 	function report_all(){
-		$this->template->build('report_all');
+		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
+		$this->template->build('report_all',$data);
+	}
+	
+	function export_all(){
+		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
+		
+		$filename= "publicdanger_report_data_all.xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_all',$data);
 	}
 	
 	function report_traffic($year=false){ //การจราจร
@@ -97,6 +113,18 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_traffic',$data);
 	}
 	
+	function export_traffic($year=false){
+		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
+
+		$data['traffics'] = $this->traffic->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		
+		$filename= "publicdanger_traffic_report_data_".$year.".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_traffic',$data);
+	}
+	
 	function report_drought($year=false){ //ภัยแล้ง
 		$data['years'] = $this->drought->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_DROUGHT ORDER BY YEAR_DATA DESC");
 		
@@ -104,10 +132,34 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_drought',$data);
 	}
 	
+	function export_drought($year=false){
+		$data['years'] = $this->drought->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_DROUGHT ORDER BY YEAR_DATA DESC");
+		
+		$data['droughts'] = $this->drought->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		
+		$filename= "publicdanger_drought_report_data_".$year.".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_drought',$data);
+	}
+	
 	function report_storm($year=false){ //ภัยแล้ง
 		$data['years'] = $this->storm->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_STORM ORDER BY YEAR_DATA DESC");
 		
 		$data['storms'] = $this->storm->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		$this->template->build('report_storm',$data);
+	}
+
+	function export_storm($year=false){
+		$data['years'] = $this->storm->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_STORM ORDER BY YEAR_DATA DESC");
+		
+		$data['storms'] = $this->storm->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		
+		$filename= "publicdanger_storm_report_data_".$year.".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_storm',$data);
 	}
 }

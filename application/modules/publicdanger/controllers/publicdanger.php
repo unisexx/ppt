@@ -7,13 +7,14 @@ Class Publicdanger extends Public_Controller{
 		$this->load->model('publicdanger_drought_model', 'drought');
 		$this->load->model('publicdanger_storm_model', 'storm');
 		$this->load->model('publicdanger_cold_model', 'cold');
+		$this->load->model('publicdanger_flood_model', 'flood');
 		$this->load->model('info_model','info');
 	}
 	// public $menu_id=112;
 	
 	
 	function form_import(){
-		// $data['menu_id'] = 112; 
+		$data['menu_id'] = 112;
 		$this->template->build('form_import',$data);
 	}
 	
@@ -44,6 +45,10 @@ Class Publicdanger extends Public_Controller{
 			case 'cold':
 		        $publicdanger_type = "cold";
 		        $table = 'PUBLICDANGER_COLD';
+		        break;
+			case 'flood':
+		        $publicdanger_type = "flood";
+		        $table = 'PUBLICDANGER_FLOOD';
 		        break;
 		}
 
@@ -161,5 +166,12 @@ Class Publicdanger extends Public_Controller{
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
 		
 		$this->load->view('export_storm',$data);
+	}
+	
+	function report_flood($year=false){ //ภัยแล้ง
+		$data['years'] = $this->flood->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_FLOOD ORDER BY YEAR_DATA DESC");
+		
+		$data['floods'] = $this->flood->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		$this->template->build('report_flood',$data);
 	}
 }

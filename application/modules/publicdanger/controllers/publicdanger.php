@@ -10,11 +10,11 @@ Class Publicdanger extends Public_Controller{
 		$this->load->model('publicdanger_flood_model', 'flood');
 		$this->load->model('info_model','info');
 	}
-	// public $menu_id=112;
+	public $menu_id=113;
 	
 	
 	function form_import(){
-		$data['menu_id'] = 112;
+		$data['menu_id'] = 113;
 		$this->template->build('form_import',$data);
 	}
 	

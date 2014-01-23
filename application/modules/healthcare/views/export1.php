@@ -23,7 +23,7 @@
     <td class="txtcen"><?php echo number_format($row['civil_sum'])?></td>
     <td class="txtcen"><?php echo number_format($row['other_sum'])?></td>
     <td class="txtcen"><?php echo number_format($row['right_sum'])?></td>
-    <td class="txtcen"><?php echo number_format($row['total'])?></td>
+    <td class="txtcen"><?php echo number_format($row['problem_sum'])?></td>
   </tr>
   <?php endforeach;?>
 </table>

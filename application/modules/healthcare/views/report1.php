@@ -25,7 +25,7 @@
     <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=civil"><?php echo number_format($row['civil_sum'])?></a></td>
     <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=other"><?php echo number_format($row['other_sum'])?></a></td>
     <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=right"><?php echo number_format($row['right_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=problem"><?php echo number_format($row['total'])?></a></td>
+    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=problem"><?php echo number_format($row['problem_sum'])?></a></td>
   </tr>
   <?php endforeach;?>
 </table>

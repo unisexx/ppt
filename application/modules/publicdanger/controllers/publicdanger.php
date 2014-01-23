@@ -168,10 +168,29 @@ Class Publicdanger extends Public_Controller{
 		$this->load->view('export_storm',$data);
 	}
 	
-	function report_flood($year=false){ //ภัยแล้ง
+	function report_flood($year=false){ //วาตภัย
 		$data['years'] = $this->flood->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_FLOOD ORDER BY YEAR_DATA DESC");
 		
 		$data['floods'] = $this->flood->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		$this->template->build('report_flood',$data);
+	}
+	
+	function report_cold($year=false){
+		$data['years'] = $this->cold->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_COLD ORDER BY YEAR_DATA DESC");
+		
+		$data['colds'] = $this->cold->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		$this->template->build('report_cold',$data);
+	}
+	
+	function export_cold($year=false){
+		$data['years'] = $this->cold->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_COLD ORDER BY YEAR_DATA DESC");
+		
+		$data['colds'] = $this->cold->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		
+		$filename= "publicdanger_cold_report_data_".$year.".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_cold',$data);
 	}
 }

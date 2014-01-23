@@ -8,7 +8,13 @@ Class Promotefund extends Public_Controller{
 	public $menu_id=113;
 	
 	function index(){
-		$data['promotefunds'] = $this->promotefund_org->get(false,true);
+		$data['years'] = $this->promotefund_org->get('SELECT DISTINCT YEAR_DATA from PROMOTEFUND_ORG ORDER BY YEAR_DATA DESC');
+		$data['provinces'] = $this->promotefund_org->get('SELECT DISTINCT PROVINCE from PROMOTEFUND_ORG ORDER BY PROVINCE ASC');
+		
+		$condition = " 1=1 ";
+		if(@$_GET['year_data']) $condition .= "AND YEAR_DATA = ".$_GET['year_data'].' ';
+		if(@$_GET['province']) $condition .= "AND PROVINCE = '".$_GET['province']."'";
+		$data['promotefunds'] = $this->promotefund_org->where($condition)->get(false,true);
 		$this->template->build('index',$data);
 	}
 	

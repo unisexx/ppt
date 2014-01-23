@@ -13,10 +13,10 @@
 	      <?php endforeach;?>
 	    </select>
 	    
-	    <select name="code">
+	    <select name="province">
 	    	<option value="">--- เลือกทุกจังหวัด ---</option>
 	      <?php foreach($provinces as $row):?>
-	      	<option value="<?php echo $row['code']?>" <?php echo ($row['code'] == @$_GET['code'])?"selected":"";?>><?php echo $row['province']?></option>
+	      	<option value="<?php echo $row['province']?>" <?php echo ($row['province'] == @$_GET['province'])?"selected":"";?>><?php echo $row['province']?></option>
 	      <?php endforeach;?>
 	    </select>
 	    

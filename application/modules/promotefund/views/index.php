@@ -1,4 +1,4 @@
-<? $m['id'] = 112; ?>
+<? $m['id'] = 115; ?>
 <?=menu::source($m['id']);?>
 
 <form action='' method='get'>
@@ -27,7 +27,7 @@
 
 <?php if(menu::perm($m['id'], 'add')): ?>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='healthcare/form_import'" class="btn_import"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='promotefund/form_import'" class="btn_import"/>
 	<!-- <input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='danger/form'" class="btn_add"/> -->
 </div>
 <?php endif; ?>

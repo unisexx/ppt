@@ -1,4 +1,4 @@
-<? $m['id'] = 112; ?>
+<? $m['id'] = 114; ?>
 <?=menu::source($m['id']);?>
 
 <form action='' method='get'>
@@ -30,14 +30,14 @@
 </form>
 
 
-<?php if($_GET['import_type'] == '1'):?>
-	
 <?php if(menu::perm($m['id'], 'add')): ?>
 <div id="btnBox">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='healthcare/form_import'" class="btn_import"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='childfund/form_import'" class="btn_import"/>
 	<!-- <input type="button" title="เพิ่มรายการ"  value=" " onclick="document.location='danger/form'" class="btn_add"/> -->
 </div>
 <?php endif; ?>
+
+<?php if($_GET['import_type'] == '1'):?>
 
 <table class="tbreport">
 <tr>

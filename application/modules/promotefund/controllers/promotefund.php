@@ -5,7 +5,7 @@ Class Promotefund extends Public_Controller{
 		
 		$this->load->model('promotefund_org_model', 'promotefund_org');
 	}
-	public $menu_id=113;
+	public $menu_id=115;
 	
 	function index(){
 		$data['years'] = $this->promotefund_org->get('SELECT DISTINCT YEAR_DATA from PROMOTEFUND_ORG ORDER BY YEAR_DATA DESC');
@@ -19,7 +19,7 @@ Class Promotefund extends Public_Controller{
 	}
 	
 	function form_import(){
-		$data['menu_id'] = 113;
+		$data['menu_id'] = 115;
 		$this->template->build('form_import',$data);
 	}
 	

@@ -27,8 +27,8 @@
   <td class="txtcen">จำนวนเงิน (บาท)</td>
   <td class="txtcen">จำนวน (แห่ง)</td>
   <td class="txtcen">จำนวนเงิน (บาท)</td>
-   <td class="txtcen">จำนวน (แห่ง)</td>
-    <td class="txtcen">จำนวนเงิน (บาท)</td>
+  <td class="txtcen">จำนวน (แห่ง)</td>
+  <td class="txtcen">จำนวนเงิน (บาท)</td>
 </tr>
 <?php foreach($promotefunds as $key=>$row):?>
 <tr>
@@ -45,4 +45,3 @@
 </table>
 
 <div id="ref">ที่มา : สป.พม. : ฐานข้อมูลระบบงานกองทุนส่งเสริมการจัดการสวัสดิการสังคม</div>
-

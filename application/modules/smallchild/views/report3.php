@@ -1,21 +1,27 @@
-<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $this->uri->rsegment(4)?> ปีงบประมาณ <?php echo $this->uri->rsegment(3)?></h3>
+<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $_GET['province']?> ปีงบประมาณ <?php echo $_GET['year']?></h3>
 <div id="search">
   <div id="searchBox">
-    <select name="select2" id="select2">
-      <option>2556</option>
-      <option>2555</option>
+  	<form method="get" action="smallchild/report3">
+    <select name="year">
+      <?php foreach($years as $row):?>
+      	<option value="<?php echo $row['year_data']?>" <?php echo ($row['year_data'] == $_GET['year'])?"selected":"";?>><?php echo $row['year_data']?></option>
+      <?php endforeach;?>
     </select>
-    <select name="select" id="select">
-      <option>จังหวัดกระบี่</option>
+    <select name="province">
+      <?php foreach($provinces as $row):?>
+      	<option value="<?php echo $row['pv']?>" <?php echo ($row['pv'] == $_GET['province'])?"selected":"";?>><?php echo $row['pv']?></option>
+      <?php endforeach;?>
     </select>
-<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+	<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+	</form>
+  </div>
 </div>
-<div id="resultsearch"><b>ผลที่ค้นหา :</b> ปีงบประมาณ 2556
+<div id="resultsearch"><b>ผลที่ค้นหา :</b> ปีงบประมาณ <?php echo $_GET['year']?>
   <label></label> 
-  จังหวัด กระบี่
+  จังหวัด <?php echo $_GET['province']?>
 </div>
 <div style="padding:10px; text-align:right;">
-<a href="smallchild/export3/<?php echo $this->uri->rsegment(3)?>/<?php echo $this->uri->rsegment(4)?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<a href="smallchild/export3?year=<?php echo $_GET['year']?>&province=<?php echo $_GET['province']?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 <img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'></div>
 <table class="tbreport">
 <tr>
@@ -32,7 +38,7 @@
 </tr>
 <tr>
   <td></td>
-  <td><?php echo $this->uri->rsegment(4)?></td>
+  <td><?php echo $_GET['province']?></td>
   <td>&nbsp;</td>
   <td></td>
   <td></td>
@@ -47,7 +53,7 @@
 ?>
 <tr>
   <td><?php echo $key+1?></td>
-  <td><a href="smallchild/report4/<?php echo $row['budgetyear']?>/<?php echo $row['pv']?>/<?php echo $row['am']?>"><?php echo $row['am']?></a></td>
+  <td><a href="smallchild/report4?year=<?php echo $row['budgetyear']?>&province=<?php echo $row['pv']?>&ampor=<?php echo $row['am']?>"><?php echo $row['am']?></a></td>
   <td><?php echo nformat($row['org_sum'])?></td>
   <td><?php echo nformat($teach_sum)?></td>
   <td><?php echo nformat($em_sum)?></td>

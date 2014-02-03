@@ -64,7 +64,9 @@ Class Smallchild extends Public_Controller{
 		$this->load->view('export1',$data);
 	}
 	
-	function report2($year){
+	function report2(){
+		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
+		
 		$sql = 'SELECT 
 				pv, budgetyear,
 				(SELECT COUNT("ID") FROM SMALLCHILD WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
@@ -76,12 +78,12 @@ Class Smallchild extends Public_Controller{
 				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 				(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 				FROM 
-				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = 2555 ORDER BY PROVINCE ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		$data['smallchilds'] = $this->smallchild->get($sql,true);
 		$this->template->build('report2',$data);
 	}
 
-	function export2($year){
+	function export2(){
 		$sql = 'SELECT 
 				pv, budgetyear,
 				(SELECT COUNT("ID") FROM SMALLCHILD WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
@@ -93,8 +95,8 @@ Class Smallchild extends Public_Controller{
 				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 				(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 				FROM 
-				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = 2555 ORDER BY PROVINCE ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		$data['smallchilds'] = $this->smallchild->get($sql,true);
 		
 		$filename= "smallchild_report2_data.xls";
 		header("Content-Disposition: attachment; filename=".$filename);
@@ -103,7 +105,10 @@ Class Smallchild extends Public_Controller{
 		$this->load->view('export2',$data);
 	}
 	
-	function report3($year,$province){
+	function report3(){
+		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
+		$data['provinces'] = $this->smallchild->get("SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = ".$_GET['year']." ORDER BY PROVINCE ASC",TRUE);
+		
 		$sql = 'SELECT 
 am, pv, budgetyear,
 (SELECT COUNT("ID") FROM SMALLCHILD WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
@@ -115,12 +120,12 @@ am, pv, budgetyear,
 (SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 (SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 FROM 
-(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$province.'\' AND YEAR_DATA = '.$year.' ORDER BY AMPOR ASC)';
+(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
 		$data['smallchilds'] = $this->smallchild->get($sql);
 		$this->template->build('report3',$data);
 	}
 
-	function export3($year,$province){
+	function export3(){
 		$sql = 'SELECT 
 am, pv, budgetyear,
 (SELECT COUNT("ID") FROM SMALLCHILD WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
@@ -132,7 +137,7 @@ am, pv, budgetyear,
 (SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 (SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 FROM 
-(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$province.'\' AND YEAR_DATA = '.$year.' ORDER BY AMPOR ASC)';
+(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
 		$data['smallchilds'] = $this->smallchild->get($sql);
 		
 		$filename= "smallchild_report3_data.xls";
@@ -142,7 +147,10 @@ FROM
 		$this->load->view('export3',$data);
 	}
 	
-	function report4($year,$province,$ampor){
+	function report4(){
+		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
+		$data['provinces'] = $this->smallchild->get("SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = ".$_GET['year']." ORDER BY PROVINCE ASC",TRUE);
+		$data['ampors'] = $this->smallchild->get("SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = '".$_GET['province']."' AND YEAR_DATA = ".$_GET['year']." ORDER BY AMPOR ASC");
 		
 		$sql = 'SELECT 
 org, am, pv, budgetyear,
@@ -155,12 +163,12 @@ org, am, pv, budgetyear,
 (SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 (SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 FROM 
-(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$ampor.'\' AND PROVINCE = \''.$province.'\' AND YEAR_DATA = '.$year.' ORDER BY AMPOR ASC)';
+(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$_GET['ampor'].'\' AND PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
 		$data['smallchilds'] = $this->smallchild->get($sql);
 		$this->template->build('report4',$data);
 	}
 
-	function export4($year,$province,$ampor){
+	function export4(){
 		$sql = 'SELECT 
 org, am, pv, budgetyear,
 (SELECT COUNT("ID") FROM SMALLCHILD WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
@@ -172,7 +180,7 @@ org, am, pv, budgetyear,
 (SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
 (SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
 FROM 
-(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$ampor.'\' AND PROVINCE = \''.$province.'\' AND YEAR_DATA = '.$year.' ORDER BY AMPOR ASC)';
+(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$_GET['ampor'].'\' AND PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
 		$data['smallchilds'] = $this->smallchild->get($sql);
 		
 		$filename= "smallchild_report4_data.xls";
@@ -189,11 +197,13 @@ FROM
 	}
 	
 	function import(){ // ประเภทบุคคล
+		header('Content-Type: text/html; charset=utf-8');
 		// Report all PHP errors (see changelog)
 		// error_reporting(E_ALL);
 		// $this->db->debug = true;
 		
 		$year_data = $_POST['year_data'];
+		$province = $_POST['province'];
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
         // $this->info->save($_POST);
 		// unset($_POST);
@@ -216,11 +226,13 @@ FROM
 			$data -> setOutputEncoding('UTF-8');
 			$data -> read($uploaddir.$file_name);
 			
-			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			// $this->db->debug =true;
-			$this->db->execute("delete from SMALLCHILD where YEAR_DATA = ".$year_data." and PROVINCE = '".$_POST['province']."'");
 			
-			header('Content-Type: text/html; charset=utf-8');
+			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
+			// $this->db->debug = true;
+			$sql = "delete from SMALLCHILD where year_data = ".$year_data." and province = '".iconv('UTF-8', 'TIS-620', $province)."'";
+			$this->db->Execute($sql);
+			
+			
 			for($i = 7; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
 				// for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
@@ -235,7 +247,7 @@ FROM
 				if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
 					$organization = trim($data -> sheets[0]['cells'][$i][3]);
 				}
-				
+
 				$value['YEAR_DATA'] = $year_data;
 				$value['PROVINCE'] = $_POST['province'];
 				$value['AMPOR'] = $ampor;
@@ -247,8 +259,8 @@ FROM
 				$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
 				$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
 				$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-				$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
-				$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][13]));
+				$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
+				$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
 				
 				// if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
 					// $organization = trim($data -> sheets[0]['cells'][$i][3]).trim($data -> sheets[0]['cells'][$i][4]);
@@ -278,5 +290,14 @@ FROM
 			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
 		// redirect('smallchild/form_import');
+	}
+
+	function ajax_get_ampor(){
+		$ampors = $this->smallchild->get("SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = '".$_GET['province']."' AND YEAR_DATA = ".$_GET['year']." ORDER BY AMPOR ASC");
+		echo "<select name=ampor>";
+		foreach($ampors as $row){
+			echo "<option value=".$row['am'].">".$row['am']."</option>";
+		}
+		echo "</select>";
 	}
 }

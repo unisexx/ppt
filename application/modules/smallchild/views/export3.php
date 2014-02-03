@@ -1,4 +1,4 @@
-<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $this->uri->rsegment(4)?> ปีงบประมาณ <?php echo $this->uri->rsegment(3)?></h3>
+<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $_GET['province']?> ปีงบประมาณ <?php echo $_GET['year']?></h3>
 
 <table border="1">
 <tr>
@@ -15,7 +15,7 @@
 </tr>
 <tr>
   <td></td>
-  <td><?php echo $this->uri->rsegment(4)?></td>
+  <td><?php echo $_GET['province']?></td>
   <td>&nbsp;</td>
   <td></td>
   <td></td>

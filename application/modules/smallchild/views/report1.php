@@ -21,7 +21,7 @@
 		$total = $teach_sum + $em_sum;
   ?>
   <tr>
-    <td class="topic"><a href="smallchild/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
+    <td class="topic"><a href="smallchild/report2?year=<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
     <td><?php echo nformat($row['org_sum'])?></td>
     <td><?php echo nformat($teach_sum)?></td>
     <td><?php echo nformat($em_sum)?></td>

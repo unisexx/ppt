@@ -58,7 +58,7 @@ Class Publicdanger extends Public_Controller{
 		}
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'traffic_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$file_name = $publicdanger_type.'_'.$year_data.'_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/publicdanger/'.$publicdanger_type.'/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);

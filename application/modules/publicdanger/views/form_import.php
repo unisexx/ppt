@@ -19,7 +19,7 @@
 					<option value="drought">ภัยแล้ง</option>
 					<option value="cold">ภัยหนาว</option>
 					<option value="storm">วาตภัย</option>
-					<option value="5">อุทกภัย</option>
+					<option value="flood">อุทกภัย</option>
 				</select>
 			</td>
 		</tr>

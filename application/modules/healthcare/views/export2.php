@@ -1,5 +1,5 @@
 <h3>รายงาน ผู้เข้าถึงสิทธิหลักประกันสุขภาพ ประเภท<?php echo $type[$_GET['type']]?> จำแนกรายจังหวัด ปีงบประมาณ <?php echo $this->uri->segment(3,0)?></h3>
-หน่วย : คน
+<div align="right">หน่วย : คน</div>
 <table class="tbreport" border="1">
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>

@@ -56,32 +56,31 @@
 </tr>
 <?php foreach($childfunds as $key=>$row):?>
   <tr>
-  <td><?php echo $key+1?></td>
-  <td><?php echo $row['pv']?></td>
-  <td><?php echo number_format($row['typemain1'])?></td>
-  <td><?php echo number_format($row['typemain2'])?></td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><?php echo number_format($row['under_type1'])?></td>
-  <td><?php echo number_format($row['under_type3'])?></td>
-  <td><?php echo number_format($row['under_type2'])?></td>
-  <td><?php echo number_format($row['typechild2'])?></td>
-  <td><?php echo number_format($row['typechild1'])?></td>
-  <td><?php echo number_format($row['typechild4'])?></td>
-  <td>&nbsp;</td>
-  <td><?php echo number_format($row['sum_typemain1'])?></td>
-  <td><?php echo number_format($row['sum_typemain2'])?></td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td><?php echo number_format($row['sum_under_type1'])?></td>
-  <td><?php echo number_format($row['sum_under_type2'])?></td>
-  <td><?php echo number_format($row['sum_under_type3'])?></td>
-  <td><?php echo number_format($row['sum_typechild2'])?></td>
-  <td><?php echo number_format($row['sum_typechild1'])?></td>
-  <td><?php echo number_format($row['sum_typechild4'])?></td>
-  <td>&nbsp;</td>
+  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtright"><?php echo $row['pv']?></td>
+  <td class="txtright"><?php echo number_format($row['typemain1'])?></td>
+  <td class="txtright"><?php echo number_format($row['typemain2'])?></td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright"><?php echo number_format($row['under_type1'])?></td>
+  <td class="txtright"><?php echo number_format($row['under_type3'])?></td>
+  <td class="txtright"><?php echo number_format($row['under_type2'])?></td>
+  <td class="txtright"><?php echo number_format($row['typechild2'])?></td>
+  <td class="txtright"><?php echo number_format($row['typechild1'])?></td>
+  <td class="txtright"><?php echo number_format($row['typechild4'])?></td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright"><?php echo number_format($row['sum_typemain2'])?></td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright">&nbsp;</td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type1'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type2'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type3'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_typechild2'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_typechild1'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_typechild4'])?></td>
+  <td class="txtright">&nbsp;</td>
   </tr>
 <?php endforeach;?>
 </table>

@@ -70,7 +70,11 @@ Class Publicdanger extends Public_Controller{
 			$data -> read($uploaddir.$file_name);
 			
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			$this->$publicdanger_type->delete('YEAR_DATA',$year_data);
+			if($publicdanger_type == "flood"){
+				$this->$publicdanger_type->where("YEAR_DATA = ".$year_data." AND NO = ".$_POST['no'])->delete();
+			}else{
+				$this->$publicdanger_type->delete('YEAR_DATA',$year_data);	
+			}
 			
 			header('Content-Type: text/html; charset=utf-8');
 			for($i = 10; $i <= $data -> sheets[0]['numRows']; $i++) {
@@ -81,6 +85,7 @@ Class Publicdanger extends Public_Controller{
 				}
 				
 				$value['YEAR_DATA'] = $year_data;
+				$value['NO'] = $_POST['no'];
 				
 				// echo"<pre>";
 				// echo print_r($value);
@@ -119,8 +124,6 @@ Class Publicdanger extends Public_Controller{
 	}
 	
 	function export_traffic($year=false){
-		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
-
 		$data['traffics'] = $this->traffic->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		
 		$filename= "publicdanger_traffic_report_data_".$year.".xls";
@@ -137,10 +140,7 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_drought',$data);
 	}
 	
-	function export_drought($year=false){
-		$data['years'] = $this->drought->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_DROUGHT ORDER BY YEAR_DATA DESC");
-		
-		$data['droughts'] = $this->drought->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+	function export_drought($year=false){$data['droughts'] = $this->drought->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		
 		$filename= "publicdanger_drought_report_data_".$year.".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
@@ -156,10 +156,7 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_storm',$data);
 	}
 
-	function export_storm($year=false){
-		$data['years'] = $this->storm->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_STORM ORDER BY YEAR_DATA DESC");
-		
-		$data['storms'] = $this->storm->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+	function export_storm($year=false){$data['storms'] = $this->storm->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		
 		$filename= "publicdanger_storm_report_data_".$year.".xls";
 		header("Content-Disposition: attachment; filename=".$filename);
@@ -168,11 +165,22 @@ Class Publicdanger extends Public_Controller{
 		$this->load->view('export_storm',$data);
 	}
 	
-	function report_flood($year=false){ //วาตภัย
+	function report_flood(){ // อุทกภัย
 		$data['years'] = $this->flood->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_FLOOD ORDER BY YEAR_DATA DESC");
+		$data['nos'] = $this->flood->get("SELECT DISTINCT NO FROM PUBLICDANGER_FLOOD WHERE YEAR_DATA = ".$_GET['year_data']." ORDER BY NO ASC");
 		
-		$data['floods'] = $this->flood->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+		$data['floods'] = $this->flood->where('year_data = '.$_GET['year_data'].' and no = '.$_GET['no'])->order_by('province','asc')->get(false,true);
 		$this->template->build('report_flood',$data);
+	}
+	
+	function export_flood(){
+		$data['floods'] = $this->flood->where('year_data = '.$_GET['year_data'].' and no = '.$_GET['no'])->order_by('province','asc')->get(false,true);
+		
+		$filename= "publicdanger_flood_report_data_".$_GET['year_data']."_no".$_GET['no'].".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_flood',$data);
 	}
 	
 	function report_cold($year=false){
@@ -182,10 +190,7 @@ Class Publicdanger extends Public_Controller{
 		$this->template->build('report_cold',$data);
 	}
 	
-	function export_cold($year=false){
-		$data['years'] = $this->cold->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_COLD ORDER BY YEAR_DATA DESC");
-		
-		$data['colds'] = $this->cold->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
+	function export_cold($year=false){$data['colds'] = $this->cold->where('year_data = '.$year)->order_by('province','asc')->get(false,true);
 		
 		$filename= "publicdanger_cold_report_data_".$year.".xls";
 		header("Content-Disposition: attachment; filename=".$filename);

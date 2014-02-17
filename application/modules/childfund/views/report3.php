@@ -41,20 +41,20 @@
 <tr>
   <td><?php echo $key+1?></td>
   <td nowrap="nowrap"><?php echo $row['province']?></td>
-  <td><?php echo number_format($row['men'])?></td>
-  <td><?php echo number_format($row['women'])?></td>
-  <td><?php echo number_format($row['unknown'])?></td>
-  <td><?php echo number_format($row['peoplesum'])?></td>
-  <td><?php echo number_format($row['alimony'])?></td>
-  <td><?php echo number_format($row['education'])?></td>
-  <td><?php echo number_format($row['job'])?></td>
-  <td><?php echo number_format($row['orthotics'])?></td>
-  <td><?php echo number_format($row['consumer'])?></td>
-  <td><?php echo number_format($row['family'])?></td>
-  <td><?php echo number_format($row['training'])?></td>
-  <td><?php echo number_format($row['dna'])?></td>
-  <td><?php echo number_format($row['other'])?></td>
-  <td><?php echo number_format($row['total'])?></td>
+  <td class="txtright"><?php echo number_format($row['men'])?></td>
+  <td class="txtright"><?php echo number_format($row['women'])?></td>
+  <td class="txtright"><?php echo number_format($row['unknown'])?></td>
+  <td class="txtright"><?php echo number_format($row['peoplesum'])?></td>
+  <td class="txtright"><?php echo number_format($row['alimony'])?></td>
+  <td class="txtright"><?php echo number_format($row['education'])?></td>
+  <td class="txtright"><?php echo number_format($row['job'])?></td>
+  <td class="txtright"><?php echo number_format($row['orthotics'])?></td>
+  <td class="txtright"><?php echo number_format($row['consumer'])?></td>
+  <td class="txtright"><?php echo number_format($row['family'])?></td>
+  <td class="txtright"><?php echo number_format($row['training'])?></td>
+  <td class="txtright"><?php echo number_format($row['dna'])?></td>
+  <td class="txtright"><?php echo number_format($row['other'])?></td>
+  <td class="txtright"><?php echo number_format($row['total'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

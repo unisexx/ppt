@@ -3,7 +3,7 @@
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
 <th rowspan="2" class="txtcen">จังหวัด</th>
-<th colspan="2" class="txtcen">ราษฎรที่ประสบภัยแล้ง</th>
+<th colspan="2" class="txtcen">ราษฎรที่ประสบภัยหนาว</th>
 </tr>
 <tr>
   <td class="txtcen">ครัวเรือน</td>

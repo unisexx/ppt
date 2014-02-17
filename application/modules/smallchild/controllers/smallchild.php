@@ -233,7 +233,10 @@ FROM
 			$this->db->Execute($sql);
 			
 			
-			for($i = 7; $i <= $data -> sheets[0]['numRows']; $i++) {
+			for($i = 0; $i <= $data -> sheets[0]['numRows']; $i++) {
+				if(is_numeric(trim($data -> sheets[0]['cells'][$i][1]))){ //ลำดับที่
+				
+				$format_type = 2;
 				$value = null;			
 				// for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
 					// $column_name = strtoupper(trim($column[$ncolumn]));
@@ -244,47 +247,55 @@ FROM
 					$ampor = trim($data -> sheets[0]['cells'][$i][2]);
 				}
 				
-				if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
-					$organization = trim($data -> sheets[0]['cells'][$i][3]);
-				}
-
-				$value['YEAR_DATA'] = $year_data;
-				$value['PROVINCE'] = $_POST['province'];
-				$value['AMPOR'] = $ampor;
-				$value['ORGANIZATION'] = $organization;
-				$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][4]);
-				$value['NAME'] = trim($data -> sheets[0]['cells'][$i][5]);
-				$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-				$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-				$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-				$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-				$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-				$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
-				$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
+				if($format_type == 1): // format_type
+					
+					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
+						$organization = trim($data -> sheets[0]['cells'][$i][3]);
+					}
+	
+					$value['YEAR_DATA'] = $year_data;
+					$value['PROVINCE'] = $_POST['province'];
+					$value['AMPOR'] = $ampor;
+					$value['ORGANIZATION'] = $organization;
+					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][4]);
+					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][5]);
+					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
+					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
+					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
+					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
+					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
 				
-				// if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
-					// $organization = trim($data -> sheets[0]['cells'][$i][3]).trim($data -> sheets[0]['cells'][$i][4]);
-				// }
-// 				
-				// $value['YEAR_DATA'] = $year_data;
-				// $value['PROVINCE'] = $_POST['province'];
-				// $value['AMPOR'] = $ampor;
-				// $value['ORGANIZATION'] = $organization;
-				// $value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][5]);
-				// $value['NAME'] = trim($data -> sheets[0]['cells'][$i][6]);
-				// $value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-				// $value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-				// $value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-				// $value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-				// $value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
-				// $value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
-				// $value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][13]));
+				else: // format_type
+				
+					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
+						$organization = trim($data -> sheets[0]['cells'][$i][3]).trim($data -> sheets[0]['cells'][$i][4]);
+					}
+					
+					$value['YEAR_DATA'] = $year_data;
+					$value['PROVINCE'] = $_POST['province'];
+					$value['AMPOR'] = $ampor;
+					$value['ORGANIZATION'] = $organization;
+					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][5]);
+					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][6]);
+					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
+					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
+					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
+					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
+					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
+				
+				endif; // format_type
 				
 				echo"<pre>";
 				echo print_r($value);
 				echo"</pre>";
 				
 				$this->smallchild->save($value);
+				
+				} //ลำดับที่
 			}
 			
 			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');

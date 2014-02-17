@@ -17,28 +17,28 @@
   <?php foreach($years as $row):?>
 	<tr>
 	    <td class="topic"><?php echo $row['year_data']?></td>
-	    <td class="txtcen">
+	    <td class="txtright">
 	    	<a href="publicdanger/report_traffic/<?php echo $row['year_data']?>">
 	    		<?php echo number_format($this->db->getone("SELECT sum(COUNTER) FROM PUBLICDANGER_TRAFFIC WHERE YEAR_DATA = ".$row['year_data']));?>
 	    	</a>
 	    </td>
-	    <td class="txtcen">
+	    <td class="txtright">
 	    	<a href="publicdanger/report_drought/<?php echo $row['year_data']?>">
 	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_DROUGHT WHERE YEAR_DATA = ".$row['year_data']));?>
 	    	</a>
 	    </td>
-	    <td class="txtcen">
+	    <td class="txtright">
 	    	<a href="publicdanger/report_cold/<?php echo $row['year_data']?>">
 	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_COLD WHERE YEAR_DATA = ".$row['year_data']));?>
 	    	</a>
 	    </td>
-	    <td class="txtcen">
+	    <td class="txtright">
 	    	<a href="publicdanger/report_storm/<?php echo $row['year_data']?>">
 	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_STORM WHERE YEAR_DATA = ".$row['year_data']));?>
 	    	</a>
 	    </td>
-	    <td class="txtcen">
-	    	<a href="publicdanger/report_flood/<?php echo $row['year_data']?>">
+	    <td class="txtright">
+	    	<a href="publicdanger/report_flood?year_data=<?php echo $row['year_data']?>&no=1">
 	    		<?php echo number_format($this->db->getone("SELECT sum(PEOPLE) FROM PUBLICDANGER_FLOOD WHERE YEAR_DATA = ".$row['year_data']));?>
 	    	</a>
 	    </td>

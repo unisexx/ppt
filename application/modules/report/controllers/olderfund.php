@@ -14,7 +14,7 @@ Class Olderfund extends Public_Controller{
 		$sql ="SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
 					  ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
 					  FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC";
-
+		$data['year'] = (!empty($_GET['year'])) ? "ปี ".$_GET['year']:'ทุกปีงบประมาณ';
 		if($export){
 			$data['result'] = $this->older->get($sql,true);
 			$filename= "olderfund_overall_data_".date("Y-m-d_H_i_s").".xls";

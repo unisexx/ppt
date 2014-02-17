@@ -73,7 +73,7 @@
 <tr>
   <th>สถานที่ตั้ง/สถานที่ติดต่อผู้ประสานงาน <span class="Txt_red_12">*</span></th>
   <td></td>
-</tr> 
+</tr>
 <tr>
   <th>โทรศัพท์ ผู้ประสานงาน<span class="Txt_red_12">*</span></th>
   <td></td>

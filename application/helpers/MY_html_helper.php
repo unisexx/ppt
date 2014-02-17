@@ -321,3 +321,11 @@ if(!function_exists('nformat'))
         return empty($number) ? 0 : number_format($number);
     }
 }
+
+function chk_numeric($data){
+	if (!is_numeric($data)){
+		return 0;
+	}else{
+		return $data;
+	}
+}

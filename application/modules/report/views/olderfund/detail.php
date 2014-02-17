@@ -58,10 +58,10 @@
 <tr>
   <td><?=(empty($_GET['page'])) ? $key : $key + (($_GET['page']-1)*20); ?></td>
   <td><?php echo $item['province'] ?></td>
-  <td><?php echo number_format($item['total_person']) ?></td>
-  <td><?php echo number_format($item['total_money_person']); ?></td>
-  <td><?php echo number_format($item['total_project']) ?></td>
-  <td><?php echo number_format($item['total_money_project']); ?></td>
+  <td class="txtright"><?php echo number_format($item['total_person']) ?></td>
+  <td class="txtright"><?php echo number_format($item['total_money_person']); ?></td>
+  <td class="txtright"><?php echo number_format($item['total_project']) ?></td>
+  <td class="txtright"><?php echo number_format($item['total_money_project']); ?></td>
   </tr>
 <?php endforeach; ?>
 </table>

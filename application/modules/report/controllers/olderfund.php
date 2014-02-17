@@ -6,7 +6,7 @@ Class Olderfund extends Public_Controller{
 		$this->load->model('province_model','province');
 	}
 	function index($export=FALSE)
-	{
+	{$this->db->debug=true;
 		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
         $num = count($set_year);
 		for($i=0; $i<$num; $i++)

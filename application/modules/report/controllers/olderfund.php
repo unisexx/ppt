@@ -86,7 +86,7 @@ Class Olderfund extends Public_Controller{
 										FROM OLDERFUND $grp");
 		$where =(!empty($_GET['year'])) ?" AND YEAR = ".$_GET['year']: "";
 		$sql ="SELECT * FROM OLDERFUND WHERE 1=1  $where";
-
+		$data['year'] = (!empty($_GET['year'])) ? "ปี ".$_GET['year']:'ทุกปีงบประมาณ';
 		if($export){
 			$data['result'] = $this->older->get($sql,true);
 			$filename= "olderfund_province_data_".date("Y-m-d_H_i_s").".xls";

@@ -2,7 +2,7 @@
 
 <div id="resultsearch">
 	<strong>ผลที่ค้นหา : </strong>ปีงบประมาณ
-	<span style='color:#F33;'><?='ปี '.(empty($_GET['year']))? 'ทุกปีงบประมาณ':$_GET['year'];?></span>
+	<span style='color:#F33;'><?php echo $year;?></span>
 </div>
 <table class='tbreport' border='1'>
 <tr>

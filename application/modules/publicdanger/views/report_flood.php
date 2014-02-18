@@ -1,4 +1,4 @@
-<h3>รายงาน ผู้ได้รับผลกระทบจาก<span class="txtcen">อุทกภัย</span> จำแนกรายจังหวัด ปีงบประมาณ <?php echo $this->uri->segment(3,0)?></h3>
+<h3>รายงาน ผู้ได้รับผลกระทบจาก<span class="txtcen">อุทกภัย</span> จำแนกรายจังหวัด ปีงบประมาณ <?php echo $_GET['year_data']?></h3>
 
 <!-- <form method="get" action="publicdanger/report_flood"> -->
 <div id="search">

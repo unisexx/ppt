@@ -24,6 +24,16 @@
 			</td>
 		</tr>
 		<tr>
+			<th>ครั้งที่</th>
+			<td>
+			<select name="no">
+			<?php for ($x=1; $x<=10; $x++):?>
+			<option value="<?php echo $x?>">ครั้งที่ <?php echo $x?></option>
+			<?php endfor;?>
+			</select>
+			</td>
+		</tr>
+		<tr>
 			<th colspan="2">แหล่งที่มาของข้อมูล</th>
 		</tr>
 		<tr>

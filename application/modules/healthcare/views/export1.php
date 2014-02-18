@@ -1,5 +1,5 @@
 <h3>รายงาน ผู้เข้าถึงสิทธิหลักประกันสุขภาพทั้งประเทศ</h3>
- หน่วย : คน
+ <div align="right">หน่วย : คน</div>
 <table class="tbreport" border="1">
   <tr>
     <th rowspan="2" class="txtcen">ปีงบประมาณ</th>

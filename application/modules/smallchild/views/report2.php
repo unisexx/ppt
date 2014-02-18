@@ -3,7 +3,7 @@
   <div id="searchBox">
     <select name="select" onchange="window.open(this.options[this.selectedIndex].value,'_self')">
       <?php foreach($years as $row):?>
-      	<option value="smallchild/report2?year=<?php echo $row['year_data']?>" <?php echo ($row['year_data'] == $this->uri->segment(3,0))?"selected":"";?>><?php echo $row['year_data']?></option>
+      	<option value="smallchild/report2?year=<?php echo $row['year_data']?>" <?php echo ($row['year_data'] == $_GET['year'])?"selected":"";?>><?php echo $row['year_data']?></option>
       <?php endforeach;?>
     </select>
   </div>

@@ -48,10 +48,10 @@
 <tr>
   <td></td>
   <td>รวมทั้งประเทศ</td>
-  <td><?php echo number_format($cnt[0]['total_person']) ?></td>
-  <td><?php echo number_format($cnt[0]['total_money_person']) ?></td>
-  <td><?php echo number_format($cnt[0]['total_project']) ?></td>
-  <td><?php echo number_format($cnt[0]['total_money_project']) ?></td>
+  <td class="txtright"><?php echo number_format($cnt[0]['total_person']) ?></td>
+  <td class="txtright"><?php echo number_format($cnt[0]['total_money_person']) ?></td>
+  <td class="txtright"><?php echo number_format($cnt[0]['total_project']) ?></td>
+  <td class="txtright"><?php echo number_format($cnt[0]['total_money_project']) ?></td>
 
   </tr>
 <?php foreach($result as $key=>$item):$key += 1; ?>

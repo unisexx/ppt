@@ -13,7 +13,7 @@ $(document).ready(function(){
 });
 </script>
 
-<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $_GET['province']?> อำเภอ <?php echo $_GET['ampor']?> ปีงบประมาณ <?php echo $_GET['province']?></h3>
+<h3>รายงาน จำนวนศูนย์พัฒนาเด็กเล็ก จังหวัด <?php echo $_GET['province']?> อำเภอ <?php echo $_GET['ampor']?> ปีงบประมาณ <?php echo $_GET['year']?></h3>
 <div id="search">
   <div id="searchBox">
   	<form method="get" action="smallchild/report4">

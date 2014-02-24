@@ -5,7 +5,7 @@
 <table class="tbreport">
   <tr>
     <th rowspan="2" class="txtcen">ปี พ.ศ.</th>
-    <th rowspan="2">จำนวนลูกจ้างในข่ายฯ</th>
+    <th rowspan="2" class="txtcen">จำนวนลูกจ้างในข่ายฯ</th>
     <th colspan="2" class="txtcen">จำนวนผู้ประสบอันตราย (ราย)</th>
     <th colspan="2" class="txtcen">อัตราการประสบอันตรายต่อลูกจ้าง 1,000 ราย</th>
   </tr>
@@ -27,4 +27,5 @@
   <?php endforeach;?>
 </table>
 <div id="ref">ที่มา : สำนักงานประกันสังคม  : เว็บไซต์สำนักงานประกันสังคม  http://www.sso.go.th</div>
+<div>หมายเหตุ : ผู้ประสบอันตรายกรณีร้ายแรง ประกอบด้วย ตาย ทุพพลภาพ สูญเสียอวัยวะบางส่วน และหยุดงานเกิน 3 วัน</div>
 

@@ -30,13 +30,13 @@
   <td class="txtcen">เล็กน้อย</td>
 </tr>
 <?php foreach($traffics as $key=>$row):?>
-<tr class="txtright">
-  <td><?php echo $key+1?></td>
-  <td><?php echo $row['province']?></td>
-  <td><?php echo number_format($row['counter'])?></td>
-  <td><?php echo number_format($row['death'])?></td>
-  <td><?php echo number_format($row['serious_injury'])?></td>
-  <td><?php echo number_format($row['minor_injury'])?></td>
+<tr>
+  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtleft"><?php echo $row['province']?></td>
+  <td class="txtright"><?php echo number_format($row['counter'])?></td>
+  <td class="txtright"><?php echo number_format($row['death'])?></td>
+  <td class="txtright"><?php echo number_format($row['serious_injury'])?></td>
+  <td class="txtright"><?php echo number_format($row['minor_injury'])?></td>
 </tr>	
 <?php endforeach;?>
 </table>

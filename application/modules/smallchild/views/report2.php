@@ -36,11 +36,11 @@
 <tr>
   <td><?php echo $key+1?></td>
   <td><a href="smallchild/report3?year=<?php echo $row['budgetyear']?>&province=<?php echo $row['pv']?>"><?php echo $row['pv']?></a></td>
-  <td><?php echo nformat($row['org_sum'])?></td>
-  <td><?php echo nformat($teach_sum)?></td>
-  <td><?php echo nformat($em_sum)?></td>
-  <td><?php echo nformat($total)?></td>
-  <td><?php echo nformat($row['child_sum'])?></td>
+  <td class="txtright"><?php echo nformat($row['org_sum'])?></td>
+  <td class="txtright"><?php echo nformat($teach_sum)?></td>
+  <td class="txtright"><?php echo nformat($em_sum)?></td>
+  <td class="txtright"><?php echo nformat($total)?></td>
+  <td class="txtright"><?php echo nformat($row['child_sum'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

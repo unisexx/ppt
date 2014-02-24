@@ -3,7 +3,7 @@
   <div id="searchBox">
     <select name="select" onchange="window.open(this.options[this.selectedIndex].value,'_self')">
       <?php foreach($years as $row):?>
-      	<option value="childfund/report2/<?php echo $row['budgetyear']?>?type=<?php echo $_GET['type']?>" <?php echo ($row['budgetyear'] == $this->uri->segment(3,0))?"selected":"";?>><?php echo $row['budgetyear']?></option>
+      	<option value="childfund/report2/<?php echo $row['budgetyear']?>" <?php echo ($row['budgetyear'] == $this->uri->segment(3,0))?"selected":"";?>><?php echo $row['budgetyear']?></option>
       <?php endforeach;?>
     </select>
 </div>
@@ -80,6 +80,7 @@
   <td class="txtright"><?php echo number_format($row['sum_typechild2'])?></td>
   <td class="txtright"><?php echo number_format($row['sum_typechild1'])?></td>
   <td class="txtright"><?php echo number_format($row['sum_typechild4'])?></td>
+  <td class="txtright">&nbsp;</td>
   <td class="txtright">&nbsp;</td>
   </tr>
 <?php endforeach;?>

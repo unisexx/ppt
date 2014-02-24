@@ -17,10 +17,22 @@
 </tr>
 <?php foreach($childfunds as $row):?>
 <tr>
-  <td class="topic"><?php echo $row['budgetyear']?></td>
-  <td class="txtright"><a href="childfund/report3/<?php echo $row['budgetyear']?>" target="_blank"><?php echo number_format($row['people_sum'])?></a></td>
+  <td class="topic txtright"><?php echo $row['budgetyear']?></td>
+  <td class="txtright">
+  	<?php if(number_format($row['people_sum']) != 0):?>
+  	<a href="childfund/report3/<?php echo $row['budgetyear']?>" target="_blank"><?php echo number_format($row['people_sum'])?></a>
+  	<?php else:?>
+  		0
+  	<?php endif;?>
+  </td>
   <td class="txtright"><?php echo number_format($row['total_sum'])?></td>
-  <td class="txtright"><a href="childfund/report2/<?php echo $row['budgetyear']?>" target="_blank"><?php echo number_format($row['org_sum'])?></a></td>
+  <td class="txtright">
+  	<?php if(number_format($row['org_sum']) != 0):?>
+  	<a href="childfund/report2/<?php echo $row['budgetyear']?>" target="_blank"><?php echo number_format($row['org_sum'])?></a>
+  	<?php else:?>
+  		0
+  	<?php endif;?>
+  </td>
   <td class="txtright"><?php echo number_format($row['org_total_sum'])?></td>
 </tr>
 <?php endforeach;?>

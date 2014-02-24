@@ -32,14 +32,14 @@
 </tr>
 <?php foreach($promotefunds as $key=>$row):?>
 <tr>
-  <td><?php echo $key+1?></td>
+  <td class="txtright"><?php echo $key+1?></td>
   <td><?php echo $row['pv']?></td>
-  <td><?php echo number_format($row['under_type1'])?></td>
-  <td><?php echo number_format($row['sum_under_type1'])?></td>
-  <td><?php echo number_format($row['under_type2'])?></td>
-  <td><?php echo number_format($row['sum_under_type2'])?></td>
-  <td><?php echo number_format($row['under_type3'])?></td>
-  <td><?php echo number_format($row['sum_under_type3'])?></td>
+  <td class="txtright"><?php echo number_format($row['under_type1'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type1'])?></td>
+  <td class="txtright"><?php echo number_format($row['under_type2'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type2'])?></td>
+  <td class="txtright"><?php echo number_format($row['under_type3'])?></td>
+  <td class="txtright"><?php echo number_format($row['sum_under_type3'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

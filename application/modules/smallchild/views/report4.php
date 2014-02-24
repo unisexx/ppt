@@ -76,11 +76,11 @@ $(document).ready(function(){
 <tr>
   <td><?php echo $key+1?></td>
   <td><?php echo $row['org']?></td>
-  <td><?php echo nformat($row['org_sum'])?></td>
-  <td><?php echo nformat($teach_sum)?></td>
-  <td><?php echo nformat($em_sum)?></td>
-  <td><?php echo nformat($total)?></td>
-  <td><?php echo nformat($row['child_sum'])?></td>
+  <td class="txtright"><?php echo nformat($row['org_sum'])?></td>
+  <td class="txtright"><?php echo nformat($teach_sum)?></td>
+  <td class="txtright"><?php echo nformat($em_sum)?></td>
+  <td class="txtright"><?php echo nformat($total)?></td>
+  <td class="txtright"><?php echo nformat($row['child_sum'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

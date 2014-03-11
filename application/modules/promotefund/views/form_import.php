@@ -1,4 +1,4 @@
-<?php echo menu::source($menu_id, 'import_file/healthcare/example.xls'); ?>
+<?php echo menu::source($menu_id, 'import_file/promotefund/example.xls'); ?>
 
 <form method="post" enctype="multipart/form-data" action="childfund/import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

@@ -1,4 +1,11 @@
 <h3>รายงาน ผู้เข้าถึงสิทธิหลักประกันสุขภาพทั้งประเทศ</h3>
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('healthcare/form_import','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
 <div style="padding:10px; text-align:right;">
 <a href='healthcare/export1'><img src="themes/thesocial_demo/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 <img src="themes/thesocial_demo/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'> หน่วย : คน</div>
@@ -18,14 +25,14 @@
   </tr>
   <?php foreach($healthcares as $row):?>
   <tr>
-    <td class="topic"><a href="healthcare/report3/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
-    <td class="txtcen"><?php echo number_format($row['total'])?></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=health"><?php echo number_format($row['health_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=noreg"><?php echo number_format($row['noreg_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=civil"><?php echo number_format($row['civil_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=other"><?php echo number_format($row['other_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=right"><?php echo number_format($row['right_sum'])?></a></td>
-    <td class="txtcen"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=problem"><?php echo number_format($row['problem_sum'])?></a></td>
+    <td class="topic txtright"><a href="healthcare/report3/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
+    <td class="txtright"><?php echo number_format($row['total'])?></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=health"><?php echo number_format($row['health_sum'])?></a></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=noreg"><?php echo number_format($row['noreg_sum'])?></a></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=civil"><?php echo number_format($row['civil_sum'])?></a></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=other"><?php echo number_format($row['other_sum'])?></a></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=right"><?php echo number_format($row['right_sum'])?></a></td>
+    <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=problem"><?php echo number_format($row['problem_sum'])?></a></td>
   </tr>
   <?php endforeach;?>
 </table>

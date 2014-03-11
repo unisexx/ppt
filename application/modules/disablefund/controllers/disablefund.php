@@ -1,5 +1,5 @@
 <?php
-Class Smallchild extends Public_Controller{
+Class disablefund extends Public_Controller{
 	function __construct(){
 		parent::__construct();
 		
@@ -215,7 +215,7 @@ FROM
 		}
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'smallchild_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$file_name = 'childfund_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/smallchild/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);

@@ -19,7 +19,7 @@
 <th rowspan="3" class="txtcen">ที่</th>
 <th rowspan="3" class="txtcen">จังหวัด</th>
 <th rowspan="3" class="txtcen">จำนวนครั้ง</th>
-<th colspan="3" class="txtcen">ผลกระทบต่อราษฎร (ราย)</th>
+<th colspan="3" class="txtcen">ราษฎรที่ประสบภัยจราจร</th>
 </tr>
 <tr>
   <td rowspan="2" class="txtcen">เสียชีวิต</td>

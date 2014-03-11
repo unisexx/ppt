@@ -25,7 +25,9 @@
   <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
 </div>
 </form>
+
 <?php if(!empty($_GET['year'])): ?><div id="resultsearch"><b>ผลที่ค้นหา :</b> ปีงบประมาณ <?php echo $_GET['year'] ?></div><?php endif; ?>
+
 <div style='line-height:40px; text-align:right;' class='hide_print'>
 	<a href='report/olderfund/detail/export<?=GetCurrentUrlGetParameter();?>'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>

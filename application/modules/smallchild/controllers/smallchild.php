@@ -9,7 +9,7 @@ Class Smallchild extends Public_Controller{
 		
 		// error_reporting(-1);
 	}
-	public $menu_id=112;
+	public $menu_id=116;
 	
 	function index(){
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
@@ -191,7 +191,7 @@ FROM
 	}
 	
 	function form_import(){
-		$data['menu_id'] = 112; 
+		$data['menu_id'] = 116; 
 		$data['provinces'] = $this->province->order_by('province','asc')->get(FALSE,TRUE);
 		$this->template->build('form_import',$data);
 	}
@@ -215,7 +215,7 @@ FROM
 		}
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'childfund_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$file_name = 'smallchild_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/smallchild/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);

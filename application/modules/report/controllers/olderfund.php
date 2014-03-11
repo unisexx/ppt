@@ -5,12 +5,16 @@ Class Olderfund extends Public_Controller{
         $this->load->model('olderfund_model', 'older');
 		$this->load->model('province_model','province');
 	}
+	public $menu_id=57;
 	function index($export=FALSE)
 	{
 		$set_year = $this->older->get("SELECT YEAR FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC");
-        $num = count($set_year);
-		for($i=0; $i<$num; $i++)
-		{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+        $data['set_year'][]="";
+        if(!empty($set_year)){
+	        $num = count($set_year);
+			for($i=0; $i<$num; $i++)
+			{ $data['set_year'][$set_year[$i]['year']] = $set_year[$i]['year']; }
+		}
 		$sql ="SELECT YEAR,sum(TOTAL_PERSON) as total_person, sum(TOTAL_MONEY_PERSON) as total_money_person
 					  ,sum(TOTAL_PROJECT) as total_project,sum(TOTAL_MONEY_PROJECT) as total_money_project
 					  FROM OLDERFUND GROUP BY YEAR ORDER BY YEAR DESC";
@@ -50,7 +54,8 @@ Class Olderfund extends Public_Controller{
 		$this->template->build('olderfund/form');
 	}
 	function import(){
-		$this->template->build('olderfund/import');
+		$data['menu_id'] = $this->menu_id;
+		$this->template->build('olderfund/import',$data);
 	}
 	function upload()
 	{

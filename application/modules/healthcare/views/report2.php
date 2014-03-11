@@ -18,7 +18,7 @@
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
 <th rowspan="2" class="txtcen">จังหวัด</th>
-<th colspan="4" class="txtcen">รวมสิทธิหลักประกันสุขภาพ</th>
+<th colspan="4" class="txtcen"><?php echo $type[$_GET['type']]?></th>
 </tr>
 <tr>
   <td class="txtcen">ชาย</td>
@@ -28,7 +28,7 @@
 </tr>
 <?php foreach($healthcares as $key=>$row):?>
 	<tr>
-	  <td><?php echo $key+1?></td>
+	  <td class="txtright"><?php echo $key+1?></td>
 	  <td><?php echo $row['province']?></td>
 	  <td class="txtright"><?php echo number_format($row[$_GET['type'].'_men'])?></td>
 	  <td class="txtright"><?php echo number_format($row[$_GET['type'].'_women'])?></td>

@@ -10,7 +10,7 @@
                     <li><a href="report/welfare">เด็กและเยาวชนในสถาบัน</a></li>
                     <li><a href="offense/offense_report">เด็กและเยาวชนในสถานพินิจฯ</a></li>
                     <li><a href="report/dla/child">ปัญหาเด็กและเยาวชนในท้องถิ่น</a></li>
-                    <li><a href="#">การให้การสนับสนุนจากกองทุนคุ้มครองเด็ก</a></li>
+                    <!-- <li><a href="#">การให้การสนับสนุนจากกองทุนคุ้มครองเด็ก</a></li> -->
                     <li><a href="childfund/report1">องค์กรที่ได้รับการสนับสนุนจากกองทุนคุ้มครองเด็ก</a></li>
                     <li><a href="smallchild/report1">ข้อมูลศูนย์พัฒนาเด็กเล็ก</a></li>
                 </ul>
@@ -84,7 +84,7 @@
 </li>
 	<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
 	<?php foreach(menu::ls(0, @login_data('user_type_id')) as $cat): ?>
-	<li><a><?php echo $cat['title']; ?></a>
+	<li style="visibility: hidden;"><a><?php echo $cat['title']; ?></a>
 	    <ul>
 	        <?php foreach(menu::ls($cat['id']) as $sub): ?>
 	            <li><a><?php echo $sub['title']; ?></a>
@@ -253,7 +253,7 @@
      */?>
 
 
-	<li><a href="#">ตั้งค่าข้อมูลหลัก</a>
+	<li style="visibility: hidden;"><a href="#">ตั้งค่าข้อมูลหลัก</a>
 		<ul>
 			<?php if(permission('user','view')):?>
 				<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>

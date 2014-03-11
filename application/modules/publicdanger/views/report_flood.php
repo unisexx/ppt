@@ -1,4 +1,4 @@
-<h3>รายงาน ผู้ได้รับผลกระทบจาก<span class="txtcen">อุทกภัย</span> จำแนกรายจังหวัด ปีงบประมาณ <?php echo $this->uri->segment(3,0)?></h3>
+<h3>รายงาน ผู้ได้รับผลกระทบจาก<span class="txtcen">อุทกภัย</span> จำแนกรายจังหวัด ปีงบประมาณ <?php echo $_GET['year_data']?></h3>
 
 <!-- <form method="get" action="publicdanger/report_flood"> -->
 <div id="search">
@@ -31,18 +31,18 @@
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
 <th rowspan="2" class="txtcen">จังหวัด</th>
-<th colspan="2" class="txtcen">ราษฎรที่ประสบภัยแล้ง</th>
+<th colspan="2" class="txtcen">ราษฎรที่ประสบอุทกภัย</th>
 </tr>
 <tr>
   <td class="txtcen">ครัวเรือน</td>
   <td class="txtcen">คน</td>
 </tr>
 <?php foreach($floods as $key=>$row):?>
-<tr class="txtright">
-  <td><?php echo $key+1?></td>
-  <td><?php echo $row['province']?></td>
-  <td><?php echo number_format($row['household'])?></td>
-  <td><?php echo number_format($row['people'])?></td>
+<tr>
+  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtleft"><?php echo $row['province']?></td>
+  <td class="txtright"><?php echo number_format($row['household'])?></td>
+  <td class="txtright"><?php echo number_format($row['people'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

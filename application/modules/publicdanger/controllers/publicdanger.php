@@ -77,15 +77,14 @@ Class Publicdanger extends Public_Controller{
 			}
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 10; $i <= $data -> sheets[0]['numRows']; $i++) {
-				$value = null;			
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn+1]));
-					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
-				}
+			for($i = 5; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$value = null;
 				
 				$value['YEAR_DATA'] = $year_data;
 				$value['NO'] = $_POST['no'];
+				$value['PROVINCE'] = trim($data -> sheets[0]['cells'][$i][1]);
+				$value['HOUSEHOLD'] = trim($data -> sheets[0]['cells'][$i][2]);
+				$value['PEOPLE'] = trim($data -> sheets[0]['cells'][$i][3]);
 				
 				// echo"<pre>";
 				// echo print_r($value);

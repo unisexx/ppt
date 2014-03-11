@@ -52,14 +52,19 @@ Class Promotefund extends Public_Controller{
 			$data -> read($uploaddir.$file_name);
 			
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			$this->promotefund_org->delete('YEAR_DATA',$year_data);
+			$this->promotefund_org->delete();
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 2; $i <= $data -> sheets[0]['numRows']; $i++) {
-				$value = null;			
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn]));
-					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+			for($i = 0; $i <= $data -> sheets[0]['numRows']; $i++) {
+				if(is_numeric(trim($data -> sheets[0]['cells'][$i][1]))){ //ถ้าคอลัมน์แรกเป็นตัวเลข ให้ fetch ข้อมูล
+					$value = null;			
+					
+					$value['YEAR_DATA'] = trim($data -> sheets[0]['cells'][$i][1]);
+					$value['PROVINCE'] = (trim($data -> sheets[0]['cells'][$i][2] == ''))?'ไม่ระบุ':trim($data -> sheets[0]['cells'][$i][2]);
+					$value['PROJECT_NAME'] = trim($data -> sheets[0]['cells'][$i][3]);
+					$value['UNDER_TYPE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][4]));
+					$value['COST_GET'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][5]));
+					$value['ORGAN_ID'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
 				}
 				
 				// $value['YEAR_DATA'] = $year_data;

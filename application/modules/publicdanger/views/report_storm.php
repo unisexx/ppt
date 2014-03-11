@@ -25,11 +25,11 @@
   <td class="txtcen">คน</td>
 </tr>
 <?php foreach($storms as $key=>$row):?>
-<tr class="txtright">
-  <td><?php echo $key+1?></td>
-  <td><?php echo $row['province']?></td>
-  <td><?php echo number_format($row['household'])?></td>
-  <td><?php echo number_format($row['people'])?></td>
+<tr>
+  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtleft"><?php echo $row['province']?></td>
+  <td class="txtright"><?php echo number_format($row['household'])?></td>
+  <td class="txtright"><?php echo number_format($row['people'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

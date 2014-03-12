@@ -293,7 +293,7 @@ FROM
 				echo print_r($value);
 				echo"</pre>";
 				
-				$this->smallchild->save($value);
+				// $this->smallchild->save($value);
 				
 				} //ลำดับที่
 			}

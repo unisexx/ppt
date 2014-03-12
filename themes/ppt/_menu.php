@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="report/dla/disabled">ปัญหาคนพิการในท้องถิ่น</a></li>
                     <li><a href="report/disability/disabled">คนพิการในสถาบัน</a></li>
-                    <li><a href="#">การขอรับการสนับสนุนเงินกองทุนส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ</a></li>
+                    <li><a href="disablefund/report_all">การขอรับการสนับสนุนเงินกองทุนส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ</a></li>
                 </ul>
             </li>
             <li><a href="#">ครอบครัว</a>

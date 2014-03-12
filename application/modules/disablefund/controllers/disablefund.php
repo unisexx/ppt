@@ -1,222 +1,51 @@
 <?php
-Class disablefund extends Public_Controller{
+Class Disablefund extends Public_Controller{
 	function __construct(){
 		parent::__construct();
 		
-		$this->load->model('smallchild_model', 'smallchild');
 		$this->load->model('info_model','info');
+		$this->load->model('disablefund_people_model','people');
+		$this->load->model('disablefund_project_model','project');
 		$this->load->model('province_model','province');
 		
 		// error_reporting(-1);
 	}
-	public $menu_id=116;
-	
-	function index(){
-		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
-		$data['provinces'] = $this->healthcare->limit(80)->get("SELECT DISTINCT CODE, PROVINCE FROM HEALTHCARE ORDER BY CODE ASC");
-		
-		$sql = 'SELECT * FROM HEALTHCARE WHERE 1=1 ';
-			if(@$_GET['year_data']) $sql .= "AND YEAR_DATA = ".$_GET['year_data'].' ';
-			if(@$_GET['code']) $sql .= "AND CODE = ".$_GET['code'].' ';
-		$sql .= ' ORDER BY ID ASC';
-			
-		$data['healthcares'] = $this->healthcare->get($sql);
-		$data['pagination'] = $this->healthcare->pagination();
-		$this->template->build('index',$data);
-	}
-	
-	function report1(){
-		$sql = 'SELECT 
-				BUDGETYEAR,
-				(SELECT NVL(count("ID"),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
-				(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-				(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-				(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-				(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-				(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-				(SELECT NVL(sum("CHILD"),0) childfun FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)CHILD_SUM
-				FROM 
-				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from SMALLCHILD ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		$this->template->build('report1',$data);
-	}
-
-	function export1(){
-		$sql = 'SELECT 
-				BUDGETYEAR,
-				(SELECT NVL(count("ID"),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
-				(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-				(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-				(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-				(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-				(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-				(SELECT NVL(sum("CHILD"),0) childfun FROM SMALLCHILD d WHERE YEAR_DATA = BUDGETYEAR)CHILD_SUM
-				FROM 
-				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from SMALLCHILD ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		
-		$filename= "smallchild_report1_data.xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		
-		$this->load->view('export1',$data);
-	}
-	
-	function report2(){
-		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
-		
-		$sql = 'SELECT 
-				pv, budgetyear,
-				(SELECT COUNT("ID") FROM SMALLCHILD WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-				(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-				(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-				(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-				(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-				(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-				(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-				FROM 
-				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql,true);
-		$this->template->build('report2',$data);
-	}
-
-	function export2(){
-		$sql = 'SELECT 
-				pv, budgetyear,
-				(SELECT COUNT("ID") FROM SMALLCHILD WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-				(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-				(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-				(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-				(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-				(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-				(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-				(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-				FROM 
-				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql,true);
-		
-		$filename= "smallchild_report2_data.xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		
-		$this->load->view('export2',$data);
-	}
-	
-	function report3(){
-		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
-		$data['provinces'] = $this->smallchild->get("SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = ".$_GET['year']." ORDER BY PROVINCE ASC",TRUE);
-		
-		$sql = 'SELECT 
-am, pv, budgetyear,
-(SELECT COUNT("ID") FROM SMALLCHILD WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-FROM 
-(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		$this->template->build('report3',$data);
-	}
-
-	function export3(){
-		$sql = 'SELECT 
-am, pv, budgetyear,
-(SELECT COUNT("ID") FROM SMALLCHILD WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-FROM 
-(SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		
-		$filename= "smallchild_report3_data.xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		
-		$this->load->view('export3',$data);
-	}
-	
-	function report4(){
-		$data['years'] = $this->smallchild->get("SELECT DISTINCT YEAR_DATA from SMALLCHILD ORDER BY YEAR_DATA DESC");
-		$data['provinces'] = $this->smallchild->get("SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE YEAR_DATA = ".$_GET['year']." ORDER BY PROVINCE ASC",TRUE);
-		$data['ampors'] = $this->smallchild->get("SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = '".$_GET['province']."' AND YEAR_DATA = ".$_GET['year']." ORDER BY AMPOR ASC");
-		
-		$sql = 'SELECT 
-org, am, pv, budgetyear,
-(SELECT COUNT("ID") FROM SMALLCHILD WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-FROM 
-(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$_GET['ampor'].'\' AND PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		$this->template->build('report4',$data);
-	}
-
-	function export4(){
-		$sql = 'SELECT 
-org, am, pv, budgetyear,
-(SELECT COUNT("ID") FROM SMALLCHILD WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) ORG_SUM,
-(SELECT NVL(sum(TEACH_5),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_5_SUM,
-(SELECT NVL(sum(TEACH_4),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_4_SUM,
-(SELECT NVL(sum(EM_BOSS),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_BOSS_SUM,
-(SELECT NVL(sum(EM_GENERAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_GENERAL_SUM,
-(SELECT NVL(sum(EM_MISSION),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)EM_MISSION_SUM,
-(SELECT NVL(sum(TEACH_EM_TOTAL),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TEACH_EM_TOTAL_SUM,
-(SELECT NVL(sum("CHILD"),0) FROM SMALLCHILD d WHERE "ORGANIZATION" = org AND AMPOR = am AND PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)CHILD_SUM
-FROM 
-(SELECT DISTINCT "ORGANIZATION" org, AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE AMPOR = \''.$_GET['ampor'].'\' AND PROVINCE = \''.$_GET['province'].'\' AND YEAR_DATA = '.$_GET['year'].' ORDER BY AMPOR ASC)';
-		$data['smallchilds'] = $this->smallchild->get($sql);
-		
-		$filename= "smallchild_report4_data.xls";
-		header("Content-Disposition: attachment; filename=".$filename);
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		
-		$this->load->view('export4',$data);
-	}
+	public $menu_id=117;
 	
 	function form_import(){
-		$data['menu_id'] = 116; 
+		$data['menu_id'] = 117; 
 		$data['provinces'] = $this->province->order_by('province','asc')->get(FALSE,TRUE);
 		$this->template->build('form_import',$data);
 	}
 	
-	function import(){ // ประเภทบุคคล
-		header('Content-Type: text/html; charset=utf-8');
+	function import(){
 		// Report all PHP errors (see changelog)
 		// error_reporting(E_ALL);
 		// $this->db->debug = true;
 		
 		$year_data = $_POST['year_data'];
 		$province = $_POST['province'];
+		$disabled_type = $_POST['disabled_type'];
+		
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
         // $this->info->save($_POST);
 		// unset($_POST);
 		
-		$table = 'SMALLCHILD';
+		set_time_limit(0);
+		
+		if($disabled_type == "people"){
+			$table = 'DISABLEFUND_PEOPLE';
+		}elseif($disabled_type == "project"){
+			$table = 'DISABLEFUND_PROJECT';
+		}
 		$columns = $this->db->MetaColumnNames($table);
 		foreach($columns as $item){
 			$column[] = $item;
 		}
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
-			$file_name = 'childfund_'.date("Y_m_d_H_i_s").'.'.$ext;
-			$uploaddir = 'import_file/smallchild/';
+			$file_name = $disabled_type.'_'.$year_data.'_'.date("Y_m_d_H_i_s").'.'.$ext;
+			$uploaddir = 'import_file/disablefund/'.$disabled_type.'/';
 			$fpicname = $uploaddir.$file_name;
 			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
 			
@@ -226,89 +55,195 @@ FROM
 			$data -> setOutputEncoding('UTF-8');
 			$data -> read($uploaddir.$file_name);
 			
-			
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			// $this->db->debug = true;
-			$sql = "delete from SMALLCHILD where year_data = ".$year_data." and province = '".iconv('UTF-8', 'TIS-620', $province)."'";
-			$this->db->Execute($sql);
-			
-			
-			for($i = 0; $i <= $data -> sheets[0]['numRows']; $i++) {
-				if(is_numeric(trim($data -> sheets[0]['cells'][$i][1]))){ //ลำดับที่
-				
-				$format_type = 2;
-				$value = null;			
-				// for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					// $column_name = strtoupper(trim($column[$ncolumn]));
-					// $value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 
-				// }
-				
-				if(trim($data -> sheets[0]['cells'][$i][2]) != ""){ //อำเภอ
-					$ampor = trim($data -> sheets[0]['cells'][$i][2]);
-				}
-				
-				if($format_type == 1): // format_type
-					
-					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
-						$organization = trim($data -> sheets[0]['cells'][$i][3]);
-					}
-	
-					$value['YEAR_DATA'] = $year_data;
-					$value['PROVINCE'] = $_POST['province'];
-					$value['AMPOR'] = $ampor;
-					$value['ORGANIZATION'] = $organization;
-					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][4]);
-					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][5]);
-					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-				
-				else: // format_type
-				
-					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
-						$organization = trim($data -> sheets[0]['cells'][$i][3]).trim($data -> sheets[0]['cells'][$i][4]);
-					}
-					
-					$value['YEAR_DATA'] = $year_data;
-					$value['PROVINCE'] = $_POST['province'];
-					$value['AMPOR'] = $ampor;
-					$value['ORGANIZATION'] = $organization;
-					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][5]);
-					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][6]);
-					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
-				
-				endif; // format_type
-				
-				echo"<pre>";
-				echo print_r($value);
-				echo"</pre>";
-				
-				$this->smallchild->save($value);
-				
-				} //ลำดับที่
+			if($disabled_type == "people"){
+				$this->people->where("YEAR_DATA = ".$year_data." AND PROVINCE = '".iconv('UTF-8', 'TIS-620', $province)."'")->delete();
+			}elseif($disabled_type == "project"){
+				$this->project->delete('YEAR_DATA',$year_data);	
 			}
 			
-			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
+			// $this->db->debug = true;
+			
+			header('Content-Type: text/html; charset=utf-8');
+			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+				$value = null;
+				
+				if($disabled_type == "people"){
+					
+					if(trim($data -> sheets[0]['cells'][$i][1]) != "ประเภทความพิการ" and trim($data -> sheets[0]['cells'][$i][1]) != "" and $i>=4){
+						$value['YEAR_DATA'] = $year_data;
+						$value['PROVINCE'] = $province;
+						$value['DISABLE_TYPE'] = trim($data -> sheets[0]['cells'][$i][1]);
+						$value['PEOPLE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][2]));
+						$value['AMOUNT'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][3]));
+					}
+					
+				}elseif($disabled_type == "project"){
+					
+					if(trim($data -> sheets[0]['cells'][$i][1]) != "โครงการ" and trim($data -> sheets[0]['cells'][$i][1]) != ""){
+						$value['YEAR_DATA'] = $year_data;
+						$value['PROVINCE'] = (trim($data -> sheets[0]['cells'][$i][3]) == "") ? "ไม่ระบุ" : trim($data -> sheets[0]['cells'][$i][3]) ;
+						$value['PROJECT'] = trim($data -> sheets[0]['cells'][$i][1]);
+						$value['ORGANIZATION'] = trim($data -> sheets[0]['cells'][$i][2]);
+						$value['REQUEST'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][4]));
+						$value['APPROVE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][5]));
+						$value['NO'] = trim($data -> sheets[0]['cells'][$i][6]);
+						$value['YEAR'] = trim($data -> sheets[0]['cells'][$i][7]);
+						$value['DATE'] = trim($data -> sheets[0]['cells'][$i][8]);
+					}
+					
+				}
+				
+				// echo"<pre>";
+				// echo print_r($value);
+				// echo"</pre>";
+				
+				$this->$disabled_type->save($value);
+			}
+			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
-		// redirect('smallchild/form_import');
+		redirect('disablefund/form_import');
+	}
+	
+	function report_all(){
+		$sql = 'SELECT 
+				BUDGETYEAR, 
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE d WHERE YEAR_DATA=BUDGETYEAR)PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE YEAR_DATA=BUDGETYEAR)TOTAL_SUM,
+				(SELECT NVL(count("PROJECT"),0) FROM DISABLEFUND_PROJECT d WHERE YEAR_DATA = BUDGETYEAR)PROJECT_SUM,
+				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE YEAR_DATA = BUDGETYEAR)APPROVE_SUM
+				FROM 
+				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PEOPLE UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PROJECT ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->template->build('report_all',$data);
+	}
+	
+	function report_people1(){
+		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PEOPLE ORDER BY YEAR_DATA ASC",FALSE);
+		
+		$sql = 'SELECT 
+				pv, budgetyear,
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TOTAL_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PEOPLE WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->template->build('report_people1',$data);
 	}
 
-	function ajax_get_ampor(){
-		$ampors = $this->smallchild->get("SELECT DISTINCT AMPOR am, PROVINCE pv, YEAR_DATA BUDGETYEAR FROM SMALLCHILD WHERE PROVINCE = '".$_GET['province']."' AND YEAR_DATA = ".$_GET['year']." ORDER BY AMPOR ASC");
-		echo "<select name=ampor>";
-		foreach($ampors as $row){
-			echo "<option value=".$row['am'].">".$row['am']."</option>";
-		}
-		echo "</select>";
+	function export_people1(){
+		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PEOPLE ORDER BY YEAR_DATA ASC",FALSE);
+		
+		$sql = 'SELECT 
+				pv, budgetyear,
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)TOTAL_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PEOPLE WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		
+		$filename= "disablefund_export_people1".$_GET['year'].".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->load->view('export_people1',$data);
+	}
+	
+	function report_people2(){
+		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PEOPLE ORDER BY YEAR_DATA ASC",FALSE);
+		$data['provinces'] = $this->project->get("SELECT DISTINCT PROVINCE FROM DISABLEFUND_PEOPLE",FALSE);
+		
+		$condition = " 1=1 ";
+		$condition .= @$_GET['year'] != '' ? " and year_data = ".$_GET['year'] : "" ;
+		$condition .= @$_GET['province'] != '' ? " and province = '".$_GET['province']."'" : "" ;
+		
+		$sql = 'SELECT 
+				dis_type,
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE WHERE '.$condition.' AND DISABLE_TYPE = dis_type) PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE '.$condition.' AND DISABLE_TYPE = dis_type)TOTAL_SUM
+				FROM 
+				(SELECT DISTINCT DISABLE_TYPE dis_type FROM DISABLEFUND_PEOPLE WHERE '.$condition.')';
+		
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->template->build('report_people2',$data);
+	}
+	
+	function export_people2(){
+		$condition = " 1=1 ";
+		$condition .= @$_GET['year'] != '' ? " and year_data = ".$_GET['year'] : "" ;
+		$condition .= @$_GET['province'] != '' ? " and province = '".$_GET['province']."'" : "" ;
+		
+		$sql = 'SELECT 
+				dis_type,
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE WHERE '.$condition.' AND DISABLE_TYPE = dis_type) PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE '.$condition.' AND DISABLE_TYPE = dis_type)TOTAL_SUM
+				FROM 
+				(SELECT DISTINCT DISABLE_TYPE dis_type FROM DISABLEFUND_PEOPLE WHERE '.$condition.')';
+		
+		$filename= "disablefund_export_people2".$_GET['year']."_".$_GET['province'].".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->load->view('export_people2',$data);
+	}
+	
+	function report_project1(){
+		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PROJECT ORDER BY YEAR_DATA ASC",FALSE);
+		
+		$sql = 'SELECT 
+				pv, budgetyear,
+				(SELECT COUNT("PROJECT") FROM DISABLEFUND_PROJECT WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) PROJECT_SUM,
+				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)APPROVE_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PROJECT WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->template->build('report_project1',$data);
+	}
+	
+	function export_project1(){
+		$sql = 'SELECT 
+				pv, budgetyear,
+				(SELECT COUNT("PROJECT") FROM DISABLEFUND_PROJECT WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR) PROJECT_SUM,
+				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)APPROVE_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PROJECT WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
+		$data['disablefunds'] = $this->people->get($sql);
+		
+		$filename= "disablefund_export_project1_".$_GET['year'].".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_project1',$data);
+	}
+	
+	function report_project2(){
+		$this->template->build('report_project2');
+	}
+	
+	function report_project3(){
+		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PROJECT ORDER BY YEAR_DATA ASC",FALSE);
+		$data['provinces'] = $this->project->get("SELECT DISTINCT PROVINCE FROM DISABLEFUND_PROJECT",FALSE);
+		
+		$condition = " 1=1 ";
+		$condition .= @$_GET['year'] != '' ? " and year_data = ".$_GET['year'] : "" ;
+		$condition .= @$_GET['province'] != '' ? " and province = '".$_GET['province']."'" : "" ;
+		
+		$data['disablefunds'] = $this->project->where($condition)->get(FALSE,TRUE);
+		$this->template->build('report_project3',$data);
+	}
+
+	function export_project3(){
+		$condition = " 1=1 ";
+		$condition .= @$_GET['year'] != '' ? " and year_data = ".$_GET['year'] : "" ;
+		$condition .= @$_GET['province'] != '' ? " and province = '".$_GET['province']."'" : "" ;
+		
+		$data['disablefunds'] = $this->project->where($condition)->get(FALSE,TRUE);
+		
+		$filename= "disablefund_export_project3_".$_GET['year']."_".$_GET['province'].".xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		$this->load->view('export_project3',$data);
 	}
 }

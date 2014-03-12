@@ -131,6 +131,18 @@
 			case 'disablefund2':
 				include "modules/report_sum/disablefund2.php";
 			break;
+			case 'disablefund2_pj':
+				include "modules/report_sum/disablefund2_pj.php";
+			break;
+			case 'disablefund3':
+				include "modules/report_sum/disablefund3.php";
+			break;
+			case 'disablefund3_pj':
+				include "modules/report_sum/disablefund3_pj.php";
+			break;
+			case 'disablefund4_pj':
+				include "modules/report_sum/disablefund4_pj.php";
+			break;
 			case 'olderfund1':
 				include "modules/report_sum/olderfund1.php";
 			break;

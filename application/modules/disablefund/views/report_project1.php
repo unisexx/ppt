@@ -31,7 +31,7 @@
 </tr>
 <tr>
   <td></td>
-  <td><a href="disablefund/report_project3?year=<?=$_GET['year']?>">รวมทั้งประเทศ</a></td>
+  <td><a href="disablefund/report_project3?year=<?=$_GET['year']?>&province=">รวมทั้งประเทศ</a></td>
   <td></td>
   <td></td>
 </tr>

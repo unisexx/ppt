@@ -39,7 +39,7 @@
   <td>อนุมัติ</td>
   </tr>
 <tr>
-  <td colspan="7">จังหวัด <?=$_GET['province']?></td>
+  <td colspan="7"><?=($_GET['province'] == "")? 'รวมทั้งประเทศ' : 'จังหวัด'.$_GET['province'] ;?></td>
 </tr>
 <?foreach($disablefunds as $key=>$row):?>
 <tr>

@@ -1,3 +1,12 @@
+<style>
+.num {
+  mso-number-format:General;
+}
+.text{
+  mso-number-format:"\@";/*force text*/
+}
+</style>
+
 <h3>รายงาน การขอรับการสนับสนุนงินกองทุนส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ ปีงบประมาณ <?=$_GET['year']?></h3>
 
 <table class="tbreport" border="1">
@@ -23,7 +32,7 @@
   <td><?=$row['organization']?></td>
   <td><?=nformat($row['request'])?></td>
   <td><?=nformat($row['approve'])?></td>
-  <td><?=$row['no']?>/<?=$row['year']?></td>
+  <td class="text"><?=$row['no']?>/<?=$row['year']?></td>
   <td><?=$row['date']?></td>
 </tr>
 <?endforeach;?>

@@ -32,8 +32,8 @@
 <tr>
   <td></td>
   <td><a href="disablefund/report_project3?year=<?=$_GET['year']?>&province=">รวมทั้งประเทศ</a></td>
-  <td></td>
-  <td></td>
+  <td class="txtright"><span id="project_sum"></span></td>
+  <td class="txtright"><span id="approve_sum"></span></td>
 </tr>
 <?foreach($disablefunds as $key=>$row):?>
 <tr>
@@ -42,7 +42,21 @@
   <td class="txtright"><?=nformat($row['project_sum'])?></td>
   <td class="txtright"><?=nformat($row['approve_sum'])?></td>
 </tr>
+
+<?@$all_project_sum = $all_project_sum + $row['project_sum'];?>
+<?@$all_approve_sum = $all_approve_sum + $row['approve_sum'];?>
 <?endforeach;?>
 </table>
 
+<span id="project_sum_tmp" style="visibility: hidden;"><?=nformat($all_project_sum)?></span>
+<span id="approve_sum_tmp" style="visibility: hidden;"><?=nformat($all_approve_sum)?></span>
+
 <div id="ref">ที่มา : พก. : เว็บไซต์สำนักงานส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการแห่งชาติ  http://www.nep.go.th/index.php?mod=tmpstat</div>
+
+
+<script>
+$(document).ready(function(){
+	$("#project_sum").text($("#project_sum_tmp").text());
+	$("#approve_sum").text($("#approve_sum_tmp").text());
+});
+</script>

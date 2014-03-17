@@ -89,7 +89,7 @@ Class Disablefund extends Public_Controller{
 						$value['APPROVE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][5]));
 						$value['NO'] = trim($data -> sheets[0]['cells'][$i][6]);
 						$value['YEAR'] = trim($data -> sheets[0]['cells'][$i][7]);
-						$value['DATE'] = trim($data -> sheets[0]['cells'][$i][8]);
+						$value['DATE'] = convertThaiyear(trim($data -> sheets[0]['cells'][$i][8]));
 					}
 					
 				}
@@ -197,7 +197,7 @@ Class Disablefund extends Public_Controller{
 				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)APPROVE_SUM
 				FROM 
 				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PROJECT WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
-		$data['disablefunds'] = $this->people->get($sql);
+		$data['disablefunds'] = $this->people->get($sql,true);
 		$this->template->build('report_project1',$data);
 	}
 	
@@ -208,7 +208,7 @@ Class Disablefund extends Public_Controller{
 				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE PROVINCE = pv AND YEAR_DATA = BUDGETYEAR)APPROVE_SUM
 				FROM 
 				(SELECT DISTINCT PROVINCE pv,YEAR_DATA BUDGETYEAR FROM DISABLEFUND_PROJECT WHERE YEAR_DATA = '.$_GET['year'].' ORDER BY PROVINCE ASC)';
-		$data['disablefunds'] = $this->people->get($sql);
+		$data['disablefunds'] = $this->people->get($sql,true);
 		
 		$filename= "disablefund_export_project1_".$_GET['year'].".xls";
 		header("Content-Disposition: attachment; filename=".$filename);

@@ -42,16 +42,17 @@ $active_record = TRUE;
 // $db['default']['password'] = '1234';
 // $db['default']['database'] = 'pptaut';
 
-/*
+
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'ppt';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'ppt';
-*/
- $db['default']['hostname'] = '27.254.33.52';
- $db['default']['username'] = 'ppt';
- $db['default']['password'] = '1234';
- $db['default']['database'] = 'ppt';
+
+
+ // $db['default']['hostname'] = '27.254.33.52';
+ // $db['default']['username'] = 'ppt';
+ // $db['default']['password'] = '1234';
+ // $db['default']['database'] = 'ppt';
 
 $db['default']['dbdriver'] = "oci8po";
 $db['default']['dbprefix'] = "";

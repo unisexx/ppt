@@ -34,14 +34,19 @@ Class Disablefund extends Public_Controller{
 		set_time_limit(0);
 		
 		if($disabled_type == "people"){
+			$start_row = 4;
 			$table = 'DISABLEFUND_PEOPLE';
 		}elseif($disabled_type == "project"){
+			$start_row = 1;
 			$table = 'DISABLEFUND_PROJECT';
 		}
 		$columns = $this->db->MetaColumnNames($table);
 		foreach($columns as $item){
 			$column[] = $item;
 		}
+		
+		print_r($columns);
+		
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
 			$file_name = $disabled_type.'_'.$year_data.'_'.date("Y_m_d_H_i_s").'.'.$ext;
@@ -65,31 +70,31 @@ Class Disablefund extends Public_Controller{
 			// $this->db->debug = true;
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 1; $i <= $data -> sheets[0]['numRows']; $i++) {
+			for($i = $start_row; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;
 				
 				if($disabled_type == "people"){
 					
-					if(trim($data -> sheets[0]['cells'][$i][1]) != "ประเภทความพิการ" and trim($data -> sheets[0]['cells'][$i][1]) != "" and $i>=4){
+					if(@trim($data -> sheets[0]['cells'][$i][1]) != "ประเภทความพิการ" and @trim($data -> sheets[0]['cells'][$i][1]) != "" and $i>=4){
 						$value['YEAR_DATA'] = $year_data;
 						$value['PROVINCE'] = $province;
-						$value['DISABLE_TYPE'] = trim($data -> sheets[0]['cells'][$i][1]);
-						$value['PEOPLE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][2]));
-						$value['AMOUNT'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][3]));
+						$value['DISABLE_TYPE'] = @trim($data -> sheets[0]['cells'][$i][1]);
+						$value['PEOPLE'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][2]));
+						$value['AMOUNT'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][3]));
 					}
 					
 				}elseif($disabled_type == "project"){
 					
-					if(trim($data -> sheets[0]['cells'][$i][1]) != "โครงการ" and trim($data -> sheets[0]['cells'][$i][1]) != ""){
+					if(@trim($data -> sheets[0]['cells'][$i][1]) != "โครงการ" and @trim($data -> sheets[0]['cells'][$i][1]) != ""){
 						$value['YEAR_DATA'] = $year_data;
-						$value['PROVINCE'] = (trim($data -> sheets[0]['cells'][$i][3]) == "") ? "ไม่ระบุ" : trim($data -> sheets[0]['cells'][$i][3]) ;
-						$value['PROJECT'] = trim($data -> sheets[0]['cells'][$i][1]);
-						$value['ORGANIZATION'] = trim($data -> sheets[0]['cells'][$i][2]);
-						$value['REQUEST'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][4]));
-						$value['APPROVE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][5]));
-						$value['NO'] = trim($data -> sheets[0]['cells'][$i][6]);
-						$value['YEAR'] = trim($data -> sheets[0]['cells'][$i][7]);
-						$value['DATE'] = convertThaiyear(trim($data -> sheets[0]['cells'][$i][8]));
+						$value['PROVINCE'] = (@trim($data -> sheets[0]['cells'][$i][3]) == "") ? "ไม่ระบุ" : trim($data -> sheets[0]['cells'][$i][3]) ;
+						$value['PROJECT'] = @trim($data -> sheets[0]['cells'][$i][1]);
+						$value['ORGANIZATION'] = @trim($data -> sheets[0]['cells'][$i][2]);
+						$value['REQUEST'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][4]));
+						$value['APPROVE'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][5]));
+						$value['NO'] = @trim($data -> sheets[0]['cells'][$i][6]);
+						$value['YEAR'] = @trim($data -> sheets[0]['cells'][$i][7]);
+						$value['DATE'] = convertThaiyear(@trim($data -> sheets[0]['cells'][$i][8]));
 					}
 					
 				}
@@ -104,6 +109,7 @@ Class Disablefund extends Public_Controller{
 		}
 		redirect('disablefund/form_import');
 	}
+
 	
 	function report_all(){
 		$sql = 'SELECT 

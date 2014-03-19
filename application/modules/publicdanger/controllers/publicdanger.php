@@ -80,11 +80,38 @@ Class Publicdanger extends Public_Controller{
 			for($i = 10; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;
 				
-				$value['YEAR_DATA'] = $year_data;
-				$value['NO'] = $_POST['no'];
-				$value['PROVINCE'] = trim($data -> sheets[0]['cells'][$i][1]);
-				$value['HOUSEHOLD'] = trim($data -> sheets[0]['cells'][$i][2]);
-				$value['PEOPLE'] = trim($data -> sheets[0]['cells'][$i][3]);
+				if($publicdanger_type == 'traffic'){
+					
+					$value['YEAR_DATA'] = $year_data;
+					$value['PROVINCE'] = trim($data -> sheets[0]['cells'][$i][1]);
+					$value['COUNTER'] = trim($data -> sheets[0]['cells'][$i][2]);
+					$value['DEATH'] = trim($data -> sheets[0]['cells'][$i][3]);
+					$value['SERIOUS_INJURY'] = trim($data -> sheets[0]['cells'][$i][4]);
+					$value['MINOR_INJURY'] = trim($data -> sheets[0]['cells'][$i][5]);
+					$value['TOTAL_INJURY'] = trim($data -> sheets[0]['cells'][$i][6]);
+				
+				}elseif($publicdanger_type == 'drought' || $publicdanger_type == 'storm' || $publicdanger_type == 'cold'){
+					
+					$value['YEAR_DATA'] = $year_data;
+					$value['PROVINCE'] = trim($data -> sheets[0]['cells'][$i][1]);
+					$value['AMPOR'] = trim($data -> sheets[0]['cells'][$i][2]);
+					$value['TUMBON'] = trim($data -> sheets[0]['cells'][$i][3]);
+					$value['MOOBAN'] = trim($data -> sheets[0]['cells'][$i][4]);
+					$value['HOUSEHOLD'] = trim($data -> sheets[0]['cells'][$i][5]);
+					$value['PEOPLE'] = trim($data -> sheets[0]['cells'][$i][6]);
+					
+				}elseif($publicdanger_type == 'flood'){
+					
+					$value['YEAR_DATA'] = $year_data;
+					$value['NO'] = $_POST['no'];
+					$value['PROVINCE'] = trim($data -> sheets[0]['cells'][$i][1]);
+					$value['AMPOR'] = trim($data -> sheets[0]['cells'][$i][2]);
+					$value['TUMBON'] = trim($data -> sheets[0]['cells'][$i][3]);
+					$value['MOOBAN'] = trim($data -> sheets[0]['cells'][$i][4]);
+					$value['HOUSEHOLD'] = trim($data -> sheets[0]['cells'][$i][5]);
+					$value['PEOPLE'] = trim($data -> sheets[0]['cells'][$i][6]);
+					
+				}
 				
 				// echo"<pre>";
 				// echo print_r($value);

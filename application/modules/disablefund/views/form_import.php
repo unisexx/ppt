@@ -11,12 +11,12 @@
 			<th>ประเภทข้อมูล</th>
 			<td>
 				<select name="disabled_type">
-					<option value="people">รายบุคคล</option>
 					<option value="project">รายโครงการ</option>
+					<option value="people">รายบุคคล</option>
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr class="province">
 			<th>จังหวัด</th>
 			<td>
 				<select name="province">
@@ -104,6 +104,15 @@
 </form>
 <script>
     $(function(){
+    	$(".province").hide();
+    	$('[name=disabled_type]').live('change',function(){
+    		if($(this).val()=='people'){
+    			$(".province").show();
+    		}else{
+    			$(".province").hide();
+    		}
+    	})
+    	
     	$('[name=section_type]').live('change',function(){
     		if($(this).val()==1){
     			$(".tr_workgroup").show();

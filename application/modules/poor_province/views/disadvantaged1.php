@@ -47,6 +47,14 @@
 
 
 </div>
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('poor_province/import_data','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
+
 <div style="padding:10px; text-align:right;">
   <img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_export/'.@$_GET['province_id'].''); ?>'">
 <img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick="document.location='<?php echo site_url('poor_province/poor_province_print/'.@$_GET['province_id'].''); ?>'"></div>

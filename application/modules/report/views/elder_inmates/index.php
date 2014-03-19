@@ -20,6 +20,14 @@
 
 <h2 class='head_sideup'>รายงานผู้ต้องขังสูงอายุ</h2>
 
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('elder/inmates/import','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
+
 <div style='line-height:40px; text-align:right;' class='hide_print'>
 	<a href='report/elder_inmates/export'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"> </a>
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>

@@ -118,6 +118,25 @@ Class Disablefund extends Public_Controller{
 		$this->template->build('report_all',$data);
 	}
 	
+	function export_all(){
+		$sql = 'SELECT 
+				BUDGETYEAR, 
+				(SELECT NVL(sum(PEOPLE),0) FROM DISABLEFUND_PEOPLE d WHERE YEAR_DATA=BUDGETYEAR)PEOPLE_SUM,
+				(SELECT NVL(sum(AMOUNT),0) FROM DISABLEFUND_PEOPLE d WHERE YEAR_DATA=BUDGETYEAR)TOTAL_SUM,
+				(SELECT NVL(count("PROJECT"),0) FROM DISABLEFUND_PROJECT d WHERE YEAR_DATA = BUDGETYEAR)PROJECT_SUM,
+				(SELECT NVL(sum(APPROVE),0) FROM DISABLEFUND_PROJECT d WHERE YEAR_DATA = BUDGETYEAR)APPROVE_SUM
+				FROM 
+				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PEOPLE UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PROJECT ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
+				
+		$filename= "disablefund_export_all.xls";
+		header("Content-Disposition: attachment; filename=".$filename);
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		
+		
+		$data['disablefunds'] = $this->people->get($sql);
+		$this->load->view('export_all',$data);
+	}
+	
 	function report_people1(){
 		$data['years'] = $this->project->get("SELECT DISTINCT YEAR_DATA FROM DISABLEFUND_PEOPLE ORDER BY YEAR_DATA ASC",FALSE);
 		

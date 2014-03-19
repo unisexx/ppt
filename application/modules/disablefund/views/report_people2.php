@@ -33,7 +33,7 @@
 </tr>
 <?foreach($disablefunds as $key=>$row):?>
 <tr>
-  <td class="txtright"><?=$key+1?></td>
+  <td class="txtleft"><?=$key+1?></td>
   <td><?=$row['dis_type']?></td>
   <td class="txtright"><?=nformat($row['people_sum'])?></td>
   <td class="txtright"><?=nformat($row['total_sum'])?></td>

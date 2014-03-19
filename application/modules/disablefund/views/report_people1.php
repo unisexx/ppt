@@ -30,7 +30,7 @@
 </tr>
 <?foreach($disablefunds as $key=>$row):?>
 <tr>
-  <td class="txtright"><?=$key+1?></td>
+  <td class="txtleft"><?=$key+1?></td>
   <td><a href="disablefund/report_people2?year=<?=$_GET['year']?>&province=<?=$row['pv']?>"><?=$row['pv']?></a></td>
   <td class="txtright"><?=nformat($row['people_sum'])?></td>
   <td class="txtright"><?=nformat($row['total_sum'])?></td>

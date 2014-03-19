@@ -57,7 +57,7 @@
 <?php foreach($childfunds as $key=>$row):?>
   <tr>
   <td class="txtright"><?php echo $key+1?></td>
-  <td class="txtright"><?php echo $row['pv']?></td>
+  <td class="txtleft"><?php echo $row['pv']?></td>
   <td class="txtright"><?php echo number_format($row['typemain1'])?></td>
   <td class="txtright"><?php echo number_format($row['typemain2'])?></td>
   <td class="txtright">&nbsp;</td>

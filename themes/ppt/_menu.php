@@ -1,6 +1,6 @@
 <div class="red">
 <ul id="mega-menu-6" class="mega-menu unstyled">
-	<li><a href="dashboard">สถานการณ์ที่สำคัญ</a></li>
+	<!-- <li><a href="dashboard">สถานการณ์ที่สำคัญ</a></li> -->
 	<!--<li><?php echo anchor('report', 'ข้อมูลรายงานสรุป'); ?></li>-->
 
 <li><a href="#">กลุ่มเป้าหมาย</a>
@@ -70,7 +70,7 @@
 		</ul>
 </li>
 
-<li><a href="#">พื้นฐาน</a>
+<li style="visibility: hidden;"><a href="#">พื้นฐาน</a>
 		<ul>
 			<li><a href="#">ข้อมูลพื้นฐาน</a>
                 <ul>

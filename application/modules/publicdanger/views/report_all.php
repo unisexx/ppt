@@ -23,7 +23,7 @@
   </tr>
   <?php foreach($years as $row):?>
 	<tr>
-	    <td class="topic"><?php echo $row['year_data']?></td>
+	    <td class="topic txtcen"><?php echo $row['year_data']?></td>
 	    <td class="txtright">
 	    	<a href="publicdanger/report_traffic/<?php echo $row['year_data']?>">
 	    		<?php echo number_format($this->db->getone("SELECT sum(COUNTER) FROM PUBLICDANGER_TRAFFIC WHERE YEAR_DATA = ".$row['year_data']));?>

@@ -1,4 +1,4 @@
-<?php echo menu::source($menu_id, 'import_file/elder/olderfund/example.xls'); ?>
+<?php echo menu::source($menu_id, 'import_file/elder/olderfund/examples.xls'); ?>
 <form action="report/olderfund/upload" method="post" enctype="multipart/form-data">
 <table class="tbadd">
 <tr>

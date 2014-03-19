@@ -77,7 +77,7 @@ Class Publicdanger extends Public_Controller{
 			}
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 5; $i <= $data -> sheets[0]['numRows']; $i++) {
+			for($i = 10; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;
 				
 				$value['YEAR_DATA'] = $year_data;

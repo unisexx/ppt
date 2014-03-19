@@ -105,19 +105,17 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
     border-collapse: collapse;
     text-align: left;
 }
-.tbreport th
-{
-    font-size: 16px;
-    font-weight: normal;
-    padding: 10px 5px 3px 5px;
-    border-top: 1px solid #ccc;
-    border-bottom: 2px solid #999;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    text-align:left;
-    background-color:#fff;
-    color:#65358f;
-}
+.tbreport th {
+font-size: 16px;
+font-weight: normal;
+padding: 10px 5px 3px 5px;
+border-top: 1px solid #ccc;
+border-bottom: 2px solid #999;
+border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+text-align: left;
+background-color: #fff;
+color: #65358f;}
 .tbreport td
 {
     color:#333;

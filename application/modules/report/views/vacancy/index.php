@@ -13,6 +13,14 @@
 		<?=(@$province_)?'จังหวัด '.$province_[0]['province']:'ทุกจังหวัด';	?>
 	</span>
 </div>
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('disadvantaged/vacancy_import','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
+
 <div style='line-height:40px; text-align:right;'>
 	<a href='import_file/vacancy/define.docx' target='_blank'><img src="themes/ppt/images/define.png" width="32" height="32" style="margin-bottom:-6px; margin-right: 10px;" class="vtip" title="นิยามข้อมูล"></a>
 	<a href='report/vacancy/export?province=<?=@$_GET['province'];?>' target='_blank'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>

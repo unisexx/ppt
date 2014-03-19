@@ -56,7 +56,7 @@
 </tr>
 <?php foreach($result as $key=>$item): ?>
 <tr>
-  <td class="topic"><a href="report/olderfund/detail?year=<?php echo $item['year'] ?>"><?php echo $item['year'] ?></a><span class="hide_screen"><?php echo $item['year'] ?></span></td>
+  <td class="topic txtcen"><a href="report/olderfund/detail?year=<?php echo $item['year'] ?>"><?php echo $item['year'] ?></a><span class="hide_screen"><?php echo $item['year'] ?></span></td>
   <td class="txtright"><?php echo number_format($item['total_person']); ?></td>
   <td class="txtright"><?php echo number_format($item['total_money_person']); ?></td>
   <td class="txtright"><?php echo number_format($item['total_project']); ?></td>

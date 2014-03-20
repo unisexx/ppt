@@ -19,14 +19,15 @@
 </style>
 
 <h2 class='head_sideup'>รายงาน การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ ทั่วประเทศ</h2>
-<form  method='get' class='hide_print'>
-<div id="search">
+
+<div id="search" class='hide_print'>
   <div id="searchBox">
+  	<form  method='get'  action="report/olderfund/index">
 	<?php echo form_dropdown('year', @$set_year, @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
 	<input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+	</form>
  </div>
 </div>
-</form>
 <div id="btnBox">
 	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="document.location='report/olderfund/import'" class="btn_import"/>
 </div>

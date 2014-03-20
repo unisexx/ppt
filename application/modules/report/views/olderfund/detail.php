@@ -18,13 +18,16 @@
 }
 </style>
 <h2 class='head_sideup'>รายงาน การขอรับการสนับสนุนเงินกองทุนผู้สูงอายุ รายจังหวัด <?php echo (!empty($_GET['year'])) ?"ปีงบประมาณ ".$_GET['year']:"ทุกปีงบประมาณ"; ?></h2>
-<form class="hide_print">
-<div id="search">
+
+<div id="search" class="hide_print">
   <div id="searchBox">
-  <?=form_dropdown('year', @$set_year, @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
-  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" /></div>
+  	<form  action="report/olderfund/index">
+	  <?=form_dropdown('year', @$set_year, @$_GET['year'], null, '-- แสดงทุกปี --'); #ถ้ามีค่าเก่าให้ใส่ , $value เลย  ?>
+	  <input type="submit" name="button9" id="button9" title="ค้นหา" value=" " class="btn_search" />
+  </form>
+  </div>
 </div>
-</form>
+
 
 <?php if(!empty($_GET['year'])): ?><div id="resultsearch"><b>ผลที่ค้นหา :</b> ปีงบประมาณ <?php echo $_GET['year'] ?></div><?php endif; ?>
 

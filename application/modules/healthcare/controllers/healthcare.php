@@ -131,9 +131,9 @@ Class Healthcare extends Public_Controller{
 	
 	function import(){
 		$year_data = $_POST['year_data'];
-		$_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
-        $this->info->save($_POST);
-		unset($_POST);
+		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
+        // $this->info->save($_POST);
+		// unset($_POST);
 		
 		set_time_limit(0);
 		$columns = $this->db->MetaColumnNames("HEALTHCARE");
@@ -173,11 +173,11 @@ Class Healthcare extends Public_Controller{
 					}elseif($column_name == "PROVINCE"){
 						$value[$column_name] = ($stging[1] != "")?$stging[1]:$province;
 					}else{
-						$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn-1]);
+						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn-1]);
 					}
 					
-					$code = ($string[0] != "")?$string[0]:$code;
-					$province = ($string[1] != "")?$string[1]:$province;
+					@$code = (@$string[0] != "")?$string[0]:$code;
+					@$province = (@$string[1] != "")?$string[1]:$province;
 				}
 				
 				$value['YEAR_DATA'] = $year_data;

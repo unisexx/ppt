@@ -247,6 +247,8 @@ FROM
 					$ampor = trim($data -> sheets[0]['cells'][$i][2]);
 				}
 				
+				// $this->db->debug = true;
+				
 				if($format_type == 1): // format_type
 					
 					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
@@ -259,13 +261,13 @@ FROM
 					$value['ORGANIZATION'] = $organization;
 					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][4]);
 					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][5]);
-					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
+					$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
+					$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
+					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
+					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
+					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
+					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
 				
 				else: // format_type
 				
@@ -279,13 +281,13 @@ FROM
 					$value['ORGANIZATION'] = $organization;
 					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][5]);
 					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][6]);
-					//$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					//$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
+					$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
+					$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
+					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
+					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
+					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
+					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
+					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][13]));
 				
 				endif; // format_type
 				

@@ -74,7 +74,7 @@ Class Danger extends Public_Controller{
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
 			$this->danger->delete('YEAR_DATA',$year_data);
 			
-			for($i = 6; $i <= $data -> sheets[0]['numRows']-11; $i++) {
+			for($i = 6; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
 				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
 					$column_name = strtoupper(trim($column[$ncolumn+1]));
@@ -82,6 +82,11 @@ Class Danger extends Public_Controller{
 				}
 				
 				$value['YEAR_DATA'] = $year_data;
+				
+				// echo"<pre>";
+				// echo print_r($value);
+				// echo"</pre>";
+			
 				$this->danger->save($value);
 			}
 			

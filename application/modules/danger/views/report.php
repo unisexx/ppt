@@ -24,7 +24,7 @@
   </tr>
   <?php foreach($dangers as $row):?>
   <tr>
-    <td class="topic"><a href="danger/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
+    <td class="topic txtcen"><a href="danger/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
     <td class="txtright"><?php echo number_format($row['total'] )?></td>
     <td class="txtright"><?php echo number_format($row['all_case'] )?></td>
     <td class="txtright"><?php echo number_format($row['severe_case'] )?></td>

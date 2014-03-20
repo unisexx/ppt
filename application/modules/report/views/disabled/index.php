@@ -29,6 +29,12 @@
 	<span style='color:#F33;'><?='ปี '.$_GET['YEAR'];?></span>
 </div>
 
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('disability/disabled/import','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
 <div style='line-height:40px; text-align:right;' class='hide_print'>
 	<a href='report/disability/disabled/export?YEAR=<?=@$_GET['YEAR'];?>' target='blank_'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip hide_print" title="ส่งออกข้อมูล"></a>
 	<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px; cursor:pointer;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>

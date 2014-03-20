@@ -32,7 +32,7 @@
 </tr>
 <?php foreach($promotefunds as $key=>$row):?>
 <tr>
-  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtleft"><?php echo $key+1?></td>
   <td><?php echo $row['pv']?></td>
   <td class="txtright"><?php echo number_format($row['under_type1'])?></td>
   <td class="txtright"><?php echo number_format($row['sum_under_type1'])?></td>

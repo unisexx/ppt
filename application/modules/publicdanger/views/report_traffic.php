@@ -31,7 +31,7 @@
 </tr>
 <?php foreach($traffics as $key=>$row):?>
 <tr>
-  <td class="txtright"><?php echo $key+1?></td>
+  <td class="txtleft"><?php echo $key+1?></td>
   <td class="txtleft"><?php echo $row['province']?></td>
   <td class="txtright"><?php echo number_format($row['counter'])?></td>
   <td class="txtright"><?php echo number_format($row['death'])?></td>

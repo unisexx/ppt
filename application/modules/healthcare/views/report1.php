@@ -7,8 +7,8 @@
 <?php endif; ?>
 
 <div style="padding:10px; text-align:right;">
-<a href='healthcare/export1'><img src="themes/thesocial_demo/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
-<img src="themes/thesocial_demo/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'> หน่วย : คน</div>
+<a href='healthcare/export1'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
+<img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'> หน่วย : คน</div>
 <table class="tbreport">
   <tr>
     <th rowspan="2" class="txtcen">ปีงบประมาณ</th>
@@ -25,7 +25,7 @@
   </tr>
   <?php foreach($healthcares as $row):?>
   <tr>
-    <td class="topic txtright"><a href="healthcare/report3/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
+    <td class="topic txtcen"><a href="healthcare/report3/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
     <td class="txtright"><?php echo number_format($row['total'])?></td>
     <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=health"><?php echo number_format($row['health_sum'])?></a></td>
     <td class="txtright"><a href="healthcare/report2/<?php echo $row['budgetyear']?>?type=noreg"><?php echo number_format($row['noreg_sum'])?></a></td>

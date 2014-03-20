@@ -23,7 +23,7 @@
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr class="number">
 			<th>ครั้งที่</th>
 			<td>
 			<select name="no">
@@ -107,6 +107,15 @@
 </form>
 <script>
     $(function(){
+    	$(".number").hide();
+    	$('[name=publicdanger_type]').live('change',function(){
+    		if($(this).val()=='flood'){
+    			$(".number").show();
+    		}else{
+    			$(".number").hide();
+    		}
+    	})
+    	
     	$('[name=section_type]').live('change',function(){
     		if($(this).val()==1){
     			$(".tr_workgroup").show();

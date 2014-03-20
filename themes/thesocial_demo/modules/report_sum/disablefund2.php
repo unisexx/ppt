@@ -17,28 +17,21 @@
 <tr>
 <th rowspan="2" class="txtcen">ที่</th>
 <th rowspan="2" class="txtcen">จังหวัด</th>
-<th colspan="2" class="txtcen">รายบุคคล</th>
-<th colspan="2" class="txtcen">รายโครงการ</th>
+<th colspan="2" class="txtcen">รายบุคคล (การกู้ยืม)</th>
 </tr>
 <tr>
 <td class="txtcen">จำนวนคน</td>
 <td class="txtcen">จำนวนเงิน (บาท)</td>
-<td class="txtcen">จำนวนโครงการ</td>
-<td class="txtcen">จำนวนเงิน (บาท)</td>
 </tr>
 <tr>
   <td></td>
-  <td>รวมทั้งประเทศ</td>
-  <td></td>
-  <td></td>
+  <td><a href="report_sum.php?act=disablefund3">รวมทั้งประเทศ</a></td>
   <td></td>
   <td></td>
   </tr>
 <tr>
   <td>1</td>
-  <td>กระบี่</td>
-  <td></td>
-  <td></td>
+  <td><a href="report_sum.php?act=disablefund3">กระบี่</a></td>
   <td></td>
   <td></td>
   </tr>
@@ -47,33 +40,25 @@
   <td>กรุงเทพฯ</td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
-</tr>
+  </tr>
 <tr>
   <td>3</td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
-</tr>
+  </tr>
 <tr>
   <td>4</td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
-</tr>
+  </tr>
 <tr>
   <td>5</td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
-</tr>
+  </tr>
 </table>
 
 <div id="ref">ที่มา : พก. : เว็บไซต์สำนักงานส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการแห่งชาติ  http://www.nep.go.th/index.php?mod=tmpstat</div>

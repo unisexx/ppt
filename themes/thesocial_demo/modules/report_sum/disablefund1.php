@@ -16,35 +16,35 @@
   <td class="txtcen">จำนวนเงิน (บาท)</td>
 </tr>
 <tr>
-  <td class="topic"><a href="report_sum.php?act=disablefund2">2556</a></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td class="topic">2556</td>
+  <td><a href="report_sum.php?act=disablefund2" target="_blank">100</a></td>
+  <td>1,000,000</td>
+  <td><a href="report_sum.php?act=disablefund2_pj" target="_blank">20</a></td>
+  <td>2,500,000</td>
 </tr>
 <tr>
-<td class="topic"><a href="report_sum.php?act=disablefund2">2555</a></td>
+<td class="topic">2555</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-  <td class="topic"><a href="report_sum.php?act=disablefund2">2554</a></td>
+  <td class="topic">2554</td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
   </tr>
 <tr>
-  <td class="topic"><a href="report_sum.php?act=disablefund2">2553</a></td>
+  <td class="topic">2553</td>
   <td></td>
   <td></td>
   <td></td>
   <td></td>
   </tr>
 <tr>
-  <td class="topic"><a href="report_sum.php?act=disablefund2">2552</a></td>
+  <td class="topic">&nbsp;</td>
   <td></td>
   <td></td>
   <td></td>

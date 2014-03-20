@@ -322,7 +322,7 @@ if(!function_exists('nformat'))
     }
 }
 
-function chk_numeric($data){
+function chk_numeric($data=false){
 	if (!is_numeric($data)){
 		return 0;
 	}else{

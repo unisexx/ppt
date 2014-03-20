@@ -17,7 +17,7 @@
 </tr>
 <?php foreach($promotefunds as $row):?>
 <tr>
-  <td class="topic txtright"><a href="promotefund/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
+  <td class="topic txtcen"><a href="promotefund/report2/<?php echo $row['budgetyear']?>"><?php echo $row['budgetyear']?></a></td>
   <td class="txtright"><?php echo number_format($row['org_sum']); ?></td>
   <td class="txtright"><?php echo number_format($row['org_total_sum']); ?></td>
   </tr>

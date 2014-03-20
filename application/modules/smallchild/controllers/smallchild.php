@@ -289,18 +289,18 @@ FROM
 				
 				endif; // format_type
 				
-				echo"<pre>";
-				echo print_r($value);
-				echo"</pre>";
+				// echo"<pre>";
+				// echo print_r($value);
+				// echo"</pre>";
 				
 				$this->smallchild->save($value);
 				
 				} //ลำดับที่
 			}
 			
-			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
+			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
-		// redirect('smallchild/form_import');
+		redirect('smallchild/form_import');
 	}
 
 	function ajax_get_ampor(){

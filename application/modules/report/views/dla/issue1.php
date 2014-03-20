@@ -34,6 +34,14 @@
 อำเภอ <label><?php echo empty($_GET['amphur_id']) ? 'ทุกอำเภอ' : get_one('amphur_name', 'amphur', $_GET['amphur_id']); ?></label> 
 ตำบล <label><?php echo empty($_GET['opt']) ? 'ทุกตำบล' : $_GET['opt']; ?></label></div>
 
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('dla/import','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
+
 <?php if(empty($_GET['export'])): ?>
 <div id="tool-info" style="padding:10px; text-align:right;">
 	<a href="<?php echo curPageURL(TRUE).'export=excel'; ?>">

@@ -28,7 +28,7 @@
 </tr>
 <?php foreach($healthcares as $key=>$row):?>
 	<tr>
-	  <td class="txtright"><?php echo $key+1?></td>
+	  <td class="txtleft"><?php echo $key+1?></td>
 	  <td><?php echo $row['province']?></td>
 	  <td class="txtright"><?php echo number_format($row[$_GET['type'].'_men'])?></td>
 	  <td class="txtright"><?php echo number_format($row[$_GET['type'].'_women'])?></td>

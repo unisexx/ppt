@@ -218,4 +218,10 @@ function getAgefromTimestamp($birth){
 	$age = ($birth < 0) ? ( $t + ($birth * -1) ) : $t - $birth;
 	return floor($age/31536000);
 }
+
+function convertThaiyear($date){
+	list($d,$m,$y) = explode('/', $date);
+	$y = $y + 543;
+	return $d.'/'.$m.'/'.$y;
+}
 ?>

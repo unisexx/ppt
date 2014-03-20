@@ -23,7 +23,7 @@
 </tr>
 <?php foreach($childfunds as $row):?>
 <tr>
-  <td class="topic txtright"><?php echo $row['budgetyear']?></td>
+  <td class="topic txtcen"><?php echo $row['budgetyear']?></td>
   <td class="txtright">
   	<?php if(number_format($row['people_sum']) != 0):?>
   	<a href="childfund/report3/<?php echo $row['budgetyear']?>" target="_blank"><?php echo number_format($row['people_sum'])?></a>

@@ -26,6 +26,14 @@ $(document).ready(function(){
   </label>
 </div>
 </form>
+
+<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+<div id="btnBox" style="margin:10px 0;">
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('family/medium/import_form','_blank')" class="btn_import"/>
+</div>
+<?php endif; ?>
+
+
 <div style="padding:10px; text-align:right;">
 <a href="report/family/index/export<?=GetCurrentUrlGetParameter();?>"><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 <a href="report/family/index/print<?=GetCurrentUrlGetParameter();?>" target="_blank"><img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล"></a>หน่วย:คน</div>

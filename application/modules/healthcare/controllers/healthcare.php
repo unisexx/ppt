@@ -156,13 +156,14 @@ Class Healthcare extends Public_Controller{
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
 			$this->healthcare->delete('YEAR_DATA',$year_data);
 			
+			header('Content-Type: text/html; charset=utf-8');
 			for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;
 				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols']+1;$ncolumn++){
 					$column_name = strtoupper(trim($column[$ncolumn+1]));
 					
 					if($column_name == "CODE"){ //แยกรหัสกับจังหวัดออกจากกัน
-						$string = trim($data -> sheets[0]['cells'][$i][$ncolumn]);
+						$string = @trim($data -> sheets[0]['cells'][$i][$ncolumn]);
 						if($string != ""){
 							$string = explode("-", $string);
 							$string = array_map('trim',$string);
@@ -171,7 +172,7 @@ Class Healthcare extends Public_Controller{
 							$value["CODE"] = $code;
 						}
 					}elseif($column_name == "PROVINCE"){
-						$value[$column_name] = ($stging[1] != "")?$stging[1]:$province;
+						$value[$column_name] = (@$string[1] != "")?$string[1]:$province;
 					}else{
 						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn-1]);
 					}
@@ -181,9 +182,11 @@ Class Healthcare extends Public_Controller{
 				}
 				
 				$value['YEAR_DATA'] = $year_data;
+				
 				// echo"<pre>";
 				// echo print_r($value);
 				// echo"</pre>";
+				
 				$this->healthcare->save($value);
 			}
 			

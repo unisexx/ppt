@@ -40,7 +40,7 @@
 <?php foreach($healthcares as $key=>$row):?>
 	<tr>
 	  <td><?php echo $key+1?></td>
-	  <td><?php echo $row['province']?></td>
+	  <td><?php echo $row['pv']?></td>
 	  <td class="txtright"><?php echo number_format($row['health_men'])?></td>
 	  <td class="txtright"><?php echo number_format($row['health_women'])?></td>
 	  <td class="txtright"><?php echo number_format($row['health_none'])?></td>

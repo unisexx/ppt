@@ -37,7 +37,7 @@ Class Disablefund extends Public_Controller{
 			$start_row = 4;
 			$table = 'DISABLEFUND_PEOPLE';
 		}elseif($disabled_type == "project"){
-			$start_row = 1;
+			$start_row = 4;
 			$table = 'DISABLEFUND_PROJECT';
 		}
 		$columns = $this->db->MetaColumnNames($table);
@@ -45,7 +45,7 @@ Class Disablefund extends Public_Controller{
 			$column[] = $item;
 		}
 		
-		print_r($columns);
+		// print_r($columns);
 		
 		if($_FILES['fl_import']['name']!=''){						
 			$ext = pathinfo($_FILES['fl_import']['name'], PATHINFO_EXTENSION);
@@ -81,6 +81,12 @@ Class Disablefund extends Public_Controller{
 						$value['DISABLE_TYPE'] = @trim($data -> sheets[0]['cells'][$i][1]);
 						$value['PEOPLE'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][2]));
 						$value['AMOUNT'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][3]));
+						
+						// echo"<pre>";
+						// echo print_r($value);
+						// echo"</pre>";
+						
+						$this->$disabled_type->save($value);
 					}
 					
 				}elseif($disabled_type == "project"){
@@ -95,15 +101,16 @@ Class Disablefund extends Public_Controller{
 						$value['NO'] = @trim($data -> sheets[0]['cells'][$i][6]);
 						$value['YEAR'] = @trim($data -> sheets[0]['cells'][$i][7]);
 						$value['DATE'] = convertThaiyear(@trim($data -> sheets[0]['cells'][$i][8]));
+						
+						// echo"<pre>";
+						// echo print_r($value);
+						// echo"</pre>";
+						
+						$this->$disabled_type->save($value);
 					}
 					
 				}
 				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-				
-				$this->$disabled_type->save($value);
 			}
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}

@@ -108,18 +108,22 @@ Class Childfund extends Public_Controller{
 			header('Content-Type: text/html; charset=utf-8');
 			for($i = 6; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn+1]));
-					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+				
+				if(@trim($data -> sheets[0]['cells'][$i][1] != "")){ //ถ้าคอลัมน์แรกมีค่าให้ fetch ข้อมูล
+					
+					for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
+						$column_name = strtoupper(@trim($column[$ncolumn+1]));
+						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+					}
+					
+					$value['YEAR_DATA'] = $year_data;
+					
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
+					
+					$this->childfund->save($value);
 				}
-				
-				$value['YEAR_DATA'] = $year_data;
-				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-				
-				$this->childfund->save($value);
 			}
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
@@ -155,23 +159,31 @@ Class Childfund extends Public_Controller{
 			$data -> read($uploaddir.$file_name);
 			
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
-			// $this->childfund->delete('YEAR_DATA',$year_data);
+			$this->childfund_org->delete();
+			
+			// $this->db->debug = true;
 			
 			header('Content-Type: text/html; charset=utf-8');
 			for($i = 2; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn]));
-					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+				
+				if(@is_numeric(@trim($data -> sheets[0]['cells'][$i][1]))){ //ถ้าคอลัมน์แรกเป็นตัวเลข ให้ fetch ข้อมูล
+				
+					for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
+						$column_name = strtoupper(@trim($column[$ncolumn]));
+						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+					}
+					
+					// $value['YEAR_DATA'] = $year_data;
+				
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
+					
+					$this->childfund_org->save($value);
+				
 				}
 				
-				// $value['YEAR_DATA'] = $year_data;
-				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-				
-				$this->childfund_org->save($value);
 			}
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
@@ -183,7 +195,7 @@ Class Childfund extends Public_Controller{
 				BUDGETYEAR, 
 				(SELECT NVL(sum(PEOPLESUM),0) FROM CHILDFUND d WHERE YEAR_DATA=BUDGETYEAR AND (PROVINCE <> 'รวมทั้งสิ้น'))PEOPLE_SUM,
 				(SELECT NVL(sum(TOTAL),0) FROM CHILDFUND d WHERE YEAR_DATA=BUDGETYEAR AND (PROVINCE <> 'รวมทั้งสิ้น'))TOTAL_SUM,
-				(SELECT NVL(count(ORGAN_ID),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
+				(SELECT NVL(count(PROJECT_NAME),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
 				(SELECT NVL(sum(COST_GET),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_TOTAL_SUM
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND_ORG UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND ORDER BY BUDGETYEAR DESC)TMP_TABLE_1";
@@ -196,7 +208,7 @@ Class Childfund extends Public_Controller{
 				BUDGETYEAR, 
 				(SELECT NVL(sum(PEOPLESUM),0) FROM CHILDFUND d WHERE YEAR_DATA=BUDGETYEAR AND (PROVINCE <> 'รวมทั้งสิ้น'))PEOPLE_SUM,
 				(SELECT NVL(sum(TOTAL),0) FROM CHILDFUND d WHERE YEAR_DATA=BUDGETYEAR AND (PROVINCE <> 'รวมทั้งสิ้น'))TOTAL_SUM,
-				(SELECT NVL(count(ORGAN_ID),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
+				(SELECT NVL(count(PROJECT_NAME),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
 				(SELECT NVL(sum(COST_GET),0) FROM CHILDFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_TOTAL_SUM
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND_ORG UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND ORDER BY BUDGETYEAR DESC)TMP_TABLE_1";

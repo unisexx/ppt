@@ -31,7 +31,7 @@ $(function(){
 });
 </script>
 <? $m['id'] = 111; ?>
-<?=menu::source($m['id'], 'import_file/danger/example.xls');?>
+<?=menu::source($m['id'], 'import_file/danger/example_danger.rar');?>
 
 <form id="import_form" method="post" enctype="multipart/form-data" action="danger/import">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

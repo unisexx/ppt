@@ -25,13 +25,13 @@ Class Healthcare extends Public_Controller{
 	function report1(){
 		$sql = "SELECT 
 				BUDGETYEAR, 
-				(SELECT sum(HEALTH_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))HEALTH_SUM,
-				(SELECT sum(NOREG_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))NOREG_SUM,
-				(SELECT sum(CIVIL_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))CIVIL_SUM,
-				(SELECT sum(OTHER_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))OTHER_SUM,
-				(SELECT sum(RIGHT_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))RIGHT_SUM,
-				(SELECT sum(PROBLEM_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))PROBLEM_SUM,
-				(SELECT(sum(HEALTH_SUM)+sum(NOREG_SUM) +sum(CIVIL_SUM) + sum(OTHER_SUM) + sum(RIGHT_SUM) + sum(PROBLEM_SUM)) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))TOTAL
+				(SELECT sum(HEALTH_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))HEALTH_SUM,
+				(SELECT sum(NOREG_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))NOREG_SUM,
+				(SELECT sum(CIVIL_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))CIVIL_SUM,
+				(SELECT sum(OTHER_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))OTHER_SUM,
+				(SELECT sum(RIGHT_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))RIGHT_SUM,
+				(SELECT sum(PROBLEM_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))PROBLEM_SUM,
+				(SELECT(sum(HEALTH_SUM)+sum(NOREG_SUM) +sum(CIVIL_SUM) + sum(OTHER_SUM) + sum(RIGHT_SUM) + sum(PROBLEM_SUM)) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))TOTAL
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from HEALTHCARE ORDER BY BUDGETYEAR DESC)";
 		$data['healthcares'] = $this->healthcare->get($sql);
@@ -41,13 +41,13 @@ Class Healthcare extends Public_Controller{
 	function export1(){
 		$sql = "SELECT 
 				BUDGETYEAR, 
-				(SELECT sum(HEALTH_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))HEALTH_SUM,
-				(SELECT sum(NOREG_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))NOREG_SUM,
-				(SELECT sum(CIVIL_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))CIVIL_SUM,
-				(SELECT sum(OTHER_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))OTHER_SUM,
-				(SELECT sum(RIGHT_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))RIGHT_SUM,
-				(SELECT sum(PROBLEM_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))PROBLEM_SUM,
-				(SELECT(sum(HEALTH_SUM)+sum(NOREG_SUM) +sum(CIVIL_SUM) + sum(OTHER_SUM) + sum(RIGHT_SUM) + sum(PROBLEM_SUM)) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE = 'Total' AND AGE IS NOT NULL))TOTAL
+				(SELECT sum(HEALTH_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))HEALTH_SUM,
+				(SELECT sum(NOREG_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))NOREG_SUM,
+				(SELECT sum(CIVIL_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))CIVIL_SUM,
+				(SELECT sum(OTHER_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))OTHER_SUM,
+				(SELECT sum(RIGHT_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))RIGHT_SUM,
+				(SELECT sum(PROBLEM_SUM) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))PROBLEM_SUM,
+				(SELECT(sum(HEALTH_SUM)+sum(NOREG_SUM) +sum(CIVIL_SUM) + sum(OTHER_SUM) + sum(RIGHT_SUM) + sum(PROBLEM_SUM)) FROM HEALTHCARE d WHERE YEAR_DATA=BUDGETYEAR AND (AGE != 'Total' AND AGE IS NOT NULL))TOTAL
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from HEALTHCARE ORDER BY BUDGETYEAR DESC)";
 		$data['healthcares'] = $this->healthcare->get($sql);
@@ -64,12 +64,23 @@ Class Healthcare extends Public_Controller{
 		
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
 		
-		$sql = "SELECT * 
-		FROM HEALTHCARE
-		WHERE
-		YEAR_DATA = ".$year."
-		AND AGE = 'Total'
-		ORDER BY CODE ASC";
+		// $sql = "SELECT * 
+		// FROM HEALTHCARE
+		// WHERE
+		// YEAR_DATA = ".$year."
+		// AND AGE = 'Total'
+		// ORDER BY CODE ASC";
+		
+		// $this->db->debug = true;
+		
+		$sql = "SELECT 
+				pv, budgetyear,
+				(SELECT NVL(SUM(".$_GET['type']."_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_MEN,
+				(SELECT NVL(SUM(".$_GET['type']."_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_WOMEN,
+				(SELECT NVL(SUM(".$_GET['type']."_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_NONE,
+				(SELECT NVL(SUM(".$_GET['type']."_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA budgetyear FROM HEALTHCARE WHERE YEAR_DATA = ".$year." ORDER BY PROVINCE ASC)";
 		$data['healthcares'] = $this->healthcare->get($sql,TRUE);
 		$this->template->build('report2',$data);
 	}
@@ -79,12 +90,22 @@ Class Healthcare extends Public_Controller{
 		
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
 		
-		$sql = "SELECT * 
-		FROM HEALTHCARE
-		WHERE
-		YEAR_DATA = ".$year."
-		AND AGE = 'Total'
-		ORDER BY CODE ASC";
+		// $sql = "SELECT * 
+		// FROM HEALTHCARE
+		// WHERE
+		// YEAR_DATA = ".$year."
+		// AND AGE = 'Total'
+		// ORDER BY CODE ASC";
+		
+		$sql = "SELECT 
+				pv, budgetyear,
+				(SELECT NVL(SUM(".$_GET['type']."_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_MEN,
+				(SELECT NVL(SUM(".$_GET['type']."_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_WOMEN,
+				(SELECT NVL(SUM(".$_GET['type']."_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_NONE,
+				(SELECT NVL(SUM(".$_GET['type']."_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) ".$_GET['type']."_SUM
+				FROM 
+				(SELECT DISTINCT PROVINCE pv,YEAR_DATA budgetyear FROM HEALTHCARE WHERE YEAR_DATA = ".$year." ORDER BY PROVINCE ASC)";
+				
 		$data['healthcares'] = $this->healthcare->get($sql,TRUE);
 		
 		$filename= "healthcare_report_data_".$year."_type_".$_GET['type'].".xls";
@@ -97,12 +118,46 @@ Class Healthcare extends Public_Controller{
 	function report3($year=false){
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
 		
-		$sql = "SELECT * 
-		FROM HEALTHCARE
-		WHERE
-		YEAR_DATA = ".$year."
-		AND AGE = 'Total'
-		ORDER BY CODE ASC";
+		// $sql = "SELECT * 
+		// FROM HEALTHCARE
+		// WHERE
+		// YEAR_DATA = ".$year."
+		// AND AGE = 'Total'
+		// ORDER BY CODE ASC";
+		
+		$sql = "SELECT 
+pv, budgetyear,
+(SELECT NVL(SUM(HEALTH_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_MEN,
+(SELECT NVL(SUM(HEALTH_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_WOMEN,
+(SELECT NVL(SUM(HEALTH_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_NONE,
+(SELECT NVL(SUM(HEALTH_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_SUM,
+
+(SELECT NVL(SUM(NOREG_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_MEN,
+(SELECT NVL(SUM(NOREG_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_WOMEN,
+(SELECT NVL(SUM(NOREG_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_NONE,
+(SELECT NVL(SUM(NOREG_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_SUM,
+
+(SELECT NVL(SUM(CIVIL_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_MEN,
+(SELECT NVL(SUM(CIVIL_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_WOMEN,
+(SELECT NVL(SUM(CIVIL_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_NONE,
+(SELECT NVL(SUM(CIVIL_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_SUM,
+
+(SELECT NVL(SUM(OTHER_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_MEN,
+(SELECT NVL(SUM(OTHER_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_WOMEN,
+(SELECT NVL(SUM(OTHER_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_NONE,
+(SELECT NVL(SUM(OTHER_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_SUM,
+
+(SELECT NVL(SUM(RIGHT_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_MEN,
+(SELECT NVL(SUM(RIGHT_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_WOMEN,
+(SELECT NVL(SUM(RIGHT_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_NONE,
+(SELECT NVL(SUM(RIGHT_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_SUM,
+
+(SELECT NVL(SUM(PROBLEM_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_MEN,
+(SELECT NVL(SUM(PROBLEM_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_WOMEN,
+(SELECT NVL(SUM(PROBLEM_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_NONE,
+(SELECT NVL(SUM(PROBLEM_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_SUM
+FROM 
+(SELECT DISTINCT PROVINCE pv,YEAR_DATA budgetyear FROM HEALTHCARE WHERE YEAR_DATA = ".$year." ORDER BY PROVINCE ASC)";
 		$data['healthcares'] = $this->healthcare->get($sql,TRUE);
 		$this->template->build('report3',$data);
 	}
@@ -110,12 +165,47 @@ Class Healthcare extends Public_Controller{
 	function export3($year=false){
 		$data['years'] = $this->healthcare->get("SELECT DISTINCT YEAR_DATA FROM HEALTHCARE ORDER BY YEAR_DATA DESC");
 		
-		$sql = "SELECT * 
-		FROM HEALTHCARE
-		WHERE
-		YEAR_DATA = ".$year."
-		AND AGE = 'Total'
-		ORDER BY CODE ASC";
+		// $sql = "SELECT * 
+		// FROM HEALTHCARE
+		// WHERE
+		// YEAR_DATA = ".$year."
+		// AND AGE = 'Total'
+		// ORDER BY CODE ASC";
+		
+		$sql = "SELECT 
+pv, budgetyear,
+(SELECT NVL(SUM(HEALTH_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_MEN,
+(SELECT NVL(SUM(HEALTH_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_WOMEN,
+(SELECT NVL(SUM(HEALTH_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_NONE,
+(SELECT NVL(SUM(HEALTH_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) HEALTH_SUM,
+
+(SELECT NVL(SUM(NOREG_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_MEN,
+(SELECT NVL(SUM(NOREG_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_WOMEN,
+(SELECT NVL(SUM(NOREG_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_NONE,
+(SELECT NVL(SUM(NOREG_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) NOREG_SUM,
+
+(SELECT NVL(SUM(CIVIL_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_MEN,
+(SELECT NVL(SUM(CIVIL_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_WOMEN,
+(SELECT NVL(SUM(CIVIL_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_NONE,
+(SELECT NVL(SUM(CIVIL_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) CIVIL_SUM,
+
+(SELECT NVL(SUM(OTHER_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_MEN,
+(SELECT NVL(SUM(OTHER_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_WOMEN,
+(SELECT NVL(SUM(OTHER_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_NONE,
+(SELECT NVL(SUM(OTHER_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) OTHER_SUM,
+
+(SELECT NVL(SUM(RIGHT_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_MEN,
+(SELECT NVL(SUM(RIGHT_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_WOMEN,
+(SELECT NVL(SUM(RIGHT_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_NONE,
+(SELECT NVL(SUM(RIGHT_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) RIGHT_SUM,
+
+(SELECT NVL(SUM(PROBLEM_MEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_MEN,
+(SELECT NVL(SUM(PROBLEM_WOMEN),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_WOMEN,
+(SELECT NVL(SUM(PROBLEM_NONE),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_NONE,
+(SELECT NVL(SUM(PROBLEM_SUM),0) FROM HEALTHCARE WHERE PROVINCE = pv AND YEAR_DATA = budgetyear AND (AGE != 'Total' AND AGE IS NOT NULL)) PROBLEM_SUM
+FROM 
+(SELECT DISTINCT PROVINCE pv,YEAR_DATA budgetyear FROM HEALTHCARE WHERE YEAR_DATA = ".$year." ORDER BY PROVINCE ASC)";
+		
 		$data['healthcares'] = $this->healthcare->get($sql,TRUE);
 		
 		$filename= "healthcare_report_data_".$year.".xls";
@@ -156,38 +246,45 @@ Class Healthcare extends Public_Controller{
 			// ลบข้อมูลเก่าแล้วบันทึกข้อมูลใหม่เข้าไป
 			$this->healthcare->delete('YEAR_DATA',$year_data);
 			
+			$this->db->debug = true;
+			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
+			for($i = 6; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols']+1;$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn+1]));
+				
+				if(@trim($data -> sheets[0]['cells'][$i][2]) != "" and @trim($data -> sheets[0]['cells'][$i][3]) != "" and @trim($data -> sheets[0]['cells'][$i][4]) != "" and @trim($data -> sheets[0]['cells'][$i][5]) != ""){
 					
-					if($column_name == "CODE"){ //แยกรหัสกับจังหวัดออกจากกัน
-						$string = @trim($data -> sheets[0]['cells'][$i][$ncolumn]);
-						if($string != ""){
-							$string = explode("-", $string);
-							$string = array_map('trim',$string);
-							$value[$column_name] = $string[0];
+					for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols']+1;$ncolumn++){
+						$column_name = strtoupper(trim($column[$ncolumn+1]));
+						
+						if($column_name == "CODE"){ //แยกรหัสกับจังหวัดออกจากกัน
+							$string = @trim($data -> sheets[0]['cells'][$i][$ncolumn]);
+							if($string != ""){
+								$string = explode("-", $string);
+								$string = array_map('trim',$string);
+								$value[$column_name] = $string[0];
+							}else{
+								$value["CODE"] = $code;
+							}
+						}elseif($column_name == "PROVINCE"){
+							$value[$column_name] = (@$string[1] != "")?$string[1]:$province;
 						}else{
-							$value["CODE"] = $code;
+							$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn-1]);
 						}
-					}elseif($column_name == "PROVINCE"){
-						$value[$column_name] = (@$string[1] != "")?$string[1]:$province;
-					}else{
-						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn-1]);
+						
+						@$code = (@$string[0] != "")?$string[0]:$code;
+						@$province = (@$string[1] != "")?$string[1]:$province;
 					}
 					
-					@$code = (@$string[0] != "")?$string[0]:$code;
-					@$province = (@$string[1] != "")?$string[1]:$province;
+					$value['YEAR_DATA'] = $year_data;
+					
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
+					
+					$this->healthcare->save($value);
+					
 				}
-				
-				$value['YEAR_DATA'] = $year_data;
-				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-				
-				$this->healthcare->save($value);
 			}
 			
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');

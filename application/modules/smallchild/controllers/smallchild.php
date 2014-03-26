@@ -234,40 +234,40 @@ FROM
 			
 			
 			for($i = 0; $i <= $data -> sheets[0]['numRows']; $i++) {
-				if(is_numeric(trim($data -> sheets[0]['cells'][$i][1]))){ //ลำดับที่
+				if(@is_numeric(@trim($data -> sheets[0]['cells'][$i][1]))){ //ลำดับที่
 				
-				$format_type = 2;
+				$format_type = 1;
 				$value = null;			
 				// for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
 					// $column_name = strtoupper(trim($column[$ncolumn]));
 					// $value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 
 				// }
 				
-				if(trim($data -> sheets[0]['cells'][$i][2]) != ""){ //อำเภอ
-					$ampor = trim($data -> sheets[0]['cells'][$i][2]);
+				if(@trim($data -> sheets[0]['cells'][$i][2]) != ""){ //อำเภอ
+					$ampor = @trim($data -> sheets[0]['cells'][$i][2]);
 				}
 				
 				// $this->db->debug = true;
 				
 				if($format_type == 1): // format_type
 					
-					if(trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
-						$organization = trim($data -> sheets[0]['cells'][$i][3]);
+					if(@trim($data -> sheets[0]['cells'][$i][3]) != ""){ //อปท.
+						$organization = @trim($data -> sheets[0]['cells'][$i][3]);
 					}
 	
 					$value['YEAR_DATA'] = $year_data;
 					$value['PROVINCE'] = $_POST['province'];
 					$value['AMPOR'] = $ampor;
 					$value['ORGANIZATION'] = $organization;
-					$value['TRANSFER'] = trim($data -> sheets[0]['cells'][$i][4]);
-					$value['NAME'] = trim($data -> sheets[0]['cells'][$i][5]);
-					$value['TEACH_5'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
-					$value['TEACH_4'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][7]));
-					$value['EM_BOSS'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][8]));
-					$value['EM_GENERAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][9]));
-					$value['EM_MISSION'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][10]));
-					$value['TEACH_EM_TOTAL'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][11]));
-					$value['CHILD'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][12]));
+					// $value['TRANSFER'] = @trim($data -> sheets[0]['cells'][$i][4]);
+					$value['NAME'] = @trim($data -> sheets[0]['cells'][$i][4]);
+					$value['TEACH_5'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][5]));
+					$value['TEACH_4'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][6]));
+					$value['EM_BOSS'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][7]));
+					$value['EM_GENERAL'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][8]));
+					$value['EM_MISSION'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][9]));
+					// $value['TEACH_EM_TOTAL'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][10]));
+					$value['CHILD'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][10]));
 				
 				else: // format_type
 				

@@ -253,7 +253,7 @@
      */?>
 
 
-	<li style="visibility: hidden;"><a href="#">ตั้งค่าข้อมูลหลัก</a>
+	<li style="visibility: visible;"><a href="#">ตั้งค่าข้อมูลหลัก</a>
 		<ul>
 			<?php if(permission('user','view')):?>
 				<li><a href="setting/user">ผู้ใช้งานระบบ</a></li>

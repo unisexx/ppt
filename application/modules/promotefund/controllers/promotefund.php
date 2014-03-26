@@ -28,7 +28,7 @@ Class Promotefund extends Public_Controller{
 		// error_reporting(E_ALL);
 		// $this->db->debug = true;
 		
-		$year_data = $_POST['year_data'];
+		// $year_data = $_POST['year_data'];
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
         // $this->info->save($_POST);
 		// unset($_POST);
@@ -55,25 +55,24 @@ Class Promotefund extends Public_Controller{
 			$this->promotefund_org->delete();
 			
 			header('Content-Type: text/html; charset=utf-8');
-			for($i = 0; $i <= $data -> sheets[0]['numRows']; $i++) {
-				if(is_numeric(trim($data -> sheets[0]['cells'][$i][1]))){ //ถ้าคอลัมน์แรกเป็นตัวเลข ให้ fetch ข้อมูล
+			for($i = 4; $i <= $data -> sheets[0]['numRows']; $i++) {
+				if(is_numeric(@trim($data -> sheets[0]['cells'][$i][1]))){ //ถ้าคอลัมน์แรกเป็นตัวเลข ให้ fetch ข้อมูล
 					$value = null;			
 					
-					$value['YEAR_DATA'] = trim($data -> sheets[0]['cells'][$i][1]);
-					$value['PROVINCE'] = (trim($data -> sheets[0]['cells'][$i][2] == ''))?'ไม่ระบุ':trim($data -> sheets[0]['cells'][$i][2]);
-					$value['PROJECT_NAME'] = trim($data -> sheets[0]['cells'][$i][3]);
-					$value['UNDER_TYPE'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][4]));
-					$value['COST_GET'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][5]));
-					$value['ORGAN_ID'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
+					$value['YEAR_DATA'] = @trim($data -> sheets[0]['cells'][$i][1]);
+					$value['PROVINCE'] = (@trim($data -> sheets[0]['cells'][$i][2] == ''))?'ไม่ระบุ':@trim($data -> sheets[0]['cells'][$i][2]);
+					$value['PROJECT_NAME'] = @trim($data -> sheets[0]['cells'][$i][3]);
+					$value['UNDER_TYPE'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][4]));
+					$value['COST_GET'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][5]));
+					// $value['ORGAN_ID'] = chk_numeric(trim($data -> sheets[0]['cells'][$i][6]));
+					
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
+					
+					$this->promotefund_org->save($value);
 				}
 				
-				// $value['YEAR_DATA'] = $year_data;
-				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-				
-				$this->promotefund_org->save($value);
 			}
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
@@ -84,7 +83,7 @@ Class Promotefund extends Public_Controller{
 	function report1(){
 		$sql = "SELECT 
 				BUDGETYEAR,
-				(SELECT NVL(count(ORGAN_ID),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
+				(SELECT NVL(count(PROJECT_NAME),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
 				(SELECT NVL(sum(COST_GET),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_TOTAL_SUM
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from PROMOTEFUND_ORG ORDER BY BUDGETYEAR DESC)TMP_TABLE_1";
@@ -95,7 +94,7 @@ Class Promotefund extends Public_Controller{
 	function export1(){
 		$sql = "SELECT 
 				BUDGETYEAR,
-				(SELECT NVL(count(ORGAN_ID),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
+				(SELECT NVL(count(PROJECT_NAME),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_SUM,
 				(SELECT NVL(sum(COST_GET),0) FROM PROMOTEFUND_ORG d WHERE YEAR_DATA = BUDGETYEAR)ORG_TOTAL_SUM
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from PROMOTEFUND_ORG ORDER BY BUDGETYEAR DESC)TMP_TABLE_1";

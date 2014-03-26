@@ -76,18 +76,21 @@ Class Danger extends Public_Controller{
 			
 			for($i = 6; $i <= $data -> sheets[0]['numRows']; $i++) {
 				$value = null;			
-				for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
-					$column_name = strtoupper(trim($column[$ncolumn+1]));
-					$value[$column_name] = trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+				
+				if(@trim($data -> sheets[0]['cells'][$i][1]) != ""){
+					for($ncolumn = 0; $ncolumn <= $data -> sheets[0]['numCols'];$ncolumn++){
+						$column_name = @strtoupper(@trim($column[$ncolumn+1]));
+						$value[$column_name] = @trim($data -> sheets[0]['cells'][$i][$ncolumn]); 						
+					}
+					
+					$value['YEAR_DATA'] = $year_data;
+					
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
+				
+					$this->danger->save($value);
 				}
-				
-				$value['YEAR_DATA'] = $year_data;
-				
-				// echo"<pre>";
-				// echo print_r($value);
-				// echo"</pre>";
-			
-				$this->danger->save($value);
 			}
 			
 			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');

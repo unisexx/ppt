@@ -1,4 +1,4 @@
-<?php echo menu::source($menu_id, 'import_file/disablefund/example.rar'); ?>
+<?php echo menu::source($menu_id, 'import_file/disablefund/example_disablefund.rar'); ?>
 
 <form method="post" enctype="multipart/form-data" action="disablefund/import" id="frm_im" name="frm_im">
 	<input type='hidden' name='ID' value='<?=@$result['id'];?>'>

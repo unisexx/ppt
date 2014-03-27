@@ -72,7 +72,7 @@ Class Olderfund extends Public_Controller{
 		$file_name = 'olderfund_'.date("Y_m_d_H_i_s").'.'.$ext;	$uploaddir = 'import_file/elder/olderfund/';
 		move_uploaded_file($_FILES['fl_import']['tmp_name'], $uploaddir.$file_name);
 		$data = $this->ReadData($uploaddir.$file_name);
-		$num = count($data)-1;
+		$num = count($data);
 		unlink($uploaddir.$file_name);
 		$_POST['YEAR'] = $_POST['year_data'];
 		for($i=2; $i<$num; $i++)
@@ -82,7 +82,12 @@ Class Olderfund extends Public_Controller{
 			$_POST['TOTAL_MONEY_PERSON'] = $data[$i][2];
 			$_POST['TOTAL_PROJECT'] = $data[$i][3];
 			$_POST['TOTAL_MONEY_PROJECT'] = $data[$i][4];
+			
 			$this->older->save($_POST);
+			
+			// echo"<pre>";
+			// echo print_r($_POST);
+			// echo"</pre>";
 		}
 		$this->template->build('olderfund/upload');
 	}

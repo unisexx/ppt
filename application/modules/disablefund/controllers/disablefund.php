@@ -100,7 +100,7 @@ Class Disablefund extends Public_Controller{
 						$value['APPROVE'] = chk_numeric(@trim($data -> sheets[0]['cells'][$i][5]));
 						$value['NO'] = @trim($data -> sheets[0]['cells'][$i][6]);
 						$value['YEAR'] = @trim($data -> sheets[0]['cells'][$i][7]);
-						$value['DATE'] = convertThaiyear(@trim($data -> sheets[0]['cells'][$i][8]));
+						$value['DATE'] = @trim($data -> sheets[0]['cells'][$i][8]);
 						
 						// echo"<pre>";
 						// echo print_r($value);

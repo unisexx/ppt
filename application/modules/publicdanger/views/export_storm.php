@@ -6,15 +6,15 @@
 <th colspan="2" class="txtcen">ราษฎรที่ประสบวาตภัย</th>
 </tr>
 <tr>
-  <td class="txtcen">ครัวเรือน</td>
   <td class="txtcen">คน</td>
+  <td class="txtcen">ครัวเรือน</td>
 </tr>
 <?php foreach($storms as $key=>$row):?>
 <tr class="txtright">
   <td><?php echo $key+1?></td>
   <td><?php echo $row['province']?></td>
-  <td><?php echo number_format($row['household'])?></td>
   <td><?php echo number_format($row['people'])?></td>
+  <td><?php echo number_format($row['household'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

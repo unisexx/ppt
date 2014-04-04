@@ -6,8 +6,8 @@
 <th colspan="2" class="txtcen">ราษฎรที่ประสบภัยหนาว</th>
 </tr>
 <tr>
-  <td class="txtcen">ครัวเรือน</td>
   <td class="txtcen">คน</td>
+  <td class="txtcen">ครัวเรือน</td>
 </tr>
 <?php foreach($colds as $key=>$row):?>
 <tr class="txtright">

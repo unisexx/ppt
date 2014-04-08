@@ -13,6 +13,7 @@
 		<?php include "_header.php";?>
 		<?php include "_menu.php";?>
 		<div id="page">
+			<div style="color:red">***อยู่ระหว่างการปรับปรุงข้อมูล***</div>
 			<?php echo $template['body'] ?>
 		</div>
 	</div>

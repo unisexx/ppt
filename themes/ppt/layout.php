@@ -16,6 +16,7 @@
 			<div style="color:red">***อยู่ระหว่างการปรับปรุงข้อมูล***</div>
 			<?php echo $template['body'] ?>
 		</div>
+		<?php include "_footer.php";?>
 	</div>
 </body>
 </html>

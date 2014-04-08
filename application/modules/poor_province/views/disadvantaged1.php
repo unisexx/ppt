@@ -63,10 +63,10 @@
 <table class="tbreport">
 <tr>
 <!--<th>เพศ</th>-->
-<th>ปี</th>
-<th>เส้นความยากจน(บาท/คน/เดือน)</th>
-<th>สัดส่วนคนจน(ร้อยละ)</th>
-<th>จำนวนคนจน(พันคน)</th>
+<th class="txtcen">ปี</th>
+<th class="txtcen">เส้นความยากจน(บาท/คน/เดือน)</th>
+<th class="txtcen">สัดส่วนคนจน(ร้อยละ)</th>
+<th class="txtcen">จำนวนคนจน(พันคน)</th>
 </tr>
 
 <?php 
@@ -99,10 +99,10 @@ $result1 = $this->opt->get($sql1);
 
 <tr>
 
-<td class="topic"><?php echo $item2['poor_province_year']; ?></td>
-<td><?php echo @number_format($item2['poor_province_line'],2); ?></td>
-<td><?php echo @number_format($item2['poor_province_percent'],2); ?></td>
-<td><?php echo @number_format($item2['poor_province_qty'],2); ?></td>
+<td class="topic txtcen"><?php echo $item2['poor_province_year']; ?></td>
+<td class="txtright"><?php echo @number_format($item2['poor_province_line'],2); ?></td>
+<td class="txtright"><?php echo @number_format($item2['poor_province_percent'],2); ?></td>
+<td class="txtright"><?php echo @number_format($item2['poor_province_qty'],2); ?></td>
 
 </tr>
 

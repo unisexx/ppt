@@ -130,8 +130,8 @@ else
  
 <table class="tbreport">
 <tr>
-<th>ประเภทฐานความผิด</th>
-<th>จำนวน</th>
+<th class="txtcen">ประเภทฐานความผิด</th>
+<th class="txtcen">จำนวน</th>
 </tr>
 
 <?php
@@ -143,14 +143,14 @@ if(@$_GET['offense_type_id']){
 <?php if(@$_GET['offense_type_id']==1){ ?>
 <tr>
 <td class="topic">ทรัพย์</td>
-<td><?php echo @number_format($all_property); ?></td>
+<td class="txtright"><?php echo @number_format($all_property); ?></td>
 </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==2){ ?>
 <tr>
   <td class="topic">ชีวิตและร่างกาย</td>
-  <td><?php echo @number_format($all_body); ?></td>
+  <td class="txtright"><?php echo @number_format($all_body); ?></td>
   </tr>
 
 <?php } ?>
@@ -158,35 +158,35 @@ if(@$_GET['offense_type_id']){
 <?php if(@$_GET['offense_type_id']==3){ ?>
 <tr>
   <td class="topic">เพศ</td>
-  <td><?php echo @number_format($all_sex); ?></td>
+  <td class="txtright"><?php echo @number_format($all_sex); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==4){ ?>
 <tr>
   <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
-  <td><?php echo @number_format($all_dominance); ?></td>
+  <td class="txtright"><?php echo @number_format($all_dominance); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==5){ ?>
 <tr>
   <td class="topic">ยาเสพติดให้โทษ</td>
-  <td><?php echo @number_format($all_drug); ?></td>
+  <td class="txtright"><?php echo @number_format($all_drug); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==6){ ?>
 <tr>
   <td class="topic">อาวุธและวัตถุระเบิด</td>
-  <td><?php echo @number_format($all_weapon); ?></td>
+  <td class="txtright"><?php echo @number_format($all_weapon); ?></td>
   </tr>
 <?php } ?>
 
 <?php if(@$_GET['offense_type_id']==7){ ?>  
  <tr>
   <td class="topic">อื่น ๆ</td>
-  <td><?php echo @number_format($all_etc); ?></td>
+  <td class="txtright"><?php echo @number_format($all_etc); ?></td>
   </tr>
  <?php 
  
@@ -203,42 +203,42 @@ else
 
 <tr>
 <td class="topic">ทรัพย์</td>
-<td><?php echo @number_format($all_property); ?></td>
+<td class="txtright"><?php echo @number_format($all_property); ?></td>
 </tr>
 
 <tr>
   <td class="topic">ชีวิตและร่างกาย</td>
-  <td><?php echo @number_format($all_body); ?></td>
+  <td class="txtright"><?php echo @number_format($all_body); ?></td>
   </tr>
 
 <tr>
   <td class="topic">เพศ</td>
-  <td><?php echo @number_format($all_sex); ?></td>
+  <td class="txtright"><?php echo @number_format($all_sex); ?></td>
   </tr>
 
 <tr>
   <td class="topic">ความสงบสุข เสรีภาพ ชื่อเสียง และการปกครอง</td>
-  <td><?php echo @number_format($all_dominance); ?></td>
+  <td class="txtright"><?php echo @number_format($all_dominance); ?></td>
   </tr>
 
 <tr>
   <td class="topic">ยาเสพติดให้โทษ</td>
-  <td><?php echo @number_format($all_drug); ?></td>
+  <td class="txtright"><?php echo @number_format($all_drug); ?></td>
   </tr>
 
 <tr>
   <td class="topic">อาวุธและวัตถุระเบิด</td>
-  <td><?php echo @number_format($all_weapon); ?></td>
+  <td class="txtright"><?php echo @number_format($all_weapon); ?></td>
   </tr>
 
  <tr>
   <td class="topic">อื่น ๆ</td>
-  <td><?php echo @number_format($all_etc); ?></td>
+  <td class="txtright"><?php echo @number_format($all_etc); ?></td>
   </tr>
  
 <tr class="total">
   <td>รวม</td>
-  <td><?php echo @number_format($offense_all); ?></td>
+  <td class="txtright"><?php echo @number_format($offense_all); ?></td>
   </tr>
 
 <!--<tr class="total">

@@ -101,18 +101,20 @@ label.error{color:#d14;font-style:italic;font-size:12px;font-weight:bold;}
     background: #fff;
     margin:0;
     margin-bottom:10px;
-    width: 100%;
+    /*width: 100%;*/
+    width:70%;
+    margin:0 auto;
     border-collapse: collapse;
     text-align: left;
 }
 .tbreport th {
-font-size: 16px;
-font-weight: normal;
+font-size: 20px;
+font-weight: bolder;
 padding: 10px 5px 3px 5px;
-border-top: 1px solid #ccc;
-border-bottom: 2px solid #999;
-border-left: 1px solid #ccc;
-border-right: 1px solid #ccc;
+border-top: 3px solid #999;
+border-bottom: 3px solid #999;
+border-left: 3px solid #999;
+border-right: 3px solid #999;
 text-align: left;
 background-color: #fff;
 color: #65358f;}
@@ -121,10 +123,10 @@ color: #65358f;}
     color:#333;
     padding:5px;
     height:30px;
-    border-top: 0px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border-top: 0px solid #999;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
 }
 
 .tbreport td.B { font-weight:700;}

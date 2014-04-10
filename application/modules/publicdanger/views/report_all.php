@@ -1,3 +1,7 @@
+<style type="text/css">
+	table td{width:211px !important;}
+</style>
+
 <h3>รายงาน ผู้ได้รับผลกระทบจากสาธารณภัยทั้งประเทศ  </h3>
 
 <?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
@@ -9,6 +13,7 @@
 <div style="padding:10px; text-align:right;">
 <a href='publicdanger/export_all'><img src="themes/ppt/images/excel.png" width="32" height="32" style="margin-bottom:-6px" class="vtip" title="ส่งออกข้อมูล"></a>
 <img src="themes/ppt/images/print.png" width="32" height="32" style="margin:0 20px -5px 10px;" class="vtip" title="พิมพ์ข้อมูล" onclick='window.print();'>หน่วย : ราย</div>
+
 <table class="tbreport">
   <tr>
     <th rowspan="2" class="txtcen">ปี พ.ศ.</th>
@@ -52,5 +57,6 @@
 	</tr>
   <?php endforeach;?>
 </table>
+
 <div id="ref">ที่มา : กรมป้องกันและบรรเทาสาธารณะภัย  http://www.disaster.go.th</div>
 

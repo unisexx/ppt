@@ -8,10 +8,10 @@
     <th colspan="2" class="txtcen">อัตราการประสบอันตรายต่อลูกจ้าง 1,000 ราย</th>
   </tr>
   <tr>
-    <td class="txtcen">ทุกกรณ๊</td>
-    <td class="txtcen">เฉพาะกรณ๊ร้ายแรง</td>
-    <td class="txtcen">ทุกกรณ๊</td>
-    <td class="txtcen">เฉพาะกรณ๊ร้ายแรง</td>
+    <td class="txtcen">ทุกกรณี</td>
+    <td class="txtcen">เฉพาะกรณีร้ายแรง</td>
+    <td class="txtcen">ทุกกรณี</td>
+    <td class="txtcen">เฉพาะกรณีร้ายแรง</td>
   </tr>
   <?php foreach($dangers as $row):?>
   <tr>

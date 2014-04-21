@@ -34,15 +34,15 @@
 <th colspan="2" class="txtcen">ราษฎรที่ประสบอุทกภัย</th>
 </tr>
 <tr>
-  <td class="txtcen">ครัวเรือน</td>
   <td class="txtcen">คน</td>
+  <td class="txtcen">ครัวเรือน</td>
 </tr>
 <?php foreach($floods as $key=>$row):?>
 <tr>
   <td class="txtleft"><?php echo $key+1?></td>
   <td class="txtleft"><?php echo $row['province']?></td>
-  <td class="txtright"><?php echo number_format($row['household'])?></td>
   <td class="txtright"><?php echo number_format($row['people'])?></td>
+  <td class="txtright"><?php echo number_format($row['household'])?></td>
 </tr>
 <?php endforeach;?>
 </table>

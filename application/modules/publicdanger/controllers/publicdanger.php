@@ -120,8 +120,8 @@ Class Publicdanger extends Public_Controller{
 						$value['AMPOR'] = @trim($data -> sheets[0]['cells'][$i][2]);
 						$value['TUMBON'] = @trim($data -> sheets[0]['cells'][$i][3]);
 						$value['MOOBAN'] = @trim($data -> sheets[0]['cells'][$i][4]);
-						$value['HOUSEHOLD'] = @trim($data -> sheets[0]['cells'][$i][5]);
-						$value['PEOPLE'] = @trim($data -> sheets[0]['cells'][$i][6]);
+						$value['PEOPLE'] = @trim($data -> sheets[0]['cells'][$i][5]);
+						$value['HOUSEHOLD'] = @trim($data -> sheets[0]['cells'][$i][6]);
 						
 					}
 					

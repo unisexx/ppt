@@ -82,9 +82,9 @@
             </li>
 		</ul>
 </li>
-	<?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
+	<?php // if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
 	<?php foreach(menu::ls(0, @login_data('user_type_id')) as $cat): ?>
-	<li style="visibility: hidden;"><a><?php echo $cat['title']; ?></a>
+	<li style="visibility: visible;"><a><?php echo $cat['title']; ?></a>
 	    <ul>
 	        <?php foreach(menu::ls($cat['id']) as $sub): ?>
 	            <li><a><?php echo $sub['title']; ?></a>
@@ -310,6 +310,6 @@
 	</ul>
 	</li>
 	<?php endif; */?>
-<?php endif;?>
+<?php //endif;?>
 </ul>
 </div>

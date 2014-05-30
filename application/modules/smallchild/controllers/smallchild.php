@@ -39,6 +39,10 @@ Class Smallchild extends Public_Controller{
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from SMALLCHILD ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
 		$data['smallchilds'] = $this->smallchild->get($sql);
+		
+		$this->template->title('รายงานจำนวนศูนย์พัฒนาเด็กเล็กทั้งประเทศ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,เด็ก,เยาวชน,พม.,สป.พม.,สป.,เด็กและเยาวชน,ศูนย์พัฒนาเด็กเล็ก,ครูผู้ดูแลเด็ก,พนักงานจ้าง,กรมส่งเสริมการปกครองท้องถิ่น'));
+		
 		$this->template->build('report1',$data);
 	}
 

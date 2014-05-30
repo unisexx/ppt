@@ -200,6 +200,10 @@ Class Childfund extends Public_Controller{
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND_ORG UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from CHILDFUND ORDER BY BUDGETYEAR DESC)TMP_TABLE_1";
 		$data['childfunds'] = $this->childfund->get($sql);
+		
+		$this->template->title('รายงานการให้การสนับสนุนจากกองทุนคุ้มครองเด็กทั้งประเทศ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,เด็ก,เยาวชน,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,เด็กและเยาวชน,กองทุนคุ้มครองเด็ก,คุ้มครองเด็ก,ประเภทบุคคล,ประเภทองค์กร'));
+		
 		$this->template->build('report1',$data);
 	}
 	

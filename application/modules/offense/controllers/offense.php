@@ -138,6 +138,10 @@ Class Offense extends Public_Controller{
 		
 		$this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
+		
+		$this->template->title('รายงานเด็กและเยาวชนในสถานพินิจฯ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,เด็ก,เยาวชน,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,เด็กและเยาวชน,เด็กและเยาวชนที่ถูกดำเนินคดีในสถานพินิจและคุ้มครองเด็ก,ฐานความผิด,เด็กและเยาวชน,สถานพินิจ,คุ้มครองเด็ก,ฐานความผิด,ทรัพย์'));
+		
 		$this->template->build('child2', $data);	
 	}
 	

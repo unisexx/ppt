@@ -15,6 +15,9 @@ class Elder_inmates extends Public_Controller
 		$set_year = $this->inmates->get("SELECT YEAR FROM ELDER_INMATES GROUP BY YEAR ORDER BY YEAR DESC");
 		for($i=0; $i<count($set_year); $i++) { $data['set_year'][] = $set_year[$i]['year']; }
 		
+		$this->template->title('รายงานผู้ต้องขังสูงอายุ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,ผู้สูงอายุ,ผู้ต้องขังสูงอายุ,กรมราชทัณฑ์,กระทรวงยุติธรรม,ผู้ต้องขัง'));
+		
 		$this->template->build('elder_inmates/index', $data);
 	}
 	

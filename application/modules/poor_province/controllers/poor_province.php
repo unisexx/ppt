@@ -108,6 +108,10 @@ POOL_PROVINCE
         $data['pagination'] = $this->opt->pagination;
         $this->template->append_metadata('<script type="text/javascript" src="media/js/jquery.chainedSelect.min.js"></script>');
 		$this->template->append_metadata('<link href="media/css/style.css" rel="stylesheet">');
+		
+		$this->template->title('รายงานผู้มีรายได้ต่ำกว่าเส้นความยากจน ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,ผู้มีรายได้น้อย,ผู้มีรายได้ต่ำ,เส้นความยากจน,สัดส่วนคนจน,ต่ำกว่าเส้นความยากจน'));
+		
 		$this->template->build('disadvantaged1', $data);	
 	}
 	

@@ -128,6 +128,10 @@ Class Disablefund extends Public_Controller{
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PEOPLE UNION SELECT DISTINCT YEAR_DATA BUDGETYEAR from DISABLEFUND_PROJECT ORDER BY BUDGETYEAR DESC)TMP_TABLE_1';
 		$data['disablefunds'] = $this->people->get($sql);
+		
+		$this->template->title('รายงานการขอรับการสนับสนุนเงินกองทุนส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,คนพิการ,พก.,กองทุนส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ,คนพิการ,กองทุนคนพิการ'));
+		
 		$this->template->build('report_all',$data);
 	}
 	

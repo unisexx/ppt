@@ -35,6 +35,10 @@ Class Healthcare extends Public_Controller{
 				FROM 
 				(SELECT DISTINCT YEAR_DATA BUDGETYEAR from HEALTHCARE ORDER BY BUDGETYEAR DESC)";
 		$data['healthcares'] = $this->healthcare->get($sql);
+		
+		$this->template->title('รายงานผู้เข้าถึงสิทธิหลักประกันสุขภาพทั้งประเทศ ระบบฐานข้อมูลทางสังคม สป.พม.');
+		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,ผู้เข้าถึงสิทธิหลักประกันสุขภาพ,30 บาท,สปสช.,หลักประกันสุขภาพ,สำนักงานหลักประกันสุขภาพแห่งชาติ'));
+		
 		$this->template->build('report1',$data);
 	}
 	

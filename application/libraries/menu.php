@@ -62,7 +62,7 @@ class Menu
         }
         else if(!empty($import_url)) 
         {
-            $html = '<h2>'.$rs['cat_title'].' - '.$rs['sub_title'].' '.anchor($import_url, img('media/images/btn_ex_data.png')).'</h2>';
+            $html = '<h2>นำเข้าทุกหมวดข้อมูล (จปฐ) '.$rs['cat_title'].' - '.$rs['sub_title'].' '.anchor($import_url, img('media/images/btn_ex_data.png')).'</h2>';
             $html .= '<h4>'.$rs['title'].'</h4>';
             $html .= '<h5><span class="gray">แหล่งข้อมูล: '.$rs['source_name'].'</span></h5>';
         }

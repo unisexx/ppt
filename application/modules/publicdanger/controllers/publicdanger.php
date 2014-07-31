@@ -21,7 +21,7 @@ Class Publicdanger extends Public_Controller{
 	function import(){
 		// Report all PHP errors (see changelog)
 		// error_reporting(E_ALL);
-		// $this->db->debug = true;
+		$this->db->debug = true;
 		
 		$year_data = $_POST['year_data'];
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
@@ -102,8 +102,7 @@ Class Publicdanger extends Public_Controller{
 						$value['HOUSEHOLD'] = @trim($data -> sheets[0]['cells'][$i][5]);
 						$value['PEOPLE'] = @trim($data -> sheets[0]['cells'][$i][6]);
 						
-					}elseif($publicdanger_type == 'storm' || $publicdanger_type == 'cold'){
-						
+					}elseif($publicdanger_type == 'storm'){
 						$value['YEAR_DATA'] = $year_data;
 						$value['PROVINCE'] = @trim($data -> sheets[0]['cells'][$i][1]);
 						$value['AMPOR'] = @trim($data -> sheets[0]['cells'][$i][2]);
@@ -111,6 +110,15 @@ Class Publicdanger extends Public_Controller{
 						$value['MOOBAN'] = @trim($data -> sheets[0]['cells'][$i][4]);
 						$value['PEOPLE'] = @trim($data -> sheets[0]['cells'][$i][5]);
 						$value['HOUSEHOLD'] = @trim($data -> sheets[0]['cells'][$i][6]);
+						
+					}elseif($publicdanger_type == 'cold'){
+						$value['YEAR_DATA'] = $year_data;
+						$value['PROVINCE'] = @trim($data -> sheets[0]['cells'][$i][1]);
+						$value['AMPOR'] = @trim($data -> sheets[0]['cells'][$i][2]);
+						$value['TUMBON'] = @trim($data -> sheets[0]['cells'][$i][3]);
+						$value['MOOBAN'] = @trim($data -> sheets[0]['cells'][$i][4]);
+						$value['PEOPLE'] = @trim($data -> sheets[0]['cells'][$i][6]);
+						$value['HOUSEHOLD'] = @trim($data -> sheets[0]['cells'][$i][5]);
 						
 					}elseif($publicdanger_type == 'flood'){
 						
@@ -125,21 +133,25 @@ Class Publicdanger extends Public_Controller{
 						
 					}
 					
-					// echo"<pre>";
-					// echo print_r($value);
-					// echo"</pre>";
+					echo"<pre>";
+					echo print_r($value);
+					echo"</pre>";
 					
 					$this->$publicdanger_type->save($value);
 					
 				}
 			}
-			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
+			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
-		redirect('publicdanger/form_import');
+		// redirect('publicdanger/form_import');
 	}
 
 	function report_all(){
-		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC ORDER BY YEAR_DATA DESC");
+		$data['years'] = $this->traffic->get("SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_TRAFFIC UNION
+SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_COLD UNION
+SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_DROUGHT UNION
+SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_FLOOD UNION
+SELECT DISTINCT YEAR_DATA FROM PUBLICDANGER_STORM ORDER BY YEAR_DATA DESC");
 		
 		$this->template->title('รายงานผู้ได้รับผลกระทบจากสาธารณภัยทั้งประเทศ ระบบฐานข้อมูลทางสังคม สป.พม.');
 		$this->template->append_metadata( meta('keywords','ระบบฐานข้อมูลทางสังคม,ระบบฐานข้อมูลด้านสังคม,ฐานข้อมูลด้านสังคม,ฐานข้อมูลทางสังคม,กลุ่มเป้าหมาย,เชิงประเด็น,สำนักงานปลัดกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์,พม.,สป.พม.,สป.,ข้อมูลด้านสังคม,ข้อมูลทางสังคม,ข้อมูลสังคม,ผู้ได้รับผลกระทบจากสาธารณภัย,ภัยจราจร,ภัยแล้ง,ภัยหนาว,วาตภัย,อุทกภัย,สาธารณภัย,กรมป้องกันและบรรเทาสาธารณะภัย,ปภ.,ปภ'));

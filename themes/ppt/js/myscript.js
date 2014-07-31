@@ -63,6 +63,14 @@ $(document).ready(function(){
 		effect: 'fade'
 	});
 	
+	// chk if first page get first menu is active
+	var pathname = window.location.pathname;
+	// console.log(pathname);
+	if(pathname == "/"){
+		$('#mega-menu-6 > li:nth-child(1)').addClass('mega-hover');
+		$('#mega-menu-6 > li:nth-child(1) > div > ul').show();
+	}
+	
 	var user_id = $('input[name=id]').val();
 	
 	$("form.validate").validate({

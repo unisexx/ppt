@@ -21,7 +21,7 @@ Class Publicdanger extends Public_Controller{
 	function import(){
 		// Report all PHP errors (see changelog)
 		// error_reporting(E_ALL);
-		$this->db->debug = true;
+		// $this->db->debug = true;
 		
 		$year_data = $_POST['year_data'];
 		// $_POST['SECTION_ID'] = ($_POST['WORKGROUP_ID']>0)?$_POST['WORKGROUP_ID']:$_POST['SECTION_ID'];
@@ -133,17 +133,17 @@ Class Publicdanger extends Public_Controller{
 						
 					}
 					
-					echo"<pre>";
-					echo print_r($value);
-					echo"</pre>";
+					// echo"<pre>";
+					// echo print_r($value);
+					// echo"</pre>";
 					
 					$this->$publicdanger_type->save($value);
 					
 				}
 			}
-			// set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
+			set_notify('success', 'นำเข้าข้อมูลเรียบร้อย');
 		}
-		// redirect('publicdanger/form_import');
+		redirect('publicdanger/form_import');
 	}
 
 	function report_all(){

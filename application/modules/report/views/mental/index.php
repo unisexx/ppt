@@ -17,7 +17,7 @@
 
 <?php if(is_login()): // ถ้าไม่ได้ login จะไม่เห็น?>
 <div id="btnBox" style="margin:10px 0;">
-	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('dla/import','_blank')" class="btn_import"/>
+	<input type="button" title="นำเข้าข้อมูล"  value=" " onclick="window.open('datapoint/mental/import','_blank')" class="btn_import"/>
 </div>
 <?php endif; ?>
 

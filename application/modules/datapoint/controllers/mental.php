@@ -60,9 +60,11 @@ Class Mental extends Public_Controller{
 				}
 		}	
 		
-	function import() { $this->template->build('mental/import'); }
+		function import() { $this->template->build('mental/import'); }
+		
 		function upload()
 		{
+			// $this->db->debug = true;
 			
 			$year_data = $_POST['YEAR_DATA'];
 

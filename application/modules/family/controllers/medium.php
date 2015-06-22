@@ -61,7 +61,7 @@ Class medium extends Public_Controller
 			$file_name = 'family_'.date("Y_m_d_H_i_s").'.'.$ext;
 			$uploaddir = 'import_file/family/';
 			$fpicname = $uploaddir.$file_name;
-			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);		
+			move_uploaded_file($_FILES['fl_import']['tmp_name'], $fpicname);
 			$data = $this->ReadData($uploaddir.$file_name);
 			foreach($data as $item):
 						$val['ID']='';								
